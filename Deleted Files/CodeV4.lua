@@ -1870,7 +1870,7 @@ TestGui.Name = "TestGui"
 TestGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 UserGameSettings.GraphicsQualityLevel = 1
---UserGameSettings.MasterVolume = 0
+UserGameSettings.MasterVolume = 8
 
 for i, v in debug.getupvalue(RouterClient.init, 7) do
 	v.Name = i
