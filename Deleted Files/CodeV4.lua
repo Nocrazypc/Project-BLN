@@ -1,5 +1,4 @@
 
-
 if not game:IsLoaded() then
 	game.Loaded:Wait()
 end
@@ -1871,7 +1870,7 @@ TestGui.Name = "TestGui"
 TestGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 UserGameSettings.GraphicsQualityLevel = 1
-UserGameSettings.MasterVolume = 8
+--UserGameSettings.MasterVolume = 0
 
 for i, v in debug.getupvalue(RouterClient.init, 7) do
 	v.Name = i
@@ -1885,8 +1884,8 @@ end
 baitId = findBait("fire_dimension_2024_burnt_bites_bait")
 
 if baitId == nil then
-	--baitId = findBait("lures_2023_flame_swirl_pie")
-	--if baitId == nil then
+	baitId = findBait("lures_2023_flame_swirl_pie")
+	if baitId == nil then
 		baitId = findBait("lures_2023_campfire_cookies")
 	end
 end
@@ -2629,17 +2628,20 @@ GuiPopupButton.Parent = TestGui
 --ClipboardButton.TextWrapped = true
 --ClipboardButton.Parent = TestGui
 
+--[[if Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("Cricket's Tile Hop") then
+	FireButton("No")
+end--]]
 
 dailyLoginAppClick()
 
---[[if not ClientData.get_data()[Player.Name].ddlm_2024_manager.stamp_claimed_today then
+if not ClientData.get_data()[Player.Name].ddlm_2024_manager.stamp_claimed_today then
 	ReplicatedStorage.API["DdlmAPI/ClaimStamp"]:FireServer()
 end
 task.wait(1)
 
 if ClientData.get_data()[Player.Name].ddlm_2024_manager.stamps_collected == 8 and not ClientData.get_data()[Player.Name].ddlm_2024_manager.has_claimed_jaguar then
 	ReplicatedStorage.API:FindFirstChild("DdlmAPI/ClaimJaguar"):FireServer()
-end--]]
+end
 
 
 startAutoFarm()
