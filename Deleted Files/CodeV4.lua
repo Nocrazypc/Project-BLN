@@ -2634,14 +2634,14 @@ end--]]
 
 dailyLoginAppClick()
 
-if not ClientData.get_data()[Player.Name].ddlm_2024_manager.stamp_claimed_today then
+--[[if not ClientData.get_data()[Player.Name].ddlm_2024_manager.stamp_claimed_today then
 	ReplicatedStorage.API["DdlmAPI/ClaimStamp"]:FireServer()
 end
 task.wait(1)
 
 if ClientData.get_data()[Player.Name].ddlm_2024_manager.stamps_collected == 8 and not ClientData.get_data()[Player.Name].ddlm_2024_manager.has_claimed_jaguar then
 	ReplicatedStorage.API:FindFirstChild("DdlmAPI/ClaimJaguar"):FireServer()
-end
+end--]]
 
 
 startAutoFarm()
