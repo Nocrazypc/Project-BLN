@@ -56,7 +56,7 @@ NameFrame.Parent = MainFrame
 
 TextLabel.AnchorPoint = Vector2.new(0.5, 0.5)
 TextLabel.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-TextLabel.BackgroundTransparency = 0.500
+TextLabel.BackgroundTransparency = 0.400
 TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 TextLabel.BorderSizePixel = 0
 TextLabel.Position = UDim2.new(0.498873174, 0, 0.496309608, 0)
@@ -89,7 +89,7 @@ TimeFrame.Size = UDim2.new(1, 0, 0.25, 0)
 TextLabel_2.Parent = TimeFrame
 TextLabel_2.AnchorPoint = Vector2.new(0.5, 0.5)
 TextLabel_2.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-TextLabel_2.BackgroundTransparency = 0.500
+TextLabel_2.BackgroundTransparency = 0.400
 TextLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
 TextLabel_2.BorderSizePixel = 0
 TextLabel_2.Position = UDim2.new(0.498873174, 0, 0.496309608, 0)
@@ -117,7 +117,7 @@ BucksAndPotionFrame.Size = UDim2.new(1, 0, 0.25, 0)
 TextLabel_4.Parent = BucksAndPotionFrame
 TextLabel_4.AnchorPoint = Vector2.new(0.5, 0.5)
 TextLabel_4.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-TextLabel_4.BackgroundTransparency = 0.500
+TextLabel_4.BackgroundTransparency = 0.400
 TextLabel_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
 TextLabel_4.BorderSizePixel = 0
 TextLabel_4.Position = UDim2.new(0.498873174, 0, 0.496309608, 0)
@@ -146,7 +146,7 @@ TotalPotionFrame.Size = UDim2.new(1, 0, 0.25, 0)
 TextLabel_3.Parent = TotalPotionFrame
 TextLabel_3.AnchorPoint = Vector2.new(0.5, 0.5)
 TextLabel_3.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-TextLabel_3.BackgroundTransparency = 0.500
+TextLabel_3.BackgroundTransparency = 0.400
 TextLabel_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
 TextLabel_3.BorderSizePixel = 0
 TextLabel_3.Position = UDim2.new(0.498873174, 0, 0.496309608, 0)
@@ -199,9 +199,9 @@ function StatsGuis:UpdateText(nameOfFrame: string)
         if bucks <= 0 then bucks = 0 end
         MainFrame.BucksAndPotionFrame.TextLabel.Text = `🧪 {potionCount} 💰 {bucks}`
     elseif nameOfFrame == "TotalPotionFrame" then
-        MainFrame.TotalPotionFrame.TextLabel.Text = `TOTAL 🧪: {agePotionCount()}`
+        MainFrame.TotalPotionFrame.TextLabel.Text = `Total Potions 🧪: {agePotionCount()}`
     elseif nameOfFrame == "NameFrame" then
-        MainFrame.NameFrame.TextLabel.Text = `🤖 {localPlayer.Name}`
+        MainFrame.NameFrame.TextLabel.Text = `😎 {localPlayer.Name}`
     end
 end
 
