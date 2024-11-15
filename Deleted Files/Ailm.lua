@@ -6,14 +6,15 @@ local ClientData = require(ReplicatedStorage:WaitForChild("ClientModules"):WaitF
 local GetInventory = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/GetInv.lua"))()
 local Teleport = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Tele.lua"))()
 
+
 local localPlayer = Players.LocalPlayer
 
 local doctorId = nil
 local Ailments = {}
 
-local ailmentsList = {"beach_party", "salon", "dirty", "thirsty", "hungry", "sleepy",
-	"toilet", "play", "walk", "sick", "pizza_party", "school", "bored", "camping", "ride"
-}
+-- local ailmentsList = {"beach_party", "salon", "dirty", "thirsty", "hungry", "sleepy",
+-- 	"toilet", "play", "walk", "sick", "pizza_party", "school", "bored", "camping", "ride"
+-- }
 
 local function FoodAilments(FoodPassOn) --FoodPassOn means "icecream" for this example
 	local hasFood = false
@@ -165,8 +166,36 @@ local function babyGetFoodAndEat(FoodPassOn)
 	end
 end
 
+local function TEST_pickMysteryTask(mysteryId: string, petUnique: string)
+	print(`mystery id: {mysteryId}`)
+    local ailmentsList = {}
+    for i, v in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][mysteryId]["components"]["mystery"]["components"] do
+        if not v.preference_status then continue end
+        for i2, v2 in v.preference_status do
+            table.insert(ailmentsList, i)
+        end
+    end
+
+	for i = 1, 3 do
+		for _, ailment in ailmentsList do
+			print(`card: {i}, ailment: {ailment}`)
+			ReplicatedStorage.API["AilmentsAPI/ChooseMysteryAilment"]:FireServer(mysteryId, i, ailment)
+			task.wait(3)
+			if not ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][mysteryId] then
+				print(`👉 Picked {ailment} ailment from mystery card 👈`)
+				return
+			end
+		end
+	end
+end
+
 local function pickMysteryTask(mysteryId: string, petUnique: string)
 	print(`mystery id: {mysteryId}`)
+    local ailmentsList = {}
+    for i, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][mysteryId]["components"]["mystery"]["components"] do
+        table.insert(ailmentsList, i)
+    end
+
 	for i = 1, 3 do
 		for _, ailment in ailmentsList do
 			print(`card: {i}, ailment: {ailment}`)
