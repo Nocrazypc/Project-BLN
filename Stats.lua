@@ -40,8 +40,8 @@ MainFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 MainFrame.BackgroundTransparency = 1.000
 MainFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 MainFrame.BorderSizePixel = 0
-MainFrame.Position = UDim2.new(0.743189096, 0, 0.443002731, 0)
-MainFrame.Size = UDim2.new(0.300000012, 0, 0.400000006, 0)
+MainFrame.Position = UDim2.new(0.643189096, 0, 0.443002731, 0)
+MainFrame.Size = UDim2.new(0.200000012, 0, 0.300000006, 0)
 MainFrame.Parent = StatsGui
 
 NameFrame.Name = "NameFrame"
