@@ -369,9 +369,6 @@ function Ailments:CampingAilment(petUnique: string)
     task.wait(2)
     ReplicatedStorage.API["ToolAPI/Equip"]:InvokeServer(ClientData.get_data()[localPlayer.Name].last_equipped_pets[1], {})
     waitForTaskToFinish("camping", petUnique)
-    if not ClientData.get_data()[localPlayer.Name].ddlm_2024_manager.stamp_claimed_today then
-        ReplicatedStorage.API["DdlmAPI/ClaimStamp"]:FireServer()
-    end
 end
 
 function Ailments:WalkAilment(petUnique: string)
