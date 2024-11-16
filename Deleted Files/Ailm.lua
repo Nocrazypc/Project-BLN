@@ -435,7 +435,7 @@ end
 function Ailments:BabyHungryAilment()
     print(`👶🍴 Doing baby hungry task 👶🍴`)
     repeat
-        babyGetFoodAndEat("marshmallow_on_a_stick")
+        babyGetFoodAndEat("icecream")
         task.wait(1)
     until not ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments["hungry"]
     print(`👶🍴 Baby hungry task Finished 👶🍴`)
