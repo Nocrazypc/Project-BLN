@@ -1690,7 +1690,7 @@ RobuxProductDialogConnection1 = Player.PlayerGui.DialogApp.Dialog.RobuxProductDi
 				-- clickGuiButton(v.Parent.Parent) -- no thanks button
 				firesignal(v.Parent.Parent.MouseButton1Down)
 				firesignal(v.Parent.Parent.MouseButton1Click)
-				firesignal(v.Parent.Parent.MouseButton1Up)
+				--firesignal(v.Parent.Parent.MouseButton1Up)
 				RobuxProductDialogConnection1:Disconnect()
 			end
 		end
