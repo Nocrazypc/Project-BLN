@@ -123,6 +123,7 @@ getgenv().auto_trade_all_neons = false
 getgenv().auto_trade_eggs = false
 getgenv().auto_trade_all_inventory = false
 getgenv().feedAgeUpPotionToggle = false
+getgenv().SOWFullGrown = false
 
 getgenv().PetCurrentlyFarming = ""
 
@@ -851,6 +852,7 @@ end
 
 
 local function SwitchOutFullyGrown()
+	if not getgenv().SOWFullGrown then return end
 	if ClientData.get("pet_char_wrappers")[1] == nil or false then
 		getPet()
 		return
@@ -1270,8 +1272,8 @@ local function autoFarm()
 		end
 	end)
 
-	--// Fires when inside the minigame
-	Player.PlayerGui.MinigameInGameApp:GetPropertyChangedSignal("Enabled"):Connect(function()
+	--Fires when inside the minigame
+	--[[Player.PlayerGui.MinigameInGameApp:GetPropertyChangedSignal("Enabled"):Connect(function()
 		if Player.PlayerGui.MinigameInGameApp.Enabled then
 			Player.PlayerGui.MinigameInGameApp:WaitForChild("Body")
 			Player.PlayerGui.MinigameInGameApp.Body:WaitForChild("Middle")
@@ -1287,10 +1289,10 @@ local function autoFarm()
 				print("start doing task")
 			end
 		end
-	end)
+	end)--]]
 
 
-	local function RemoveGameOverButton()
+	--[[local function RemoveGameOverButton()
 		Player.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild("Face")
 		for _, v in pairs(Player.PlayerGui.MinigameRewardsApp.Body.Button:GetDescendants()) do
 			if v.Name == "TextLabel" then
@@ -1304,14 +1306,14 @@ local function autoFarm()
 				end
 			end
 		end
-	end
+	end--]]
 
 	local function onTextChangedMiniGame()
 		-- nothing for now
 	end
 
 	-- fires when it ask you if you want to join minigame
-	Player.PlayerGui.DialogApp.Dialog.ChildAdded:Connect(function(NormalDialogChild)
+	--[[Player.PlayerGui.DialogApp.Dialog.ChildAdded:Connect(function(NormalDialogChild)
 		if NormalDialogChild.Name == "NormalDialog" then
 			NormalDialogChild:GetPropertyChangedSignal("Visible"):Connect(function()
 				if NormalDialogChild.Visible then
@@ -1329,10 +1331,10 @@ local function autoFarm()
 				end
 			end)
 		end
-	end)
+	end)--]]
 
 
-	Player.PlayerGui.DialogApp.Dialog.NormalDialog:GetPropertyChangedSignal("Visible"):Connect(function()
+	--[[Player.PlayerGui.DialogApp.Dialog.NormalDialog:GetPropertyChangedSignal("Visible"):Connect(function()
 		if Player.PlayerGui.DialogApp.Dialog.NormalDialog.Visible then
 			Player.PlayerGui.DialogApp.Dialog.NormalDialog:WaitForChild("Info")
 			Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info:WaitForChild("TextLabel")
@@ -1346,7 +1348,7 @@ local function autoFarm()
 				end
 			end)
 		end
-	end)
+	end)--]]
 
 
 	-- if Player.PlayerGui.DialogApp.Dialog.NormalDialog.Visible then
@@ -1360,7 +1362,7 @@ local function autoFarm()
 	-- end
 
 
-	Player.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal("Visible"):Connect(function()
+	--[[Player.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal("Visible"):Connect(function()
 		if Player.PlayerGui.MinigameRewardsApp.Body.Visible then
 			Player.PlayerGui.MinigameRewardsApp.Body:WaitForChild("Button")
 			Player.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild("Face")
@@ -1373,10 +1375,10 @@ local function autoFarm()
 				Teleport.BeachParty()
 			end
 		end
-	end)
+	end)--]]
 
 	-- Player.PlayerGui.BattlePassApp.Body.Header.Title.Title.Text:match("Pony Pass")
-	Player.PlayerGui.BattlePassApp.Body:GetPropertyChangedSignal("Visible"):Connect(function()
+	--[[Player.PlayerGui.BattlePassApp.Body:GetPropertyChangedSignal("Visible"):Connect(function()
 		if Player.PlayerGui.BattlePassApp.Body.Visible then
 			Player.PlayerGui.BattlePassApp.Body:WaitForChild("InnerBody")
 			Player.PlayerGui.BattlePassApp.Body.InnerBody:WaitForChild("ScrollingFrame")
@@ -1414,7 +1416,7 @@ local function autoFarm()
 				stopDoingTasks = false
 			end
 		end
-	end)
+	end) --]]
 
 
 	--// Code below runs once when auto farm is enabled
@@ -1823,7 +1825,7 @@ game.Players.PlayerAdded:Connect(function(player: Player)
 end)
 
 
-if SETTINGS.WEBHOOK and SETTINGS.WEBHOOK.URL and #SETTINGS.WEBHOOK.URL >= 1 and Player.Name == SETTINGS.TRADE_COLLECTOR_NAME then
+--[[if SETTINGS.WEBHOOK and SETTINGS.WEBHOOK.URL and #SETTINGS.WEBHOOK.URL >= 1 and Player.Name == SETTINGS.TRADE_COLLECTOR_NAME then
 	Player.PlayerGui.DialogApp.Dialog:GetPropertyChangedSignal("Visible"):Connect(function()
 		if discordCooldown then
 			return
@@ -1849,7 +1851,7 @@ if SETTINGS.WEBHOOK and SETTINGS.WEBHOOK.URL and #SETTINGS.WEBHOOK.URL >= 1 and 
 				end)
 		end)
 	end)
-end
+end--]]
 
 
 Player.PlayerGui.TradeApp.Frame.NegotiationFrame.Body.PartnerOffer.Accepted:GetPropertyChangedSignal("ImageTransparency"):Connect(function()
@@ -2111,11 +2113,27 @@ local FarmToggle = FarmTab:CreateToggle({
      end,
  })
 
+---------------------------------------------------
+
+
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Switch Out When FullGrown",
+     CurrentValue = true,
+     Flag = "Toggle02",
+     Callback = function(Value)
+         getgenv().SOWFullGrown = Value
+         SwitchOutFullyGrown()
+     end,
+ })
+
+-------------------------------------------------
+
+
 
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Low Render / Hide Parts",
      CurrentValue = false,
-     Flag = "Toggle02",
+     Flag = "Toggle03",
      Callback = function(Value)
         
 for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
