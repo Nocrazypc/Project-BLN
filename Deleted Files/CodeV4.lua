@@ -26,7 +26,7 @@ local StarterGui = game:GetService("StarterGui")
 StarterGui:SetCore(
     "SendNotification",
     {
-        Title = "Hello Potato :)",
+        Title = "Hello Potato 😊",
         Text = "We're Back.. Be Happy!"
     }
 )
@@ -481,7 +481,7 @@ local function agePotion(FoodPassOn)
 	for _, v in pairs(ClientData.get_data()[Player.Name].inventory.food) do
 		if v.id == FoodPassOn then
 
-                        local isEgg = if table.find(pets_eggs, ClientData.get("pet_char_wrappers")[1]["pet_id"])                                    then true else false
+                        local isEgg = if table.find(pets_eggs, ClientData.get("pet_char_wrappers")[1]["pet_id"]) then true else false
 
 
 			local petAge = ClientData.get("pet_char_wrappers")[1]["pet_progression"]["age"]
@@ -1079,7 +1079,7 @@ local function completeBabyAilments()
 			Ailments:BabySleepyAilment(Bed)
 			-- need baby to do task too
 			getBaitReward(baitId) -- check to see if this is really working
-			task.wait(1)
+			task.wait(2)
 			placeBait(baitId)
 			return
 		elseif key == "dirty" then
@@ -1092,10 +1092,13 @@ end
 
 
 local function autoFarm()
-	if not getgenv().auto_farm then return end
-	CollisionsClient.set_collidable(false)
-	Teleport.CampSite()
-	local function CompletePetAilments()
+	     if not getgenv().auto_farm then return end
+	     CollisionsClient.set_collidable(false)
+	     Teleport.PlaceFloorAtFarmingHome()
+	     Teleport.PlaceFloorAtCampSite()
+	     Teleport.PlaceFloorAtBeachParty()
+	     Teleport.FarmingHome()
+		local function CompletePetAilments()
 		-- if ClientData.get("pet_char_wrappers")[1] == nil then
 		-- 	ReplicatedStorage.API["ToolAPI/Equip"]:InvokeServer(PetCurrentlyFarming, {})
 		-- 	return -- return because when pet gets requipped it will call this function anyway
@@ -1152,7 +1155,7 @@ local function autoFarm()
 				Ailments:SleepyAilment(Bed, petUnique)
 				-- need baby to do task too
 				getBaitReward(baitId) -- check to see if this is really working
-				task.wait(1)
+				task.wait(2)
 				placeBait(baitId)
 				return true
 			elseif key == "dirty" then
@@ -1181,11 +1184,15 @@ local function autoFarm()
 		-- for ailments that teleport to mainmap
 		for key, _ in ClientData.get_data()[Player.Name].ailments_manager.ailments[petUnique] do
 			if key == "beach_party" then
+	                Teleport.PlaceFloorAtBeachParty()
 				Ailments:BeachPartyAilment(petUnique)
+                     Teleport.FarmingHome()
 				-- should already do baby task when pet does it
 				return true
 			elseif key == "camping" then
+			     Teleport.PlaceFloorAtCampSite()
 				Ailments:CampingAilment(petUnique)
+				Teleport.FarmingHome()
 				-- should already do baby task when pet does it
 				return true
 			end
@@ -1202,21 +1209,6 @@ local function autoFarm()
 		return false
 	end
 
-
-	-- local function CompleteBabyAilments()
-	-- 	if ClientData.get_data()[Player.Name]["team"] ~= "Babies" then return end
-	-- 	if #ClientData.get("char_wrapper")["ailments_monitor"]["ailments"] == 0 then
-	-- 		return
-	-- 	end
-	-- 	for _, m in pairs(ClientData.get("char_wrapper")["ailments_monitor"]["ailments"]) do
-	-- 		if m["id"] == m["id"] then
-	-- 			RouterClient.get("MonitorAPI/AddRate"):InvokeServer(m["id"], 100)
-	-- 			return
-	-- 		end
-	-- 	end
-	-- end
-
-	-- game:GetService("Players").LocalPlayer.PlayerGui:GetChildren()["ailments_list"].SurfaceGui.Container:GetChildren()["Ailment"]
 
 	task.delay(30, function()
 		while true do
@@ -1376,7 +1368,7 @@ local function autoFarm()
 			if Player.PlayerGui.MinigameRewardsApp.Body.Button.Face.TextLabel.Text:match("NICE!") then
 				Player.Character.HumanoidRootPart.Anchored = false
 				RemoveGameOverButton()
-				Teleport.DeleteMainMapParts()
+				--Teleport.DeleteMainMapParts()
 
 				Teleport.BeachParty()
 			end
@@ -1875,7 +1867,6 @@ end)
 repeat
 	task.wait(1)
 until Player.PlayerGui.NewsApp.Enabled or Player.Character or Player.PlayerGui.DialogApp.Dialog.ThemeColorDialog.Visible
-
 			
 StatsGuis:UpdateText("NameFrame")
 StatsGuis:UpdateText("TimeFrame")
@@ -1915,10 +1906,10 @@ end
 baitId = findBait("fire_dimension_2024_burnt_bites_bait")
 
 if baitId == nil then
-	baitId = findBait("lures_2023_flame_swirl_pie")
-	if baitId == nil then
+	baitId = findBait("lures_2023_campfire_cookies")
+	--[[if baitId == nil then
 		baitId = findBait("lures_2023_campfire_cookies")
-	end
+	end--]]
 end
 
 -- task.wait(1)
@@ -2051,7 +2042,7 @@ end
 
 
 local Window = Rayfield:CreateWindow({
-	Name = "BLN Adopt Me!  Basic Autofarm V4.0",
+	Name = "BLN Adopt Me!  Basic Autofarm V4.1",
 	LoadingTitle = "Loading BLN Script ",
 	LoadingSubtitle = "by BlackLastNight 2024",
 	ConfigurationSaving = {
@@ -2659,21 +2650,11 @@ GuiPopupButton.Parent = TestGui
 --ClipboardButton.TextWrapped = true
 --ClipboardButton.Parent = TestGui
 
---[[if Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("Cricket's Tile Hop") then
-	FireButton("No")
-end--]]
-
 dailyLoginAppClick()
 
---[[if not ClientData.get_data()[Player.Name].ddlm_2024_manager.stamp_claimed_today then
-	ReplicatedStorage.API["DdlmAPI/ClaimStamp"]:FireServer()
-end
-task.wait(1)
-
-if ClientData.get_data()[Player.Name].ddlm_2024_manager.stamps_collected == 8 and not ClientData.get_data()[Player.Name].ddlm_2024_manager.has_claimed_jaguar then
-	ReplicatedStorage.API:FindFirstChild("DdlmAPI/ClaimJaguar"):FireServer()
+--[[if getgenv().BUY_BEFORE_FARMING then
+        BuyItems:BuyPets(getgenv().BUY_BEFORE_FARMING)
 end--]]
-
 
 startAutoFarm()
 
@@ -2687,7 +2668,6 @@ task.delay(5, function()
 	end
 end)
 
--- stamps_collected
--- has_claimed_jaguar
 
-print("Loaded. lastest update 14/10/2024  mm/dd/yyyy")
+
+print("Loaded. lastest update 18/10/2024  mm/dd/yyyy")
