@@ -23,6 +23,7 @@ local function FoodAilments(FoodPassOn) --FoodPassOn means "icecream" for this e
 			hasFood = true
 			ReplicatedStorage.API["ToolAPI/Equip"]:InvokeServer(v.unique, {})
 			task.wait(1)
+           if not ClientData.get("pet_char_wrappers")[1] then print("⚠️ Trying to feed pet but no pet equipped ⚠️") return end
 			ReplicatedStorage.API["PetAPI/ConsumeFoodItem"]:FireServer(v.unique, ClientData.get("pet_char_wrappers")[1].pet_unique)
 			return
 		end
@@ -434,20 +435,32 @@ end
 ----------------------
 function Ailments:BabyHungryAilment()
     print(`👶🍴 Doing baby hungry task 👶🍴`)
+    local stuckCount = 0
     repeat
         babyGetFoodAndEat("icecream")
+        stuckCount += 1
         task.wait(1)
-    until not ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments["hungry"]
-    print(`👶🍴 Baby hungry task Finished 👶🍴`)
+    until not ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments["hungry"] or stuckCount >= 30
+    if stuckCount >= 30 then
+        print(`⚠️ Waited too long for Baby Hungry. Must be stuck ⚠️`)
+    else
+        print(`👶🍴 Baby hungry task Finished 👶🍴`)
+    end
 end
 
 function Ailments:BabyThirstyAilment()
     print(`👶🥛 Doing baby water task 👶🥛`)
+    local stuckCount = 0
     repeat
         babyGetFoodAndEat("water")
+        stuckCount += 1
         task.wait(1)
-    until not ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments["thirsty"]
-    print(`👶🥛 Baby water task Finished 👶🥛`)
+    until not ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments["thirsty"] or stuckCount >= 30
+    if stuckCount >= 30 then
+        print(`⚠️ Waited too long for Baby Thirsty. Must be stuck ⚠️`)
+    else
+        print(`👶🥛 Baby water task Finished 👶🥛`)
+    end
 end
 
 function Ailments:BabyBoredAilment(pianoId: string)
