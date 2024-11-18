@@ -62,7 +62,7 @@ function Teleport.PlaceFloorAtFarmingHome()
 	TextLabel.BorderSizePixel = 0
 	TextLabel.Size = UDim2.new(1, 0, 1, 0)
 	TextLabel.Font = Enum.Font.SourceSans
-	TextLabel.Text = "🍕🍕🍕😋"
+	TextLabel.Text = "🍕🍕🍕🍕🍕🍕🍕🍕🍕😋"
 	TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
 	TextLabel.TextScaled = true
 	TextLabel.TextSize = 14.000
