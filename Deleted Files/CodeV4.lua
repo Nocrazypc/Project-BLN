@@ -123,7 +123,7 @@ getgenv().auto_trade_all_neons = false
 getgenv().auto_trade_eggs = false
 getgenv().auto_trade_all_inventory = false
 getgenv().feedAgeUpPotionToggle = false
-getgenv().SOWFullGrown = false
+getgenv().SOWFullGrown = true
 
 getgenv().PetCurrentlyFarming = ""
 
