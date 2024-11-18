@@ -124,6 +124,7 @@ getgenv().auto_trade_eggs = false
 getgenv().auto_trade_all_inventory = false
 getgenv().feedAgeUpPotionToggle = false
 getgenv().SOWFullGrown = true
+getgenv().AutoFusion = false
 
 getgenv().PetCurrentlyFarming = ""
 
@@ -2128,12 +2129,27 @@ local FarmToggle = FarmTab:CreateToggle({
 
 -------------------------------------------------
 
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Pet Auto Fusion",
+     CurrentValue = false,
+     Flag = "Toggle03",
+     Callback = function(Value)
+         getgenv().AutoFusion = Value
 
+	 while getgenv().AutoFusion do
+	 Fusion:MakeMega(false) -- makes neon
+	 Fusion:MakeMega(true) -- makes mega
+         task.wait(900)
+	end
+     end,
+ })
+
+-------------------------------------------
 
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Low Render / Hide Parts",
      CurrentValue = false,
-     Flag = "Toggle03",
+     Flag = "Toggle04",
      Callback = function(Value)
         
 for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
