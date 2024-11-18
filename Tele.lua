@@ -1,7 +1,9 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
 
+local ClientData = require(ReplicatedStorage:WaitForChild("ClientModules"):WaitForChild("Core"):WaitForChild("ClientData"))
 local CollisionsClient = require(ReplicatedStorage.ClientModules.Game.CollisionsClient)
+
 
 local Player = Players.LocalPlayer
 local getconstants = getconstants or debug.getconstants
@@ -10,6 +12,7 @@ local get_thread_identity = get_thread_identity or gti or getthreadidentity or g
 local set_thread_identity = set_thread_context or sti or setthreadcontext or setidentity or syn.set_thread_identity or fluxus.set_thread_identity
 
 local SetLocationTP
+local rng = Random.new()
 
 local Teleport = {}
 
@@ -32,35 +35,62 @@ local function SetLocationFunc(a, b, c)
 	set_thread_identity(k)
 end
 
-local function floorPart()
-	for _, v in workspace:GetChildren() do
-		if v.Name == "FloorPart1" then
-			return
-		end
-	end
+function Teleport.PlaceFloorAtFarmingHome()
+	if workspace:FindFirstChild("FarmingHomeLocation") then return end
+
 	local part = Instance.new("Part")
-	part.Position = game.Workspace.Interiors:FindFirstChild(
-		tostring(game.Workspace.Interiors:FindFirstChildWhichIsA("Model"))
-	).Static.Campsite.MarshmallowChair.VintageChair.Union.Position + Vector3.new(0, -3, 0)
-	part.Size = Vector3.new(2000, 2, 2000)
+	local SurfaceGui = Instance.new("SurfaceGui")
+	local TextLabel = Instance.new("TextLabel")
+
+	part.Position = Vector3.new(1000, 0, 1000)
+	part.Size = Vector3.new(200, 2, 200)
 	part.Anchored = true
-	part.Name = "FloorPart1"
+    part.Transparency = 1
+	part.Name = "FarmingHomeLocation"
+	part.Parent = workspace
+
+	SurfaceGui.Parent = part
+	SurfaceGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	SurfaceGui.AlwaysOnTop = false
+	SurfaceGui.CanvasSize = Vector2.new(600, 600)
+	SurfaceGui.Face = Enum.NormalId.Top
+
+	TextLabel.Parent = SurfaceGui
+	TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TextLabel.BackgroundTransparency = 1.000
+	TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TextLabel.BorderSizePixel = 0
+	TextLabel.Size = UDim2.new(1, 0, 1, 0)
+	TextLabel.Font = Enum.Font.SourceSans
+	TextLabel.Text = "🏡"
+	TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+	TextLabel.TextScaled = true
+	TextLabel.TextSize = 14.000
+	TextLabel.TextWrapped = true
+end
+
+function Teleport.PlaceFloorAtCampSite()
+	if workspace:FindFirstChild("CampingLocation") then return end
+
+	local campsite = workspace.StaticMap.Campsite.CampsiteOrigin
+	local part = Instance.new("Part")
+	part.Position = campsite.Position + Vector3.new(0, -1, 0)
+	part.Size = Vector3.new(200, 2, 200)
+	part.Anchored = true
+    part.Transparency = 1
+	part.Name = "CampingLocation"
 	part.Parent = workspace
 end
 
-local function floorPart2()
-	for _, v in workspace:GetChildren() do
-		if v.Name == "FloorPart3" then
-			return
-		end
-	end
+function Teleport.PlaceFloorAtBeachParty()
+	if workspace:FindFirstChild("BeachPartyLocation") then return end
+
 	local part = Instance.new("Part")
-	part.Position = game.Workspace.Interiors:FindFirstChild(
-		tostring(game.Workspace.Interiors:FindFirstChildWhichIsA("Model"))
-	).Static.Campsite.MarshmallowChair.VintageChair.Union.Position + Vector3.new(0, -20, 0)
-	part.Size = Vector3.new(2000, 2, 2000)
+	part.Position = workspace.StaticMap.Beach.BeachPartyAilmentTarget.Position + Vector3.new(0, -10, 0) --Vector3.new(-240, 0, 40)
+	part.Size = Vector3.new(200, 2, 200)
 	part.Anchored = true
-	part.Name = "FloorPart3"
+    part.Transparency = 1
+	part.Name = "BeachPartyLocation"
 	part.Parent = workspace
 end
 
@@ -83,35 +113,27 @@ function Teleport.placeFloorOnJoinZone()
 	part.Parent = workspace
 end
 
-function Teleport.DeleteMainMapParts()
-	-- local MainMap = workspace.Interiors:WaitForChild(tostring(workspace.Interiors:FindFirstChildWhichIsA("Model")))
-	-- if not MainMap then
-	-- 	print("not in mainmap")
-	-- 	return
-	-- end
-
-	-- MainMap:WaitForChild("Static")
-	-- workspace:WaitForChild("StaticMap")
-
+function Teleport.DeleteWater()
 	if workspace:FindFirstChildWhichIsA("Terrain") then
         workspace.Terrain:Clear()
     end
+end
 
-	-- if workspace.StaticMap:FindFirstChild("Balloon") then
-	-- 	workspace.StaticMap:FindFirstChild("Balloon"):Destroy()
-	-- 	MainMap.Static:FindFirstChild("Campsite"):Destroy()
-	-- 	MainMap.Static:FindFirstChild("Bridges"):Destroy()
-	-- 	MainMap.Static:FindFirstChild("Boundaries"):Destroy()
-	-- 	MainMap.Static:FindFirstChild("Props"):Destroy()
-	-- 	MainMap.Static:FindFirstChild("Terrain"):FindFirstChild("Mountains"):Destroy()
-	-- 	MainMap.Static:FindFirstChild("Terrain"):FindFirstChild("Road"):Destroy()
-	-- 	MainMap.Static:FindFirstChild("Terrain"):FindFirstChild("RiverEdge"):Destroy()
-	-- 	MainMap.Static:FindFirstChild("ThemeArea"):Destroy()
-	-- 	MainMap.Static:FindFirstChild("Beach"):Destroy()
-	-- 	MainMap:FindFirstChild("Park"):Destroy()
-		-- MainMap:FindFirstChild("Buildings"):Destroy()
-		-- MainMap:FindFirstChild("Event"):Destroy()
+
+function Teleport.FarmingHome()
+	-- local isAlreadyOnMainMap = workspace:FindFirstChild("Interiors"):FindFirstChild("center_map_plot", true)
+	-- if isAlreadyOnMainMap then
+	-- 	return
 	-- end
+	-- CollisionsClient.set_collidable(false)
+	Player.Character:WaitForChild("HumanoidRootPart").Anchored = true
+	-- SetLocationFunc("MainMap", "Neighborhood/MainDoor", {})
+	Player.Character.HumanoidRootPart.CFrame = workspace.FarmingHomeLocation.CFrame * CFrame.new(rng:NextInteger(1, 40), 10, rng:NextInteger(1, 40))
+
+	Player.Character:WaitForChild("HumanoidRootPart").Anchored = false
+	Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+
+	Teleport.DeleteWater()
 end
 
 function Teleport.MainMap()
@@ -123,7 +145,7 @@ function Teleport.MainMap()
 	Player.Character:WaitForChild("HumanoidRootPart").Anchored = true
 	SetLocationFunc("MainMap", "Neighborhood/MainDoor", {})
 	workspace.Interiors:WaitForChild(tostring(workspace.Interiors:FindFirstChildWhichIsA("Model")))
-	floorPart()
+	
 	Player.Character.PrimaryPart.CFrame = workspace
 		:WaitForChild("StaticMap")
 		:WaitForChild("Campsite")
@@ -131,7 +153,7 @@ function Teleport.MainMap()
 	Player.Character:WaitForChild("HumanoidRootPart").Anchored = false
 	Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
 	-- Player.Character.Humanoid.WalkSpeed = 0
-	Teleport.DeleteMainMapParts()
+	Teleport.DeleteWater()
 	task.wait(2)
 end
 
@@ -149,76 +171,19 @@ function Teleport.Nursery()
 end
 
 function Teleport.CampSite()
-	Player.Character:WaitForChild("HumanoidRootPart").Anchored = true
-	-- local isAlreadyOnMainMap = workspace:FindFirstChild("Interiors"):FindFirstChild("center_map_plot", true)
-	-- if not isAlreadyOnMainMap then
-	-- 	SetLocationFunc("MainMap", "Neighborhood/MainDoor", {})
-	-- end
-	SetLocationFunc("MainMap", "Neighborhood/MainDoor", {})
+	Teleport.DeleteWater()
+	ReplicatedStorage.API["LocationAPI/SetLocation"]:FireServer("MainMap", Player, ClientData.get_data()[Player.Name].LiveOpsMapType)
 	task.wait(1)
-	workspace.Interiors:WaitForChild(tostring(workspace.Interiors:FindFirstChildWhichIsA("Model")))
-	floorPart()
-	Player.Character.PrimaryPart.CFrame = workspace
-		:WaitForChild("StaticMap")
-		:WaitForChild("Campsite")
-		:WaitForChild("CampsiteOrigin").CFrame + Vector3.new(math.random(1, 5), 10, math.random(1, 5))
-	Player.Character:WaitForChild("HumanoidRootPart").Anchored = false
+	Player.Character.PrimaryPart.CFrame = workspace.CampingLocation.CFrame + Vector3.new(rng:NextInteger(1, 30), 5, rng:NextInteger(1, 30))
 	Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
-	-- Player.Character.Humanoid.WalkSpeed = 0
-	Teleport.DeleteMainMapParts()
-end
-
-function Teleport.CampSite2()
-	Player.Character:WaitForChild("HumanoidRootPart").Anchored = true
-	local isAlreadyOnMainMap = workspace:FindFirstChild("Interiors"):FindFirstChild("center_map_plot", true)
-	if not isAlreadyOnMainMap then
-		SetLocationFunc("MainMap", "Neighborhood/MainDoor", {})
-	end
-	task.wait(1)
-	workspace.Interiors:WaitForChild(tostring(workspace.Interiors:FindFirstChildWhichIsA("Model")))
-	floorPart2()
-	Player.Character.PrimaryPart.CFrame = workspace
-		:WaitForChild("StaticMap")
-		:WaitForChild("Campsite")
-		:WaitForChild("CampsiteOrigin").CFrame + Vector3.new(math.random(1, 5), -15, math.random(55, 60))
-	Player.Character:WaitForChild("HumanoidRootPart").Anchored = false
-	Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
-	-- Player.Character.Humanoid.WalkSpeed = 0
-	Teleport.DeleteMainMapParts()
 end
 
 function Teleport.BeachParty()
-	Player.Character:WaitForChild("HumanoidRootPart").Anchored = true
-	-- local isAlreadyOnMainMap = workspace:FindFirstChild("Interiors"):FindFirstChild("center_map_plot", true)
-	-- if not isAlreadyOnMainMap then
-	-- 	SetLocationFunc("MainMap", "Neighborhood/MainDoor", {})
-	-- end
-	SetLocationFunc("MainMap", "Neighborhood/MainDoor", {})
+	Teleport.DeleteWater()
+	ReplicatedStorage.API["LocationAPI/SetLocation"]:FireServer("MainMap", Player, ClientData.get_data()[Player.Name].LiveOpsMapType)
 	task.wait(1)
-	workspace.Interiors:WaitForChild(tostring(workspace.Interiors:FindFirstChildWhichIsA("Model")))
-	Player.Character.PrimaryPart.CFrame = workspace.StaticMap.Beach.BeachPartyAilmentTarget.CFrame
-		+ Vector3.new(math.random(1, 20), 10, math.random(1, 20))
-	Player.Character:WaitForChild("HumanoidRootPart").Anchored = false
+	Player.Character.PrimaryPart.CFrame = workspace.BeachPartyLocation.CFrame + Vector3.new(math.random(1, 30), 5, math.random(1, 30))
 	Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
-	-- Player.Character.Humanoid.WalkSpeed = 0
-	Teleport.DeleteMainMapParts()
-end
-
-function Teleport.BeachParty2()
-	Player.Character:WaitForChild("HumanoidRootPart").Anchored = true
-	local isAlreadyOnMainMap = workspace:FindFirstChild("Interiors"):FindFirstChild("center_map_plot", true)
-	if not isAlreadyOnMainMap then
-		SetLocationFunc("MainMap", "Neighborhood/MainDoor", {})
-	end
-	task.wait(1)
-	workspace.Interiors:WaitForChild(tostring(workspace.Interiors:FindFirstChildWhichIsA("Model")))
-	floorPart2()
-	Player.Character.PrimaryPart.CFrame = workspace.StaticMap.Beach.BeachPartyAilmentTarget.CFrame
-		+ Vector3.new(-160, -10, 40)
-	Player.Character:WaitForChild("HumanoidRootPart").Anchored = false
-	Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
-	-- Player.Character.Humanoid.WalkSpeed = 0
-	Teleport.DeleteMainMapParts()
 end
 
 function Teleport.PlayGround(vec: Vector3)
@@ -238,7 +203,7 @@ function Teleport.PlayGround(vec: Vector3)
 	Player.Character:WaitForChild("HumanoidRootPart").Anchored = false
 	Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
 	-- Player.Character.Humanoid.WalkSpeed = 0
-	Teleport.DeleteMainMapParts()
+	Teleport.DeleteWater()
 end
 
 function Teleport.DownloadMainMap()
@@ -254,7 +219,7 @@ function Teleport.DownloadMainMap()
 	Player.Character:WaitForChild("HumanoidRootPart").Anchored = false
 	Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
 	-- Player.Character.Humanoid.WalkSpeed = 0
-	Teleport.DeleteMainMapParts()
+	Teleport.DeleteWater()
 end
 
 function Teleport.SkyCastle()
