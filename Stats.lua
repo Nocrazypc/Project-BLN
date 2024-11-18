@@ -167,9 +167,9 @@ local function formatTime(currentTime)
 	return string.format("%02d:%02d", hours, minutes)
 end
 
-local function getBucksInfo()
-local bucks = ClientData.get_data()[localPlayer.Name].money or 0
-
+local function bucksAmount()
+    return ClientData.get_data()[localPlayer.Name].money or 0
+end
 
 local function agePotionCount()
     local count = 0
@@ -182,9 +182,8 @@ local function agePotionCount()
 end
 
 startCount = agePotionCount()
-startBucksAmount = getBucksInfo()
+startBucksAmount = bucksAmount()
 startTime = DateTime.now().UnixTimestamp
-
 
 function StatsGuis:UpdateText(nameOfFrame: string)
     local MainFrame = localPlayer.PlayerGui.StatsGui.MainFrame
@@ -195,7 +194,7 @@ function StatsGuis:UpdateText(nameOfFrame: string)
         MainFrame.TimeFrame.TextLabel.Text = `🕒 {formatTime(timeElapsed)}`
     elseif nameOfFrame == "BucksAndPotionFrame" then
         local potionCount = agePotionCount() - startCount
-        local bucks = getBucksInfo() - startBucksAmount
+        local bucks = bucksAmount() - startBucksAmount
         if potionCount <= 0 then potionCount = 0 end
         if bucks <= 0 then bucks = 0 end
         MainFrame.BucksAndPotionFrame.TextLabel.Text = `🧪 {potionCount} 💰 {bucks}`
