@@ -168,7 +168,7 @@ local function formatTime(currentTime)
 end
 
 local function bucksAmount()
-    return ClientData.get_data()[Player.Name].money
+    return ClientData.get_data()[localPlayer.Name].money
 end
 
 local function agePotionCount()
