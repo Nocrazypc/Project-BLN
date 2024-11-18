@@ -123,7 +123,6 @@ getgenv().auto_trade_all_neons = false
 getgenv().auto_trade_eggs = false
 getgenv().auto_trade_all_inventory = false
 getgenv().feedAgeUpPotionToggle = false
-getgenv().SOWFullGrown = true
 getgenv().AutoFusion = false
 
 getgenv().PetCurrentlyFarming = ""
@@ -853,7 +852,6 @@ end
 
 
 local function SwitchOutFullyGrown()
-	if not getgenv().SOWFullGrown then return end
 	if ClientData.get("pet_char_wrappers")[1] == nil or false then
 		getPet()
 		return
@@ -2111,19 +2109,6 @@ local FarmToggle = FarmTab:CreateToggle({
      Callback = function(Value)
          getgenv().auto_farm = Value
          autoFarm()
-     end,
- })
-
----------------------------------------------------
-
-
-local FarmToggle = FarmTab:CreateToggle({
-     Name = "Switch Out When FullGrown",
-     CurrentValue = true,
-     Flag = "Toggle02",
-     Callback = function(Value)
-         getgenv().SOWFullGrown = Value
-         SwitchOutFullyGrown()
      end,
  })
 
