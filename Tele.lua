@@ -45,7 +45,7 @@ function Teleport.PlaceFloorAtFarmingHome()
 	part.Position = Vector3.new(1000, 0, 1000)
 	part.Size = Vector3.new(200, 2, 200)
 	part.Anchored = true
-    part.Transparency = 1
+        part.Transparency = 0.6
 	part.Name = "FarmingHomeLocation"
 	part.Parent = workspace
 
@@ -62,7 +62,7 @@ function Teleport.PlaceFloorAtFarmingHome()
 	TextLabel.BorderSizePixel = 0
 	TextLabel.Size = UDim2.new(1, 0, 1, 0)
 	TextLabel.Font = Enum.Font.SourceSans
-	TextLabel.Text = "🍕🍕🍕🍕🍕🍕🍕🍕🍕😋"
+	TextLabel.Text = "🍕🍕😋"
 	TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
 	TextLabel.TextScaled = true
 	TextLabel.TextSize = 14.000
