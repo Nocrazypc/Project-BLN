@@ -124,7 +124,7 @@ getgenv().auto_trade_eggs = false
 getgenv().auto_trade_all_inventory = false
 getgenv().feedAgeUpPotionToggle = false
 getgenv().AutoFusion = false
-
+getgenv().FocusFarmAgePotions = false
 getgenv().PetCurrentlyFarming = ""
 
 local Egg2Buy = SETTINGS.PET_TO_BUY
@@ -690,7 +690,7 @@ end
 
 
 local function getPet()
-	if SETTINGS.FOCUS_FARM_AGE_POTION then
+	if SETTINGS.FOCUS_FARM_AGE_POTION or getgenv().FocusFarmAgePotions then
 		if GetInventory:GetPetFriendship() then return end
 		if GetInventory:PetRarityAndAge("common", 6) then return end
 		if GetInventory:PetRarityAndAge("legendary", 6) then return end
@@ -1256,20 +1256,20 @@ local function autoFarm()
 			if not SETTINGS.FOCUS_FARM_AGE_POTION then
 				SwitchOutFullyGrown()
 			end
-		elseif Player.PlayerGui.HintApp.TextLabel.Text:match("You have left the queue") then
+		--[[elseif Player.PlayerGui.HintApp.TextLabel.Text:match("You have left the queue") then
 			if workspace.Interiors:FindFirstChild("Winter2023Shop") then
 				Player.Character.PrimaryPart.CFrame = workspace.Interiors.Winter2023Shop.PetRescue.JoinZone.Collider.CFrame
 					+ Vector3.new(0, -14, 0)
-			end
+			end--]]
 		end
 	end)
 
-	Player.PlayerGui.MinigameInGameApp.Body.Left.Container.ValueLabel:GetPropertyChangedSignal("Text"):Connect(function()
+	--[[Player.PlayerGui.MinigameInGameApp.Body.Left.Container.ValueLabel:GetPropertyChangedSignal("Text"):Connect(function()
 		local eventTime = Player.PlayerGui.MinigameInGameApp.Body.Left.Container.ValueLabel.Text
 		if eventTime == "00:00" then
 			game:Shutdown()
 		end
-	end)
+	end)--]]
 
 	--Fires when inside the minigame
 	--[[Player.PlayerGui.MinigameInGameApp:GetPropertyChangedSignal("Enabled"):Connect(function()
@@ -2128,6 +2128,20 @@ local FarmToggle = FarmTab:CreateToggle({
 	end
      end,
  })
+
+-------------------------------------------
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Focus Farm Age Potions",
+     CurrentValue = false,
+     Flag = "Toggle033",
+     Callback = function(Value)
+
+         getgenv().FocusFarmAgePotions = Value
+         getPet()
+
+     end,
+ })
+
 
 -------------------------------------------
 
