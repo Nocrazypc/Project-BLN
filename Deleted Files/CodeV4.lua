@@ -2009,7 +2009,7 @@ task.wait(1)
 strollerId  = GetInventory:GetUniqueId("strollers", "stroller-default")
 findFurniture()
 
-print(`Has Bed: {Bed} 🛏️ | Has Piano: {Piano} 🎹 | Has LitterBox: {LitterBox} 💩`)
+--print(`Has Bed: {Bed} 🛏️ | Has Piano: {Piano} 🎹 | Has LitterBox: {LitterBox} 💩`)
 
 ReplicatedStorage:WaitForChild("API"):WaitForChild("HousingAPI/SetDoorLocked"):InvokeServer(true)
 
@@ -2703,4 +2703,4 @@ end)
 
 
 
-print("Loaded. lastest update 18/10/2024  mm/dd/yyyy")
+--print("Loaded. lastest update 21/10/2024  mm/dd/yyyy")
