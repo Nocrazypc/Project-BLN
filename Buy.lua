@@ -42,16 +42,16 @@ end
 function BuyItems:BuyPets(petsToBuy: table)
     for _, myPet in ipairs(petsToBuy) do
         local amount = hasPetMaxAmount(myPet.NameId, myPet.MaxAmount)
-        print(amount)
+        --print(amount)
         if amount == 0 then
-            print(`has max amount of: {myPet.NameId}, skipping`)
+            --print(`has max amount of: {myPet.NameId}, skipping`)
             continue 
         end
         if not buyPet(myPet.NameId, amount) then
-            print(`has no money to buy more so breaking out of loop`)
+            --print(`has no money to buy more so breaking out of loop`)
             break 
         end
-        print(`bought all pets needed: {myPet.NameId}`)
+        --print(`bought all pets needed: {myPet.NameId}`)
     end 
 end
 
