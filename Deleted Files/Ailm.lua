@@ -218,11 +218,11 @@ local function waitForTaskToFinish(ailment: string, petUnique: string)
         local taskActive = if ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique] and ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][ailment] then true else false
         count += 5
     until not taskActive or count >= 60
-    if count >= 60 then
+    --if count >= 60 then
         --print(`⚠️ Waited too long for ailment: {ailment}, must be stuck ⚠️`)
-    else
+    --else
         --print(`🎉 {ailment} task finished 🎉`)
-    end
+    --end
 end
 
 local function waitForJumpingToFinish(ailment: string, petUnique: string)
