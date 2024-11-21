@@ -23,7 +23,7 @@ local function FoodAilments(FoodPassOn) --FoodPassOn means "icecream" for this e
 			hasFood = true
 			ReplicatedStorage.API["ToolAPI/Equip"]:InvokeServer(v.unique, {})
 			task.wait(1)
-           if not ClientData.get("pet_char_wrappers")[1] then print("⚠️ Trying to feed pet but no pet equipped ⚠️") return end
+           if not ClientData.get("pet_char_wrappers")[1] then --[[print("⚠️ Trying to feed pet but no pet equipped ⚠️")--]] return end
 			ReplicatedStorage.API["PetAPI/ConsumeFoodItem"]:FireServer(v.unique, ClientData.get("pet_char_wrappers")[1].pet_unique)
 			return
 		end
@@ -79,15 +79,15 @@ local function isDoctorLoaded()
         until doctor or isStuck
     end
     if isStuck then
-        print("⚠️ Wasn't able to find Doctor Id ⚠️")
+        --[[print("⚠️ Wasn't able to find Doctor Id ⚠️")--]]
         return false
     end
     return true
 end
 
 local function getDoctorId()
-    if doctorId then print(`Doctor Id: {doctorId}`) return end
-    print("🩹 Getting Doctor ID 🩹")
+    if doctorId then --[[print(`Doctor Id: {doctorId}`)--]] return end
+    --print("🩹 Getting Doctor ID 🩹")
     local stuckCount = 0
     local isStuck = false
     ReplicatedStorage.API["LocationAPI/SetLocation"]:FireServer("Hospital")
@@ -102,12 +102,12 @@ local function getDoctorId()
         until doctor or isStuck
     end
     if isStuck then
-        print("⚠️ Wasn't able to find Doctor Id ⚠️")
+        --[[print("⚠️ Wasn't able to find Doctor Id ⚠️")--]]
         return
     end
     if doctor then
         doctorId = doctor:GetAttribute("furniture_unique")
-        print(`Found doctor Id: {doctorId}`)
+        --[[print(`Found doctor Id: {doctorId}`)--]]
     end
 end
 
@@ -143,7 +143,7 @@ local function reEquipPet()
         EquipTimeout += 1
     until hasPetChar or EquipTimeout >= 10
     if EquipTimeout >= 10 then
-        print(`⚠️ Waited too long for Equipping pet so trying again ⚠️`)
+        --print(`⚠️ Waited too long for Equipping pet so trying again ⚠️`)
         reEquipPet()
     end
 end
@@ -168,7 +168,7 @@ local function babyGetFoodAndEat(FoodPassOn)
 end
 
 local function TEST_pickMysteryTask(mysteryId: string, petUnique: string)
-	print(`mystery id: {mysteryId}`)
+	--print(`mystery id: {mysteryId}`)
     local ailmentsList = {}
     for i, v in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][mysteryId]["components"]["mystery"]["components"] do
         if not v.preference_status then continue end
@@ -179,11 +179,11 @@ local function TEST_pickMysteryTask(mysteryId: string, petUnique: string)
 
 	for i = 1, 3 do
 		for _, ailment in ailmentsList do
-			print(`card: {i}, ailment: {ailment}`)
+			--print(`card: {i}, ailment: {ailment}`)
 			ReplicatedStorage.API["AilmentsAPI/ChooseMysteryAilment"]:FireServer(mysteryId, i, ailment)
 			task.wait(3)
 			if not ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][mysteryId] then
-				print(`👉 Picked {ailment} ailment from mystery card 👈`)
+				--print(`👉 Picked {ailment} ailment from mystery card 👈`)
 				return
 			end
 		end
@@ -191,7 +191,7 @@ local function TEST_pickMysteryTask(mysteryId: string, petUnique: string)
 end
 
 local function pickMysteryTask(mysteryId: string, petUnique: string)
-	print(`mystery id: {mysteryId}`)
+	--print(`mystery id: {mysteryId}`)
     local ailmentsList = {}
     for i, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][mysteryId]["components"]["mystery"]["components"] do
         table.insert(ailmentsList, i)
@@ -199,11 +199,11 @@ local function pickMysteryTask(mysteryId: string, petUnique: string)
 
 	for i = 1, 3 do
 		for _, ailment in ailmentsList do
-			print(`card: {i}, ailment: {ailment}`)
+			--print(`card: {i}, ailment: {ailment}`)
 			ReplicatedStorage.API["AilmentsAPI/ChooseMysteryAilment"]:FireServer(mysteryId, i, ailment)
 			task.wait(3)
 			if not ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][mysteryId] then
-				print(`👉 Picked {ailment} ailment from mystery card 👈`)
+				--print(`👉 Picked {ailment} ailment from mystery card 👈`)
 				return
 			end
 		end
@@ -211,7 +211,7 @@ local function pickMysteryTask(mysteryId: string, petUnique: string)
 end
 
 local function waitForTaskToFinish(ailment: string, petUnique: string)
-    print(`⏳ Waiting for {string.upper(ailment)} to finish ⏳`)
+    --print(`⏳ Waiting for {string.upper(ailment)} to finish ⏳`)
     local count = 0
     repeat
         task.wait(5)
@@ -219,14 +219,14 @@ local function waitForTaskToFinish(ailment: string, petUnique: string)
         count += 5
     until not taskActive or count >= 60
     if count >= 60 then
-        print(`⚠️ Waited too long for ailment: {ailment}, must be stuck ⚠️`)
+        --print(`⚠️ Waited too long for ailment: {ailment}, must be stuck ⚠️`)
     else
-        print(`🎉 {ailment} task finished 🎉`)
+        --print(`🎉 {ailment} task finished 🎉`)
     end
 end
 
 local function waitForJumpingToFinish(ailment: string, petUnique: string)
-    print(`⏳ Waiting for {string.upper(ailment)} to finish ⏳`)
+    --print(`⏳ Waiting for {string.upper(ailment)} to finish ⏳`)
     local stuckCount = tick()
     local isStuck = false
     repeat
@@ -236,26 +236,26 @@ local function waitForJumpingToFinish(ailment: string, petUnique: string)
         task.wait(0.1)
         isStuck = if (tick() - stuckCount) >= 120 then true else false
     until not taskActive or isStuck
-    if isStuck then
-        print(`⛔ {ailment} ailment is stuck so exiting task ⛔`)
-    else
-        print(`🎉 {ailment} ailment finished 🎉`)
-    end
+    --if isStuck then
+        --print(`⛔ {ailment} ailment is stuck so exiting task ⛔`)
+    --else
+        --print(`🎉 {ailment} ailment finished 🎉`)
+    --end
 end
 
 local function babyWaitForTaskToFinish(ailment: string)
-    print(`⏳ Waiting for BABY {string.upper(ailment)} to finish ⏳`)
+    --print(`⏳ Waiting for BABY {string.upper(ailment)} to finish ⏳`)
     local count = 0
     repeat
         task.wait(5)
         local taskActive = if ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments and ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments[ailment] then true else false
         count += 5
     until not taskActive or count >= 60
-    if count >= 60 then
-        print(`⚠️ Waited too long for ailment: {ailment}, must be stuck ⚠️`)
-    else
-        print(`🎉 {string.upper(ailment)} task finished 🎉`)
-    end
+    --if count >= 60 then
+        --print(`⚠️ Waited too long for ailment: {ailment}, must be stuck ⚠️`)
+    --else
+        --print(`🎉 {string.upper(ailment)} task finished 🎉`)
+    --end
 end
 
 
@@ -263,22 +263,22 @@ end
 --[[ Pet Ailments ]]--
 ----------------------
 function Ailments:HungryAilment()
-    print("🍖 Doing hungry task 🍖")
+    --print("🍖 Doing hungry task 🍖")
     FoodAilments("icecream")
-    print("🍖 Finished hungry task 🍖")
+    --print("🍖 Finished hungry task 🍖")
 end
 
 function Ailments:ThirstyAilment()
-    print("🥛 Doing thirsty task 🥛")
+    --print("🥛 Doing thirsty task 🥛")
     FoodAilments("water")
-    print("🥛 Finished thirsty task 🥛")
+    --print("🥛 Finished thirsty task 🥛")
 end
 
 function Ailments:SickAilment()
     if doctorId then
-        print("🩹 Doing sick task 🩹")
+        --print("🩹 Doing sick task 🩹")
         ReplicatedStorage.API["LocationAPI/SetLocation"]:FireServer("Hospital")
-        if not isDoctorLoaded() then print(`🩹⚠️ Doctor didnt load 🩹⚠️`) return end
+        if not isDoctorLoaded() then --[[print(`🩹⚠️ Doctor didnt load 🩹⚠️`)--]] return end
         local args = {
             [1] = doctorId,
             [2] = "UseBlock",
@@ -287,7 +287,7 @@ function Ailments:SickAilment()
         }
         
         ReplicatedStorage.API:FindFirstChild("HousingAPI/ActivateInteriorFurniture"):InvokeServer(unpack(args))
-        print("🩹 SICK task Finished 🩹")
+        --print("🩹 SICK task Finished 🩹")
     else
         getDoctorId()
     end
@@ -295,28 +295,28 @@ end
 
 function Ailments:SalonAilment(ailment: string, petUnique: string)
     reEquipPet()
-    print("👗 Doing salon task 👗")
+    --print("👗 Doing salon task 👗")
     ReplicatedStorage.API["LocationAPI/SetLocation"]:FireServer("Salon")
     waitForTaskToFinish(ailment, petUnique)
 end
 
 function Ailments:PizzaPartyAilment(ailment: string, petUnique: string)
     reEquipPet()
-    print("🍕 Doing pizza party task 🍕")
+    --print("🍕 Doing pizza party task 🍕")
     ReplicatedStorage.API["LocationAPI/SetLocation"]:FireServer("PizzaShop")
     waitForTaskToFinish(ailment, petUnique)
 end
 
 function Ailments:SchoolAilment(ailment: string, petUnique: string)
     reEquipPet()
-    print("🏫 Doing school task 🏫")
+    --print("🏫 Doing school task 🏫")
     ReplicatedStorage.API["LocationAPI/SetLocation"]:FireServer("School")
     waitForTaskToFinish(ailment, petUnique)
 end
 
 function Ailments:BoredAilment(pianoId: string, petUnique: string)
     reEquipPet()
-    print("🥱 Doing bored task 🥱")
+    --print("🥱 Doing bored task 🥱")
     if pianoId then
         PianoAilment(pianoId, ClientData.get("pet_char_wrappers")[1]["char"])
     else
@@ -327,21 +327,21 @@ end
 
 function Ailments:SleepyAilment(bedId: string, petUnique: string)
     reEquipPet()
-    print("😴 Doing sleep task 😴")
+    --print("😴 Doing sleep task 😴")
     furnitureAilments(bedId, ClientData.get("pet_char_wrappers")[1]["char"])
     waitForTaskToFinish("sleepy", petUnique)
 end
 
 function Ailments:DirtyAilment(showerId: string, petUnique: string)
     reEquipPet()
-    print("🧼 Doing dirty task 🧼")
+    --print("🧼 Doing dirty task 🧼")
     furnitureAilments(showerId, ClientData.get("pet_char_wrappers")[1]["char"])
     waitForTaskToFinish("dirty", petUnique)
 end
 
 function Ailments:ToiletAilment(litterBoxId: string, petUnique: string)
     reEquipPet()
-    print("🚽 Doing toilet task 🚽")
+    --print("🚽 Doing toilet task 🚽")
     if litterBoxId then
         furnitureAilments(litterBoxId, ClientData.get("pet_char_wrappers")[1]["char"])
     else
@@ -355,7 +355,7 @@ function Ailments:ToiletAilment(litterBoxId: string, petUnique: string)
 end
 
 function Ailments:BeachPartyAilment(petUnique: string)
-    print("🏖️ Doing beach party 🏖️")
+    --print("🏖️ Doing beach party 🏖️")
     ReplicatedStorage.API["ToolAPI/Unequip"]:InvokeServer(ClientData.get_data()[localPlayer.Name].last_equipped_pets[1], {})
     Teleport.BeachParty()
     task.wait(2)
@@ -364,7 +364,7 @@ function Ailments:BeachPartyAilment(petUnique: string)
 end
 
 function Ailments:CampingAilment(petUnique: string)
-    print("🏕️ Doing camping task 🏕️")
+    --print("🏕️ Doing camping task 🏕️")
     ReplicatedStorage.API["ToolAPI/Unequip"]:InvokeServer(ClientData.get_data()[localPlayer.Name].last_equipped_pets[1], {})
     Teleport.CampSite()
     task.wait(2)
@@ -374,7 +374,7 @@ end
 
 function Ailments:WalkAilment(petUnique: string)
     reEquipPet()
-    print("🦮 Doing walking task 🦮")
+    --print("🦮 Doing walking task 🦮")
     ReplicatedStorage.API["AdoptAPI/HoldBaby"]:FireServer(ClientData.get("pet_char_wrappers")[1]["char"])
     waitForJumpingToFinish("walk", petUnique)
     ReplicatedStorage.API:FindFirstChild("AdoptAPI/EjectBaby"):FireServer(ClientData.get("pet_char_wrappers")[1]["char"])
@@ -392,13 +392,13 @@ end
 
 function Ailments:PlayAilment(ailment: string, petUnique: string)
     reEquipPet()
-    print("🦴 Doing play task 🦴")
+    --print("🦴 Doing play task 🦴")
     local toyId = GetInventory:GetUniqueId("toys", "raw_bone")
     if not toyId then
         ReplicatedStorage.API:FindFirstChild("ShopAPI/BuyItem"):InvokeServer("toys", "raw_bone", {})
         task.wait(3)
         toyId = GetInventory:GetUniqueId("toys", "raw_bone")
-        if not toyId then print(`⚠️ Doesn't have raw bone so exiting ⚠️`) return end
+        if not toyId then --[[print(`⚠️ Doesn't have raw bone so exiting ⚠️`)--]] return end
     end
 
     local args = {
@@ -410,22 +410,22 @@ function Ailments:PlayAilment(ailment: string, petUnique: string)
     }
     local count = 0
     repeat
-        print("🦴 Throwing toy 🦴")
+        --print("🦴 Throwing toy 🦴")
         ReplicatedStorage.API:FindFirstChild("PetObjectAPI/CreatePetObject"):InvokeServer(unpack(args))
         task.wait(10)
         local taskActive = if ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique] and ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][ailment] then true else false
         count += 1
     until not taskActive or count >= 6
     if count >= 6 then
-        print(`Play task got stuck so requiping pet`)
+        --print(`Play task got stuck so requiping pet`)
         reEquipPet()
         return
     end
-    print(`🎉 {ailment} ailment finished 🎉`)
+    --print(`🎉 {ailment} ailment finished 🎉`)
 end
 
 function Ailments:MysteryAilment(mysteryId: string, petUnique: string)
-    print("❓ Picking mystery task ❓") 
+    --print("❓ Picking mystery task ❓") 
     pickMysteryTask(mysteryId, petUnique)
 end
 
@@ -434,37 +434,37 @@ end
 --[[ Baby Ailments ]]--
 ----------------------
 function Ailments:BabyHungryAilment()
-    print(`👶🍴 Doing baby hungry task 👶🍴`)
+    --print(`👶🍴 Doing baby hungry task 👶🍴`)
     local stuckCount = 0
     repeat
         babyGetFoodAndEat("icecream")
         stuckCount += 1
         task.wait(1)
     until not ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments["hungry"] or stuckCount >= 30
-    if stuckCount >= 30 then
-        print(`⚠️ Waited too long for Baby Hungry. Must be stuck ⚠️`)
-    else
-        print(`👶🍴 Baby hungry task Finished 👶🍴`)
-    end
+    --if stuckCount >= 30 then
+        --print(`⚠️ Waited too long for Baby Hungry. Must be stuck ⚠️`)
+    --else
+        --print(`👶🍴 Baby hungry task Finished 👶🍴`)
+    --end
 end
 
 function Ailments:BabyThirstyAilment()
-    print(`👶🥛 Doing baby water task 👶🥛`)
+    --print(`👶🥛 Doing baby water task 👶🥛`)
     local stuckCount = 0
     repeat
         babyGetFoodAndEat("water")
         stuckCount += 1
         task.wait(1)
     until not ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments["thirsty"] or stuckCount >= 30
-    if stuckCount >= 30 then
-        print(`⚠️ Waited too long for Baby Thirsty. Must be stuck ⚠️`)
-    else
-        print(`👶🥛 Baby water task Finished 👶🥛`)
-    end
+    --if stuckCount >= 30 then
+        --print(`⚠️ Waited too long for Baby Thirsty. Must be stuck ⚠️`)
+    --else
+        --print(`👶🥛 Baby water task Finished 👶🥛`)
+    --end
 end
 
 function Ailments:BabyBoredAilment(pianoId: string)
-    print("👶🥱 Doing bored task 👶🥱")
+    --print("👶🥱 Doing bored task 👶🥱")
     getUpFromSitting()
     if pianoId then
         PianoAilment(pianoId, localPlayer.Character)
@@ -476,7 +476,7 @@ function Ailments:BabyBoredAilment(pianoId: string)
 end
 
 function Ailments:BabySleepyAilment(bedId: string)
-    print("👶😴 Doing sleepy task 👶😴")
+    --print("👶😴 Doing sleepy task 👶😴")
     getUpFromSitting()
     furnitureAilments(bedId, localPlayer.Character)
     babyWaitForTaskToFinish("sleepy")
@@ -484,7 +484,7 @@ function Ailments:BabySleepyAilment(bedId: string)
 end
 
 function Ailments:BabyDirtyAilment(showerId: string)
-    print("👶🧼 Doing dirty task 👶🧼")
+    --print("👶🧼 Doing dirty task 👶🧼")
     getUpFromSitting()
     furnitureAilments(showerId, localPlayer.Character)
     babyWaitForTaskToFinish("dirty")
