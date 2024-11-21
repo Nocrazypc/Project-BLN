@@ -48,7 +48,7 @@ local CollisionsClient = require(ReplicatedStorage.ClientModules.Game:WaitForChi
 local Player = Players.LocalPlayer
 
 -- repeat task.wait(1) until ClientData.get_data()[Player.Name].loaded_in
-print("loading")
+--print("loading")
 
 local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Rayfield/main/source"))()
 
@@ -239,7 +239,7 @@ local rng = Random.new()
 --[[ Private Functions ]]--
 -----------------------------------------------------------------------------------------------
 local function clickGuiButton(button: Instance, xOffset: number, yOffset: number)
-	if typeof(button) ~= "Instance" then print("button is not a Instance") return end
+	if typeof(button) ~= "Instance" then --[[print("button is not a Instance")--]] return end
 	local xOffset = xOffset or 60
 	local yOffset = yOffset or 60
 	task.wait()
@@ -339,7 +339,7 @@ end
 
 
 local function buyFurniture(furnitureId: string) --piano basiccrib
-	print(`💸 No {furnitureId}, so buying it 💸`)
+	--print(`💸 No {furnitureId}, so buying it 💸`)
 	local args = {
 		{
 			{
@@ -826,7 +826,7 @@ local function AgeUpPotionLevelUp()
 
 		local hasAgeUpPotion = feedAgePotion()
 		if not hasAgeUpPotion then
-			print("no more age up potions")
+			--print("no more age up potions")
 			getgenv().PotionToggle:Set(false)
 			return
 		end
@@ -1106,7 +1106,7 @@ local function autoFarm()
 		-- end
 
 		if not ClientData.get("pet_char_wrappers")[1] then
-			print("no pet so requipping")
+			--print("no pet so requipping")
 			ReplicatedStorage.API["ToolAPI/Unequip"]:InvokeServer(PetCurrentlyFarming, {})
 			task.wait(1)
 			ReplicatedStorage.API["ToolAPI/Equip"]:InvokeServer(PetCurrentlyFarming, {})
@@ -1280,12 +1280,12 @@ local function autoFarm()
 			Player.PlayerGui.MinigameInGameApp.Body.Middle.Container:WaitForChild("TitleLabel")
 			if Player.PlayerGui.MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match("CRICKET'S TILE HOP") then
 				stopDoingTasks = true
-				print("stop doing task")
+				--print("stop doing task")
 				-- Player.Character.Humanoid.WalkSpeed = 0
 				task.wait(rng:NextInteger(20, 30))
 				
 				stopDoingTasks = false
-				print("start doing task")
+				--print("start doing task")
 			end
 		end
 	end)--]]
