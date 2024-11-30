@@ -169,7 +169,41 @@ local DailyRewardTable2 = {
 
 local NeonTable = { ["neon_fusion"] = true, ["mega_neon_fusion"] = true }
 
- local ClaimTable = {
+
+   local ClaimTable = {
+	["hatch_three_eggs"] = {3},
+	["fully_age_three_pets"] = {3},
+	["make_two_trades"] = {2},
+	["equip_two_accessories"] = {2},
+	["buy_three_furniture_items_with_friends_coop_budget"] = {3},
+	["buy_five_furniture_items"] = {5},
+	["buy_fifteen_furniture_items"] = {15},
+	["play_as_a_baby_for_twenty_five_minutes"] = {1500},
+	["play_for_thirty_minutes"] = {1800},
+	["sunshine_2024_playtime"] = {2400},
+	["bonus_week_2024_small_ailments"] = {5},
+	["bonus_week_2024_small_hatch_egg"] = {1},
+	["bonus_week_2024_small_age_potion_drank"] = {1},
+	["bonus_week_2024_small_ailment_orange"] = {1},
+	["bonus_week_2024_medium_ailment_hungry_sleepy_bored"] = {3},
+	["bonus_week_2024_medium_ailment_catch_bored"] = {2},
+	["bonus_week_2024_medium_ailment_toilet_dirty_sleepy"] = {3},
+	["bonus_week_2024_medium_ailment_pizza_hungry"] = {2},
+	["bonus_week_2024_medium_ailment_salon_dirty"] = {2},
+	["bonus_week_2024_medium_ailment_school_ride"] = {2},
+	["bonus_week_2024_medium_ailment_walk_beach"] = {2},
+	["bonus_week_2024_medium_ailments"] = {15},
+	["bonus_week_2024_large_ailments_common"] = {30},
+	["bonus_week_2024_large_ailments_legendary"] = {30},
+	["bonus_week_2024_large_ailments_ultra_rare"] = {30},
+	["bonus_week_2024_large_ailments_uncommon"] = {30},
+	["bonus_week_2024_large_ailments_rare"] = {30},
+	["bonus_week_2024_large_ailments"] = {30},
+}
+
+
+--- old---
+--[[local ClaimTable = {
 	["hatch_three_eggs"] = { 3 },
 	["fully_age_three_pets"] = { 3 },
 	["make_two_trades"] = { 2 },
@@ -179,7 +213,8 @@ local NeonTable = { ["neon_fusion"] = true, ["mega_neon_fusion"] = true }
 	["buy_fifteen_furniture_items"] = { 15 },
 	["play_as_a_baby_for_twenty_five_minutes"] = { 1500 },
 	["play_for_thirty_minutes"] = { 1800 },
-} 
+} --]]
+
 
 local petsTable = GetInventory:TabId("pets")
 if #petsTable == 0 then petsTable = {"Nothing"} end
@@ -1412,7 +1447,7 @@ local function autoFarm()
 	-- ReplicatedStorage.API["EventAPI/ClaimObbyReward"]:InvokeServer(1)
 
 	-- adopt me code
-	-- ReplicatedStorage.API["CodeRedemptionAPI/AttemptRedeemCode"]:InvokeServer("2xGARDEN")
+	ReplicatedStorage.API["CodeRedemptionAPI/AttemptRedeemCode"]:InvokeServer("AMTRUCK2024")
 
 	-- setfpscap(SETTINGS.SET_FPS)
 end
