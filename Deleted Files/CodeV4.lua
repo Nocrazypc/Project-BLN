@@ -14,7 +14,7 @@ end
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local UserInputService = game:GetService("UserInputService")
-local VirtualInputManager = game:GetService("VirtualInputManager")
+-- local VirtualInputManager = game:GetService("VirtualInputManager")
 local UserGameSettings = UserSettings():GetService("UserGameSettings")
 -- local UserInputService = game:GetService("UserInputService")
 local VirtualUser = game:GetService("VirtualUser")
@@ -65,7 +65,7 @@ local StatsGuis = loadstring(game:HttpGet("https://raw.githubusercontent.com/Noc
 -------------------------------------------------------------------
 --[[ Private Variables ]]--
 -------------------------------------------------------------------
-local NewsAppConnection
+-- local NewsAppConnection
 local PickColorConn
 local WelcomeScreen
 -- local DialogConnection
@@ -75,21 +75,21 @@ local RobuxProductDialogConnection2
 local banMessageConnection
 local DailyClaimConnection
 -- local ChatConnection
-local CharConn
+-- local CharConn
 
 local counter = 0
-local diedCounter = 0
+-- local diedCounter = 0
 
-local isInMiniGame = false
-local DailyBoolean = true
+-- local isInMiniGame = false
+-- local DailyBoolean = true
 local NewTaskBool = true
 local NewClaimBool = true
-local isMainMap = false
-local stopDoingTasks = false
-local isCurrentlyDoingTasks = false
+-- local isMainMap = false
+-- local stopDoingTasks = false
+-- local isCurrentlyDoingTasks = false
 local guiCooldown = false
 local tutorialDebonce = false
-local stopEquip = false
+-- local stopEquip = false
 local discordCooldown = false
 local debounce = false
 
@@ -202,20 +202,6 @@ local NeonTable = { ["neon_fusion"] = true, ["mega_neon_fusion"] = true }
 }
 
 
---- old---
---[[local ClaimTable = {
-	["hatch_three_eggs"] = { 3 },
-	["fully_age_three_pets"] = { 3 },
-	["make_two_trades"] = { 2 },
-	["equip_two_accessories"] = { 2 },
-	["buy_three_furniture_items_with_friends_coop_budget"] = { 3 },
-	["buy_five_furniture_items"] = { 5 },
-	["buy_fifteen_furniture_items"] = { 15 },
-	["play_as_a_baby_for_twenty_five_minutes"] = { 1500 },
-	["play_for_thirty_minutes"] = { 1800 },
-} --]]
-
-
 local petsTable = GetInventory:TabId("pets")
 if #petsTable == 0 then petsTable = {"Nothing"} end
 local giftsTable = GetInventory:TabId("gifts")
@@ -238,27 +224,29 @@ local rng = Random.new()
 -----------------------------------------------------------------------------------------------
 --[[ Private Functions ]]--
 -----------------------------------------------------------------------------------------------
-local function clickGuiButton(button: Instance, xOffset: number, yOffset: number)
-	if typeof(button) ~= "Instance" then --[[print("button is not a Instance")--]] return end
-	local xOffset = xOffset or 60
-	local yOffset = yOffset or 60
-	task.wait()
-	VirtualInputManager:SendMouseButtonEvent(button.AbsolutePosition.X + xOffset, button.AbsolutePosition.Y + yOffset, 0, true, game, 1)
-	task.wait()
-	VirtualInputManager:SendMouseButtonEvent(button.AbsolutePosition.X + xOffset, button.AbsolutePosition.Y + yOffset, 0, false, game, 1)
-	task.wait()
-end
+-- local function clickGuiButton(button: Instance, xOffset: number, yOffset: number)
+-- 	if typeof(button) ~= "Instance" then print("button is not a Instance") return end
+-- 	local xOffset = xOffset or 60
+-- 	local yOffset = yOffset or 60
+-- 	task.wait()
+-- 	VirtualInputManager:SendMouseButtonEvent(button.AbsolutePosition.X + xOffset, button.AbsolutePosition.Y + yOffset, 0, true, game, 1)
+-- 	task.wait()
+-- 	VirtualInputManager:SendMouseButtonEvent(button.AbsolutePosition.X + xOffset, button.AbsolutePosition.Y + yOffset, 0, false, game, 1)
+-- 	task.wait()
+-- end
 
-local function FireButton(PassOn, dialogFrame)
+local function FireButton(PassOn, dialogFramePass)
 	task.wait() -- gives it time for button
-	local dialogFrame = dialogFrame or "NormalDialog"
+	local dialogFrame = dialogFramePass or "NormalDialog"
 	for i, v in pairs(Player.PlayerGui.DialogApp.Dialog[dialogFrame].Buttons:GetDescendants()) do
 		if v.Name == "TextLabel" then
 			if v.Text == PassOn then
 				-- clickGuiButton(v.Parent.Parent)
-				firesignal(v.Parent.Parent.MouseButton1Down)
-				firesignal(v.Parent.Parent.MouseButton1Click)
-				firesignal(v.Parent.Parent.MouseButton1Up)
+				pcall(function()
+					firesignal(v.Parent.Parent.MouseButton1Down)
+					firesignal(v.Parent.Parent.MouseButton1Click)
+					firesignal(v.Parent.Parent.MouseButton1Up)
+				end)
 				break
 			end
 		end
@@ -289,6 +277,7 @@ local function completeStarterTutorial()
 	pcall(function()
 		LegacyTutorial.cancel_tutorial()
 		task.wait()
+		ReplicatedStorage.API["LegacyTutorialAPI/MarkTutorialCompleted"]:FireServer()
 		-- Bypass("TutorialClient").cancel()
 		task.wait()
 		ReplicatedStorage.API["LegacyTutorialAPI/EquipTutorialEgg"]:FireServer()
@@ -397,6 +386,7 @@ local function ReRollCount()
 			return v
 		end
 	end
+     return 0
 end
 
 local function NewTask()
@@ -473,9 +463,9 @@ local function isMuleInGame()
 	return false
 end
 
-local function subToHouse()
-	game:GetService("ReplicatedStorage").API:FindFirstChild("HousingAPI/SubscribeToHouse"):FireServer(Player)
-end
+--[[local function subToHouse()
+game:GetService("ReplicatedStorage").API:FindFirstChild("HousingAPI/SubscribeToHouse"):FireServer(Player)
+end--]]
 
 
 local function agePotion(FoodPassOn)
@@ -589,9 +579,10 @@ local function getEgg()
 	local BuyEgg = ReplicatedStorage.API["ShopAPI/BuyItem"]:InvokeServer("pets", Egg2Buy, {})
 	if BuyEgg == "too little money" then
 		-- nothing
-		return
+		return false
 	end
 	task.wait(1)
+	return false
 end
 
 --[[
@@ -836,7 +827,7 @@ end
 
 
 local function CheckifEgg()
-	local PetNameID = ClientData.get("pet_char_wrappers")[1]["pet_id"]
+	-- local PetNameID = ClientData.get("pet_char_wrappers")[1]["pet_id"]
 	local PetUniqueID = ClientData.get("pet_char_wrappers")[1]["pet_unique"]
 	local PetAge = ClientData.get("pet_char_wrappers")[1]["pet_progression"]["age"]
 
@@ -1191,6 +1182,7 @@ local function autoFarm()
 				-- should already do baby task when pet does it
 				return true
 			elseif key == "camping" then
+			     getRewardFromAdventCalendar()
 			     Teleport.PlaceFloorAtCampSite()
 				Ailments:CampingAilment(petUnique)
 				Teleport.FarmingHome()
@@ -1420,10 +1412,10 @@ local function autoFarm()
 
 	--// Code below runs once when auto farm is enabled
 	if SETTINGS.PET_AUTO_FUSION then
-		task.spawn(function()
+
 			Fusion:MakeMega(false)
 			Fusion:MakeMega(true)
-		end)
+			
 	end
 
 
@@ -1436,9 +1428,9 @@ local function autoFarm()
 		VirtualUser:ClickButton2(Vector2.new())
 	end)
 
-	for _, v in getconnections(Player.Idled) do
-		v:Disable()
-	end
+	-- for _, v in getconnections(Player.Idled) do
+	--	v:Disable()
+	-- end
 
 	-- if not Bypass("ClientData").get_data()[Player.Name].inventory.toys.trade_license then
 	--     getTradeLicense()
@@ -1537,16 +1529,22 @@ local function onTextChanged()
 		FireButton("I understand")
 	elseif Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("4.5%% Legendary") then
 		FireButton("Okay")
+	elseif Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("Let's start the day") then
+		FireButton("Start")
+	elseif Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("Are you subscribed") then
+		FireButton("Yes")
+	elseif Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("your inventory") then
+		FireButton("Awesome!")
 	end
 end
 
-local function isMuleTrading()
+--[[ local function isMuleTrading()
 	if ClientData.get_data()[Player.Name].in_active_trade then
 		return true
 	else
 		return false
 	end
-end
+end ]]--
 
 -----------------------------------------------------------------------------------------------
 --[[ Handling ]]--
@@ -1576,11 +1574,11 @@ Player.OnTeleport:Connect(function(State)
 	end
 end)
 
-Players.PlayerRemoving:Connect(function(player)
-	if player.Name == getgenv().SETTINGS.TRADE_COLLECTOR_NAME then
-		stopDoingTasks = false
-	end
-end)
+-- Players.PlayerRemoving:Connect(function(player)
+--	if player.Name == getgenv().SETTINGS.TRADE_COLLECTOR_NAME then
+--		stopDoingTasks = false
+--	end
+-- end)
 
 
 WelcomeScreen = Player.PlayerGui.DialogApp.Dialog.NormalDialog:GetPropertyChangedSignal("Visible"):Connect(function()
@@ -1596,7 +1594,7 @@ WelcomeScreen = Player.PlayerGui.DialogApp.Dialog.NormalDialog:GetPropertyChange
 				completeStarterTutorial()
 				getTradeLicense()
 				task.wait(1)
-				game:Shutdown()
+				-- game:Shutdown()
 				WelcomeScreen:Disconnect()
 			end
 		end)
@@ -1932,7 +1930,7 @@ if Player.PlayerGui.NewsApp.Enabled then
 	-- NewsAppConnection:Disconnect()
 end
 
-if Player.PlayerGui.DialogApp.Dialog.ThemeColorDialog.Visible then
+--[[if Player.PlayerGui.DialogApp.Dialog.ThemeColorDialog.Visible then
 	if tutorialDebonce then
 		return
 	end
@@ -1957,7 +1955,7 @@ if Player.PlayerGui.DialogApp.Dialog.ThemeColorDialog.Visible then
 	firesignal(doneButton.MouseButton1Up)
 	tutorialDebonce = false
 	PickColorConn:Disconnect()
-end
+end--]]
 
 
 if Player.PlayerGui.DialogApp.Dialog.NormalDialog.Visible then
