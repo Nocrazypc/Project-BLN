@@ -548,6 +548,19 @@ local function getBaitReward(baitId)
 	ReplicatedStorage.API:FindFirstChild("HousingAPI/ActivateFurniture"):InvokeServer(unpack(args))
 end
 
+---Advent Calendar-----
+local function getRewardFromAdventCalendar()
+	local date = DateTime.now().ToUniversalTime(DateTime.now())
+	local claimed = if ClientData.get_data()[Player.Name].winter_2024_advent_manager.rewards_claimed[date["Day"]] then true else false
+	if claimed then
+		-- print(`Reward already claimed for day {date["Day"]}`)
+	else
+		ReplicatedStorage.API["WinterfestAPI/AdventCalendarTryTakeReward"]:InvokeServer(date["Day"])
+		print(`🎉 Reward claimed: day {date["Day"]} 🎉`)
+	end
+end
+----------------------
+
 local function findBait(baitPassOn)
 	local bait
 	for _, v in pairs(ClientData.get_data()[Player.Name].inventory.food) do
