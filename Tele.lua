@@ -56,8 +56,8 @@ function Teleport.PlaceFloorAtFarmingHome()
 	SurfaceGui.Face = Enum.NormalId.Top
 
 	TextLabel.Parent = SurfaceGui
-	TextLabel.BackgroundColor3 = Color3.fromRGB(50, 220, 0)
-	TextLabel.BackgroundTransparency = 0.400
+	TextLabel.BackgroundColor3 = Color3.fromRGB(50, 200, 0)
+	TextLabel.BackgroundTransparency = 0.350
 	TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	TextLabel.BorderSizePixel = 0
 	TextLabel.Size = UDim2.new(1, 0, 1, 0)
