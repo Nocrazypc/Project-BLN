@@ -2666,9 +2666,9 @@ getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
 	end,
 })
 
-GuiPopupButton.Text = "Pop-Up GUI"
+GuiPopupButton.Text = "Open GUI"
 GuiPopupButton.AnchorPoint = Vector2.new(0.5, 0.5)
-GuiPopupButton.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+GuiPopupButton.BackgroundColor3 = Color3.fromRGB(255, 176, 5)
 GuiPopupButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
 GuiPopupButton.BorderSizePixel = 0
 GuiPopupButton.Position = UDim2.new(0.65, 0, 0.91, 0)
