@@ -21,9 +21,11 @@ local BucksAndPotionFrame = Instance.new("Frame")
 local TextLabel_3 = Instance.new("TextLabel")
 local UICorner_3 = Instance.new("UICorner")
 local TotalFrame = Instance.new("Frame")
-local TotalFrame1 = Instance.new("Frame")
 local TextLabel_4 = Instance.new("TextLabel")
 local UICorner_4 = Instance.new("UICorner")
+local TotalFrame1 = Instance.new("Frame")
+local TextLabel_5 = Instance.new("TextLabel")
+local UICorner_5 = Instance.new("UICorner")
 
 local startCount = 0
 local startBucksAmount = 0
@@ -246,7 +248,6 @@ function StatsGuis:UpdateText(nameOfFrame: string)
         MainFrame.BucksAndPotionFrame.TextLabel.Text = `🧪 {formatNumber(potionCount)} 💰 {formatNumber(bucks)}`
     elseif nameOfFrame == "TotalFrame" then
         local potionCount = agePotionCount()
-        local bucks = bucksAmount()
         MainFrame.TotalFrame.TextLabel.Text = `Total 🧪 {formatNumber(potionCount)}`
     elseif nameOfFrame == "TotalFrame1" then
         local bucks = bucksAmount()
