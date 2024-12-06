@@ -21,6 +21,7 @@ local BucksAndPotionFrame = Instance.new("Frame")
 local TextLabel_3 = Instance.new("TextLabel")
 local UICorner_3 = Instance.new("UICorner")
 local TotalFrame = Instance.new("Frame")
+local TotalFrame1 = Instance.new("Frame")
 local TextLabel_4 = Instance.new("TextLabel")
 local UICorner_4 = Instance.new("UICorner")
 
@@ -161,6 +162,35 @@ TextLabel_3.TextWrapped = true
 UICorner_3.CornerRadius = UDim.new(0, 12)
 UICorner_3.Parent = TextLabel_3
 
+TotalFrame1.Name = "TotalFrame1"
+TotalFrame1.Parent = MainFrame
+TotalFrame1.AnchorPoint = Vector2.new(0.5, 0.5)
+TotalFrame1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TotalFrame1.BackgroundTransparency = 1.000
+TotalFrame1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TotalFrame1.BorderSizePixel = 0
+TotalFrame1.Position = UDim2.new(0.5, 0, 0.119999997, 0)
+TotalFrame1.Size = UDim2.new(1, 0, 0.25, 0)
+
+TextLabel_5.Parent = TotalFrame1
+TextLabel_5.AnchorPoint = Vector2.new(0.5, 0.5)
+TextLabel_5.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+TextLabel_5.BackgroundTransparency = 0.500
+TextLabel_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_5.BorderSizePixel = 0
+TextLabel_5.Position = UDim2.new(0.498873174, 0, 0.496309608, 0)
+TextLabel_5.Size = UDim2.new(0.996291697, 0, 0.97639972, 0)
+TextLabel_5.Font = Enum.Font.FredokaOne
+TextLabel_5.Text = "Name"
+TextLabel_5.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_5.TextScaled = true
+TextLabel_5.TextSize = 14.000
+TextLabel_5.TextWrapped = true
+
+UICorner_5.CornerRadius = UDim.new(0, 12)
+UICorner_5.Parent = TextLabel_5
+
+
 local function formatTime(currentTime)
 	local hours = math.floor(currentTime / 3600)
 	local minutes = math.floor((currentTime % 3600) / 60)
@@ -217,7 +247,10 @@ function StatsGuis:UpdateText(nameOfFrame: string)
     elseif nameOfFrame == "TotalFrame" then
         local potionCount = agePotionCount()
         local bucks = bucksAmount()
-        MainFrame.TotalFrame.TextLabel.Text = `Total:🧪 {formatNumber(potionCount)} 💰 {formatNumber(bucks)}`
+        MainFrame.TotalFrame.TextLabel.Text = `Total 🧪 {formatNumber(potionCount)}`
+    elseif nameOfFrame == "TotalFrame1" then
+        local bucks = bucksAmount()
+        MainFrame.TotalFrame1.TextLabel.Text = `Total 💰 {formatNumber(bucks)}`
     elseif nameOfFrame == "NameFrame" then
         MainFrame.NameFrame.TextLabel.Text = `😎 {localPlayer.Name}`
     end
