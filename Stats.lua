@@ -27,7 +27,7 @@ local TotalFrame1 = Instance.new("Frame")
 local TextLabel_5 = Instance.new("TextLabel")
 local UICorner_5 = Instance.new("UICorner")
 -----Gingerbread-----
-local TotalFrame2 = Instance.new("Frame")
+local TotalFrameG = Instance.new("Frame")
 local TextLabel_6 = Instance.new("TextLabel")
 local UICorner_6 = Instance.new("UICorner")
 
@@ -202,17 +202,17 @@ UICorner_5.Parent = TextLabel_5
 
 ------ Gingerbread ---------
 
-TotalFrame2.Name = "TotalFrame2"
-TotalFrame2.Parent = MainFrame
-TotalFrame2.AnchorPoint = Vector2.new(0.5, 0.5)
-TotalFrame2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TotalFrame2.BackgroundTransparency = 1.000
-TotalFrame2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TotalFrame2.BorderSizePixel = 0
-TotalFrame2.Position = UDim2.new(0.5, 0, 0.119999997, 0)
-TotalFrame2.Size = UDim2.new(1, 0, 0.25, 0)
+TotalFrameG.Name = "TotalFrameG"
+TotalFrameG.Parent = MainFrame
+TotalFrameG.AnchorPoint = Vector2.new(0.5, 0.5)
+TotalFrameG.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TotalFrameG.BackgroundTransparency = 1.000
+TotalFrameG.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TotalFrameG.BorderSizePixel = 0
+TotalFrameG.Position = UDim2.new(0.5, 0, 0.119999997, 0)
+TotalFrameG.Size = UDim2.new(1, 0, 0.25, 0)
 
-TextLabel_6.Parent = TotalFrame2
+TextLabel_6.Parent = TotalFrameG
 TextLabel_6.AnchorPoint = Vector2.new(0.5, 0.5)
 TextLabel_6.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 TextLabel_6.BackgroundTransparency = 0.500
@@ -269,13 +269,12 @@ end
 local function gingerbreadAmount()
     return ClientData.get_data()[localPlayer.Name].gingerbread_2024 or 0
 end
-
-startgingerbreadAmount = gingerbreadAmount()
 -----------------------
 
 startCount = agePotionCount()
 startBucksAmount = bucksAmount()
 startTime = DateTime.now().UnixTimestamp
+startgingerbreadAmount = gingerbreadAmount()
 
 function StatsGuis:UpdateText(nameOfFrame: string)
     local MainFrame = localPlayer.PlayerGui.StatsGui.MainFrame
@@ -299,9 +298,9 @@ function StatsGuis:UpdateText(nameOfFrame: string)
         local bucks = bucksAmount()
         MainFrame.TotalFrame1.TextLabel.Text = `Total 💰 {formatNumber(bucks)}`
 --- Gingerbread-----
-    elseif nameOfFrame == "TotalFrame2" then
+    elseif nameOfFrame == "TotalFrameG" then
         local gingerbread = gingerbreadAmount()
-        MainFrame.TotalFrame2.TextLabel.Text = `Total 🍪 {formatNumber(gingerbread)}`
+        MainFrame.TotalFrameG.TextLabel.Text = `Total 🍪 {formatNumber(gingerbread)}`
 --------------------
     elseif nameOfFrame == "NameFrame" then
         MainFrame.NameFrame.TextLabel.Text = `😎 {localPlayer.Name}`
