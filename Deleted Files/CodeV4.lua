@@ -1225,6 +1225,7 @@ local function autoFarm()
 			StatsGuis:UpdateText("TimeFrame")
 			StatsGuis:UpdateText("BucksAndPotionFrame")
                         StatsGuis:UpdateText("TotalFrame")
+                        StatsGuis:UpdateText("TotalFrame1")
 			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
 			task.wait(5)
 		end
@@ -1884,6 +1885,7 @@ StatsGuis:UpdateText("NameFrame")
 StatsGuis:UpdateText("TimeFrame")
 StatsGuis:UpdateText("BucksAndPotionFrame")
 StatsGuis:UpdateText("TotalFrame")
+StatsGuis:UpdateText("TotalFrame1")
 
 StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Captures, false)
 -- Player:WaitForChild("PlayerGui", 600)
