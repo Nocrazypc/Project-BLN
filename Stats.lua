@@ -26,7 +26,7 @@ local UICorner_4 = Instance.new("UICorner")
 local TotalFrame1 = Instance.new("Frame")
 local TextLabel_5 = Instance.new("TextLabel")
 local UICorner_5 = Instance.new("UICorner")
------Gingerbread-----
+
 local TotalFrameG = Instance.new("Frame")
 local TextLabel_6 = Instance.new("TextLabel")
 local UICorner_6 = Instance.new("UICorner")
@@ -300,7 +300,7 @@ function StatsGuis:UpdateText(nameOfFrame: string)
 --- Gingerbread-----
     elseif nameOfFrame == "TotalFrameG" then
         local gingerbread = gingerbreadAmount()
-        MainFrame.TotalFrameG.TextLabel.Text = `Total 🍪 {formatNumber(bucks)}`
+        MainFrame.TotalFrameG.TextLabel.Text = `Total 🍪 {formatNumber(gingerbread)}`
 --------------------
     elseif nameOfFrame == "NameFrame" then
         MainFrame.NameFrame.TextLabel.Text = `😎 {localPlayer.Name}`
