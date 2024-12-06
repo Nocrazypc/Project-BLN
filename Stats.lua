@@ -228,7 +228,7 @@ TextLabel_6.TextSize = 14.000
 TextLabel_6.TextWrapped = true
 
 UICorner_6.CornerRadius = UDim.new(0, 12)
-UICorner_6.Parent = TextLabel_5
+UICorner_6.Parent = TextLabel_6
 
 ----------------------------
 
