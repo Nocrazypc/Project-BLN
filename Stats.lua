@@ -36,6 +36,8 @@ local UICorner_6 = Instance.new("UICorner")
 local startCount = 0
 local startBucksAmount = 0
 local startTime = nil
+local startgingerbreadAmount = 0
+
 --Properties:
 
 StatsGui.Name = "StatsGui"
@@ -263,6 +265,7 @@ local function agePotionCount()
     return count
 end
 ----- gingrebread------
+
 local function gingerbreadAmount()
     return ClientData.get_data()[localPlayer.Name].gingerbread_2024 or 0
 end
@@ -296,7 +299,7 @@ function StatsGuis:UpdateText(nameOfFrame: string)
 --- Gingerbread-----
     elseif nameOfFrame == "TotalFrame2" then
         local gingerbread = gingerbreadAmount()
-        MainFrame.TotalFrame1.TextLabel.Text = `Total 🍪{formatNumber(gingerbread)}`
+        MainFrame.TotalFrame2.TextLabel.Text = `Total 🍪{formatNumber(gingerbread)}`
 --------------------
     elseif nameOfFrame == "NameFrame" then
         MainFrame.NameFrame.TextLabel.Text = `😎 {localPlayer.Name}`
