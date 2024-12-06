@@ -61,6 +61,7 @@ local Teleport = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocr
 local Ailments = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Deleted%20Files/Ailm.lua"))()
 local StatsGuis = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Stats.lua"))()
 
+local Christmas2024 = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Ch2024.lua"))()
 
 -------------------------------------------------------------------
 --[[ Private Variables ]]--
@@ -1191,8 +1192,9 @@ local function autoFarm()
 			if key == "beach_party" then
 	                Teleport.PlaceFloorAtBeachParty()
 				Ailments:BeachPartyAilment(petUnique)
-                     Teleport.FarmingHome()
+                             Teleport.FarmingHome()
 				-- should already do baby task when pet does it
+                             Christmas2024.getGingerbread()
 				return true
 			elseif key == "camping" then
 			     getRewardFromAdventCalendar()
@@ -1200,6 +1202,7 @@ local function autoFarm()
 				Ailments:CampingAilment(petUnique)
 				Teleport.FarmingHome()
 				-- should already do baby task when pet does it
+                            Christmas2024.getGingerbread()
 				return true
 			end
 		end
