@@ -20,7 +20,7 @@ local UICorner_2 = Instance.new("UICorner")
 local BucksAndPotionFrame = Instance.new("Frame")
 local TextLabel_3 = Instance.new("TextLabel")
 local UICorner_3 = Instance.new("UICorner")
-local TotalPotionFrame = Instance.new("Frame")
+local TotalFrame = Instance.new("Frame")
 local TextLabel_4 = Instance.new("TextLabel")
 local UICorner_4 = Instance.new("UICorner")
 
@@ -133,17 +133,17 @@ UICorner_4.CornerRadius = UDim.new(0, 12)
 UICorner_4.Parent = TextLabel_4
 
 
-TotalPotionFrame.Name = "TotalPotionFrame"
-TotalPotionFrame.Parent = MainFrame
-TotalPotionFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-TotalPotionFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TotalPotionFrame.BackgroundTransparency = 1.000
-TotalPotionFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TotalPotionFrame.BorderSizePixel = 0
-TotalPotionFrame.Position = UDim2.new(0.5, 0, 0.119999997, 0)
-TotalPotionFrame.Size = UDim2.new(1, 0, 0.25, 0)
+TotalFrame.Name = "TotalFrame"
+TotalFrame.Parent = MainFrame
+TotalFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+TotalFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TotalFrame.BackgroundTransparency = 1.000
+TotalFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TotalFrame.BorderSizePixel = 0
+TotalFrame.Position = UDim2.new(0.5, 0, 0.119999997, 0)
+TotalFrame.Size = UDim2.new(1, 0, 0.25, 0)
 
-TextLabel_3.Parent = TotalPotionFrame
+TextLabel_3.Parent = TotalFrame
 TextLabel_3.AnchorPoint = Vector2.new(0.5, 0.5)
 TextLabel_3.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 TextLabel_3.BackgroundTransparency = 0.500
@@ -166,6 +166,22 @@ local function formatTime(currentTime)
 	local minutes = math.floor((currentTime % 3600) / 60)
 	return string.format("%02d:%02d", hours, minutes)
 end
+
+local function formatNumber(num)
+        if num >= 1e6 then
+                -- Millions
+                return string.format("%.1fM", num / 1e6)
+        elseif num >= 1e3 then
+                -- Thousands
+                return string.format("%.0fk", num / 1e3)
+        else
+                -- Less than a thousand
+                return tostring(num)
+        end
+end
+
+
+
 
 local function bucksAmount()
     return ClientData.get_data()[localPlayer.Name].money or 0
@@ -197,9 +213,11 @@ function StatsGuis:UpdateText(nameOfFrame: string)
         local bucks = bucksAmount() - startBucksAmount
         if potionCount <= 0 then potionCount = 0 end
         if bucks <= 0 then bucks = 0 end
-        MainFrame.BucksAndPotionFrame.TextLabel.Text = `🧪 {potionCount} 💰 {bucks}`
-    elseif nameOfFrame == "TotalPotionFrame" then
-        MainFrame.TotalPotionFrame.TextLabel.Text = `Total 🧪: {agePotionCount()}`
+        MainFrame.BucksAndPotionFrame.TextLabel.Text = `🧪 {formatNumber(potionCount)} 💰 {formatNumber(bucks)}`
+    elseif nameOfFrame == "TotalFrame" then
+        local potionCount = agePotionCount()
+        local bucks = bucksAmount()
+        MainFrame.TotalFrame.TextLabel.Text = `🧪 {formatNumber(potionCount)} 💰 {formatNumber(bucks)}`
     elseif nameOfFrame == "NameFrame" then
         MainFrame.NameFrame.TextLabel.Text = `😎 {localPlayer.Name}`
     end
