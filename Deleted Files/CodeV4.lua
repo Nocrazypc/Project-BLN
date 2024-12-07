@@ -2206,8 +2206,12 @@ local FarmToggle = FarmTab:CreateToggle({
      CurrentValue = false,
      Flag = "Toggle10",
      Callback = function(Value)
-        
-task.wait(10) do
+
+task.wait(2)    
+
+    ReplicatedStorage.API["TeamAPI/ChooseTeam"]:InvokeServer("Parents", {["dont_send_back_home"] = true, ["source_for_logging"] = "avatar_editor"})
+    
+task.wait(5) do
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/W24.lua"))()
 end
 
