@@ -2732,16 +2732,21 @@ task.delay(5, function()
 	end
 end)
 ------------------------update Stats UI ----------------
-while task.wait(5) do
+            while task.wait(5) do
 			StatsGuis:UpdateText("TimeFrame")
 			StatsGuis:UpdateText("BucksAndPotionFrame")
                         StatsGuis:UpdateText("TotalFrame")
                         StatsGuis:UpdateText("TotalFrame1")
                         StatsGuis:UpdateText("TotalFrame2")
 			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
-end
+                    end
 
 -------------------------------------------------------
+            while task.wait(15) do
 
+                         getRewardFromAdventCalendar()
+                         task.wait(1800)
+
+                   end
 
 --print("Loaded. lastest update 07/12/2024  mm/dd/yyyy")
