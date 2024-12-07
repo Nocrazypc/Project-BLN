@@ -26,7 +26,7 @@ local StarterGui = game:GetService("StarterGui")
 StarterGui:SetCore(
     "SendNotification",
     {
-        Title = "Hello Potato  😊",
+        Title = "Hello Potato 😊",
         Text = "We're Back.. Be Happy!"
     }
 )
@@ -61,7 +61,6 @@ local Teleport = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocr
 local Ailments = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Deleted%20Files/Ailm.lua"))()
 local StatsGuis = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Stats.lua"))()
 
-local Christmas2024 = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Ch2024.lua"))()
 
 -------------------------------------------------------------------
 --[[ Private Variables ]]--
@@ -1192,9 +1191,8 @@ local function autoFarm()
 			if key == "beach_party" then
 	                Teleport.PlaceFloorAtBeachParty()
 				Ailments:BeachPartyAilment(petUnique)
-                             Teleport.FarmingHome()
+                     Teleport.FarmingHome()
 				-- should already do baby task when pet does it
-                             Christmas2024.getGingerbread()
 				return true
 			elseif key == "camping" then
 			     getRewardFromAdventCalendar()
@@ -1202,7 +1200,6 @@ local function autoFarm()
 				Ailments:CampingAilment(petUnique)
 				Teleport.FarmingHome()
 				-- should already do baby task when pet does it
-                            Christmas2024.getGingerbread()
 				return true
 			end
 		end
@@ -1229,7 +1226,6 @@ local function autoFarm()
 			StatsGuis:UpdateText("BucksAndPotionFrame")
                         StatsGuis:UpdateText("TotalFrame")
                         StatsGuis:UpdateText("TotalFrame1")
-                        StatsGuis:UpdateText("TotalFrame2")
 			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
 			task.wait(5)
 		end
@@ -1890,7 +1886,6 @@ StatsGuis:UpdateText("TimeFrame")
 StatsGuis:UpdateText("BucksAndPotionFrame")
 StatsGuis:UpdateText("TotalFrame")
 StatsGuis:UpdateText("TotalFrame1")
-StatsGuis:UpdateText("TotalFrame2")
 
 StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Captures, false)
 -- Player:WaitForChild("PlayerGui", 600)
@@ -2116,7 +2111,7 @@ end)
 
 -- Rayfield:Hide()
 
---[[ First Tab ]]
+--[[ First Tab - Autofarm ]]
 
 local FarmTab = Window:CreateTab("Farm", 4483362458)
 
@@ -2202,6 +2197,24 @@ FarmTab:CreateButton({
 		Fusion:MakeMega(true)
 	end,
 })
+
+-------------------- minigames-----------
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Winter 2024 Minigames",
+     CurrentValue = false,
+     Flag = "Toggle10",
+     Callback = function(Value)
+        
+task.wait(10) do
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/W24.lua"))()
+end
+
+
+     end,
+ })
+
+------------------------------------
+
 
 FarmTab:CreateButton({
 	Name = "Copy All Inventory to clipboard",
