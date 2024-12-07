@@ -81,7 +81,7 @@ local DailyClaimConnection
 local counter = 0
 -- local diedCounter = 0
 
-local isInMiniGame = false
+-- local isInMiniGame = false
 -- local DailyBoolean = true
 local NewTaskBool = true
 local NewClaimBool = true
@@ -1223,7 +1223,7 @@ local function autoFarm()
 		while true do
 			if isInMiniGame then
 				repeat
-					print(`⏱️ Waiting for 10 secs [inside minigame] ⏱️`)
+					--print(`⏱️ Waiting for 10 secs [inside minigame] ⏱️`)
 					task.wait(10)
 				until not isInMiniGame
 			end
