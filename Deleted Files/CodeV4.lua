@@ -1,3 +1,4 @@
+
 if not game:IsLoaded() then
 	game.Loaded:Wait()
 end
@@ -1220,18 +1221,17 @@ local function autoFarm()
 
 	task.delay(30, function()
 		while true do
-			pcall(function()
-				if isInMiniGame then
-					repeat
-						--print(`⏱️ Waiting for 10 secs [inside minigame] ⏱️`)
-						task.wait(10)
-					until not isInMiniGame
-				end
-				removeHandHeldItem()
-				if not CompletePetAilments() then
-					completeBabyAilments()
-				end
-			
+			if isInMiniGame then
+				repeat
+					print(`⏱️ Waiting for 10 secs [inside minigame] ⏱️`)
+					task.wait(10)
+				until not isInMiniGame
+			end
+			removeHandHeldItem()
+			if not CompletePetAilments() then
+				completeBabyAilments()
+			end
+						
 			StatsGuis:UpdateText("TimeFrame")
 			StatsGuis:UpdateText("BucksAndPotionFrame")
                         StatsGuis:UpdateText("TotalFrame")
