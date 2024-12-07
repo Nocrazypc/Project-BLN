@@ -1222,13 +1222,7 @@ local function autoFarm()
 			if not CompletePetAilments() then
 				completeBabyAilments()
 			end
-			StatsGuis:UpdateText("TimeFrame")
-			StatsGuis:UpdateText("BucksAndPotionFrame")
-                        StatsGuis:UpdateText("TotalFrame")
-                        StatsGuis:UpdateText("TotalFrame1")
-                        StatsGuis:UpdateText("TotalFrame2")
-			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
-			task.wait(5)
+-------------- status guis removed -----------
 		end
 	end)
 		
@@ -2738,6 +2732,13 @@ task.delay(5, function()
 	end
 end)
 
-
+while task.wait(5) do
+			StatsGuis:UpdateText("TimeFrame")
+			StatsGuis:UpdateText("BucksAndPotionFrame")
+                        StatsGuis:UpdateText("TotalFrame")
+                        StatsGuis:UpdateText("TotalFrame1")
+                        StatsGuis:UpdateText("TotalFrame2")
+			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
+end
 
 --print("Loaded. lastest update 21/10/2024  mm/dd/yyyy")
