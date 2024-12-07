@@ -51,7 +51,7 @@ local set_thread_identity = set_thread_context or setthreadcontext or setidentit
 -- Player.PlayerGui.InteractionsApp.Enabled = false
 -- Player.PlayerGui.NavigatorApp.Enabled = false
 
-
+    RS.API["TeamAPI/ChooseTeam"]:InvokeServer("Parents", {["dont_send_back_home"] = true, ["source_for_logging"] = "avatar_editor"})
 
 --------  Game Status Check ----------
 function GameStatus()
