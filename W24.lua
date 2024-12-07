@@ -354,18 +354,3 @@ while task.wait(0.5) do
     end
 end
 
-
-
------ Advent Calendar ------
-
-
-    while task.wait(600) do
-        pcall(function()
-            -- Winter Advent Manager Claim
-            Winter2024AdventManager = ClientData.get_data()[game.Players.LocalPlayer.Name]["winter_2024_advent_manager"]
-            if not Winter2024AdventManager["rewards_claimed"][#Winter2024AdventManager["replicated_rewards"]] then
-                RS.API:WaitForChild("WinterfestAPI/AdventCalendarTryTakeReward"):InvokeServer(i)
-                print("Claimed", v["amount"], findItemName(v["kind"], v["category"]))
-            end
-        end)
-        end
