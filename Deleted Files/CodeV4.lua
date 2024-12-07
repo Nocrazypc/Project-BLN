@@ -1197,7 +1197,6 @@ local function autoFarm()
 				Ailments:BeachPartyAilment(petUnique)
                              Teleport.FarmingHome()
 				-- should already do baby task when pet does it
-                     Christmas2024.getGingerbread()
 				return true
 			elseif key == "camping" then
 			     getRewardFromAdventCalendar()
@@ -1205,7 +1204,7 @@ local function autoFarm()
 				Ailments:CampingAilment(petUnique)
 				Teleport.FarmingHome()
 				-- should already do baby task when pet does it
-                            Christmas2024.getGingerbread()
+                      Christmas2024.getGingerbread()
 				return true
 			end
 		end
@@ -1292,6 +1291,20 @@ local function autoFarm()
 		end
 	end)--]]
 
+	local function PlaceFloorAtSpleefMinigame()
+		if workspace:FindFirstChild("SpleefLocation") then return end
+	
+		local floor = workspace.Interiors:WaitForChild("SpleefMinigame"):WaitForChild("Minigame"):WaitForChild("Floor")
+		local part = Instance.new("Part")
+		part.Position = floor.Position + Vector3.new(0, 20, 0)
+		part.Size = Vector3.new(200, 2, 200)
+		part.Anchored = true
+		part.Transparency = 1
+		part.Name = "SpleefLocation"
+		part.Parent = workspace
+	end
+
+
 	--Fires when inside the minigame
 	Player.PlayerGui.MinigameInGameApp:GetPropertyChangedSignal("Enabled"):Connect(function()
 		if Player.PlayerGui.MinigameInGameApp.Enabled then
@@ -1301,12 +1314,9 @@ local function autoFarm()
 			Player.PlayerGui.MinigameInGameApp.Body.Middle.Container:WaitForChild("TitleLabel")
 			if Player.PlayerGui.MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match("MELT OFF") then
 				     
-				          isInMiniGame = true
-				
-					
-                                task.wait(2)                                
-                                Player.Character.HumanoidRootPart.Anchored = true
-			end
+                                PlaceFloorAtSpleefMinigame()
+                                
+                 end
 		end
 	end)
 
@@ -1328,6 +1338,7 @@ local function autoFarm()
 	end
 
 	local function onTextChangedMiniGame()
+	           isInMiniGame = true
                 FireButton("Yes")
 	end
 
@@ -1347,6 +1358,9 @@ local function autoFarm()
 							FireButton("Okay")
 						end
 					end)
+				else
+                                        ReplicatedStorage.API:FindFirstChild("MinigameAPI/AttemptJoin"):FireServer("spleef_minigame", true)
+					
 				end
 			end)
 		end
@@ -1366,6 +1380,8 @@ local function autoFarm()
 					FireButton("Okay")
 				end
 			end)
+            else
+                        ReplicatedStorage.API:FindFirstChild("MinigameAPI/AttemptJoin"):FireServer("spleef_minigame", true)
 		end
 	end)
 
@@ -1496,7 +1512,7 @@ end
 
 
 local function SendMessage(url, message, userId)
-	local http = game:GetService("HttpService")
+	-- local http = game:GetService("HttpService")
 	local request = request or http_request
 	local headers = {
 		["Content-Type"] = "application/json",
