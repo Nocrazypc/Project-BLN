@@ -2742,10 +2742,10 @@ end)
                     end
 
 -------------------------------------------------------
-            while task.wait(20) do
+            while task.wait(180) do
 
                          getRewardFromAdventCalendar()
-                         task.wait(10)
+                         task.wait(1200)
 
                    end
 
