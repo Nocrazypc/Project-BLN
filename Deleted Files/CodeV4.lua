@@ -2731,7 +2731,7 @@ task.delay(5, function()
 		end)
 	end
 end)
-
+------------------------update Stats UI ----------------
 while task.wait(5) do
 			StatsGuis:UpdateText("TimeFrame")
 			StatsGuis:UpdateText("BucksAndPotionFrame")
@@ -2741,4 +2741,29 @@ while task.wait(5) do
 			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
 end
 
---print("Loaded. lastest update 21/10/2024  mm/dd/yyyy")
+-------------------------------------------------------
+
+	local function RemoveGameOverButton()
+		Player.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild("Face")
+		for _, v in pairs(Player.PlayerGui.MinigameRewardsApp.Body.Button:GetDescendants()) do
+			if v.Name == "TextLabel" then
+				if v.Text == "NICE!" then
+					task.wait(5)
+					-- clickGuiButton(v.Parent.Parent, 30, 60)
+					firesignal(v.Parent.Parent.MouseButton1Down)
+					firesignal(v.Parent.Parent.MouseButton1Click)
+					firesignal(v.Parent.Parent.MouseButton1Up)
+					break
+				end
+			end
+		end
+	end
+-----------------------------------------
+
+while task.wait(30) do
+
+                        RemoveGameOverButton()
+end
+
+
+--print("Loaded. lastest update 07/12/2024  mm/dd/yyyy")
