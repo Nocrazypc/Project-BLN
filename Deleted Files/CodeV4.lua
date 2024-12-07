@@ -1890,6 +1890,7 @@ StatsGuis:UpdateText("TimeFrame")
 StatsGuis:UpdateText("BucksAndPotionFrame")
 StatsGuis:UpdateText("TotalFrame")
 StatsGuis:UpdateText("TotalFrame1")
+StatsGuis:UpdateText("TotalFrame2")
 
 StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Captures, false)
 -- Player:WaitForChild("PlayerGui", 600)
