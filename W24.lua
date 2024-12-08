@@ -110,12 +110,13 @@ game:GetService("Players").LocalPlayer.PlayerGui.InteractionsApp.Enabled = false
 game:GetService("Players").LocalPlayer.PlayerGui.NavigatorApp.Enabled = false
 game:GetService("Players").LocalPlayer.PlayerGui.MinigameRewardsApp.Enabled = false
 
+
 ------- Transition App Disabled (whatever it is) --------
 --[[require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
 require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).sudden_fill = function() return end
 if game:GetService("Players").LocalPlayer.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible then 
     game:GetService("Players").LocalPlayer.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false 
-end --]]
+end--]]
 
 
 local Player = game:GetService("Players").LocalPlayer
@@ -131,7 +132,6 @@ Player.PlayerGui.DialogApp.Enabled = false
 Player.PlayerGui.InteractionsApp.Enabled = false
 Player.PlayerGui.NavigatorApp.Enabled = false
 Player.PlayerGui.MinigameRewardsApp.Enabled = false
-
 
 
 --------  Game Status Check ----------
@@ -218,6 +218,12 @@ function farmGingerbreads()
     RS.API:FindFirstChild("WinterEventAPI/RedeemPendingGingerbread"):FireServer()
 end
 
+function timeToSeconds(timeString)
+    local minutes, seconds = string.match(timeString, "(%d+):(%d+)")
+    local totalSeconds = tonumber(minutes) * 60 + tonumber(seconds)
+    return totalSeconds
+end
+
 -- Optimization
 workspace.Pets.ChildAdded:Connect(function(c)
     task.wait(1)
@@ -270,8 +276,17 @@ spawn(function()
                 task.wait(15)
                 if not GameStatus() and Player.PlayerGui.MinigameInGameApp.Body.Left.Container.ValueLabel.Text == "00:00" and Player.PlayerGui.MinigameInGameApp.Enabled then
                     --game:Shutdown()
-                    print("===== ACC STUCKK ====")
+                    print("===== ACC STUCKED ====")
                 end
+            end
+        end)
+
+        pcall(function()
+            -- Winter Advent Manager Claim
+            Winter2024AdventManager = ClientData.get_data()[game.Players.LocalPlayer.Name]["winter_2024_advent_manager"]
+            if not Winter2024AdventManager["rewards_claimed"][#Winter2024AdventManager["replicated_rewards"]] then
+                RS.API:WaitForChild("WinterfestAPI/AdventCalendarTryTakeReward"):InvokeServer(i)
+                print("Claimed", v["amount"], findItemName(v["kind"], v["category"]))
             end
         end)
 
@@ -294,10 +309,8 @@ while task.wait(0.5) do
                     RS.API:FindFirstChild("MinigameAPI/AttemptJoin"):FireServer("spleef_minigame", true)
                     task.wait(10)
                 else
-                    pcall(function()
-                        HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
-                        CreateTempPart()
-                    end)
+                    HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
+                    CreateTempPart()
                 end
             else
                 print("TPing to Join Zone")
@@ -319,35 +332,39 @@ while task.wait(0.5) do
 
         HRP.CFrame = CFrame.new(15766.4307, 7769.59521, 16022.4043) * CFrame.Angles(0, 0, 0)
         CreateTempPart()
+        HRP.Anchored = true
 
         task.wait(1)
         print("Completing minigame..")
         local startTimeForMinigameOverCheck = os.time()
-        repeat task.wait()
+        --repeat task.wait()
             -- Minigame Code
             if (Vector3.new(15766.4307, 7769.59521, 16022.4043) - HRP.Position).Magnitude > 15 then
                 HRP.Anchored = true
                 HRP.CFrame = CFrame.new(15766.4307, 7769.59521, 16022.4043) * CFrame.Angles(0, 0, 0)
                 CreateTempPart()
-                --HRP.Anchored = false
+                HRP.Anchored = true
             end
-            local st = tick()
-            while tick() - st <= 60 do
-                task.wait(1)
-                if not (game.Workspace.Interiors:FindFirstChild("SpleefMinigame") and GameStatus() and Player.PlayerGui.MinigameInGameApp.Enabled) then
-                    startTimeForMinigameOverCheck = startTimeForMinigameOverCheck - 150
-                    break
-                end
-            end
-        until not (game.Workspace.Interiors:FindFirstChild("SpleefMinigame") and GameStatus() and Player.PlayerGui.MinigameInGameApp.Enabled) or (os.time() - startTimeForMinigameOverCheck >= 150)
+
+            print("Waiting:", timeToSeconds(Player.PlayerGui.MinigameInGameApp.Body.Left.Container.ValueLabel.Text))
+            task.wait(timeToSeconds(Player.PlayerGui.MinigameInGameApp.Body.Left.Container.ValueLabel.Text))
+
+            --local st = os.time()
+            --while os.time() - st <= timeToSeconds(Player.PlayerGui.MinigameInGameApp.Body.Left.Container.ValueLabel.Text) do
+            --    task.wait(1)
+                --if not (game.Workspace.Interiors:FindFirstChild("SpleefMinigame") and GameStatus() and Player.PlayerGui.MinigameInGameApp.Enabled) then
+                --    startTimeForMinigameOverCheck = startTimeForMinigameOverCheck - 150
+                --    break
+                --end
+            --end
+        --until not (game.Workspace.Interiors:FindFirstChild("SpleefMinigame") and GameStatus() and Player.PlayerGui.MinigameInGameApp.Enabled) or (os.time() - startTimeForMinigameOverCheck >= 150)
+        task.wait(1)
         print("Minigame Ended!")
         HRP.Anchored = true
         for i = 1, 10 do
             task.wait(1)
-            pcall(function()
-                HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
-                CreateTempPart()
-            end)
+            HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
+            CreateTempPart()
         end
     else
         print("Going to Main Map..")
@@ -355,4 +372,3 @@ while task.wait(0.5) do
         print("Arrived at Map..")
     end
 end
-
