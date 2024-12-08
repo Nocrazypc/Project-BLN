@@ -105,9 +105,9 @@ task.spawn(function()
 end)
 
 ---------- Extra GUI Control and Buttons and IMAGES blah blah -------------
-game:GetService("Players").LocalPlayer.PlayerGui.DialogApp.Enabled = false
-game:GetService("Players").LocalPlayer.PlayerGui.InteractionsApp.Enabled = false
-game:GetService("Players").LocalPlayer.PlayerGui.NavigatorApp.Enabled = false
+--game:GetService("Players").LocalPlayer.PlayerGui.DialogApp.Enabled = false
+--game:GetService("Players").LocalPlayer.PlayerGui.InteractionsApp.Enabled = false
+--game:GetService("Players").LocalPlayer.PlayerGui.NavigatorApp.Enabled = false
 game:GetService("Players").LocalPlayer.PlayerGui.MinigameRewardsApp.Enabled = false
 
 
@@ -128,9 +128,9 @@ local get_thread_identity = get_thread_context or getthreadcontext or getidentit
 local set_thread_identity = set_thread_context or setthreadcontext or setidentity or syn.set_thread_identity
 
 -- Disable GUIs
-Player.PlayerGui.DialogApp.Enabled = false
-Player.PlayerGui.InteractionsApp.Enabled = false
-Player.PlayerGui.NavigatorApp.Enabled = false
+--Player.PlayerGui.DialogApp.Enabled = false
+--Player.PlayerGui.InteractionsApp.Enabled = false
+--Player.PlayerGui.NavigatorApp.Enabled = false
 Player.PlayerGui.MinigameRewardsApp.Enabled = false
 
 
