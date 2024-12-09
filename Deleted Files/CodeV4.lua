@@ -408,4 +408,15 @@ while task.wait(0.5) do
 end
 
 
+----------------
 
+            task.spawn(function()
+		while true do
+			StatsGuis:UpdateText("TimeFrame")
+			StatsGuis:UpdateText("BucksAndPotionFrame")
+                        StatsGuis:UpdateText("TotalFrame")
+                        StatsGuis:UpdateText("TotalFrame1")
+                        StatsGuis:UpdateText("TotalFrame2")
+			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
+                        task.wait(5)
+                    end
