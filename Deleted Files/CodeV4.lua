@@ -295,7 +295,7 @@ spawn(function()
                 task.wait(15)
                 if not GameStatus() and Player.PlayerGui.MinigameInGameApp.Body.Left.Container.ValueLabel.Text == "00:00" and Player.PlayerGui.MinigameInGameApp.Enabled then
                     --game:Shutdown()
-                    print("===== ACC STUCKK ====")
+                    print("===== ACC STUCK ====")
                 end
             end
         end)
