@@ -2742,11 +2742,11 @@ end)
                     end
 
 -------------------------------------------------------
-            while task.wait(180) do
+            --[[while task.wait(180) do
 
                          getRewardFromAdventCalendar()
                          task.wait(1200)
 
-                   end
+                   end --]]
 
 --print("Loaded. lastest update 07/12/2024  mm/dd/yyyy")
