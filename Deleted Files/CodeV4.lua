@@ -1292,7 +1292,7 @@ local function autoFarm()
 	end)--]]
 
 
-	local function RemoveGameOverButton()
+	--[[local function RemoveGameOverButton()
 		Player.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild("Face")
 		for _, v in pairs(Player.PlayerGui.MinigameRewardsApp.Body.Button:GetDescendants()) do
 			if v.Name == "TextLabel" then
@@ -1306,7 +1306,7 @@ local function autoFarm()
 				end
 			end
 		end
-	end
+	end--]]
 
 	local function onTextChangedMiniGame()
 		-- nothing for now
@@ -1362,7 +1362,7 @@ local function autoFarm()
 	-- end
 
 
-	Player.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal("Visible"):Connect(function()
+	--[[Player.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal("Visible"):Connect(function()
 		if Player.PlayerGui.MinigameRewardsApp.Body.Visible then
 			Player.PlayerGui.MinigameRewardsApp.Body:WaitForChild("Button")
 			Player.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild("Face")
@@ -1373,7 +1373,7 @@ local function autoFarm()
 				--Teleport.DeleteMainMapParts()
 			end
 		end
-	end)
+	end)--]]
 
 	-- Player.PlayerGui.BattlePassApp.Body.Header.Title.Title.Text:match("Pony Pass")
 	--[[Player.PlayerGui.BattlePassApp.Body:GetPropertyChangedSignal("Visible"):Connect(function()
@@ -1673,7 +1673,7 @@ end)
 
 
 -- // Clicks on baby button
---[[RoleChooserDialogConnection = Player.PlayerGui.DialogApp.Dialog.RoleChooserDialog:GetPropertyChangedSignal("Visible"):Connect(function()
+RoleChooserDialogConnection = Player.PlayerGui.DialogApp.Dialog.RoleChooserDialog:GetPropertyChangedSignal("Visible"):Connect(function()
 	task.wait()
 	if Player.PlayerGui.DialogApp.Dialog.RoleChooserDialog.Visible then
 		-- firesignal(Player.PlayerGui.DialogApp.Dialog.RoleChooserDialog.ChooseParent.MouseButton1Click)
@@ -1682,21 +1682,7 @@ end)
 		firesignal(Player.PlayerGui.DialogApp.Dialog.RoleChooserDialog.Baby.MouseButton1Up)
 		RoleChooserDialogConnection:Disconnect()
 	end
-end)--]]
-
--- // Clicks on parent button (only for minigames)
-RoleChooserDialogConnection = Player.PlayerGui.DialogApp.Dialog.RoleChooserDialog:GetPropertyChangedSignal("Visible"):Connect(function()
-	task.wait()
-	if Player.PlayerGui.DialogApp.Dialog.RoleChooserDialog.Visible then
-		-- firesignal(Player.PlayerGui.DialogApp.Dialog.RoleChooserDialog.ChooseParent.MouseButton1Click)
-		firesignal(Player.PlayerGui.DialogApp.Dialog.RoleChooserDialog.Parent.MouseButton1Down)
-		firesignal(Player.PlayerGui.DialogApp.Dialog.RoleChooserDialog.Parent.MouseButton1Click)
-		firesignal(Player.PlayerGui.DialogApp.Dialog.RoleChooserDialog.Parent.MouseButton1Up)
-		RoleChooserDialogConnection:Disconnect()
-	end
 end)
-		
-
 
 --// Clicks no robux product button
 RobuxProductDialogConnection1 = Player.PlayerGui.DialogApp.Dialog.RobuxProductDialog:GetPropertyChangedSignal("Visible"):Connect(function()
