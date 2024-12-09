@@ -7,7 +7,7 @@ end
 
 local RS = game:GetService("ReplicatedStorage")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
---local ClientData = require(RS.ClientModules.Core.ClientData)
+local ClientData = require(RS.ClientModules.Core.ClientData)
 local Player = game:GetService("Players").LocalPlayer
 local RouterClient = require(RS.ClientModules.Core:WaitForChild("RouterClient"):WaitForChild("RouterClient"))
 local Main_Menu = require(RS.ClientModules.Core.UIManager.Apps.MainMenuApp)
@@ -15,10 +15,7 @@ local VirtualInputManager = game:GetService("VirtualInputManager")
 local LiveOpsMapSwap = require(game:GetService("ReplicatedStorage").SharedModules.Game.LiveOpsMapSwap)
 
 -----------------------------------
-local VirtualUser = game:GetService("VirtualUser")
-local UserInputService = game:GetService("UserInputService")
-local ClientData = require(ReplicatedStorage:WaitForChild("ClientModules"):WaitForChild("Core"):WaitForChild("ClientData"))
-local CoreGui = game:GetService("CoreGui")
+
 local StarterGui = game:GetService("StarterGui")
 
 
@@ -398,32 +395,3 @@ while task.wait(0.5) do
         print("Arrived at Map..")
     end
 end
---------------------------
-	local function RemoveGameOverButton()
-		Player.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild("Face")
-		for _, v in pairs(Player.PlayerGui.MinigameRewardsApp.Body.Button:GetDescendants()) do
-			if v.Name == "TextLabel" then
-				if v.Text == "NICE!" then
-					task.wait(5)
-					-- clickGuiButton(v.Parent.Parent, 30, 60)
-					firesignal(v.Parent.Parent.MouseButton1Down)
-					firesignal(v.Parent.Parent.MouseButton1Click)
-					firesignal(v.Parent.Parent.MouseButton1Up)
-					break
-				end
-			end
-		end
-	end
-
-	Player.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal("Visible"):Connect(function()
-		if Player.PlayerGui.MinigameRewardsApp.Body.Visible then
-			Player.PlayerGui.MinigameRewardsApp.Body:WaitForChild("Button")
-			Player.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild("Face")
-			Player.PlayerGui.MinigameRewardsApp.Body.Button.Face:WaitForChild("TextLabel")
-			if Player.PlayerGui.MinigameRewardsApp.Body.Button.Face.TextLabel.Text:match("NICE!") then
-
-				RemoveGameOverButton()
-
-			end
-		end
-	end)
