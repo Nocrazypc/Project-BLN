@@ -108,15 +108,15 @@ end)
 --game:GetService("Players").LocalPlayer.PlayerGui.DialogApp.Enabled = false
 --game:GetService("Players").LocalPlayer.PlayerGui.InteractionsApp.Enabled = false
 --game:GetService("Players").LocalPlayer.PlayerGui.NavigatorApp.Enabled = false
-game:GetService("Players").LocalPlayer.PlayerGui.MinigameRewardsApp.Enabled = false
+--game:GetService("Players").LocalPlayer.PlayerGui.MinigameRewardsApp.Enabled = false
 
 
 ------- Transition App Disabled (whatever it is) --------
-require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
+--[[require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
 require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).sudden_fill = function() return end
 if game:GetService("Players").LocalPlayer.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible then 
     game:GetService("Players").LocalPlayer.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false 
-end
+end--]]
 
 
 local Player = game:GetService("Players").LocalPlayer
@@ -131,7 +131,7 @@ local set_thread_identity = set_thread_context or setthreadcontext or setidentit
 --Player.PlayerGui.DialogApp.Enabled = false
 --Player.PlayerGui.InteractionsApp.Enabled = false
 --Player.PlayerGui.NavigatorApp.Enabled = false
-Player.PlayerGui.MinigameRewardsApp.Enabled = false
+--Player.PlayerGui.MinigameRewardsApp.Enabled = false
 
 
 --------  Game Status Check ----------
