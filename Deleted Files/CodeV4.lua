@@ -43,7 +43,7 @@ StarterGui:SetCore(
     "SendNotification",
     {
         Title = "Hello Potato 😊",
-        Text = "Winter 2024 Farm... Be Happy!"
+        Text = "Winter 2024 Farm is running... Be Happy!"
     }
 )
 ---------------------------------------------------------------
