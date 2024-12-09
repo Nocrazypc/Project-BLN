@@ -34,16 +34,23 @@ for i, v in pairs(debug.getupvalue(RouterClient.init, 7)) do
     v.Name = i
 end
 ---------------------------------------------------------------
-local StarterGui = game:GetService("StarterGui")
+local StatsGuis = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Stats.lua"))()
 
+StatsGuis:UpdateText("NameFrame")
+StatsGuis:UpdateText("TimeFrame")
+StatsGuis:UpdateText("BucksAndPotionFrame")
+StatsGuis:UpdateText("TotalFrame")
+StatsGuis:UpdateText("TotalFrame1")
+StatsGuis:UpdateText("TotalFrame2")
 
 --- Welcome MSG -------
+local StarterGui = game:GetService("StarterGui")
 
 StarterGui:SetCore(
     "SendNotification",
     {
         Title = "Hello Potato 😊",
-        Text = "Winter 2024 Farm is running... Be Happy!"
+        Text = "Winter 2024 Farm... Be Happy!"
     }
 )
 ---------------------------------------------------------------
@@ -399,5 +406,14 @@ while task.wait(0.5) do
 end
 ---------------------------------------
 
-
+	task.delay(30, function()
+		while true do
+			StatsGuis:UpdateText("TimeFrame")
+			StatsGuis:UpdateText("BucksAndPotionFrame")
+                        StatsGuis:UpdateText("TotalFrame")
+                        StatsGuis:UpdateText("TotalFrame1")
+			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
+			task.wait(5)
+		end
+	end)
 
