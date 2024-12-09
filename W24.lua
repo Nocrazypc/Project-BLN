@@ -219,7 +219,7 @@ function farmGingerbreads()
 end
 
 -- Optimization
-workspace.Pets.ChildAdded:Connect(function(c)
+--[[workspace.Pets.ChildAdded:Connect(function(c)
     task.wait(1)
     for i, v in pairs(workspace.Pets:GetChildren()) do
         v.Parent = game.ReplicatedStorage
@@ -261,7 +261,7 @@ workspace.Interiors.ChildAdded:Connect(function(c)
         end
         if workspace:FindFirstChildWhichIsA("Terrain") then workspace.Terrain:Clear() end
     end
-end)
+end)--]]
 
 spawn(function()
     while task.wait(5) do
