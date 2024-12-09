@@ -379,6 +379,9 @@ while task.wait(0.5) do
             task.wait(1)
             HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
             CreateTempPart()
+-----------------
+            RemoveGameOverButton()
+-----------------
         end
     else
         print("Going to Main Map..")
@@ -407,15 +410,4 @@ end
 
 
 
-	Player.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal("Visible"):Connect(function()
-		if Player.PlayerGui.MinigameRewardsApp.Body.Visible then
-			Player.PlayerGui.MinigameRewardsApp.Body:WaitForChild("Button")
-			Player.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild("Face")
-			Player.PlayerGui.MinigameRewardsApp.Body.Button.Face:WaitForChild("TextLabel")
-			if Player.PlayerGui.MinigameRewardsApp.Body.Button.Face.TextLabel.Text:match("NICE!") then
 
-				RemoveGameOverButton()
-
-			end
-		end
-	end)
