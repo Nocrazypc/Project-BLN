@@ -377,8 +377,10 @@ while task.wait(0.5) do
         HRP.Anchored = true
         for i = 1, 10 do
             task.wait(1)
-            HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
             CreateTempPart()
+            task.wait(2)
+            HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
+
 -----------------
             RemoveGameOverButton()
 -----------------
