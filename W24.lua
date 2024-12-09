@@ -376,7 +376,7 @@ while task.wait(0.5) do
         print("Minigame Ended!")
         HRP.Anchored = true
         for i = 1, 10 do
-            task.wait(2)
+            task.wait(1)
             HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
             CreateTempPart()
 -----------------
@@ -391,24 +391,19 @@ while task.wait(0.5) do
 end
 --------------------------
 
-	function RemoveGameOverButton()
+           function RemoveGameOverButton()
                 task.wait(20)
-		Player.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild("Face")
-		for _, v in pairs(Player.PlayerGui.MinigameRewardsApp.Body.Button:GetDescendants()) do
-			if v.Name == "TextLabel" then
-				if v.Text == "NICE!" then
-					task.wait(1)
-					-- clickGuiButton(v.Parent.Parent, 30, 60)
-					firesignal(v.Parent.Parent.MouseButton1Down)
-					firesignal(v.Parent.Parent.MouseButton1Click)
-					firesignal(v.Parent.Parent.MouseButton1Up)
-					break
+		Player.PlayerGui:WaitForChild("MinigameRewardsApp")
+	        if Player.PlayerGui.MinigameRewardsApp.Enabled and Player.PlayerGui.MinigameRewardsApp.Frame.Visible then 
+		for i,v in pairs(Player.PlayerGui.MinigameRewardsApp.Body.Button:GetChildren()) do
+
+            if v.ClassName == "ImageButton" then
+                clickGuiButton(v)
 				end
-			end
+			
 		end
 	end
 
-
-
+end
 
 
