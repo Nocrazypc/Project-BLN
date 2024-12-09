@@ -36,12 +36,14 @@ end
 ---------------------------------------------------------------
 local StatsGuis = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Stats.lua"))()
 
-StatsGuis:UpdateText("NameFrame")
-StatsGuis:UpdateText("TimeFrame")
-StatsGuis:UpdateText("BucksAndPotionFrame")
-StatsGuis:UpdateText("TotalFrame")
-StatsGuis:UpdateText("TotalFrame1")
-StatsGuis:UpdateText("TotalFrame2")
+            while task.wait(5) do
+			StatsGuis:UpdateText("TimeFrame")
+			StatsGuis:UpdateText("BucksAndPotionFrame")
+                        StatsGuis:UpdateText("TotalFrame")
+                        StatsGuis:UpdateText("TotalFrame1")
+                        StatsGuis:UpdateText("TotalFrame2")
+			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
+                    end
 
 --- Welcome MSG -------
 local StarterGui = game:GetService("StarterGui")
@@ -405,15 +407,5 @@ while task.wait(0.5) do
     end
 end
 
-------------------------update Stats UI ----------------
-            while task.wait(5) do
-			StatsGuis:UpdateText("TimeFrame")
-			StatsGuis:UpdateText("BucksAndPotionFrame")
-                        StatsGuis:UpdateText("TotalFrame")
-                        StatsGuis:UpdateText("TotalFrame1")
-                        StatsGuis:UpdateText("TotalFrame2")
-			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
-                    end
 
--------------------------------------------------------
 
