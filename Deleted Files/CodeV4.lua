@@ -407,7 +407,7 @@ end
 
 ----------------
 
-            task.spawn(function()
+             spawn(function()
 		while true do
 			StatsGuis:UpdateText("TimeFrame")
 			StatsGuis:UpdateText("BucksAndPotionFrame")
@@ -417,3 +417,4 @@ end
 			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
                         task.wait(5)
                     end
+	      end)
