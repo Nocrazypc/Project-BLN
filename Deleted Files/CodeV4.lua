@@ -1673,7 +1673,7 @@ end)
 
 
 -- // Clicks on baby button
-RoleChooserDialogConnection = Player.PlayerGui.DialogApp.Dialog.RoleChooserDialog:GetPropertyChangedSignal("Visible"):Connect(function()
+--[[RoleChooserDialogConnection = Player.PlayerGui.DialogApp.Dialog.RoleChooserDialog:GetPropertyChangedSignal("Visible"):Connect(function()
 	task.wait()
 	if Player.PlayerGui.DialogApp.Dialog.RoleChooserDialog.Visible then
 		-- firesignal(Player.PlayerGui.DialogApp.Dialog.RoleChooserDialog.ChooseParent.MouseButton1Click)
@@ -1682,7 +1682,20 @@ RoleChooserDialogConnection = Player.PlayerGui.DialogApp.Dialog.RoleChooserDialo
 		firesignal(Player.PlayerGui.DialogApp.Dialog.RoleChooserDialog.Baby.MouseButton1Up)
 		RoleChooserDialogConnection:Disconnect()
 	end
+end)--]]
+
+-- // Clicks on parent button (only for minigames)
+RoleChooserDialogConnection = Player.PlayerGui.DialogApp.Dialog.RoleChooserDialog:GetPropertyChangedSignal("Visible"):Connect(function()
+	task.wait()
+	if Player.PlayerGui.DialogApp.Dialog.RoleChooserDialog.Visible then
+		-- firesignal(Player.PlayerGui.DialogApp.Dialog.RoleChooserDialog.ChooseParent.MouseButton1Click)
+		firesignal(Player.PlayerGui.DialogApp.Dialog.RoleChooserDialog.Parent.MouseButton1Down)
+		firesignal(Player.PlayerGui.DialogApp.Dialog.RoleChooserDialog.Parent.MouseButton1Click)
+		firesignal(Player.PlayerGui.DialogApp.Dialog.RoleChooserDialog.Parent.MouseButton1Up)
+		RoleChooserDialogConnection:Disconnect()
+	end
 end)
+		
 
 
 --// Clicks no robux product button
