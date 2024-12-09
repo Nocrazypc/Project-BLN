@@ -1292,7 +1292,7 @@ local function autoFarm()
 	end)--]]
 
 
-	--[[local function RemoveGameOverButton()
+	local function RemoveGameOverButton()
 		Player.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild("Face")
 		for _, v in pairs(Player.PlayerGui.MinigameRewardsApp.Body.Button:GetDescendants()) do
 			if v.Name == "TextLabel" then
@@ -1306,7 +1306,7 @@ local function autoFarm()
 				end
 			end
 		end
-	end--]]
+	end
 
 	local function onTextChangedMiniGame()
 		-- nothing for now
