@@ -1,13 +1,3 @@
-if not game:IsLoaded() then
-	game.Loaded:Wait()
-end
-
-if game.PlaceId ~= 920587237 then
-	return
-end
-
-----------------------------------
-
 repeat task.wait() until game:IsLoaded() and game:GetService("ReplicatedStorage"):FindFirstChild("ClientModules") and game:GetService("ReplicatedStorage").ClientModules:FindFirstChild("Core") and game:GetService("ReplicatedStorage").ClientModules.Core:FindFirstChild("UIManager") and game:GetService("ReplicatedStorage").ClientModules.Core:FindFirstChild("UIManager").Apps:FindFirstChild("TransitionsApp") and game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("TransitionsApp") and game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("TransitionsApp"):FindFirstChild("Whiteout")
 
 if game:GetService("Players").LocalPlayer.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible then 
@@ -33,6 +23,8 @@ end)
 for i, v in pairs(debug.getupvalue(RouterClient.init, 7)) do
     v.Name = i
 end
+
+---------------------------------------------------------------
 
 function clickGuiButton(button: Instance, xOffset: number, yOffset: number)
 	local xOffset = xOffset or 60
@@ -116,13 +108,14 @@ end)
 game:GetService("Players").LocalPlayer.PlayerGui.DialogApp.Enabled = false
 game:GetService("Players").LocalPlayer.PlayerGui.InteractionsApp.Enabled = false
 game:GetService("Players").LocalPlayer.PlayerGui.NavigatorApp.Enabled = false
+--game:GetService("Players").LocalPlayer.PlayerGui.MinigameRewardsApp.Enabled = false
 
 ------- Transition App Disabled (whatever it is) --------
-require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
+--[[require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
 require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).sudden_fill = function() return end
 if game:GetService("Players").LocalPlayer.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible then 
     game:GetService("Players").LocalPlayer.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false 
-end
+end --]]
 
 
 local Player = game:GetService("Players").LocalPlayer
@@ -137,6 +130,7 @@ local set_thread_identity = set_thread_context or setthreadcontext or setidentit
 Player.PlayerGui.DialogApp.Enabled = false
 Player.PlayerGui.InteractionsApp.Enabled = false
 Player.PlayerGui.NavigatorApp.Enabled = false
+--Player.PlayerGui.MinigameRewardsApp.Enabled = false
 
 
 
@@ -222,12 +216,6 @@ function farmGingerbreads()
     end
     task.wait(1)
     RS.API:FindFirstChild("WinterEventAPI/RedeemPendingGingerbread"):FireServer()
-end
-
-function timeToSeconds(timeString)
-    local minutes, seconds = string.match(timeString, "(%d+):(%d+)")
-    local totalSeconds = tonumber(minutes) * 60 + tonumber(seconds)
-    return totalSeconds
 end
 
 -- Optimization
@@ -319,7 +307,7 @@ while task.wait(0.5) do
                         HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
                         CreateTempPart()
                     end)
-                 end
+                end
             else
                 print("TPing to Join Zone")
                 pcall(function()
@@ -340,33 +328,27 @@ while task.wait(0.5) do
 
         HRP.CFrame = CFrame.new(15766.4307, 7769.59521, 16022.4043) * CFrame.Angles(0, 0, 0)
         CreateTempPart()
-        HRP.Anchored = true
 
         task.wait(1)
         print("Completing minigame..")
         local startTimeForMinigameOverCheck = os.time()
-        --repeat task.wait()
+        repeat task.wait()
             -- Minigame Code
             if (Vector3.new(15766.4307, 7769.59521, 16022.4043) - HRP.Position).Magnitude > 15 then
                 HRP.Anchored = true
                 HRP.CFrame = CFrame.new(15766.4307, 7769.59521, 16022.4043) * CFrame.Angles(0, 0, 0)
                 CreateTempPart()
-                HRP.Anchored = true
+                --HRP.Anchored = false
             end
-
-            print("Waiting:", timeToSeconds(Player.PlayerGui.MinigameInGameApp.Body.Left.Container.ValueLabel.Text))
-            task.wait(timeToSeconds(Player.PlayerGui.MinigameInGameApp.Body.Left.Container.ValueLabel.Text))
-
-            --local st = os.time()
-            --while os.time() - st <= timeToSeconds(Player.PlayerGui.MinigameInGameApp.Body.Left.Container.ValueLabel.Text) do
-            --    task.wait(1)
-                --if not (game.Workspace.Interiors:FindFirstChild("SpleefMinigame") and GameStatus() and Player.PlayerGui.MinigameInGameApp.Enabled) then
-                --    startTimeForMinigameOverCheck = startTimeForMinigameOverCheck - 150
-                --    break
-                --end
-            --end
-        --until not (game.Workspace.Interiors:FindFirstChild("SpleefMinigame") and GameStatus() and Player.PlayerGui.MinigameInGameApp.Enabled) or (os.time() - startTimeForMinigameOverCheck >= 150)
-        task.wait(1)
+            local st = tick()
+            while tick() - st <= 60 do
+                task.wait(1)
+                if not (game.Workspace.Interiors:FindFirstChild("SpleefMinigame") and GameStatus() and Player.PlayerGui.MinigameInGameApp.Enabled) then
+                    startTimeForMinigameOverCheck = startTimeForMinigameOverCheck - 150
+                    break
+                end
+            end
+        until not (game.Workspace.Interiors:FindFirstChild("SpleefMinigame") and GameStatus() and Player.PlayerGui.MinigameInGameApp.Enabled) or (os.time() - startTimeForMinigameOverCheck >= 150)
         print("Minigame Ended!")
         HRP.Anchored = true
         for i = 1, 10 do
@@ -375,7 +357,6 @@ while task.wait(0.5) do
                 HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
                 CreateTempPart()
             end)
-            CreateTempPart()
         end
     else
         print("Going to Main Map..")
@@ -383,5 +364,4 @@ while task.wait(0.5) do
         print("Arrived at Map..")
     end
 end
-
 
