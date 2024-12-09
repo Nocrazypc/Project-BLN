@@ -1,3 +1,12 @@
+if not game:IsLoaded() then
+	game.Loaded:Wait(10)
+end
+
+if game.PlaceId ~= 920587237 then
+	return
+end
+
+
 repeat task.wait() until game:IsLoaded() and game:GetService("ReplicatedStorage"):FindFirstChild("ClientModules") and game:GetService("ReplicatedStorage").ClientModules:FindFirstChild("Core") and game:GetService("ReplicatedStorage").ClientModules.Core:FindFirstChild("UIManager") and game:GetService("ReplicatedStorage").ClientModules.Core:FindFirstChild("UIManager").Apps:FindFirstChild("TransitionsApp") and game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("TransitionsApp") and game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("TransitionsApp"):FindFirstChild("Whiteout")
 
 if game:GetService("Players").LocalPlayer.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible then 
@@ -14,8 +23,16 @@ local Main_Menu = require(RS.ClientModules.Core.UIManager.Apps.MainMenuApp)
 local VirtualInputManager = game:GetService("VirtualInputManager")
 local LiveOpsMapSwap = require(game:GetService("ReplicatedStorage").SharedModules.Game.LiveOpsMapSwap)
 
------------------------------------
+game.Players.LocalPlayer.Idled:Connect(function() 
+    game:GetService("VirtualUser"):Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame) 
+    task.wait(1)
+    game:GetService("VirtualUser"):Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame) 
+end)
 
+for i, v in pairs(debug.getupvalue(RouterClient.init, 7)) do
+    v.Name = i
+end
+---------------------------------------------------------------
 local StarterGui = game:GetService("StarterGui")
 
 
@@ -28,22 +45,6 @@ StarterGui:SetCore(
         Text = "Winter 2024 Farm... Be Happy!"
     }
 )
-
------------------------
-
-
-
-
-game.Players.LocalPlayer.Idled:Connect(function() 
-    game:GetService("VirtualUser"):Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame) 
-    task.wait(1)
-    game:GetService("VirtualUser"):Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame) 
-end)
-
-for i, v in pairs(debug.getupvalue(RouterClient.init, 7)) do
-    v.Name = i
-end
-
 ---------------------------------------------------------------
 
 function clickGuiButton(button: Instance, xOffset: number, yOffset: number)
@@ -125,18 +126,16 @@ task.spawn(function()
 end)
 
 ---------- Extra GUI Control and Buttons and IMAGES blah blah -------------
---game:GetService("Players").LocalPlayer.PlayerGui.DialogApp.Enabled = false
---game:GetService("Players").LocalPlayer.PlayerGui.InteractionsApp.Enabled = false
---game:GetService("Players").LocalPlayer.PlayerGui.NavigatorApp.Enabled = false
---game:GetService("Players").LocalPlayer.PlayerGui.MinigameRewardsApp.Enabled = false
-
+game:GetService("Players").LocalPlayer.PlayerGui.DialogApp.Enabled = false
+game:GetService("Players").LocalPlayer.PlayerGui.InteractionsApp.Enabled = false
+game:GetService("Players").LocalPlayer.PlayerGui.NavigatorApp.Enabled = false
 
 ------- Transition App Disabled (whatever it is) --------
---[[require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
+require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
 require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).sudden_fill = function() return end
 if game:GetService("Players").LocalPlayer.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible then 
     game:GetService("Players").LocalPlayer.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false 
-end--]]
+end
 
 
 local Player = game:GetService("Players").LocalPlayer
@@ -148,10 +147,10 @@ local get_thread_identity = get_thread_context or getthreadcontext or getidentit
 local set_thread_identity = set_thread_context or setthreadcontext or setidentity or syn.set_thread_identity
 
 -- Disable GUIs
---Player.PlayerGui.DialogApp.Enabled = false
---Player.PlayerGui.InteractionsApp.Enabled = false
---Player.PlayerGui.NavigatorApp.Enabled = false
---Player.PlayerGui.MinigameRewardsApp.Enabled = false
+Player.PlayerGui.DialogApp.Enabled = false
+Player.PlayerGui.InteractionsApp.Enabled = false
+Player.PlayerGui.NavigatorApp.Enabled = false
+
 
 
 --------  Game Status Check ----------
@@ -296,7 +295,7 @@ spawn(function()
                 task.wait(15)
                 if not GameStatus() and Player.PlayerGui.MinigameInGameApp.Body.Left.Container.ValueLabel.Text == "00:00" and Player.PlayerGui.MinigameInGameApp.Enabled then
                     --game:Shutdown()
-                    print("===== ACC STUCKED ====")
+                    print("===== ACC STUCKK ====")
                 end
             end
         end)
@@ -385,9 +384,6 @@ while task.wait(0.5) do
             task.wait(1)
             HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
             CreateTempPart()
------------------
-            RemoveGameOverButton()
------------------
         end
     else
         print("Going to Main Map..")
