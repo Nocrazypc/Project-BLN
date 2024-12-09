@@ -1,3 +1,13 @@
+if not game:IsLoaded() then
+	game.Loaded:Wait()
+end
+
+if game.PlaceId ~= 920587237 then
+	return
+end
+
+----------------------------------
+
 repeat task.wait() until game:IsLoaded() and game:GetService("ReplicatedStorage"):FindFirstChild("ClientModules") and game:GetService("ReplicatedStorage").ClientModules:FindFirstChild("Core") and game:GetService("ReplicatedStorage").ClientModules.Core:FindFirstChild("UIManager") and game:GetService("ReplicatedStorage").ClientModules.Core:FindFirstChild("UIManager").Apps:FindFirstChild("TransitionsApp") and game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("TransitionsApp") and game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("TransitionsApp"):FindFirstChild("Whiteout")
 
 if game:GetService("Players").LocalPlayer.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible then 
@@ -7,26 +17,12 @@ end
 
 local RS = game:GetService("ReplicatedStorage")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
---local ClientData = require(RS.ClientModules.Core.ClientData)
+local ClientData = require(RS.ClientModules.Core.ClientData)
 local Player = game:GetService("Players").LocalPlayer
 local RouterClient = require(RS.ClientModules.Core:WaitForChild("RouterClient"):WaitForChild("RouterClient"))
 local Main_Menu = require(RS.ClientModules.Core.UIManager.Apps.MainMenuApp)
 local VirtualInputManager = game:GetService("VirtualInputManager")
 local LiveOpsMapSwap = require(game:GetService("ReplicatedStorage").SharedModules.Game.LiveOpsMapSwap)
-
------------------------------------
-local VirtualUser = game:GetService("VirtualUser")
-local UserInputService = game:GetService("UserInputService")
-local ClientData = require(ReplicatedStorage:WaitForChild("ClientModules"):WaitForChild("Core"):WaitForChild("ClientData"))
-local CoreGui = game:GetService("CoreGui")
-local StarterGui = game:GetService("StarterGui")
-
--------------------------------------
-
-
-
-
-
 
 game.Players.LocalPlayer.Idled:Connect(function() 
     game:GetService("VirtualUser"):Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame) 
@@ -37,7 +33,26 @@ end)
 for i, v in pairs(debug.getupvalue(RouterClient.init, 7)) do
     v.Name = i
 end
+---------------------------------------------------------------
+local StatsGuis = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Stats.lua"))()
 
+StatsGuis:UpdateText("NameFrame")
+StatsGuis:UpdateText("TimeFrame")
+StatsGuis:UpdateText("BucksAndPotionFrame")
+StatsGuis:UpdateText("TotalFrame")
+StatsGuis:UpdateText("TotalFrame1")
+StatsGuis:UpdateText("TotalFrame2")
+
+--- Welcome MSG -------
+local StarterGui = game:GetService("StarterGui")
+
+StarterGui:SetCore(
+    "SendNotification",
+    {
+        Title = "Hello Potato 😊",
+        Text = "Winter 2024 Farm... Be Happy!"
+    }
+)
 ---------------------------------------------------------------
 
 function clickGuiButton(button: Instance, xOffset: number, yOffset: number)
@@ -119,18 +134,16 @@ task.spawn(function()
 end)
 
 ---------- Extra GUI Control and Buttons and IMAGES blah blah -------------
---game:GetService("Players").LocalPlayer.PlayerGui.DialogApp.Enabled = false
---game:GetService("Players").LocalPlayer.PlayerGui.InteractionsApp.Enabled = false
---game:GetService("Players").LocalPlayer.PlayerGui.NavigatorApp.Enabled = false
---game:GetService("Players").LocalPlayer.PlayerGui.MinigameRewardsApp.Enabled = false
-
+game:GetService("Players").LocalPlayer.PlayerGui.DialogApp.Enabled = false
+game:GetService("Players").LocalPlayer.PlayerGui.InteractionsApp.Enabled = false
+game:GetService("Players").LocalPlayer.PlayerGui.NavigatorApp.Enabled = false
 
 ------- Transition App Disabled (whatever it is) --------
---[[require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
+require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
 require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).sudden_fill = function() return end
 if game:GetService("Players").LocalPlayer.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible then 
     game:GetService("Players").LocalPlayer.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false 
-end--]]
+end
 
 
 local Player = game:GetService("Players").LocalPlayer
@@ -142,10 +155,10 @@ local get_thread_identity = get_thread_context or getthreadcontext or getidentit
 local set_thread_identity = set_thread_context or setthreadcontext or setidentity or syn.set_thread_identity
 
 -- Disable GUIs
---Player.PlayerGui.DialogApp.Enabled = false
---Player.PlayerGui.InteractionsApp.Enabled = false
---Player.PlayerGui.NavigatorApp.Enabled = false
---Player.PlayerGui.MinigameRewardsApp.Enabled = false
+Player.PlayerGui.DialogApp.Enabled = false
+Player.PlayerGui.InteractionsApp.Enabled = false
+Player.PlayerGui.NavigatorApp.Enabled = false
+
 
 
 --------  Game Status Check ----------
@@ -290,7 +303,7 @@ spawn(function()
                 task.wait(15)
                 if not GameStatus() and Player.PlayerGui.MinigameInGameApp.Body.Left.Container.ValueLabel.Text == "00:00" and Player.PlayerGui.MinigameInGameApp.Enabled then
                     --game:Shutdown()
-                    print("===== ACC STUCKED ====")
+                    print("===== ACC STUCK ====")
                 end
             end
         end)
@@ -323,9 +336,11 @@ while task.wait(0.5) do
                     RS.API:FindFirstChild("MinigameAPI/AttemptJoin"):FireServer("spleef_minigame", true)
                     task.wait(10)
                 else
-                    HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
-                    CreateTempPart()
-                end
+                    pcall(function()
+                        HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
+                        CreateTempPart()
+                    end)
+                 end
             else
                 print("TPing to Join Zone")
                 pcall(function()
@@ -377,11 +392,11 @@ while task.wait(0.5) do
         HRP.Anchored = true
         for i = 1, 10 do
             task.wait(1)
-            HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
+            pcall(function()
+                HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
+                CreateTempPart()
+            end)
             CreateTempPart()
------------------
-            RemoveGameOverButton()
------------------
         end
     else
         print("Going to Main Map..")
@@ -389,21 +404,15 @@ while task.wait(0.5) do
         print("Arrived at Map..")
     end
 end
---------------------------
+------------------------update Stats UI ----------------
+            while task.wait(5) do
+			StatsGuis:UpdateText("TimeFrame")
+			StatsGuis:UpdateText("BucksAndPotionFrame")
+                        StatsGuis:UpdateText("TotalFrame")
+                        StatsGuis:UpdateText("TotalFrame1")
+                        StatsGuis:UpdateText("TotalFrame2")
+			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
+                    end
 
-           function RemoveGameOverButton()
-                task.wait(20)
-		Player.PlayerGui:WaitForChild("MinigameRewardsApp")
-	        if Player.PlayerGui.MinigameRewardsApp.Enabled and Player.PlayerGui.MinigameRewardsApp.Frame.Visible then 
-		for i,v in pairs(Player.PlayerGui.MinigameRewardsApp.Body.Button:GetChildren()) do
-
-            if v.ClassName == "ImageButton" then
-                clickGuiButton(v)
-				end
-			
-		end
-	end
-
-end
-
+-------------------------------------------------------
 
