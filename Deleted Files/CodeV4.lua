@@ -1,5 +1,5 @@
 if not game:IsLoaded() then
-	game.Loaded:Wait(10)
+	game.Loaded:Wait(12)
 end
 
 if game.PlaceId ~= 920587237 then
@@ -328,9 +328,11 @@ while task.wait(0.5) do
                     RS.API:FindFirstChild("MinigameAPI/AttemptJoin"):FireServer("spleef_minigame", true)
                     task.wait(10)
                 else
-                    HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
-                    CreateTempPart()
-                end
+                    pcall(function()
+                        HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
+                        CreateTempPart()
+                    end)
+                 end
             else
                 print("TPing to Join Zone")
                 pcall(function()
@@ -382,7 +384,10 @@ while task.wait(0.5) do
         HRP.Anchored = true
         for i = 1, 10 do
             task.wait(1)
-            HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
+            pcall(function()
+                HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
+                CreateTempPart()
+            end)
             CreateTempPart()
         end
     else
