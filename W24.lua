@@ -33,16 +33,6 @@ end)
 for i, v in pairs(debug.getupvalue(RouterClient.init, 7)) do
     v.Name = i
 end
----------------------------------------------------------------
-local StatsGuis = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Stats.lua"))()
-
-StatsGuis:UpdateText("NameFrame")
-StatsGuis:UpdateText("TimeFrame")
-StatsGuis:UpdateText("BucksAndPotionFrame")
-StatsGuis:UpdateText("TotalFrame")
-StatsGuis:UpdateText("TotalFrame1")
-StatsGuis:UpdateText("TotalFrame2")
-
 --- Welcome MSG -------
 local StarterGui = game:GetService("StarterGui")
 
@@ -53,7 +43,7 @@ StarterGui:SetCore(
         Text = "Winter 2024 Farm... Be Happy!"
     }
 )
----------------------------------------------------------------
+------------------------------
 
 function clickGuiButton(button: Instance, xOffset: number, yOffset: number)
 	local xOffset = xOffset or 60
@@ -404,15 +394,5 @@ while task.wait(0.5) do
         print("Arrived at Map..")
     end
 end
-------------------------update Stats UI ----------------
-            while task.wait(5) do
-			StatsGuis:UpdateText("TimeFrame")
-			StatsGuis:UpdateText("BucksAndPotionFrame")
-                        StatsGuis:UpdateText("TotalFrame")
-                        StatsGuis:UpdateText("TotalFrame1")
-                        StatsGuis:UpdateText("TotalFrame2")
-			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
-                    end
 
--------------------------------------------------------
 
