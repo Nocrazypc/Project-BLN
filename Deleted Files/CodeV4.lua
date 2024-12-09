@@ -1297,7 +1297,7 @@ local function autoFarm()
 		for _, v in pairs(Player.PlayerGui.MinigameRewardsApp.Body.Button:GetDescendants()) do
 			if v.Name == "TextLabel" then
 				if v.Text == "NICE!" then
-					task.wait(1)
+					task.wait(10)
 					-- clickGuiButton(v.Parent.Parent, 30, 60)
 					firesignal(v.Parent.Parent.MouseButton1Down)
 					firesignal(v.Parent.Parent.MouseButton1Click)
@@ -1362,7 +1362,7 @@ local function autoFarm()
 	-- end
 
 
-	--[[Player.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal("Visible"):Connect(function()
+	Player.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal("Visible"):Connect(function()
 		if Player.PlayerGui.MinigameRewardsApp.Body.Visible then
 			Player.PlayerGui.MinigameRewardsApp.Body:WaitForChild("Button")
 			Player.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild("Face")
@@ -1371,11 +1371,9 @@ local function autoFarm()
 				Player.Character.HumanoidRootPart.Anchored = false
 				RemoveGameOverButton()
 				--Teleport.DeleteMainMapParts()
-
-				Teleport.BeachParty()
 			end
 		end
-	end)--]]
+	end)
 
 	-- Player.PlayerGui.BattlePassApp.Body.Header.Title.Title.Text:match("Pony Pass")
 	--[[Player.PlayerGui.BattlePassApp.Body:GetPropertyChangedSignal("Visible"):Connect(function()
