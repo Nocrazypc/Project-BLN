@@ -112,11 +112,11 @@ game:GetService("Players").LocalPlayer.PlayerGui.MinigameRewardsApp.Enabled = fa
 
 
 ------- Transition App Disabled (whatever it is) --------
---[[require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
+require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
 require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).sudden_fill = function() return end
 if game:GetService("Players").LocalPlayer.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible then 
     game:GetService("Players").LocalPlayer.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false 
-end--]]
+end
 
 
 local Player = game:GetService("Players").LocalPlayer
