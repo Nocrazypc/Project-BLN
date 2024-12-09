@@ -404,16 +404,16 @@ while task.wait(0.5) do
         print("Arrived at Map..")
     end
 end
----------------------------------------
 
-	task.delay(30, function()
-		while true do
+------------------------update Stats UI ----------------
+            while task.wait(5) do
 			StatsGuis:UpdateText("TimeFrame")
 			StatsGuis:UpdateText("BucksAndPotionFrame")
                         StatsGuis:UpdateText("TotalFrame")
                         StatsGuis:UpdateText("TotalFrame1")
+                        StatsGuis:UpdateText("TotalFrame2")
 			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
-			task.wait(5)
-		end
-	end)
+                    end
+
+-------------------------------------------------------
 
