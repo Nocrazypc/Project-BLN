@@ -391,7 +391,7 @@ while task.wait(0.5) do
 end
 --------------------------
 
-	local function RemoveGameOverButton()
+	function RemoveGameOverButton()
                 task.wait(20)
 		Player.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild("Face")
 		for _, v in pairs(Player.PlayerGui.MinigameRewardsApp.Body.Button:GetDescendants()) do
