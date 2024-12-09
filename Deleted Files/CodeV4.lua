@@ -1,11 +1,12 @@
 if not game:IsLoaded() then
-	game.Loaded:Wait(12)
+	game.Loaded:Wait()
 end
 
 if game.PlaceId ~= 920587237 then
 	return
 end
 
+----------------------------------
 
 repeat task.wait() until game:IsLoaded() and game:GetService("ReplicatedStorage"):FindFirstChild("ClientModules") and game:GetService("ReplicatedStorage").ClientModules:FindFirstChild("Core") and game:GetService("ReplicatedStorage").ClientModules.Core:FindFirstChild("UIManager") and game:GetService("ReplicatedStorage").ClientModules.Core:FindFirstChild("UIManager").Apps:FindFirstChild("TransitionsApp") and game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("TransitionsApp") and game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("TransitionsApp"):FindFirstChild("Whiteout")
 
@@ -33,6 +34,8 @@ for i, v in pairs(debug.getupvalue(RouterClient.init, 7)) do
     v.Name = i
 end
 ---------------------------------------------------------------
+local StatsGuis = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Stats.lua"))(
+
 local StarterGui = game:GetService("StarterGui")
 
 
@@ -396,3 +399,16 @@ while task.wait(0.5) do
         print("Arrived at Map..")
     end
 end
+---------------------------------------
+
+	task.delay(30, function()
+		while true do
+			StatsGuis:UpdateText("TimeFrame")
+			StatsGuis:UpdateText("BucksAndPotionFrame")
+                        StatsGuis:UpdateText("TotalFrame")
+                        StatsGuis:UpdateText("TotalFrame1")
+			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
+			task.wait(5)
+		end
+	end)
+
