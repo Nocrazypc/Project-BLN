@@ -429,7 +429,7 @@ end)
 
 
 print("== Starting Auto Winter 2024 Event ==")
-while task.wait(0.5) do
+while task.wait(1) do
     if GetMainMap() then
         pcall(function()
             if GetLobby() then
@@ -441,7 +441,7 @@ while task.wait(0.5) do
                     CreateTempPart()
                 end
             else
-                print("TPing to Join Zone")
+                --print("TPing to Join Zone")
                 pcall(function()
                     HRP.Anchored = true
                     HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
