@@ -108,14 +108,13 @@ end)
 game:GetService("Players").LocalPlayer.PlayerGui.DialogApp.Enabled = false
 game:GetService("Players").LocalPlayer.PlayerGui.InteractionsApp.Enabled = false
 game:GetService("Players").LocalPlayer.PlayerGui.NavigatorApp.Enabled = false
---game:GetService("Players").LocalPlayer.PlayerGui.MinigameRewardsApp.Enabled = false
 
 ------- Transition App Disabled (whatever it is) --------
---[[require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
+require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
 require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).sudden_fill = function() return end
 if game:GetService("Players").LocalPlayer.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible then 
     game:GetService("Players").LocalPlayer.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false 
-end --]]
+end
 
 
 local Player = game:GetService("Players").LocalPlayer
@@ -130,8 +129,6 @@ local set_thread_identity = set_thread_context or setthreadcontext or setidentit
 Player.PlayerGui.DialogApp.Enabled = false
 Player.PlayerGui.InteractionsApp.Enabled = false
 Player.PlayerGui.NavigatorApp.Enabled = false
---Player.PlayerGui.MinigameRewardsApp.Enabled = false
-
 
 
 --------  Game Status Check ----------
@@ -159,7 +156,7 @@ SetLocation = function(A, B)
     local O = get_thread_identity()
     set_thread_identity(4)
     --require(game.ReplicatedStorage.ClientModules.Core.InteriorsM.InteriorsM).enter(A, B, {["studs_ahead_of_door"] = 15})
-    require(game.ReplicatedStorage.ClientModules.Core.InteriorsM.InteriorsM).enter(A, B, {["spawn_cframe"] = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)})
+    require(game.ReplicatedStorage.ClientModules.Core.InteriorsM.InteriorsM).enter(A, B, {["spawn_cframe"] = CFrame.new(-15956, 11160, -15888) * CFrame.Angles(0, 0, 0)})
     set_thread_identity(O)
 end
 
@@ -171,6 +168,109 @@ GoToMainMap = function()
     CreateTempPart()
     if workspace:FindFirstChildWhichIsA("Terrain") then workspace.Terrain:Clear() end
     return false
+end
+
+function Optimizer()
+    print("-- Boost Performance Activated --")
+    UserSettings():GetService("UserGameSettings").MasterVolume = 0
+    local decalsyeeted = true
+    local g = game
+    local w = g.Workspace
+    local l = g.Lighting
+    local t = w.Terrain
+    sethiddenproperty(l,"Technology",2)
+    sethiddenproperty(t,"Decoration",false)
+    game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Chat,false)
+    t.WaterWaveSize = 0
+    t.WaterWaveSpeed = 0
+    t.WaterReflectance = 0
+    t.WaterTransparency = 0
+    l.GlobalShadows = 0
+    l.FogEnd = 9e9
+    l.Brightness = 0
+    settings().Rendering.QualityLevel = "0"
+    settings().Rendering.MeshPartDetailLevel = Enum.MeshPartDetailLevel.Level04
+    task.wait()
+    for i, v in pairs(w:GetDescendants()) do
+        if v:IsA("BasePart") and not v:IsA("MeshPart") then
+            v.Material = "Plastic"
+            v.Reflectance = 0
+        elseif (v:IsA("Decal") or v:IsA("Texture")) and decalsyeeted then
+            v.Transparency = 1
+        elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+            v.Lifetime = NumberRange.new(0)
+        elseif v:IsA("Explosion") then
+            v.BlastPressure = 1
+            v.BlastRadius = 1
+        elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
+            v.Enabled = false
+        elseif v:IsA("MeshPart") and decalsyeeted then
+            v.Material = "Plastic"
+            v.Reflectance = 0
+            v.TextureID = 10385902758728957
+        elseif v:IsA("SpecialMesh") and decalsyeeted  then
+            v.TextureId=0
+        elseif v:IsA("ShirtGraphic") and decalsyeeted then
+            v.Graphic=1
+        end
+    end
+    for i = 1,#l:GetChildren() do
+        e=l:GetChildren()[i]
+        if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then
+            e.Enabled = false
+        end
+    end
+    w.DescendantAdded:Connect(function(v)
+        pcall(function()
+            if v:IsA("BasePart") and not v:IsA("MeshPart") then
+                v.Material = "Plastic"
+                v.Reflectance = 0
+            elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
+                v.Transparency = 1
+            elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+                v.Lifetime = NumberRange.new(0)
+            elseif v:IsA("Explosion") then
+                v.BlastPressure = 1
+                v.BlastRadius = 1
+            elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
+                v.Enabled = false
+            elseif v:IsA("MeshPart") and decalsyeeted then
+                v.Material = "Plastic"
+                v.Reflectance = 0
+                v.TextureID = 10385902758728957
+            elseif v:IsA("SpecialMesh") and decalsyeeted then
+                v.TextureId=0
+            elseif v:IsA("ShirtGraphic") and decalsyeeted then
+                v.ShirtGraphic=1
+            end
+        end)
+        task.wait()
+    end)
+
+    workspace.Terrain.WaterReflectance = 0
+    workspace.Terrain.WaterTransparency = 1
+    workspace.Terrain.WaterWaveSize = 0
+    workspace.Terrain.WaterWaveSpeed = 0
+
+    for i,v in pairs(game.Lighting:GetChildren()) do 
+        if v:IsA("Model") then
+            v:Destroy()
+        elseif v.Name:match("Weather") then 
+            v:Destroy()
+        end 
+    end
+    game.Lighting.Brightness = 0
+
+    game.Lighting.ChildAdded:Connect(function()
+        for i,v in pairs(game.Lighting:GetChildren()) do 
+            if v:IsA("Model") then
+                v:Destroy()
+            elseif v.Name:match("Weather") then 
+                v:Destroy()
+            end 
+        end
+        game.Lighting.Brightness = 0
+    end)
 end
 
 function CreateTempPart()
@@ -218,8 +318,28 @@ function farmGingerbreads()
     RS.API:FindFirstChild("WinterEventAPI/RedeemPendingGingerbread"):FireServer()
 end
 
+function timeToSeconds(timeString)
+    local minutes, seconds = string.match(timeString, "(%d+):(%d+)")
+    local totalSeconds = tonumber(minutes) * 60 + tonumber(seconds)
+    return totalSeconds
+end
+
+function PlaceFloorAtSpleefMinigame()
+    if workspace:FindFirstChild("SpleefLocation") then return end
+
+    local floor = workspace.Interiors:WaitForChild("SpleefMinigame"):WaitForChild("Minigame"):WaitForChild("Floor")
+    local part = Instance.new("Part")
+    part.Position = floor.Position + Vector3.new(0, 100, 0)
+    part.Size = Vector3.new(200, 2, 200)
+    part.Anchored = true
+    part.Transparency = 0
+    part.Name = "SpleefLocation"
+    part.Parent = workspace
+    part.BrickColor = BrickColor.new("Bright red")
+end
+
 -- Optimization
---[[workspace.Pets.ChildAdded:Connect(function(c)
+workspace.Pets.ChildAdded:Connect(function(c)
     task.wait(1)
     for i, v in pairs(workspace.Pets:GetChildren()) do
         v.Parent = game.ReplicatedStorage
@@ -243,7 +363,7 @@ workspace.Interiors.ChildAdded:Connect(function(c)
                 if v.Name == "Visual" then
                     for l,o in pairs(workspace.Interiors.Winter2024Shop.Visual:GetChildren()) do
                         if o.Name ~= "Model" then
-                            v.Parent = game.ReplicatedStorage
+                            o.Parent = game.ReplicatedStorage
                         end
                     end
                 else
@@ -261,7 +381,21 @@ workspace.Interiors.ChildAdded:Connect(function(c)
         end
         if workspace:FindFirstChildWhichIsA("Terrain") then workspace.Terrain:Clear() end
     end
-end)--]]
+end)
+
+Player.PlayerGui.MinigameInGameApp:GetPropertyChangedSignal("Enabled"):Connect(function()
+    if Player.PlayerGui.MinigameInGameApp.Enabled then
+        Player.PlayerGui.MinigameInGameApp:WaitForChild("Body")
+        Player.PlayerGui.MinigameInGameApp.Body:WaitForChild("Middle")
+        Player.PlayerGui.MinigameInGameApp.Body.Middle:WaitForChild("Container")
+        Player.PlayerGui.MinigameInGameApp.Body.Middle.Container:WaitForChild("TitleLabel")
+        if Player.PlayerGui.MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match("MELT OFF") then
+            PlaceFloorAtSpleefMinigame()
+        end
+    end
+end)
+
+Optimizer()
 
 spawn(function()
     while task.wait(5) do
@@ -270,7 +404,7 @@ spawn(function()
                 task.wait(15)
                 if not GameStatus() and Player.PlayerGui.MinigameInGameApp.Body.Left.Container.ValueLabel.Text == "00:00" and Player.PlayerGui.MinigameInGameApp.Enabled then
                     --game:Shutdown()
-                    print("===== ACC STUCK ====")
+                    print("===== ACC STUCKK ====")
                 end
             end
         end)
@@ -303,10 +437,8 @@ while task.wait(0.5) do
                     RS.API:FindFirstChild("MinigameAPI/AttemptJoin"):FireServer("spleef_minigame", true)
                     task.wait(10)
                 else
-                    pcall(function()
-                        HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
-                        CreateTempPart()
-                    end)
+                    HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
+                    CreateTempPart()
                 end
             else
                 print("TPing to Join Zone")
@@ -328,35 +460,39 @@ while task.wait(0.5) do
 
         HRP.CFrame = CFrame.new(15766.4307, 7769.59521, 16022.4043) * CFrame.Angles(0, 0, 0)
         CreateTempPart()
+        HRP.Anchored = true
 
         task.wait(1)
         print("Completing minigame..")
         local startTimeForMinigameOverCheck = os.time()
-        repeat task.wait()
+        --repeat task.wait()
             -- Minigame Code
             if (Vector3.new(15766.4307, 7769.59521, 16022.4043) - HRP.Position).Magnitude > 15 then
                 HRP.Anchored = true
                 HRP.CFrame = CFrame.new(15766.4307, 7769.59521, 16022.4043) * CFrame.Angles(0, 0, 0)
                 CreateTempPart()
-                --HRP.Anchored = false
+                HRP.Anchored = true
             end
-            local st = tick()
-            while tick() - st <= 60 do
-                task.wait(1)
-                if not (game.Workspace.Interiors:FindFirstChild("SpleefMinigame") and GameStatus() and Player.PlayerGui.MinigameInGameApp.Enabled) then
-                    startTimeForMinigameOverCheck = startTimeForMinigameOverCheck - 150
-                    break
-                end
-            end
-        until not (game.Workspace.Interiors:FindFirstChild("SpleefMinigame") and GameStatus() and Player.PlayerGui.MinigameInGameApp.Enabled) or (os.time() - startTimeForMinigameOverCheck >= 150)
+
+            print("Waiting:", timeToSeconds(Player.PlayerGui.MinigameInGameApp.Body.Left.Container.ValueLabel.Text))
+            task.wait(timeToSeconds(Player.PlayerGui.MinigameInGameApp.Body.Left.Container.ValueLabel.Text))
+
+            --local st = os.time()
+            --while os.time() - st <= timeToSeconds(Player.PlayerGui.MinigameInGameApp.Body.Left.Container.ValueLabel.Text) do
+            --    task.wait(1)
+                --if not (game.Workspace.Interiors:FindFirstChild("SpleefMinigame") and GameStatus() and Player.PlayerGui.MinigameInGameApp.Enabled) then
+                --    startTimeForMinigameOverCheck = startTimeForMinigameOverCheck - 150
+                --    break
+                --end
+            --end
+        --until not (game.Workspace.Interiors:FindFirstChild("SpleefMinigame") and GameStatus() and Player.PlayerGui.MinigameInGameApp.Enabled) or (os.time() - startTimeForMinigameOverCheck >= 150)
+        task.wait(1)
         print("Minigame Ended!")
         HRP.Anchored = true
         for i = 1, 10 do
             task.wait(1)
-            pcall(function()
-                HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
-                CreateTempPart()
-            end)
+            HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
+            CreateTempPart()
         end
     else
         print("Going to Main Map..")
@@ -364,4 +500,3 @@ while task.wait(0.5) do
         print("Arrived at Map..")
     end
 end
-
