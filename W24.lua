@@ -172,7 +172,7 @@ end
 
 function Optimizer()
     print("-- Boost Performance Activated --")
-    UserSettings():GetService("UserGameSettings").MasterVolume = 0
+    --UserSettings():GetService("UserGameSettings").MasterVolume = 0
     local decalsyeeted = true
     local g = game
     local w = g.Workspace
@@ -335,7 +335,7 @@ function PlaceFloorAtSpleefMinigame()
     part.Transparency = 0
     part.Name = "SpleefLocation"
     part.Parent = workspace
-    part.BrickColor = BrickColor.new("Bright red")
+    --part.BrickColor = BrickColor.new("Bright red")
 end
 
 -- Optimization
