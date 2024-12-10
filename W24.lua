@@ -429,13 +429,13 @@ end)
 
 
 print("== Starting Auto Winter 2024 Event ==")
-while task.wait(2) do
+while task.wait(3) do
     if GetMainMap() then
         pcall(function()
             if GetLobby() then
                 if GameLoading() then
                     RS.API:FindFirstChild("MinigameAPI/AttemptJoin"):FireServer("spleef_minigame", true)
-                    task.wait(15)
+                    task.wait(20)
                 else
                     HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
                     CreateTempPart()
