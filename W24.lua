@@ -429,7 +429,7 @@ end)
 
 
 print("== Starting Auto Winter 2024 Event ==")
-while task.wait(1) do
+while task.wait(2) do
     if GetMainMap() then
         pcall(function()
             if GetLobby() then
