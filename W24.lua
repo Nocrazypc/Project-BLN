@@ -156,7 +156,7 @@ SetLocation = function(A, B)
     local O = get_thread_identity()
     set_thread_identity(4)
     --require(game.ReplicatedStorage.ClientModules.Core.InteriorsM.InteriorsM).enter(A, B, {["studs_ahead_of_door"] = 15})
-    require(game.ReplicatedStorage.ClientModules.Core.InteriorsM.InteriorsM).enter(A, B, {["spawn_cframe"] = CFrame.new(-7956, 11160, -15888) * CFrame.Angles(0, 0, 0)})
+    require(game.ReplicatedStorage.ClientModules.Core.InteriorsM.InteriorsM).enter(A, B, {["spawn_cframe"] = CFrame.new(-15956, 11160, -15888) * CFrame.Angles(0, 0, 0)})
     set_thread_identity(O)
 end
 
