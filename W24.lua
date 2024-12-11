@@ -435,7 +435,7 @@ while task.wait(3) do
             if GetLobby() then
                 if GameLoading() then
                     RS.API:FindFirstChild("MinigameAPI/AttemptJoin"):FireServer("spleef_minigame", true)
-                    task.wait(20)
+                    task.wait(15)
                 else
                     HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
                     CreateTempPart()
