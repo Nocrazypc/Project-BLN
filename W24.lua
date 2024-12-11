@@ -444,7 +444,7 @@ while task.wait(3) do
                 --print("TPing to Join Zone")
                 pcall(function()
                     HRP.Anchored = true
-                    HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
+                    HRP.CFrame = CFrame.new(-7956, 11155, -15888) * CFrame.Angles(0, 0, 0)
                     CreateTempPart()
                     HRP.Anchored = false
                 end)
