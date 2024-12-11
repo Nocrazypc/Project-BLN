@@ -332,7 +332,7 @@ function PlaceFloorAtSpleefMinigame()
     part.Position = floor.Position + Vector3.new(0, 100, 0)
     part.Size = Vector3.new(200, 2, 200)
     part.Anchored = true
-    part.Transparency = 0
+    part.Transparency = 0.5
     part.Name = "SpleefLocation"
     part.Parent = workspace
     --part.BrickColor = BrickColor.new("Bright red")
