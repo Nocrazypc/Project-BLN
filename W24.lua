@@ -335,7 +335,7 @@ function PlaceFloorAtSpleefMinigame()
     part.Transparency = 0
     part.Name = "SpleefLocation"
     part.Parent = workspace
-    -- part.BrickColor = BrickColor.new("Bright red")
+    --part.BrickColor = BrickColor.new("Bright red")
 end
 
 -- Optimization
@@ -437,14 +437,14 @@ while task.wait(3) do
                     RS.API:FindFirstChild("MinigameAPI/AttemptJoin"):FireServer("spleef_minigame", true)
                     task.wait(15)
                 else
-                    HRP.CFrame = CFrame.new(-7956, 11155, -15888) * CFrame.Angles(0, 0, 0)
+                    HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
                     CreateTempPart()
                 end
             else
-                -- print("TPing to Join Zone")
+                --print("TPing to Join Zone")
                 pcall(function()
                     HRP.Anchored = true
-                    HRP.CFrame = CFrame.new(-7956, 11155, -15888) * CFrame.Angles(0, 0, 0)
+                    HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
                     CreateTempPart()
                     HRP.Anchored = false
                 end)
@@ -458,7 +458,7 @@ while task.wait(3) do
         HRP.Anchored = true
         task.wait(1)
 
-        HRP.CFrame = CFrame.new(-12026, 11795, -16005) * CFrame.Angles(0, 0, 0)
+        HRP.CFrame = CFrame.new(15766.4307, 7769.59521, 16022.4043) * CFrame.Angles(0, 0, 0)
         CreateTempPart()
         HRP.Anchored = true
 
@@ -467,9 +467,9 @@ while task.wait(3) do
         local startTimeForMinigameOverCheck = os.time()
         --repeat task.wait()
             -- Minigame Code
-            --if (Vector3.new(-12026, 11795, -16005) - HRP.Position).Magnitude > 15 then
+            --if (Vector3.new(15766.4307, 7769.59521, 16022.4043) - HRP.Position).Magnitude > 15 then
                 HRP.Anchored = true
-                HRP.CFrame = CFrame.new(-12026, 11795, -16005) * CFrame.Angles(0, 0, 0)
+                HRP.CFrame = CFrame.new(15766.4307, 7769.59521, 16022.4043) * CFrame.Angles(0, 0, 0)
                 CreateTempPart()
                 HRP.Anchored = true
             --end
