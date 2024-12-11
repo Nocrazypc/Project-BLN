@@ -156,7 +156,7 @@ SetLocation = function(A, B)
     local O = get_thread_identity()
     set_thread_identity(4)
     --require(game.ReplicatedStorage.ClientModules.Core.InteriorsM.InteriorsM).enter(A, B, {["studs_ahead_of_door"] = 15})
-    require(game.ReplicatedStorage.ClientModules.Core.InteriorsM.InteriorsM).enter(A, B, {["spawn_cframe"] = CFrame.new(-15956, 11160, -15888) * CFrame.Angles(0, 0, 0)})
+    require(game.ReplicatedStorage.ClientModules.Core.InteriorsM.InteriorsM).enter(A, B, {["spawn_cframe"] = CFrame.new(-7956, 11160, -15888) * CFrame.Angles(0, 0, 0)})
     set_thread_identity(O)
 end
 
@@ -335,7 +335,7 @@ function PlaceFloorAtSpleefMinigame()
     part.Transparency = 0
     part.Name = "SpleefLocation"
     part.Parent = workspace
-    --part.BrickColor = BrickColor.new("Bright red")
+    -- part.BrickColor = BrickColor.new("Bright red")
 end
 
 -- Optimization
@@ -404,7 +404,7 @@ spawn(function()
                 task.wait(15)
                 if not GameStatus() and Player.PlayerGui.MinigameInGameApp.Body.Left.Container.ValueLabel.Text == "00:00" and Player.PlayerGui.MinigameInGameApp.Enabled then
                     --game:Shutdown()
-                    print("===== ACC STUCKK ====")
+                    print("===== ACC STUCK ====")
                 end
             end
         end)
@@ -435,16 +435,16 @@ while task.wait(3) do
             if GetLobby() then
                 if GameLoading() then
                     RS.API:FindFirstChild("MinigameAPI/AttemptJoin"):FireServer("spleef_minigame", true)
-                    task.wait(20)
+                    task.wait(15)
                 else
-                    HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
+                    HRP.CFrame = CFrame.new(-7956, 11155, -15888) * CFrame.Angles(0, 0, 0)
                     CreateTempPart()
                 end
             else
-                --print("TPing to Join Zone")
+                -- print("TPing to Join Zone")
                 pcall(function()
                     HRP.Anchored = true
-                    HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
+                    HRP.CFrame = CFrame.new(-7956, 11155, -15888) * CFrame.Angles(0, 0, 0)
                     CreateTempPart()
                     HRP.Anchored = false
                 end)
@@ -458,7 +458,7 @@ while task.wait(3) do
         HRP.Anchored = true
         task.wait(1)
 
-        HRP.CFrame = CFrame.new(15766.4307, 7769.59521, 16022.4043) * CFrame.Angles(0, 0, 0)
+        HRP.CFrame = CFrame.new(-12026, 11795, -16005) * CFrame.Angles(0, 0, 0)
         CreateTempPart()
         HRP.Anchored = true
 
@@ -467,12 +467,12 @@ while task.wait(3) do
         local startTimeForMinigameOverCheck = os.time()
         --repeat task.wait()
             -- Minigame Code
-            if (Vector3.new(15766.4307, 7769.59521, 16022.4043) - HRP.Position).Magnitude > 15 then
+            --if (Vector3.new(-12026, 11795, -16005) - HRP.Position).Magnitude > 15 then
                 HRP.Anchored = true
-                HRP.CFrame = CFrame.new(15766.4307, 7769.59521, 16022.4043) * CFrame.Angles(0, 0, 0)
+                HRP.CFrame = CFrame.new(-12026, 11795, -16005) * CFrame.Angles(0, 0, 0)
                 CreateTempPart()
                 HRP.Anchored = true
-            end
+            --end
 
             print("Waiting:", timeToSeconds(Player.PlayerGui.MinigameInGameApp.Body.Left.Container.ValueLabel.Text))
             task.wait(timeToSeconds(Player.PlayerGui.MinigameInGameApp.Body.Left.Container.ValueLabel.Text))
@@ -491,7 +491,7 @@ while task.wait(3) do
         HRP.Anchored = true
         for i = 1, 10 do
             task.wait(1)
-            HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
+            HRP.CFrame = CFrame.new(-7956, 11155, -15888) * CFrame.Angles(0, 0, 0)
             CreateTempPart()
         end
     else
