@@ -467,12 +467,12 @@ while task.wait(3) do
         local startTimeForMinigameOverCheck = os.time()
         --repeat task.wait()
             -- Minigame Code
-            --if (Vector3.new(15766.4307, 7769.59521, 16022.4043) - HRP.Position).Magnitude > 15 then
+            if (Vector3.new(15766.4307, 7769.59521, 16022.4043) - HRP.Position).Magnitude > 15 then
                 HRP.Anchored = true
                 HRP.CFrame = CFrame.new(15766.4307, 7769.59521, 16022.4043) * CFrame.Angles(0, 0, 0)
                 CreateTempPart()
                 HRP.Anchored = true
-            --end
+            end
 
             print("Waiting:", timeToSeconds(Player.PlayerGui.MinigameInGameApp.Body.Left.Container.ValueLabel.Text))
             task.wait(timeToSeconds(Player.PlayerGui.MinigameInGameApp.Body.Left.Container.ValueLabel.Text))
