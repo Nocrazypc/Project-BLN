@@ -435,22 +435,22 @@ while task.wait(3) do
             if GetLobby() then
                 if GameLoading() then
                     RS.API:FindFirstChild("MinigameAPI/AttemptJoin"):FireServer("spleef_minigame", true)
-                    task.wait(15)
+                    task.wait(10)
                 else
-                    HRP.CFrame = CFrame.new(-7956, 11155, -15888) * CFrame.Angles(0, 0, 0)
-                    --CreateTempPart()
+                    HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
+                    CreateTempPart()
                 end
-            --[[else
+            else
                 --print("TPing to Join Zone")
                 pcall(function()
                     HRP.Anchored = true
-                    HRP.CFrame = CFrame.new(-7956, 11155, -15888) * CFrame.Angles(0, 0, 0)
+                    HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
                     CreateTempPart()
                     HRP.Anchored = false
                 end)
                 RS.API:FindFirstChild("MinigameAPI/AttemptJoin"):FireServer("spleef_minigame", true)
             end
-        end)--]]
+        end)
     elseif GameStatus() and workspace.Interiors:FindFirstChild("SpleefMinigame") then
         print("Waiting for Minigame to load..")
         repeat task.wait(0.50) until workspace.Interiors:FindFirstChild("SpleefMinigame") and workspace.Interiors.SpleefMinigame:FindFirstChild("Minigame") 
