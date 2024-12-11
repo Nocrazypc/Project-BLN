@@ -437,8 +437,8 @@ while task.wait(3) do
                     RS.API:FindFirstChild("MinigameAPI/AttemptJoin"):FireServer("spleef_minigame", true)
                     task.wait(15)
                 else
-                    HRP.CFrame = CFrame.new(-15956, 11155, -15888) * CFrame.Angles(0, 0, 0)
-                    CreateTempPart()
+                    HRP.CFrame = CFrame.new(-7956, 11155, -15888) * CFrame.Angles(0, 0, 0)
+                    --CreateTempPart()
                 end
             else
                 --print("TPing to Join Zone")
