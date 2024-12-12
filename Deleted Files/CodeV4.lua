@@ -1233,7 +1233,7 @@ local function autoFarm()
 				completeBabyAilments()
 			end
 -------------- status guis removed -----------	
-               task.wait(5
+               task.wait(5)
 		end
 	end)
 		
