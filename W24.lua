@@ -166,5 +166,5 @@ local NewClaimBool = true
 		end
 	end)
 
-return minigame
+
 		
