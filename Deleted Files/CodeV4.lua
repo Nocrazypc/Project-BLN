@@ -80,7 +80,7 @@ local DailyClaimConnection
 local counter = 0
 -- local diedCounter = 0
 
--- local isInMiniGame = false
+local isInMiniGame = false
 -- local DailyBoolean = true
 local NewTaskBool = true
 local NewClaimBool = true
@@ -126,6 +126,7 @@ getgenv().feedAgeUpPotionToggle = false
 getgenv().AutoFusion = false
 getgenv().FocusFarmAgePotions = false
 getgenv().PetCurrentlyFarming = ""
+getgenv().AutoMinigame = true
 
 local Egg2Buy = SETTINGS.PET_TO_BUY
 local Gift2Buy = "lunar_2024_special_lunar_new_year_gift_box"
@@ -752,7 +753,7 @@ end
 
 local function AgeUpPotionLevelUp()
 	local sameUnqiue
-	local count = 0
+	-- local count = 0
 
 	local function equipPet()
 		-- checks inventory for neon pet
@@ -1103,6 +1104,7 @@ local function autoFarm()
 	     Teleport.PlaceFloorAtCampSite()
 	     Teleport.PlaceFloorAtBeachParty()
 	     Teleport.FarmingHome()
+	     Christmas2024.getGingerbread()
 		local function CompletePetAilments()
 		-- if ClientData.get("pet_char_wrappers")[1] == nil then
 		-- 	ReplicatedStorage.API["ToolAPI/Equip"]:InvokeServer(PetCurrentlyFarming, {})
@@ -1130,6 +1132,7 @@ local function autoFarm()
 				return true
 			elseif key == "thirsty" then
 				Ailments:ThirstyAilment()
+				Christmas2024.getGingerbread()
 				return true
 			elseif key == "sick" then
 				Ailments:SickAilment()
@@ -1218,6 +1221,15 @@ local function autoFarm()
 
 	task.delay(30, function()
 		while true do
+		if isInMiniGame then
+                                local count = 0
+                                repeat
+                                        -- print(`⏱️ Waiting for 10 secs [inside minigame] ⏱️`)
+                                        count += 10
+                                        task.wait(10)
+                                until not isInMiniGame or count > 120
+                                isInMiniGame = false
+                end
 			removeHandHeldItem()
 			if not CompletePetAilments() then
 				completeBabyAilments()
@@ -1272,32 +1284,43 @@ local function autoFarm()
 		end
 	end)--]]
 
-	--Fires when inside the minigame
-	--[[Player.PlayerGui.MinigameInGameApp:GetPropertyChangedSignal("Enabled"):Connect(function()
+        local function PlaceFloorAtSpleefMinigame()
+                if workspace:FindFirstChild("SpleefLocation") then return end
+                local interiorOrigin = workspace:WaitForChild("Interiors"):WaitForChild("SpleefMinigame"):WaitForChild("InteriorOrigin")
+                local part = Instance.new("Part")
+                part.Position = interiorOrigin.Position
+                part.Size = Vector3.new(200, 2, 200)
+                part.Anchored = true
+                part.Transparency = 0
+                part.Name = "SpleefLocation"
+                part.Parent = workspace
+        end
+
+
+
+	--// Fires when inside the minigame
+	Player.PlayerGui.MinigameInGameApp:GetPropertyChangedSignal("Enabled"):Connect(function()
 		if Player.PlayerGui.MinigameInGameApp.Enabled then
 			Player.PlayerGui.MinigameInGameApp:WaitForChild("Body")
 			Player.PlayerGui.MinigameInGameApp.Body:WaitForChild("Middle")
 			Player.PlayerGui.MinigameInGameApp.Body.Middle:WaitForChild("Container")
 			Player.PlayerGui.MinigameInGameApp.Body.Middle.Container:WaitForChild("TitleLabel")
-			if Player.PlayerGui.MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match("CRICKET'S TILE HOP") then
-				stopDoingTasks = true
-				--print("stop doing task")
-				-- Player.Character.Humanoid.WalkSpeed = 0
-				task.wait(rng:NextInteger(20, 30))
-				
-				stopDoingTasks = false
-				--print("start doing task")
+			if Player.PlayerGui.MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match("MELT OFF") then
+				isInMiniGame = true
+				PlaceFloorAtSpleefMinigame()
+				task.wait(2)
+				Player.Character.PrimaryPart.CFrame = workspace:WaitForChild("SpleefLocation").CFrame + Vector3.new(0, 5, 0)
 			end
 		end
-	end)--]]
+	end)
 
 
-	--[[local function RemoveGameOverButton()
+	local function RemoveGameOverButton()
 		Player.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild("Face")
 		for _, v in pairs(Player.PlayerGui.MinigameRewardsApp.Body.Button:GetDescendants()) do
 			if v.Name == "TextLabel" then
 				if v.Text == "NICE!" then
-					task.wait(10)
+					task.wait(5)
 					-- clickGuiButton(v.Parent.Parent, 30, 60)
 					firesignal(v.Parent.Parent.MouseButton1Down)
 					firesignal(v.Parent.Parent.MouseButton1Click)
@@ -1306,21 +1329,25 @@ local function autoFarm()
 				end
 			end
 		end
-	end--]]
+	end
 
 	local function onTextChangedMiniGame()
-		-- nothing for now
+		if getgenv().AutoMinigame then 
+			FireButton("Yes")
+		else
+			FireButton("No")
+		end
 	end
 
 	-- fires when it ask you if you want to join minigame
-	--[[Player.PlayerGui.DialogApp.Dialog.ChildAdded:Connect(function(NormalDialogChild)
+	Player.PlayerGui.DialogApp.Dialog.ChildAdded:Connect(function(NormalDialogChild)
 		if NormalDialogChild.Name == "NormalDialog" then
 			NormalDialogChild:GetPropertyChangedSignal("Visible"):Connect(function()
 				if NormalDialogChild.Visible then
 					NormalDialogChild:WaitForChild("Info")
 					NormalDialogChild.Info:WaitForChild("TextLabel")
 					NormalDialogChild.Info.TextLabel:GetPropertyChangedSignal("Text"):Connect(function()
-						if Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("Cricket's Tile Hop") then
+						if Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("Melt Off") then
 							onTextChangedMiniGame()
 						elseif Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("invitation") then
 							game:Shutdown()
@@ -1331,15 +1358,15 @@ local function autoFarm()
 				end
 			end)
 		end
-	end)--]]
+	end)
 
 
-	--[[Player.PlayerGui.DialogApp.Dialog.NormalDialog:GetPropertyChangedSignal("Visible"):Connect(function()
+	Player.PlayerGui.DialogApp.Dialog.NormalDialog:GetPropertyChangedSignal("Visible"):Connect(function()
 		if Player.PlayerGui.DialogApp.Dialog.NormalDialog.Visible then
 			Player.PlayerGui.DialogApp.Dialog.NormalDialog:WaitForChild("Info")
 			Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info:WaitForChild("TextLabel")
 			Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel:GetPropertyChangedSignal("Text"):Connect(function()
-				if Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("Cricket's Tile Hop") then
+				if Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("Melt Off") then
 					onTextChangedMiniGame()
 				elseif Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("invitation") then
 					game:Shutdown()
@@ -1348,21 +1375,17 @@ local function autoFarm()
 				end
 			end)
 		end
-	end)--]]
+	end)
 
+workspace.StaticMap.spleef_minigame_minigame_state.players_loading:GetPropertyChangedSignal("Value"):Connect(function()
+		if workspace.StaticMap.spleef_minigame_minigame_state.players_loading.Value then
+			isInMiniGame = true
+			task.wait(1)
+			ReplicatedStorage.API:FindFirstChild("MinigameAPI/AttemptJoin"):FireServer("spleef_minigame", true)
+		end
+	end)
 
-	-- if Player.PlayerGui.DialogApp.Dialog.NormalDialog.Visible then
-	--     if Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("Tile Skip is starting soon!") then
-	--         FireButton("Yes")
-
-	--     elseif Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("Crabby Grabby is starting soon!") then
-	--         FireButton("Yes")
-
-	--     end
-	-- end
-
-
-	--[[Player.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal("Visible"):Connect(function()
+	Player.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal("Visible"):Connect(function()
 		if Player.PlayerGui.MinigameRewardsApp.Body.Visible then
 			Player.PlayerGui.MinigameRewardsApp.Body:WaitForChild("Button")
 			Player.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild("Face")
@@ -1370,51 +1393,13 @@ local function autoFarm()
 			if Player.PlayerGui.MinigameRewardsApp.Body.Button.Face.TextLabel.Text:match("NICE!") then
 				Player.Character.HumanoidRootPart.Anchored = false
 				RemoveGameOverButton()
-				--Teleport.DeleteMainMapParts()
+				isInMiniGame = false
+				Teleport.FarmingHome()
 			end
 		end
-	end)--]]
+	end)
 
-	-- Player.PlayerGui.BattlePassApp.Body.Header.Title.Title.Text:match("Pony Pass")
-	--[[Player.PlayerGui.BattlePassApp.Body:GetPropertyChangedSignal("Visible"):Connect(function()
-		if Player.PlayerGui.BattlePassApp.Body.Visible then
-			Player.PlayerGui.BattlePassApp.Body:WaitForChild("InnerBody")
-			Player.PlayerGui.BattlePassApp.Body.InnerBody:WaitForChild("ScrollingFrame")
-			Player.PlayerGui.BattlePassApp.Body.InnerBody.ScrollingFrame:WaitForChild("21")
-			if Player.PlayerGui.BattlePassApp.Body.InnerBody.ScrollingFrame[21] then
-				for _, v in Player.PlayerGui.BattlePassApp.Body.InnerBody.ScrollingFrame:GetChildren() do
-					if not v:FindFirstChild("ButtonFrame") then
-						continue
-					end
-					if v.ButtonFrame:FindFirstChild("ClaimButton") then
-						ReplicatedStorage.API["BattlePassAPI/ClaimReward"]:InvokeServer(
-							"celestial_2024_pass_4",
-							tonumber(v.Name) - 1
-						)
-						task.wait(1)
-						ReplicatedStorage.API["BattlePassAPI/ClaimReward"]:InvokeServer(
-							"celestial_2024_pass_4",
-							tonumber(v.Name)
-						)
-					end
-				end
 
-				-- Player.PlayerGui.BattlePassApp.Body.Header.ExitFrame.ExitButton
-				-- Player.PlayerGui.BattlePassApp.Body:WaitForChild("Header")
-				-- Player.PlayerGui.BattlePassApp.Body.Header:WaitForChild("ExitFrame")
-				-- Player.PlayerGui.BattlePassApp.Body.Header.ExitFrame:WaitForChild("ExitButton")
-				-- local count = 0
-				-- repeat
-				--     clickGuiButton(Player.PlayerGui.BattlePassApp.Body.Header.ExitFrame.ExitButton, 30, 60)
-				--     count += 1
-				--     task.wait(1)
-				-- until not Player.PlayerGui.BattlePassApp.Body.Visible or count >= 10
-
-				-- joinMiniGame()
-				stopDoingTasks = false
-			end
-		end
-	end) --]]
 
 
 	--// Code below runs once when auto farm is enabled
@@ -1542,6 +1527,8 @@ local function onTextChanged()
 		FireButton("Yes")
 	elseif Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("your inventory") then
 		FireButton("Awesome!")
+	elseif Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("Gingerbread!") then
+                FireButton("Awesome!")
 	end
 end
 
@@ -2210,6 +2197,18 @@ end
      end,
  })
 
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Winter 2024 Minigames for AutoFarm",
+     CurrentValue = false,
+     Flag = "Toggle11",
+     Callback = function(Value)
+     getgenv().AutoMinigame = Value
+
+
+     end,
+ })
+
+
 ------------------------------------
 
 
@@ -2746,4 +2745,4 @@ end)
 
                    end --]]
 
---print("Loaded. lastest update 07/12/2024  mm/dd/yyyy")
+--print("Loaded. lastest update 12/12/2024  mm/dd/yyyy")
