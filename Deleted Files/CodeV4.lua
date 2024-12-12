@@ -1344,6 +1344,9 @@ local function autoFarm()
 					NormalDialogChild.Info.TextLabel:GetPropertyChangedSignal("Text"):Connect(function()
 						if Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("Melt Off") then
 							onTextChangedMiniGame()
+                                                        task.wait(5)
+			ReplicatedStorage.API["ToolAPI/Unequip"]:InvokeServer(PetCurrentlyFarming, {})
+
 						elseif Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("invitation") then
 							game:Shutdown()
 						elseif Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("You found a") then
@@ -1391,7 +1394,10 @@ workspace.StaticMap.spleef_minigame_minigame_state.players_loading:GetPropertyCh
 				Player.Character.HumanoidRootPart.Anchored = false
 				RemoveGameOverButton()
 				isInMiniGame = false
+			ReplicatedStorage.API["ToolAPI/Equip"]:InvokeServer(PetCurrentlyFarming, {})
+                                task.wait(2)
 				Teleport.FarmingHome()
+
 			end
 		end
 	end)
