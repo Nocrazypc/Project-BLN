@@ -126,7 +126,7 @@ getgenv().feedAgeUpPotionToggle = false
 getgenv().AutoFusion = false
 getgenv().FocusFarmAgePotions = false
 getgenv().PetCurrentlyFarming = ""
-getgenv().AutoMinigame = true
+getgenv().AutoMinigame = false
 
 local Egg2Buy = SETTINGS.PET_TO_BUY
 local Gift2Buy = "lunar_2024_special_lunar_new_year_gift_box"
