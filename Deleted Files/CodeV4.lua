@@ -305,7 +305,7 @@ local function completeStarterTutorial()
 		end
 
 		feedStartEgg("sandwich-default")
-		ReplicatedStorage.API["TeamAPI/ChooseTeam"]:InvokeServer("Babies", {["dont_send_back_home"] = true})
+		-- ReplicatedStorage.API["TeamAPI/ChooseTeam"]:InvokeServer("Babies", {["dont_send_back_home"] = true})
 	end)
 end
 
@@ -329,7 +329,7 @@ end
 
 
 local function buyFurniture(furnitureId: string) --piano basiccrib
-	--print(`💸 No {furnitureId}, so buying it 💸`)
+	print(`💸 No {furnitureId}, so buying it 💸`)
 	local args = {
 		{
 			{
@@ -480,10 +480,7 @@ local function agePotion(FoodPassOn)
 			if isEgg or petAge >= 6 then
 				return
 			end
-			ReplicatedStorage.API["PetAPI/ConsumeFoodItem"]:FireServer(
-				v.unique,
-				ClientData.get("pet_char_wrappers")[1].pet_unique
-			)
+			ReplicatedStorage.API["PetAPI/ConsumeFoodItem"]:FireServer(v.unique, ClientData.get("pet_char_wrappers")[1].pet_unique)
 			return
 		end
 	end
@@ -570,6 +567,7 @@ local function findBait(baitPassOn)
 			return bait
 		end
 	end
+     return nil
 end
 
 
@@ -758,7 +756,7 @@ local function AgeUpPotionLevelUp()
 	local function equipPet()
 		-- checks inventory for neon pet
 		for _, v in
-			pairs(require(ReplicatedStorage.ClientModules.Core.ClientData).get_data()[Player.Name].inventory.pets)
+			 pairs(ClientData.get_data()[Player.Name].inventory.pets)
 		do
 			if
 				v.id == selectedItem
@@ -773,7 +771,7 @@ local function AgeUpPotionLevelUp()
 		end
 
 		for _, v in
-			pairs(require(ReplicatedStorage.ClientModules.Core.ClientData).get_data()[Player.Name].inventory.pets)
+                        pairs(ClientData.get_data()[Player.Name].inventory.pets)
 		do
 			if
 				v.id == selectedItem
@@ -790,7 +788,7 @@ local function AgeUpPotionLevelUp()
 
 	local function feedAgePotion()
 		for _, v in
-			pairs(require(ReplicatedStorage.ClientModules.Core.ClientData).get_data()[Player.Name].inventory.food)
+                   pairs(ClientData.get_data()[Player.Name].inventory.food)
 		do
 			if v.id == "pet_age_potion" then
 				if sameUnqiue == v.unique then
@@ -1234,7 +1232,8 @@ local function autoFarm()
 			if not CompletePetAilments() then
 				completeBabyAilments()
 			end
--------------- status guis removed -----------
+-------------- status guis removed -----------	
+               task.wait(5
 		end
 	end)
 		
@@ -1269,11 +1268,7 @@ local function autoFarm()
 			if not SETTINGS.FOCUS_FARM_AGE_POTION then
 				SwitchOutFullyGrown()
 			end
-		--[[elseif Player.PlayerGui.HintApp.TextLabel.Text:match("You have left the queue") then
-			if workspace.Interiors:FindFirstChild("Winter2023Shop") then
-				Player.Character.PrimaryPart.CFrame = workspace.Interiors.Winter2023Shop.PetRescue.JoinZone.Collider.CFrame
-					+ Vector3.new(0, -14, 0)
-			end--]]
+		
 		end
 	end)
 
@@ -1291,7 +1286,7 @@ local function autoFarm()
                 part.Position = interiorOrigin.Position
                 part.Size = Vector3.new(200, 2, 200)
                 part.Anchored = true
-                part.Transparency = 0
+                part.Transparency = 0.5
                 part.Name = "SpleefLocation"
                 part.Parent = workspace
         end
@@ -1320,7 +1315,7 @@ local function autoFarm()
 		for _, v in pairs(Player.PlayerGui.MinigameRewardsApp.Body.Button:GetDescendants()) do
 			if v.Name == "TextLabel" then
 				if v.Text == "NICE!" then
-					task.wait(12)
+					task.wait(10)
 					-- clickGuiButton(v.Parent.Parent, 30, 60)
 					firesignal(v.Parent.Parent.MouseButton1Down)
 					firesignal(v.Parent.Parent.MouseButton1Click)
@@ -1390,6 +1385,8 @@ workspace.StaticMap.spleef_minigame_minigame_state.players_loading:GetPropertyCh
 			Player.PlayerGui.MinigameRewardsApp.Body:WaitForChild("Button")
 			Player.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild("Face")
 			Player.PlayerGui.MinigameRewardsApp.Body.Button.Face:WaitForChild("TextLabel")
+                        Player.PlayerGui.MinigameRewardsApp.Body:WaitForChild("Reward")
+                        Player.PlayerGui.MinigameRewardsApp.Body.Reward:WaitForChild("TitleLabel")			
 			if Player.PlayerGui.MinigameRewardsApp.Body.Button.Face.TextLabel.Text:match("NICE!") then
 				Player.Character.HumanoidRootPart.Anchored = false
 				RemoveGameOverButton()
@@ -1399,15 +1396,53 @@ workspace.StaticMap.spleef_minigame_minigame_state.players_loading:GetPropertyCh
 		end
 	end)
 
+        -- Player.PlayerGui.BattlePassApp.Body.Header.Title.Title.Text:match("Pony Pass")
+        Player.PlayerGui.BattlePassApp.Body:GetPropertyChangedSignal("Visible"):Connect(function()
+                if Player.PlayerGui.BattlePassApp.Body.Visible then
+                        Player.PlayerGui.BattlePassApp.Body:WaitForChild("InnerBody")
+                        Player.PlayerGui.BattlePassApp.Body.InnerBody:WaitForChild("ScrollingFrame")
+                        Player.PlayerGui.BattlePassApp.Body.InnerBody.ScrollingFrame:WaitForChild("21")
+                        if Player.PlayerGui.BattlePassApp.Body.InnerBody.ScrollingFrame[21] then
+                                for _, v in Player.PlayerGui.BattlePassApp.Body.InnerBody.ScrollingFrame:GetChildren() do
+                                        if not v:FindFirstChild("ButtonFrame") then
+                                                continue
+                                        end
+                                        if v.ButtonFrame:FindFirstChild("ClaimButton") then
+                                                -- ReplicatedStorage.API["BattlePassAPI/ClaimReward"]:InvokeServer(
+                                                --         "celestial_2024_pass_4",
+                                                --         tonumber(v.Name) - 1
+                                                -- )
+                                                -- task.wait(1)
+                                                -- ReplicatedStorage.API["BattlePassAPI/ClaimReward"]:InvokeServer(
+                                                --         "celestial_2024_pass_4",
+                                                --         tonumber(v.Name)
+                                                -- )
+                                        end
+                                end
+                                -- Player.PlayerGui.BattlePassApp.Body.Header.ExitFrame.ExitButton
+                                -- Player.PlayerGui.BattlePassApp.Body:WaitForChild("Header")
+                                -- Player.PlayerGui.BattlePassApp.Body.Header:WaitForChild("ExitFrame")
+                                -- Player.PlayerGui.BattlePassApp.Body.Header.ExitFrame:WaitForChild("ExitButton")
+                                -- local count = 0
+                                -- repeat
+                                --     clickGuiButton(Player.PlayerGui.BattlePassApp.Body.Header.ExitFrame.ExitButton, 30, 60)
+                                --     count += 1
+                                --     task.wait(1)
+                                -- until not Player.PlayerGui.BattlePassApp.Body.Visible or count >= 10
+                                -- joinMiniGame()
+                                -- stopDoingTasks = false
+                        end
+                end
+        end)
 
 
 
 	--// Code below runs once when auto farm is enabled
 	if SETTINGS.PET_AUTO_FUSION then
-
+         task.spawn(function()
 			Fusion:MakeMega(false)
 			Fusion:MakeMega(true)
-			
+	    end)		
 	end
 
 
@@ -1462,7 +1497,7 @@ end
 
 local function SendMessage(url, message, userId)
 	local http = game:GetService("HttpService")
-	local request = request or http_request
+	-- local request = request or http_request
 	local headers = {
 		["Content-Type"] = "application/json",
 	}
@@ -2006,8 +2041,15 @@ findFurniture()
 
 ReplicatedStorage:WaitForChild("API"):WaitForChild("HousingAPI/SetDoorLocked"):InvokeServer(true)
 
+if not Player.Character then
+        print("get player character so waiting")
+        Player.CharacterAdded:Wait()
+end
+
+if Player.Character:WaitForChild("HumanoidRootPart") then
 ReplicatedStorage.API["TeamAPI/ChooseTeam"]:InvokeServer("Babies", {["dont_send_back_home"] = true})
 -- ReplicatedStorage.API["TeamAPI/ChooseTeam"]:InvokeServer("Parents", {["dont_send_back_home"] = true})
+end
 
 if Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("Thanks for subscribing!") then
 	FireButton("Okay")
