@@ -150,7 +150,7 @@ local NewClaimBool = true
 		end
 	end)
 
-	task.delay(30, function()
+--[[	task.delay(30, function()
 		while true do
 			if isInMiniGame then
 				local count = 0
@@ -164,7 +164,7 @@ local NewClaimBool = true
 
 
 		end
-	end)
+	end)--]]
 
 
 		
