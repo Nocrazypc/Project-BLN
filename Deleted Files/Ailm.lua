@@ -318,6 +318,7 @@ function Ailments:BoredAilment(pianoId: string, petUnique: string)
     reEquipPet()
     --print("🥱 Doing bored task 🥱")
     if pianoId then
+    if not ClientData.get("pet_char_wrappers")[1] and ClientData.get("pet_char_wrappers")[1]["char"] then return end
         PianoAilment(pianoId, ClientData.get("pet_char_wrappers")[1]["char"])
     else
         Teleport.PlayGround(Vector3.new(20, 10, math.random(15, 30)))
@@ -327,7 +328,8 @@ end
 
 function Ailments:SleepyAilment(bedId: string, petUnique: string)
     reEquipPet()
-    --print("😴 Doing sleep task 😴")
+    --print("😴 Doing sleep task 😴")	
+    if not ClientData.get("pet_char_wrappers")[1] and ClientData.get("pet_char_wrappers")[1]["char"] then return end
     furnitureAilments(bedId, ClientData.get("pet_char_wrappers")[1]["char"])
     waitForTaskToFinish("sleepy", petUnique)
 end
@@ -335,6 +337,7 @@ end
 function Ailments:DirtyAilment(showerId: string, petUnique: string)
     reEquipPet()
     --print("🧼 Doing dirty task 🧼")
+    if not ClientData.get("pet_char_wrappers")[1] and ClientData.get("pet_char_wrappers")[1]["char"] then return end
     furnitureAilments(showerId, ClientData.get("pet_char_wrappers")[1]["char"])
     waitForTaskToFinish("dirty", petUnique)
 end
@@ -343,6 +346,7 @@ function Ailments:ToiletAilment(litterBoxId: string, petUnique: string)
     reEquipPet()
     --print("🚽 Doing toilet task 🚽")
     if litterBoxId then
+    if not ClientData.get("pet_char_wrappers")[1] and ClientData.get("pet_char_wrappers")[1]["char"] then return end
         furnitureAilments(litterBoxId, ClientData.get("pet_char_wrappers")[1]["char"])
     else
         Teleport.DownloadMainMap()
@@ -375,8 +379,10 @@ end
 function Ailments:WalkAilment(petUnique: string)
     reEquipPet()
     --print("🦮 Doing walking task 🦮")
+    if not ClientData.get("pet_char_wrappers")[1] and ClientData.get("pet_char_wrappers")[1]["char"] then return end
     ReplicatedStorage.API["AdoptAPI/HoldBaby"]:FireServer(ClientData.get("pet_char_wrappers")[1]["char"])
-    waitForJumpingToFinish("walk", petUnique)
+    waitForJumpingToFinish("walk", petUnique)	
+    if not ClientData.get("pet_char_wrappers")[1] and ClientData.get("pet_char_wrappers")[1]["char"] then return end
     ReplicatedStorage.API:FindFirstChild("AdoptAPI/EjectBaby"):FireServer(ClientData.get("pet_char_wrappers")[1]["char"])
 end
 
@@ -385,7 +391,8 @@ function Ailments:RideAilment(strollerId: string, petUnique: string)
     ReplicatedStorage.API:FindFirstChild("ToolAPI/Equip"):InvokeServer(strollerId, {})
     task.wait(1)
     useStroller()
-    waitForJumpingToFinish("ride", petUnique)
+    waitForJumpingToFinish("ride", petUnique)	
+    if not ClientData.get("pet_char_wrappers")[1] and ClientData.get("pet_char_wrappers")[1]["char"] then return end
     ReplicatedStorage.API:FindFirstChild("AdoptAPI/EjectBaby"):FireServer(ClientData.get("pet_char_wrappers")[1]["char"])
     -- ReplicatedStorage.API:FindFirstChild("ToolAPI/Unequip"):InvokeServer(strollerId, {})  -- errors
 end
