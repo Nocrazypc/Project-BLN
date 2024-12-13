@@ -646,6 +646,9 @@ local function priorityPet()
 				if
 					v == v2.id
 					and v2.id ~= "practice_dog"
+				and v2.id ~= "winter_2024_minigame_winter_buck"
+				and v2.id ~= "winter_2024_minigame_winter_doe"
+				and v2.id ~= "winter_2024_minigame_winter_fawn"
 					and v2.properties.age == Petage
 					and v2.properties.neon == isNeon
 				then
