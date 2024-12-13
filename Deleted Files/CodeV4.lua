@@ -761,6 +761,9 @@ local function AgeUpPotionLevelUp()
 			if
 				v.id == selectedItem
 				and v.id ~= "practice_dog"
+				and v.id ~= "winter_2024_minigame_winter_buck"
+				and v.id ~= "winter_2024_minigame_winter_doe"
+				and v.id ~= "winter_2024_minigame_winter_fawn"
 				and v.properties.age ~= 6
 				and v.properties.neon
 				and not v.properties.mega_neon
@@ -776,6 +779,9 @@ local function AgeUpPotionLevelUp()
 			if
 				v.id == selectedItem
 				and v.id ~= "practice_dog"
+				and v.id ~= "winter_2024_minigame_winter_buck"
+				and v.id ~= "winter_2024_minigame_winter_doe"
+				and v.id ~= "winter_2024_minigame_winter_fawn"
 				and v.properties.age ~= 6
 				and not v.properties.mega_neon
 			then
