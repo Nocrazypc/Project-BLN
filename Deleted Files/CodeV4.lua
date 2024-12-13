@@ -622,7 +622,11 @@ local function priorityEgg()
 		task.wait()
 		for _, v in ipairs(SETTINGS.HATCH_EGG_PRIORITY_NAMES) do
 			for i, v2 in pairs(ClientData.get_data()[Player.Name].inventory.pets) do
-				if v == v2.id and v2.id ~= "practice_dog" then
+				if v == v2.id and v2.id ~= "practice_dog"
+				and v2.id ~= "winter_2024_minigame_winter_buck"
+				and v2.id ~= "winter_2024_minigame_winter_doe"
+				and v2.id ~= "winter_2024_minigame_winter_fawn"				
+				then
 					ReplicatedStorage.API["ToolAPI/Equip"]:InvokeServer(v2.unique, { ["use_sound_delay"] = true })
 					PetCurrentlyFarming = v2.unique
 					return true
