@@ -552,9 +552,9 @@ local function getRewardFromAdventCalendar()
 	local claimed = if ClientData.get_data()[Player.Name].winter_2024_advent_manager.rewards_claimed[date["Day"]] then true else false
 	if claimed then
 		-- print(`Reward already claimed for day {date["Day"]}`)
-	else
-		ReplicatedStorage.API["WinterfestAPI/AdventCalendarTryTakeReward"]:InvokeServer(date["Day"])
-		print(`🎉 Reward claimed: day {date["Day"]} 🎉`)
+	--else
+		--ReplicatedStorage.API["WinterfestAPI/AdventCalendarTryTakeReward"]:InvokeServer(date["Day"])
+		--print(`🎉 Reward claimed: day {date["Day"]} 🎉`)
 	end
 end
 ----------------------
