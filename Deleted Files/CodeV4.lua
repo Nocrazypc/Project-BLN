@@ -1343,6 +1343,7 @@ local function autoFarm()
 					NormalDialogChild.Info:WaitForChild("TextLabel")
 					NormalDialogChild.Info.TextLabel:GetPropertyChangedSignal("Text"):Connect(function()
 						if Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("Melt Off") then
+                                                        task.wait(12)
 							onTextChangedMiniGame()
 						elseif Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("invitation") then
 							game:Shutdown()
@@ -1362,6 +1363,7 @@ local function autoFarm()
 			Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info:WaitForChild("TextLabel")
 			Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel:GetPropertyChangedSignal("Text"):Connect(function()
 				if Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("Melt Off") then
+				        task.wait(12)
 					onTextChangedMiniGame()
 				elseif Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("invitation") then
 					game:Shutdown()
