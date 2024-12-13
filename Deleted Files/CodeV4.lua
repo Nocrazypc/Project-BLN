@@ -582,7 +582,11 @@ end
 
 local function getEgg()
 	for _, v in pairs(ClientData.get_data()[Player.Name].inventory.pets) do
-		if v.id == Egg2Buy and v.id ~= "practice_dog" and v.properties.age ~= 6 and not v.properties.mega_neon then
+		if v.id == Egg2Buy and v.id ~= "practice_dog"
+				and v.id ~= "winter_2024_minigame_winter_buck" 
+				and v.id ~= "winter_2024_minigame_winter_doe" 
+				and v.id ~= "winter_2024_minigame_winter_fawn" 
+                        and v.properties.age ~= 6 and not v.properties.mega_neon then
 			ReplicatedStorage.API["ToolAPI/Equip"]:InvokeServer(v.unique, { ["use_sound_delay"] = true })
 			PetCurrentlyFarming = v.unique
 			return true
@@ -622,10 +626,10 @@ local function priorityEgg()
 		task.wait()
 		for _, v in ipairs(SETTINGS.HATCH_EGG_PRIORITY_NAMES) do
 			for i, v2 in pairs(ClientData.get_data()[Player.Name].inventory.pets) do
-				if v == v2.id and v2.id ~= "practice_dog"
-				and v2.id ~= "winter_2024_minigame_winter_buck"
-				and v2.id ~= "winter_2024_minigame_winter_doe"
-				and v2.id ~= "winter_2024_minigame_winter_fawn"				
+				if v == v2.id and v2.id ~= "practice_dog" 
+				and v2.id ~= "winter_2024_minigame_winter_buck" 
+				and v2.id ~= "winter_2024_minigame_winter_doe" 
+				and v2.id ~= "winter_2024_minigame_winter_fawn" 				
 				then
 					ReplicatedStorage.API["ToolAPI/Equip"]:InvokeServer(v2.unique, { ["use_sound_delay"] = true })
 					PetCurrentlyFarming = v2.unique
@@ -649,10 +653,10 @@ local function priorityPet()
 			for i2, v2 in pairs(ClientData.get_data()[Player.Name].inventory.pets) do
 				if
 					v == v2.id
-					and v2.id ~= "practice_dog"
-				and v2.id ~= "winter_2024_minigame_winter_buck"
-				and v2.id ~= "winter_2024_minigame_winter_doe"
-				and v2.id ~= "winter_2024_minigame_winter_fawn"
+					and v2.id ~= "practice_dog" 
+				and v2.id ~= "winter_2024_minigame_winter_buck" 
+				and v2.id ~= "winter_2024_minigame_winter_doe" 
+				and v2.id ~= "winter_2024_minigame_winter_fawn" 
 					and v2.properties.age == Petage
 					and v2.properties.neon == isNeon
 				then
@@ -683,7 +687,11 @@ local function getNeonPet()
 	while found_pet == false do
 		task.wait()
 		for i, v in pairs(ClientData.get_data()[Player.Name].inventory.pets) do
-			if v.id ~= "practice_dog" and v.properties.age == Petage and v.properties.neon == isNeon then
+			if v.id ~= "practice_dog" 
+				and v.id ~= "winter_2024_minigame_winter_buck" 
+				and v.id ~= "winter_2024_minigame_winter_doe" 
+				and v.id ~= "winter_2024_minigame_winter_fawn" 	
+                                and v.properties.age == Petage and v.properties.neon == isNeon then
 				ReplicatedStorage.API["ToolAPI/Equip"]:InvokeServer(v.unique, { ["use_sound_delay"] = true })
 				PetCurrentlyFarming = v.unique
 				return true
@@ -767,10 +775,10 @@ local function AgeUpPotionLevelUp()
 		do
 			if
 				v.id == selectedItem
-				and v.id ~= "practice_dog"
-				and v.id ~= "winter_2024_minigame_winter_buck"
-				and v.id ~= "winter_2024_minigame_winter_doe"
-				and v.id ~= "winter_2024_minigame_winter_fawn"
+				and v.id ~= "practice_dog" 
+				and v.id ~= "winter_2024_minigame_winter_buck" 
+				and v.id ~= "winter_2024_minigame_winter_doe" 
+				and v.id ~= "winter_2024_minigame_winter_fawn" 
 				and v.properties.age ~= 6
 				and v.properties.neon
 				and not v.properties.mega_neon
@@ -785,10 +793,10 @@ local function AgeUpPotionLevelUp()
 		do
 			if
 				v.id == selectedItem
-				and v.id ~= "practice_dog"
-				and v.id ~= "winter_2024_minigame_winter_buck"
-				and v.id ~= "winter_2024_minigame_winter_doe"
-				and v.id ~= "winter_2024_minigame_winter_fawn"
+				and v.id ~= "practice_dog" 
+				and v.id ~= "winter_2024_minigame_winter_buck" 
+				and v.id ~= "winter_2024_minigame_winter_doe" 
+				and v.id ~= "winter_2024_minigame_winter_fawn" 
 				and v.properties.age ~= 6
 				and not v.properties.mega_neon
 			then
