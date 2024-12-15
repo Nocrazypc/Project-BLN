@@ -2210,20 +2210,20 @@ end)
      end,
  })
 
-FarmTab:CreateSection("Make ALL Neon/Mega in 1 Click")
+--[[FarmTab:CreateSection("Make ALL Neon/Mega in 1 Click")
 FarmTab:CreateButton({
 	Name = "Make Neon Pets",
 	Callback = function()
 		Fusion:MakeMega(false)
 	end,
-})
+})--]]
 
-FarmTab:CreateButton({
+--[[FarmTab:CreateButton({
 	Name = "Make Mega Pets",
 	Callback = function()
 		Fusion:MakeMega(true)
 	end,
-})
+})--]]
 
 -------------------- minigames-----------
 local FarmToggle = FarmTab:CreateToggle({
