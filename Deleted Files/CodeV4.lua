@@ -2262,7 +2262,8 @@ if getgenv().AutoFCMinigame then
 	end)
 	task.spawn(function()
 		while true do
-                        task.wait(20)
+                        getRewardFromAdventCalendar()
+                        task.wait(15)
 			--print("running frostclaw minigame")
 			if FC2024.CreateAndStartLobby() then
 				FC2024.StartGame()
