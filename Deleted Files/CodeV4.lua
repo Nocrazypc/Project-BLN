@@ -62,6 +62,8 @@ local Ailments = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocr
 local StatsGuis = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Stats.lua"))()
 
 local Christmas2024 = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Ch2024.lua"))()
+
+local FC2024 = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/FC2024.lua"))()
 -------------------------------------------------------------------
 --[[ Private Variables ]]--
 -------------------------------------------------------------------
@@ -127,6 +129,7 @@ getgenv().AutoFusion = false
 getgenv().FocusFarmAgePotions = false
 getgenv().PetCurrentlyFarming = ""
 getgenv().AutoMinigame = false
+getgenv().AutoFCMinigame = false
 
 local Egg2Buy = SETTINGS.PET_TO_BUY
 local Gift2Buy = "lunar_2024_special_lunar_new_year_gift_box"
@@ -2224,7 +2227,7 @@ FarmTab:CreateButton({
 
 -------------------- minigames-----------
 local FarmToggle = FarmTab:CreateToggle({
-     Name = "Winter 2024 Minigames",
+     Name = "Winter 2024 Spleef Minigame",
      CurrentValue = false,
      Flag = "Toggle10",
      Callback = function(Value)
@@ -2241,15 +2244,48 @@ end
      end,
  })
 
+
+----------
+
 local FarmToggle = FarmTab:CreateToggle({
-     Name = "Winter 2024 Minigames for AutoFarm",
+     Name = "Winter 2024 Frostclaw Revenge Minigame",
      CurrentValue = false,
      Flag = "Toggle11",
      Callback = function(Value)
-     getgenv().AutoMinigame = Value
+     getgenv().AutoFCMinigame = Value
+
+
+if getgenv().AutoFCMinigame then
+	FC2024.init()
+
+	task.spawn(function()
+		while true do
+			--print("running frostclaw minigame")
+			if FC2024.CreateAndStartLobby() then
+				FC2024.StartGame()
+			end
+			
+			task.wait(1)
+		end
+	end)
+end
+
+
 
 
      end,
+ })
+
+----------
+
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Winter 2024 Spleef Minigame for AutoFarm",
+     CurrentValue = false,
+     Flag = "Toggle12",
+     Callback = function(Value)
+     getgenv().AutoMinigame = Value
+
+       end,
  })
 
 
@@ -2782,11 +2818,11 @@ end)
                     end
 
 -------------------------------------------------------
-            --[[while task.wait(180) do
+            while task.wait(180) do
 
                          getRewardFromAdventCalendar()
                          task.wait(1200)
 
-                   end --]]
+                   end
 
---print("Loaded. lastest update 12/12/2024  mm/dd/yyyy")
+--print("Loaded. lastest update 15/12/2024  mm/dd/yyyy")
