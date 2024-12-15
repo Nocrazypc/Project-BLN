@@ -2257,12 +2257,14 @@ local FarmToggle = FarmTab:CreateToggle({
 
 if getgenv().AutoFCMinigame then
 	FC2024.init()
-
+	Player.Idled:Connect(function()
+		VirtualUser:ClickButton2(Vector2.new())
+	end)
 	task.spawn(function()
 		while true do
+                        task.wait(20)
 			--print("running frostclaw minigame")
 			if FC2024.CreateAndStartLobby() then
-                                task.wait(15)
 				FC2024.StartGame()
 			end
 			
