@@ -2262,6 +2262,7 @@ if getgenv().AutoFCMinigame then
 		while true do
 			--print("running frostclaw minigame")
 			if FC2024.CreateAndStartLobby() then
+                                task.wait(15)
 				FC2024.StartGame()
 			end
 			
