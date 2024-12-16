@@ -2254,6 +2254,11 @@ local FarmToggle = FarmTab:CreateToggle({
      Callback = function(Value)
      getgenv().AutoFCMinigame = Value
 
+   
+
+    ReplicatedStorage.API["TeamAPI/ChooseTeam"]:InvokeServer("Parents", {["dont_send_back_home"] = true, ["source_for_logging"] = "avatar_editor"})
+
+    task.wait(2) 
 
 if getgenv().AutoFCMinigame then
 	FC2024.init()
@@ -2263,7 +2268,7 @@ if getgenv().AutoFCMinigame then
 	task.spawn(function()
 		while true do
                         getRewardFromAdventCalendar()
-                        task.wait(15)
+                        task.wait(13)
 			--print("running frostclaw minigame")
 			if FC2024.CreateAndStartLobby() then
 				FC2024.StartGame()
@@ -2822,11 +2827,11 @@ end)
                     end
 
 -------------------------------------------------------
-            while task.wait(180) do
+            --[[while task.wait(180) do
 
                          getRewardFromAdventCalendar()
                          task.wait(1200)
 
-                   end
+                   end--]]
 
 --print("Loaded. lastest update 15/12/2024  mm/dd/yyyy")
