@@ -224,7 +224,7 @@ local pets_eggs = {}
 local Pets_commonto_ultrarare = {}
 local pets_legendary_to_common = {}
 
-local rng = Random.new()
+-- local rng = Random.new()
 -----------------------------------------------------------------------------------------------
 --[[ Private Functions ]]--
 -----------------------------------------------------------------------------------------------
@@ -2065,7 +2065,10 @@ if Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("You
 	FireButton("Awesome!")
 end
 
-
+Teleport.PlaceFloorAtFarmingHome()
+Teleport.PlaceFloorAtCampSite()
+Teleport.PlaceFloorAtBeachParty()
+		
 -- RobuxProductDialogConnection:Disconnect()
 
 -- local tele = fluxus or codex or arceusx
