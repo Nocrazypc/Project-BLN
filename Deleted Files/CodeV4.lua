@@ -224,7 +224,7 @@ local pets_eggs = {}
 local Pets_commonto_ultrarare = {}
 local pets_legendary_to_common = {}
 
--- local rng = Random.new()
+local rng = Random.new()
 -----------------------------------------------------------------------------------------------
 --[[ Private Functions ]]--
 -----------------------------------------------------------------------------------------------
@@ -1100,7 +1100,7 @@ end
 
 local function checkIfPetEquipped()
 	if not ClientData.get("pet_char_wrappers")[1] then
-		print("no pet so requipping")
+		-- print("no pet so requipping")
 		ReplicatedStorage.API["ToolAPI/Unequip"]:InvokeServer(PetCurrentlyFarming, {})
 		task.wait(1)
 		ReplicatedStorage.API["ToolAPI/Equip"]:InvokeServer(PetCurrentlyFarming, {})
@@ -2025,9 +2025,9 @@ if Player.PlayerGui.DialogApp.Dialog.NormalDialog.Visible then
 end
 
 
--- NewClaim()
--- task.wait()
--- NewTask()
+NewClaim()
+task.wait()
+NewTask()
 
 
 for _, pettable in pairs({ pets_common, pets_uncommon, pets_rare, pets_ultrarare }) do
@@ -2076,9 +2076,9 @@ if Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("You
 	FireButton("Awesome!")
 end
 
-Teleport.PlaceFloorAtFarmingHome()
-Teleport.PlaceFloorAtCampSite()
-Teleport.PlaceFloorAtBeachParty()
+--Teleport.PlaceFloorAtFarmingHome()
+--Teleport.PlaceFloorAtCampSite()
+--Teleport.PlaceFloorAtBeachParty()
 
 -- RobuxProductDialogConnection:Disconnect()
 
