@@ -2025,9 +2025,9 @@ if Player.PlayerGui.DialogApp.Dialog.NormalDialog.Visible then
 end
 
 
-NewClaim()
-task.wait()
-NewTask()
+-- NewClaim()
+-- task.wait()
+-- NewTask()
 
 
 for _, pettable in pairs({ pets_common, pets_uncommon, pets_rare, pets_ultrarare }) do
