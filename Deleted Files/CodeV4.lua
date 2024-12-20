@@ -266,12 +266,12 @@ local function getTradeLicense()
 	end
 
 	pcall(function()
-		RouterClient.get("SettingsAPI/SetBooleanFlag"):FireServer("has_talked_to_trade_quest_npc", true)
+		ReplicatedStorage.API:FindFirstChild("SettingsAPI/SetBooleanFlag"):FireServer("has_talked_to_trade_quest_npc", true)
 		task.wait()
-		RouterClient.get("TradeAPI/BeginQuiz"):FireServer()
+		ReplicatedStorage.API:FindFirstChild("TradeAPI/BeginQuiz"):FireServer()
 		task.wait(1)
 		for _, v in pairs(ClientData.get("trade_license_quiz_manager")["quiz"]) do
-			RouterClient.get("TradeAPI/AnswerQuizQuestion"):FireServer(v["answer"])
+			ReplicatedStorage.API:FindFirstChild("TradeAPI/AnswerQuizQuestion"):FireServer(v["answer"])
 		end
 	end)
 end
@@ -351,7 +351,7 @@ local function GrabDailyReward()
 		for i, v in pairs(DailyRewardTable) do
 			if i < Daily.stars or i == Daily.stars then
 				if not Daily.claimed_star_rewards[v] then
-					RouterClient.get("DailyLoginAPI/ClaimStarReward"):InvokeServer(v)
+					ReplicatedStorage.API:FindFirstChild("DailyLoginAPI/ClaimStarReward"):InvokeServer(v)
 				end
 			end
 		end
@@ -359,7 +359,7 @@ local function GrabDailyReward()
 		for i, v in pairs(DailyRewardTable2) do
 			if i < Daily.stars or i == Daily.stars then
 				if not Daily.claimed_star_rewards[v] then
-					RouterClient.get("DailyLoginAPI/ClaimStarReward"):InvokeServer(v)
+					ReplicatedStorage.API:FindFirstChild("DailyLoginAPI/ClaimStarReward"):InvokeServer(v)
 				end
 			end
 		end
@@ -400,7 +400,7 @@ local function NewTask()
 			task.wait()
 		elseif v["entry_name"]:match("tutorial") then
 			ReplicatedStorage.API["QuestAPI/ClaimQuest"]:InvokeServer(v["unique_id"])
-			-- ClaimRemote:InvokeServer(v["unique_id"])
+
 			task.wait()
 		elseif v["entry_name"]:match("celestial_2024_small_open_gift") then
 			-- open small gift
@@ -420,7 +420,7 @@ local function NewTask()
 					task.wait()
 				elseif not NeonTable[v["entry_name"]] and ReRollCount() >= 1 then
 					ReplicatedStorage.API["QuestAPI/RerollQuest"]:FireServer(v["unique_id"])
-					-- RerollRemote:FireServer(v["unique_id"])
+
 					task.wait()
 				end
 			elseif QuestCount() > 1 then
@@ -460,6 +460,7 @@ end
 
 local function isMuleInGame()
 	for _, player in Players:GetPlayers() do
+                if player.Name == Player.Name then continue end
 		if player.Name == getgenv().SETTINGS.TRADE_COLLECTOR_NAME then
 			return true
 		end
@@ -1097,6 +1098,22 @@ local function completeBabyAilments()
 	end
 end
 
+local function checkIfPetEquipped()
+	if not ClientData.get("pet_char_wrappers")[1] then
+		print("no pet so requipping")
+		ReplicatedStorage.API["ToolAPI/Unequip"]:InvokeServer(PetCurrentlyFarming, {})
+		task.wait(1)
+		ReplicatedStorage.API["ToolAPI/Equip"]:InvokeServer(PetCurrentlyFarming, {})
+		local count = 0
+		repeat
+			count += 1
+			task.wait(1)
+		until ClientData.get_data()[Player.Name].pet_char_wrappers[1] or count > 10
+		if count > 10 then
+			checkIfPetEquipped()
+		end
+	end
+end
 
 local function autoFarm()
 	     if not getgenv().auto_farm then return end
@@ -1112,13 +1129,7 @@ local function autoFarm()
 		-- 	return -- return because when pet gets requipped it will call this function anyway
 		-- end
 
-		if not ClientData.get("pet_char_wrappers")[1] then
-			--print("no pet so requipping")
-			ReplicatedStorage.API["ToolAPI/Unequip"]:InvokeServer(PetCurrentlyFarming, {})
-			task.wait(1)
-			ReplicatedStorage.API["ToolAPI/Equip"]:InvokeServer(PetCurrentlyFarming, {})
-			return false
-		end
+                checkIfPetEquipped()
 
 		local petUnique = ClientData.get_data()[Player.Name].pet_char_wrappers[1].pet_unique
 
@@ -1722,7 +1733,7 @@ RobuxProductDialogConnection1 = Player.PlayerGui.DialogApp.Dialog.RobuxProductDi
 				-- clickGuiButton(v.Parent.Parent) -- no thanks button
 				firesignal(v.Parent.Parent.MouseButton1Down)
 				firesignal(v.Parent.Parent.MouseButton1Click)
-				--firesignal(v.Parent.Parent.MouseButton1Up)
+				firesignal(v.Parent.Parent.MouseButton1Up)
 				RobuxProductDialogConnection1:Disconnect()
 			end
 		end
@@ -1758,7 +1769,7 @@ end)
 Players.LocalPlayer.PlayerGui.QuestIconApp.ImageButton.EventContainer.IsNew:GetPropertyChangedSignal("Position"):Connect(function()
 	if NewTaskBool then
 		NewTaskBool = false
-		RouterClient.get("QuestAPI/MarkQuestsViewed"):FireServer()
+		ReplicatedStorage.API:FindFirstChild("QuestAPI/MarkQuestsViewed"):FireServer()
 		NewTask()
 	end
 end)
@@ -2068,7 +2079,7 @@ end
 Teleport.PlaceFloorAtFarmingHome()
 Teleport.PlaceFloorAtCampSite()
 Teleport.PlaceFloorAtBeachParty()
-		
+
 -- RobuxProductDialogConnection:Disconnect()
 
 -- local tele = fluxus or codex or arceusx
