@@ -2076,6 +2076,9 @@ if Player.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("You
 	FireButton("Awesome!")
 end
 
+Teleport.PlaceFloorAtFarmingHome()
+Teleport.PlaceFloorAtCampSite()
+Teleport.PlaceFloorAtBeachParty()
 
 -- RobuxProductDialogConnection:Disconnect()
 
