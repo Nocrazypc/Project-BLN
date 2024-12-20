@@ -2080,6 +2080,7 @@ Teleport.PlaceFloorAtFarmingHome()
 Teleport.PlaceFloorAtCampSite()
 Teleport.PlaceFloorAtBeachParty()
 
+Teleport.FarmingHome()
 -- RobuxProductDialogConnection:Disconnect()
 
 -- local tele = fluxus or codex or arceusx
