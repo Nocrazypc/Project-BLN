@@ -875,7 +875,7 @@ local autoFarm = function()
                 completeBabyAilments()
             end
 
-            updateStatsGui()
+            --updateStatsGui()
             task.wait(5)
         end
     end)
