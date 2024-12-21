@@ -320,43 +320,7 @@ local agePotionCount = function(nameId)
 
     return count
 end
-local gingerbreadAmount = function()
-    return ClientData.get_data()[localPlayer.Name].gingerbread_2024 or 0
-end
-local updateStatsGui = function()
-    StatsGuis2:UpdateTextFor('TimeLabel', startTime)
 
-    potionsGained = agePotionCount('pet_age_potion') - startPotionAmount
-
-    if potionsGained < 0 then
-        potionsGained = 0
-    end
-
-    TempPotions:UpdateTextFor('TempPotions', potionsGained)
-
-    tinyPotionsGained = agePotionCount('tiny_pet_age_potion') - startTinyPotionAmount
-
-    if tinyPotionsGained < 0 then
-        tinyPotionsGained = 0
-    end
-
-    TempTinyPotions:UpdateTextFor('TempTinyPotions', tinyPotionsGained)
-
-    local currentGingerbread = gingerbreadAmount()
-
-    if currentGingerbread >= startGingerbreadAmount then
-        gingerbreadsGained += (currentGingerbread - startGingerbreadAmount)
-
-        startGingerbreadAmount = currentGingerbread
-    elseif currentGingerbread < startGingerbreadAmount then
-        startGingerbreadAmount = currentGingerbread
-    end
-
-    TempGingerbreads:UpdateTextFor('TempGingerbreads', gingerbreadsGained)
-    TotalPotions:UpdateTextFor('TotalPotions')
-    TotalBucks:UpdateTextFor('TotalBucks')
-    TotalGingerbreads:UpdateTextFor('TotalGingerbreads')
-end
 local getRewardFromAdventCalendar = function()
     local date = DateTime.now().ToUniversalTime(DateTime.now())
     local claimed = if ClientData.get_data()[localPlayer.Name].winter_2024_advent_manager.rewards_claimed[date['Day'] ]then true else false
