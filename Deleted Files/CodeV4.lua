@@ -888,7 +888,7 @@ local autoFarm = function()
     Teleport.PlaceFloorAtCampSite()
     Teleport.PlaceFloorAtBeachParty()
     Teleport.FarmingHome()
-    Christmas2024.getGingerbread()
+    --Christmas2024.getGingerbread()
     task.delay(30, function()
         while true do
             if isInMiniGame then
@@ -1052,7 +1052,7 @@ Lighting:GetPropertyChangedSignal('ClockTime'):Connect(function()
     if Lighting.ClockTime == 13 then
         task.wait(5)
         print('got gingerbread')
-        Christmas2024.getGingerbread()
+        --Christmas2024.getGingerbread()
     end
 end)
 UserInputService.InputBegan:Connect(function(input, processed)
@@ -2329,7 +2329,7 @@ task.delay(5, function()
     end
 end)
 
-Christmas2024.getGingerbread()
+--Christmas2024.getGingerbread()
 task.wait(2)
 startAutoFarm()
 
