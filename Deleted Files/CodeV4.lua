@@ -1,7 +1,6 @@
---if not game:IsLoaded() then
-    --game.Loaded:Wait()
---end
-repeat wait(12) until game:IsLoaded()
+if not game:IsLoaded() then
+        game.Loaded:Wait()
+end
 
 if game.PlaceId ~= 920587237 then
     return
@@ -981,6 +980,26 @@ end
 localPlayer.Idled:Connect(function()
     VirtualUser:ClickButton2(Vector2.new())
 end)
+localPlayer.PlayerGui.HintApp.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
+)
+    if localPlayer.PlayerGui.HintApp.TextLabel.Text:match('Bucks') then
+        local text = localPlayer.PlayerGui.HintApp.TextLabel.Text
+
+        if not text then
+            return
+        end
+
+        --print(text)
+
+        --local amount = text:split('+')[2]:split(' ')[1]
+
+        --bucksGained += tonumber(amount)
+
+        --TempBucks:UpdateTextFor('TempBucks', bucksGained)
+    elseif localPlayer.PlayerGui.HintApp.TextLabel.Text:match('aged up!') then
+        if getgenv().feedAgeUpPotionToggle then
+            return
+        end
 
         if getgenv().SETTINGS.PET_AUTO_FUSION then
             Fusion:MakeMega(false)
