@@ -43,24 +43,6 @@ StarterGui:SetCore(
     }
 )
 
-StatsGuis2.Setup()
-
-local startTime
-local startPotionAmount = 0
-local startTinyPotionAmount = 0
-local startGingerbreadAmount
-local potionsGained = 0
-local tinyPotionsGained = 0
-local bucksGained = 0
-local gingerbreadsGained = 0
-local TempPotions = StatsGuis2.new('TempPotions')
-local TempTinyPotions = StatsGuis2.new('TempTinyPotions')
-local TempBucks = StatsGuis2.new('TempBucks')
-local TempGingerbreads = StatsGuis2.new('TempGingerbreads')
-local TotalPotions = StatsGuis2.new('TotalPotions')
-local TotalTinyPotions = StatsGuis2.new('TotalTinyPotions')
-local TotalBucks = StatsGuis2.new('TotalBucks')
-local TotalGingerbreads = StatsGuis2.new('TotalGingerbreads')
 local Bed
 local Shower
 local Piano
