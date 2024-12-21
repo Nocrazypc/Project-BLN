@@ -307,7 +307,7 @@ function GetLobby()
     return false
 end
 
-function farmGingerbreads()
+--[[ function farmGingerbreads()
     for _, v in RS.Resources.IceSkating.GingerbreadMarkers:GetChildren() do
         if v:IsA("BasePart") then
             local a,b = RS.API:FindFirstChild("WinterEventAPI/PickUpGingerbread"):InvokeServer(v.Name)
@@ -316,7 +316,7 @@ function farmGingerbreads()
     end
     task.wait(1)
     RS.API:FindFirstChild("WinterEventAPI/RedeemPendingGingerbread"):FireServer()
-end
+end--]]
 
 function timeToSeconds(timeString)
     local minutes, seconds = string.match(timeString, "(%d+):(%d+)")
@@ -418,12 +418,12 @@ spawn(function()
             end
         end)
 
-        if (ClientData.get_data()[game.Players.LocalPlayer.Name]["spleef_minigame_cycle_timestamp"]["timestamp"] - os.time() > 120) and (not GameLoading() and not GameStatus()) then
+        --[[ if (ClientData.get_data()[game.Players.LocalPlayer.Name]["spleef_minigame_cycle_timestamp"]["timestamp"] - os.time() > 120) and (not GameLoading() and not GameStatus()) then
             print("== Starting Farming Gingerbread ==")
             farmGingerbreads()
             print("== Ended Farming Gingerbread ==")
             task.wait(300)
-        end
+        end --]]
     end
 end)
 
