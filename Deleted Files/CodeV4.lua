@@ -1122,7 +1122,7 @@ local function autoFarm()
 	     Teleport.PlaceFloorAtCampSite()
 	     Teleport.PlaceFloorAtBeachParty()
 	     Teleport.FarmingHome()
-	     Christmas2024.getGingerbread()
+	     -- Christmas2024.getGingerbread()
 		local function CompletePetAilments()
 		-- if ClientData.get("pet_char_wrappers")[1] == nil then
 		-- 	ReplicatedStorage.API["ToolAPI/Equip"]:InvokeServer(PetCurrentlyFarming, {})
@@ -1144,7 +1144,7 @@ local function autoFarm()
 				return true
 			elseif key == "thirsty" then
 				Ailments:ThirstyAilment()
-				Christmas2024.getGingerbread()
+				-- Christmas2024.getGingerbread()
 				return true
 			elseif key == "sick" then
 				Ailments:SickAilment()
