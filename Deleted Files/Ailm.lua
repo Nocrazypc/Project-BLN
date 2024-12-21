@@ -24,19 +24,8 @@ local function FoodAilments(FoodPassOn) --FoodPassOn means "icecream" for this e
 			ReplicatedStorage.API["ToolAPI/Equip"]:InvokeServer(v.unique, {})
 			task.wait(1)
            if not ClientData.get("pet_char_wrappers")[1] then --[[print("⚠️ Trying to feed pet but no pet equipped ⚠️")--]] return end
-			-- ReplicatedStorage.API["PetAPI/ConsumeFoodItem"]:FireServer(v.unique, ClientData.get("pet_char_wrappers")[1].pet_unique)
-
-
-ReplicatedStorage.API:WaitForChild("PetObjectAPI/CreatePetObject"):InvokeServer("__Enum_PetObjectCreatorType_2", {["pet_unique"] = ClientData.get("pet_char_wrappers")[1]["pet_unique"], ["unique_id"] = FoodPassOn})
-    task.wait(1)
-
-    local st = tick()
-    repeat task.wait() until not IsEatingOrDrinking() or (tick() - st >= 7)
-
-
-
-
-			
+			ReplicatedStorage.API["PetAPI/ConsumeFoodItem"]:FireServer(v.unique, ClientData.get("pet_char_wrappers")[1].pet_unique)
+		
 			return
 		end
 	end
