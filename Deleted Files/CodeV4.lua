@@ -1386,9 +1386,9 @@ localPlayer.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal('Visible'
 
             isInMiniGame = false
 
-            if not getgenv().SETTINGS.EVENT.DO_FROSTCLAW_MINIGAME then
+            --[[if not getgenv().SETTINGS.EVENT.DO_FROSTCLAW_MINIGAME then
                 Teleport.FarmingHome()
-            end
+            end--]]
         end
     end
 end)
