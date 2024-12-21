@@ -1139,7 +1139,7 @@ local function autoFarm()
 
 		-- instant ailments first
 		for key, _ in ClientData.get_data()[Player.Name].ailments_manager.ailments[petUnique] do
-			-- [[if key == "hungry" then
+			--[[if key == "hungry" then
 				Ailments:HungryAilment()
 				return true
 			elseif key == "thirsty" then
