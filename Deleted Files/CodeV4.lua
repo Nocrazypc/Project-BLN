@@ -1073,13 +1073,13 @@ end
 
 local function completeBabyAilments()
 	for key, _ in ClientData.get_data()[Player.Name].ailments_manager.baby_ailments do
-		if key == "hungry" then
+		--[[if key == "hungry" then
 			Ailments:BabyHungryAilment()
 			return
 		elseif key == "thirsty" then
 			Ailments:BabyThirstyAilment()
-			return
-		elseif key == "bored" then
+			return --]]
+		if key == "bored" then
 			Ailments:BabyBoredAilment(Piano)
 			-- need baby to do task too
 			return
@@ -1139,14 +1139,14 @@ local function autoFarm()
 
 		-- instant ailments first
 		for key, _ in ClientData.get_data()[Player.Name].ailments_manager.ailments[petUnique] do
-			if key == "hungry" then
+			-- [[if key == "hungry" then
 				Ailments:HungryAilment()
 				return true
 			elseif key == "thirsty" then
 				Ailments:ThirstyAilment()
 				-- Christmas2024.getGingerbread()
-				return true
-			elseif key == "sick" then
+				return true --]]
+			if key == "sick" then
 				Ailments:SickAilment()
 				-- should already do baby task when pet does it
 				return true
