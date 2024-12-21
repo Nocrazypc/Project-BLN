@@ -2275,7 +2275,7 @@ if getgenv().OPEN_ITEMS_BEFORE_FARMING then
     BuyItems:OpenItems(getgenv().OPEN_ITEMS_BEFORE_FARMING)
 end
 if getgenv().AGE_PETS_BEFORE_FARMING then
-    local BulkPotions = __DARKLUA_BUNDLE_MODULES.load('m')
+    --local BulkPotions = __DARKLUA_BUNDLE_MODULES.load('m')
     local bulkPotions = BulkPotions.new()
 
     bulkPotions:SetEggTable(GetInventory:GetPetEggs())
