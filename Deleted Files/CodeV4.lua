@@ -74,7 +74,7 @@ local selectedPet
 local selectedGift
 local selectedToy
 local selectedFood
-local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Rayfield/main/source"))()
+local Rayfield = loadstring(game:HttpGet([[https://raw.githubusercontent.com/Nocrazypc/Rayfield/main/source]]))()
 
 getgenv().auto_accept_trade = false
 getgenv().auto_trade_all_pets = false
