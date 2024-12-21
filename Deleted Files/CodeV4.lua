@@ -17,8 +17,7 @@ local ClientData = require(ReplicatedStorage:WaitForChild('ClientModules'):WaitF
 local RouterClient = require(ReplicatedStorage.ClientModules.Core:WaitForChild('RouterClient'):WaitForChild('RouterClient'))
 local CollisionsClient = require(ReplicatedStorage.ClientModules.Game:WaitForChild('CollisionsClient'))
 local localPlayer = Players.LocalPlayer
-local clipboard = Clipboard.new()
-local taskBoard = TaskBoard.new()
+
 local PickColorConn
 local WelcomeScreen
 local RoleChooserDialogConnection
@@ -88,7 +87,8 @@ local Tutorials = loadstring(game:HttpGet("https://raw.githubusercontent.com/Noc
 local BulkPotions = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/BulkP.lua"))()
 local TaskBoard = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/TaskB.lua"))()
 local Clipboard = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/ClipB.lua"))()
-
+local clipboard = Clipboard.new()
+local taskBoard = TaskBoard.new()
 local Christmas2024 = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Ch2024.lua"))()
 local FC2024 = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/FC2024.lua"))()
 
