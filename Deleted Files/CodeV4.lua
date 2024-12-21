@@ -1,5 +1,6 @@
 if not game:IsLoaded() then
-    game.Loaded:wait()
+	repeat wait(12) until game:IsLoaded()
+    --game.Loaded:wait()
 end
 if game.PlaceId ~= 920587237 then
     return
