@@ -404,7 +404,7 @@ local getEgg = function()
     return false
 end
 local getPet = function()
-    if getgenv().SETTINGS.FOCUS_FARM_AGE_POTION then
+    if getgenv().SETTINGS.FOCUS_FARM_AGE_POTION or getgenv().FocusFarmAgePotions then
         if GetInventory:GetPetFriendship() then
             return
         end
@@ -1043,7 +1043,7 @@ localPlayer.PlayerGui.HintApp.TextLabel:GetPropertyChangedSignal('Text'):Connect
 
         task.wait(2)
 
-        if not getgenv().SETTINGS.FOCUS_FARM_AGE_POTION then
+        if not getgenv().SETTINGS.FOCUS_FARM_AGE_POTION or getgenv().FocusFarmAgePotions then
             SwitchOutFullyGrown()
         end
     end
