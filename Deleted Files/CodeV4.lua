@@ -842,7 +842,7 @@ local CompletePetAilments = function()
 
     return false
 end
---[[local autoFarm = function()
+local autoFarm = function()
     if not getgenv().auto_farm then
         return
     end
@@ -878,7 +878,7 @@ end
             --updateStatsGui()
             task.wait(5)
         end
-    end)--]]
+    end)
 
     if getgenv().SETTINGS.PET_AUTO_FUSION then
         task.spawn(function()
