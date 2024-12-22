@@ -1687,7 +1687,7 @@ end
 ----------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Winter 2024 Frostclaw Revenge Minigame",
-     CurrentValue = false,
+     CurrentValue = true,
      Flag = "Toggle11",
      Callback = function(Value)
      getgenv().AutoFCMinigame = Value
@@ -1706,7 +1706,7 @@ if getgenv().AutoFCMinigame then
 	task.spawn(function()
 		while true do
                         getRewardFromAdventCalendar()
-                        task.wait(12)
+                        task.wait(13)
 			--print("running frostclaw minigame")
 			if FC2024.CreateAndStartLobby() then
 				FC2024.StartGame()
