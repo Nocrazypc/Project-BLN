@@ -893,7 +893,7 @@ local autoFarm = function()
     TradeLicense.Get(ClientData, localPlayer.Name)
 end
 local startAutoFarm = function()
-    if getgenv().SETTINGS.EVENT.DO_FROSTCLAW_MINIGAME then
+    if getgenv().SETTINGS.EVENT.DO_FROSTCLAW_MINIGAME or getgenv().AutoFCMinigame then
         return
     end
 
