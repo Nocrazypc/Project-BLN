@@ -1687,7 +1687,7 @@ end
 ----------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Winter 2024 Frostclaw Revenge Minigame",
-     CurrentValue = true,
+     CurrentValue = false,
      Flag = "Toggle11",
      Callback = function(Value)
      getgenv().AutoFCMinigame = Value
