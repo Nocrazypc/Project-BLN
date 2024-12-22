@@ -2299,7 +2299,7 @@ end)
 task.wait(2)
 startAutoFarm()
 
-if getgenv().SETTINGS.ENABLE_AUTO_FARM and getgenv().SETTINGS.EVENT.DO_FROSTCLAW_MINIGAME then
+--[[if getgenv().SETTINGS.ENABLE_AUTO_FARM and getgenv().SETTINGS.EVENT.DO_FROSTCLAW_MINIGAME then
     Christmas2024.init()
     localPlayer.Idled:Connect(function()
         VirtualUser:ClickButton2(Vector2.new())
@@ -2316,7 +2316,7 @@ if getgenv().SETTINGS.ENABLE_AUTO_FARM and getgenv().SETTINGS.EVENT.DO_FROSTCLAW
             task.wait(1)
         end
     end)
-end
+end--]]
 
 
 --------------------update Stats UI ----------------
