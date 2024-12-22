@@ -691,15 +691,15 @@ local onTextChangedMiniGame = function()
 end
 local completeBabyAilments = function()
     for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments do
-        --[[if key == 'hungry' then
+        if key == 'hungry' then
             Ailments:BabyHungryAilment()
 
             return
         elseif key == 'thirsty' then
             Ailments:BabyThirstyAilment()
 
-            return--]]
-        if key == 'bored' then
+            return
+	elseif key == 'bored' then
             Ailments:BabyBoredAilment(Piano)
 
             return
@@ -752,7 +752,7 @@ local CompletePetAilments = function()
     end
 
     for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
-        --[[if key == 'hungry' then
+        if key == 'hungry' then
             Ailments:HungryAilment()
             task.wait(1)
 
@@ -760,8 +760,8 @@ local CompletePetAilments = function()
         elseif key == 'thirsty' then
             Ailments:ThirstyAilment()
 
-            return true--]]
-        if key == 'sick' then
+            return true
+	elseif key == 'sick' then
             Ailments:SickAilment()
 
             return true
