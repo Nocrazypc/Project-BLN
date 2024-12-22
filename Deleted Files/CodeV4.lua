@@ -1297,7 +1297,7 @@ localPlayer.PlayerGui.TradeApp.Frame.ConfirmationFrame.PartnerOffer.Accepted:Get
 )
     Trade:AutoAcceptTrade()
 end)
-localPlayer.PlayerGui.MinigameInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function(
+--[[localPlayer.PlayerGui.MinigameInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function(
 )
     if localPlayer.PlayerGui.MinigameInGameApp.Enabled then
         localPlayer.PlayerGui.MinigameInGameApp:WaitForChild('Body')
@@ -1311,15 +1311,15 @@ localPlayer.PlayerGui.MinigameInGameApp:GetPropertyChangedSignal('Enabled'):Conn
             PlaceFloorAtSpleefMinigame()
             task.wait(2)
 
-            localPlayer.Character.PrimaryPart.CFrame = workspace:WaitForChild('SpleefLocation').CFrame + Vector3.new(0, 5, 0)
+        localPlayer.Character.PrimaryPart.CFrame = workspace:WaitForChild('SpleefLocation').CFrame + Vector3.new(0, 5, 0)
         elseif localPlayer.PlayerGui.MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match("FROSTCLAW'S REVENGE") then
             if Christmas2024.CreateAndStartLobby() then
                 Christmas2024.StartGame()
             end
         end
     end
-end)
-localPlayer.PlayerGui.DialogApp.Dialog.ChildAdded:Connect(function(
+end)--]]
+--[[localPlayer.PlayerGui.DialogApp.Dialog.ChildAdded:Connect(function(
     NormalDialogChild
 )
     if NormalDialogChild.Name == 'NormalDialog' then
@@ -1331,8 +1331,8 @@ localPlayer.PlayerGui.DialogApp.Dialog.ChildAdded:Connect(function(
                 )
                     if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Melt Off') then
                         onTextChangedMiniGame()
-                    --[[elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
-                        game:Shutdown()--]]
+                    elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
+                        game:Shutdown()
                     elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('You found a') then
                         findButton('Okay')
                     end
@@ -1350,15 +1350,15 @@ localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog:GetPropertyChangedSignal('Vi
         )
             if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Melt Off') then
                 onTextChangedMiniGame()
-            --[[elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
-                game:Shutdown()--]]
+            elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
+                game:Shutdown()
             elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('You found a') then
                 findButton('Okay')
             end
         end)
     end
-end)
-workspace.StaticMap.spleef_minigame_minigame_state.players_loading:GetPropertyChangedSignal('Value'):Connect(function(
+end)--]]
+--[[workspace.StaticMap.spleef_minigame_minigame_state.players_loading:GetPropertyChangedSignal('Value'):Connect(function(
 )
     if workspace.StaticMap.spleef_minigame_minigame_state.players_loading.Value then
         task.wait(1)
@@ -1386,13 +1386,13 @@ localPlayer.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal('Visible'
 
             isInMiniGame = false
 
-            --[[if not getgenv().SETTINGS.EVENT.DO_FROSTCLAW_MINIGAME then
+            if not getgenv().SETTINGS.EVENT.DO_FROSTCLAW_MINIGAME then
                 Teleport.FarmingHome()
-            end--]]
+            end
         end
     end
-end)
-localPlayer.PlayerGui.BattlePassApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
+end)--]]
+--[[localPlayer.PlayerGui.BattlePassApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
 )
     if localPlayer.PlayerGui.BattlePassApp.Body.Visible then
         localPlayer.PlayerGui.BattlePassApp.Body:WaitForChild('InnerBody')
@@ -1409,7 +1409,7 @@ localPlayer.PlayerGui.BattlePassApp.Body:GetPropertyChangedSignal('Visible'):Con
             end
         end
     end
-end)
+end)--]]
 
 repeat
     task.wait(1)
