@@ -2297,7 +2297,7 @@ end)
 
 --Christmas2024.getGingerbread()
 task.wait(2)
---startAutoFarm()
+startAutoFarm()
 
 --[[if getgenv().SETTINGS.ENABLE_AUTO_FARM and getgenv().SETTINGS.EVENT.DO_FROSTCLAW_MINIGAME then
     Christmas2024.init()
