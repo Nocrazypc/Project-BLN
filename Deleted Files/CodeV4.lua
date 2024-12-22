@@ -1034,11 +1034,11 @@ UserInputService.InputBegan:Connect(function(input, processed)
         debounce = false
     end
 end)
-localPlayer.OnTeleport:Connect(function(State)
+--[[localPlayer.OnTeleport:Connect(function(State)
     if State == Enum.TeleportState.InProgress then
         game:Shutdown()
     end
-end)
+end)--]]
 
 WelcomeScreen = localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog:GetPropertyChangedSignal('Visible'):Connect(function(
 )
