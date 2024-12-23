@@ -1685,12 +1685,6 @@ end
      end,
  })
 ---------- frostClawMinigame ----------
-   function Teleport.Winter2024Shop()
-	SetLocationFunc("Winter2024Shop", "MainDoor", {})
-        Player.Character.HumanoidRootPart.CFrame = Workspace.Interiors:FindFirstChildWhichIsA('Model').Doors.MainDoor.WorkingParts.TouchToEnter.CFrame:ToWorldSpace(CFrame.new(0, 0, -6))
-        Workspace.Gravity = 196.2					
-   end
-
 	
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Winter 2024 Frostclaw Revenge Minigame",
@@ -1701,7 +1695,7 @@ local FarmToggle = FarmTab:CreateToggle({
 
     ReplicatedStorage.API["TeamAPI/ChooseTeam"]:InvokeServer("Parents", {["dont_send_back_home"] = true, ["source_for_logging"] = "avatar_editor"})
 				
-    Teleport.Winter2024Shop()			
+    Teleport.BeachParty()			
     task.wait(2) 
 
 if getgenv().AutoFCMinigame then
