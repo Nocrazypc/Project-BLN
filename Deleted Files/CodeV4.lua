@@ -1105,10 +1105,10 @@ RoleChooserDialogConnection = localPlayer.PlayerGui.DialogApp.Dialog.RoleChooser
 )
     task.wait()
 
-    if localPlayer.PlayerGui.DialogApp.Dialog.RoleChooserDialog.Visible then
+    --[[if localPlayer.PlayerGui.DialogApp.Dialog.RoleChooserDialog.Visible then
         firesignal(localPlayer.PlayerGui.DialogApp.Dialog.RoleChooserDialog.Baby.MouseButton1Click)
         RoleChooserDialogConnection:Disconnect()
-    end
+    end--]]
 end)
 RobuxProductDialogConnection1 = localPlayer.PlayerGui.DialogApp.Dialog.RobuxProductDialog:GetPropertyChangedSignal('Visible'):Connect(function(
 )
