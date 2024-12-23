@@ -1448,8 +1448,8 @@ end
 if localPlayer.PlayerGui.NewsApp.Enabled then
     local AbsPlay = localPlayer.PlayerGui.NewsApp:WaitForChild('EnclosingFrame'):WaitForChild('MainFrame'):WaitForChild('Contents'):WaitForChild('PlayButton')
 
-    firesignal(AbsPlay.MouseButton1Down)
-    firesignal(AbsPlay.MouseButton1Click)
+    --firesignal(AbsPlay.MouseButton1Down)
+    --firesignal(AbsPlay.MouseButton1Click)
 end
 if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Visible then
     if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('ban') then
