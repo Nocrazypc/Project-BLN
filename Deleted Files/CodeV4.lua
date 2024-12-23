@@ -2264,7 +2264,7 @@ if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match
 end
 
 dailyLoginAppClick()
-Teleport.FarmingHome()
+--Teleport.FarmingHome()
 	
 if getgenv().BUY_BEFORE_FARMING then
     BuyItems:BuyPets(getgenv().BUY_BEFORE_FARMING)
