@@ -1694,7 +1694,7 @@ local FarmToggle = FarmTab:CreateToggle({
 
     ReplicatedStorage.API["TeamAPI/ChooseTeam"]:InvokeServer("Parents", {["dont_send_back_home"] = true, ["source_for_logging"] = "avatar_editor"})
 
-    Teleport.MainMap()
+    SetLocationFunc("Interiors", "FrostclawsRevengeMinigame", {})
     task.wait(2) 
 
 if getgenv().AutoFCMinigame then
