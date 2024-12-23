@@ -1457,10 +1457,10 @@ if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Visible then
         banMessageConnection:Disconnect()
     end
 end
-if localPlayer.PlayerGui.DialogApp.Dialog.RoleChooserDialog.Visible then
+--[[if localPlayer.PlayerGui.DialogApp.Dialog.RoleChooserDialog.Visible then
     firesignal(localPlayer.PlayerGui.DialogApp.Dialog.RoleChooserDialog.Baby.MouseButton1Click)
     RoleChooserDialogConnection:Disconnect()
-end
+end--]]
 if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Visible then
     if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('4.5%% Legendary') then
         findButton('Okay')
