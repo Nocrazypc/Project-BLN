@@ -1693,14 +1693,7 @@ local FarmToggle = FarmTab:CreateToggle({
      getgenv().AutoFCMinigame = Value
 
     ReplicatedStorage.API["TeamAPI/ChooseTeam"]:InvokeServer("Parents", {["dont_send_back_home"] = true, ["source_for_logging"] = "avatar_editor"})
-				
-if localPlayer.PlayerGui.NewsApp.Enabled then
-    local AbsPlay = localPlayer.PlayerGui.NewsApp:WaitForChild('EnclosingFrame'):WaitForChild('MainFrame'):WaitForChild('Contents'):WaitForChild('PlayButton')
-
-    firesignal(AbsPlay.MouseButton1Down)
-    firesignal(AbsPlay.MouseButton1Click)
-end
-
+		
     task.wait(2) 
 
 if getgenv().AutoFCMinigame then
