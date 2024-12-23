@@ -1445,12 +1445,12 @@ for i, v in debug.getupvalue(RouterClient.init, 7)do
     v.Name = i
 end
 
---[[if localPlayer.PlayerGui.NewsApp.Enabled then
+if localPlayer.PlayerGui.NewsApp.Enabled then
     local AbsPlay = localPlayer.PlayerGui.NewsApp:WaitForChild('EnclosingFrame'):WaitForChild('MainFrame'):WaitForChild('Contents'):WaitForChild('PlayButton')
 
     firesignal(AbsPlay.MouseButton1Down)
     firesignal(AbsPlay.MouseButton1Click)
-end--]]
+end
 if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Visible then
     if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('ban') then
         findButton('Okay')
