@@ -1693,7 +1693,8 @@ local FarmToggle = FarmTab:CreateToggle({
      getgenv().AutoFCMinigame = Value
 
     ReplicatedStorage.API["TeamAPI/ChooseTeam"]:InvokeServer("Parents", {["dont_send_back_home"] = true, ["source_for_logging"] = "avatar_editor"})
-		
+
+    Teleport.MainMap()
     task.wait(2) 
 
 if getgenv().AutoFCMinigame then
@@ -2264,7 +2265,7 @@ if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match
 end
 
 dailyLoginAppClick()
---Teleport.FarmingHome()
+Teleport.FarmingHome()
 	
 if getgenv().BUY_BEFORE_FARMING then
     BuyItems:BuyPets(getgenv().BUY_BEFORE_FARMING)
