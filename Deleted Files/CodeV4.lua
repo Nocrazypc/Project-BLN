@@ -321,7 +321,7 @@ local agePotionCount = function(nameId)
     return count
 end
 
-local getRewardFromAdventCalendar = function()
+--[[local getRewardFromAdventCalendar = function()
     local date = DateTime.now().ToUniversalTime(DateTime.now())
     local claimed = if ClientData.get_data()[localPlayer.Name].winter_2024_advent_manager.rewards_claimed[date['Day'] ]then true else false
 
@@ -330,7 +330,7 @@ local getRewardFromAdventCalendar = function()
         ReplicatedStorage.API['WinterEventAPI/AdventCalendarTryTakeReward']:InvokeServer(date['Day'])
         print(`\u{1f389} Reward claimed: day {date['Day']} \u{1f389}`)
     end
-end
+end--]]
 local findBait = function(baitPassOn)
     local bait
 
@@ -824,7 +824,6 @@ local CompletePetAilments = function()
 
             return true
         elseif key == 'camping' then
-            getRewardFromAdventCalendar()
             Teleport.PlaceFloorAtCampSite()
             Ailments:CampingAilment(petUnique)
             Teleport.FarmingHome()
@@ -1705,7 +1704,6 @@ if getgenv().AutoFCMinigame then
 	end)
 	task.spawn(function()
 		while true do
-                        getRewardFromAdventCalendar()
                         task.wait(13)
 			--print("running frostclaw minigame")
 			if FC2024.CreateAndStartLobby() then
