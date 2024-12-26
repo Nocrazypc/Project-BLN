@@ -409,14 +409,14 @@ spawn(function()
             end
         end)
 
-        pcall(function()
+       --pcall(function()
             -- Winter Advent Manager Claim
-            Winter2024AdventManager = ClientData.get_data()[game.Players.LocalPlayer.Name]["winter_2024_advent_manager"]
-            if not Winter2024AdventManager["rewards_claimed"][#Winter2024AdventManager["replicated_rewards"]] then
-                RS.API:WaitForChild("WinterEventAPI/AdventCalendarTryTakeReward"):InvokeServer(i)
-                print("Claimed", v["amount"], findItemName(v["kind"], v["category"]))
-            end
-        end)
+           -- Winter2024AdventManager = ClientData.get_data()[game.Players.LocalPlayer.Name]["winter_2024_advent_manager"]
+           -- if not Winter2024AdventManager["rewards_claimed"][#Winter2024AdventManager["replicated_rewards"]] then
+		 -- RS.API:WaitForChild("WinterEventAPI/AdventCalendarTryTakeReward"):InvokeServer(i)
+               -- print("Claimed", v["amount"], findItemName(v["kind"], v["category"]))
+            -- end
+        -- end)
 
         --[[ if (ClientData.get_data()[game.Players.LocalPlayer.Name]["spleef_minigame_cycle_timestamp"]["timestamp"] - os.time() > 120) and (not GameLoading() and not GameStatus()) then
             print("== Starting Farming Gingerbread ==")
