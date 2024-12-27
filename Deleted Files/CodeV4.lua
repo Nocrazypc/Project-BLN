@@ -1503,7 +1503,13 @@ if not NormalLure then
     buyFurniture('lures_2023_normal_lure')
 end
 
-baitId = findBait('lures_2023_campfire_cookies')
+task.wait(1)
+
+baitId = findBait('winter_2024_winter_deer_bait')
+
+if not baitId then
+    baitId = findBait('lures_2023_campfire_cookies')
+end
 
 print(`\u{1f36a} Found baitId: {baitId} \u{1f36a}`)
 placeBaitOrPickUp(baitId)
