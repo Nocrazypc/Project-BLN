@@ -1710,7 +1710,6 @@ if getgenv().AutoFCMinigame then
 	end)
 	task.spawn(function()
 		while true do
-                        placeBaitOrPickUp(baitId)
                         task.wait(13)
 			--print("running frostclaw minigame")
 			if FC2024.CreateAndStartLobby() then
