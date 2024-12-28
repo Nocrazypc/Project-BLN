@@ -250,7 +250,7 @@
             FoodAilments('icecream')
         end
         function Ailments:ThirstyAilment()
-            FoodAilments('water')
+            FoodAilments('lemonade')
         end
         function Ailments:SickAilment()
             if doctorId then
