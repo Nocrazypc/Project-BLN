@@ -799,10 +799,16 @@ local CompletePetAilments = function()
             Ailments:SleepyAilment(Bed, petUnique)
             task.wait(3)
             placeBaitOrPickUp(baitId)
+            task.wait(2)
+            placeBaitOrPickUp(baitId)
 
             return true
         elseif key == 'dirty' then
             Ailments:DirtyAilment(Shower, petUnique)
+            task.wait(3)
+            placeBaitOrPickUp(baitId)
+            task.wait(2)
+            placeBaitOrPickUp(baitId)
 
             return true
         elseif key == 'walk' then
@@ -815,7 +821,11 @@ local CompletePetAilments = function()
             end
 
             Ailments:ToiletAilment(LitterBox, petUnique)
-
+            task.wait(3)
+            placeBaitOrPickUp(baitId)
+            task.wait(2)
+            placeBaitOrPickUp(baitId)
+			
             return true
         elseif key == 'ride' then
             Ailments:RideAilment(strollerId, petUnique)
