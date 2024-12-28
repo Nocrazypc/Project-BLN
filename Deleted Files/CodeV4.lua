@@ -1441,6 +1441,10 @@ findFurniture()
 print(`Has Bed: {Bed} \u{1f6cf}\u{fe0f} | Has Piano: {Piano} \u{1f3b9} | Has LitterBox: {LitterBox} \u{1f4a9} | Has Lure: {NormalLure}`)
 ReplicatedStorage:WaitForChild('API'):WaitForChild('HousingAPI/SetDoorLocked'):InvokeServer(true)
 
+if not localPlayer.Character then
+    print('get player character so waiting')
+    localPlayer.CharacterAdded:Wait()
+end
 if localPlayer.Character:WaitForChild('HumanoidRootPart') then
     ReplicatedStorage.API['TeamAPI/ChooseTeam']:InvokeServer('Babies', {
         ['dont_send_back_home'] = true,
