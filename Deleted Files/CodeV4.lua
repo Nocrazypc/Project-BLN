@@ -24,6 +24,7 @@ if game.PlaceId ~= 920587237 then
 end
 
 local Players = game:GetService('Players')
+local Workspace = game:GetService('Workspace')
 local ReplicatedStorage = game:GetService('ReplicatedStorage')
 local UserInputService = game:GetService('UserInputService')
 local Lighting = game:GetService('Lighting')
@@ -45,7 +46,10 @@ local RobuxProductDialogConnection2
 local banMessageConnection
 local DailyClaimConnection
 local counter = 0
+local isNewAccount = false
 local isInMiniGame = false
+local isInMiniGame = false
+local isBuyingOrAging = false
 local guiCooldown = false
 local tutorialDebonce = false
 local discordCooldown = false
@@ -297,6 +301,12 @@ local getPlayersInGame = function()
     return playerTable
 end
 local placeBaitOrPickUp = function(baitIdPasson)
+    if not NormalLure then
+        return
+    end
+    
+    print('placing bait or picking up')
+    
     local args = {
         [1] = game:GetService('Players').LocalPlayer,
         [2] = NormalLure,
@@ -307,7 +317,7 @@ local placeBaitOrPickUp = function(baitIdPasson)
         [5] = game:GetService('Players').LocalPlayer.Character,
     }
 
-    ReplicatedStorage.API:FindFirstChild('HousingAPI/ActivateFurniture'):InvokeServer(unpack(args))
+    print(ReplicatedStorage.API:FindFirstChild('HousingAPI/ActivateFurniture'):InvokeServer(unpack(args)))
 end
 local agePotionCount = function(nameId)
     local count = 0
@@ -321,16 +331,6 @@ local agePotionCount = function(nameId)
     return count
 end
 
---[[local getRewardFromAdventCalendar = function()
-    local date = DateTime.now().ToUniversalTime(DateTime.now())
-    local claimed = if ClientData.get_data()[localPlayer.Name].winter_2024_advent_manager.rewards_claimed[date['Day'] ]then true else false
-
-    if claimed then
-    else
-        ReplicatedStorage.API['WinterEventAPI/AdventCalendarTryTakeReward']:InvokeServer(date['Day'])
-        print(`\u{1f389} Reward claimed: day {date['Day']} \u{1f389}`)
-    end
-end--]]
 local findBait = function(baitPassOn)
     local bait
 
@@ -447,6 +447,9 @@ local CheckifEgg = function()
     getPet()
 end
 local SwitchOutFullyGrown = function()
+    if isBuyingOrAging then
+        return
+    end
     if ClientData.get('pet_char_wrappers')[1] == nil or false then
         getPet()
 
@@ -649,11 +652,11 @@ local tradeCollector = function(namePassOn)
     end
 end
 local PlaceFloorAtSpleefMinigame = function()
-    if workspace:FindFirstChild('SpleefLocation') then
+    if Workspace:FindFirstChild('SpleefLocation') then
         return
     end
 
-    local interiorOrigin = workspace:WaitForChild('Interiors'):WaitForChild('SpleefMinigame'):WaitForChild('InteriorOrigin')
+    local interiorOrigin = Workspace:WaitForChild('Interiors'):WaitForChild('SpleefMinigame'):WaitForChild('InteriorOrigin')
     local part = Instance.new('Part')
 
     part.Position = interiorOrigin.Position
@@ -661,7 +664,7 @@ local PlaceFloorAtSpleefMinigame = function()
     part.Anchored = true
     part.Transparency = 0
     part.Name = 'SpleefLocation'
-    part.Parent = workspace
+    part.Parent = Workspace
 end
 local removeGameOverButton = function()
     localPlayer.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild('Face')
@@ -787,7 +790,7 @@ local CompletePetAilments = function()
         elseif key == 'sleepy' then
             Ailments:SleepyAilment(Bed, petUnique)
             task.wait(3)
-            placeBaitOrPickUp(baitId)
+            --placeBaitOrPickUp(baitId)
 
             return true
         elseif key == 'dirty' then
@@ -851,7 +854,6 @@ local autoFarm = function()
     Teleport.PlaceFloorAtCampSite()
     Teleport.PlaceFloorAtBeachParty()
     Teleport.FarmingHome()
-    --Christmas2024.getGingerbread()
     task.delay(30, function()
         while true do
             if isInMiniGame then
@@ -892,7 +894,7 @@ local autoFarm = function()
     TradeLicense.Get(ClientData, localPlayer.Name)
 end
 local startAutoFarm = function()
-    if getgenv().SETTINGS.EVENT.DO_FROSTCLAW_MINIGAME or getgenv().AutoFCMinigame then
+    if getgenv().AutoFCMinigame then
         return
     end
 
@@ -973,7 +975,7 @@ local onTextChangedNormalDialog = function()
         findButton('Awesome!')
     elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Gingerbread!') then
         findButton('Awesome!')
-    end
+      end
 end
 
 localPlayer.Idled:Connect(function()
@@ -1007,18 +1009,12 @@ localPlayer.PlayerGui.HintApp.TextLabel:GetPropertyChangedSignal('Text'):Connect
 
         task.wait(2)
 
-        if not getgenv().SETTINGS.FOCUS_FARM_AGE_POTION or getgenv().FocusFarmAgePotions then
+        if not getgenv().SETTINGS.FOCUS_FARM_AGE_POTION and not getgenv().FocusFarmAgePotions then
             SwitchOutFullyGrown()
         end
     end
 end)
-Lighting:GetPropertyChangedSignal('ClockTime'):Connect(function()
-    if Lighting.ClockTime == 13 then
-        task.wait(5)
-        print('got gingerbread')
-        --Christmas2024.getGingerbread()
-    end
-end)
+
 UserInputService.InputBegan:Connect(function(input, processed)
     if (input.KeyCode == Enum.KeyCode.Q and not processed) then
         if debounce then
@@ -1093,7 +1089,12 @@ banMessageConnection = localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog:GetPr
         )
             if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('ban') then
                 findButton('Okay')
+                
+            if banMessageConnection then                
                 banMessageConnection:Disconnect()
+                
+                banMessageConnection = nil
+                end
             elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('You have been awarded') then
                 findButton('Awesome!')
             end
@@ -1106,7 +1107,11 @@ RoleChooserDialogConnection = localPlayer.PlayerGui.DialogApp.Dialog.RoleChooser
 
     if localPlayer.PlayerGui.DialogApp.Dialog.RoleChooserDialog.Visible then
         firesignal(localPlayer.PlayerGui.DialogApp.Dialog.RoleChooserDialog.Baby.MouseButton1Click)
+        if RoleChooserDialogConnection then        
         RoleChooserDialogConnection:Disconnect()
+        
+        RoleChooserDialogConnection = nil
+        end        
     end
 end)
 RobuxProductDialogConnection1 = localPlayer.PlayerGui.DialogApp.Dialog.RobuxProductDialog:GetPropertyChangedSignal('Visible'):Connect(function(
@@ -1122,7 +1127,13 @@ RobuxProductDialogConnection1 = localPlayer.PlayerGui.DialogApp.Dialog.RobuxProd
         if v.Name == 'TextLabel' then
             if v.Text == 'No Thanks' then
                 firesignal(v.Parent.Parent.MouseButton1Click)
+                
+                	
+            if RobuxProductDialogConnection1 then
                 RobuxProductDialogConnection1:Disconnect()
+                
+                RobuxProductDialogConnection1 = nil
+                end                
             end
         end
     end
@@ -1146,7 +1157,11 @@ RobuxProductDialogConnection2 = localPlayer.PlayerGui.DialogApp.Dialog:GetProper
         if v.Name == 'TextLabel' then
             if v.Text == 'No Thanks' then
                 firesignal(v.Parent.Parent.MouseButton1Click)
-                RobuxProductDialogConnection2:Disconnect()
+
+                if RobuxProductDialogConnection2 then
+                    RobuxProductDialogConnection2:Disconnect()
+                    RobuxProductDialogConnection2 = nil
+                end
             end
         end
     end
@@ -1154,6 +1169,12 @@ end)
 DailyClaimConnection = localPlayer.PlayerGui.DailyLoginApp:GetPropertyChangedSignal('Enabled'):Connect(function(
 )
     dailyLoginAppClick()
+    
+        if DailyClaimConnection then
+        DailyClaimConnection:Disconnect()
+        
+        DailyClaimConnection = nil
+    end
 end)
 
 Players.LocalPlayer.PlayerGui.QuestIconApp.ImageButton.EventContainer.IsNew:GetPropertyChangedSignal('Position'):Connect(function(
@@ -1296,119 +1317,6 @@ localPlayer.PlayerGui.TradeApp.Frame.ConfirmationFrame.PartnerOffer.Accepted:Get
 )
     Trade:AutoAcceptTrade()
 end)
---[[localPlayer.PlayerGui.MinigameInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function(
-)
-    if localPlayer.PlayerGui.MinigameInGameApp.Enabled then
-        localPlayer.PlayerGui.MinigameInGameApp:WaitForChild('Body')
-        localPlayer.PlayerGui.MinigameInGameApp.Body:WaitForChild('Middle')
-        localPlayer.PlayerGui.MinigameInGameApp.Body.Middle:WaitForChild('Container')
-        localPlayer.PlayerGui.MinigameInGameApp.Body.Middle.Container:WaitForChild('TitleLabel')
-
-        if localPlayer.PlayerGui.MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('MELT OFF') then
-            isInMiniGame = true
-
-            PlaceFloorAtSpleefMinigame()
-            task.wait(2)
-
-        localPlayer.Character.PrimaryPart.CFrame = workspace:WaitForChild('SpleefLocation').CFrame + Vector3.new(0, 5, 0)
-        elseif localPlayer.PlayerGui.MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match("FROSTCLAW'S REVENGE") then
-            if Christmas2024.CreateAndStartLobby() then
-                Christmas2024.StartGame()
-            end
-        end
-    end
-end)--]]
---[[localPlayer.PlayerGui.DialogApp.Dialog.ChildAdded:Connect(function(
-    NormalDialogChild
-)
-    if NormalDialogChild.Name == 'NormalDialog' then
-        NormalDialogChild:GetPropertyChangedSignal('Visible'):Connect(function()
-            if NormalDialogChild.Visible then
-                NormalDialogChild:WaitForChild('Info')
-                NormalDialogChild.Info:WaitForChild('TextLabel')
-                NormalDialogChild.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
-                )
-                    if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Melt Off') then
-                        onTextChangedMiniGame()
-                    elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
-                        game:Shutdown()
-                    elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('You found a') then
-                        findButton('Okay')
-                    end
-                end)
-            end
-        end)
-    end
-end)
-localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog:GetPropertyChangedSignal('Visible'):Connect(function(
-)
-    if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Visible then
-        localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog:WaitForChild('Info')
-        localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info:WaitForChild('TextLabel')
-        localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
-        )
-            if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Melt Off') then
-                onTextChangedMiniGame()
-            elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
-                game:Shutdown()
-            elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('You found a') then
-                findButton('Okay')
-            end
-        end)
-    end
-end)--]]
---[[workspace.StaticMap.spleef_minigame_minigame_state.players_loading:GetPropertyChangedSignal('Value'):Connect(function(
-)
-    if workspace.StaticMap.spleef_minigame_minigame_state.players_loading.Value then
-        task.wait(1)
-
-        if getgenv().SETTINGS.EVENT.DO_FROSTCLAW_MINIGAME then
-            return
-        end
-
-        ReplicatedStorage.API:FindFirstChild('MinigameAPI/AttemptJoin'):FireServer('spleef_minigame', true)
-    end
-end)
-localPlayer.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
-)
-    if localPlayer.PlayerGui.MinigameRewardsApp.Body.Visible then
-        localPlayer.PlayerGui.MinigameRewardsApp.Body:WaitForChild('Button')
-        localPlayer.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild('Face')
-        localPlayer.PlayerGui.MinigameRewardsApp.Body.Button.Face:WaitForChild('TextLabel')
-        localPlayer.PlayerGui.MinigameRewardsApp.Body:WaitForChild('Reward')
-        localPlayer.PlayerGui.MinigameRewardsApp.Body.Reward:WaitForChild('TitleLabel')
-
-        if localPlayer.PlayerGui.MinigameRewardsApp.Body.Button.Face.TextLabel.Text:match('NICE!') then
-            localPlayer.Character.HumanoidRootPart.Anchored = false
-
-            removeGameOverButton()
-
-            isInMiniGame = false
-
-            if not getgenv().SETTINGS.EVENT.DO_FROSTCLAW_MINIGAME then
-                Teleport.FarmingHome()
-            end
-        end
-    end
-end)--]]
---[[localPlayer.PlayerGui.BattlePassApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
-)
-    if localPlayer.PlayerGui.BattlePassApp.Body.Visible then
-        localPlayer.PlayerGui.BattlePassApp.Body:WaitForChild('InnerBody')
-        localPlayer.PlayerGui.BattlePassApp.Body.InnerBody:WaitForChild('ScrollingFrame')
-        localPlayer.PlayerGui.BattlePassApp.Body.InnerBody.ScrollingFrame:WaitForChild('21')
-
-        if localPlayer.PlayerGui.BattlePassApp.Body.InnerBody.ScrollingFrame[21] then
-            for _, v in localPlayer.PlayerGui.BattlePassApp.Body.InnerBody.ScrollingFrame:GetChildren()do
-                if not v:FindFirstChild('ButtonFrame') then
-                    continue
-                end
-                if v.ButtonFrame:FindFirstChild('ClaimButton') then
-                end
-            end
-        end
-    end
-end)--]]
 
 repeat
     task.wait(1)
@@ -1453,15 +1361,24 @@ end --]]
 if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Visible then
     if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('ban') then
         findButton('Okay')
-        banMessageConnection:Disconnect()
+
+        if banMessageConnection then
+            banMessageConnection:Disconnect()
+            banMessageConnection = nil
+        end
     end
 end
 if localPlayer.PlayerGui.DialogApp.Dialog.RoleChooserDialog.Visible then
     firesignal(localPlayer.PlayerGui.DialogApp.Dialog.RoleChooserDialog.Baby.MouseButton1Click)
-    RoleChooserDialogConnection:Disconnect()
+
+    if RoleChooserDialogConnection then
+        RoleChooserDialogConnection:Disconnect()
+        RoleChooserDialogConnection = nil
+    end
 end
 if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Visible then
     if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('4.5%% Legendary') then
+        task.wait(1)
         findButton('Okay')
     end
 end
@@ -1493,22 +1410,30 @@ findFurniture()
 if not Bed then
     buyFurniture('basiccrib')
 end
+task.wait(1)
 if not Piano then
     buyFurniture('piano')
 end
+task.wait(1)
 if not LitterBox then
     buyFurniture('ailments_refresh_2024_litter_box')
 end
+task.wait(1)
 if not NormalLure then
     buyFurniture('lures_2023_normal_lure')
 end
 
---baitId = findBait('lures_2023_campfire_cookies')
+    --[[task.wait(1)    
+    baitId = findBait('winter_2024_winter_deer_bait')
 
---print(`\u{1f36a} Found baitId: {baitId} \u{1f36a}`)
---placeBaitOrPickUp(baitId)
---task.wait(1)
---placeBaitOrPickUp(baitId)
+if not baitId then
+    baitId = findBait('lures_2023_campfire_cookies')
+end
+
+print(`\u{1f36a} Found baitId: {baitId} \u{1f36a}`)
+placeBaitOrPickUp(baitId)
+task.wait(1)
+placeBaitOrPickUp(baitId)--]]
 
 strollerId = GetInventory:GetUniqueId('strollers', 'stroller-default')
 
@@ -1516,10 +1441,6 @@ findFurniture()
 print(`Has Bed: {Bed} \u{1f6cf}\u{fe0f} | Has Piano: {Piano} \u{1f3b9} | Has LitterBox: {LitterBox} \u{1f4a9} | Has Lure: {NormalLure}`)
 ReplicatedStorage:WaitForChild('API'):WaitForChild('HousingAPI/SetDoorLocked'):InvokeServer(true)
 
-if not localPlayer.Character then
-    print('get player character so waiting')
-    localPlayer.CharacterAdded:Wait()
-end
 if localPlayer.Character:WaitForChild('HumanoidRootPart') then
     ReplicatedStorage.API['TeamAPI/ChooseTeam']:InvokeServer('Babies', {
         ['dont_send_back_home'] = true,
@@ -2259,27 +2180,29 @@ GuiPopupButton.Parent = TestGui
 --ClipboardButton.TextWrapped = true
 --ClipboardButton.Parent = TestGui
 
-if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match("Cricket's Tile Hop") then
-    findButton('No')
-end
-
 dailyLoginAppClick()
 Teleport.FarmingHome()
 	
 if getgenv().BUY_BEFORE_FARMING then
+    isBuyingOrAging = true
     BuyItems:BuyPets(getgenv().BUY_BEFORE_FARMING)
 end
 if getgenv().OPEN_ITEMS_BEFORE_FARMING then
+    isBuyingOrAging = true
     BuyItems:OpenItems(getgenv().OPEN_ITEMS_BEFORE_FARMING)
 end
 if getgenv().AGE_PETS_BEFORE_FARMING then
-    --local BulkPotions = __DARKLUA_BUNDLE_MODULES.load('m')
+    isBuyingOrAging = true
+    
     local bulkPotions = BulkPotions.new()
 
     bulkPotions:SetEggTable(GetInventory:GetPetEggs())
     bulkPotions:StartAgingPets(getgenv().AGE_PETS_BEFORE_FARMING)
     print('DONE aging pets')
 end
+
+    isBuyingOrAging = false
+
 if isMuleInGame() then
     tradeCollector(getgenv().SETTINGS.TRADE_COLLECTOR_NAME)
 end
@@ -2293,28 +2216,8 @@ task.delay(5, function()
     end
 end)
 
---Christmas2024.getGingerbread()
 task.wait(2)
 startAutoFarm()
-
---[[if getgenv().SETTINGS.ENABLE_AUTO_FARM and getgenv().SETTINGS.EVENT.DO_FROSTCLAW_MINIGAME then
-    Christmas2024.init()
-    localPlayer.Idled:Connect(function()
-        VirtualUser:ClickButton2(Vector2.new())
-    end)
-    task.spawn(function()
-        while true do
-            print('running frostclaw event')
-            updateStatsGui()
-
-            if Christmas2024.CreateAndStartLobby() then
-                Christmas2024.StartGame()
-            end
-
-            task.wait(1)
-        end
-    end)
-end--]]
 
 
 --------------------update Stats UI ----------------
@@ -2327,5 +2230,5 @@ end--]]
 			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
                     end
                     
-   --print('Loaded. lastest update 21/13/2024  mm/dd/yyyy')                 
+   --print('Loaded. lastest update 27/12/2024  mm/dd/yyyy')                 
                     
