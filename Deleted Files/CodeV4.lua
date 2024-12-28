@@ -699,6 +699,8 @@ local completeBabyAilments = function()
 
             return
         elseif key == 'thirsty' then
+            ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', "water", {})
+            task.wait(2)
             Ailments:BabyThirstyAilment()
 
             return
@@ -761,6 +763,8 @@ local CompletePetAilments = function()
 
             return true
         elseif key == 'thirsty' then
+            ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', "water", {})
+            task.wait(2)
             Ailments:ThirstyAilment()
 
             return true
