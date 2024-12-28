@@ -250,7 +250,7 @@
             FoodAilments('icecream')
         end
         function Ailments:ThirstyAilment()
-            FoodAilments('lemonade')
+            FoodAilments('water')
         end
         function Ailments:SickAilment()
             if doctorId then
@@ -448,7 +448,7 @@
             local stuckCount = 0
 
             repeat
-                babyGetFoodAndEat('lemonade')
+                babyGetFoodAndEat('water')
 
                 stuckCount += 1
 
