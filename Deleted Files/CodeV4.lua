@@ -2215,7 +2215,7 @@ if isMuleInGame() then
     tradeCollector(getgenv().SETTINGS.TRADE_COLLECTOR_NAME)
 end
 
-DailyClaimConnection:Disconnect()
+--DailyClaimConnection:Disconnect()
 task.delay(5, function()
     if Players.LocalPlayer.Name == getgenv().SETTINGS.TRADE_COLLECTOR_NAME and getgenv().SETTINGS.ENABLE_TRADE_COLLECTOR == true then
         task.spawn(function()
