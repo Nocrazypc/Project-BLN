@@ -1427,7 +1427,7 @@ if not NormalLure then
     buyFurniture('lures_2023_normal_lure')
 end
 
-    --[[task.wait(1)    
+    task.wait(1)    
     baitId = findBait('winter_2024_winter_deer_bait')
 
 if not baitId then
@@ -1436,8 +1436,8 @@ end
 
 print(`\u{1f36a} Found baitId: {baitId} \u{1f36a}`)
 placeBaitOrPickUp(baitId)
-task.wait(1)
-placeBaitOrPickUp(baitId)--]]
+task.wait(2)
+placeBaitOrPickUp(baitId)
 
 strollerId = GetInventory:GetUniqueId('strollers', 'stroller-default')
 
