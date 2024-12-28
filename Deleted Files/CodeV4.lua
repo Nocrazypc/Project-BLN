@@ -695,6 +695,8 @@ end
 local completeBabyAilments = function()
     for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments do
         if key == 'hungry' then
+            ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', "icecream", {})
+            task.wait(2)
             Ailments:BabyHungryAilment()
 
             return
@@ -758,6 +760,8 @@ local CompletePetAilments = function()
 
     for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
         if key == 'hungry' then
+            ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', "icecream", {})
+            task.wait(2)
             Ailments:HungryAilment()
             task.wait(1)
 
