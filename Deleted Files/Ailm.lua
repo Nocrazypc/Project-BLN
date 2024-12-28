@@ -1,4 +1,5 @@
         local ReplicatedStorage = game:GetService('ReplicatedStorage')
+        local Workspace = game:GetService('Workspace')
         local Players = game:GetService('Players')
         local ClientData = require(ReplicatedStorage:WaitForChild('ClientModules'):WaitForChild('Core'):WaitForChild('ClientData'))
         local GetInventory = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/GetInv.lua"))()
@@ -72,13 +73,13 @@
         local isDoctorLoaded = function()
             local stuckCount = 0
             local isStuck = false
-            local doctor = workspace.HouseInteriors.furniture:FindFirstChild('Doctor', true)
+            local doctor = Workspace.HouseInteriors.furniture:FindFirstChild('Doctor', true)
 
             if not doctor then
                 repeat
                     task.wait(1)
 
-                    doctor = workspace.HouseInteriors.furniture:FindFirstChild('Doctor', true)
+                    doctor = Workspace.HouseInteriors.furniture:FindFirstChild('Doctor', true)
 
                     stuckCount += 1
 
@@ -104,13 +105,13 @@
             ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('Hospital')
             task.wait(1)
 
-            local doctor = workspace.HouseInteriors.furniture:FindFirstChild('Doctor', true)
+            local doctor = Workspace.HouseInteriors.furniture:FindFirstChild('Doctor', true)
 
             if not doctor then
                 repeat
                     task.wait(1)
 
-                    doctor = workspace.HouseInteriors.furniture:FindFirstChild('Doctor', true)
+                    doctor = Workspace.HouseInteriors.furniture:FindFirstChild('Doctor', true)
 
                     stuckCount += 1
 
@@ -336,7 +337,7 @@
                 Teleport.DownloadMainMap()
                 task.wait(5)
 
-                localPlayer.Character.HumanoidRootPart.CFrame = workspace.HouseInteriors.furniture:FindFirstChild('AilmentsRefresh2024FireHydrant', true).PrimaryPart.CFrame + Vector3.new(5, 5, 5)
+                localPlayer.Character.HumanoidRootPart.CFrame = Workspace.HouseInteriors.furniture:FindFirstChild('AilmentsRefresh2024FireHydrant', true).PrimaryPart.CFrame + Vector3.new(5, 5, 5)
 
                 task.wait(2)
                 reEquipPet()
