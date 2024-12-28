@@ -1526,7 +1526,8 @@ local FarmToggle = FarmTab:CreateToggle({
      Flag = "Toggle01",
      Callback = function(Value)
          getgenv().auto_farm = Value
-         autoFarm()
+         --autoFarm()
+         startAutoFarm()
      end,
  })
 -------------------------------------------------
