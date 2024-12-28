@@ -2224,8 +2224,8 @@ task.delay(5, function()
     end
 end)
 
-task.wait(2)
-startAutoFarm()
+--task.wait(2)
+--startAutoFarm()
 
 
 --------------------update Stats UI ----------------
