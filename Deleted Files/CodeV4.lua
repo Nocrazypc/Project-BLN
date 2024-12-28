@@ -794,7 +794,7 @@ local CompletePetAilments = function()
         elseif key == 'sleepy' then
             Ailments:SleepyAilment(Bed, petUnique)
             task.wait(3)
-            --placeBaitOrPickUp(baitId)
+            placeBaitOrPickUp(baitId)
 
             return true
         elseif key == 'dirty' then
