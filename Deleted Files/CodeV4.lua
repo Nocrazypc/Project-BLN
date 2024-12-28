@@ -1526,9 +1526,7 @@ local FarmToggle = FarmTab:CreateToggle({
      Flag = "Toggle01",
      Callback = function(Value)
          getgenv().auto_farm = Value
-	 task.wait(2)		
          autoFarm()
-
      end,
  })
 -------------------------------------------------
@@ -2226,10 +2224,6 @@ task.delay(5, function()
     end
 end)
 
---task.wait(2)
---startAutoFarm()
-
-
 --------------------update Stats UI ----------------
             while task.wait(5) do
 			StatsGuis:UpdateText("TimeFrame")
@@ -2239,6 +2233,8 @@ end)
                         StatsGuis:UpdateText("TotalFrame2")
 			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
                     end
-                    
+----------------------------------------------------
+task.wait(2)
+startAutoFarm()
    --print('Loaded. lastest update 27/12/2024  mm/dd/yyyy')                 
                     
