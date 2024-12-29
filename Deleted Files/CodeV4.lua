@@ -301,6 +301,20 @@ local getPlayersInGame = function()
     return playerTable
 end
 
+local findBait = function(baitPassOn)
+    local bait
+
+    for _, v in pairs(ClientData.get_data()[localPlayer.Name].inventory.food)do
+        if v.id == baitPassOn then
+            bait = v.unique
+
+            return bait
+        end
+    end
+
+    return nil
+end
+
 local placeBaitOrPickUp = function(baitIdPasson)
     if not NormalLure then
         return
@@ -362,19 +376,6 @@ local agePotionCount = function(nameId)
     return count
 end
 
-local findBait = function(baitPassOn)
-    local bait
-
-    for _, v in pairs(ClientData.get_data()[localPlayer.Name].inventory.food)do
-        if v.id == baitPassOn then
-            bait = v.unique
-
-            return bait
-        end
-    end
-
-    return nil
-end
 local getEgg = function()
     for _, v in pairs(ClientData.get_data()[localPlayer.Name].inventory.pets)do
         if v.id == Egg2Buy and v.id ~= 'practice_dog' and v.properties.age ~= 6 and not v.properties.mega_neon then
