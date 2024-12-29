@@ -344,26 +344,6 @@ print(`\u{1f36a} Found baitId: {baitId} \u{1f36a}`)
 
 end
 
-
---[[local placeBaitOrPickUp = function(baitIdPasson)
-    if not NormalLure then
-        return
-    end
-    
-    print('placing bait or picking up')
-    
-    local args = {
-        [1] = game:GetService('Players').LocalPlayer,
-        [2] = NormalLure,
-        [3] = 'UseBlock',
-        [4] = {
-            ['bait_unique'] = baitIdPasson,
-        },
-        [5] = game:GetService('Players').LocalPlayer.Character,
-    }
-
-    print(ReplicatedStorage.API:FindFirstChild('HousingAPI/ActivateFurniture'):InvokeServer(unpack(args)))
-end--]]
 local agePotionCount = function(nameId)
     local count = 0
 
@@ -1465,13 +1445,7 @@ if not NormalLure then
 end
 
     task.wait(1)    
-    --[[baitId = findBait('winter_2024_winter_deer_bait')
 
-if not baitId then
-    baitId = findBait('lures_2023_campfire_cookies')
-end
-
-print(`\u{1f36a} Found baitId: {baitId} \u{1f36a}`)--]]
 placeBaitOrPickUp(baitId)
 task.wait(2)
 placeBaitOrPickUp(baitId)
