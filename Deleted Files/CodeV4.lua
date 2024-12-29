@@ -2250,5 +2250,5 @@ end)
 ----------------------------------------------------
 task.wait(2)
 startAutoFarm()
-   --print('Loaded. lastest update 27/12/2024  mm/dd/yyyy')                 
+   --print('Loaded. lastest update 28/12/2024  mm/dd/yyyy')                 
                     
