@@ -14,13 +14,7 @@
             for _, v in ClientData.get_data()[localPlayer.Name].inventory.food do
                 if v.id == FoodPassOn then
                     hasFood = true
-                        
-                    if not hasFood then
-                    ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', FoodPassOn, {})
-                    task.wait(1) 
-                        return
-                    end
-                                
+
                     ReplicatedStorage.API['ToolAPI/Equip']:InvokeServer(v.unique, {})
                     task.wait(1)
 
@@ -44,11 +38,11 @@
                 end
             end
 
-            --[[if not hasFood then
+            if not hasFood then
                 ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', FoodPassOn, {})
                 task.wait(1)
                 FoodAilments(FoodPassOn)
-            end--]]
+            end
         end
 
         local useToolOnBaby = function(uniqueId)
