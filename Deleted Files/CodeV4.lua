@@ -300,7 +300,38 @@ local getPlayersInGame = function()
 
     return playerTable
 end
+
 local placeBaitOrPickUp = function(baitIdPasson)
+    if not NormalLure then
+        return
+    end
+    
+    baitId = findBait('winter_2024_winter_deer_bait')
+
+if not baitId then
+    baitId = findBait('lures_2023_campfire_cookies')
+end
+
+print(`\u{1f36a} Found baitId: {baitId} \u{1f36a}`)
+    
+    local args = {
+        [1] = game:GetService('Players').LocalPlayer,
+        [2] = NormalLure,
+        [3] = 'UseBlock',
+        [4] = {
+            ['bait_unique'] = baitId,
+        },
+        [5] = game:GetService('Players').LocalPlayer.Character,
+    }
+
+    ReplicatedStorage.API:FindFirstChild('HousingAPI/ActivateFurniture'):InvokeServer(unpack(args))
+
+    print('placing bait or picking up rewards')
+
+end
+
+
+--[[local placeBaitOrPickUp = function(baitIdPasson)
     if not NormalLure then
         return
     end
@@ -318,7 +349,7 @@ local placeBaitOrPickUp = function(baitIdPasson)
     }
 
     print(ReplicatedStorage.API:FindFirstChild('HousingAPI/ActivateFurniture'):InvokeServer(unpack(args)))
-end
+end--]]
 local agePotionCount = function(nameId)
     local count = 0
 
@@ -805,10 +836,6 @@ local CompletePetAilments = function()
             return true
         elseif key == 'dirty' then
             Ailments:DirtyAilment(Shower, petUnique)
-            task.wait(3)
-            placeBaitOrPickUp(baitId)
-            task.wait(2)
-            placeBaitOrPickUp(baitId)
 
             return true
         elseif key == 'walk' then
@@ -821,10 +848,6 @@ local CompletePetAilments = function()
             end
 
             Ailments:ToiletAilment(LitterBox, petUnique)
-            task.wait(3)
-            placeBaitOrPickUp(baitId)
-            task.wait(2)
-            placeBaitOrPickUp(baitId)
 			
             return true
         elseif key == 'ride' then
@@ -1442,13 +1465,13 @@ if not NormalLure then
 end
 
     task.wait(1)    
-    baitId = findBait('winter_2024_winter_deer_bait')
+    --[[baitId = findBait('winter_2024_winter_deer_bait')
 
 if not baitId then
     baitId = findBait('lures_2023_campfire_cookies')
 end
 
-print(`\u{1f36a} Found baitId: {baitId} \u{1f36a}`)
+print(`\u{1f36a} Found baitId: {baitId} \u{1f36a}`)--]]
 placeBaitOrPickUp(baitId)
 task.wait(2)
 placeBaitOrPickUp(baitId)
