@@ -932,9 +932,8 @@ local autoFarm = function()
 
     task.wait()
     getPet()
-    task.wait()
-    --TradeLicense.Get(ClientData, localPlayer.Name)
 end
+
 local startAutoFarm = function()
     if getgenv().AutoFCMinigame then
         return
