@@ -1481,7 +1481,7 @@ Teleport.PlaceFloorAtFarmingHome()
 Teleport.PlaceFloorAtCampSite()
 Teleport.PlaceFloorAtBeachParty()
 
-GuiPopupButton.Text = "Open GUI"
+--[[GuiPopupButton.Text = "Open GUI"
 GuiPopupButton.AnchorPoint = Vector2.new(0.5, 0.5)
 GuiPopupButton.BackgroundColor3 = Color3.fromRGB(255, 176, 5)
 GuiPopupButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -1493,13 +1493,11 @@ GuiPopupButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 GuiPopupButton.TextScaled = true
 GuiPopupButton.TextSize = 14.000
 GuiPopupButton.TextWrapped = true
-GuiPopupButton.Parent = TestGui
-
-
+GuiPopupButton.Parent = TestGui--]]
 
 local Window = Rayfield:CreateWindow({
 	Name = "BLN Adopt Me!  Basic Autofarm V4.2",
-	LoadingTitle = "Loading BLN Script ",
+	LoadingTitle = "Loading BLN V4 Script ",
 	LoadingSubtitle = "by BlackLastNight 2025",
 	ConfigurationSaving = {
 		Enabled = false,
@@ -1538,7 +1536,7 @@ ClipboardButton.Activated:Connect(function()
 end)
 
 -- Rayfield:Minimise()
-GuiPopupButton.MouseButton1Click:Connect(function()
+--[[GuiPopupButton.MouseButton1Click:Connect(function()
     if guiCooldown then
         return
     end
@@ -1549,7 +1547,8 @@ GuiPopupButton.MouseButton1Click:Connect(function()
     task.wait()
 
     guiCooldown = false
-end)
+end)--]]
+
 --[[ First Tab - Autofarm ]]
 local FarmTab = Window:CreateTab("Farm", 4483362458)
 
