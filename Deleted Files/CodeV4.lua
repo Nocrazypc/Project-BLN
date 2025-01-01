@@ -1536,10 +1536,11 @@ ClipboardButton.Activated:Connect(function()
 
     guiCooldown = false
 end)
+
 -- Rayfield:Minimise()
 GuiPopupButton.MouseButton1Click:Connect(function()
     if guiCooldown then
-       return
+        return
     end
 
     guiCooldown = true
