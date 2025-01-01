@@ -78,8 +78,7 @@ local selectedPet
 local selectedGift
 local selectedToy
 local selectedFood
-local Rayfield = loadstring(game:HttpGet([[https://raw.githubusercontent.com/Nocrazypc/Rayfield/main/source.lua]]))()
-local RayfieldLibrary = loadstring(game:HttpGet([[https://raw.githubusercontent.com/Nocrazypc/Rayfield/main/source.lua]]))()
+local Rayfield = loadstring(game:HttpGet(https://raw.githubusercontent.com/Nocrazypc/Rayfield/main/source.lua))()
 --local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 getgenv().auto_accept_trade = false
@@ -1538,16 +1537,16 @@ ClipboardButton.Activated:Connect(function()
 end)
 -- Rayfield:Minimise()
 GuiPopupButton.MouseButton1Click:Connect(function()
-    --if guiCooldown then
-       --return
-    --end
+    if guiCooldown then
+       return
+    end
 
-    --guiCooldown = true
+    guiCooldown = true
 
-    RayfieldLibrary:Unhide()
+    Rayfield:Unhide()
     task.wait()
 
-    --guiCooldown = false
+    guiCooldown = false
 end)
 --[[ First Tab - Autofarm ]]
 local FarmTab = Window:CreateTab("Farm", 4483362458)
