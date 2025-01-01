@@ -79,6 +79,7 @@ local selectedGift
 local selectedToy
 local selectedFood
 local Rayfield = loadstring(game:HttpGet([[https://raw.githubusercontent.com/Nocrazypc/Rayfield/main/source.lua]]))()
+local RayfieldLibrary = loadstring(game:HttpGet([[https://raw.githubusercontent.com/Nocrazypc/Rayfield/main/source.lua]]))()
 --local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 getgenv().auto_accept_trade = false
