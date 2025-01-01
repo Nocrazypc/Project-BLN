@@ -1544,8 +1544,7 @@ GuiPopupButton.MouseButton1Click:Connect(function()
 
     --guiCooldown = true
 
-    RayfieldLibrary:setVisibility(visibility, true)
-			---Unhide()
+    RayfieldLibrary:Unhide()
     task.wait()
 
     --guiCooldown = false
