@@ -1381,12 +1381,11 @@ UserGameSettings.MasterVolume = 8
 for i, v in debug.getupvalue(RouterClient.init, 7)do
     v.Name = i
 end
---First Button- Play---
+---First Button- Play---
 if localPlayer.PlayerGui.NewsApp.Enabled then
     local AbsPlay = localPlayer.PlayerGui.NewsApp:WaitForChild('EnclosingFrame'):WaitForChild('MainFrame'):WaitForChild('Contents'):WaitForChild('PlayButton')
 
-    firesignal(AbsPlay.MouseButton1Down)
-    firesignal(AbsPlay.MouseButton1Click)
+    fireButton(AbsPlay)
 end
 
 if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Visible then
@@ -1568,17 +1567,9 @@ end)
 
 task.wait(2)
 startAutoFarm()
---------------------update Stats UI ----------------
-            while task.wait(5) do
-			StatsGuis:UpdateText("TimeFrame")
-			StatsGuis:UpdateText("BucksAndPotionFrame")
-                        StatsGuis:UpdateText("TotalFrame")
-                        StatsGuis:UpdateText("TotalFrame1")
-                        StatsGuis:UpdateText("TotalFrame2")
-			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
-                    end
+
 -----------------------Rayfield---------------------
-task.wait(15)
+task.wait(10)
 local Window = Rayfield:CreateWindow({
 	Name = "BLN Adopt Me!  Basic Autofarm V4.2",
 	LoadingTitle = "Loading BLN V4 Script ",
@@ -2250,6 +2241,14 @@ getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
 			
     end,
 })
-
+--------------------update Stats UI ----------------
+            while task.wait(5) do
+			StatsGuis:UpdateText("TimeFrame")
+			StatsGuis:UpdateText("BucksAndPotionFrame")
+                        StatsGuis:UpdateText("TotalFrame")
+                        StatsGuis:UpdateText("TotalFrame1")
+                        StatsGuis:UpdateText("TotalFrame2")
+			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
+                    end
    --print('Loaded. lastest update 28/12/2024  mm/dd/yyyy')                 
                     
