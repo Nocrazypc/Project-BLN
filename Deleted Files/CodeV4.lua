@@ -1479,6 +1479,22 @@ Teleport.PlaceFloorAtFarmingHome()
 Teleport.PlaceFloorAtCampSite()
 Teleport.PlaceFloorAtBeachParty()
 
+GuiPopupButton.Text = "Open GUI"
+GuiPopupButton.AnchorPoint = Vector2.new(0.5, 0.5)
+GuiPopupButton.BackgroundColor3 = Color3.fromRGB(255, 176, 5)
+GuiPopupButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+GuiPopupButton.BorderSizePixel = 0
+GuiPopupButton.Position = UDim2.new(0.65, 0, 0.91, 0)
+GuiPopupButton.Size = UDim2.new(0.1, 0, 0.1, 0)
+GuiPopupButton.Font = Enum.Font.FredokaOne
+GuiPopupButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+GuiPopupButton.TextScaled = true
+GuiPopupButton.TextSize = 14.000
+GuiPopupButton.TextWrapped = true
+GuiPopupButton.Parent = TestGui
+
+
+
 local Window = Rayfield:CreateWindow({
 	Name = "BLN Adopt Me!  Basic Autofarm V4.2",
 	LoadingTitle = "Loading BLN Script ",
@@ -2177,33 +2193,6 @@ getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
     end,
 })
 
-GuiPopupButton.Text = "Open GUI"
-GuiPopupButton.AnchorPoint = Vector2.new(0.5, 0.5)
-GuiPopupButton.BackgroundColor3 = Color3.fromRGB(255, 176, 5)
-GuiPopupButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-GuiPopupButton.BorderSizePixel = 0
-GuiPopupButton.Position = UDim2.new(0.65, 0, 0.91, 0)
-GuiPopupButton.Size = UDim2.new(0.1, 0, 0.1, 0)
-GuiPopupButton.Font = Enum.Font.FredokaOne
-GuiPopupButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-GuiPopupButton.TextScaled = true
-GuiPopupButton.TextSize = 14.000
-GuiPopupButton.TextWrapped = true
-GuiPopupButton.Parent = TestGui
-
---ClipboardButton.Text = "Account Clipboard"
---ClipboardButton.AnchorPoint = Vector2.new(0.5, 0.5)
---ClipboardButton.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
---ClipboardButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
---ClipboardButton.BorderSizePixel = 0
---ClipboardButton.Position = UDim2.new(0.78, 0, 0.91, 0)
---ClipboardButton.Size = UDim2.new(0.1, 0, 0.1, 0)
---ClipboardButton.Font = Enum.Font.SourceSans
---ClipboardButton.TextColor3 = Color3.fromRGB(255, 255, 255)
---ClipboardButton.TextScaled = true
---ClipboardButton.TextSize = 14.000
---ClipboardButton.TextWrapped = true
---ClipboardButton.Parent = TestGui
 
 dailyLoginAppClick()
 Teleport.FarmingHome()
