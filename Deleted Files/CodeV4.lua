@@ -1379,13 +1379,13 @@ for i, v in debug.getupvalue(RouterClient.init, 7)do
     v.Name = i
 end
 --First Button- Play---
---[[if localPlayer.PlayerGui.NewsApp.Enabled then
-    task.wait(15)
+if localPlayer.PlayerGui.NewsApp.Enabled then
     local AbsPlay = localPlayer.PlayerGui.NewsApp:WaitForChild('EnclosingFrame'):WaitForChild('MainFrame'):WaitForChild('Contents'):WaitForChild('PlayButton')
 
     firesignal(AbsPlay.MouseButton1Down)
     firesignal(AbsPlay.MouseButton1Click)
-end--]]
+end
+
 if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Visible then
     if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('ban') then
         findButton('Okay')
@@ -1497,33 +1497,6 @@ GuiPopupButton.TextSize = 14.000
 GuiPopupButton.TextWrapped = true
 GuiPopupButton.Parent = TestGui--]]
 
-local Window = Rayfield:CreateWindow({
-	Name = "BLN Adopt Me!  Basic Autofarm V4.2",
-	LoadingTitle = "Loading BLN V4 Script ",
-	LoadingSubtitle = "by BlackLastNight 2025",
-	ConfigurationSaving = {
-		Enabled = false,
-		FolderName = nil, -- Create a custom folder for your hub/game
-		FileName = "BLN 4",
-	},
-	Discord = {
-		Enabled = false,
-		Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
-		RememberJoins = true, -- Set this to false to make them join the discord every time they load it up
-	},
-    KeySystem = false,
-    KeySettings = {
-        Title = 'Untitled',
-        Subtitle = 'Key System',
-        Note = 'No method of obtaining the key is provided',
-        FileName = 'Key',
-        SaveKey = false,
-        GrabKeyFromSite = false,
-        Key = {
-            'Hello',
-        },
-    },
-})
 
 --[[ClipboardButton.Activated:Connect(function()
     if guiCooldown then
@@ -1552,6 +1525,84 @@ end)--]]
 end)--]]
 
 --[[ First Tab - Autofarm ]]
+
+
+dailyLoginAppClick()
+Teleport.FarmingHome()
+	
+if getgenv().BUY_BEFORE_FARMING then
+    isBuyingOrAging = true
+    BuyItems:BuyPets(getgenv().BUY_BEFORE_FARMING)
+end
+if getgenv().OPEN_ITEMS_BEFORE_FARMING then
+    isBuyingOrAging = true
+    BuyItems:OpenItems(getgenv().OPEN_ITEMS_BEFORE_FARMING)
+end
+if getgenv().AGE_PETS_BEFORE_FARMING then
+    isBuyingOrAging = true
+    
+    local bulkPotions = BulkPotions.new()
+
+    bulkPotions:SetEggTable(GetInventory:GetPetEggs())
+    bulkPotions:StartAgingPets(getgenv().AGE_PETS_BEFORE_FARMING)
+    print('DONE aging pets')
+end
+
+    isBuyingOrAging = false
+
+if isMuleInGame() then
+    tradeCollector(getgenv().SETTINGS.TRADE_COLLECTOR_NAME)
+end
+
+--DailyClaimConnection:Disconnect()
+task.delay(5, function()
+    if Players.LocalPlayer.Name == getgenv().SETTINGS.TRADE_COLLECTOR_NAME and getgenv().SETTINGS.ENABLE_TRADE_COLLECTOR == true then
+        task.spawn(function()
+            getgenv().AutoTradeToggle:Set(true)
+        end)
+    end
+end)
+
+task.wait(2)
+startAutoFarm()
+--------------------update Stats UI ----------------
+            while task.wait(5) do
+			StatsGuis:UpdateText("TimeFrame")
+			StatsGuis:UpdateText("BucksAndPotionFrame")
+                        StatsGuis:UpdateText("TotalFrame")
+                        StatsGuis:UpdateText("TotalFrame1")
+                        StatsGuis:UpdateText("TotalFrame2")
+			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
+                    end
+-----------------------Rayfield---------------------
+task.wait(15)
+local Window = Rayfield:CreateWindow({
+	Name = "BLN Adopt Me!  Basic Autofarm V4.2",
+	LoadingTitle = "Loading BLN V4 Script ",
+	LoadingSubtitle = "by BlackLastNight 2025",
+	ConfigurationSaving = {
+		Enabled = false,
+		FolderName = nil, -- Create a custom folder for your hub/game
+		FileName = "BLN 4",
+	},
+	Discord = {
+		Enabled = false,
+		Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
+		RememberJoins = true, -- Set this to false to make them join the discord every time they load it up
+	},
+    KeySystem = false,
+    KeySettings = {
+        Title = 'Untitled',
+        Subtitle = 'Key System',
+        Note = 'No method of obtaining the key is provided',
+        FileName = 'Key',
+        SaveKey = false,
+        GrabKeyFromSite = false,
+        Key = {
+            'Hello',
+        },
+    },
+})
 local FarmTab = Window:CreateTab("Farm", 4483362458)
 
 local FarmToggle = FarmTab:CreateToggle({
@@ -2196,56 +2247,6 @@ getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
 			
     end,
 })
-
-
-dailyLoginAppClick()
-Teleport.FarmingHome()
-	
-if getgenv().BUY_BEFORE_FARMING then
-    isBuyingOrAging = true
-    BuyItems:BuyPets(getgenv().BUY_BEFORE_FARMING)
-end
-if getgenv().OPEN_ITEMS_BEFORE_FARMING then
-    isBuyingOrAging = true
-    BuyItems:OpenItems(getgenv().OPEN_ITEMS_BEFORE_FARMING)
-end
-if getgenv().AGE_PETS_BEFORE_FARMING then
-    isBuyingOrAging = true
-    
-    local bulkPotions = BulkPotions.new()
-
-    bulkPotions:SetEggTable(GetInventory:GetPetEggs())
-    bulkPotions:StartAgingPets(getgenv().AGE_PETS_BEFORE_FARMING)
-    print('DONE aging pets')
-end
-
-    isBuyingOrAging = false
-
-if isMuleInGame() then
-    tradeCollector(getgenv().SETTINGS.TRADE_COLLECTOR_NAME)
-end
-
---DailyClaimConnection:Disconnect()
-task.delay(5, function()
-    if Players.LocalPlayer.Name == getgenv().SETTINGS.TRADE_COLLECTOR_NAME and getgenv().SETTINGS.ENABLE_TRADE_COLLECTOR == true then
-        task.spawn(function()
-            getgenv().AutoTradeToggle:Set(true)
-        end)
-    end
-end)
-
-task.wait(2)
-startAutoFarm()
---------------------update Stats UI ----------------
-            while task.wait(5) do
-			StatsGuis:UpdateText("TimeFrame")
-			StatsGuis:UpdateText("BucksAndPotionFrame")
-                        StatsGuis:UpdateText("TotalFrame")
-                        StatsGuis:UpdateText("TotalFrame1")
-                        StatsGuis:UpdateText("TotalFrame2")
-			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
-                    end
-----------------------------------------------------
 
    --print('Loaded. lastest update 28/12/2024  mm/dd/yyyy')                 
                     
