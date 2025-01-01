@@ -1538,7 +1538,7 @@ ClipboardButton.Activated:Connect(function()
 end)
 
 -- Rayfield:Minimise()
-GuiPopupButton.MouseButton1Click:Connect(function()
+--[[GuiPopupButton.MouseButton1Click:Connect(function()
     if guiCooldown then
         return
     end
@@ -1549,7 +1549,7 @@ GuiPopupButton.MouseButton1Click:Connect(function()
     task.wait()
 
     guiCooldown = false
-end)
+end)--]]
 
 --[[ First Tab - Autofarm ]]
 local FarmTab = Window:CreateTab("Farm", 4483362458)
