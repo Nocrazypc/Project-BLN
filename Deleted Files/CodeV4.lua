@@ -1566,15 +1566,6 @@ end)
 task.wait(2)
 startAutoFarm()
 
---------------------update Stats UI ----------------
-            while task.wait(5) do
-			StatsGuis:UpdateText("TimeFrame")
-			StatsGuis:UpdateText("BucksAndPotionFrame")
-                        StatsGuis:UpdateText("TotalFrame")
-                        StatsGuis:UpdateText("TotalFrame1")
-                        StatsGuis:UpdateText("TotalFrame2")
-			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
-                    end
 -----------------------Rayfield---------------------
 task.wait(5)
 local Window = Rayfield:CreateWindow({
@@ -2249,5 +2240,14 @@ getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
     end,
 })
 
+--------------------update Stats UI ----------------
+            while task.wait(5) do
+			StatsGuis:UpdateText("TimeFrame")
+			StatsGuis:UpdateText("BucksAndPotionFrame")
+                        StatsGuis:UpdateText("TotalFrame")
+                        StatsGuis:UpdateText("TotalFrame1")
+                        StatsGuis:UpdateText("TotalFrame2")
+			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
+                    end
    --print('Loaded. lastest update 28/12/2024  mm/dd/yyyy')                 
                     
