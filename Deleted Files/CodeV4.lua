@@ -1380,6 +1380,7 @@ for i, v in debug.getupvalue(RouterClient.init, 7)do
 end
 --First Button- Play---
 if localPlayer.PlayerGui.NewsApp.Enabled then
+    task.wait(15)
     local AbsPlay = localPlayer.PlayerGui.NewsApp:WaitForChild('EnclosingFrame'):WaitForChild('MainFrame'):WaitForChild('Contents'):WaitForChild('PlayButton')
 
     firesignal(AbsPlay.MouseButton1Down)
