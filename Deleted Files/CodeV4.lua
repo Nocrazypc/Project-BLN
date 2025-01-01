@@ -710,6 +710,9 @@ end
 local completeBabyAilments = function()
     for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments do
         if key == 'hungry' then
+        ReplicatedStorage.API['ToolAPI/Unequip']:InvokeServer(PetCurrentlyFarming, {})
+        task.wait(1)
+        ReplicatedStorage.API['ToolAPI/Equip']:InvokeServer(PetCurrentlyFarming, {})
             ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', "icecream", {})
             task.wait(5)
             Ailments:BabyHungryAilment()
@@ -717,6 +720,9 @@ local completeBabyAilments = function()
 			
             return
         elseif key == 'thirsty' then
+        ReplicatedStorage.API['ToolAPI/Unequip']:InvokeServer(PetCurrentlyFarming, {})
+        task.wait(1)
+        ReplicatedStorage.API['ToolAPI/Equip']:InvokeServer(PetCurrentlyFarming, {})
             ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', "water", {})
             task.wait(5)
             Ailments:BabyThirstyAilment()
@@ -777,6 +783,10 @@ local CompletePetAilments = function()
 
     for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
         if key == 'hungry' then
+        ReplicatedStorage.API['ToolAPI/Unequip']:InvokeServer(PetCurrentlyFarming, {})
+        task.wait(1)
+        ReplicatedStorage.API['ToolAPI/Equip']:InvokeServer(PetCurrentlyFarming, {})
+			
             ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', "icecream", {})
             task.wait(5)
             Ailments:HungryAilment()
@@ -784,6 +794,9 @@ local CompletePetAilments = function()
 
             return true
         elseif key == 'thirsty' then
+	ReplicatedStorage.API['ToolAPI/Unequip']:InvokeServer(PetCurrentlyFarming, {})
+        task.wait(1)
+        ReplicatedStorage.API['ToolAPI/Equip']:InvokeServer(PetCurrentlyFarming, {})
             ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', "water", {})
             task.wait(5)
             Ailments:ThirstyAilment()
