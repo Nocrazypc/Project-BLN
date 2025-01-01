@@ -1,4 +1,10 @@
+if not game:IsLoaded() then
+        game.Loaded:Wait()
+end
 
+if game.PlaceId ~= 920587237 then
+    return
+end
 --------------- modules -------------------
 --local Clipboard = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/ClipboardP.lua"))()
 local Fusion = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Fus.lua"))()
@@ -17,14 +23,6 @@ local taskBoard = TaskBoard.new()
 local Christmas2024 = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Ch2024.lua"))()
 local FC2024 = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/FC2024.lua"))()
 --------------
-
-if not game:IsLoaded() then
-        game.Loaded:Wait()
-end
-
-if game.PlaceId ~= 920587237 then
-    return
-end
 
 local Players = game:GetService('Players')
 local Workspace = game:GetService('Workspace')
@@ -1568,8 +1566,17 @@ end)
 task.wait(2)
 startAutoFarm()
 
+--------------------update Stats UI ----------------
+            while task.wait(5) do
+			StatsGuis:UpdateText("TimeFrame")
+			StatsGuis:UpdateText("BucksAndPotionFrame")
+                        StatsGuis:UpdateText("TotalFrame")
+                        StatsGuis:UpdateText("TotalFrame1")
+                        StatsGuis:UpdateText("TotalFrame2")
+			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
+                    end
 -----------------------Rayfield---------------------
-task.wait(10)
+task.wait(5)
 local Window = Rayfield:CreateWindow({
 	Name = "BLN Adopt Me!  Basic Autofarm V4.2",
 	LoadingTitle = "Loading BLN V4 Script ",
@@ -2241,14 +2248,6 @@ getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
 			
     end,
 })
---------------------update Stats UI ----------------
-            while task.wait(5) do
-			StatsGuis:UpdateText("TimeFrame")
-			StatsGuis:UpdateText("BucksAndPotionFrame")
-                        StatsGuis:UpdateText("TotalFrame")
-                        StatsGuis:UpdateText("TotalFrame1")
-                        StatsGuis:UpdateText("TotalFrame2")
-			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
-                    end
+
    --print('Loaded. lastest update 28/12/2024  mm/dd/yyyy')                 
                     
