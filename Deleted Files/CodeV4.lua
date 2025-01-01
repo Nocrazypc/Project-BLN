@@ -78,7 +78,8 @@ local selectedPet
 local selectedGift
 local selectedToy
 local selectedFood
-local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Rayfield/main/source.lua"))()
+local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Rayfield/main/source"))()
+--local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Rayfield/main/source.lua"))()
 --local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 getgenv().auto_accept_trade = false
@@ -1499,11 +1500,11 @@ GuiPopupButton.Parent = TestGui
 local Window = Rayfield:CreateWindow({
 	Name = "BLN Adopt Me!  Basic Autofarm V4.2",
 	LoadingTitle = "Loading BLN Script ",
-	LoadingSubtitle = "by BlackLastNight 2024",
+	LoadingSubtitle = "by BlackLastNight 2025",
 	ConfigurationSaving = {
 		Enabled = false,
 		FolderName = nil, -- Create a custom folder for your hub/game
-		FileName = "Big Hub",
+		FileName = "BLN 4",
 	},
 	Discord = {
 		Enabled = false,
