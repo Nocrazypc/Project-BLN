@@ -1525,7 +1525,7 @@ local Window = Rayfield:CreateWindow({
     },
 })
 
-ClipboardButton.Activated:Connect(function()
+--[[ClipboardButton.Activated:Connect(function()
     if guiCooldown then
         return
     end
@@ -1535,7 +1535,7 @@ ClipboardButton.Activated:Connect(function()
     clipboard:CopyAllInventory()
 
     guiCooldown = false
-end)
+end)--]]
 
 -- Rayfield:Minimise()
 --[[GuiPopupButton.MouseButton1Click:Connect(function()
