@@ -2242,7 +2242,6 @@ AgeUpPotionTab:CreateButton({
         PetsDropdown2:Set(GetInventory:TabId('pets'))
     end,
 })
-    local petsToAge = {"winter_2024_winter_buck"}	
 
 BulkPotionToggle = AgeUpPotionTab:CreateToggle({
     Name = 'Click to Age up Pet',
@@ -2250,7 +2249,7 @@ BulkPotionToggle = AgeUpPotionTab:CreateToggle({
     Flag = 'Toggle1',
     Callback = function(Value)
 				
-      BulkPotions:StartAgingPets(petsToAge)
+      BulkPotions:StartAgingPets()
 			
     end,
 })
