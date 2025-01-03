@@ -7,7 +7,7 @@
         local ClientData = require(ReplicatedStorage:WaitForChild("ClientModules"):WaitForChild("Core"):WaitForChild("ClientData"))
         local BulkPotions = {}
 
-        BulkPotions.__index = BulkPotions
+        --BulkPotions.__index = BulkPotions
 
         function BulkPotions.new()
             local self = setmetatable({}, BulkPotions)
