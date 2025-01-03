@@ -716,7 +716,7 @@ local completeBabyAilments = function()
             ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', "icecream", {})
             task.wait(5)
             Ailments:BabyHungryAilment()
-            task.wait(5)
+            task.wait(8)
 			
             return
         elseif key == 'thirsty' then
@@ -726,7 +726,7 @@ local completeBabyAilments = function()
             ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', "water", {})
             task.wait(5)
             Ailments:BabyThirstyAilment()
-            task.wait(5)
+            task.wait(8)
 
             return
 	elseif key == 'bored' then
@@ -790,7 +790,7 @@ local CompletePetAilments = function()
             ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', "icecream", {})
             task.wait(5)
             Ailments:HungryAilment()
-            task.wait(5)
+            task.wait(1)
 
             return true
         elseif key == 'thirsty' then
@@ -800,7 +800,7 @@ local CompletePetAilments = function()
             ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', "water", {})
             task.wait(5)
             Ailments:ThirstyAilment()
-            task.wait(5)
+            task.wait(1)
 			
             return true
 	elseif key == 'sick' then
