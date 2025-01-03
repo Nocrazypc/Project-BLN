@@ -1,10 +1,4 @@
-if not game:IsLoaded() then
-        game.Loaded:Wait()
-end
 
-if game.PlaceId ~= 920587237 then
-    return
-end
 --------------- modules -------------------
 --local Clipboard = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/ClipboardP.lua"))()
 local Fusion = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Fus.lua"))()
@@ -23,6 +17,13 @@ local taskBoard = TaskBoard.new()
 local Christmas2024 = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Ch2024.lua"))()
 local FC2024 = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/FC2024.lua"))()
 --------------
+if not game:IsLoaded() then
+        game.Loaded:Wait()
+end
+
+if game.PlaceId ~= 920587237 then
+    return
+end
 
 local Players = game:GetService('Players')
 local Workspace = game:GetService('Workspace')
