@@ -2262,7 +2262,7 @@ if getgenv().feedAgeUpPotionToggle then
     local bulkPotions = BulkPotions.new()
 
     --bulkPotions:SetEggTable(GetInventory:GetPetEggs())
-    bulkPotions:StartAgingPets(Option)
+    bulkPotions:StartAgingPets(CurrentOption)
     print('DONE aging pets')
 end
 			
