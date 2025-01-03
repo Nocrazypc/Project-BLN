@@ -716,7 +716,7 @@ local completeBabyAilments = function()
             ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', "icecream", {})
             task.wait(5)
             Ailments:BabyHungryAilment()
-            task.wait(7)
+            task.wait(5)
 			
             return
         elseif key == 'thirsty' then
@@ -726,7 +726,7 @@ local completeBabyAilments = function()
             ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', "water", {})
             task.wait(5)
             Ailments:BabyThirstyAilment()
-            task.wait(7)
+            task.wait(5)
 
             return
 	elseif key == 'bored' then
@@ -790,7 +790,7 @@ local CompletePetAilments = function()
             ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', "icecream", {})
             task.wait(5)
             Ailments:HungryAilment()
-            task.wait(7)
+            task.wait(5)
 
             return true
         elseif key == 'thirsty' then
@@ -800,7 +800,7 @@ local CompletePetAilments = function()
             ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', "water", {})
             task.wait(5)
             Ailments:ThirstyAilment()
-            task.wait(7)
+            task.wait(5)
 			
             return true
 	elseif key == 'sick' then
@@ -943,14 +943,13 @@ local startAutoFarm = function()
     if getgenv().SETTINGS.ENABLE_AUTO_FARM then
         findFurniture()
 
-        --if Bed then
-            --getgenv().auto_farm = true
+        if Bed then
+            getgenv().auto_farm = true
 
             autoFarm()
-        --end
+        end
     end
 end
-
 local SendMessage = function(url, message, userId)
     local http = game:GetService('HttpService')
     local headers = {
@@ -1577,8 +1576,8 @@ task.delay(5, function()
     end
 end)
 
---task.wait(2)
---startAutoFarm()
+task.wait(2)
+startAutoFarm()
 
 -----------------------Rayfield---------------------
 task.wait(5)
@@ -1618,7 +1617,6 @@ local FarmToggle = FarmTab:CreateToggle({
      Callback = function(Value)
 			
          getgenv().auto_farm = Value
-			
          autoFarm()
      end,
  })
@@ -2234,7 +2232,6 @@ local PetsDropdown2 = AgeUpPotionTab:CreateDropdown({
     Flag = 'Dropdown2',
     Callback = function(Option)
         selectedItem = Option[1] or 'Nothing'
-   --local petsToAge = {"selectedItem"}
     end,
 })
 
@@ -2245,13 +2242,13 @@ AgeUpPotionTab:CreateButton({
     end,
 })
 
-BulkPotionToggle = AgeUpPotionTab:CreateToggle({
+getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
     Name = 'Click to Age up Pet',
     CurrentValue = false,
     Flag = 'Toggle1',
     Callback = function(Value)
-				
-      BulkPotions:StartAgingPets()
+			
+       getgenv().feedAgeUpPotionToggle = Value
 			
     end,
 })
@@ -2266,3 +2263,4 @@ BulkPotionToggle = AgeUpPotionTab:CreateToggle({
 			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
                     end
    --print('Loaded. lastest update 28/12/2024  mm/dd/yyyy')                 
+                    
