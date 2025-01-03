@@ -2248,7 +2248,7 @@ getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
     Flag = 'Toggle1',
     Callback = function(Value)
 			
-       getgenv().feedAgeUpPotionToggle = Value
+       BulkPotions:StartAgingPets(petsToAge) = Value
 			
     end,
 })
