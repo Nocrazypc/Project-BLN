@@ -940,15 +940,15 @@ local startAutoFarm = function()
 
     counter += 1
 
-    --if getgenv().SETTINGS.ENABLE_AUTO_FARM then
+    if getgenv().SETTINGS.ENABLE_AUTO_FARM then
         findFurniture()
 
-        if Bed then
-            getgenv().auto_farm = true
+        --if Bed then
+            --getgenv().auto_farm = true
 
             autoFarm()
-        end
-    --end
+        --end
+    end
 end
 
 local SendMessage = function(url, message, userId)
@@ -1577,8 +1577,8 @@ task.delay(5, function()
     end
 end)
 
-task.wait(2)
-startAutoFarm()
+--task.wait(2)
+--startAutoFarm()
 
 -----------------------Rayfield---------------------
 task.wait(5)
@@ -1619,9 +1619,7 @@ local FarmToggle = FarmTab:CreateToggle({
 			
          getgenv().auto_farm = Value
 			
-	 if getgenv().auto_farm then
-         startAutoFarm()
-	 end
+         autoFarm()
      end,
  })
 -------------------------------------------------
