@@ -940,7 +940,7 @@ local startAutoFarm = function()
 
     counter += 1
 
-    if getgenv().SETTINGS.ENABLE_AUTO_FARM then
+    --if getgenv().SETTINGS.ENABLE_AUTO_FARM then
         findFurniture()
 
         if Bed then
@@ -948,8 +948,9 @@ local startAutoFarm = function()
 
             autoFarm()
         end
-    end
+    --end
 end
+
 local SendMessage = function(url, message, userId)
     local http = game:GetService('HttpService')
     local headers = {
@@ -1617,7 +1618,10 @@ local FarmToggle = FarmTab:CreateToggle({
      Callback = function(Value)
 			
          getgenv().auto_farm = Value
-         autoFarm()
+			
+	 if getgenv().auto_farm then
+         startAutoFarm()
+	 end
      end,
  })
 -------------------------------------------------
