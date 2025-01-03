@@ -2265,3 +2265,8 @@ BulkPotionToggle = AgeUpPotionTab:CreateToggle({
                     end
    --print('Loaded. lastest update 28/12/2024  mm/dd/yyyy')                 
                     
+
+local petsToAge = {
+	"winter_2024_winter_buck"
+}
+BulkPotions:StartAgingPets(petsToAge)
