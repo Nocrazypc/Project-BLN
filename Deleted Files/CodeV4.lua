@@ -2248,8 +2248,10 @@ BulkPotionToggle = AgeUpPotionTab:CreateToggle({
     CurrentValue = false,
     Flag = 'Toggle1',
     Callback = function(Value)
-			
-      BulkPotions:StartAgingPets(petsTable)
+    local petsToAge = {
+	"winter_2024_winter_buck"	
+				
+      BulkPotions:StartAgingPets(petsToAge)
 			
     end,
 })
