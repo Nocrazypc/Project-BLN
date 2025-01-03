@@ -2249,6 +2249,16 @@ getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
     Callback = function(Value)
 			
        getgenv().feedAgeUpPotionToggle = Value
+
+if getgenv().feedAgeUpPotionToggle then
+    isBuyingOrAging = true
+
+    local bulkPotions = BulkPotions.new()
+
+    bulkPotions:SetEggTable(GetInventory:GetPetEggs())
+    bulkPotions:StartAgingPets(selectedItem)
+    print('DONE aging pets')
+end
 			
     end,
 })
