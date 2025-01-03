@@ -5,9 +5,7 @@
         local localPlayer = Players.LocalPlayer
         local Fusion = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Fus.lua"))()
         local ClientData = require(ReplicatedStorage:WaitForChild("ClientModules"):WaitForChild("Core"):WaitForChild("ClientData"))
-        local BulkPotions = {}
-
-        --BulkPotions.__index = BulkPotions
+        local BulkPotions = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/BulkP.lua"))()
 
         function BulkPotions.new()
             local self = setmetatable({}, BulkPotions)
