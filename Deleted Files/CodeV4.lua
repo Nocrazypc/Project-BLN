@@ -2242,13 +2242,13 @@ AgeUpPotionTab:CreateButton({
     end,
 })
 
-getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
+BulkPotionToggle = AgeUpPotionTab:CreateToggle({
     Name = 'Click to Age up Pet',
     CurrentValue = false,
     Flag = 'Toggle1',
     Callback = function(Value)
 			
-       BulkPotions:StartAgingPets(petsToAge)
+      BulkPotions:StartAgingPets(petsTable)
 			
     end,
 })
