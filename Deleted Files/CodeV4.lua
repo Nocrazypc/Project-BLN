@@ -2243,9 +2243,9 @@ AgeUpPotionTab:CreateButton({
     end,
 })
 ---------------
- getgenv().AGE_PETS_BEFORE_FARMING = {
+ --[[getgenv().AGE_PETS_BEFORE_FARMING = {
  	"winter_2024_winter_buck" 
- }
+ }--]]
 ---------------
 
 getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
@@ -2262,7 +2262,7 @@ if getgenv().feedAgeUpPotionToggle then
     local bulkPotions = BulkPotions.new()
 
     --bulkPotions:SetEggTable(GetInventory:GetPetEggs())
-    bulkPotions:StartAgingPets(getgenv().AGE_PETS_BEFORE_FARMING)
+    bulkPotions:StartAgingPets(petsTable)
     print('DONE aging pets')
 end
 			
