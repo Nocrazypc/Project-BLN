@@ -150,8 +150,8 @@
                 return
             end
 
-            local TotalPotions = localPlayer.PlayerGui.StatsGui.MainFrame.MiddleFrame.TotalPotions
-            local TotalTinyPotions = localPlayer.PlayerGui.StatsGui.MainFrame.MiddleFrame.TotalTinyPotions
+            --local TotalPotions = localPlayer.PlayerGui.StatsGui.MainFrame.MiddleFrame.TotalPotions
+            --local TotalTinyPotions = localPlayer.PlayerGui.StatsGui.MainFrame.MiddleFrame.TotalTinyPotions
 
             for _, v in ClientData.get_data()[localPlayer.Name].inventory.food do
                 if v.id == 'pet_age_potion' then
