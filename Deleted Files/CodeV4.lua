@@ -2248,7 +2248,7 @@ BulkPotionToggle = AgeUpPotionTab:CreateToggle({
     Flag = 'Toggle1',
     Callback = function(Value)
 			
-      BulkPotions:StartAgingPets(CurrentOption)
+      BulkPotions:StartAgingPets(Option[1])
 			
     end,
 })
