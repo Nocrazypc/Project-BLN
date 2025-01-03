@@ -173,7 +173,7 @@ local ClientData = require(ReplicatedStorage:WaitForChild("ClientModules"):WaitF
                     task.wait(1)
                     consumeItem('AgePotion')
 
-                    TotalPotions.Text = `\u{1f9ea} {agePotionCount('pet_age_potion')}`
+                    --TotalPotions.Text = `\u{1f9ea} {agePotionCount('pet_age_potion')}`
 
                     return
                 end
@@ -196,14 +196,14 @@ local ClientData = require(ReplicatedStorage:WaitForChild("ClientModules"):WaitF
                     task.wait(1)
                     consumeItem('TinyAgePotion')
 
-                    TotalTinyPotions.Text = `\u{2697}\u{fe0f} {agePotionCount('tiny_pet_age_potion')}`
+                    --TotalTinyPotions.Text = `\u{2697}\u{fe0f} {agePotionCount('tiny_pet_age_potion')}`
 
                     return
                 end
             end
 
-            TotalPotions.Text = `\u{1f9ea} {agePotionCount('pet_age_potion')}`
-            TotalTinyPotions.Text = `\u{2697}\u{fe0f} {agePotionCount('tiny_pet_age_potion')}`
+            --TotalPotions.Text = `\u{1f9ea} {agePotionCount('pet_age_potion')}`
+            --TotalTinyPotions.Text = `\u{2697}\u{fe0f} {agePotionCount('tiny_pet_age_potion')}`
 
             return
         end
