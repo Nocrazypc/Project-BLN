@@ -2232,6 +2232,7 @@ local PetsDropdown2 = AgeUpPotionTab:CreateDropdown({
     Flag = 'Dropdown2',
     Callback = function(Option)
         selectedItem = Option[1] or 'Nothing'
+   local petsToAge = {"selectedItem"}
     end,
 })
 
@@ -2248,7 +2249,7 @@ BulkPotionToggle = AgeUpPotionTab:CreateToggle({
     Flag = 'Toggle1',
     Callback = function(Value)
 			
-      BulkPotions:StartAgingPets(CurrentOption)
+      BulkPotions:StartAgingPets(petsToAge)
 			
     end,
 })
