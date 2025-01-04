@@ -2256,40 +2256,19 @@ getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
 			
        getgenv().feedAgeUpPotionToggle = Value
 
---if getgenv().feedAgeUpPotionToggle then
     while getgenv().feedAgeUpPotionToggle do				
     isBuyingOrAging = true
-
     local bulkPotions = BulkPotions.new()
-
     --bulkPotions:SetEggTable(GetInventory:GetPetEggs())
     bulkPotions:StartAgingPets(petsTable)
-
-
-		local hasPetEquipped = ClientData.get("pet_char_wrappers")[1]
-		if not hasPetEquipped then
-			equipPet()
-			task.wait(1)
-		end
 
 		if selectedItem ~= ClientData.get("pet_char_wrappers")[1]["pet_id"] then
 			equipPet()
 			task.wait(1)
 		end
-
-		local age = ClientData.get("pet_char_wrappers")[1]["pet_progression"]["age"]
-		if age >= 6 then
-			local hasPet = equipPet()
-			task.wait(1) -- wait for pet to equip
-			if not hasPet then
-				getgenv().PotionToggle:Set(false)
-				return
-			end
-		end
-
-				
-    print('DONE aging pets')
-end
+						
+                print('DONE aging pets')
+                                        end
 			
     end,
 })
