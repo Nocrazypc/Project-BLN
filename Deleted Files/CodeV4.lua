@@ -2223,26 +2223,8 @@ NewAltTab:CreateButton({
 })
 
 local AgeUpPotionTab = Window:CreateTab('Age Up Potion', 4483362458)
---[[local PetsDropdown2 = AgeUpPotionTab:CreateDropdown({
-    Name = 'Select a Pet',
-    Options = petsTable,
-    CurrentOption = {
-        '',
-    },
-    MultipleOptions = false,
-    Flag = 'Dropdown2',
-    Callback = function(Option)
-        selectedItem = Option[1] or 'Nothing'
-    end,
-})
 
-AgeUpPotionTab:CreateButton({
-    Name = 'Refesh Pet list',
-    Callback = function()
-        PetsDropdown2:Set(GetInventory:TabId('pets'))
-    end,
-})--]]
----------- Pets to Age Up --------
+---------- focused Pets to Age Up --------
  --[[getgenv().AGE_PETS_BEFORE_FARMING = {
  	"winter_2024_winter_buck" 
  }--]]
