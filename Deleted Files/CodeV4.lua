@@ -2249,7 +2249,7 @@ AgeUpPotionTab:CreateButton({
 ---------------
 
 getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
-    Name = 'Click to Age up Pet',
+    Name = 'Click to Age Up All Pets',
     CurrentValue = false,
     Flag = 'Toggle1',
     Callback = function(Value)
