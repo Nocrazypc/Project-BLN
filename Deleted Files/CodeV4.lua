@@ -2222,7 +2222,7 @@ NewAltTab:CreateButton({
     end,
 })
 
-local AgeUpPotionTab = Window:CreateTab('Bulk Age Up Potion', 4483362458)
+local AgeUpPotionTab = Window:CreateTab('Age Up Potion', 4483362458)
 --[[local PetsDropdown2 = AgeUpPotionTab:CreateDropdown({
     Name = 'Select a Pet',
     Options = petsTable,
@@ -2249,7 +2249,7 @@ AgeUpPotionTab:CreateButton({
 ----------------------------------
 
 getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
-    Name = 'Click to Age Up All Pets',
+    Name = 'Turm On to Age Up All Pets',
     CurrentValue = false,
     Flag = 'Toggle1',
     Callback = function(Value)
@@ -2259,7 +2259,7 @@ getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
     while getgenv().feedAgeUpPotionToggle do				
     isBuyingOrAging = true
     local bulkPotions = BulkPotions.new()
-    --bulkPotions:SetEggTable(GetInventory:GetPetEggs())
+    bulkPotions:SetEggTable(GetInventory:GetPetEggs())
     bulkPotions:StartAgingPets(petsTable)
     --bulkPotions:StartAgingPets(getgenv().AGE_PETS_BEFORE_FARMING)				
     print('DONE aging pets')
