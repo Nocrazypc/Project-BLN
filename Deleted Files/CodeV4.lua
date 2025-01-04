@@ -2242,11 +2242,11 @@ AgeUpPotionTab:CreateButton({
         PetsDropdown2:Set(GetInventory:TabId('pets'))
     end,
 })--]]
----------------
+---------- Pets to Age Up --------
  --[[getgenv().AGE_PETS_BEFORE_FARMING = {
  	"winter_2024_winter_buck" 
  }--]]
----------------
+----------------------------------
 
 getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
     Name = 'Click to Age Up All Pets',
@@ -2261,7 +2261,7 @@ getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
     local bulkPotions = BulkPotions.new()
     --bulkPotions:SetEggTable(GetInventory:GetPetEggs())
     bulkPotions:StartAgingPets(petsTable)
-				
+    --bulkPotions:StartAgingPets(getgenv().AGE_PETS_BEFORE_FARMING)				
     print('DONE aging pets')
                                         end
 			
