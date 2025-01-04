@@ -2222,8 +2222,8 @@ NewAltTab:CreateButton({
     end,
 })
 
-local AgeUpPotionTab = Window:CreateTab('Age Potion', 4483362458)
-local PetsDropdown2 = AgeUpPotionTab:CreateDropdown({
+local AgeUpPotionTab = Window:CreateTab('Bulk Age Up Potion', 4483362458)
+--[[local PetsDropdown2 = AgeUpPotionTab:CreateDropdown({
     Name = 'Select a Pet',
     Options = petsTable,
     CurrentOption = {
@@ -2241,7 +2241,7 @@ AgeUpPotionTab:CreateButton({
     Callback = function()
         PetsDropdown2:Set(GetInventory:TabId('pets'))
     end,
-})
+})--]]
 ---------------
  --[[getgenv().AGE_PETS_BEFORE_FARMING = {
  	"winter_2024_winter_buck" 
@@ -2261,13 +2261,8 @@ getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
     local bulkPotions = BulkPotions.new()
     --bulkPotions:SetEggTable(GetInventory:GetPetEggs())
     bulkPotions:StartAgingPets(petsTable)
-
-		if selectedItem ~= ClientData.get("pet_char_wrappers")[1]["pet_id"] then
-			equipPet()
-			task.wait(1)
-		end
-						
-                print('DONE aging pets')
+				
+    print('DONE aging pets')
                                         end
 			
     end,
