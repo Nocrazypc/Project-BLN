@@ -1524,8 +1524,7 @@ end)--]]
     guiCooldown = false
 end)--]]
 
---[[ First Tab - Autofarm ]]
-
+----------------------------------------
 
 dailyLoginAppClick()
 --Teleport.FarmingHome()
@@ -1595,6 +1594,8 @@ local Window = Rayfield:CreateWindow({
         },
     },
 })
+
+--[[ First Tab - Autofarm ]]
 local FarmTab = Window:CreateTab("Farm", 4483362458)
 
 local FarmToggle = FarmTab:CreateToggle({
@@ -1673,67 +1674,8 @@ FarmTab:CreateButton({
 	end,
 })
 
-------------- minigames-----------
---[[local FarmToggle = FarmTab:CreateToggle({
-     Name = "Winter 2024 Spleef Minigame",
-     CurrentValue = false,
-     Flag = "Toggle10",
-     Callback = function(Value)
+------------- minigames-------------
 
-task.wait(2)    
-
-    ReplicatedStorage.API["TeamAPI/ChooseTeam"]:InvokeServer("Parents", {["dont_send_back_home"] = true, ["source_for_logging"] = "avatar_editor"})
-    
-task.wait(5) do
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/W24.lua"))()
-end
-
-     end,
- })--]]
----------- frostClawMinigame ----------
-	
---[[local FarmToggle = FarmTab:CreateToggle({
-     Name = "Winter 2024 Frostclaw Revenge Minigame",
-     CurrentValue = false,
-     Flag = "Toggle11",
-     Callback = function(Value)
-     getgenv().AutoFCMinigame = Value
-
-    ReplicatedStorage.API["TeamAPI/ChooseTeam"]:InvokeServer("Parents", {["dont_send_back_home"] = true, ["source_for_logging"] = "avatar_editor"})
-				
-    Teleport.BeachParty()			
-    task.wait(2) 
-
-if getgenv().AutoFCMinigame then
-	FC2024.init()
-	Player.Idled:Connect(function()
-		VirtualUser:ClickButton2(Vector2.new())
-	end)
-	task.spawn(function()
-		while true do
-                        task.wait(13)
-			--print("running frostclaw minigame")
-			if FC2024.CreateAndStartLobby() then
-				FC2024.StartGame()
-			end
-			
-			task.wait(1)
-		end
-	end)
-end
-
-     end,
- })--]]
-----------
---[[local FarmToggle = FarmTab:CreateToggle({
-     Name = "Winter 2024 Spleef Minigame for AutoFarm",
-     CurrentValue = false,
-     Flag = "Toggle12",
-     Callback = function(Value)
-     getgenv().AutoMinigame = Value
-
-       end,
- })--]]
 ------------------------------------
 
 
@@ -2245,5 +2187,5 @@ getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
                         --StatsGuis:UpdateText("TotalFrame2")
 			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
                     end
-   --print('Loaded. lastest update 28/12/2024  mm/dd/yyyy')                 
+   --print('Loaded. lastest update 10/01/2025  mm/dd/yyyy')                 
                     
