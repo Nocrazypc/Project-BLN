@@ -324,11 +324,12 @@ local placeBaitOrPickUp = function(baitIdPasson)
         return
     end
     
-    baitId = findBait('winter_2024_winter_deer_bait')
-
-if not baitId then
+    --baitId = findBait('winter_2024_winter_deer_bait')
     baitId = findBait('lures_2023_campfire_cookies')
-end
+
+--[[if not baitId then
+    baitId = findBait('lures_2023_campfire_cookies')
+end--]]
 
 print(`\u{1f36a} Found baitId: {baitId} \u{1f36a}`)
     
