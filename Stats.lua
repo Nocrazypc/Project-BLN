@@ -26,16 +26,16 @@ local UICorner_4 = Instance.new("UICorner")
 local TotalFrame1 = Instance.new("Frame")
 local TextLabel_5 = Instance.new("TextLabel")
 local UICorner_5 = Instance.new("UICorner")
------Gingerbread-----
-local TotalFrame2 = Instance.new("Frame")
-local TextLabel_6 = Instance.new("TextLabel")
-local UICorner_6 = Instance.new("UICorner")
-
+-----Gingerbread slot-----
+--local TotalFrame2 = Instance.new("Frame")
+--local TextLabel_6 = Instance.new("TextLabel")
+--local UICorner_6 = Instance.new("UICorner")
+-------------------------
 
 
 local startCount = 0
 local startBucksAmount = 0
-local startgingerbreadAmount = 0
+--local startgingerbreadAmount = 0
 local startTime = nil
 
 
@@ -257,11 +257,11 @@ local function bucksAmount()
     return ClientData.get_data()[localPlayer.Name].money or 0
 end
 
------ gingrebread------
+----- gingerbread------
 
-local function gingerbreadAmount()
+--[[local function gingerbreadAmount()
     return ClientData.get_data()[localPlayer.Name].gingerbread_2024 or 0
-end
+end--]]
 
 -----------------------
 
@@ -278,7 +278,7 @@ end
 
 startCount = agePotionCount()
 startBucksAmount = bucksAmount()
-startgingerbreadAmount = gingerbreadAmount()
+--startgingerbreadAmount = gingerbreadAmount()
 startTime = DateTime.now().UnixTimestamp
 
 function StatsGuis:UpdateText(nameOfFrame: string)
@@ -291,10 +291,10 @@ function StatsGuis:UpdateText(nameOfFrame: string)
     elseif nameOfFrame == "BucksAndPotionFrame" then
         local potionCount = agePotionCount() - startCount
         local bucks = bucksAmount() - startBucksAmount
-        local gingerbread = gingerbreadAmount() - startgingerbreadAmount
+        --local gingerbread = gingerbreadAmount() - startgingerbreadAmount
         if potionCount <= 0 then potionCount = 0 end
         if bucks <= 0 then bucks = 0 end
-        if gingerbread <= 0 then gingerbread = 0 end
+        --if gingerbread <= 0 then gingerbread = 0 end
         MainFrame.BucksAndPotionFrame.TextLabel.Text = `🧪 {formatNumber(potionCount)} 💰 {formatNumber(bucks)}`
     elseif nameOfFrame == "TotalFrame" then
         local potionCount = agePotionCount()
