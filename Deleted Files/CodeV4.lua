@@ -50,7 +50,6 @@ local DailyClaimConnection
 local counter = 0
 local isNewAccount = false
 local isInMiniGame = false
-local isInMiniGame = false
 local isBuyingOrAging = false
 local guiCooldown = false
 local tutorialDebonce = false
@@ -103,8 +102,8 @@ getgenv().PetCurrentlyFarming = ''
 getgenv().AutoFusion = false
 getgenv().FocusFarmAgePotions = false
 
-getgenv().AutoMinigame = false
-getgenv().AutoFCMinigame = false
+--getgenv().AutoMinigame = false
+--getgenv().AutoFCMinigame = false
 
 local Egg2Buy = getgenv().SETTINGS.PET_TO_BUY
 local TestGui = Instance.new('ScreenGui')
@@ -668,22 +667,8 @@ local tradeCollector = function(namePassOn)
         task.wait()
     end
 end
-local PlaceFloorAtSpleefMinigame = function()
-    if Workspace:FindFirstChild('SpleefLocation') then
-        return
-    end
 
-    local interiorOrigin = Workspace:WaitForChild('Interiors'):WaitForChild('SpleefMinigame'):WaitForChild('InteriorOrigin')
-    local part = Instance.new('Part')
-
-    part.Position = interiorOrigin.Position
-    part.Size = Vector3.new(200, 2, 200)
-    part.Anchored = true
-    part.Transparency = 0
-    part.Name = 'SpleefLocation'
-    part.Parent = Workspace
-end
-local removeGameOverButton = function()
+--[[local removeGameOverButton = function()
     localPlayer.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild('Face')
 
     for _, v in pairs(localPlayer.PlayerGui.MinigameRewardsApp.Body.Button:GetDescendants())do
@@ -708,7 +693,7 @@ local onTextChangedMiniGame = function()
     else
         findButton('No')
     end
-end
+end--]]
 local completeBabyAilments = function()
     for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments do
         if key == 'hungry' then
@@ -936,9 +921,9 @@ local autoFarm = function()
 end
 
 local startAutoFarm = function()
-    if getgenv().AutoFCMinigame then
+    --[[if getgenv().AutoFCMinigame then
         return
-    end
+    end--]]
 
     counter += 1
 
