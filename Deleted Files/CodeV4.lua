@@ -14,8 +14,8 @@ local TaskBoard = loadstring(game:HttpGet("https://raw.githubusercontent.com/Noc
 local Clipboard = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/ClipB.lua"))()
 local clipboard = Clipboard.new()
 local taskBoard = TaskBoard.new()
-local Christmas2024 = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Ch2024.lua"))()
-local FC2024 = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/FC2024.lua"))()
+--local Christmas2024 = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Ch2024.lua"))()
+--local FC2024 = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/FC2024.lua"))()
 --------------
 if not game:IsLoaded() then
         game.Loaded:Wait()
@@ -1672,23 +1672,23 @@ end)
      end,
  })
 
---[[FarmTab:CreateSection("Make ALL Neon/Mega in 1 Click")
+FarmTab:CreateSection("Make ALL Neon/Mega in 1 Click")
 FarmTab:CreateButton({
 	Name = "Make Neon Pets",
 	Callback = function()
 		Fusion:MakeMega(false)
 	end,
-})--]]
+})
 
---[[FarmTab:CreateButton({
+FarmTab:CreateButton({
 	Name = "Make Mega Pets",
 	Callback = function()
 		Fusion:MakeMega(true)
 	end,
-})--]]
+})
 
 ------------- minigames-----------
-local FarmToggle = FarmTab:CreateToggle({
+--[[local FarmToggle = FarmTab:CreateToggle({
      Name = "Winter 2024 Spleef Minigame",
      CurrentValue = false,
      Flag = "Toggle10",
@@ -1703,10 +1703,10 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN
 end
 
      end,
- })
+ })--]]
 ---------- frostClawMinigame ----------
 	
-local FarmToggle = FarmTab:CreateToggle({
+--[[local FarmToggle = FarmTab:CreateToggle({
      Name = "Winter 2024 Frostclaw Revenge Minigame",
      CurrentValue = false,
      Flag = "Toggle11",
@@ -1737,9 +1737,9 @@ if getgenv().AutoFCMinigame then
 end
 
      end,
- })
+ })--]]
 ----------
-local FarmToggle = FarmTab:CreateToggle({
+--[[local FarmToggle = FarmTab:CreateToggle({
      Name = "Winter 2024 Spleef Minigame for AutoFarm",
      CurrentValue = false,
      Flag = "Toggle12",
@@ -1747,7 +1747,7 @@ local FarmToggle = FarmTab:CreateToggle({
      getgenv().AutoMinigame = Value
 
        end,
- })
+ })--]]
 ------------------------------------
 
 
