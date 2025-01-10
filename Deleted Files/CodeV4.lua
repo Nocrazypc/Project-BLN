@@ -1369,7 +1369,7 @@ StatsGuis:UpdateText("TimeFrame")
 StatsGuis:UpdateText("BucksAndPotionFrame")
 StatsGuis:UpdateText("TotalFrame")
 StatsGuis:UpdateText("TotalFrame1")
-StatsGuis:UpdateText("TotalFrame2")
+--StatsGuis:UpdateText("TotalFrame2")
 
 StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Captures, false)
 
@@ -2256,7 +2256,7 @@ getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
 			StatsGuis:UpdateText("BucksAndPotionFrame")
                         StatsGuis:UpdateText("TotalFrame")
                         StatsGuis:UpdateText("TotalFrame1")
-                        StatsGuis:UpdateText("TotalFrame2")
+                        --StatsGuis:UpdateText("TotalFrame2")
 			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
                     end
    --print('Loaded. lastest update 28/12/2024  mm/dd/yyyy')                 
