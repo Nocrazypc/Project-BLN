@@ -323,9 +323,9 @@ local placeBaitOrPickUp = function(baitIdPasson)
     --baitId = findBait('winter_2024_winter_deer_bait')
     baitId = findBait('lures_2023_campfire_cookies')
 
---[[if not baitId then
+if not baitId then
     baitId = findBait('lures_2023_campfire_cookies')
-end--]]
+end
 
 print(`\u{1f36a} Found baitId: {baitId} \u{1f36a}`)
     
@@ -813,8 +813,6 @@ local CompletePetAilments = function()
         elseif key == 'sleepy' then
             Ailments:SleepyAilment(Bed, petUnique)
             task.wait(3)
-            placeBaitOrPickUp(baitId)
-            task.wait(2)
             placeBaitOrPickUp(baitId)
 
             return true
