@@ -20,13 +20,25 @@ local UICorner_2 = Instance.new("UICorner")
 local BucksAndPotionFrame = Instance.new("Frame")
 local TextLabel_3 = Instance.new("TextLabel")
 local UICorner_3 = Instance.new("UICorner")
-local TotalPotionFrame = Instance.new("Frame")
+local TotalFrame = Instance.new("Frame")
 local TextLabel_4 = Instance.new("TextLabel")
 local UICorner_4 = Instance.new("UICorner")
+local TotalFrame1 = Instance.new("Frame")
+local TextLabel_5 = Instance.new("TextLabel")
+local UICorner_5 = Instance.new("UICorner")
+-----Gingerbread-----
+local TotalFrame2 = Instance.new("Frame")
+local TextLabel_6 = Instance.new("TextLabel")
+local UICorner_6 = Instance.new("UICorner")
+
+
 
 local startCount = 0
 local startBucksAmount = 0
+local startgingerbreadAmount = 0
 local startTime = nil
+
+
 --Properties:
 
 StatsGui.Name = "StatsGui"
@@ -40,7 +52,7 @@ MainFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 MainFrame.BackgroundTransparency = 1.000
 MainFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 MainFrame.BorderSizePixel = 0
-MainFrame.Position = UDim2.new(0.777189096, 0, 0.443002731, 0)
+MainFrame.Position = UDim2.new(0.777189096, 0, 0.363002731, 0)
 MainFrame.Size = UDim2.new(0.200000012, 0, 0.300000006, 0)
 MainFrame.Parent = StatsGui
 
@@ -133,17 +145,17 @@ UICorner_4.CornerRadius = UDim.new(0, 12)
 UICorner_4.Parent = TextLabel_4
 
 
-TotalPotionFrame.Name = "TotalPotionFrame"
-TotalPotionFrame.Parent = MainFrame
-TotalPotionFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-TotalPotionFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TotalPotionFrame.BackgroundTransparency = 1.000
-TotalPotionFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TotalPotionFrame.BorderSizePixel = 0
-TotalPotionFrame.Position = UDim2.new(0.5, 0, 0.119999997, 0)
-TotalPotionFrame.Size = UDim2.new(1, 0, 0.25, 0)
+TotalFrame.Name = "TotalFrame"
+TotalFrame.Parent = MainFrame
+TotalFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+TotalFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TotalFrame.BackgroundTransparency = 1.000
+TotalFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TotalFrame.BorderSizePixel = 0
+TotalFrame.Position = UDim2.new(0.5, 0, 0.119999997, 0)
+TotalFrame.Size = UDim2.new(1, 0, 0.25, 0)
 
-TextLabel_3.Parent = TotalPotionFrame
+TextLabel_3.Parent = TotalFrame
 TextLabel_3.AnchorPoint = Vector2.new(0.5, 0.5)
 TextLabel_3.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 TextLabel_3.BackgroundTransparency = 0.500
@@ -161,15 +173,96 @@ TextLabel_3.TextWrapped = true
 UICorner_3.CornerRadius = UDim.new(0, 12)
 UICorner_3.Parent = TextLabel_3
 
+TotalFrame1.Name = "TotalFrame1"
+TotalFrame1.Parent = MainFrame
+TotalFrame1.AnchorPoint = Vector2.new(0.5, 0.5)
+TotalFrame1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TotalFrame1.BackgroundTransparency = 1.000
+TotalFrame1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TotalFrame1.BorderSizePixel = 0
+TotalFrame1.Position = UDim2.new(0.5, 0, 0.119999997, 0)
+TotalFrame1.Size = UDim2.new(1, 0, 0.25, 0)
+
+TextLabel_5.Parent = TotalFrame1
+TextLabel_5.AnchorPoint = Vector2.new(0.5, 0.5)
+TextLabel_5.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+TextLabel_5.BackgroundTransparency = 0.500
+TextLabel_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_5.BorderSizePixel = 0
+TextLabel_5.Position = UDim2.new(0.498873174, 0, 0.496309608, 0)
+TextLabel_5.Size = UDim2.new(0.996291697, 0, 0.97639972, 0)
+TextLabel_5.Font = Enum.Font.FredokaOne
+TextLabel_5.Text = "Name"
+TextLabel_5.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_5.TextScaled = true
+TextLabel_5.TextSize = 14.000
+TextLabel_5.TextWrapped = true
+
+UICorner_5.CornerRadius = UDim.new(0, 12)
+UICorner_5.Parent = TextLabel_5
+
+------ Gingerbread ---------
+
+TotalFrame2.Name = "TotalFrame2"
+TotalFrame2.Parent = MainFrame
+TotalFrame2.AnchorPoint = Vector2.new(0.5, 0.5)
+TotalFrame2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TotalFrame2.BackgroundTransparency = 1.000
+TotalFrame2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TotalFrame2.BorderSizePixel = 0
+TotalFrame2.Position = UDim2.new(0.5, 0, 0.119999997, 0)
+TotalFrame2.Size = UDim2.new(1, 0, 0.25, 0)
+
+TextLabel_6.Parent = TotalFrame2
+TextLabel_6.AnchorPoint = Vector2.new(0.5, 0.5)
+TextLabel_6.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+TextLabel_6.BackgroundTransparency = 0.500
+TextLabel_6.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_6.BorderSizePixel = 0
+TextLabel_6.Position = UDim2.new(0.498873174, 0, 0.496309608, 0)
+TextLabel_6.Size = UDim2.new(0.996291697, 0, 0.97639972, 0)
+TextLabel_6.Font = Enum.Font.FredokaOne
+TextLabel_6.Text = "Name"
+TextLabel_6.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_6.TextScaled = true
+TextLabel_6.TextSize = 14.000
+TextLabel_6.TextWrapped = true
+
+UICorner_6.CornerRadius = UDim.new(0, 12)
+UICorner_6.Parent = TextLabel_6
+
+----------------------------
+
 local function formatTime(currentTime)
 	local hours = math.floor(currentTime / 3600)
 	local minutes = math.floor((currentTime % 3600) / 60)
 	return string.format("%02d:%02d", hours, minutes)
 end
 
+local function formatNumber(num)
+        if num >= 1e6 then
+                -- Millions
+                return string.format("%.1fM", num / 1e6)
+        elseif num >= 1e3 then
+                -- Thousands
+                return string.format("%.0fk", num / 1e3)
+        else
+                -- Less than a thousand
+                return tostring(num)
+        end
+end
+
 local function bucksAmount()
     return ClientData.get_data()[localPlayer.Name].money or 0
 end
+
+----- gingrebread------
+
+local function gingerbreadAmount()
+    return ClientData.get_data()[localPlayer.Name].gingerbread_2024 or 0
+end
+
+-----------------------
 
 local function agePotionCount()
     local count = 0
@@ -181,8 +274,10 @@ local function agePotionCount()
     return count
 end
 
+
 startCount = agePotionCount()
 startBucksAmount = bucksAmount()
+startgingerbreadAmount = gingerbreadAmount()
 startTime = DateTime.now().UnixTimestamp
 
 function StatsGuis:UpdateText(nameOfFrame: string)
@@ -195,11 +290,22 @@ function StatsGuis:UpdateText(nameOfFrame: string)
     elseif nameOfFrame == "BucksAndPotionFrame" then
         local potionCount = agePotionCount() - startCount
         local bucks = bucksAmount() - startBucksAmount
+        local gingerbread = gingerbreadAmount() - startgingerbreadAmount
         if potionCount <= 0 then potionCount = 0 end
         if bucks <= 0 then bucks = 0 end
-        MainFrame.BucksAndPotionFrame.TextLabel.Text = `🧪 {potionCount} 💰 {bucks}`
-    elseif nameOfFrame == "TotalPotionFrame" then
-        MainFrame.TotalPotionFrame.TextLabel.Text = `Total 🧪: {agePotionCount()}`
+        if gingerbread <= 0 then gingerbread = 0 end
+        MainFrame.BucksAndPotionFrame.TextLabel.Text = `🧪 {formatNumber(potionCount)} 💰 {formatNumber(bucks)}`
+    elseif nameOfFrame == "TotalFrame" then
+        local potionCount = agePotionCount()
+        MainFrame.TotalFrame.TextLabel.Text = `Total 🧪 {formatNumber(potionCount)}`
+    elseif nameOfFrame == "TotalFrame1" then
+        local bucks = bucksAmount()
+        MainFrame.TotalFrame1.TextLabel.Text = `Total 💰 {formatNumber(bucks)}`
+--- Gingerbread-----
+    elseif nameOfFrame == "TotalFrame2" then
+        local gingerbread = gingerbreadAmount()
+        MainFrame.TotalFrame2.TextLabel.Text = `Total 🍪 {formatNumber(gingerbread)}`
+--------------------
     elseif nameOfFrame == "NameFrame" then
         MainFrame.NameFrame.TextLabel.Text = `😎 {localPlayer.Name}`
     end
