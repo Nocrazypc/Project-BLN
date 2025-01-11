@@ -811,6 +811,8 @@ local CompletePetAilments = function()
             return true
         elseif key == 'dirty' then
             Ailments:DirtyAilment(Shower, petUnique)
+            task.wait(3)
+            placeBaitOrPickUp(baitId)
 
             return true
         elseif key == 'walk' then
