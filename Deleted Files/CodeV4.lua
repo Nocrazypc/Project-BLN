@@ -321,11 +321,10 @@ local placeBaitOrPickUp = function(baitIdPasson)
     end
     
     --baitId = findBait('winter_2024_winter_deer_bait')
-    baitId = findBait('lures_2023_campfire_cookies')
 
-if not baitId then
+--[[if not baitId then
     baitId = findBait('lures_2023_campfire_cookies')
-end
+end--]]
 
 print(`\u{1f36a} Found baitId: {baitId} \u{1f36a}`)
     
@@ -334,15 +333,15 @@ print(`\u{1f36a} Found baitId: {baitId} \u{1f36a}`)
         [2] = NormalLure,
         [3] = 'UseBlock',
         [4] = {
-            ['bait_unique'] = baitId,
+            ['bait_unique'] = baitIdPasson,
         },
         [5] = game:GetService('Players').LocalPlayer.Character,
     }
+    local success, errorMessage = pcall(function()
+        ReplicatedStorage.API:FindFirstChild('HousingAPI/ActivateFurniture'):InvokeServer(unpack(args))
+    end)
 
-    ReplicatedStorage.API:FindFirstChild('HousingAPI/ActivateFurniture'):InvokeServer(unpack(args))
-
-    print('placing bait or picking up rewards')
-
+    print('FIRING BAITBOX', success, errorMessage)
 end
 
 local agePotionCount = function(nameId)
