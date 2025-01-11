@@ -315,13 +315,13 @@ local findBait = function(baitPassOn)
     return nil
 end
 
-local placeBaitOrPickUp = function(baitIdPasson)
+local function placeBaitOrPickUp(baitIdPasson)
     if not NormalLure then
         return
     end
- 
-print(`\u{1f36a} Found baitId: {baitId} \u{1f36a}`)
-    
+
+    print('placing bait or picking up')
+
     local args = {
         [1] = game:GetService('Players').LocalPlayer,
         [2] = NormalLure,
@@ -1445,7 +1445,7 @@ task.wait(1)
 --if not baitId then
     baitId = findBait('lures_2023_campfire_cookies')
 --end   
-
+print(`\u{1f36a} Found baitId: {baitId} \u{1f36a}`)
 placeBaitOrPickUp(baitId)
 task.wait(2)
 placeBaitOrPickUp(baitId)
