@@ -320,7 +320,7 @@ local function placeBaitOrPickUp(baitIdPasson)
         return
     end
 
-    print('placing bait or picking up')
+    --print('placing bait or picking up')
 
     local args = {
         [1] = game:GetService('Players').LocalPlayer,
@@ -335,7 +335,7 @@ local function placeBaitOrPickUp(baitIdPasson)
         ReplicatedStorage.API:FindFirstChild('HousingAPI/ActivateFurniture'):InvokeServer(unpack(args))
     end)
 
-    print('FIRING BAITBOX', success, errorMessage)
+    --print('FIRING BAITBOX', success, errorMessage)
 end
 
 local agePotionCount = function(nameId)
