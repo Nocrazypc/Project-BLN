@@ -1619,9 +1619,12 @@ local FarmToggle = FarmTab:CreateToggle({
      CurrentValue = false,
      Flag = "Toggle21",
      Callback = function(Value)
-	 getgenv().PetCurrentlyFarming = ('pets', selectedPet)
          getgenv().auto_farm = Value
+	 if getgenv().auto_farm do
+	 PetCurrentlyFarming = selectedPet
          autoFarm()
+	                      end
+	 end
 
      end,
  })
