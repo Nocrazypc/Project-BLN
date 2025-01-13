@@ -1593,6 +1593,31 @@ local Window = Rayfield:CreateWindow({
 --[[ First Tab - Autofarm ]]
 local FarmTab = Window:CreateTab("Farm", 4483362458)
 
+
+
+local petsDropdown0 = FarmTab:CreateDropdown({
+    Name = 'Select a Pet',
+    Options = petsTable,
+    CurrentOption = {
+        petsTable[1],
+    },
+    MultipleOptions = false,
+    Flag = 'Dropdown0',
+    Callback = function(Option)
+        selectedPet = Option[1] or 'Nothing'
+    end,
+})
+
+FarmTab:CreateButton({
+    Name = 'Refesh Pet list',
+    Callback = function()
+        petsDropdown0:Set(GetInventory:TabId('pets'))
+    end,
+})
+
+
+
+
 local FarmToggle = FarmTab:CreateToggle({
      Name = "AutoFarm",
      CurrentValue = false,
