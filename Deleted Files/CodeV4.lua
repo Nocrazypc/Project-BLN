@@ -1598,9 +1598,7 @@ local FarmTab = Window:CreateTab("Farm", 4483362458)
 local petsDropdown0 = FarmTab:CreateDropdown({
     Name = 'Select a Pet',
     Options = petsTable,
-    CurrentOption = {
-        petsTable[1],
-    },
+    CurrentOption = { "" },
     MultipleOptions = false,
     Flag = 'Dropdown0',
     Callback = function(Option)
