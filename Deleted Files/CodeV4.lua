@@ -1976,9 +1976,7 @@ TradeTab:CreateSection('Send Custom Pet, sends ALL ages of selected pet')
 local petsDropdown = TradeTab:CreateDropdown({
     Name = 'Select a Pet',
     Options = petsTable,
-    CurrentOption = {
-        petsTable[1],
-    },
+    CurrentOption = { "" },
     MultipleOptions = false,
     Flag = 'Dropdown1',
     Callback = function(Option)
