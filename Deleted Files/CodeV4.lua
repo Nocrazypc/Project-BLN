@@ -1592,41 +1592,6 @@ local Window = Rayfield:CreateWindow({
 
 --[[ First Tab - Autofarm ]]
 local FarmTab = Window:CreateTab("Farm", 4483362458)
-
-
-
-local petsDropdown0 = FarmTab:CreateDropdown({
-    Name = 'Select a Pet',
-    Options = petsTable,
-    CurrentOption = { "" },
-    MultipleOptions = false,
-    Flag = 'Dropdown0',
-    Callback = function(Option)
-        selectedPet = Option[1] or 'Nothing'
-    end,
-})
-
-FarmTab:CreateButton({
-    Name = 'Refesh Pet list',
-    Callback = function()
-        petsDropdown0:Set(GetInventory:TabId('pets'))
-    end,
-})
-
-
-local FarmToggle = FarmTab:CreateToggle({
-     Name = "AutoFarm Selected Pet",
-     CurrentValue = false,
-     Flag = "Toggle21",
-     Callback = function(Value)
-         getgenv().auto_farm = Value
-         autoFarm('pets', selectedPet)
-
-     end,
- })
-
-
-
 ------------------------------------------------
 
 local FarmToggle = FarmTab:CreateToggle({
@@ -1639,7 +1604,7 @@ local FarmToggle = FarmTab:CreateToggle({
          autoFarm()
      end,
  })
--------------------------------------------------
+-----------------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Pet Auto Fusion",
      CurrentValue = false,
@@ -1704,6 +1669,26 @@ FarmTab:CreateButton({
 		Fusion:MakeMega(true)
 	end,
 })
+
+------------------------
+local petsDropdown0 = FarmTab:CreateDropdown({
+    Name = 'Pet List',
+    Options = petsTable,
+    CurrentOption = { "" },
+    MultipleOptions = false,
+    Flag = 'Dropdown0',
+    Callback = function(Option)
+        selectedPet = Option[1] or 'Nothing'
+    end,
+})
+
+FarmTab:CreateButton({
+    Name = 'Refesh Pet list',
+    Callback = function()
+        petsDropdown0:Set(GetInventory:TabId('pets'))
+    end,
+})
+
 
 ------------- minigames-------------
 
