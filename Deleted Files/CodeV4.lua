@@ -1614,7 +1614,19 @@ FarmTab:CreateButton({
 })
 
 
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "AutoFarm Selected Pet",
+     CurrentValue = false,
+     Flag = "Toggle21",
+     Callback = function(Value)
+	 getgenv().auto_farm = Value
+         autoFarm('pets', selectedPet)
+     end,
+ })
 
+
+
+------------------------------------------------
 
 local FarmToggle = FarmTab:CreateToggle({
      Name = "AutoFarm",
