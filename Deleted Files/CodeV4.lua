@@ -724,6 +724,12 @@ end
 
 local function checkIfPetEquipped()
     if not ClientData.get('pet_char_wrappers')[1] then
+        if not PetCurrentlyFarming then
+            getPet()
+
+            return
+        end
+
         print('no pet so requipping')
         ReplicatedStorage.API['ToolAPI/Unequip']:InvokeServer(PetCurrentlyFarming, {})
         task.wait(1)
@@ -739,6 +745,8 @@ local function checkIfPetEquipped()
 
         if count > 10 then
             checkIfPetEquipped()
+
+            return
         end
     end
 end
