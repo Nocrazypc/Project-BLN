@@ -883,6 +883,14 @@ local autoFarm = function()
     Teleport.FarmingHome()
     task.delay(30, function()
         while true do
+
+            local howManyAvailable = ClientData.get_data()[localPlayer.Name].moon_2025_shooting_stars.available_stars['MainMap']
+            if howManyAvailable >= 1 then
+                Teleport.DownloadMainMap()
+                LunarNewYear2025:CollectStars()
+            end
+
+				
             if isInMiniGame then
                 local count = 0
 
