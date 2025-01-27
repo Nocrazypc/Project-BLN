@@ -15,9 +15,6 @@
                 if v.id == FoodPassOn then
                     hasFood = true
 
-                    ReplicatedStorage.API['ToolAPI/Equip']:InvokeServer(v.unique, {})
-                    task.wait(1)
-
                     if not ClientData.get('pet_char_wrappers')[1] then
                         print('\u{26a0}\u{fe0f} Trying to feed pet but no pet equipped \u{26a0}\u{fe0f}')
 
@@ -247,9 +244,11 @@
         end
 
         function Ailments:HungryAilment()
+            reEquipPet()
             FoodAilments('icecream')
         end
         function Ailments:ThirstyAilment()
+            reEquipPet()
             FoodAilments('water')
         end
         function Ailments:SickAilment()
