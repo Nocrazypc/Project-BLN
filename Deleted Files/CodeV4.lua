@@ -769,7 +769,7 @@ local CompletePetAilments = function()
 	    --ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', "icecream", {})
             --task.wait(5)
             Ailments:HungryAilment()
-            task.wait(2)
+            --task.wait(2)
 
             return true
         elseif key == 'thirsty' then
@@ -779,7 +779,7 @@ local CompletePetAilments = function()
             --ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', "water", {})
             --task.wait(5)
             Ailments:ThirstyAilment()
-            task.wait(2)
+            --task.wait(2)
 			
             return true
 	elseif key == 'sick' then
