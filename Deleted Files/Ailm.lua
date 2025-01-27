@@ -17,7 +17,10 @@
 
                     if not ClientData.get('pet_char_wrappers')[1] then
                         print('\u{26a0}\u{fe0f} Trying to feed pet but no pet equipped \u{26a0}\u{fe0f}')
-
+                        return
+                    end
+                        
+                    if not ClientData.get('pet_char_wrappers')[1].pet_unique then
                         return
                     end
 
