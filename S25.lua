@@ -20,7 +20,7 @@ function LunarNewYear2025:GetAvailableShootingStars(mapName)
 end
 
 function LunarNewYear2025:FetchStars(mapName)
-    while task.wait() and GetAvailableShootingStars(mapName) ~= 0 do
+    while task.wait() and LunarNewYear2025:GetAvailableShootingStars(mapName) ~= 0 do
         for i = 1, 150 do
             RS.API:WaitForChild("MoonAPI/ShootingStarCollected"):FireServer(
                 mapName,
