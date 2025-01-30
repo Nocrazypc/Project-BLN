@@ -864,6 +864,7 @@ local CompletePetAilments = function()
 
     return false
 end
+
 local autoFarm = function()
     if not getgenv().auto_farm then
         return
@@ -877,11 +878,18 @@ local autoFarm = function()
     task.delay(30, function()
         while true do
 
-            local howManyAvailable = ClientData.get_data()[localPlayer.Name].moon_2025_shooting_stars.available_stars['MainMap']
-            if howManyAvailable >= 1 then
-                Teleport.DownloadMainMap()
-                LunarNewYear2025:CollectStars()
-            end
+            --local howManyAvailable = ClientData.get_data()[localPlayer.Name].moon_2025_shooting_stars.available_stars['MainMap']
+            --if howManyAvailable >= 1 then
+                --Teleport.DownloadMainMap()
+                --LunarNewYear2025:CollectStars()
+        for i, v in pairs(ClientData.get_data()[localPlayer.Name].moon_2025_shooting_stars.spawn_limits) do 
+            if LunarNewYear2025:GetAvailableShootingStars(i) > 0 then
+                LunarNewYear2025:FetchStars(i)
+                print("[EVENT] - Collected Shooting Stars from :", i)
+            end 
+        end
+				
+            
 
 				
             if isInMiniGame then
