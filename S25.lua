@@ -32,14 +32,10 @@ function LunarNewYear2025:FetchStars(mapName)
 end
 
 -- SPECIAL STARS
-function LunarNewYear2025:GetAvailableSpecialStars(mapName)
-    return ClientData.get_data()[Player.Name].moon_2025_special_stars.available_stars[mapName]
-end
-
 function LunarNewYear2025:FetchSpecialStars(mapName)
-    while task.wait() and LunarNewYear2025:GetAvailableSpecialStars(mapName) ~= 0 do
+    while task.wait() and LunarNewYear2025:GetAvailableSpecialShootingStars(mapName) ~= 0 do
         for i = 1, 150 do
-            RS.API:WaitForChild("MoonAPI/SpecialStarCollected"):FireServer(
+            RS.API:WaitForChild("MoonAPI/SpecialShootingStarCollected"):FireServer(
                 mapName,
                 tostring(i)
             )
@@ -47,5 +43,6 @@ function LunarNewYear2025:FetchSpecialStars(mapName)
         end
     end
 end
+
 
 return LunarNewYear2025
