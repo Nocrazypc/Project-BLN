@@ -890,7 +890,7 @@ local autoFarm = function()
             end 
         end
 				
-      task.wait(2)
+      --[[task.wait(2)
 
 
         for i, v in pairs(ClientData.get_data()[localPlayer.Name].moon_2025_special_stars.spawn_limits) do 
@@ -899,7 +899,7 @@ local autoFarm = function()
                 LunarNewYear2025:FetchSpecialStars(i)
                 print("[EVENT] - Collected Special Stars from :", i)
             end 
-        end
+        end--]]
 
 				
 
