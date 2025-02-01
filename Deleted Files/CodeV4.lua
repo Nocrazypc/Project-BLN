@@ -895,7 +895,7 @@ local autoFarm = function()
     if a.special_stars_collected_today < a.special_stars_allowed_today then
     Teleport.DownloadMainMap()
         for i = 1, 150 do
-            ReplicatedStorage.API:WaitForChild("MoonAPI/SpecialStarCollected"):FireServer(
+            ReplicatedStorage.API:WaitForChild("MoonAPI/SpecialShootingStarCollected"):FireServer(
                 mapName,
                 tostring(i),
                 true
