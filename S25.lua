@@ -41,7 +41,6 @@ function LunarNewYear2025:FetchSpecialStars(mapName)
         task.wait()
         if ClientData.get_data()[Player.Name].moon_2025_shooting_stars.special_stars_collected_today >= ClientData.get_data()[Player.Name].moon_2025_shooting_stars.special_stars_allowed_today then return end
        end
-    end
 end
 
 return LunarNewYear2025
