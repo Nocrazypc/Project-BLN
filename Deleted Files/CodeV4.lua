@@ -890,7 +890,7 @@ local autoFarm = function()
             end 
         end
 	-----------Special Stars ---------			
-    a= ClientData.get_data()[localPlayer.Name].moon_2025_shooting_stars
+    --[[a= ClientData.get_data()[localPlayer.Name].moon_2025_shooting_stars
 				
     if a.special_stars_collected_today < a.special_stars_allowed_today then
     Teleport.DownloadMainMap()
@@ -904,7 +904,7 @@ local autoFarm = function()
             if a.special_stars_collected_today >= a.special_stars_allowed_today then break end
         
     end
-end
+end--]]
 
 
 
