@@ -890,12 +890,12 @@ local autoFarm = function()
             end 
         end
 	-----------Special Stars ---------			
-    --[[a= ClientData.get_data()[localPlayer.Name].moon_2025_shooting_stars
+    a= ClientData.get_data()[localPlayer.Name].moon_2025_shooting_stars
 				
     if a.special_stars_collected_today < a.special_stars_allowed_today then
     Teleport.DownloadMainMap()
         for i = 1, 150 do
-            ReplicatedStorage.API:WaitForChild("MoonAPI/ShootingStarCollected"):FireServer(
+            ReplicatedStorage.API:WaitForChild("MoonAPI/SpecialStarCollected"):FireServer(
                 mapName,
                 tostring(i),
                 true
@@ -904,7 +904,7 @@ local autoFarm = function()
             if a.special_stars_collected_today >= a.special_stars_allowed_today then break end
         
     end
-end--]]
+end
 
 
 
