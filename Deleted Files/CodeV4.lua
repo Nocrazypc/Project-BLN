@@ -891,7 +891,8 @@ local autoFarm = function()
         end
 -----------Special Stars ---------			
             while ClientData.get_data()[Player.Name].moon_2025_shooting_stars.special_stars_collected_today < ClientData.get_data()[Player.Name].moon_2025_shooting_stars.special_stars_allowed_today and task.wait(1) do
-            for i, v in pairs(ClientData.get_data()[Player.Name].moon_2025_shooting_stars.spawn_limits) do 
+            for i, v in pairs(ClientData.get_data()[Player.Name].moon_2025_shooting_stars.spawn_limits) do
+                Teleport.DownloadMainMap() 
                 FetchSpecialStars(i)
                     
                 if ClientData.get_data()[Player.Name].moon_2025_shooting_stars.special_stars_collected_today >= ClientData.get_data()[Player.Name].moon_2025_shooting_stars.special_stars_allowed_today then break end
