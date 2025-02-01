@@ -885,26 +885,19 @@ local autoFarm = function()
         for i, v in pairs(ClientData.get_data()[localPlayer.Name].moon_2025_shooting_stars.spawn_limits) do 
             if LunarNewYear2025:GetAvailableShootingStars(i) > 0 then
                 Teleport.DownloadMainMap()
-                LunarNewYear2025:FetchStars(i)
-                print("[EVENT] - Collected Shooting Stars from :", i)
+                LunarNewYear2025:FetchNormalStars(i)
+                print("[EVENT] - Collected Normal Stars from :", i)
             end 
         end
 -----------Special Stars ---------			
-    --[[a= ClientData.get_data()[localPlayer.Name].moon_2025_shooting_stars
-				
-    if a.special_stars_collected_today < a.special_stars_allowed_today then
-    Teleport.DownloadMainMap()
-        for i = 1, 150 do
-            ReplicatedStorage.API:WaitForChild("MoonAPI/SpecialShootingStarCollected"):FireServer(
-                mapName,
-                tostring(i),
-                true
-            )
-            task.wait()
-            if a.special_stars_collected_today >= a.special_stars_allowed_today then break end
-        
-    end
-end--]]
+            while ClientData.get_data()[Player.Name].moon_2025_shooting_stars.special_stars_collected_today < ClientData.get_data()[Player.Name].moon_2025_shooting_stars.special_stars_allowed_today and task.wait(1) do
+            for i, v in pairs(ClientData.get_data()[Player.Name].moon_2025_shooting_stars.spawn_limits) do 
+                FetchSpecialStars(i)
+                    
+                if ClientData.get_data()[Player.Name].moon_2025_shooting_stars.special_stars_collected_today >= ClientData.get_data()[Player.Name].moon_2025_shooting_stars.special_stars_allowed_today then break end
+            end
+        end   
+        print("[EVENT] - Collected Special Stars!")
 ------------------------------------
 				
             if isInMiniGame then
