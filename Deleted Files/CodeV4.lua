@@ -883,7 +883,7 @@ local autoFarm = function()
                 --Teleport.DownloadMainMap()
                 --LunarNewYear2025:CollectStars()
         for i, v in pairs(ClientData.get_data()[localPlayer.Name].moon_2025_shooting_stars.spawn_limits) do 
-            if LunarNewYear2025:GetAvailableShootingStars(i) >= 1 then
+            if LunarNewYear2025:GetAvailableShootingStars(i) > 0 then
                 Teleport.DownloadMainMap()
                 LunarNewYear2025:FetchStars(i)
                 print("[EVENT] - Collected Shooting Stars from :", i)
