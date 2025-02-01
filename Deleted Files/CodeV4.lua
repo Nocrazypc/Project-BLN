@@ -889,8 +889,8 @@ local autoFarm = function()
                 print("[EVENT] - Collected Shooting Stars from :", i)
             end 
         end
-	-----------Special Stars ---------			
-    a= ClientData.get_data()[localPlayer.Name].moon_2025_shooting_stars
+-----------Special Stars ---------			
+    --[[a= ClientData.get_data()[localPlayer.Name].moon_2025_shooting_stars
 				
     if a.special_stars_collected_today < a.special_stars_allowed_today then
     Teleport.DownloadMainMap()
@@ -904,13 +904,8 @@ local autoFarm = function()
             if a.special_stars_collected_today >= a.special_stars_allowed_today then break end
         
     end
-end
-
-
-
-
-
-				
+end--]]
+------------------------------------
 				
             if isInMiniGame then
                 local count = 0
