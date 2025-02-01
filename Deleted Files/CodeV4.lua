@@ -100,6 +100,7 @@ getgenv().feedAgeUpPotionToggle = false
 getgenv().PetCurrentlyFarming = ''
 getgenv().AutoFusion = false
 getgenv().FocusFarmAgePotions = false
+getgenv().HatchEggs = false
 
 --getgenv().AutoMinigame = false
 --getgenv().AutoFCMinigame = false
