@@ -19,7 +19,7 @@ function LunarNewYear2025:GetAvailableShootingStars(mapName)
     return ClientData.get_data()[Player.Name].moon_2025_shooting_stars.available_stars[mapName]
 end
 
-function LunarNewYear2025:FetchStars(mapName)
+function LunarNewYear2025:FetchNormalStars(mapName)
     while task.wait() and LunarNewYear2025:GetAvailableShootingStars(mapName) ~= 0 do
         for i = 1, 150 do
             RS.API:WaitForChild("MoonAPI/ShootingStarCollected"):FireServer(
@@ -29,19 +29,19 @@ function LunarNewYear2025:FetchStars(mapName)
             task.wait()
         end
     end
+end
 
-        --[[a = ClientData.get_data()[Player.Name].moon_2025_shooting_stars
-    if a.special_stars_collected_today < a.special_stars_allowed_today then
-        for i = 1, 150 do
-            RS.API:WaitForChild("MoonAPI/ShootingStarCollected"):FireServer(
-                mapName,
-                tostring(i),
-                true
-            )
-            task.wait()
-            if a.special_stars_collected_today >= a.special_stars_allowed_today then break end
-        end
-     end--]]
+function LunarNewYear2025:FetchSpecialStars(mapName)
+    for i = 1, 150 do
+        RS.API:WaitForChild("MoonAPI/ShootingStarCollected"):FireServer(
+            mapName,
+            tostring(i),
+            true
+        )
+        task.wait()
+        if ClientData.get_data()[Player.Name].moon_2025_shooting_stars.special_stars_collected_today >= ClientData.get_data()[Player.Name].moon_2025_shooting_stars.special_stars_allowed_today then return end
+       end
+    end
 end
 
 return LunarNewYear2025
