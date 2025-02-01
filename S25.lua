@@ -29,6 +29,23 @@ function LunarNewYear2025:FetchStars(mapName)
             task.wait()
         end
     end
+
+    a = ClientData.get_data()[Player.Name].moon_2025_shooting_stars
+    if a.special_stars_collected_today < a.special_stars_allowed_today then
+        for i = 1, 150 do
+            RS.API:WaitForChild("MoonAPI/ShootingStarCollected"):FireServer(
+                mapName,
+                tostring(i),
+                true
+            )
+            task.wait()
+            if a.special_stars_collected_today >= a.special_stars_allowed_today then break end
+        end
+        
+    end
 end
+
+
+
 
 return LunarNewYear2025
