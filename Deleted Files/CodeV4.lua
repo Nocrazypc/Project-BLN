@@ -915,6 +915,7 @@ local autoFarm = function()
             end
 
             removeHandHeldItem()
+            GetInventory:IsFarmingSelectedPet()
 
             if not CompletePetAilments() then
                 completeBabyAilments()
