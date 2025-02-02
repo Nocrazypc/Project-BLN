@@ -10,10 +10,6 @@ for i, v in pairs(debug.getupvalue(RouterClient.init, 7)) do
     v.Name = i
 end
 
-
-
-
-
 -- SHOOTING STARS
 function LunarNewYear2025:GetAvailableShootingStars(mapName)
     return ClientData.get_data()[Player.Name].moon_2025_shooting_stars.available_stars[mapName]
