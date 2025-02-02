@@ -5,6 +5,10 @@
         local localPlayer = Players.LocalPlayer
         local GetInventory = {}
 
+        function GetInventory:GetAll()
+            return ClientData.get_data()[localPlayer.Name].inventory
+        end
+
         function GetInventory:TabId(tabId)
             local inventoryTable = {}
 
@@ -23,6 +27,20 @@
 
             return inventoryTable
         end
+        
+         function GetInventory:IsFarmingSelectedPet()
+            if not ClientData.get('pet_char_wrappers')[1] then
+                return
+            end
+            if getgenv().PetCurrentlyFarming == ClientData.get('pet_char_wrappers')[1]['pet_unique'] then
+                return
+            end
+            print('current pet equipped is not the same pet as selected..')
+            ReplicatedStorage.API['ToolAPI/Equip']:InvokeServer(getgenv().PetCurrentlyFarming, {})
+            task.wait(2)
+            return
+        end
+        
         function GetInventory:GetPetFriendship()
             local level = 0
             local petUnique = nil
