@@ -140,8 +140,8 @@
 
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
         end
-        local getUpFromSitting = function()
-            ReplicatedStorage.API['AdoptAPI/BabyJump']:FireServer(localPlayer.Character)
+        local function getUpFromSitting()
+            ReplicatedStorage.API['AdoptAPI/ExitSeatStates']:FireServer()
             task.wait(0.1)
         end
 
