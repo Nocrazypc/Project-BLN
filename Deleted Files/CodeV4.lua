@@ -1688,7 +1688,7 @@ end)
 
      end,
  })
-------------- Hatch Eggs --------
+------------- Hatch Eggs Only --------
 
 
 local FarmToggle = FarmTab:CreateToggle({
@@ -1699,9 +1699,19 @@ local FarmToggle = FarmTab:CreateToggle({
 			
          getgenv().HatchPriorityEggs = Value
 			
-          while task.wait(30) do
+        while task.wait(30) do
+        for _, v in pairs(ClientData.get_data()[localPlayer.Name].inventory.pets)do
+        if v.id ~= Egg2Buy  then
+        getPet()
+	       end
+	    end				
+	end
+
+
+			
+         --[[ while task.wait(30) do
          getPet()
-	 end
+	 end--]]
      end,
  })
 
