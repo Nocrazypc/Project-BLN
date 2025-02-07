@@ -1706,16 +1706,6 @@ local FarmToggle = FarmTab:CreateToggle({
  })
 
 
-
-
-
-
-
-
-
-
-
-
 ----------------------------------
 FarmTab:CreateSection("Make ALL Neon/Mega in 1 Click")
 FarmTab:CreateButton({
