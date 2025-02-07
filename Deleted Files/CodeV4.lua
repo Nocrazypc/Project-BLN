@@ -1694,7 +1694,7 @@ local FarmToggle = FarmTab:CreateToggle({
      Callback = function(Value)
 			
          getgenv().HatchEggs = Value
-         autoFarm()
+         getPet()
      end,
  })
 
