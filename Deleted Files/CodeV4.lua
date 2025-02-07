@@ -447,7 +447,7 @@ local removeHandHeldItem = function()
     end
 end
 local CheckifEgg = function()
-    --[[local PetUniqueID = ClientData.get('pet_char_wrappers')[1]['pet_unique']
+    local PetUniqueID = ClientData.get('pet_char_wrappers')[1]['pet_unique']
     local PetAge = ClientData.get('pet_char_wrappers')[1]['pet_progression']['age']
 
     if PetUniqueID == PetCurrentlyFarming then
@@ -455,21 +455,15 @@ local CheckifEgg = function()
     end
     if PetAge ~= 1 then
         return
-    end--]]
-    if ClientData.get('pet_char_wrappers')[1] and table.find(peteggs, ClientData.get('pet_char_wrappers')[1].pet_unique) then
-        return print('equipped pet is an egg')
     end
+
     getPet()
-
-    return
 end
-
 local SwitchOutFullyGrown = function()
     if isBuyingOrAging then
         return
     end
-    --if ClientData.get('pet_char_wrappers')[1] == nil or false then
-    if not ClientData.get('pet_char_wrappers')[1] then	
+    if ClientData.get('pet_char_wrappers')[1] == nil or false then
         getPet()
 
         return
@@ -933,8 +927,9 @@ local autoFarm = function()
             if not CompletePetAilments() then
                 completeBabyAilments()
             end
-            task.wait(1)
-            SwitchOutFullyGrown()
+
+            --updateStatsGui()
+            task.wait(5)
         end
     end)
 
@@ -1703,14 +1698,13 @@ local FarmToggle = FarmTab:CreateToggle({
 	getgenv().auto_farm = Value	
         autoFarm()
 			
-        --[[while task.wait(30) do
+        while task.wait(30) do
         for _, v in pairs(ClientData.get_data()[localPlayer.Name].inventory.pets)do
         if v.id ~= Egg2Buy  then
         getPet()
 	       end
 	    end				
-	end--]]
-
+	end
      end,
  })
 ----------------------------------
