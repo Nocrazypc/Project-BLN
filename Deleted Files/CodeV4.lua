@@ -463,7 +463,8 @@ local SwitchOutFullyGrown = function()
     if isBuyingOrAging then
         return
     end
-    if ClientData.get('pet_char_wrappers')[1] == nil or false then
+    --if ClientData.get('pet_char_wrappers')[1] == nil or false then
+    if not ClientData.get('pet_char_wrappers')[1] then	
         getPet()
 
         return
