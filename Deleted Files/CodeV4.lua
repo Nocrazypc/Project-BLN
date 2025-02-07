@@ -795,6 +795,10 @@ local CompletePetAilments = function()
             Ailments:SalonAilment(key, petUnique)
 
             return true
+        elseif key == 'moon' then
+            Ailments:MoonAilment(key, petUnique)
+			
+            return true			
         elseif key == 'pizza_party' then
             Ailments:PizzaPartyAilment(key, petUnique)
 
