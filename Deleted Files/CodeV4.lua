@@ -407,7 +407,7 @@ local getPet = function()
             return
         end
     end
-    if getgenv().SETTINGS.HATCH_EGG_PRIORITY then
+    if getgenv().SETTINGS.HATCH_EGG_PRIORITY or getgenv().HatchEggs then
         if GetInventory:PriorityEgg() then
             return
         end
@@ -1684,7 +1684,32 @@ end)
 
      end,
  })
+------------- Hatch Eggs --------
 
+
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Hatch Eggs Only",
+     CurrentValue = false,
+     Flag = "Toggle201",
+     Callback = function(Value)
+			
+         getgenv().HatchEggs = Value
+         autoFarm()
+     end,
+ })
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------
 FarmTab:CreateSection("Make ALL Neon/Mega in 1 Click")
 FarmTab:CreateButton({
 	Name = "Make Neon Pets",
