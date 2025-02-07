@@ -447,7 +447,7 @@ local removeHandHeldItem = function()
     end
 end
 local CheckifEgg = function()
-    local PetUniqueID = ClientData.get('pet_char_wrappers')[1]['pet_unique']
+    --[[local PetUniqueID = ClientData.get('pet_char_wrappers')[1]['pet_unique']
     local PetAge = ClientData.get('pet_char_wrappers')[1]['pet_progression']['age']
 
     if PetUniqueID == PetCurrentlyFarming then
@@ -455,10 +455,15 @@ local CheckifEgg = function()
     end
     if PetAge ~= 1 then
         return
+    end--]]
+    if ClientData.get('pet_char_wrappers')[1] and table.find(peteggs, ClientData.get('pet_char_wrappers')[1].pet_unique) then
+        return print('equipped pet is an egg')
     end
-
     getPet()
+
+    return
 end
+
 local SwitchOutFullyGrown = function()
     if isBuyingOrAging then
         return
