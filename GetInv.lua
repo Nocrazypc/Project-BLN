@@ -121,8 +121,8 @@
                 end
             end
 
-            return false
-        end
+        --return false
+        --end
         function GetInventory:GetPetEggs()
             local eggs = {}
 
