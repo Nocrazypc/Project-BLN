@@ -276,6 +276,13 @@
                 getDoctorId()
             end
         end
+
+        function Ailments:MoonAilment(ailment, petUnique)
+            reEquipPet()
+            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MoonInterior')
+            waitForTaskToFinish(ailment, petUnique)
+        end
+                                                        
         function Ailments:SalonAilment(ailment, petUnique)
             reEquipPet()
             ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('Salon')
