@@ -35,7 +35,7 @@
             if getgenv().PetCurrentlyFarming == ClientData.get('pet_char_wrappers')[1]['pet_unique'] then
                 return
             end
-            print('current pet equipped is not the same pet as selected..')
+            --print('current pet equipped is not the same pet as selected..')
             ReplicatedStorage.API['ToolAPI/Equip']:InvokeServer(getgenv().PetCurrentlyFarming, {})
             task.wait(2)
             return
