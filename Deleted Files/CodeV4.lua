@@ -1690,12 +1690,12 @@ end)
  })
 ------------- Hatch Eggs Only --------
 local FarmToggle = FarmTab:CreateToggle({
-     Name = "Hatch Eggs Only",
+     Name = "Buy & Hatch Eggs Only",
      CurrentValue = false,
      Flag = "Toggle201",
      Callback = function(Value)
-			
-        getgenv().HatchPriorityEggs = Value
+	getgenv().HatchPriorityEggs = Value
+	getgenv().auto_farm = Value	
         autoFarm()
 			
         while task.wait(30) do
