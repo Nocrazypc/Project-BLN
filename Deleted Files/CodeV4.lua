@@ -1703,13 +1703,14 @@ local FarmToggle = FarmTab:CreateToggle({
 	getgenv().auto_farm = Value	
         autoFarm()
 			
-        while task.wait(30) do
+        --[[while task.wait(30) do
         for _, v in pairs(ClientData.get_data()[localPlayer.Name].inventory.pets)do
         if v.id ~= Egg2Buy  then
         getPet()
 	       end
 	    end				
-	end
+	end--]]
+
      end,
  })
 ----------------------------------
