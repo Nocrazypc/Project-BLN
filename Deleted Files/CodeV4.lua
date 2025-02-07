@@ -1689,34 +1689,24 @@ end)
      end,
  })
 ------------- Hatch Eggs Only --------
-
-
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Hatch Eggs Only",
      CurrentValue = false,
      Flag = "Toggle201",
      Callback = function(Value)
 			
-         getgenv().HatchPriorityEggs = Value
+        getgenv().HatchPriorityEggs = Value
+        autoFarm()
 			
         while task.wait(30) do
         for _, v in pairs(ClientData.get_data()[localPlayer.Name].inventory.pets)do
-        if v.id == Egg2Buy  then
-        return false
-        end
         if v.id ~= Egg2Buy  then
         getPet()
 	       end
 	    end				
 	end
-			
-         --[[ while task.wait(30) do
-         getPet()
-	 end--]]
      end,
  })
-
-
 ----------------------------------
 FarmTab:CreateSection("Make ALL Neon/Mega in 1 Click")
 FarmTab:CreateButton({
