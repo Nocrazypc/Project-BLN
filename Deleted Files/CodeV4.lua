@@ -933,7 +933,8 @@ local autoFarm = function()
             if not CompletePetAilments() then
                 completeBabyAilments()
             end
-            task.wait(5)
+            task.wait(1)
+            SwitchOutFullyGrown()
         end
     end)
 
