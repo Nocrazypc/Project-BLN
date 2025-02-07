@@ -928,8 +928,6 @@ local autoFarm = function()
             if not CompletePetAilments() then
                 completeBabyAilments()
             end
-
-            --updateStatsGui()
             task.wait(5)
         end
     end)
