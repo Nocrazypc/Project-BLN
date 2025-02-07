@@ -100,7 +100,7 @@ getgenv().feedAgeUpPotionToggle = false
 getgenv().PetCurrentlyFarming = ''
 getgenv().AutoFusion = false
 getgenv().FocusFarmAgePotions = false
-getgenv().HatchEggs = false
+getgenv().HatchPriorityEggs = false
 
 --getgenv().AutoMinigame = false
 --getgenv().AutoFCMinigame = false
@@ -377,6 +377,18 @@ local getEgg = function()
     return false
 end
 local getPet = function()
+
+    if getgenv().SETTINGS.HATCH_EGG_PRIORITY or getgenv().HatchPriorityEggs then
+        if GetInventory:PriorityEgg() then
+            return
+        end
+
+        ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('pets', getgenv().SETTINGS.HATCH_EGG_PRIORITY_NAMES[1], {})
+
+        return
+    end
+
+	
     if getgenv().SETTINGS.FOCUS_FARM_AGE_POTION or getgenv().FocusFarmAgePotions then
         if GetInventory:GetPetFriendship() then
             return
@@ -407,15 +419,7 @@ local getPet = function()
             return
         end
     end
-    if getgenv().SETTINGS.HATCH_EGG_PRIORITY or getgenv().HatchEggs then
-        if GetInventory:PriorityEgg() then
-            return
-        end
 
-        ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('pets', getgenv().SETTINGS.HATCH_EGG_PRIORITY_NAMES[1], {})
-
-        return
-    end
     if GetInventory:PetRarityAndAge('legendary', 5) then
         return
     end
@@ -1693,7 +1697,7 @@ local FarmToggle = FarmTab:CreateToggle({
      Flag = "Toggle201",
      Callback = function(Value)
 			
-         getgenv().HatchEggs = Value
+         getgenv().HatchPriorityEggs = Value
          getPet()
      end,
  })
