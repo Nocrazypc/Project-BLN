@@ -1698,7 +1698,10 @@ local FarmToggle = FarmTab:CreateToggle({
      Callback = function(Value)
 			
          getgenv().HatchPriorityEggs = Value
+			
+          while task.wait(30) do
          getPet()
+	 end
      end,
  })
 
