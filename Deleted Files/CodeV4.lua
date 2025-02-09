@@ -463,7 +463,8 @@ local SwitchOutFullyGrown = function()
     if isBuyingOrAging then
         return
     end
-    if ClientData.get('pet_char_wrappers')[1] == nil or false then
+    --if ClientData.get('pet_char_wrappers')[1] == nil or false then
+    if not ClientData.get('pet_char_wrappers')[1] then
         getPet()
 
         return
@@ -1705,10 +1706,7 @@ local FarmToggle = FarmTab:CreateToggle({
         task.wait(10)
         if v.id ~= Egg2Buy  then
         task.wait(10)
-        if v.id == Egg2Buy  then
-        return
         getPet()
-		  end
 		 end
 	       end
 	    end				
