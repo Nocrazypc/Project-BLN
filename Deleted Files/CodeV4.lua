@@ -1636,16 +1636,20 @@ local PetsDropdown3 = FarmTab:CreateDropdown({
     Flag = 'Dropdown3',
     Callback = function(Option)
         selectedPet = Option[1] or 'Nothing'
-	getgenv().SETTINGS.PET_ONLY_PRIORITY_NAMES = selectedPet
+	getgenv().SETTINGS.PET_ONLY_PRIORITY_NAMES = { "selectedPet" }
     end,
 })
+
 
 FarmTab:CreateButton({
     Name = 'Refesh Pet list',
     Callback = function()
-        petsDropdown:Set(GetInventory:TabId('pets'))
+        petsDropdown0:Set(GetInventory:TabId('pets'))
     end,
 })
+
+
+
 
 local FarmToggle3 = FarmTab:CreateToggle({
      Name = "AutoFarm Priority Pet",
