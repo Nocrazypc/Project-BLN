@@ -1636,6 +1636,7 @@ local PetsDropdown3 = FarmTab:CreateDropdown({
     Flag = 'Dropdown3',
     Callback = function(Option)
         selectedItem = Option[1] or 'Nothing'
+	getgenv().SETTINGS.PET_ONLY_PRIORITY_NAMES = { "selectedItem" }	
     end,
 })
 
@@ -1656,7 +1657,7 @@ local FarmToggle3 = FarmTab:CreateToggle({
      Callback = function(Value)
 
         getgenv().SETTINGS.PET_ONLY_PRIORITY = Value
-	getgenv().SETTINGS.PET_ONLY_PRIORITY_NAMES = { "selectedItem" },		
+	
         getgenv().auto_farm = Value
         autoFarm()
      end,
