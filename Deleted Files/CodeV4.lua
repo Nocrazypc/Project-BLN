@@ -103,7 +103,7 @@ getgenv().FocusFarmAgePotions = false
 getgenv().HatchPriorityEggs = false
 
 --getgenv().AutoMinigame = false
---getgenv().AutoFCMinigame = false
+
 
 local Egg2Buy = getgenv().SETTINGS.PET_TO_BUY
 local TestGui = Instance.new('ScreenGui')
@@ -1628,8 +1628,43 @@ local Window = Rayfield:CreateWindow({
 --[[ First Tab - Autofarm ]]
 local FarmTab = Window:CreateTab("Farm", 4483362458)
 ------------------------------------------------
+local PetsDropdown3 = FarmTab:CreateDropdown({
+    Name = 'Select a Priority Pet',
+    Options = petsTable,
+    CurrentOption = { "" },
+    MultipleOptions = false,
+    Flag = 'Dropdown3',
+    Callback = function(Option)
+        selectedPet = Option[1] or 'Nothing'
+	getgenv().SETTINGS.PET_ONLY_PRIORITY_NAMES = selectedPet
+    end,
+})
 
-local FarmToggle = FarmTab:CreateToggle({
+FarmTab:CreateButton({
+    Name = 'Refesh Pet list',
+    Callback = function()
+        petsDropdown:Set(GetInventory:TabId('pets'))
+    end,
+})
+
+local FarmToggle3 = FarmTab:CreateToggle({
+     Name = "AutoFarm Priority Pet",
+     CurrentValue = false,
+     Flag = "Toggle3",
+     Callback = function(Value)
+
+        getgenv().SETTINGS.PET_ONLY_PRIORITY = Value		
+
+		
+         getgenv().auto_farm = Value
+         autoFarm()
+     end,
+ })
+
+
+
+----------------------------------------------
+--[[local FarmToggle = FarmTab:CreateToggle({
      Name = "AutoFarm",
      CurrentValue = false,
      Flag = "Toggle01",
@@ -1638,7 +1673,7 @@ local FarmToggle = FarmTab:CreateToggle({
          getgenv().auto_farm = Value
          autoFarm()
      end,
- })
+ })--]]
 -----------------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Pet Auto Fusion",
