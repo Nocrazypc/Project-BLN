@@ -889,7 +889,7 @@ local autoFarm = function()
     task.delay(30, function()
         while true do
 -------- Hearts ---------
-Teleport.DownloadMainMap()
+--[[Teleport.DownloadMainMap()
 task.spawn(function()
 while task.wait() do
     local args = {
@@ -898,7 +898,7 @@ while task.wait() do
     }
     game:GetService("ReplicatedStorage"):WaitForChild("API"):WaitForChild("ValentinesEventAPI/PickupRoseHearts"):FireServer(unpack(args))
       end
-end)
+end)--]]
 
 ------------------------				
             if isInMiniGame then
