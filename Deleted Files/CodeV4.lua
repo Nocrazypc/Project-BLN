@@ -2245,7 +2245,7 @@ getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
                         --StatsGuis:UpdateText("TotalFrame2")
 			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
                     end
-
+Teleport.DownloadMainMap()
 while task.wait() do
     local args = {
         [1] = 5,
