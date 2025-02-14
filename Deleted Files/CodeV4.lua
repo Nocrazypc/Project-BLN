@@ -2245,5 +2245,13 @@ getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
                         --StatsGuis:UpdateText("TotalFrame2")
 			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
                     end
-   --print('Loaded. lastest update 10/01/2025  mm/dd/yyyy')                 
+
+while task.wait() do
+    local args = {
+        [1] = 5,
+        [2] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,16 ,17, 18, 19,20}
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("API"):WaitForChild("ValentinesEventAPI/PickupRoseHearts"):FireServer(unpack(args))
+end
+   --print('Loaded. lastest update 14/02/2025  mm/dd/yyyy')                 
                     
