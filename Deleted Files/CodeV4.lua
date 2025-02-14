@@ -889,24 +889,6 @@ local autoFarm = function()
     task.delay(30, function()
         while true do
 
------------Mormal Stars ---------	
-        for i, v in pairs(ClientData.get_data()[localPlayer.Name].moon_2025_shooting_stars.spawn_limits) do 
-            if LunarNewYear2025:GetAvailableShootingStars(i) > 0 then
-                Teleport.DownloadMainMap()
-                LunarNewYear2025:FetchNormalStars(i)
-                print("[EVENT] - Collected Normal Stars from :", i)
-            end 
-        end
------------Special Stars ---------			
-            while ClientData.get_data()[localPlayer.Name].moon_2025_shooting_stars.special_stars_collected_today < ClientData.get_data()[localPlayer.Name].moon_2025_shooting_stars.special_stars_allowed_today and task.wait(1) do
-            for i, v in pairs(ClientData.get_data()[localPlayer.Name].moon_2025_shooting_stars.spawn_limits) do
-                Teleport.DownloadMainMap() 
-                LunarNewYear2025:FetchSpecialStars(i)
-                print("[EVENT] - Collected Special Stars!")    
-                if ClientData.get_data()[localPlayer.Name].moon_2025_shooting_stars.special_stars_collected_today >= ClientData.get_data()[localPlayer.Name].moon_2025_shooting_stars.special_stars_allowed_today then break end
-            end
-        end   
-------------------------------------
 				
             if isInMiniGame then
                 local count = 0
