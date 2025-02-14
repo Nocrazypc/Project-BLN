@@ -1672,8 +1672,10 @@ end)
      end,
  })
 ------------- Hatch Eggs Only --------
+FarmTab:CreateSection("Eggs Only")
+--------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
-     Name = "Buy & Hatch Eggs Only",
+     Name = "Auto Buy & Hatch Eggs",
      CurrentValue = false,
      Flag = "Toggle201",
      Callback = function(Value)
@@ -1697,6 +1699,7 @@ local FarmToggle = FarmTab:CreateToggle({
  })
 ----------------------------------
 FarmTab:CreateSection("Make ALL Neon/Mega in 1 Click")
+----------------------------------
 FarmTab:CreateButton({
 	Name = "Make Neon Pets",
 	Callback = function()
