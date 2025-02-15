@@ -889,13 +889,8 @@ local autoFarm = function()
     task.delay(30, function()
         while true do
 -------- Valentines 25 ---------
-             if isBuyingOrAging then
-                 repeat
-                    print('Stopping because its buying or aging')
-                    task.wait(20)
-                until not isBuyingOrAging
-            end
             Teleport.DownloadMainMap()
+	    task.wait(6)
             Valentines2025.GetAllRosesAndHearts()
 
 ----------------------------				
