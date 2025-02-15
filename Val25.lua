@@ -29,10 +29,10 @@
                 for i, v in HeartsFolder:GetChildren()do
                     if v:IsA('Model') and v:FindFirstChild('Collider') then
                         localPlayer.Character.HumanoidRootPart.CFrame = v.PrimaryPart.CFrame
-                        task.wait(0.3)
+                        task.wait(0.5)
                     end
                 end
-                task.wait()
+                task.wait(1)
                 if not HeartsFolder:FindFirstChildWhichIsA('Model') then
                     return
                 end
