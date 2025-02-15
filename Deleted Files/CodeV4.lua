@@ -896,7 +896,8 @@ local autoFarm = function()
                 until not isBuyingOrAging
             end
 
-            Valentines2025.GetAllRosesAndHearts()	
+            Valentines2025.GetAllRosesAndHearts()
+            Teleport.FarmingHome()	
 ----------------------------				
             if isInMiniGame then
                 local count = 0
