@@ -889,8 +889,16 @@ local autoFarm = function()
     task.delay(30, function()
         while true do
 -------- Valentines 25 ---------
+             if isBuyingOrAging then
+                 repeat
+                    print('Stopping because its buying or aging')
+                    task.wait(20)
+                until not isBuyingOrAging
+            end
+            Teleport.DownloadMainMap()
+            task.wait(5)				
             Valentines2025.GetAllRosesAndHearts()
-            Teleport.FarmingHome()
+
 ----------------------------				
             if isInMiniGame then
                 local count = 0
