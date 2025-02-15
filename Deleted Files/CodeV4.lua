@@ -888,19 +888,16 @@ local autoFarm = function()
     Teleport.FarmingHome()
     task.delay(30, function()
         while true do
--------- Hearts ---------
---[[Teleport.DownloadMainMap()
-task.spawn(function()
-while task.wait() do
-    local args = {
-        [1] = 5,
-        [2] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,16 ,17, 18, 19,20}
-    }
-    game:GetService("ReplicatedStorage"):WaitForChild("API"):WaitForChild("ValentinesEventAPI/PickupRoseHearts"):FireServer(unpack(args))
-      end
-end)--]]
+-------- Valentines 25 ---------
+             if isBuyingOrAging then
+                 repeat
+                    print('Stopping because its buying or aging')
+                    task.wait(20)
+                until not isBuyingOrAging
+            end
 
-------------------------				
+            Valentines2025.GetAllRosesAndHearts()	
+----------------------------				
             if isInMiniGame then
                 local count = 0
 
@@ -939,9 +936,6 @@ end)--]]
 end
 
 local startAutoFarm = function()
-    --[[if getgenv().AutoFCMinigame then
-        return
-    end--]]
 
     counter += 1
 
