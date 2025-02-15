@@ -8,7 +8,7 @@
             if not Valentines2025 then
                 return
             end
-            Teleport.DownloadMainMap()
+            --Teleport.DownloadMainMap()
             local RosesFolder = ValentinesFolder:FindFirstChild('Roses')
             if not RosesFolder then
                 return print('no rose folder')
@@ -29,7 +29,7 @@
                 for i, v in HeartsFolder:GetChildren()do
                     if v:IsA('Model') and v:FindFirstChild('Collider') then
                         localPlayer.Character.HumanoidRootPart.CFrame = v.PrimaryPart.CFrame
-                        task.wait(1)
+                        task.wait(0.3)
                     end
                 end
                 task.wait()
@@ -47,7 +47,7 @@
                     return
                 end
             until #RosesFolder:GetChildren() == 0
-            print('picked up all roses for the day')
+            --print('picked up all roses for the day')
         end
 
         return Valentines2025
