@@ -51,7 +51,7 @@
         end
 ------------------------------------------
 
-local function Optimizer()
+function Optimizer()
     local decalsyeeted = true
     local g = game
     local w = g.Workspace
