@@ -223,7 +223,6 @@ end
 
         Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
 
-	task.wait(3)
         Teleport.DeleteWater()
 end
 
