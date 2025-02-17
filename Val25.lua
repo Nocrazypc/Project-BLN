@@ -51,7 +51,7 @@
         end
 ------------------------------------------
 
-function Optimizer()
+function Valentines2025.Optimizer()
     local decalsyeeted = true
     local g = game
     local w = g.Workspace
