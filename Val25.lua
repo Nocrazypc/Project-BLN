@@ -52,74 +52,30 @@
 ------------------------------------------
 
 function Valentines2025.Optimizer()
-    local decalsyeeted = true
+
     local g = game
-    local w = g.Workspace
+    local w = g.workspace
     local l = g.Lighting
     local t = w.Terrain
-    sethiddenproperty(l,"Technology",2)
-    sethiddenproperty(t,"Decoration",false)
-    --game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Chat,false)
+
     t.WaterWaveSize = 0
     t.WaterWaveSpeed = 0
     t.WaterReflectance = 0
     t.WaterTransparency = 1
-    l.GlobalShadows = 0
-    l.FogEnd = 9e9
-    -- l.Brightness = 0
-    settings().Rendering.QualityLevel = "0"
-    settings().Rendering.MeshPartDetailLevel = Enum.MeshPartDetailLevel.Level04
+
     task.wait()
-    for i, v in pairs(w:GetDescendants()) do
-        if (v:IsA("Decal") or v:IsA("Texture")) and decalsyeeted then
-            v.Transparency = 1
-        elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
-            v.Lifetime = NumberRange.new(0)
-        elseif v:IsA("SpecialMesh") and decalsyeeted  then
-            v.TextureId=0
-        end
-    end
-    for i = 1,#l:GetChildren() do
-        e=l:GetChildren()[i]
-        if e:IsA("BlurEffect") or e:IsA("DepthOfFieldEffect") then
-            e.Enabled = false
-        end
-    end
-    w.DescendantAdded:Connect(function(v)
-        pcall(function()
-            if v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
-                v.Transparency = 1
-            elseif v:IsA("SpecialMesh") and decalsyeeted then
-                v.TextureId=0
-            end
-        end)
-        task.wait()
-    end)
+    
 
     workspace.Terrain.WaterReflectance = 0
     workspace.Terrain.WaterTransparency = 1
     workspace.Terrain.WaterWaveSize = 0
     workspace.Terrain.WaterWaveSpeed = 0
 
-    for i,v in pairs(game.Lighting:GetChildren()) do 
-        if v:IsA("Model") then
-            v:Destroy()
-        elseif v.Name:match("Weather") then 
-            v:Destroy()
-        end 
-    end
 
-
-    game.Lighting.ChildAdded:Connect(function()
-        for i,v in pairs(game.Lighting:GetChildren()) do 
-            if v:IsA("Model") then
-                v:Destroy()
-            elseif v.Name:match("Weather") then 
-                v:Destroy()
-            end 
-        end
-
-    end)
+     if workspace:FindFirstChildWhichIsA("Terrain") then
+        workspace.Terrain:Clear()
+     end
+        
 end
 
 
