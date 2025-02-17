@@ -66,7 +66,7 @@ function Valentines2025.Optimizer()
     t.WaterTransparency = 1
     l.GlobalShadows = 0
     l.FogEnd = 9e9
-    l.Brightness = 1
+    -- l.Brightness = 0
     settings().Rendering.QualityLevel = "0"
     settings().Rendering.MeshPartDetailLevel = Enum.MeshPartDetailLevel.Level04
     task.wait()
