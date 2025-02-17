@@ -896,11 +896,11 @@ local autoFarm = function()
                 until not isBuyingOrAging
             end
             Teleport.DownloadMainMap()
-            task.wait(4)
-            if workspace:FindFirstChildWhichIsA("Terrain") then workspace.Terrain:Clear()
-	    end
-            task.wait(1)				
+            task.wait(3)
+            Teleport.DeleteWater()
+            task.wait(2)				
             Valentines2025.GetAllRosesAndHearts()
+            Teleport.DeleteWater()
 ----------------------------				
             if isInMiniGame then
                 local count = 0
