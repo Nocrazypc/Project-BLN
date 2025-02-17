@@ -900,7 +900,8 @@ local autoFarm = function()
             Teleport.DeleteWater()
             task.wait(2)				
             Valentines2025.GetAllRosesAndHearts()
-            Teleport.DeleteWater()
+            -- Teleport.DeleteWater()
+            Valentines2025.Optimizer()
 ----------------------------				
             if isInMiniGame then
                 local count = 0
