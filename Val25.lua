@@ -63,7 +63,7 @@ function Valentines2025.Optimizer()
     t.WaterWaveSize = 0
     t.WaterWaveSpeed = 0
     t.WaterReflectance = 0
-    t.WaterTransparency = 0
+    t.WaterTransparency = 1
     l.GlobalShadows = 0
     l.FogEnd = 9e9
     l.Brightness = 0
@@ -71,10 +71,10 @@ function Valentines2025.Optimizer()
     settings().Rendering.MeshPartDetailLevel = Enum.MeshPartDetailLevel.Level04
     task.wait()
     for i, v in pairs(w:GetDescendants()) do
-        if v:IsA("BasePart") and not v:IsA("MeshPart") then
-            v.Material = "Plastic"
-            v.Reflectance = 0
-        elseif (v:IsA("Decal") or v:IsA("Texture")) and decalsyeeted then
+        --if v:IsA("BasePart") and not v:IsA("MeshPart") then
+            --v.Material = "Plastic"
+            --v.Reflectance = 0
+        if (v:IsA("Decal") or v:IsA("Texture")) and decalsyeeted then
             v.Transparency = 1
         elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
             v.Lifetime = NumberRange.new(0)
@@ -83,10 +83,10 @@ function Valentines2025.Optimizer()
             v.BlastRadius = 1
         elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
             v.Enabled = false
-        elseif v:IsA("MeshPart") and decalsyeeted then
-            v.Material = "Plastic"
-            v.Reflectance = 0
-            v.TextureID = 10385902758728957
+        --elseif v:IsA("MeshPart") and decalsyeeted then
+            --v.Material = "Plastic"
+            --v.Reflectance = 0
+            --v.TextureID = 10385902758728957
         elseif v:IsA("SpecialMesh") and decalsyeeted  then
             v.TextureId=0
         elseif v:IsA("ShirtGraphic") and decalsyeeted then
@@ -101,10 +101,10 @@ function Valentines2025.Optimizer()
     end
     w.DescendantAdded:Connect(function(v)
         pcall(function()
-            if v:IsA("BasePart") and not v:IsA("MeshPart") then
-                v.Material = "Plastic"
-                v.Reflectance = 0
-            elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
+            --if v:IsA("BasePart") and not v:IsA("MeshPart") then
+               -- v.Material = "Plastic"
+               -- v.Reflectance = 0
+            if v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
                 v.Transparency = 1
             elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
                 v.Lifetime = NumberRange.new(0)
@@ -113,10 +113,10 @@ function Valentines2025.Optimizer()
                 v.BlastRadius = 1
             elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
                 v.Enabled = false
-            elseif v:IsA("MeshPart") and decalsyeeted then
-                v.Material = "Plastic"
-                v.Reflectance = 0
-                v.TextureID = 10385902758728957
+            --elseif v:IsA("MeshPart") and decalsyeeted then
+                --v.Material = "Plastic"
+                --v.Reflectance = 0
+                --v.TextureID = 10385902758728957
             elseif v:IsA("SpecialMesh") and decalsyeeted then
                 v.TextureId=0
             elseif v:IsA("ShirtGraphic") and decalsyeeted then
