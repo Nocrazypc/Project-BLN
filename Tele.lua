@@ -222,6 +222,8 @@ end
         Player.Character:WaitForChild('HumanoidRootPart').Anchored = false
 
         Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+
+	task.wait(3)
         Teleport.DeleteWater()
 end
 
