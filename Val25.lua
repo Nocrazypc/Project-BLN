@@ -61,13 +61,13 @@ function Valentines2025.Optimizer()
     t.WaterWaveSize = 0
     t.WaterWaveSpeed = 0
     t.WaterReflectance = 0
-    t.WaterTransparency = 1
+    t.WaterTransparency = 0
 
     task.wait()
     
 
     workspace.Terrain.WaterReflectance = 0
-    workspace.Terrain.WaterTransparency = 1
+    workspace.Terrain.WaterTransparency = 0
     workspace.Terrain.WaterWaveSize = 0
     workspace.Terrain.WaterWaveSpeed = 0
 
