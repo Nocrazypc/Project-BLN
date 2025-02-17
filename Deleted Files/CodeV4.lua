@@ -896,7 +896,6 @@ local autoFarm = function()
                 until not isBuyingOrAging
             end
             Teleport.DownloadMainMap()
-            Teleport.DeleteWater()
             task.wait(5)				
             Valentines2025.GetAllRosesAndHearts()
 
