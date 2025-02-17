@@ -895,10 +895,10 @@ local autoFarm = function()
                     task.wait(20)
                 until not isBuyingOrAging
             end
-            Teleport.DownloadMainMap()
-            task.wait(3)
-            if workspace:FindFirstChildWhichIsA("Terrain") then workspace.Terrain:Clear()
-	    end
+            -- Teleport.DownloadMainMap()
+            -- task.wait(3)
+            -- if workspace:FindFirstChildWhichIsA("Terrain") then workspace.Terrain:Clear()
+	    -- end
             task.wait(2)				
             Valentines2025.GetAllRosesAndHearts()
 ----------------------------				
