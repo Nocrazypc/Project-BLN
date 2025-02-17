@@ -1586,6 +1586,39 @@ end)
 task.wait(2)
 startAutoFarm()
 
+----------optimizer -----------
+function Optimizer()
+    local decalsyeeted = true
+    local g = game
+    local w = g.Workspace
+    local l = g.Lighting
+    local t = w.Terrain
+    sethiddenproperty(l,"Technology",2)
+    sethiddenproperty(t,"Decoration",false)
+    -- game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Chat,false)
+    t.WaterWaveSize = 0
+    t.WaterWaveSpeed = 0
+    t.WaterReflectance = 0
+    t.WaterTransparency = 0
+    l.GlobalShadows = 0
+    l.FogEnd = 9e9
+    -- l.Brightness = 0
+    settings().Rendering.QualityLevel = "0"
+    settings().Rendering.MeshPartDetailLevel = Enum.MeshPartDetailLevel.Level04
+    task.wait()
+    for i, v in pairs(w:GetDescendants()) do
+        if v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
+            v.Enabled = false
+        end
+    end
+
+    workspace.Terrain.WaterReflectance = 0
+    workspace.Terrain.WaterTransparency = 1
+    workspace.Terrain.WaterWaveSize = 0
+    workspace.Terrain.WaterWaveSpeed = 0
+
+end
+
 -----------------------Rayfield---------------------
 task.wait(5)
 local Window = Rayfield:CreateWindow({
@@ -1677,40 +1710,7 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
         v.Transparency = 1 
     end 
 end)
-----------optimizer -----------
-function Optimizer()
-    local decalsyeeted = true
-    local g = game
-    local w = g.Workspace
-    local l = g.Lighting
-    local t = w.Terrain
-    sethiddenproperty(l,"Technology",2)
-    sethiddenproperty(t,"Decoration",false)
-    -- game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Chat,false)
-    t.WaterWaveSize = 0
-    t.WaterWaveSpeed = 0
-    t.WaterReflectance = 0
-    t.WaterTransparency = 0
-    l.GlobalShadows = 0
-    l.FogEnd = 9e9
-    -- l.Brightness = 0
-    settings().Rendering.QualityLevel = "0"
-    settings().Rendering.MeshPartDetailLevel = Enum.MeshPartDetailLevel.Level04
-    task.wait()
-    for i, v in pairs(w:GetDescendants()) do
-        if v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
-            v.Enabled = false
-        end
-    end
-
-    workspace.Terrain.WaterReflectance = 0
-    workspace.Terrain.WaterTransparency = 1
-    workspace.Terrain.WaterWaveSize = 0
-    workspace.Terrain.WaterWaveSpeed = 0
-
-end
-
---------------
+Optimizer()
      end,
  })
 ------------- Hatch Eggs Only --------
