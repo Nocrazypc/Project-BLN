@@ -66,7 +66,7 @@ function Valentines2025.Optimizer()
     t.WaterTransparency = 1
     l.GlobalShadows = 0
     l.FogEnd = 9e9
-    l.Brightness = 0
+    --l.Brightness = 0
     settings().Rendering.QualityLevel = "0"
     settings().Rendering.MeshPartDetailLevel = Enum.MeshPartDetailLevel.Level04
     task.wait()
@@ -138,7 +138,7 @@ function Valentines2025.Optimizer()
             v:Destroy()
         end 
     end
-    game.Lighting.Brightness = 0
+    --game.Lighting.Brightness = 0
 
     game.Lighting.ChildAdded:Connect(function()
         for i,v in pairs(game.Lighting:GetChildren()) do 
@@ -148,7 +148,7 @@ function Valentines2025.Optimizer()
                 v:Destroy()
             end 
         end
-        game.Lighting.Brightness = 0
+        --game.Lighting.Brightness = 0
     end)
 end
 
