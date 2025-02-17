@@ -1660,7 +1660,7 @@ local FarmToggle = FarmTab:CreateToggle({
 -------------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Low Render / Hide Parts",
-     CurrentValue = true,
+     CurrentValue = false,
      Flag = "Toggle04",
      Callback = function(Value)
         
