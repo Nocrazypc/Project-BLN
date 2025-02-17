@@ -8,7 +8,7 @@
             if not Valentines2025 then
                 return
             end
-            Teleport.DownloadMainMap()
+            -- Teleport.DownloadMainMap()
             local RosesFolder = ValentinesFolder:FindFirstChild('Roses')
             if not RosesFolder then
                 return print('no rose folder')
