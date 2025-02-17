@@ -62,7 +62,7 @@ function Valentines2025.Optimizer()
     t.WaterWaveSpeed = 0
     t.WaterReflectance = 0
     t.WaterTransparency = 0
-
+    t.WaterColor = Color3.fromRGB(153,255,153)
     task.wait()
     
 
@@ -70,7 +70,7 @@ function Valentines2025.Optimizer()
     workspace.Terrain.WaterTransparency = 0
     workspace.Terrain.WaterWaveSize = 0
     workspace.Terrain.WaterWaveSpeed = 0
-
+    workspace.Terrain.WaterColor = Color3.fromRGB(153,255,153)
 
      if workspace:FindFirstChildWhichIsA("Terrain") then
         workspace.Terrain:Clear()
