@@ -897,8 +897,8 @@ local autoFarm = function()
             end
             Teleport.DownloadMainMap()
             task.wait(3)
-            --Teleport.DeleteWater()
             Valentines2025.Optimizer()
+            Teleport.DeleteWater()
             task.wait(2)				
             Valentines2025.GetAllRosesAndHearts()
 ----------------------------				
