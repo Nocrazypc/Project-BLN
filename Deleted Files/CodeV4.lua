@@ -886,7 +886,7 @@ local autoFarm = function()
     Teleport.PlaceFloorAtCampSite()
     Teleport.PlaceFloorAtBeachParty()
     Teleport.FarmingHome()
-    task.delay(20, function()
+    task.delay(30, function()
         while true do
 -------- Valentines 25 ---------
              if isBuyingOrAging then
