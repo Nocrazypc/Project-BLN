@@ -886,7 +886,7 @@ local autoFarm = function()
     Teleport.PlaceFloorAtCampSite()
     Teleport.PlaceFloorAtBeachParty()
     Teleport.FarmingHome()
-    task.delay(30, function()
+    task.delay(20, function()
         while true do
 -------- Valentines 25 ---------
              if isBuyingOrAging then
@@ -898,7 +898,7 @@ local autoFarm = function()
             Teleport.DownloadMainMap()
             task.wait(3)
             Valentines2025.Optimizer()
-            Teleport.DeleteWater()
+            -- Teleport.DeleteWater()
             task.wait(2)				
             Valentines2025.GetAllRosesAndHearts()
 ----------------------------				
