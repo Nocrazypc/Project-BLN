@@ -33,7 +33,7 @@ end
 
 
 
-function ChooseMysteryTask(mysteryID)
+local function ChooseMysteryTask(mysteryID)
     getgenv().MysteryChoosing = true
 
     local tasksList = {
@@ -511,9 +511,14 @@ end
                 return
             end
         end
-        function Ailments:MysteryAilment(mysteryId, petUnique)
+        --[[function Ailments:MysteryAilment(mysteryId, petUnique)
             pickMysteryTask(mysteryId, petUnique)
+        end--]]
+        function Ailments:MysteryAilment(mysteryId, petUnique)
+        ChooseMysteryTask(mysteryID)
         end
+
+                                                                        
         function Ailments:BabyHungryAilment()
             local stuckCount = 0
 
