@@ -213,8 +213,7 @@
             for i = 1, 3 do
                 for _, ailment in ailmentsList do
                     ReplicatedStorage.API['AilmentsAPI/ChooseMysteryAilment']:FireServer(mysteryId, i, ailment)
-                    --RouterClient.get("AilmentsAPI/ChooseMysteryAilment"):FireServer(mysteryId, i, ailment)
-                    task.wait(3)
+                    task.wait(6)
 
                     if not ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][mysteryId] then
                         return
@@ -222,6 +221,7 @@
                 end
             end
         end
+                        
         local waitForTaskToFinish = function(ailment, petUnique)
             local count = 0
 
