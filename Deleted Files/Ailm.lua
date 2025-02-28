@@ -8,6 +8,77 @@
         local doctorId = nil
         local Ailments = {}
 
+-------------------
+
+local function GetPetTasks()
+    local a,b = pcall(function()
+        ailmentData = ClientData.get_data()[localPlayer.Name]["ailments_manager"]
+        if ailmentData["ailments"] and ailmentData["ailments"][ClientData.get("pet_char_wrappers")[1].pet_unique] then
+            return ClientData.get_data()[localPlayer.Name]["ailments_manager"]["ailments"][ClientData.get("pet_char_wrappers")[1].pet_unique]
+        else
+            return {}
+        end
+    end)
+    if a then return b else return {} end
+end
+
+local function CheckTaskExist(taskName)
+    for i, v in pairs(GetPetTasks()) do
+        if i == taskName then
+            return true
+        end
+    end
+    return false
+end
+
+
+
+function ChooseMysteryTask(mysteryID)
+    getgenv().MysteryChoosing = true
+
+    local tasksList = {
+        "thirsty",
+        "dirty",
+        "sleepy",
+        "toilet",
+        "hungry",
+        "school",
+        "bored",
+        "pizza_party",
+        "salon",
+        "camping",
+        "beach_party",
+        "sick",
+        "ride",
+        "walk",
+        "play"
+    }
+
+    for _, taskA in pairs(tasksList) do
+        for x = 1, 3 do
+            local success, err = pcall(function()
+                local args = {
+                    [1] = mysteryID,
+                    [2] = x,
+                    [3] = taskA
+                }
+                RouterClient.get("AilmentsAPI/ChooseMysteryAilment"):FireServer(unpack(args))
+            end)
+            
+            if not success then
+                warn("Failed to fire server:", err)
+            end
+
+            task.wait(1)
+        end
+        if not CheckTaskExist(mysteryID) then break end
+    end
+    getgenv().MysteryChoosing = false
+end
+
+
+---------------------------------------------------------
+
         local function FoodAilments(FoodPassOn)
             local hasFood = false
 
