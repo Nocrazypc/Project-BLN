@@ -187,6 +187,28 @@
                 babyGetFoodAndEat(FoodPassOn)
             end
         end
+---------------------------------------------------
+local function GetPetTasks()
+    local a,b = pcall(function()
+        ailmentData = ClientData.get_data()[Player.Name]["ailments_manager"]
+        if ailmentData["ailments"] and ailmentData["ailments"][ClientData.get("pet_char_wrappers")[1].pet_unique] then
+            return ClientData.get_data()[Player.Name]["ailments_manager"]["ailments"][ClientData.get("pet_char_wrappers")[1].pet_unique]
+        else
+            return {}
+        end
+    end)
+    if a then return b else return {} end
+end
+
+local function CheckTaskExist(taskName)
+    for i, v in pairs(GetPetTasks()) do
+        if i == taskName then
+            return true
+        end
+    end
+    return false
+end
+----------------------------------------------------
                         
     local function pickMysteryTask(mysteryId, petUnique)
     getgenv().MysteryChoosing = true
@@ -224,10 +246,10 @@
                 warn("Failed to fire server:", err)
             end
 
-            task.wait(3)
+            task.wait(1)
         end
-        if not ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][mysteryId] then return end
-                end
+        if not CheckTaskExist(mysteryID) then break end
+    end
     getgenv().MysteryChoosing = false
 end
 
