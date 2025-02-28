@@ -866,9 +866,13 @@ local CompletePetAilments = function()
             return true
         end
     end
-    for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
+
+    for key, _ in ClientData.get_data()[localPlayer.Name]["ailments_manager"]["ailments"][ClientData.get("pet_char_wrappers")[1].pet_unique] do
         if key:match('mystery') then
-            Ailments:MysteryAilment(key, petUnique)
+            Ailments:MysteryAilment(key, petUnique)	
+    --[[for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
+        if key:match('mystery') then
+            Ailments:MysteryAilment(key, petUnique)--]]
 
             return true
         end
