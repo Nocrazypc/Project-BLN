@@ -1551,13 +1551,16 @@ dailyLoginAppClick()
 -- Teleport.FarmingHome()
 	
 if getgenv().BUY_BEFORE_FARMING then
-    isBuyingOrAging = true
+    getgenv().isBuyingOrAging = true
+
     BuyItems:BuyPets(getgenv().BUY_BEFORE_FARMING)
 end
 if getgenv().OPEN_ITEMS_BEFORE_FARMING then
-    isBuyingOrAging = true
+    getgenv().isBuyingOrAging = true
+
     BuyItems:OpenItems(getgenv().OPEN_ITEMS_BEFORE_FARMING)
 end
+
 if getgenv().AGE_PETS_BEFORE_FARMING then
     isBuyingOrAging = true
     
