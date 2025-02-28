@@ -188,32 +188,16 @@
         end
 
         local pickMysteryTask = function(mysteryId, petUnique)
-            local ailmentsList = {
-        "thirsty",
-        "dirty",
-        "sleepy",
-        "toilet",
-        "hungry",
-        "school",
-        "bored",
-        "pizza_party",
-        "salon",
-        "camping",
-        "beach_party",
-        "sick",
-        "ride",
-        "walk",
-        "play"
-}
+            local ailmentsList = {}
 
-            --[[for i, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][mysteryId]['components']['mystery']['components']do
+            for i, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][mysteryId]['components']['mystery']['components']do
                 table.insert(ailmentsList, i)
-            end--]]
+            end
 
             for i = 1, 3 do
                 for _, ailment in ailmentsList do
                     ReplicatedStorage.API['AilmentsAPI/ChooseMysteryAilment']:FireServer(mysteryId, i, ailment)
-                    task.wait(6)
+                    task.wait(3)
 
                     if not ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][mysteryId] then
                         return
