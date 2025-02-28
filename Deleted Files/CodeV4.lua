@@ -102,9 +102,8 @@ getgenv().PetCurrentlyFarming = ''
 getgenv().AutoFusion = false
 getgenv().FocusFarmAgePotions = false
 getgenv().HatchPriorityEggs = false
-
+getgenv().MysteryChoosing = false
 --getgenv().AutoMinigame = false
---getgenv().AutoFCMinigame = false
 
 local Egg2Buy = getgenv().SETTINGS.PET_TO_BUY
 local TestGui = Instance.new('ScreenGui')
