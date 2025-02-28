@@ -775,7 +775,51 @@ local function CheckTaskExist(taskName)
     end
     return false
 end
--------
+
+function ChooseMysteryTask(mysteryID)
+    getgenv().MysteryChoosing = true
+
+    local tasksList = {
+        "thirsty",
+        "dirty",
+        "sleepy",
+        "toilet",
+        "hungry",
+        "school",
+        "bored",
+        "pizza_party",
+        "salon",
+        "camping",
+        "beach_party",
+        "sick",
+        "ride",
+        "walk",
+        "play"
+    }
+
+    for _, taskA in pairs(tasksList) do
+        for x = 1, 3 do
+            local success, err = pcall(function()
+                local args = {
+                    [1] = mysteryID,
+                    [2] = x,
+                    [3] = taskA
+                }
+                RouterClient.get("AilmentsAPI/ChooseMysteryAilment"):FireServer(unpack(args))
+            end)
+            
+            if not success then
+                warn("Failed to fire server:", err)
+            end
+
+            task.wait(1)
+        end
+        if not CheckTaskExist(mysteryID) then break end
+    end
+    getgenv().MysteryChoosing = false
+end
+
+-------------------
 
 local CompletePetAilments = function()
     checkIfPetEquipped()
@@ -896,7 +940,9 @@ local CompletePetAilments = function()
                 elseif taskName:match("mystery") and not getgenv().MysteryChoosing then
                     print("Choosing Random Mystery Task!")
                     getgenv().MysteryChoosing = true
-                    Ailments:ChooseMysteryTask(taskName)
+                    spawn(function() 
+                        ChooseMysteryTask(taskName)
+                    end)
 
             return true
         end
