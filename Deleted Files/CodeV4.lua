@@ -755,7 +755,7 @@ end
 
 ------------new -------
 
-local function GetPetTasks()
+function GetPetTasks()
     local a,b = pcall(function()
         ailmentData = ClientData.get_data()[Player.Name]["ailments_manager"]
         if ailmentData["ailments"] and ailmentData["ailments"][ClientData.get("pet_char_wrappers")[1].pet_unique] then
@@ -767,7 +767,7 @@ local function GetPetTasks()
     if a then return b else return {} end
 end
 
-local function CheckTaskExist(taskName)
+function CheckTaskExist(taskName)
     for i, v in pairs(GetPetTasks()) do
         if i == taskName then
             return true
