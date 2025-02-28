@@ -187,8 +187,52 @@
                 babyGetFoodAndEat(FoodPassOn)
             end
         end
+                        
+    local function pickMysteryTask(mysteryId, petUnique)
+    getgenv().MysteryChoosing = true
 
-        local pickMysteryTask = function(mysteryId, petUnique)
+    local tasksList = {
+        "thirsty",
+        "dirty",
+        "sleepy",
+        "toilet",
+        "hungry",
+        "school",
+        "bored",
+        "pizza_party",
+        "salon",
+        "camping",
+        "beach_party",
+        "sick",
+        "ride",
+        "walk",
+        "play"
+    }
+
+    for _, taskA in pairs(tasksList) do
+        for x = 1, 3 do
+            local success, err = pcall(function()
+                local args = {
+                    [1] = mysteryID,
+                    [2] = x,
+                    [3] = taskA
+                }
+                RouterClient.get("AilmentsAPI/ChooseMysteryAilment"):FireServer(unpack(args))
+            end)
+            
+            if not success then
+                warn("Failed to fire server:", err)
+            end
+
+            task.wait(3)
+        end
+        if not ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][mysteryId] then return end
+                end
+    getgenv().MysteryChoosing = false
+end
+
+                        
+        --[[local function pickMysteryTask(mysteryId, petUnique)
             local ailmentsList = {}
 
             for i, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][mysteryId]['components']['mystery']['components']do
@@ -205,7 +249,7 @@
                     end
                 end
             end
-        end
+        end--]]
         local waitForTaskToFinish = function(ailment, petUnique)
             local count = 0
 
