@@ -196,7 +196,8 @@
 
             for i = 1, 3 do
                 for _, ailment in ailmentsList do
-                    ReplicatedStorage.API['AilmentsAPI/ChooseMysteryAilment']:FireServer(mysteryId, i, ailment)
+                    ---ReplicatedStorage.API['AilmentsAPI/ChooseMysteryAilment']:FireServer(mysteryId, i, ailment)
+                    RouterClient.get("AilmentsAPI/ChooseMysteryAilment"):FireServer(mysteryId, i, ailment)
                     task.wait(3)
 
                     if not ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][mysteryId] then
