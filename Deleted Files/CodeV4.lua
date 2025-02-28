@@ -767,9 +767,9 @@ function GetPetTasks()
     if a then return b else return {} end
 end
 
-function CheckTaskExist(taskName)
+function CheckTaskExist(taskNameM)
     for i, v in pairs(GetPetTasks()) do
-        if i == taskName then
+        if i == taskNameM then
             return true
         end
     end
@@ -779,7 +779,7 @@ end
 function ChooseMysteryTask(mysteryID)
     getgenv().MysteryChoosing = true
 
-    local tasksList = {
+    local tasksListM = {
         "thirsty",
         "dirty",
         "sleepy",
@@ -797,7 +797,7 @@ function ChooseMysteryTask(mysteryID)
         "play"
     }
 
-    for _, taskA in pairs(tasksList) do
+    for _, taskA in pairs(tasksListM) do
         for x = 1, 3 do
             local success, err = pcall(function()
                 local args = {
@@ -937,7 +937,7 @@ local CompletePetAilments = function()
         if key:match('mystery') then
             Ailments:MysteryAilment(key, petUnique)--]]
 	
-                elseif taskName:match("mystery") and not getgenv().MysteryChoosing then
+                elseif taskNameM:match("mystery") and not getgenv().MysteryChoosing then
                     print("Choosing Random Mystery Task!")
                     getgenv().MysteryChoosing = true
                     spawn(function() 
