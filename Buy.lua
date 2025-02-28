@@ -1,7 +1,10 @@
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Player = game:GetService("Players").LocalPlayer
-local BuyItems = {}
-local ClientData = require(ReplicatedStorage:WaitForChild("ClientModules"):WaitForChild("Core"):WaitForChild("ClientData"))
+        local ReplicatedStorage = game:GetService('ReplicatedStorage')
+        local Players = game:GetService('Players')
+        local ClientData = require(ReplicatedStorage:WaitForChild('ClientModules'):WaitForChild('Core'):WaitForChild('ClientData'))
+        local InventoryDB = require(ReplicatedStorage.ClientDB.Inventory.InventoryDB)
+        local localPlayer = Players.LocalPlayer
+        local BuyItems = {}
+
 
 
         local function getCategory(nameId)
