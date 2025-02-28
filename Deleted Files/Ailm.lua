@@ -187,30 +187,8 @@
                 babyGetFoodAndEat(FoodPassOn)
             end
         end
----------------------------------------------------
-local function GetPetTasks()
-    local a,b = pcall(function()
-        ailmentData = ClientData.get_data()[Player.Name]["ailments_manager"]
-        if ailmentData["ailments"] and ailmentData["ailments"][ClientData.get("pet_char_wrappers")[1].pet_unique] then
-            return ClientData.get_data()[Player.Name]["ailments_manager"]["ailments"][ClientData.get("pet_char_wrappers")[1].pet_unique]
-        else
-            return {}
-        end
-    end)
-    if a then return b else return {} end
-end
-
-local function CheckTaskExist(taskName)
-    for i, v in pairs(GetPetTasks()) do
-        if i == taskName then
-            return true
-        end
-    end
-    return false
-end
-----------------------------------------------------
                         
-    local function pickMysteryTask(mysteryId, petUnique)
+    function Ailments:ChooseMysteryTask(mysteryID)
     getgenv().MysteryChoosing = true
 
     local tasksList = {
@@ -252,7 +230,6 @@ end
     end
     getgenv().MysteryChoosing = false
 end
-
                         
         --[[local function pickMysteryTask(mysteryId, petUnique)
             local ailmentsList = {}
