@@ -754,6 +754,30 @@ local function checkIfPetEquipped()
     end
 end
 
+------------new -------
+
+local function GetPetTasks()
+    local a,b = pcall(function()
+        ailmentData = ClientData.get_data()[Player.Name]["ailments_manager"]
+        if ailmentData["ailments"] and ailmentData["ailments"][ClientData.get("pet_char_wrappers")[1].pet_unique] then
+            return ClientData.get_data()[Player.Name]["ailments_manager"]["ailments"][ClientData.get("pet_char_wrappers")[1].pet_unique]
+        else
+            return {}
+        end
+    end)
+    if a then return b else return {} end
+end
+
+local function CheckTaskExist(taskName)
+    for i, v in pairs(GetPetTasks()) do
+        if i == taskName then
+            return true
+        end
+    end
+    return false
+end
+-------
+
 local CompletePetAilments = function()
     checkIfPetEquipped()
 
@@ -866,9 +890,14 @@ local CompletePetAilments = function()
             return true
         end
     end
-    for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
+    --[[for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
         if key:match('mystery') then
-            Ailments:MysteryAilment(key, petUnique)
+            Ailments:MysteryAilment(key, petUnique)--]]
+	
+                elseif taskName:match("mystery") and not getgenv().MysteryChoosing then
+                    print("Choosing Random Mystery Task!")
+                    getgenv().MysteryChoosing = true
+                    Ailments:ChooseMysteryTask(taskName)
 
             return true
         end
