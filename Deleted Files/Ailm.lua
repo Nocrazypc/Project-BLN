@@ -4,7 +4,6 @@
         local ClientData = require(ReplicatedStorage:WaitForChild('ClientModules'):WaitForChild('Core'):WaitForChild('ClientData'))
         local GetInventory = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/GetInv.lua"))()
         local Teleport = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Tele.lua"))()
-        local RouterClient = require(ReplicatedStorage.ClientModules.Core:WaitForChild('RouterClient'):WaitForChild('RouterClient'))
         local localPlayer = Players.LocalPlayer
         local doctorId = nil
         local Ailments = {}
@@ -186,9 +185,9 @@
                 task.wait(1)
                 babyGetFoodAndEat(FoodPassOn)
             end
-        end                        
-                      
-        local function pickMysteryTask(mysteryId, petUnique)
+        end
+
+        local pickMysteryTask = function(mysteryId, petUnique)
             local ailmentsList = {}
 
             for i, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][mysteryId]['components']['mystery']['components']do
@@ -206,7 +205,6 @@
                 end
             end
         end
-                        
         local waitForTaskToFinish = function(ailment, petUnique)
             local count = 0
 
