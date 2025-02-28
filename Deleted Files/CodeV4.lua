@@ -890,7 +890,7 @@ local autoFarm = function()
     task.delay(30, function()
         while true do
 -------- Valentines 25 ---------
-             if isBuyingOrAging then
+             --[[if isBuyingOrAging then
                  repeat
                     print('Stopping because its buying or aging')
                     task.wait(20)
@@ -901,7 +901,7 @@ local autoFarm = function()
             Valentines2025.Optimizer()
             -- Teleport.DeleteWater()
             task.wait(2)				
-            Valentines2025.GetAllRosesAndHearts()
+            Valentines2025.GetAllRosesAndHearts()--]]
 ----------------------------				
             if isInMiniGame then
                 local count = 0
