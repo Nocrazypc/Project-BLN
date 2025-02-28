@@ -1548,7 +1548,7 @@ end)--]]
 ----------------------------------------
 
 dailyLoginAppClick()
---Teleport.FarmingHome()
+Teleport.FarmingHome()
 	
 if getgenv().BUY_BEFORE_FARMING then
     isBuyingOrAging = true
