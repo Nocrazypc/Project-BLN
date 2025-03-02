@@ -2,6 +2,7 @@
         local Workspace = game:GetService('Workspace')
         local Players = game:GetService('Players')
         local ClientData = require(ReplicatedStorage:WaitForChild('ClientModules'):WaitForChild('Core'):WaitForChild('ClientData'))
+        local Bypass = require(ReplicatedStorage:WaitForChild('Fsys')).load
         local GetInventory = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/GetInv.lua"))()
         local Teleport = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Tele.lua"))()
         local localPlayer = Players.LocalPlayer
