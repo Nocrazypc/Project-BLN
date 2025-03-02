@@ -792,10 +792,14 @@ local CompletePetAilments = function()
             return true
 	elseif key == 'sick' then
             Ailments:SickAilment()
-
+			
+            return true
+        elseif key == 'pet_me' then
+            Ailments:PetMeAilment()
             return true
         end
     end
+
     for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
         if key == 'salon' then
             Ailments:SalonAilment(key, petUnique)
