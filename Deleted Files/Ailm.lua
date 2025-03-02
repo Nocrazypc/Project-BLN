@@ -277,6 +277,26 @@
             end
         end
 
+
+
+
+
+        function Ailments:PetMeAilment()
+            ReplicatedStorage.API['AdoptAPI/FocusPet']:FireServer(ClientData.get('pet_char_wrappers')[1]['char'])
+            task.wait(1)
+            ReplicatedStorage.API['PetAPI/ReplicateActivePerformances']:FireServer(ClientData.get('pet_char_wrappers')[1]['char'], {
+                ['FocusPet'] = true,
+                ['Petting'] = true,
+            })
+            task.wait(1)
+            Bypass('RouterClient').get('AilmentsAPI/ProgressPetMeAilment'):FireServer(ClientData.get('pet_char_wrappers')[1].pet_unique)
+        end
+
+
+
+
+
+
         function Ailments:MoonAilment(ailment, petUnique)
             reEquipPet()
             ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MoonInterior')
