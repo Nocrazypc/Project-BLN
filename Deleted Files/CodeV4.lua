@@ -1403,7 +1403,8 @@ for i, v in debug.getupvalue(RouterClient.init, 7)do
 end
 ---First Button- Play---
 if localPlayer.PlayerGui.NewsApp.Enabled then
-    local AbsPlay = localPlayer.PlayerGui.NewsApp:WaitForChild('EnclosingFrame'):WaitForChild('MainFrame'):WaitForChild('Contents'):WaitForChild('PlayButton')
+
+    local AbsPlay = localPlayer.PlayerGui.NewsApp:WaitForChild('EnclosingFrame'):WaitForChild('MainFrame'):WaitForChild('Buttons'):WaitForChild('PlayButton')
 
     fireButton(AbsPlay)
 end
