@@ -1478,7 +1478,7 @@ task.wait(1)
 --baitId = findBait('winter_2024_winter_deer_bait')
 
 --if not baitId then
-    baitId = findBait('lures_2023_campfire_cookies')
+    baitId = findBait('ice_dimension_2025_ice_soup_bait')
 --end   
 print(`\u{1f36a} Found baitId: {baitId} \u{1f36a}`)
 placeBaitOrPickUp(baitId)
