@@ -104,7 +104,7 @@ getgenv().AutoFusion = false
 getgenv().FocusFarmAgePotions = false
 getgenv().HatchPriorityEggs = false
 
-getgenv().AutoMinigame = true
+getgenv().AutoMinigame = false
 
 local Egg2Buy = getgenv().SETTINGS.PET_TO_BUY
 local TestGui = Instance.new('ScreenGui')
@@ -1751,6 +1751,23 @@ local FarmToggle = FarmTab:CreateToggle({
 	       end
 	    end				
 	end
+     end,
+ })
+
+----------- Minigames -------------
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "ID 2025 - Slippery Slope Minigame",
+     CurrentValue = false,
+     Flag = "Toggle10",
+     Callback = function(Value)
+     getgenv().AutoMinigame = Value
+
+task.wait(2)    
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-1/refs/heads/main/Tor_ID.lua"))()
+end
+
+
      end,
  })
 ----------------------------------
