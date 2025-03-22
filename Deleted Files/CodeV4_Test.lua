@@ -1527,6 +1527,80 @@ Teleport.PlaceFloorAtCampSite()
 Teleport.PlaceFloorAtBeachParty()
 
 -------- Minigames ----------------
+localPlayer.PlayerGui.MinigameInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function()
+    if localPlayer.PlayerGui.MinigameInGameApp.Enabled then
+        localPlayer.PlayerGui.MinigameInGameApp:WaitForChild('Body')
+        localPlayer.PlayerGui.MinigameInGameApp.Body:WaitForChild('Middle')
+        localPlayer.PlayerGui.MinigameInGameApp.Body.Middle:WaitForChild('Container')
+        localPlayer.PlayerGui.MinigameInGameApp.Body.Middle.Container:WaitForChild('TitleLabel')
+
+        if localPlayer.PlayerGui.MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('SLIPPERY SLOPE') then
+            isInMiniGame = true
+
+            SlipperyEvent.Start()
+        end
+    end
+end)
+localPlayer.PlayerGui.DialogApp.Dialog.ChildAdded:Connect(function(
+    NormalDialogChild
+)
+    if NormalDialogChild.Name == 'NormalDialog' then
+        NormalDialogChild:GetPropertyChangedSignal('Visible'):Connect(function()
+            if NormalDialogChild.Visible then
+                NormalDialogChild:WaitForChild('Info')
+                NormalDialogChild.Info:WaitForChild('TextLabel')
+                NormalDialogChild.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
+                )
+                    if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Slippery Slope') then
+                        onTextChangedMiniGame()
+                    --elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
+                    --game:Shutdown()
+                    elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('You found a') then
+                        findButton('Okay')
+                    end
+                end)
+            end
+        end)
+    end
+end)
+localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog:GetPropertyChangedSignal('Visible'):Connect(function(
+)
+    if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Visible then
+        localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog:WaitForChild('Info')
+        localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info:WaitForChild('TextLabel')
+        localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
+        )
+            if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Slippery Slope') then
+                onTextChangedMiniGame()
+            elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
+                game:Shutdown()
+            elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('You found a') then
+                findButton('Okay')
+            end
+        end)
+    end
+end)
+localPlayer.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
+)
+    if localPlayer.PlayerGui.MinigameRewardsApp.Body.Visible then
+        localPlayer.PlayerGui.MinigameRewardsApp.Body:WaitForChild('Button')
+        localPlayer.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild('Face')
+        localPlayer.PlayerGui.MinigameRewardsApp.Body.Button.Face:WaitForChild('TextLabel')
+        localPlayer.PlayerGui.MinigameRewardsApp.Body:WaitForChild('Reward')
+        localPlayer.PlayerGui.MinigameRewardsApp.Body.Reward:WaitForChild('TitleLabel')
+
+        if localPlayer.PlayerGui.MinigameRewardsApp.Body.Button.Face.TextLabel.Text:match('NICE!') then
+            localPlayer.Character.HumanoidRootPart.Anchored = false
+
+            removeGameOverButton()
+
+            isInMiniGame = false
+
+            Teleport.FarmingHome()
+        end
+    end
+end)
+
 
 -----------------------------------
 
