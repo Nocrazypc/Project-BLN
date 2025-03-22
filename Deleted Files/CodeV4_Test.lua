@@ -1524,7 +1524,7 @@ localPlayer.PlayerGui.MinigameInGameApp:GetPropertyChangedSignal('Enabled'):Conn
         if localPlayer.PlayerGui.MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('SLIPPERY SLOPE') then
             isInMiniGame = true
 
-            SlipperyEvent.Start()
+            -- SlipperyEvent.Start()
         end
     end
 end)
