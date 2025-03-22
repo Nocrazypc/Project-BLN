@@ -196,7 +196,7 @@ local pets_uncommon = {}
 local pets_common = {}
 local Pets_commonto_ultrarare = {}
 local pets_legendary_to_common = {}
-local fireButton = function(button)
+--[[local fireButton = function(button)
     local success, errorMessage = pcall(function()
         firesignal(button.MouseButton1Down)
         firesignal(button.MouseButton1Click)
@@ -204,7 +204,29 @@ local fireButton = function(button)
     end)
 
     print(success, errorMessage)
-end
+end--]]
+
+local function clickGuiButton(button, xOffset, yOffset)
+     if typeof(button) ~= 'Instance' then
+         return 
+     -- Misc.DebugModePrint('button is not a Instance')
+     end
+    local xOffset = xOffset or 60
+    local yOffset = yOffset or 60
+
+    task.wait()
+    VirtualInputManager:SendMouseButtonEvent(button.AbsolutePosition.X + xOffset, button.AbsolutePosition.Y + yOffset, 0, true, game, 1)
+    task.wait()
+    VirtualInputManager:SendMouseButtonEvent(button.AbsolutePosition.X + xOffset, button.AbsolutePosition.Y + yOffset, 0, false, game, 1)
+    task.wait()
+ 
+     return
+ end
+
+ local function fireButton(button)
+     clickGuiButton(button)
+ end
+	
 local findButton = function(text, dialogFramePassOn)
     task.wait()
 
