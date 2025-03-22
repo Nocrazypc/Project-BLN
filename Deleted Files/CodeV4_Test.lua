@@ -1728,12 +1728,6 @@ FarmTab:CreateButton({
     end,
 })
 
-
-------------- minigames-------------
-
-------------------------------------
-
-
 FarmTab:CreateButton({
 	Name = "Copy All Inventory to clipboard",
 	Callback = function()
