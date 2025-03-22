@@ -1762,7 +1762,7 @@ local FarmToggle = FarmTab:CreateToggle({
      Callback = function(Value)
      getgenv().AutoMinigame = Value
 
-task.wait(2)    
+task.wait(2) do 
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-1/refs/heads/main/Tor_ID.lua"))()
 end
