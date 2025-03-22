@@ -206,22 +206,16 @@ local pets_legendary_to_common = {}
     print(success, errorMessage)
 end--]]
 
-local function clickGuiButton(button, xOffset, yOffset)
-     if typeof(button) ~= 'Instance' then
-         return 
-     -- Misc.DebugModePrint('button is not a Instance')
-     end
-    local xOffset = xOffset or 60
-    local yOffset = yOffset or 60
+local function clickGuiButton(button: Instance, xOffset: number, yOffset: number)
+	local xOffset = xOffset or 60
+	local yOffset = yOffset or 60
+	task.wait()
+	VirtualInputManager:SendMouseButtonEvent(button.AbsolutePosition.X + xOffset, button.AbsolutePosition.Y + yOffset, 0, true, game, 1)
+	task.wait()
+	VirtualInputManager:SendMouseButtonEvent(button.AbsolutePosition.X + xOffset, button.AbsolutePosition.Y + yOffset, 0, false, game, 1)
+	task.wait()
+end
 
-    task.wait()
-    VirtualInputManager:SendMouseButtonEvent(button.AbsolutePosition.X + xOffset, button.AbsolutePosition.Y + yOffset, 0, true, game, 1)
-    task.wait()
-    VirtualInputManager:SendMouseButtonEvent(button.AbsolutePosition.X + xOffset, button.AbsolutePosition.Y + yOffset, 0, false, game, 1)
-    task.wait()
- 
-     return
- end
 
  local function fireButton(button)
      clickGuiButton(button)
