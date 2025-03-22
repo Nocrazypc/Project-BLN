@@ -20,7 +20,7 @@ local BulkPotions = loadstring(game:HttpGet("https://raw.githubusercontent.com/N
 local TaskBoard = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/TaskB.lua"))()
 local Clipboard = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/ClipB.lua"))()
 local BuyItems = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Buy.lua"))()
--- local Valentines2025 = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Val25.lua"))()
+local SlipperyEvent = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/ID25.lua"))()
 local clipboard = Clipboard.new()
 local taskBoard = TaskBoard.new()
 
