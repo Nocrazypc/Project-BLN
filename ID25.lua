@@ -38,11 +38,13 @@
 
                 task.wait(0.1)
 
+                local Ice = v.Name
+                
                 local args2 = {
                     [1] = 'ice_cube_hill_minigame',
                     [2] = 'attempt_hit',
                     [3] = v.Name,
-                    [4] = v.Name.PrimaryPart.Position,
+                    [4] = Ice.PrimaryPart.Position,
                     [5] = math.random(800, 2000),
                     [6] = Bypass('LiveOpsTime').now(),
                 }
