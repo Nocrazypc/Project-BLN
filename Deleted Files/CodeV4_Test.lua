@@ -20,7 +20,7 @@ local BulkPotions = loadstring(game:HttpGet("https://raw.githubusercontent.com/N
 local TaskBoard = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/TaskB.lua"))()
 local Clipboard = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/ClipB.lua"))()
 local BuyItems = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Buy.lua"))()
--- local SlipperyEvent = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/ID25.lua"))()
+local SlipperyEvent = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/ID25.lua"))()
 local clipboard = Clipboard.new()
 local taskBoard = TaskBoard.new()
 
@@ -1524,7 +1524,7 @@ localPlayer.PlayerGui.MinigameInGameApp:GetPropertyChangedSignal('Enabled'):Conn
         if localPlayer.PlayerGui.MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('SLIPPERY SLOPE') then
             isInMiniGame = true
 
-            -- SlipperyEvent.Start()
+            SlipperyEvent.Start()
         end
     end
 end)
@@ -1736,14 +1736,14 @@ local FarmToggle = FarmTab:CreateToggle({
      Callback = function(Value)
      getgenv().AutoMinigame = Value
 
-task.wait(2)    
+--[[task.wait(2)    
 
     ReplicatedStorage.API["TeamAPI/ChooseTeam"]:InvokeServer("Parents", {["dont_send_back_home"] = true, ["source_for_logging"] = "avatar_editor"})
 
 task.wait(2) do 
 
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-1/refs/heads/main/Tor_ID.lua"))()
-end
+end--]]
 
 
      end,
