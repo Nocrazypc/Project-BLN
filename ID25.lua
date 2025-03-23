@@ -22,10 +22,10 @@
         
            for i, v in ipairs(iceCubesFolder:GetChildren())do
                 if not v then
-                    return
+                    continue
                 end
                 --[[if not v.PrimaryPart then
-                    return
+                    continue
                 end--]]
 
                 local args1 = {
@@ -42,7 +42,7 @@
                     [1] = 'ice_cube_hill_minigame',
                     [2] = 'attempt_hit',
                     [3] = v.Name,
-                    [4] = ,
+                    [4] = iceCubesFolder.IceCube.PrimaryPart.Position,
                     [5] = math.random(800, 2000),
                     [6] = Bypass('LiveOpsTime').now(),
                 }
