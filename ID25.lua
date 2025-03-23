@@ -28,13 +28,7 @@
                 ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args1))
             --end 
                 task.wait(0.1)
-            --[[for i, v in ipairs(iceCubesFolder:GetChildren())do
-                if not v then
-                    continue
-                end
-                if not v.PrimaryPart then
-                    continue
-                end--]]
+
 
                 local args2 = {
                     [1] = 'ice_cube_hill_minigame',
@@ -49,7 +43,7 @@
 
                 --v.DecalPart.Color = Color3.fromRGB(255, 0, 0)
 
-                task.wait(1)
+                task.wait(0.3)
 
                 --break
             --end
