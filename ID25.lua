@@ -2,6 +2,7 @@
         local Bypass = require(ReplicatedStorage:WaitForChild('Fsys')).load
         local Workspace = game:GetService('Workspace')
         local SlipperyEvent = {}
+        local VirtualUser = game:GetService('VirtualUser')
 
         local function IceCubeEvent()
             local iceCubeHillMinigameStatic = Workspace.StaticMap.IceCubeHillMinigameStatic
@@ -26,7 +27,12 @@
                 }
 
                 ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args1))
-            --end 
+
+                firesignal(MouseButton1Click)
+                task.wait(0.1)
+                firesignal(MouseButton1Click)
+                task.wait(0.1)
+                firesignal(MouseButton1Click)
                 task.wait(0.1)
 
 
@@ -40,8 +46,11 @@
                 }
 
                 ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args2))
-
-                --v.DecalPart.Color = Color3.fromRGB(255, 0, 0)
+                firesignal(MouseButton1Click)
+                task.wait(0.1)
+                firesignal(MouseButton1Click)
+                task.wait(0.1)
+                firesignal(MouseButton1Click)
 
                 task.wait(0.3)
 
