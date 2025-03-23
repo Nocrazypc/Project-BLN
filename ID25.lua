@@ -28,11 +28,11 @@
 
                 ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args1))
 
-                firesignal(MouseButton1Click)
+                VirtualUser:ClickButton1(Vector2.new(60, 60))
                 task.wait(0.1)
-                firesignal(MouseButton1Click)
+                VirtualUser:ClickButton1(Vector2.new(60, 60))
                 task.wait(0.1)
-                firesignal(MouseButton1Click)
+                VirtualUser:ClickButton1(Vector2.new(60, 60))
                 task.wait(0.1)
 
 
@@ -46,11 +46,12 @@
                 }
 
                 ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args2))
-                firesignal(MouseButton1Click)
+
+                VirtualUser:ClickButton1(Vector2.new(60, 60))
                 task.wait(0.1)
-                firesignal(MouseButton1Click)
+                VirtualUser:ClickButton1(Vector2.new(60, 60))
                 task.wait(0.1)
-                firesignal(MouseButton1Click)
+                VirtualUser:ClickButton1(Vector2.new(60, 60))
 
                 task.wait(0.3)
 
