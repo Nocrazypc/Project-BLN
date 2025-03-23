@@ -24,7 +24,7 @@
                 if not v then
                     continue
                 end
-                if not v.PrimaryPart then
+                if not v.BasePart then
                     continue
                 end
 
