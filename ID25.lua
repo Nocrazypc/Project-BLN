@@ -11,9 +11,12 @@
                 return
             end
 
-            for i, v in ipairs(Workspace.StaticMap.IceCubeHillMinigameStatic.IceCubes:GetChildren())do
+            for i, v in ipairs(iceCubesFolder:GetChildren())do
                 if not v then
-                    return
+                    continue
+                end
+                if not v.PrimaryPart then
+                    continue
                 end
 
                 local args1 = {
@@ -24,9 +27,12 @@
 
                 ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args1))
             end
-tssk.wait(0.3)
+            for i, v in ipairs(Workspace.StaticMap.IceCubeHillMinigameStatic.IceCubes:GetChildren())do
+                if not v then
+                    continue
+                end
                 if not v.PrimaryPart then
-                    return
+                    continue
                 end
 
                 local args2 = {
@@ -40,7 +46,7 @@ tssk.wait(0.3)
 
                 ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args2))
 
-                --v.DecalPart.Color = Color3.fromRGB(255, 0, 0)
+                v.DecalPart.Color = Color3.fromRGB(255, 0, 0)
 
                 task.wait(1.1)
 
