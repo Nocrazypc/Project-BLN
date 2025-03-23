@@ -26,7 +26,7 @@
                 }
 
                 ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args1))
-            end -]]  
+            end --]]
           
             for i, v in ipairs(iceCubesFolder:GetChildren())do
                 if not v then
@@ -40,16 +40,16 @@
                     [1] = 'ice_cube_hill_minigame',
                     [2] = 'attempt_hit',
                     [3] = v.Name,
-                    --[4] = v.PrimaryPart.Position,
-                    --[5] = 10,
-                    --[6] = Bypass('LiveOpsTime').now(),
+                    [4] = v.PrimaryPart.Position,
+                    [5] = 10,
+                    [6] = Bypass('LiveOpsTime').now(),
                 }
 
                 ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args))
 
                 --v.DecalPart.Color = Color3.fromRGB(255, 0, 0)
 
-                task.wait(1.1)
+                task.wait(3)
 
                 --break
             end
