@@ -42,7 +42,7 @@
                     [1] = 'ice_cube_hill_minigame',
                     [2] = 'attempt_hit',
                     [3] = v.Name,
-                    [4] = iceCubesFolder.IceCube.PrimaryPart.Position,
+                    [4] = v.Name.PrimaryPart.Position,
                     [5] = math.random(800, 2000),
                     [6] = Bypass('LiveOpsTime').now(),
                 }
