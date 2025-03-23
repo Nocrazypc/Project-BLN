@@ -1,3 +1,5 @@
+        local Players = game:GetService('Players')
+        local localPlayer = Players.LocalPlayer
         local ReplicatedStorage = game:GetService('ReplicatedStorage')
         local Bypass = require(ReplicatedStorage:WaitForChild('Fsys')).load
         local Workspace = game:GetService('Workspace')
@@ -12,18 +14,24 @@
                 return
             end
 
-           for i, v in ipairs(iceCubesFolder:GetChildren())do
-                if not v then
-                    continue
-                end
-                if not v.PrimaryPart then
-                    continue
-                end
+            if iceCubesFolder:FindFirstChild('IceCube') then
+                localPlayer.Character.HumanoidRootPart.CFrame = iceCubesFolder.IceCube.PrimaryPart.CFrame + Vector3.new(0, 2, 0)
+                
+            end
+
+        
+           --for i, v in ipairs(iceCubesFolder:GetChildren())do
+                --if not v then
+                    --continue
+                --end
+                --if not v.PrimaryPart then
+                    --continue
+                --end
 
                 local args1 = {
                     [1] = 'ice_cube_hill_minigame',
                     [2] = 'ice_cube_touched',
-                    [3] = v.Name,
+                    --[3] = v.Name,
                 }
 
                 ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args1))
@@ -33,18 +41,18 @@
                 local args2 = {
                     [1] = 'ice_cube_hill_minigame',
                     [2] = 'attempt_hit',
-                    [3] = v.Name,
-                    [4] = v.PrimaryPart.CFrame,
-                    [5] = 200,
-                    [6] = Bypass('LiveOpsTime').now(),
+                    --[3] = v.Name,
+                    --[4] = v.PrimaryPart.CFrame,
+                    --[5] = 200,
+                    --[6] = Bypass('LiveOpsTime').now(),
                 }
 
                 ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args2))
 
                 task.wait(1)
-
+                 return
                 --break
-            end
+            --end
         end
 
         function SlipperyEvent.Start()
