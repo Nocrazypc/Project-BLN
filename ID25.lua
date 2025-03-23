@@ -2,7 +2,7 @@
         local Bypass = require(ReplicatedStorage:WaitForChild('Fsys')).load
         local Workspace = game:GetService('Workspace')
         local SlipperyEvent = {}
-        local VirtualUser = game:GetService('VirtualUser')
+
 
         local function IceCubeEvent()
             local iceCubeHillMinigameStatic = Workspace.StaticMap.IceCubeHillMinigameStatic
@@ -12,51 +12,38 @@
                 return
             end
 
-           --[[for i, v in ipairs(iceCubesFolder:GetChildren())do
+           for i, v in ipairs(iceCubesFolder:GetChildren())do
                 if not v then
                     continue
                 end
                 if not v.PrimaryPart then
                     continue
-                end--]]
+                end
 
                 local args1 = {
                     [1] = 'ice_cube_hill_minigame',
                     [2] = 'ice_cube_touched',
-                    --[3] = v.Name,
+                    [3] = v.Name,
                 }
 
                 ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args1))
-
-                VirtualUser:ClickButton1(Vector2.new(60, 60))
-                task.wait(0.1)
-                VirtualUser:ClickButton1(Vector2.new(60, 60))
-                task.wait(0.1)
-                VirtualUser:ClickButton1(Vector2.new(60, 60))
-                task.wait(0.1)
 
 
                 local args2 = {
                     [1] = 'ice_cube_hill_minigame',
                     [2] = 'attempt_hit',
-                    --[3] = v.Name,
-                    --[4] = v.PrimaryPart,
-                    --[5] = 200,
-                    --[6] = Bypass('LiveOpsTime').now(),
+                    [3] = v.Name,
+                    [4] = v.PrimaryPart.CFrame,
+                    [5] = 200,
+                    [6] = Bypass('LiveOpsTime').now(),
                 }
 
                 ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args2))
 
-                VirtualUser:ClickButton1(Vector2.new(60, 60))
-                task.wait(0.1)
-                VirtualUser:ClickButton1(Vector2.new(60, 60))
-                task.wait(0.1)
-                VirtualUser:ClickButton1(Vector2.new(60, 60))
-
-                task.wait(0.3)
+                task.wait(1)
 
                 --break
-            --end
+            end
         end
 
         function SlipperyEvent.Start()
