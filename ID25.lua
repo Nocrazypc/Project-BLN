@@ -11,8 +11,8 @@
                 return
             end
 
-           --for i, v in ipairs(iceCubesFolder:GetChildren())do
-                --[[if not v then
+           --[[for i, v in ipairs(iceCubesFolder:GetChildren())do
+                if not v then
                     continue
                 end
                 if not v.PrimaryPart then
