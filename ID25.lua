@@ -11,7 +11,7 @@
                 return
             end
 
-            for i, v in ipairs(iceCubesFolder:GetChildren())do
+           --[[ for i, v in ipairs(iceCubesFolder:GetChildren())do
                 if not v then
                     continue
                 end
@@ -26,8 +26,8 @@
                 }
 
                 ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args1))
-            end
-            task.wait()
+            end -]]  
+          
             for i, v in ipairs(iceCubesFolder:GetChildren())do
                 if not v then
                     continue
@@ -36,20 +36,20 @@
                     continue
                 end
 
-                local args2 = {
+                local args = {
                     [1] = 'ice_cube_hill_minigame',
                     [2] = 'attempt_hit',
                     [3] = v.Name,
                     --[4] = v.PrimaryPart.Position,
-                    --[5] = math.random(800, 2000),
+                    --[5] = 10,
                     --[6] = Bypass('LiveOpsTime').now(),
                 }
 
-                ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args2))
+                ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args))
 
                 --v.DecalPart.Color = Color3.fromRGB(255, 0, 0)
 
-                task.wait(2)
+                task.wait(1.1)
 
                 --break
             end
