@@ -27,7 +27,7 @@
 
                 ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args1))
             end
-            for i, v in ipairs(Workspace.StaticMap.IceCubeHillMinigameStatic.IceCubes:GetChildren())do
+            for i, v in ipairs(iceCubesFolder:GetChildren())do
                 if not v then
                     continue
                 end
@@ -67,7 +67,7 @@
 
             print('\u{1f431}\u{200d}\u{1f4bb} STARTING MINIGAME \u{1f431}\u{200d}\u{1f4bb}')
 
-            while Workspace.StaticMap.ice_cube_hill_minigame_minigame_state.is_game_active do
+            while Workspace.StaticMap.ice_cube_hill_minigame_minigame_state.is_game_active.Value do
                 IceCubeEvent()
                 task.wait()
             end
