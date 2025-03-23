@@ -1,32 +1,23 @@
-        local Players = game:GetService('Players')
-        local localPlayer = Players.LocalPlayer
         local ReplicatedStorage = game:GetService('ReplicatedStorage')
         local Bypass = require(ReplicatedStorage:WaitForChild('Fsys')).load
         local Workspace = game:GetService('Workspace')
         local SlipperyEvent = {}
 
-
         local function IceCubeEvent()
             local iceCubeHillMinigameStatic = Workspace.StaticMap.IceCubeHillMinigameStatic
             local iceCubesFolder = iceCubeHillMinigameStatic:FindFirstChild('IceCubes')
 
-           if not iceCubesFolder then
+            if not iceCubesFolder then
                 return
             end
 
-            --[[if iceCubesFolder:FindFirstChild('IceCube') then
-                localPlayer.Character.HumanoidRootPart.CFrame = iceCubesFolder.IceCube.PrimaryPart.CFrame + Vector3.new(0, 2, 0)
-                
-            end--]]
-
-        
-           for i, v in ipairs(iceCubesFolder:GetChildren())do
+            for i, v in ipairs(iceCubesFolder:GetChildren())do
                 if not v then
                     continue
                 end
-                --[[if not v.PrimaryPart then
+                if not v.PrimaryPart then
                     continue
-                end--]]
+                end
 
                 local args1 = {
                     [1] = 'ice_cube_hill_minigame',
@@ -35,24 +26,31 @@
                 }
 
                 ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args1))
+            end
+            for i, v in ipairs(Workspace.StaticMap.IceCubeHillMinigameStatic.IceCubes:GetChildren())do
+                if not v then
+                    continue
+                end
+                if not v.PrimaryPart then
+                    continue
+                end
 
-                task.wait(0.1)
-
-                local Ice = v.Name
-                
                 local args2 = {
                     [1] = 'ice_cube_hill_minigame',
                     [2] = 'attempt_hit',
                     [3] = v.Name,
-                    [4] = Ice.PrimaryPart.Position,
+                    [4] = v.PrimaryPart.Position,
                     [5] = math.random(800, 2000),
                     [6] = Bypass('LiveOpsTime').now(),
                 }
 
                 ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args2))
 
-                task.wait(1)
-                --break
+                v.DecalPart.Color = Color3.fromRGB(255, 0, 0)
+
+                task.wait(1.1)
+
+                break
             end
         end
 
@@ -69,7 +67,7 @@
 
             print('\u{1f431}\u{200d}\u{1f4bb} STARTING MINIGAME \u{1f431}\u{200d}\u{1f4bb}')
 
-            while Workspace.StaticMap.ice_cube_hill_minigame_minigame_state.is_game_active.Value do
+            while Workspace.StaticMap.ice_cube_hill_minigame_minigame_state.is_game_active do
                 IceCubeEvent()
                 task.wait()
             end
