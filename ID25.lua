@@ -28,6 +28,7 @@
 
                 ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args1))
 
+                task.wait(0.1)
 
                 local args2 = {
                     [1] = 'ice_cube_hill_minigame',
