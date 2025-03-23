@@ -12,13 +12,7 @@
             end
 
             for i, v in ipairs(iceCubesFolder:GetChildren())do
-                if not v then
-                    continue
-                end
-                if not v.PrimaryPart then
-                    continue
-                end
-
+                task.wait(0.3)
                 local args1 = {
                     [1] = 'ice_cube_hill_minigame',
                     [2] = 'ice_cube_touched',
@@ -27,14 +21,9 @@
 
                 ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args1))
             end
-            for i, v in ipairs(Workspace.StaticMap.IceCubeHillMinigameStatic.IceCubes:GetChildren())do
-                if not v then
-                    continue
-                end
-                if not v.PrimaryPart then
-                    continue
-                end
 
+            for i, v in ipairs(iceCubesFolder:GetChildren())do
+                task.wait(0.3)
                 local args2 = {
                     [1] = 'ice_cube_hill_minigame',
                     [2] = 'attempt_hit',
