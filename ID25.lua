@@ -13,7 +13,7 @@
 
               
 -------------------------------------------------------------------------------------------
-            --[[for i, v in ipairs(iceCubesFolder:GetChildren())do
+           --[[ for i, v in ipairs(iceCubesFolder:GetChildren())do
                 if not v then
                     continue
                 end
@@ -37,7 +37,7 @@
                 task.wait(1)
                 break
             --end
-        end
+        --end
 
         function SlipperyEvent.Start()
             if not Workspace:WaitForChild('StaticMap', 15) then
