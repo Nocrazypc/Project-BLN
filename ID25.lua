@@ -7,17 +7,17 @@
             local iceCubeHillMinigameStatic = Workspace.StaticMap.IceCubeHillMinigameStatic
             local iceCubesFolder = iceCubeHillMinigameStatic:FindFirstChild('IceCubes')
 
-            if not iceCubesFolder then
+           if not iceCubesFolder then
                 return
             end
 
-           for i, v in ipairs(iceCubesFolder:GetChildren())do
+           --[[for i, v in ipairs(iceCubesFolder:GetChildren())do
                 if not v then
                     continue
                 end
                 if not v.PrimaryPart then
                     continue
-                end
+                end--]]
 
                 local args1 = {
                     [1] = 'ice_cube_hill_minigame',
@@ -40,7 +40,7 @@
                     [1] = 'ice_cube_hill_minigame',
                     [2] = 'attempt_hit',
                     [3] = v.Name,
-                    [4] = v.PrimaryPart.Position,
+                    [4] = v.PrimaryPart,
                     [5] = 200,
                     [6] = Bypass('LiveOpsTime').now(),
                 }
@@ -49,10 +49,10 @@
 
                 --v.DecalPart.Color = Color3.fromRGB(255, 0, 0)
 
-                task.wait(3)
+                task.wait(1)
 
                 --break
-            end
+            --end
         end
 
         function SlipperyEvent.Start()
