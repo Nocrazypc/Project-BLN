@@ -10,21 +10,20 @@
             if not iceCubesFolder then
                 return
             end
+            
 
-              
--------------------------------------------------------------------------------------------
-           --[[ for i, v in ipairs(iceCubesFolder:GetChildren())do
+           for i, v in ipairs(iceCubesFolder:GetChildren())do
                 if not v then
                     continue
                 end
                 if not v.PrimaryPart then
                     continue
-                end--]]
+                end
                 
                 local args2 = {
                     [1] = 'ice_cube_hill_minigame',
                     [2] = 'attempt_hit',
-                    --[3] = v.Name,
+                    [3] = v.Name,
                     --[4] = v.PrimaryPart.Position,
                     --[5] = math.random(800, 2000),
                     --[6] = Bypass('LiveOpsTime').now(),
@@ -36,8 +35,8 @@
 
                 task.wait(1)
                 break
-            --end
-        --end
+            end
+        end
 
         function SlipperyEvent.Start()
             if not Workspace:WaitForChild('StaticMap', 15) then
