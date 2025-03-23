@@ -24,9 +24,9 @@
                 if not v then
                     return
                 end
-                if not v.PrimaryPart then
+                --[[if not v.PrimaryPart then
                     return
-                end
+                end--]]
 
                 local args1 = {
                     [1] = 'ice_cube_hill_minigame',
@@ -42,8 +42,8 @@
                     [1] = 'ice_cube_hill_minigame',
                     [2] = 'attempt_hit',
                     [3] = v.Name,
-                    [4] = v.PrimaryPart.Position,
-                    [5] = 200,
+                    [4] = ,
+                    [5] = math.random(800, 2000),
                     [6] = Bypass('LiveOpsTime').now(),
                 }
 
