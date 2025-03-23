@@ -12,7 +12,13 @@
             end
 
             for i, v in ipairs(iceCubesFolder:GetChildren())do
-                task.wait(0.3)
+                if not v then
+                    continue
+                end
+                if not v.PrimaryPart then
+                    continue
+                end
+
                 local args1 = {
                     [1] = 'ice_cube_hill_minigame',
                     [2] = 'ice_cube_touched',
@@ -21,9 +27,14 @@
 
                 ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args1))
             end
-
             for i, v in ipairs(iceCubesFolder:GetChildren())do
-                task.wait(0.3)
+                if not v then
+                    continue
+                end
+                if not v.PrimaryPart then
+                    continue
+                end
+
                 local args2 = {
                     [1] = 'ice_cube_hill_minigame',
                     [2] = 'attempt_hit',
@@ -56,9 +67,9 @@
 
             print('\u{1f431}\u{200d}\u{1f4bb} STARTING MINIGAME \u{1f431}\u{200d}\u{1f4bb}')
 
-            while Workspace.StaticMap.ice_cube_hill_minigame_minigame_state.is_game_active do
+            while Workspace.StaticMap.ice_cube_hill_minigame_minigame_state.is_game_active.Value do
                 IceCubeEvent()
-                task.wait()
+                task.wait(0.3)
             end
 
             print('\u{1f389} EVENT DONE \u{1f389}')
