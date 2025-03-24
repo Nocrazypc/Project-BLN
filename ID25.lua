@@ -30,7 +30,7 @@
                 return
             end
 
-            local MAX_DISTANCE = 100
+            local MAX_DISTANCE = 300
             local distance = 0
             local iceCube
 
