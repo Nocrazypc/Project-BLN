@@ -1516,12 +1516,11 @@ Teleport.PlaceFloorAtBeachParty()
 
 -------- Minigames ----------------
 
-Workspace.StaticMap.ice_cube_hill_minigame_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function(
-)
+Workspace.StaticMap.ice_cube_hill_minigame_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function()
     if not Workspace.StaticMap.ice_cube_hill_minigame_minigame_state.is_game_active.Value then
         return
     end
-    if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME then
+    if getgenv().AutoMinigame then
         ReplicatedStorage.API['MinigameAPI/AttemptJoin']:FireServer('ice_cube_hill_minigame', true)
     end
 end)
