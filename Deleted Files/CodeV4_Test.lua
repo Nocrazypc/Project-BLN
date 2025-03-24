@@ -702,6 +702,7 @@ end
 local function onTextChangedMiniGame()
     --if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME then
     if getgenv().AutoMinigame then
+        SlipperyEvent.CreatePlatform()
         findButton('Yes')
     else
         findButton('No')
