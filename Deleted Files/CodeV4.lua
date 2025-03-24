@@ -692,6 +692,11 @@ local tradeCollector = function(namePassOn)
 end
 
 local completeBabyAilments = function()
+
+    if isInMiniGame then
+         return
+     end
+	
     for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments do
         if key == 'hungry' then
             --ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', "icecream", {})
@@ -753,6 +758,11 @@ local function checkIfPetEquipped()
 end
 
 local CompletePetAilments = function()
+
+    if isInMiniGame then
+         return
+     end
+
     checkIfPetEquipped()
 
     local petUnique = ClientData.get_data()[localPlayer.Name].pet_char_wrappers[1].pet_unique
