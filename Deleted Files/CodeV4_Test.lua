@@ -1750,7 +1750,7 @@ end)
  })
 
 ----------- Minigames -------------
-local FarmToggle = FarmTab:CreateToggle({
+--[[local FarmToggle = FarmTab:CreateToggle({
      Name = "ID 2025 - Slippery Slope Minigame",
      CurrentValue = false,
      Flag = "Toggle10",
@@ -1768,7 +1768,7 @@ end
 
 
      end,
- }) 
+ }) --]]
 ------------ Hatch Eggs Only ---------
 FarmTab:CreateSection("Eggs Only")
 --------------------------------------
