@@ -30,7 +30,7 @@
                 return
             end
 
-            local MAX_DISTANCE = 50
+            local MAX_DISTANCE = 100
             local distance = 0
             local iceCube
 
@@ -96,7 +96,7 @@
 
             iceCube.DecalPart.Color = Color3.fromRGB(255, 0, 0)
 
-            task.wait(1.1)
+            task.wait(0.3)
         end
 
         function SlipperyEvent.Start()
