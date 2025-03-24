@@ -20,7 +20,7 @@ local BulkPotions = loadstring(game:HttpGet("https://raw.githubusercontent.com/N
 local TaskBoard = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/TaskB.lua"))()
 local Clipboard = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/ClipB.lua"))()
 local BuyItems = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Buy.lua"))()
--- local Valentines2025 = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Val25.lua"))()
+local SlipperyEvent = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/ID25.lua"))()
 local clipboard = Clipboard.new()
 local taskBoard = TaskBoard.new()
 
@@ -104,8 +104,7 @@ getgenv().AutoFusion = false
 getgenv().FocusFarmAgePotions = false
 getgenv().HatchPriorityEggs = false
 
---getgenv().AutoMinigame = false
---getgenv().AutoFCMinigame = false
+getgenv().AutoMinigame = true
 
 local Egg2Buy = getgenv().SETTINGS.PET_TO_BUY
 local TestGui = Instance.new('ScreenGui')
@@ -196,7 +195,6 @@ local pets_uncommon = {}
 local pets_common = {}
 local Pets_commonto_ultrarare = {}
 local pets_legendary_to_common = {}
-
 --[[local fireButton = function(button)
     local success, errorMessage = pcall(function()
         firesignal(button.MouseButton1Down)
@@ -207,22 +205,16 @@ local pets_legendary_to_common = {}
     print(success, errorMessage)
 end--]]
 
-local function clickGuiButton(button, xOffset, yOffset)
-     if typeof(button) ~= 'Instance' then
-         return 
-     -- Misc.DebugModePrint('button is not a Instance')
-     end
-    local xOffset = xOffset or 60
-    local yOffset = yOffset or 60
+local function clickGuiButton(button: Instance, xOffset: number, yOffset: number)
+	local xOffset = xOffset or 60
+	local yOffset = yOffset or 60
+	task.wait()
+	VirtualInputManager:SendMouseButtonEvent(button.AbsolutePosition.X + xOffset, button.AbsolutePosition.Y + yOffset, 0, true, game, 1)
+	task.wait()
+	VirtualInputManager:SendMouseButtonEvent(button.AbsolutePosition.X + xOffset, button.AbsolutePosition.Y + yOffset, 0, false, game, 1)
+	task.wait()
+end
 
-    task.wait()
-    VirtualInputManager:SendMouseButtonEvent(button.AbsolutePosition.X + xOffset, button.AbsolutePosition.Y + yOffset, 0, true, game, 1)
-    task.wait()
-    VirtualInputManager:SendMouseButtonEvent(button.AbsolutePosition.X + xOffset, button.AbsolutePosition.Y + yOffset, 0, false, game, 1)
-    task.wait()
- 
-     return
- end
 
  local function fireButton(button)
      clickGuiButton(button)
@@ -691,11 +683,42 @@ local tradeCollector = function(namePassOn)
     end
 end
 
-local completeBabyAilments = function()
+local function removeGameOverButton()
+    task.wait()
+    localPlayer.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild('Face')
 
+    for _, v in pairs(localPlayer.PlayerGui.MinigameRewardsApp.Body.Button:GetDescendants())do
+        if v.Name == 'TextLabel' then
+            if v.Text == 'NICE!' then
+		task.wait(10)
+                fireButton(v.Parent.Parent)
+
+                break
+            end
+        end
+    end
+end
+
+local function onTextChangedMiniGame()
+    --if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME then
+    if getgenv().AutoMinigame then
+
+        SlipperyEvent.CreatePlatform()
+        isInMiniGame = true
+		
+        task.wait(3)
+		
+        findButton('Yes')
+    else
+        findButton('No')
+    end
+end
+
+local completeBabyAilments = function()
+	
     if isInMiniGame then
          return
-     end
+    end
 	
     for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments do
         if key == 'hungry' then
@@ -761,8 +784,8 @@ local CompletePetAilments = function()
 
     if isInMiniGame then
          return
-     end
-
+    end
+	
     checkIfPetEquipped()
 
     local petUnique = ClientData.get_data()[localPlayer.Name].pet_char_wrappers[1].pet_unique
@@ -901,31 +924,19 @@ local autoFarm = function()
     Teleport.PlaceFloorAtBeachParty()
     Teleport.FarmingHome()
     task.delay(30, function()
+
         while true do
--------- Valentines 25 ---------
-             --[[if isBuyingOrAging then
-                 repeat
-                    print('Stopping because its buying or aging')
-                    task.wait(20)
-                until not isBuyingOrAging
-            end
-            Teleport.DownloadMainMap()
-            task.wait(3)
-            Valentines2025.Optimizer()
-            -- Teleport.DeleteWater()
-            task.wait(2)				
-            Valentines2025.GetAllRosesAndHearts()--]]
-----------------------------				
             if isInMiniGame then
                 local count = 0
 
                 repeat
-                    print(`\u{23f1}\u{fe0f} Waiting for 10 secs [inside minigame] \u{23f1}\u{fe0f}`)
+                    print(`\u{23f1}\u{fe0f} Waiting for 30 secs [inside minigame] \u{23f1}\u{fe0f}`)
 
-                    count += 10
+                    count += 30
 
-                    task.wait(10)
-                until not isInMiniGame or count > 120
+                    task.wait(30)
+                until not isInMiniGame or not Workspace.StaticMap.ice_cube_hill_minigame_minigame_state.is_game_active.Value
+                --until not isInMiniGame or count > 120
 
                 isInMiniGame = false
             end
@@ -934,11 +945,11 @@ local autoFarm = function()
             GetInventory:IsFarmingSelectedPet()
 
             if not CompletePetAilments() then
+                task.wait()
                 completeBabyAilments()
             end
 
-            --updateStatsGui()
-            task.wait(5)
+            task.wait(1)
         end
     end)
 
@@ -1519,48 +1530,99 @@ Teleport.PlaceFloorAtFarmingHome()
 Teleport.PlaceFloorAtCampSite()
 Teleport.PlaceFloorAtBeachParty()
 
---[[GuiPopupButton.Text = "Open GUI"
-GuiPopupButton.AnchorPoint = Vector2.new(0.5, 0.5)
-GuiPopupButton.BackgroundColor3 = Color3.fromRGB(255, 176, 5)
-GuiPopupButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-GuiPopupButton.BorderSizePixel = 0
-GuiPopupButton.Position = UDim2.new(0.65, 0, 0.91, 0)
-GuiPopupButton.Size = UDim2.new(0.1, 0, 0.1, 0)
-GuiPopupButton.Font = Enum.Font.FredokaOne
-GuiPopupButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-GuiPopupButton.TextScaled = true
-GuiPopupButton.TextSize = 14.000
-GuiPopupButton.TextWrapped = true
-GuiPopupButton.Parent = TestGui--]]
+-------- Minigames ----------------
 
-
---[[ClipboardButton.Activated:Connect(function()
-    if guiCooldown then
+Workspace.StaticMap.ice_cube_hill_minigame_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function()
+    if not Workspace.StaticMap.ice_cube_hill_minigame_minigame_state.is_game_active.Value then
+	isInMiniGame = false		
         return
     end
-
-    guiCooldown = true
-
-    clipboard:CopyAllInventory()
-
-    guiCooldown = false
-end)--]]
-
--- Rayfield:Minimise()
---[[GuiPopupButton.MouseButton1Click:Connect(function()
-    if guiCooldown then
-        return
+    if getgenv().AutoMinigame then
+        ReplicatedStorage.API['MinigameAPI/AttemptJoin']:FireServer('ice_cube_hill_minigame', true)
     end
+end)
+------------------------------------------------------
 
-    guiCooldown = true
 
-    Rayfield:Unhide()
-    task.wait()
+localPlayer.PlayerGui.MinigameInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function()
+    if localPlayer.PlayerGui.MinigameInGameApp.Enabled then
+        localPlayer.PlayerGui.MinigameInGameApp:WaitForChild('Body')
+        localPlayer.PlayerGui.MinigameInGameApp.Body:WaitForChild('Middle')
+        localPlayer.PlayerGui.MinigameInGameApp.Body.Middle:WaitForChild('Container')
+        localPlayer.PlayerGui.MinigameInGameApp.Body.Middle.Container:WaitForChild('TitleLabel')
 
-    guiCooldown = false
-end)--]]
+        if localPlayer.PlayerGui.MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('SLIPPERY SLOPE') then
+            if getgenv().AutoMinigame then
 
-----------------------------------------
+            isInMiniGame = true
+
+            SlipperyEvent.Start()
+	   end
+        end
+    end
+end)
+localPlayer.PlayerGui.DialogApp.Dialog.ChildAdded:Connect(function(
+    NormalDialogChild
+)
+    if NormalDialogChild.Name == 'NormalDialog' then
+        NormalDialogChild:GetPropertyChangedSignal('Visible'):Connect(function()
+            if NormalDialogChild.Visible then
+                NormalDialogChild:WaitForChild('Info')
+                NormalDialogChild.Info:WaitForChild('TextLabel')
+                NormalDialogChild.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
+                )
+                    if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Slippery Slope') then
+                        onTextChangedMiniGame()
+                    --elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
+                    --game:Shutdown()
+                    elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('You found a') then
+                        findButton('Okay')
+                    end
+                end)
+            end
+        end)
+    end
+end)
+localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog:GetPropertyChangedSignal('Visible'):Connect(function(
+)
+    if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Visible then
+        localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog:WaitForChild('Info')
+        localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info:WaitForChild('TextLabel')
+        localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
+        )
+            if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Slippery Slope') then
+                onTextChangedMiniGame()
+            elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
+                game:Shutdown()
+            elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('You found a') then
+                findButton('Okay')
+            end
+        end)
+    end
+end)
+localPlayer.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
+)
+    if localPlayer.PlayerGui.MinigameRewardsApp.Body.Visible then
+        localPlayer.PlayerGui.MinigameRewardsApp.Body:WaitForChild('Button')
+        localPlayer.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild('Face')
+        localPlayer.PlayerGui.MinigameRewardsApp.Body.Button.Face:WaitForChild('TextLabel')
+        localPlayer.PlayerGui.MinigameRewardsApp.Body:WaitForChild('Reward')
+        localPlayer.PlayerGui.MinigameRewardsApp.Body.Reward:WaitForChild('TitleLabel')
+
+        if localPlayer.PlayerGui.MinigameRewardsApp.Body.Button.Face.TextLabel.Text:match('NICE!') then
+            localPlayer.Character.HumanoidRootPart.Anchored = false
+
+            removeGameOverButton()
+
+            isInMiniGame = false
+
+            Teleport.FarmingHome()
+        end
+    end
+end)
+
+
+-----------------------------------
 
 dailyLoginAppClick()
 -- Teleport.FarmingHome()
@@ -1698,7 +1760,28 @@ end)
 
      end,
  })
-------------- Hatch Eggs Only --------
+
+----------- Minigames -------------
+--[[local FarmToggle = FarmTab:CreateToggle({
+     Name = "ID 2025 - Slippery Slope Minigame",
+     CurrentValue = false,
+     Flag = "Toggle10",
+     Callback = function(Value)
+     --getgenv().AutoMinigame = Value
+
+--task.wait(2)    
+
+    --ReplicatedStorage.API["TeamAPI/ChooseTeam"]:InvokeServer("Parents", {["dont_send_back_home"] = true, ["source_for_logging"] = "avatar_editor"})
+
+    task.wait(2) do 
+
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-1/refs/heads/main/Tor_ID.lua"))()
+end
+
+
+     end,
+ }) --]]
+------------ Hatch Eggs Only ---------
 FarmTab:CreateSection("Eggs Only")
 --------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
@@ -1759,12 +1842,6 @@ FarmTab:CreateButton({
         petsDropdown0:Set(GetInventory:TabId('pets'))
     end,
 })
-
-
-------------- minigames-------------
-
-------------------------------------
-
 
 FarmTab:CreateButton({
 	Name = "Copy All Inventory to clipboard",
