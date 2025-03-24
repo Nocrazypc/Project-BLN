@@ -691,32 +691,6 @@ local tradeCollector = function(namePassOn)
     end
 end
 
---[[local removeGameOverButton = function()
-    localPlayer.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild('Face')
-
-    for _, v in pairs(localPlayer.PlayerGui.MinigameRewardsApp.Body.Button:GetDescendants())do
-        if v.Name == 'TextLabel' then
-            if v.Text == 'NICE!' then
-                task.wait(10)
-                fireButton(v.Parent.Parent)
-
-                break
-            end
-        end
-    end
-end
-local onTextChangedMiniGame = function()
-    if getgenv().SETTINGS.EVENT.DO_FROSTCLAW_MINIGAME then
-        findButton('No')
-
-        return
-    end
-    if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME then
-        findButton('Yes')
-    else
-        findButton('No')
-    end
-end--]]
 local completeBabyAilments = function()
     for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments do
         if key == 'hungry' then
