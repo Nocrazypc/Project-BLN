@@ -14,7 +14,7 @@
             part.Position = Workspace.StaticMap.IceCubeHillMinigameStatic.HillOrientation.Position + Vector3.new(0, 15, 0)
             part.Size = Vector3.new(200, 2, 200)
             part.Anchored = true
-            part.Transparency = 1
+            part.Transparency = 0.90
             part.Name = 'MinigamePlatform'
             part.Parent = Workspace
         end
