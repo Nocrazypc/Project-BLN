@@ -1514,6 +1514,19 @@ Teleport.PlaceFloorAtCampSite()
 Teleport.PlaceFloorAtBeachParty()
 
 -------- Minigames ----------------
+
+Workspace.StaticMap.ice_cube_hill_minigame_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function(
+)
+    if not Workspace.StaticMap.ice_cube_hill_minigame_minigame_state.is_game_active.Value then
+        return
+    end
+    if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME then
+        ReplicatedStorage.API['MinigameAPI/AttemptJoin']:FireServer('ice_cube_hill_minigame', true)
+    end
+end)
+------------------------------------------------------
+
+
 localPlayer.PlayerGui.MinigameInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function()
     if localPlayer.PlayerGui.MinigameInGameApp.Enabled then
         localPlayer.PlayerGui.MinigameInGameApp:WaitForChild('Body')
@@ -1522,6 +1535,8 @@ localPlayer.PlayerGui.MinigameInGameApp:GetPropertyChangedSignal('Enabled'):Conn
         localPlayer.PlayerGui.MinigameInGameApp.Body.Middle.Container:WaitForChild('TitleLabel')
 
         if localPlayer.PlayerGui.MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('SLIPPERY SLOPE') then
+            if getgenv().AutoMinigame then
+
             isInMiniGame = true
 
             SlipperyEvent.Start()
