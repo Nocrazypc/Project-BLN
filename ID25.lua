@@ -1,4 +1,3 @@
- 
         local ReplicatedStorage = game:GetService('ReplicatedStorage')
         local Players = game:GetService('Players')
         local Bypass = require(ReplicatedStorage:WaitForChild('Fsys')).load
@@ -22,6 +21,36 @@
 
         local function teleportToPlatform()
             Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Workspace.MinigamePlatform.CFrame + Vector3.new(0, 5, 0)
+        end
+        local function getFurthestIceCube()
+            local iceCubeHillMinigameStatic = Workspace.StaticMap.IceCubeHillMinigameStatic
+            local iceCubesFolder = iceCubeHillMinigameStatic:FindFirstChild('IceCubes')
+
+            if not iceCubesFolder then
+                return
+            end
+
+            local MAX_DISTANCE = 100
+            local distance = 0
+            local iceCube
+
+            for i, v in ipairs(iceCubesFolder:GetChildren())do
+                if not v then
+                    continue
+                end
+                if not v.PrimaryPart then
+                    continue
+                end
+
+                local magnitude = (Players.LocalPlayer.Character.HumanoidRootPart.Position - v.PrimaryPart.Position).Magnitude
+
+                if magnitude <= MAX_DISTANCE and magnitude > distance then
+                    distance = magnitude
+                    iceCube = v
+                end
+            end
+
+            return iceCube
         end
         local function IceCubeEvent()
             local iceCubeHillMinigameStatic = Workspace.StaticMap.IceCubeHillMinigameStatic
@@ -47,31 +76,27 @@
 
                 ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args1))
             end
-            for i, v in ipairs(iceCubesFolder:GetChildren())do
-                if not v then
-                    continue
-                end
-                if not v.PrimaryPart then
-                    continue
-                end
 
-                local args2 = {
-                    [1] = 'ice_cube_hill_minigame',
-                    [2] = 'attempt_hit',
-                    [3] = v.Name,
-                    [4] = v.PrimaryPart.Position,
-                    [5] = math.random(800, 2000),
-                    [6] = Bypass('LiveOpsTime').now(),
-                }
+            local iceCube = getFurthestIceCube()
 
-                ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args2))
-
-                v.DecalPart.Color = Color3.fromRGB(255, 0, 0)
-
-                task.wait(1.1)
-
-                break
+            if not iceCube then
+                return
             end
+
+            local args2 = {
+                [1] = 'ice_cube_hill_minigame',
+                [2] = 'attempt_hit',
+                [3] = iceCube.Name,
+                [4] = iceCube.PrimaryPart.Position,
+                [5] = math.random(800, 2000),
+                [6] = Bypass('LiveOpsTime').now(),
+            }
+
+            ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args2))
+
+            iceCube.DecalPart.Color = Color3.fromRGB(255, 0, 0)
+
+            task.wait(1.1)
         end
 
         function SlipperyEvent.Start()
