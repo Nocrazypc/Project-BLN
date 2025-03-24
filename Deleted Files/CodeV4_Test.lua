@@ -705,7 +705,9 @@ local function onTextChangedMiniGame()
 
         SlipperyEvent.CreatePlatform()
         isInMiniGame = true
-
+		
+        task.wait(3)
+		
         findButton('Yes')
     else
         findButton('No')
