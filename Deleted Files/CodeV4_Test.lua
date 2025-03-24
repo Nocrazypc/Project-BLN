@@ -1745,14 +1745,14 @@ end)
  })
 
 ----------- Minigames -------------
-local FarmToggle = FarmTab:CreateToggle({
+--[[local FarmToggle = FarmTab:CreateToggle({
      Name = "ID 2025 - Slippery Slope Minigame",
      CurrentValue = false,
      Flag = "Toggle10",
      Callback = function(Value)
      getgenv().AutoMinigame = Value
 
---[[task.wait(2)    
+task.wait(2)    
 
     ReplicatedStorage.API["TeamAPI/ChooseTeam"]:InvokeServer("Parents", {["dont_send_back_home"] = true, ["source_for_logging"] = "avatar_editor"})
 
