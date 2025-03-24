@@ -108,7 +108,7 @@
             if not Workspace.StaticMap:WaitForChild('IceCubeHillMinigameStatic', 15) then
                 return
             end
-            if not Workspace.StaticMap.IceCubeHillMinigameStatic:WaitForChild('IceCubes', 15) then
+            if not Workspace.StaticMap.IceCubeHillMinigameStatic:WaitForChild('IceCubes', 30) then
                 return
             end
 
