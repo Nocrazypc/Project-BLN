@@ -1521,6 +1521,7 @@ Teleport.PlaceFloorAtBeachParty()
 
 Workspace.StaticMap.ice_cube_hill_minigame_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function()
     if not Workspace.StaticMap.ice_cube_hill_minigame_minigame_state.is_game_active.Value then
+	isInMiniGame = false		
         return
     end
     if getgenv().AutoMinigame then
