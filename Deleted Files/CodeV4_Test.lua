@@ -1540,6 +1540,7 @@ localPlayer.PlayerGui.MinigameInGameApp:GetPropertyChangedSignal('Enabled'):Conn
             isInMiniGame = true
 
             SlipperyEvent.Start()
+	   end
         end
     end
 end)
