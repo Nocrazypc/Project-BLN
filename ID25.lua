@@ -12,7 +12,8 @@
             local part = Instance.new('Part')
 
             part.Position = Workspace.StaticMap.IceCubeHillMinigameStatic.HillOrientation.Position + Vector3.new(0, 15, 0)
-            part.Size = Vector3.new(200, 2, 200)
+            --part.Size = Vector3.new(200, 2, 200)
+            part.Size = Vector3.new(25, 2, 25)
             part.Anchored = true
             part.Transparency = 0.90
             part.Name = 'MinigamePlatform'
@@ -20,7 +21,8 @@
         end
 
         local function teleportToPlatform()
-            Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Workspace.MinigamePlatform.CFrame + Vector3.new(0, 5, 0)
+            --Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Workspace.MinigamePlatform.CFrame + Vector3.new(0, 5, 0)
+            Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Workspace.MinigamePlatform.CFrame + Vector3.new(math.random(-8, 8), 5, math.random(-8, 8))
         end
         local function getFurthestIceCube()
             local iceCubeHillMinigameStatic = Workspace.StaticMap.IceCubeHillMinigameStatic
@@ -108,7 +110,7 @@
             if not Workspace.StaticMap:WaitForChild('IceCubeHillMinigameStatic', 15) then
                 return
             end
-            if not Workspace.StaticMap.IceCubeHillMinigameStatic:WaitForChild('IceCubes', 30) then
+            if not Workspace.StaticMap.IceCubeHillMinigameStatic:WaitForChild('IceCubes', 15) then
                 return
             end
 
