@@ -321,24 +321,27 @@ local getPlayersInGame = function()
     return playerTable
 end
 
-local findBait = function(baitPassOn)
-    local bait
+local findBait = function()
+    local baits = getgenv().SETTINGS.BAIT_TO_USE_IN_ORDER
 
-    for _, v in pairs(ClientData.get_data()[localPlayer.Name].inventory.food)do
-        if v.id == baitPassOn then
-            bait = v.unique
+    if not baits then
+        baits = {
+            'ice_dimension_2025_shiver_cone_bait',
+            'ice_dimension_2025_subzero_popsicle_bait',
+            'ice_dimension_2025_ice_soup_bait',
+        }
+    end
 
-            return bait
+    for _, id in ipairs(baits)do
+        for _, v in pairs(ClientData.get_data()[localPlayer.Name].inventory.food)do
+            if id == v.id then
+                return v.unique
+            end
         end
     end
 
     return nil
 end
-
-local function placeBaitOrPickUp(baitIdPasson)
-    if not NormalLure then
-        return
-    end
 
     --print('placing bait or picking up')
 
