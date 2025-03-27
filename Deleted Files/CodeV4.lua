@@ -24,6 +24,10 @@ local SlipperyEvent = loadstring(game:HttpGet("https://raw.githubusercontent.com
 local clipboard = Clipboard.new()
 local taskBoard = TaskBoard.new()
 
+--local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Rayfield/main/source"))()
+local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Rayfield/main/source.lua"))()
+--local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
 local Players = game:GetService('Players')
 local Workspace = game:GetService('Workspace')
 local ReplicatedStorage = game:GetService('ReplicatedStorage')
@@ -56,6 +60,7 @@ local guiCooldown = false
 local tutorialDebonce = false
 local discordCooldown = false
 local debounce = false
+local hasStartedFarming = false
 local StarterGui = game:GetService("StarterGui")
 
 --- Welcome MSG -------
@@ -80,9 +85,6 @@ local selectedPet
 local selectedGift
 local selectedToy
 local selectedFood
---local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Rayfield/main/source"))()
-local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Rayfield/main/source.lua"))()
---local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 getgenv().auto_accept_trade = false
 getgenv().auto_trade_all_pets = false
