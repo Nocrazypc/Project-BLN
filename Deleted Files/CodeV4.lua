@@ -74,7 +74,7 @@ local Piano
 local NormalLure
 local LitterBox
 local strollerId
-local baitId
+local baitUnique
 local selectedPlayer
 local selectedPet
 local selectedGift
@@ -320,7 +320,7 @@ local getPlayersInGame = function()
 
     return playerTable
 end
-
+-----------  baits  ---------------
 local findBait = function()
     local baits = getgenv().SETTINGS.BAIT_TO_USE_IN_ORDER
 
@@ -343,23 +343,43 @@ local findBait = function()
     return nil
 end
 
-    --print('placing bait or picking up')
-
+local placeBaitOrPickUp = function(baitUniquePasson)
+    if not NormalLure then
+        return
+    end
+    if not baitUniquePasson then
+        return
+    end
+    
     local args = {
         [1] = game:GetService('Players').LocalPlayer,
         [2] = NormalLure,
         [3] = 'UseBlock',
         [4] = {
-            ['bait_unique'] = baitIdPasson,
+            ['bait_unique'] = baitUniquePasson,
         },
         [5] = game:GetService('Players').LocalPlayer.Character,
     }
     local success, errorMessage = pcall(function()
         ReplicatedStorage.API:FindFirstChild('HousingAPI/ActivateFurniture'):InvokeServer(unpack(args))
     end)
+   end
 
-    --print('FIRING BAITBOX', success, errorMessage)
+-------------------------------------------
+
+local agePotionCount = function(nameId)
+    local count = 0
+
+    for _, v in ClientData.get_data()[localPlayer.Name].inventory.food do
+        if v.id == nameId then
+            count = count + 1
+        end
+    end
+
+    return count
 end
+
+
 
 local agePotionCount = function(nameId)
     local count = 0
