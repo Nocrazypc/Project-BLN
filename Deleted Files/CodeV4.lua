@@ -959,11 +959,11 @@ local autoFarm = function()
                 local count = 0
 
                 repeat
-                    print(`\u{23f1}\u{fe0f} Waiting for 45 secs [inside minigame] \u{23f1}\u{fe0f}`)
+                    print(`\u{23f1}\u{fe0f} Waiting for 50 secs [inside minigame] \u{23f1}\u{fe0f}`)
                     
-                    count = count + 46
+                    count = count + 50
 
-                    task.wait(46)
+                    task.wait(50)
                     until not isInMiniGame or not Workspace.StaticMap.ice_cube_hill_minigame_minigame_state.is_game_active.Value
                 --until not isInMiniGame or count > 120
 
