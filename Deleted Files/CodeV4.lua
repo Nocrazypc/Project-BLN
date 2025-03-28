@@ -106,7 +106,7 @@ getgenv().AutoFusion = false
 getgenv().FocusFarmAgePotions = false
 getgenv().HatchPriorityEggs = false
 
-getgenv().AutoMinigame = true
+--getgenv().AutoMinigame = true
 
 local Egg2Buy = getgenv().SETTINGS.PET_TO_BUY
 local TestGui = Instance.new('ScreenGui')
@@ -1837,25 +1837,18 @@ end)
  })
 
 ----------- Minigames -------------
---[[local FarmToggle = FarmTab:CreateToggle({
+[[local FarmToggle = FarmTab:CreateToggle({
      Name = "ID 2025 - Slippery Slope Minigame",
      CurrentValue = false,
      Flag = "Toggle10",
      Callback = function(Value)
      --getgenv().AutoMinigame = Value
 
---task.wait(2)    
-
-    --ReplicatedStorage.API["TeamAPI/ChooseTeam"]:InvokeServer("Parents", {["dont_send_back_home"] = true, ["source_for_logging"] = "avatar_editor"})
-
-    task.wait(2) do 
-
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-1/refs/heads/main/Tor_ID.lua"))()
-end
+     getgenv().AutoMinigame = Value
 
 
      end,
- }) --]]
+ })
 ------------ Hatch Eggs Only ---------
 FarmTab:CreateSection("Eggs Only")
 --------------------------------------
