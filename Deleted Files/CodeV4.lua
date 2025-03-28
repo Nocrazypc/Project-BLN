@@ -1838,14 +1838,12 @@ end)
 
 ----------- Minigames -------------
 [[local FarmToggle = FarmTab:CreateToggle({
-     Name = "ID 2025 - Slippery Slope Minigame",
+     Name = "Ice Dimension 2025 Minigame",
      CurrentValue = false,
      Flag = "Toggle10",
      Callback = function(Value)
-     --getgenv().AutoMinigame = Value
 
      getgenv().AutoMinigame = Value
-
 
      end,
  })
