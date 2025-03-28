@@ -1084,6 +1084,8 @@ local onTextChangedNormalDialog = function()
         findButton('Awesome!')
     elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Gingerbread!') then
         findButton('Awesome!')
+    elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('The Frostbite Bear') then
+         findButton('Okay')
       end
 end
 
