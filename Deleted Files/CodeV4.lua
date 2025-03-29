@@ -1738,8 +1738,8 @@ end)
 task.wait(2)
 startAutoFarm()
 
+task.wait(2)
 -----------------------Rayfield---------------------
-task.wait(5)
 local Window = Rayfield:CreateWindow({
 	Name = "BLN Adopt Me!  Basic Autofarm V4.2",
 	LoadingTitle = "Loading BLN V4 Script ",
