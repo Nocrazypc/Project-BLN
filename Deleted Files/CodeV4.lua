@@ -2419,10 +2419,6 @@ getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
 			
     end,
 })
-
-
-localPlayer.PlayerGui.DialogApp:WaitForChild('Dialog'):WaitForChild('IceDimension2025Dialog').Visible = false
-
 --------------------update Stats UI ----------------
             while task.wait(5) do
 			StatsGuis:UpdateText("TimeFrame")
