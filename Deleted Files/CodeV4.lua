@@ -1611,6 +1611,8 @@ Workspace.StaticMap.ice_cube_hill_minigame_minigame_state.is_game_active:GetProp
     end
     if getgenv().AutoMinigame then
         ReplicatedStorage.API['MinigameAPI/AttemptJoin']:FireServer('ice_cube_hill_minigame', true)
+        task.wait()
+        ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('IceCubeHillMinigame')
     end
 end)
 ------------------------------------------------------
