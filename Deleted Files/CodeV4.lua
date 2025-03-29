@@ -1381,17 +1381,23 @@ localPlayer.PlayerGui.DialogApp.Dialog.ChildAdded:Connect(function(Child)
             if not Child.Visible then
                 return
             end
-
-            Child.Visible = false
+            findButton('Okay', 'IceDimension2025Dialog')
+            localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog:WaitForChild('Info')
+            localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog.Info:WaitForChild('TextLabel')
+            localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(onTextChangedIceDimension)
         end)
     end
 end)
 localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog:GetPropertyChangedSignal('Visible'):Connect(function(
 )
     if localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog.Visible then
-        localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog.Visible = false
+        findButton('Okay', 'IceDimension2025Dialog')
+        localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog:WaitForChild('Info')
+        localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog.Info:WaitForChild('TextLabel')
+        localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(onTextChangedIceDimension)
     end
 end)
+
 --------------------------------------
 
 --[[localPlayer.PlayerGui.DialogApp.Dialog.ChildAdded:Connect(function(Child)
