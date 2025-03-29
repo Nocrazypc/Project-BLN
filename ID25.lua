@@ -110,7 +110,7 @@
             if not Workspace.StaticMap:WaitForChild('IceCubeHillMinigameStatic', 15) then
                 return
             end
-            if not Workspace.StaticMap.IceCubeHillMinigameStatic:WaitForChild('IceCubes', 15) then
+            if not Workspace.StaticMap.IceCubeHillMinigameStatic:WaitForChild('IceCubes', 30) then
                 return
             end
 
@@ -121,7 +121,13 @@
                 task.wait()
             end
 
-            print('\u{1f389} EVENT DONE \u{1f389}')
+            task.wait(1)
+
+            if Workspace.StaticMap.IceCubeHillMinigameStatic:FindFirstChild('IceCubes') then
+                --print('Deleted IceCubes Folder')
+                Workspace.StaticMap.IceCubeHillMinigameStatic.IceCubes:Destroy()
+            end
+            --print('\u{1f389} EVENT DONE \u{1f389}')
         end
 
         return SlipperyEvent
