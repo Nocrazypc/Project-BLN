@@ -106,7 +106,7 @@ getgenv().AutoFusion = false
 getgenv().FocusFarmAgePotions = false
 getgenv().HatchPriorityEggs = false
 
-getgenv().AutoMinigame = false
+getgenv().AutoMinigame = true
 
 local Egg2Buy = getgenv().SETTINGS.PET_TO_BUY
 local TestGui = Instance.new('ScreenGui')
@@ -197,668 +197,6 @@ local pets_uncommon = {}
 local pets_common = {}
 local Pets_commonto_ultrarare = {}
 local pets_legendary_to_common = {}
-
------------- Rayfield Config --------------
-
-local Window = Rayfield:CreateWindow({
-	Name = "BLN Adopt Me!  Basic Autofarm V4.2",
-	LoadingTitle = "Loading BLN V4 Script ",
-	LoadingSubtitle = "by BlackLastNight 2025",
-	ConfigurationSaving = {
-		Enabled = false,
-		FolderName = nil, -- Create a custom folder for your hub/game
-		FileName = "BLN 4",
-	},
-	Discord = {
-		Enabled = false,
-		Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
-		RememberJoins = true, -- Set this to false to make them join the discord every time they load it up
-	},
-    KeySystem = false,
-    KeySettings = {
-        Title = 'Untitled',
-        Subtitle = 'Key System',
-        Note = 'No method of obtaining the key is provided',
-        FileName = 'Key',
-        SaveKey = false,
-        GrabKeyFromSite = false,
-        Key = {
-            'Hello',
-        },
-    },
-})
-
---[[ First Tab - Autofarm ]]
-local FarmTab = Window:CreateTab("Farm", 4483362458)
-------------------------------------------------
-
-local FarmToggle = FarmTab:CreateToggle({
-     Name = "AutoFarm",
-     CurrentValue = false,
-     Flag = "Toggle01",
-     Callback = function(Value)
-			
-         getgenv().auto_farm = Value
-         autoFarm()
-     end,
- })
------------------------------------------------
-local FarmToggle = FarmTab:CreateToggle({
-     Name = "Pet Auto Fusion",
-     CurrentValue = false,
-     Flag = "Toggle03",
-     Callback = function(Value)
-         getgenv().AutoFusion = Value
-
-	 while getgenv().AutoFusion do
-	 Fusion:MakeMega(false) -- makes neon
-	 Fusion:MakeMega(true) -- makes mega
-         task.wait(900)
-	end
-     end,
- })
--------------------------------------------
-local FarmToggle = FarmTab:CreateToggle({
-     Name = "Focus Farm Age Potions",
-     CurrentValue = false,
-     Flag = "Toggle033",
-     Callback = function(Value)
-
-         getgenv().FocusFarmAgePotions = Value
-         getPet()
-
-     end,
- })
--------------------------------------------
-local FarmToggle = FarmTab:CreateToggle({
-     Name = "Low Render / Hide Parts",
-     CurrentValue = false,
-     Flag = "Toggle04",
-     Callback = function(Value)
-        
-for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
-    if v:IsA("BasePart") and Value then
-        v.Transparency = 1 
-    elseif v:IsA("BasePart") and not Value then
-        v.Transparency = 0 
-    end 
-end 
-
-game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
-    if v:IsA('BasePart') and Value then
-        v.Transparency = 1 
-    end 
-end)
-
-     end,
- })
-
------------ Minigames -------------
-local FarmToggle = FarmTab:CreateToggle({
-     Name = "Ice Dimension 2025 Minigame",
-     CurrentValue = false,
-     Flag = "Toggle10",
-     Callback = function(Value)
-
-     getgenv().AutoMinigame = Value
-
-     end,
- }) 
------------- Hatch Eggs Only ---------
-FarmTab:CreateSection("Eggs Only")
---------------------------------------
-local FarmToggle = FarmTab:CreateToggle({
-     Name = "Auto Buy & Hatch Eggs",
-     CurrentValue = false,
-     Flag = "Toggle201",
-     Callback = function(Value)
-	getgenv().HatchPriorityEggs = Value
-	getgenv().auto_farm = Value	
-        autoFarm()
-			
-        while task.wait(15) do
-        for _, v in pairs(ClientData.get_data()[localPlayer.Name].inventory.pets)do
-        task.wait(5)
-        if v.id ~= Egg2Buy  then
-        task.wait(10)
-        if v.id ~= Egg2Buy  then
-        task.wait(10)
-        getPet()
-		 end
-	       end
-	    end				
-	end
-     end,
- })
-----------------------------------
-FarmTab:CreateSection("Make ALL Neon/Mega in 1 Click")
-----------------------------------
-FarmTab:CreateButton({
-	Name = "Make Neon Pets",
-	Callback = function()
-		Fusion:MakeMega(false)
-	end,
-})
-
-FarmTab:CreateButton({
-	Name = "Make Mega Pets",
-	Callback = function()
-		Fusion:MakeMega(true)
-	end,
-})
-
-------------------------
-local petsDropdown0 = FarmTab:CreateDropdown({
-    Name = 'Pet List',
-    Options = petsTable,
-    CurrentOption = { "" },
-    MultipleOptions = false,
-    Flag = 'Dropdown0',
-    Callback = function(Option)
-        selectedPet = Option[1] or 'Nothing'
-    end,
-})
-
-FarmTab:CreateButton({
-    Name = 'Refesh Pet list',
-    Callback = function()
-        petsDropdown0:Set(GetInventory:TabId('pets'))
-    end,
-})
-
-FarmTab:CreateButton({
-	Name = "Copy All Inventory to clipboard",
-	Callback = function()
-		Clipboard:CopyAllInventory()
-	end,
-})
-
-FarmTab:CreateButton({
-	Name = "Detailed Pet Inventory clipboard",
-	Callback = function()
-		Clipboard:CopyPetInfo()
-	end,
-})
-
---[[ Auto Trade Tab ]]
-local TradeTab = Window:CreateTab('Auto Trade', 4483362458)
-
-TradeTab:CreateSection('only enable Auto Accept trade on alt getting the items')
-
-getgenv().AutoTradeToggle = TradeTab:CreateToggle({
-    Name = 'Auto Accept Trade',
-    CurrentValue = false,
-    Flag = 'Toggle1',
-    Callback = function(Value)
-        getgenv().auto_accept_trade = Value
-
-        if getgenv().auto_accept_trade then
-            Rayfield:Hide()
-            task.wait(1)
-        end
-
-        while getgenv().auto_accept_trade do
-            Trade:AutoAcceptTrade()
-            ClickTradeWindowPopUps()
-            task.wait(1)
-        end
-    end,
-})
-
-local playerDropdown = TradeTab:CreateDropdown({
-    Name = 'Select a player',
-    Options = getPlayersInGame(),
-    CurrentOption = {
-        '',
-    },
-    MultipleOptions = false,
-    Flag = 'Dropdown1',
-    Callback = function(Option)
-        selectedPlayer = Option[1]
-    end,
-})
-
-TradeTab:CreateButton({
-    Name = 'Refesh player list',
-    Callback = function()
-        playerDropdown:Set(getPlayersInGame())
-    end,
-})
-TradeTab:CreateToggle({
-    Name = 'Send player Trade',
-    CurrentValue = false,
-    Flag = 'Toggle1',
-    Callback = function(Value)
-        getgenv().auto_trade_semi_auto = Value
-
-        while getgenv().auto_trade_semi_auto do
-            Trade:SendTradeRequest(selectedPlayer)
-            task.wait(1)
-        end
-    end,
-})
-
-TradeAllInventory = TradeTab:CreateToggle({
-    Name = 'Auto Trade EVERYTHING',
-    CurrentValue = false,
-    Flag = 'Toggle1',
-    Callback = function(Value)
-        getgenv().auto_trade_all_inventory = Value
-
-        while getgenv().auto_trade_all_inventory do
-            Trade:SendTradeRequest(selectedPlayer)
-            Trade:AllInventory('pets')
-            Trade:AllInventory('pet_accessories')
-            Trade:AllInventory('strollers')
-            Trade:AllInventory('food')
-            Trade:AllInventory('transport')
-            Trade:AllInventory('toys')
-            Trade:AllInventory('gifts')
-
-            local hasPets = Trade:AcceptNegotiationAndConfirm()
-
-            if not hasPets then
-                TradeAllInventory:Set(false)
-            end
-
-            task.wait()
-        end
-    end,
-})
-AllPetsToggle = TradeTab:CreateToggle({
-    Name = 'Auto Trade All Pets',
-    CurrentValue = false,
-    Flag = 'Toggle1',
-    Callback = function(Value)
-        getgenv().auto_trade_all_pets = Value
-
-        while getgenv().auto_trade_all_pets do
-            Trade:SendTradeRequest(selectedPlayer)
-            Trade:AllPets()
-
-            local hasPets = Trade:AcceptNegotiationAndConfirm()
-
-            if not hasPets then
-                AllPetsToggle:Set(false)
-            end
-
-            task.wait()
-        end
-    end,
-})
-AnyNeonToggle = TradeTab:CreateToggle({
-    Name = 'FullGrown, Newborn to luminous Neons and Megas',
-    CurrentValue = false,
-    Flag = 'Toggle1',
-    Callback = function(Value)
-        getgenv().auto_trade_fullgrown_neon_and_mega = Value
-
-        while getgenv().auto_trade_fullgrown_neon_and_mega do
-            Trade:SendTradeRequest(selectedPlayer)
-            Trade:FullgrownAndAnyNeonsAndMegas()
-
-            local hasPets = Trade:AcceptNegotiationAndConfirm()
-
-            if not hasPets then
-                AnyNeonToggle:Set(false)
-            end
-
-            task.wait()
-        end
-    end,
-})
-LegendaryToggle = TradeTab:CreateToggle({
-    Name = "Auto Trade Only Legendary's",
-    CurrentValue = false,
-    Flag = 'Toggle1',
-    Callback = function(Value)
-        getgenv().auto_trade_Legendary = Value
-
-        while getgenv().auto_trade_Legendary do
-            Trade:SendTradeRequest(selectedPlayer)
-            Trade:AllPetsOfSameRarity('legendary')
-
-            local hasPets = Trade:AcceptNegotiationAndConfirm()
-
-            if not hasPets then
-                LegendaryToggle:Set(false)
-            end
-
-            task.wait()
-        end
-    end,
-})
-FullgrownToggle = TradeTab:CreateToggle({
-    Name = 'Auto Trade FullGrown, luminous Neons and Megas',
-    CurrentValue = false,
-    Flag = 'Toggle1',
-    Callback = function(Value)
-        getgenv().auto_trade_fullgrown_neon_and_mega = Value
-
-        while getgenv().auto_trade_fullgrown_neon_and_mega do
-            Trade:SendTradeRequest(selectedPlayer)
-            Trade:Fullgrown()
-
-            local hasPets = Trade:AcceptNegotiationAndConfirm()
-
-            if not hasPets then
-                FullgrownToggle:Set(false)
-            end
-
-            task.wait()
-        end
-    end,
-})
-TradeAllMegas = TradeTab:CreateToggle({
-    Name = 'Auto Trade All Megas',
-    CurrentValue = false,
-    Flag = 'Toggle1',
-    Callback = function(Value)
-        getgenv().auto_trade_all_neons = Value
-
-        while getgenv().auto_trade_all_neons do
-            Trade:SendTradeRequest(selectedPlayer)
-            Trade:AllNeons('mega_neon')
-
-            local hasPets = Trade:AcceptNegotiationAndConfirm()
-
-            if not hasPets then
-                TradeAllMegas:Set(false)
-            end
-
-            task.wait()
-        end
-    end,
-})
-TradeAllNeons = TradeTab:CreateToggle({
-    Name = 'Auto Trade All Neons',
-    CurrentValue = false,
-    Flag = 'Toggle1',
-    Callback = function(Value)
-        getgenv().auto_trade_all_neons = Value
-
-        while getgenv().auto_trade_all_neons do
-            Trade:SendTradeRequest(selectedPlayer)
-            Trade:AllNeons('neon')
-
-            local hasPets = Trade:AcceptNegotiationAndConfirm()
-
-            if not hasPets then
-                TradeAllNeons:Set(false)
-            end
-
-            task.wait()
-        end
-    end,
-})
-LowTierToggle = TradeTab:CreateToggle({
-    Name = 'Auto Trade Common to Ultra-rare and Newborn to Post-Teen',
-    CurrentValue = false,
-    Flag = 'Toggle1',
-    Callback = function(Value)
-        getgenv().auto_trade_lowtier_pets = Value
-
-        while getgenv().auto_trade_lowtier_pets do
-            if selectedPlayer then
-                Trade:SendTradeRequest(selectedPlayer)
-            end
-
-            Trade:LowTiers()
-
-            local hasPets = Trade:AcceptNegotiationAndConfirm()
-
-            if not hasPets then
-                LowTierToggle:Set(false)
-            end
-
-            task.wait()
-        end
-    end,
-})
-RarityToggle = TradeTab:CreateToggle({
-    Name = 'Auto Trade Legendary Newborn to Post-Teen',
-    CurrentValue = false,
-    Flag = 'Toggle1',
-    Callback = function(Value)
-        getgenv().auto_trade_rarity_pets = Value
-
-        while getgenv().auto_trade_rarity_pets do
-            if selectedPlayer then
-                Trade:SendTradeRequest(selectedPlayer)
-            end
-
-            Trade:NewbornToPostteen('legendary')
-
-            local hasPets = Trade:AcceptNegotiationAndConfirm()
-
-            if not hasPets then
-                RarityToggle:Set(false)
-            end
-
-            task.wait()
-        end
-    end,
-})
-
-TradeTab:CreateSection('Send Custom Pet, sends ALL ages of selected pet')
-
-local petsDropdown = TradeTab:CreateDropdown({
-    Name = 'Select a Pet',
-    Options = petsTable,
-    CurrentOption = { "" },
-    MultipleOptions = false,
-    Flag = 'Dropdown1',
-    Callback = function(Option)
-        selectedPet = Option[1] or 'Nothing'
-    end,
-})
-
-TradeTab:CreateButton({
-    Name = 'Refesh Pet list',
-    Callback = function()
-        petsDropdown:Set(GetInventory:TabId('pets'))
-    end,
-})
-
-PetToggle = TradeTab:CreateToggle({
-    Name = 'Auto Trade Selected Pet',
-    CurrentValue = false,
-    Flag = 'Toggle1',
-    Callback = function(Value)
-        getgenv().auto_trade_custom = Value
-
-        while getgenv().auto_trade_custom do
-            Trade:SendTradeRequest(selectedPlayer)
-            Trade:SelectTabAndTrade('pets', selectedPet)
-
-            local hasPets = Trade:AcceptNegotiationAndConfirm()
-
-            if not hasPets then
-                PetToggle:Set(false)
-            end
-
-            task.wait()
-        end
-    end,
-})
-
-TradeTab:CreateSection(' ')
-
-local giftsDropdown = TradeTab:CreateDropdown({
-    Name = 'Select gift',
-    Options = giftsTable,
-    CurrentOption = {
-        giftsTable[1],
-    },
-    MultipleOptions = false,
-    Flag = 'Dropdown1',
-    Callback = function(Option)
-        selectedGift = Option[1] or 'Nothing'
-    end,
-})
-
-TradeTab:CreateButton({
-    Name = 'Refesh Gift list',
-    Callback = function()
-        giftsDropdown:Set(GetInventory:TabId('gifts'))
-    end,
-})
-
-GiftToggle = TradeTab:CreateToggle({
-    Name = 'Auto Trade Custom Gift',
-    CurrentValue = false,
-    Flag = 'Toggle1',
-    Callback = function(Value)
-        getgenv().auto_trade_custom = Value
-
-        while getgenv().auto_trade_custom do
-            Trade:SendTradeRequest(selectedPlayer)
-            Trade:SelectTabAndTrade('gifts', selectedGift)
-
-            local hasPets = Trade:AcceptNegotiationAndConfirm()
-
-            if not hasPets then
-                GiftToggle:Set(false)
-            end
-
-            task.wait()
-        end
-    end,
-})
-
-TradeTab:CreateSection(' ')
-
-local toysDropdown = TradeTab:CreateDropdown({
-    Name = 'Select toys',
-    Options = toysTable,
-    CurrentOption = {
-        toysTable[1],
-    },
-    MultipleOptions = false,
-    Flag = 'Dropdown1',
-    Callback = function(Option)
-        selectedToy = Option[1] or 'Nothing'
-    end,
-})
-
-TradeTab:CreateButton({
-    Name = 'Refesh Toy list',
-    Callback = function()
-        toysDropdown:Set(GetInventory:TabId('toys'))
-    end,
-})
-
-ToyToggle = TradeTab:CreateToggle({
-    Name = 'Auto Trade Custom Toy',
-    CurrentValue = false,
-    Flag = 'Toggle1',
-    Callback = function(Value)
-        getgenv().auto_trade_custom = Value
-
-        while getgenv().auto_trade_custom do
-            Trade:SendTradeRequest(selectedPlayer)
-            Trade:SelectTabAndTrade('toys', selectedToy)
-
-            local hasPets = Trade:AcceptNegotiationAndConfirm()
-
-            if not hasPets then
-                ToyToggle:Set(false)
-            end
-
-            task.wait()
-        end
-    end,
-})
-
-TradeTab:CreateSection(' ')
-
-local foodDropdown = TradeTab:CreateDropdown({
-    Name = 'Select food',
-    Options = foodTable,
-    CurrentOption = {
-        foodTable[1],
-    },
-    MultipleOptions = false,
-    Flag = 'Dropdown1',
-    Callback = function(Option)
-        selectedFood = Option[1] or 'Nothing'
-    end,
-})
-
-TradeTab:CreateButton({
-    Name = 'Refesh Food list',
-    Callback = function()
-        foodDropdown:Set(GetInventory:TabId('food'))
-    end,
-})
-
-FoodToggle = TradeTab:CreateToggle({
-    Name = 'Auto Trade Custom Food',
-    CurrentValue = false,
-    Flag = 'Toggle1',
-    Callback = function(Value)
-        getgenv().auto_trade_custom = Value
-
-        while getgenv().auto_trade_custom do
-            Trade:SendTradeRequest(selectedPlayer)
-            Trade:SelectTabAndTrade('food', selectedFood)
-
-            local hasPets = Trade:AcceptNegotiationAndConfirm()
-
-            if not hasPets then
-                FoodToggle:Set(false)
-            end
-
-            task.wait()
-        end
-    end,
-})
-
-local NewAltTab = Window:CreateTab('New Alts', 4483362458)
-
-NewAltTab:CreateButton({
-    Name = 'Complete Starter Tutorial',
-    Callback = function()
-        Tutorials.CompleteStarterTutorial()
-    end,
-})
-NewAltTab:CreateButton({
-    Name = 'Get Trade License',
-    Callback = function()
-        TradeLicense.Get(ClientData, localPlayer.Name)
-    end,
-})
-NewAltTab:CreateButton({
-    Name = 'Buy Basic Crib',
-    Callback = function()
-        buyFurniture('basiccrib')
-    end,
-})
-
-local AgeUpPotionTab = Window:CreateTab('Age Up Potion', 4483362458)
-
-
-getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
-    Name = 'Turm On to Age Up All Pets',
-    CurrentValue = false,
-    Flag = 'Toggle1',
-    Callback = function(Value)
-			
-       getgenv().feedAgeUpPotionToggle = Value
-
-    while getgenv().feedAgeUpPotionToggle do				
-    isBuyingOrAging = true
-    local bulkPotions = BulkPotions.new()
-    bulkPotions:SetEggTable(GetInventory:GetPetEggs())
-    bulkPotions:StartAgingPets(petsTable)
-    --bulkPotions:StartAgingPets(getgenv().AGE_PETS_BEFORE_FARMING)				
-    print('DONE aging pets')
-                                        end
-			
-    end,
-})
---------------- end Rayfield config -------------------------------
-
 --[[local fireButton = function(button)
     local success, errorMessage = pcall(function()
         firesignal(button.MouseButton1Down)
@@ -2399,6 +1737,671 @@ end)
 
 task.wait(2)
 startAutoFarm()
+
+-----------------------Rayfield---------------------
+task.wait(5)
+local Window = Rayfield:CreateWindow({
+	Name = "BLN Adopt Me!  Basic Autofarm V4.2",
+	LoadingTitle = "Loading BLN V4 Script ",
+	LoadingSubtitle = "by BlackLastNight 2025",
+	ConfigurationSaving = {
+		Enabled = false,
+		FolderName = nil, -- Create a custom folder for your hub/game
+		FileName = "BLN 4",
+	},
+	Discord = {
+		Enabled = false,
+		Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
+		RememberJoins = true, -- Set this to false to make them join the discord every time they load it up
+	},
+    KeySystem = false,
+    KeySettings = {
+        Title = 'Untitled',
+        Subtitle = 'Key System',
+        Note = 'No method of obtaining the key is provided',
+        FileName = 'Key',
+        SaveKey = false,
+        GrabKeyFromSite = false,
+        Key = {
+            'Hello',
+        },
+    },
+})
+
+--[[ First Tab - Autofarm ]]
+local FarmTab = Window:CreateTab("Farm", 4483362458)
+------------------------------------------------
+
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "AutoFarm",
+     CurrentValue = false,
+     Flag = "Toggle01",
+     Callback = function(Value)
+			
+         getgenv().auto_farm = Value
+         autoFarm()
+     end,
+ })
+-----------------------------------------------
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Pet Auto Fusion",
+     CurrentValue = false,
+     Flag = "Toggle03",
+     Callback = function(Value)
+         getgenv().AutoFusion = Value
+
+	 while getgenv().AutoFusion do
+	 Fusion:MakeMega(false) -- makes neon
+	 Fusion:MakeMega(true) -- makes mega
+         task.wait(900)
+	end
+     end,
+ })
+-------------------------------------------
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Focus Farm Age Potions",
+     CurrentValue = false,
+     Flag = "Toggle033",
+     Callback = function(Value)
+
+         getgenv().FocusFarmAgePotions = Value
+         getPet()
+
+     end,
+ })
+-------------------------------------------
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Low Render / Hide Parts",
+     CurrentValue = false,
+     Flag = "Toggle04",
+     Callback = function(Value)
+        
+for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
+    if v:IsA("BasePart") and Value then
+        v.Transparency = 1 
+    elseif v:IsA("BasePart") and not Value then
+        v.Transparency = 0 
+    end 
+end 
+
+game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
+    if v:IsA('BasePart') and Value then
+        v.Transparency = 1 
+    end 
+end)
+
+     end,
+ })
+
+----------- Minigames -------------
+--[[local FarmToggle = FarmTab:CreateToggle({
+     Name = "Ice Dimension 2025 Minigame",
+     CurrentValue = false,
+     Flag = "Toggle10",
+     Callback = function(Value)
+
+     getgenv().AutoMinigame = Value
+
+     end,
+ }) --]]
+------------ Hatch Eggs Only ---------
+FarmTab:CreateSection("Eggs Only")
+--------------------------------------
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Auto Buy & Hatch Eggs",
+     CurrentValue = false,
+     Flag = "Toggle201",
+     Callback = function(Value)
+	getgenv().HatchPriorityEggs = Value
+	getgenv().auto_farm = Value	
+        autoFarm()
+			
+        while task.wait(15) do
+        for _, v in pairs(ClientData.get_data()[localPlayer.Name].inventory.pets)do
+        task.wait(5)
+        if v.id ~= Egg2Buy  then
+        task.wait(10)
+        if v.id ~= Egg2Buy  then
+        task.wait(10)
+        getPet()
+		 end
+	       end
+	    end				
+	end
+     end,
+ })
+----------------------------------
+FarmTab:CreateSection("Make ALL Neon/Mega in 1 Click")
+----------------------------------
+FarmTab:CreateButton({
+	Name = "Make Neon Pets",
+	Callback = function()
+		Fusion:MakeMega(false)
+	end,
+})
+
+FarmTab:CreateButton({
+	Name = "Make Mega Pets",
+	Callback = function()
+		Fusion:MakeMega(true)
+	end,
+})
+
+------------------------
+local petsDropdown0 = FarmTab:CreateDropdown({
+    Name = 'Pet List',
+    Options = petsTable,
+    CurrentOption = { "" },
+    MultipleOptions = false,
+    Flag = 'Dropdown0',
+    Callback = function(Option)
+        selectedPet = Option[1] or 'Nothing'
+    end,
+})
+
+FarmTab:CreateButton({
+    Name = 'Refesh Pet list',
+    Callback = function()
+        petsDropdown0:Set(GetInventory:TabId('pets'))
+    end,
+})
+
+FarmTab:CreateButton({
+	Name = "Copy All Inventory to clipboard",
+	Callback = function()
+		Clipboard:CopyAllInventory()
+	end,
+})
+
+FarmTab:CreateButton({
+	Name = "Detailed Pet Inventory clipboard",
+	Callback = function()
+		Clipboard:CopyPetInfo()
+	end,
+})
+
+--[[ Auto Trade Tab ]]
+local TradeTab = Window:CreateTab('Auto Trade', 4483362458)
+
+TradeTab:CreateSection('only enable Auto Accept trade on alt getting the items')
+
+getgenv().AutoTradeToggle = TradeTab:CreateToggle({
+    Name = 'Auto Accept Trade',
+    CurrentValue = false,
+    Flag = 'Toggle1',
+    Callback = function(Value)
+        getgenv().auto_accept_trade = Value
+
+        if getgenv().auto_accept_trade then
+            Rayfield:Hide()
+            task.wait(1)
+        end
+
+        while getgenv().auto_accept_trade do
+            Trade:AutoAcceptTrade()
+            ClickTradeWindowPopUps()
+            task.wait(1)
+        end
+    end,
+})
+
+local playerDropdown = TradeTab:CreateDropdown({
+    Name = 'Select a player',
+    Options = getPlayersInGame(),
+    CurrentOption = {
+        '',
+    },
+    MultipleOptions = false,
+    Flag = 'Dropdown1',
+    Callback = function(Option)
+        selectedPlayer = Option[1]
+    end,
+})
+
+TradeTab:CreateButton({
+    Name = 'Refesh player list',
+    Callback = function()
+        playerDropdown:Set(getPlayersInGame())
+    end,
+})
+TradeTab:CreateToggle({
+    Name = 'Send player Trade',
+    CurrentValue = false,
+    Flag = 'Toggle1',
+    Callback = function(Value)
+        getgenv().auto_trade_semi_auto = Value
+
+        while getgenv().auto_trade_semi_auto do
+            Trade:SendTradeRequest(selectedPlayer)
+            task.wait(1)
+        end
+    end,
+})
+
+TradeAllInventory = TradeTab:CreateToggle({
+    Name = 'Auto Trade EVERYTHING',
+    CurrentValue = false,
+    Flag = 'Toggle1',
+    Callback = function(Value)
+        getgenv().auto_trade_all_inventory = Value
+
+        while getgenv().auto_trade_all_inventory do
+            Trade:SendTradeRequest(selectedPlayer)
+            Trade:AllInventory('pets')
+            Trade:AllInventory('pet_accessories')
+            Trade:AllInventory('strollers')
+            Trade:AllInventory('food')
+            Trade:AllInventory('transport')
+            Trade:AllInventory('toys')
+            Trade:AllInventory('gifts')
+
+            local hasPets = Trade:AcceptNegotiationAndConfirm()
+
+            if not hasPets then
+                TradeAllInventory:Set(false)
+            end
+
+            task.wait()
+        end
+    end,
+})
+AllPetsToggle = TradeTab:CreateToggle({
+    Name = 'Auto Trade All Pets',
+    CurrentValue = false,
+    Flag = 'Toggle1',
+    Callback = function(Value)
+        getgenv().auto_trade_all_pets = Value
+
+        while getgenv().auto_trade_all_pets do
+            Trade:SendTradeRequest(selectedPlayer)
+            Trade:AllPets()
+
+            local hasPets = Trade:AcceptNegotiationAndConfirm()
+
+            if not hasPets then
+                AllPetsToggle:Set(false)
+            end
+
+            task.wait()
+        end
+    end,
+})
+AnyNeonToggle = TradeTab:CreateToggle({
+    Name = 'FullGrown, Newborn to luminous Neons and Megas',
+    CurrentValue = false,
+    Flag = 'Toggle1',
+    Callback = function(Value)
+        getgenv().auto_trade_fullgrown_neon_and_mega = Value
+
+        while getgenv().auto_trade_fullgrown_neon_and_mega do
+            Trade:SendTradeRequest(selectedPlayer)
+            Trade:FullgrownAndAnyNeonsAndMegas()
+
+            local hasPets = Trade:AcceptNegotiationAndConfirm()
+
+            if not hasPets then
+                AnyNeonToggle:Set(false)
+            end
+
+            task.wait()
+        end
+    end,
+})
+LegendaryToggle = TradeTab:CreateToggle({
+    Name = "Auto Trade Only Legendary's",
+    CurrentValue = false,
+    Flag = 'Toggle1',
+    Callback = function(Value)
+        getgenv().auto_trade_Legendary = Value
+
+        while getgenv().auto_trade_Legendary do
+            Trade:SendTradeRequest(selectedPlayer)
+            Trade:AllPetsOfSameRarity('legendary')
+
+            local hasPets = Trade:AcceptNegotiationAndConfirm()
+
+            if not hasPets then
+                LegendaryToggle:Set(false)
+            end
+
+            task.wait()
+        end
+    end,
+})
+FullgrownToggle = TradeTab:CreateToggle({
+    Name = 'Auto Trade FullGrown, luminous Neons and Megas',
+    CurrentValue = false,
+    Flag = 'Toggle1',
+    Callback = function(Value)
+        getgenv().auto_trade_fullgrown_neon_and_mega = Value
+
+        while getgenv().auto_trade_fullgrown_neon_and_mega do
+            Trade:SendTradeRequest(selectedPlayer)
+            Trade:Fullgrown()
+
+            local hasPets = Trade:AcceptNegotiationAndConfirm()
+
+            if not hasPets then
+                FullgrownToggle:Set(false)
+            end
+
+            task.wait()
+        end
+    end,
+})
+TradeAllMegas = TradeTab:CreateToggle({
+    Name = 'Auto Trade All Megas',
+    CurrentValue = false,
+    Flag = 'Toggle1',
+    Callback = function(Value)
+        getgenv().auto_trade_all_neons = Value
+
+        while getgenv().auto_trade_all_neons do
+            Trade:SendTradeRequest(selectedPlayer)
+            Trade:AllNeons('mega_neon')
+
+            local hasPets = Trade:AcceptNegotiationAndConfirm()
+
+            if not hasPets then
+                TradeAllMegas:Set(false)
+            end
+
+            task.wait()
+        end
+    end,
+})
+TradeAllNeons = TradeTab:CreateToggle({
+    Name = 'Auto Trade All Neons',
+    CurrentValue = false,
+    Flag = 'Toggle1',
+    Callback = function(Value)
+        getgenv().auto_trade_all_neons = Value
+
+        while getgenv().auto_trade_all_neons do
+            Trade:SendTradeRequest(selectedPlayer)
+            Trade:AllNeons('neon')
+
+            local hasPets = Trade:AcceptNegotiationAndConfirm()
+
+            if not hasPets then
+                TradeAllNeons:Set(false)
+            end
+
+            task.wait()
+        end
+    end,
+})
+LowTierToggle = TradeTab:CreateToggle({
+    Name = 'Auto Trade Common to Ultra-rare and Newborn to Post-Teen',
+    CurrentValue = false,
+    Flag = 'Toggle1',
+    Callback = function(Value)
+        getgenv().auto_trade_lowtier_pets = Value
+
+        while getgenv().auto_trade_lowtier_pets do
+            if selectedPlayer then
+                Trade:SendTradeRequest(selectedPlayer)
+            end
+
+            Trade:LowTiers()
+
+            local hasPets = Trade:AcceptNegotiationAndConfirm()
+
+            if not hasPets then
+                LowTierToggle:Set(false)
+            end
+
+            task.wait()
+        end
+    end,
+})
+RarityToggle = TradeTab:CreateToggle({
+    Name = 'Auto Trade Legendary Newborn to Post-Teen',
+    CurrentValue = false,
+    Flag = 'Toggle1',
+    Callback = function(Value)
+        getgenv().auto_trade_rarity_pets = Value
+
+        while getgenv().auto_trade_rarity_pets do
+            if selectedPlayer then
+                Trade:SendTradeRequest(selectedPlayer)
+            end
+
+            Trade:NewbornToPostteen('legendary')
+
+            local hasPets = Trade:AcceptNegotiationAndConfirm()
+
+            if not hasPets then
+                RarityToggle:Set(false)
+            end
+
+            task.wait()
+        end
+    end,
+})
+
+TradeTab:CreateSection('Send Custom Pet, sends ALL ages of selected pet')
+
+local petsDropdown = TradeTab:CreateDropdown({
+    Name = 'Select a Pet',
+    Options = petsTable,
+    CurrentOption = { "" },
+    MultipleOptions = false,
+    Flag = 'Dropdown1',
+    Callback = function(Option)
+        selectedPet = Option[1] or 'Nothing'
+    end,
+})
+
+TradeTab:CreateButton({
+    Name = 'Refesh Pet list',
+    Callback = function()
+        petsDropdown:Set(GetInventory:TabId('pets'))
+    end,
+})
+
+PetToggle = TradeTab:CreateToggle({
+    Name = 'Auto Trade Selected Pet',
+    CurrentValue = false,
+    Flag = 'Toggle1',
+    Callback = function(Value)
+        getgenv().auto_trade_custom = Value
+
+        while getgenv().auto_trade_custom do
+            Trade:SendTradeRequest(selectedPlayer)
+            Trade:SelectTabAndTrade('pets', selectedPet)
+
+            local hasPets = Trade:AcceptNegotiationAndConfirm()
+
+            if not hasPets then
+                PetToggle:Set(false)
+            end
+
+            task.wait()
+        end
+    end,
+})
+
+TradeTab:CreateSection(' ')
+
+local giftsDropdown = TradeTab:CreateDropdown({
+    Name = 'Select gift',
+    Options = giftsTable,
+    CurrentOption = {
+        giftsTable[1],
+    },
+    MultipleOptions = false,
+    Flag = 'Dropdown1',
+    Callback = function(Option)
+        selectedGift = Option[1] or 'Nothing'
+    end,
+})
+
+TradeTab:CreateButton({
+    Name = 'Refesh Gift list',
+    Callback = function()
+        giftsDropdown:Set(GetInventory:TabId('gifts'))
+    end,
+})
+
+GiftToggle = TradeTab:CreateToggle({
+    Name = 'Auto Trade Custom Gift',
+    CurrentValue = false,
+    Flag = 'Toggle1',
+    Callback = function(Value)
+        getgenv().auto_trade_custom = Value
+
+        while getgenv().auto_trade_custom do
+            Trade:SendTradeRequest(selectedPlayer)
+            Trade:SelectTabAndTrade('gifts', selectedGift)
+
+            local hasPets = Trade:AcceptNegotiationAndConfirm()
+
+            if not hasPets then
+                GiftToggle:Set(false)
+            end
+
+            task.wait()
+        end
+    end,
+})
+
+TradeTab:CreateSection(' ')
+
+local toysDropdown = TradeTab:CreateDropdown({
+    Name = 'Select toys',
+    Options = toysTable,
+    CurrentOption = {
+        toysTable[1],
+    },
+    MultipleOptions = false,
+    Flag = 'Dropdown1',
+    Callback = function(Option)
+        selectedToy = Option[1] or 'Nothing'
+    end,
+})
+
+TradeTab:CreateButton({
+    Name = 'Refesh Toy list',
+    Callback = function()
+        toysDropdown:Set(GetInventory:TabId('toys'))
+    end,
+})
+
+ToyToggle = TradeTab:CreateToggle({
+    Name = 'Auto Trade Custom Toy',
+    CurrentValue = false,
+    Flag = 'Toggle1',
+    Callback = function(Value)
+        getgenv().auto_trade_custom = Value
+
+        while getgenv().auto_trade_custom do
+            Trade:SendTradeRequest(selectedPlayer)
+            Trade:SelectTabAndTrade('toys', selectedToy)
+
+            local hasPets = Trade:AcceptNegotiationAndConfirm()
+
+            if not hasPets then
+                ToyToggle:Set(false)
+            end
+
+            task.wait()
+        end
+    end,
+})
+
+TradeTab:CreateSection(' ')
+
+local foodDropdown = TradeTab:CreateDropdown({
+    Name = 'Select food',
+    Options = foodTable,
+    CurrentOption = {
+        foodTable[1],
+    },
+    MultipleOptions = false,
+    Flag = 'Dropdown1',
+    Callback = function(Option)
+        selectedFood = Option[1] or 'Nothing'
+    end,
+})
+
+TradeTab:CreateButton({
+    Name = 'Refesh Food list',
+    Callback = function()
+        foodDropdown:Set(GetInventory:TabId('food'))
+    end,
+})
+
+FoodToggle = TradeTab:CreateToggle({
+    Name = 'Auto Trade Custom Food',
+    CurrentValue = false,
+    Flag = 'Toggle1',
+    Callback = function(Value)
+        getgenv().auto_trade_custom = Value
+
+        while getgenv().auto_trade_custom do
+            Trade:SendTradeRequest(selectedPlayer)
+            Trade:SelectTabAndTrade('food', selectedFood)
+
+            local hasPets = Trade:AcceptNegotiationAndConfirm()
+
+            if not hasPets then
+                FoodToggle:Set(false)
+            end
+
+            task.wait()
+        end
+    end,
+})
+
+local NewAltTab = Window:CreateTab('New Alts', 4483362458)
+
+NewAltTab:CreateButton({
+    Name = 'Complete Starter Tutorial',
+    Callback = function()
+        Tutorials.CompleteStarterTutorial()
+    end,
+})
+NewAltTab:CreateButton({
+    Name = 'Get Trade License',
+    Callback = function()
+        TradeLicense.Get(ClientData, localPlayer.Name)
+    end,
+})
+NewAltTab:CreateButton({
+    Name = 'Buy Basic Crib',
+    Callback = function()
+        buyFurniture('basiccrib')
+    end,
+})
+
+local AgeUpPotionTab = Window:CreateTab('Age Up Potion', 4483362458)
+
+---------- focused Pets to Age Up --------
+ --[[getgenv().AGE_PETS_BEFORE_FARMING = {
+ 	"winter_2024_winter_buck" 
+ }--]]
+----------------------------------
+
+getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
+    Name = 'Turm On to Age Up All Pets',
+    CurrentValue = false,
+    Flag = 'Toggle1',
+    Callback = function(Value)
+			
+       getgenv().feedAgeUpPotionToggle = Value
+
+    while getgenv().feedAgeUpPotionToggle do				
+    isBuyingOrAging = true
+    local bulkPotions = BulkPotions.new()
+    bulkPotions:SetEggTable(GetInventory:GetPetEggs())
+    bulkPotions:StartAgingPets(petsTable)
+    --bulkPotions:StartAgingPets(getgenv().AGE_PETS_BEFORE_FARMING)				
+    print('DONE aging pets')
+                                        end
+			
+    end,
+})
 
 
 localPlayer.PlayerGui.DialogApp:WaitForChild('Dialog'):WaitForChild('IceDimension2025Dialog').Visible = false
