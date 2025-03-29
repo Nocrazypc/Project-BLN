@@ -1088,6 +1088,15 @@ local onTextChangedNormalDialog = function()
       end
 end
 
+
+local onTextChangedIceDimension = function()
+    if localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog.Info.TextLabel.Text:match('Frostbite Bear') then
+        findButton('Okay', 'IceDimension2025Dialog')
+    end
+end
+
+
+
 localPlayer.Idled:Connect(function()
     VirtualUser:ClickButton2(Vector2.new())
 end)
