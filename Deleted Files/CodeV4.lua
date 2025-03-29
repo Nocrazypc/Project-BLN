@@ -1738,7 +1738,7 @@ end)
 task.wait(2)
 startAutoFarm()
 
-task.wait(3)
+task.wait(6)
 -----------------------Rayfield---------------------
 local Window = Rayfield:CreateWindow({
 	Name = "BLN Adopt Me!  Basic Autofarm V4.2",
