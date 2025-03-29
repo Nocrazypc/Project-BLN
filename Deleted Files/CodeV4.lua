@@ -197,6 +197,37 @@ local pets_uncommon = {}
 local pets_common = {}
 local Pets_commonto_ultrarare = {}
 local pets_legendary_to_common = {}
+
+------------ Rayfield Config --------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 --[[local fireButton = function(button)
     local success, errorMessage = pcall(function()
         firesignal(button.MouseButton1Down)
