@@ -1837,7 +1837,7 @@ end)
  })
 
 ----------- Minigames -------------
-[[local FarmToggle = FarmTab:CreateToggle({
+local FarmToggle = FarmTab:CreateToggle({
      Name = "Ice Dimension 2025 Minigame",
      CurrentValue = false,
      Flag = "Toggle10",
