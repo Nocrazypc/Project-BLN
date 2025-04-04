@@ -1588,49 +1588,6 @@ Teleport.PlaceFloorAtFarmingHome()
 Teleport.PlaceFloorAtCampSite()
 Teleport.PlaceFloorAtBeachParty()
 
---[[GuiPopupButton.Text = "Open GUI"
-GuiPopupButton.AnchorPoint = Vector2.new(0.5, 0.5)
-GuiPopupButton.BackgroundColor3 = Color3.fromRGB(255, 176, 5)
-GuiPopupButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-GuiPopupButton.BorderSizePixel = 0
-GuiPopupButton.Position = UDim2.new(0.65, 0, 0.91, 0)
-GuiPopupButton.Size = UDim2.new(0.1, 0, 0.1, 0)
-GuiPopupButton.Font = Enum.Font.FredokaOne
-GuiPopupButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-GuiPopupButton.TextScaled = true
-GuiPopupButton.TextSize = 14.000
-GuiPopupButton.TextWrapped = true
-GuiPopupButton.Parent = TestGui--]]
-
-
---[[ClipboardButton.Activated:Connect(function()
-    if guiCooldown then
-        return
-    end
-
-    guiCooldown = true
-
-    clipboard:CopyAllInventory()
-
-    guiCooldown = false
-end)--]]
-
--- Rayfield:Minimise()
---[[GuiPopupButton.MouseButton1Click:Connect(function()
-    if guiCooldown then
-        return
-    end
-
-    guiCooldown = true
-
-    Rayfield:Unhide()
-    task.wait()
-
-    guiCooldown = false
-end)--]]
-
-----------------------------------------
-
 dailyLoginAppClick()
 -- Teleport.FarmingHome()
 	
