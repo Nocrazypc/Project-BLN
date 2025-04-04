@@ -1552,11 +1552,11 @@ if not NormalLure then
 end
 
 task.wait(1) 
---baitId = findBait('winter_2024_winter_deer_bait')
-
---if not baitId then
+baitId = findBait('ice_dimension_2025_shiver_cone_bait')
+--baitId = findBait('ice_dimension_2025_subzero_popsicle_bait')
+if not baitId then
     baitId = findBait('ice_dimension_2025_ice_soup_bait')
---end   
+end   
 print(`\u{1f36a} Found baitId: {baitId} \u{1f36a}`)
 placeBaitOrPickUp(baitId)
 task.wait(2)
