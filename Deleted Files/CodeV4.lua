@@ -79,7 +79,7 @@ local Piano
 local NormalLure
 local LitterBox
 local strollerId
-local baitUnique
+local baitId
 local selectedPlayer
 local selectedPet
 local selectedGift
@@ -323,50 +323,42 @@ local getPlayersInGame = function()
     return playerTable
 end
 -----------  baits  ---------------
-local findBait = function()
-    local baits = getgenv().SETTINGS.BAIT_TO_USE_IN_ORDER
+local findBait = function(baitPassOn)
+    local bait
 
-    if not baits then
-        baits = {
-            'ice_dimension_2025_shiver_cone_bait',
-            'ice_dimension_2025_subzero_popsicle_bait',
-            'ice_dimension_2025_ice_soup_bait',
-        }
-    end
+    for _, v in pairs(ClientData.get_data()[localPlayer.Name].inventory.food)do
+        if v.id == baitPassOn then
+            bait = v.unique
 
-    for _, id in ipairs(baits)do
-        for _, v in pairs(ClientData.get_data()[localPlayer.Name].inventory.food)do
-            if id == v.id then
-                return v.unique
-            end
+            return bait
         end
     end
 
     return nil
 end
 
-local placeBaitOrPickUp = function(baitUniquePasson)
+local function placeBaitOrPickUp(baitIdPasson)
     if not NormalLure then
         return
     end
-    if not baitUniquePasson then
-        return
-    end
-    
+
+    --print('placing bait or picking up')
+
     local args = {
         [1] = game:GetService('Players').LocalPlayer,
         [2] = NormalLure,
         [3] = 'UseBlock',
         [4] = {
-            ['bait_unique'] = baitUniquePasson,
+            ['bait_unique'] = baitIdPasson,
         },
         [5] = game:GetService('Players').LocalPlayer.Character,
     }
     local success, errorMessage = pcall(function()
         ReplicatedStorage.API:FindFirstChild('HousingAPI/ActivateFurniture'):InvokeServer(unpack(args))
     end)
-   end
 
+    --print('FIRING BAITBOX', success, errorMessage)
+end
 -------------------------------------------
 
 local agePotionCount = function(nameId)
@@ -880,13 +872,13 @@ local CompletePetAilments = function()
         elseif key == 'sleepy' then
             Ailments:SleepyAilment(Bed, petUnique)
             task.wait(3)
-            placeBaitOrPickUp(baitUnique)
+            placeBaitOrPickUp(baitId)
 
             return true
         elseif key == 'dirty' then
             Ailments:DirtyAilment(Shower, petUnique)
             task.wait(3)
-            placeBaitOrPickUp(baitUnique)
+            placeBaitOrPickUp(baitId)
 
             return true
         elseif key == 'walk' then
