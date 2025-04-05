@@ -720,7 +720,6 @@ local function onTextChangedMiniGame()
     --if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME then
     if getgenv().AutoMinigame and hasStartedFarming then
 
-        SlipperyEvent.CreatePlatform()
         isInMiniGame = true
 		
         task.wait(3)
