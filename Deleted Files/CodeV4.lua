@@ -964,20 +964,11 @@ local autoFarm = function()
                 completeBabyAilments()
             end
 
-            task.wait(1)
-
-            if baitboxCount > 600 then
-                baitUnique = findBait()
-
-                placeBaitOrPickUp(baitUnique)
-                task.wait(2)
-                placeBaitOrPickUp(baitUnique)
-
-                baitboxCount = 0
-            end				
-
+            --updateStatsGui()
+            task.wait(5)
         end
     end)
+
 
     if getgenv().SETTINGS.PET_AUTO_FUSION then
         task.spawn(function()
