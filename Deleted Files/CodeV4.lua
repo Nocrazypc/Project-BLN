@@ -1619,18 +1619,17 @@ Teleport.PlaceFloorAtBeachParty()
 
 -------- Minigames ----------------
 
-Workspace.StaticMap.ice_cube_hill_minigame_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function()
-    if not Workspace.StaticMap.ice_cube_hill_minigame_minigame_state.is_game_active.Value then
-	isInMiniGame = false		
+Workspace.StaticMap.blossom_shakedown_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function()
+    if not Workspace.StaticMap.blossom_shakedown_minigame_state.is_game_active.Value then
+        isInMiniGame = false
         return
     end
     if getgenv().AutoMinigame then
-        ReplicatedStorage.API['MinigameAPI/AttemptJoin']:FireServer('ice_cube_hill_minigame', true)
+        ReplicatedStorage.API['MinigameAPI/AttemptJoin']:FireServer('blossom_shakedown', true)
         task.wait()
-        ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('IceCubeHillMinigame')
+        ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('BlossomShakedownInterior')
     end
 end)
-------------------------------------------------------
 
 
 localPlayer.PlayerGui.MinigameInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function()
@@ -1689,8 +1688,7 @@ localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog:GetPropertyChangedSignal('Vi
         end)
     end
 end)
-localPlayer.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
-)
+localPlayer.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal('Visible'):Connect(function()
     if localPlayer.PlayerGui.MinigameRewardsApp.Body.Visible then
         localPlayer.PlayerGui.MinigameRewardsApp.Body:WaitForChild('Button')
         localPlayer.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild('Face')
