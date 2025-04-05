@@ -1571,12 +1571,16 @@ end
 
 task.wait(1) 
 
-baitUnique = findBait()
-
-print(`\u{1f36a} Found baitId: {baitUnique} \u{1f36a}`)
-placeBaitOrPickUp(baitUnique)
+baitId = findBait('ice_dimension_2025_shiver_cone_bait')
+--baitId = findBait('ice_dimension_2025_subzero_popsicle_bait')
+if not baitId then
+    baitId = findBait('ice_dimension_2025_ice_soup_bait')
+end   
+print(`\u{1f36a} Found baitId: {baitId} \u{1f36a}`)
+placeBaitOrPickUp(baitId)
 task.wait(2)
-placeBaitOrPickUp(baitUnique)
+placeBaitOrPickUp(baitId)
+
 
 strollerId = GetInventory:GetUniqueId('strollers', 'stroller-default')
 
