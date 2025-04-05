@@ -1640,12 +1640,12 @@ localPlayer.PlayerGui.MinigameInGameApp:GetPropertyChangedSignal('Enabled'):Conn
         localPlayer.PlayerGui.MinigameInGameApp.Body.Middle:WaitForChild('Container')
         localPlayer.PlayerGui.MinigameInGameApp.Body.Middle.Container:WaitForChild('TitleLabel')
 
-        if localPlayer.PlayerGui.MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('SLIPPERY SLOPE') then
+        if localPlayer.PlayerGui.MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('SAKURA SWOOP') then
             if getgenv().AutoMinigame then
 
             isInMiniGame = true
-
-            SlipperyEvent.Start()
+            task.wait(2)
+            Blossom.StartEvent()
 	   end
         end
     end
@@ -1660,7 +1660,7 @@ localPlayer.PlayerGui.DialogApp.Dialog.ChildAdded:Connect(function(
                 NormalDialogChild.Info:WaitForChild('TextLabel')
                 NormalDialogChild.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
                 )
-                    if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Slippery Slope') then
+                    if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Sakura Swoop') then
                         onTextChangedMiniGame()
                     --elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
                     --game:Shutdown()
@@ -1679,7 +1679,7 @@ localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog:GetPropertyChangedSignal('Vi
         localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info:WaitForChild('TextLabel')
         localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
         )
-            if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Slippery Slope') then
+            if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Sakura Swoop') then
                 onTextChangedMiniGame()
             elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
                 game:Shutdown()
@@ -1701,6 +1701,7 @@ localPlayer.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal('Visible'
         if localPlayer.PlayerGui.MinigameRewardsApp.Body.Button.Face.TextLabel.Text:match('NICE!') then
             localPlayer.Character.HumanoidRootPart.Anchored = false
 
+            task.wait(10)				
             removeGameOverButton()
 
             isInMiniGame = false
