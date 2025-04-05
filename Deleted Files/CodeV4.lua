@@ -20,14 +20,14 @@ local BulkPotions = loadstring(game:HttpGet("https://raw.githubusercontent.com/N
 local TaskBoard = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/TaskB.lua"))()
 local Clipboard = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/ClipB.lua"))()
 local BuyItems = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Buy.lua"))()
-local Blossom = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Bloss.lua"))()
+local SlipperyEvent = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/ID25.lua"))()
+local clipboard = Clipboard.new()
+local taskBoard = TaskBoard.new()
 
 --local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Rayfield/main/source"))()
 local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Rayfield/main/source.lua"))()
 --local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
-local clipboard = Clipboard.new()
-local taskBoard = TaskBoard.new()
 local Players = game:GetService('Players')
 local Workspace = game:GetService('Workspace')
 local ReplicatedStorage = game:GetService('ReplicatedStorage')
@@ -79,7 +79,7 @@ local Piano
 local NormalLure
 local LitterBox
 local strollerId
-local baitId
+local baitUnique
 local selectedPlayer
 local selectedPet
 local selectedGift
@@ -106,8 +106,7 @@ getgenv().AutoFusion = false
 getgenv().FocusFarmAgePotions = false
 getgenv().HatchPriorityEggs = false
 
---getgenv().AutoMinigame = false
---getgenv().AutoFCMinigame = false
+getgenv().AutoMinigame = true
 
 local Egg2Buy = getgenv().SETTINGS.PET_TO_BUY
 local TestGui = Instance.new('ScreenGui')
@@ -198,7 +197,6 @@ local pets_uncommon = {}
 local pets_common = {}
 local Pets_commonto_ultrarare = {}
 local pets_legendary_to_common = {}
-
 --[[local fireButton = function(button)
     local success, errorMessage = pcall(function()
         firesignal(button.MouseButton1Down)
@@ -324,43 +322,66 @@ local getPlayersInGame = function()
 
     return playerTable
 end
+-----------  baits  ---------------
+local findBait = function()
+    local baits = getgenv().SETTINGS.BAIT_TO_USE_IN_ORDER
 
-local findBait = function(baitPassOn)
-    local bait
+    if not baits then
+        baits = {
+            'ice_dimension_2025_shiver_cone_bait',
+            'ice_dimension_2025_subzero_popsicle_bait',
+            'ice_dimension_2025_ice_soup_bait',
+        }
+    end
 
-    for _, v in pairs(ClientData.get_data()[localPlayer.Name].inventory.food)do
-        if v.id == baitPassOn then
-            bait = v.unique
-
-            return bait
+    for _, id in ipairs(baits)do
+        for _, v in pairs(ClientData.get_data()[localPlayer.Name].inventory.food)do
+            if id == v.id then
+                return v.unique
+            end
         end
     end
 
     return nil
 end
 
-local function placeBaitOrPickUp(baitIdPasson)
+local placeBaitOrPickUp = function(baitUniquePasson)
     if not NormalLure then
         return
     end
-
-    --print('placing bait or picking up')
-
+    if not baitUniquePasson then
+        return
+    end
+    
     local args = {
         [1] = game:GetService('Players').LocalPlayer,
         [2] = NormalLure,
         [3] = 'UseBlock',
         [4] = {
-            ['bait_unique'] = baitIdPasson,
+            ['bait_unique'] = baitUniquePasson,
         },
         [5] = game:GetService('Players').LocalPlayer.Character,
     }
     local success, errorMessage = pcall(function()
         ReplicatedStorage.API:FindFirstChild('HousingAPI/ActivateFurniture'):InvokeServer(unpack(args))
     end)
+   end
 
-    --print('FIRING BAITBOX', success, errorMessage)
+-------------------------------------------
+
+local agePotionCount = function(nameId)
+    local count = 0
+
+    for _, v in ClientData.get_data()[localPlayer.Name].inventory.food do
+        if v.id == nameId then
+            count = count + 1
+        end
+    end
+
+    return count
 end
+
+
 
 local agePotionCount = function(nameId)
     local count = 0
@@ -687,13 +708,14 @@ local tradeCollector = function(namePassOn)
     end
 end
 
-local removeGameOverButton = function()
+local function removeGameOverButton()
+    task.wait()
     localPlayer.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild('Face')
 
     for _, v in pairs(localPlayer.PlayerGui.MinigameRewardsApp.Body.Button:GetDescendants())do
         if v.Name == 'TextLabel' then
             if v.Text == 'NICE!' then
-                task.wait(10)
+		task.wait(10)
                 fireButton(v.Parent.Parent)
 
                 break
@@ -703,9 +725,10 @@ local removeGameOverButton = function()
 end
 
 local function onTextChangedMiniGame()
+    --if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME then
     if getgenv().AutoMinigame and hasStartedFarming then
 
-       -- SlipperyEvent.CreatePlatform()
+        SlipperyEvent.CreatePlatform()
         isInMiniGame = true
 		
         task.wait(3)
@@ -717,11 +740,11 @@ local function onTextChangedMiniGame()
 end
 
 local completeBabyAilments = function()
-
+	
     if isInMiniGame then
          return
     end
-
+	
     for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments do
         if key == 'hungry' then
             --ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', "icecream", {})
@@ -787,7 +810,7 @@ local CompletePetAilments = function()
     if isInMiniGame then
          return
     end
-
+	
     checkIfPetEquipped()
 
     local petUnique = ClientData.get_data()[localPlayer.Name].pet_char_wrappers[1].pet_unique
@@ -857,13 +880,13 @@ local CompletePetAilments = function()
         elseif key == 'sleepy' then
             Ailments:SleepyAilment(Bed, petUnique)
             task.wait(3)
-            placeBaitOrPickUp(baitId)
+            placeBaitOrPickUp(baitUnique)
 
             return true
         elseif key == 'dirty' then
             Ailments:DirtyAilment(Shower, petUnique)
             task.wait(3)
-            placeBaitOrPickUp(baitId)
+            placeBaitOrPickUp(baitUnique)
 
             return true
         elseif key == 'walk' then
@@ -926,48 +949,48 @@ local autoFarm = function()
     Teleport.PlaceFloorAtBeachParty()
     Teleport.FarmingHome()
     task.delay(30, function()
-    
+			
         hasStartedFarming = true
-        
+
+        local baitboxCount = 0
+			
         while true do
-        
--------- Valentines 25 ---------
-             --[[if isBuyingOrAging then
-                 repeat
-                    print('Stopping because its buying or aging')
-                    task.wait(20)
-                until not isBuyingOrAging
-            end
-            Teleport.DownloadMainMap()
-            task.wait(3)
-            Valentines2025.Optimizer()
-            -- Teleport.DeleteWater()
-            task.wait(2)				
-            Valentines2025.GetAllRosesAndHearts()--]]
-----------------------------				
             if isInMiniGame then
                 local count = 0
 
                 repeat
-                    print(`\u{23f1}\u{fe0f} Waiting for 10 secs [inside minigame] \u{23f1}\u{fe0f}`)
+                    print(`\u{23f1}\u{fe0f} Waiting for 50 secs [inside minigame] \u{23f1}\u{fe0f}`)
+                    
+                    count = count + 50
 
-                    count += 10
-
-                    task.wait(10)
-                until not isInMiniGame or count > 120
+                    task.wait(50)
+                    until not isInMiniGame or not Workspace.StaticMap.ice_cube_hill_minigame_minigame_state.is_game_active.Value
+                --until not isInMiniGame or count > 120
 
                 isInMiniGame = false
             end
 
             removeHandHeldItem()
+				
             GetInventory:IsFarmingSelectedPet()
 
             if not CompletePetAilments() then
+                task.wait()
                 completeBabyAilments()
             end
 
-            --updateStatsGui()
-            task.wait(5)
+            task.wait(1)
+
+            if baitboxCount > 600 then
+                baitUnique = findBait()
+
+                placeBaitOrPickUp(baitUnique)
+                task.wait(2)
+                placeBaitOrPickUp(baitUnique)
+
+                baitboxCount = 0
+            end				
+
         end
     end)
 
@@ -1061,14 +1084,18 @@ local onTextChangedNormalDialog = function()
         findButton('Awesome!')
     elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Gingerbread!') then
         findButton('Awesome!')
+
       end
 end
+
 
 local onTextChangedIceDimension = function()
     if localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog.Info.TextLabel.Text:match('Frostbite Bear') then
         findButton('Okay', 'IceDimension2025Dialog')
     end
 end
+
+
 
 localPlayer.Idled:Connect(function()
     VirtualUser:ClickButton2(Vector2.new())
@@ -1343,10 +1370,12 @@ localPlayer.PlayerGui.DialogApp.Dialog.ChildAdded:Connect(function(Child)
             if not Child.Visible then
                 return
             end
+
             Child:WaitForChild('Info')
             Child.Info:WaitForChild('TextLabel')
             Child.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(onTextChangedNormalDialog)
         end)
+
     elseif Child.Name == 'IceDimension2025Dialog' then
         Child:GetPropertyChangedSignal('Visible'):Connect(function()
             if not Child.Visible then
@@ -1368,7 +1397,9 @@ localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog:GetPropertyChanged
         localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(onTextChangedIceDimension)
     end
 end)
+
 --------------------------------------
+
 --[[localPlayer.PlayerGui.DialogApp.Dialog.ChildAdded:Connect(function(Child)
     if Child.Name ~= 'NormalDialog' then
         return
@@ -1552,15 +1583,13 @@ if not NormalLure then
 end
 
 task.wait(1) 
-baitId = findBait('ice_dimension_2025_shiver_cone_bait')
---baitId = findBait('ice_dimension_2025_subzero_popsicle_bait')
-if not baitId then
-    baitId = findBait('ice_dimension_2025_ice_soup_bait')
-end   
-print(`\u{1f36a} Found baitId: {baitId} \u{1f36a}`)
-placeBaitOrPickUp(baitId)
+
+baitUnique = findBait()
+
+print(`\u{1f36a} Found baitId: {baitUnique} \u{1f36a}`)
+placeBaitOrPickUp(baitUnique)
 task.wait(2)
-placeBaitOrPickUp(baitId)
+placeBaitOrPickUp(baitUnique)
 
 strollerId = GetInventory:GetUniqueId('strollers', 'stroller-default')
 
@@ -1587,6 +1616,102 @@ end
 Teleport.PlaceFloorAtFarmingHome()
 Teleport.PlaceFloorAtCampSite()
 Teleport.PlaceFloorAtBeachParty()
+
+-------- Minigames ----------------
+
+Workspace.StaticMap.ice_cube_hill_minigame_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function()
+    if not Workspace.StaticMap.ice_cube_hill_minigame_minigame_state.is_game_active.Value then
+	isInMiniGame = false		
+        return
+    end
+    if getgenv().AutoMinigame then
+        ReplicatedStorage.API['MinigameAPI/AttemptJoin']:FireServer('ice_cube_hill_minigame', true)
+        task.wait()
+        ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('IceCubeHillMinigame')
+    end
+end)
+------------------------------------------------------
+
+
+localPlayer.PlayerGui.MinigameInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function()
+    if localPlayer.PlayerGui.MinigameInGameApp.Enabled then
+        localPlayer.PlayerGui.MinigameInGameApp:WaitForChild('Body')
+        localPlayer.PlayerGui.MinigameInGameApp.Body:WaitForChild('Middle')
+        localPlayer.PlayerGui.MinigameInGameApp.Body.Middle:WaitForChild('Container')
+        localPlayer.PlayerGui.MinigameInGameApp.Body.Middle.Container:WaitForChild('TitleLabel')
+
+        if localPlayer.PlayerGui.MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('SLIPPERY SLOPE') then
+            if getgenv().AutoMinigame then
+
+            isInMiniGame = true
+
+            SlipperyEvent.Start()
+	   end
+        end
+    end
+end)
+localPlayer.PlayerGui.DialogApp.Dialog.ChildAdded:Connect(function(
+    NormalDialogChild
+)
+    if NormalDialogChild.Name == 'NormalDialog' then
+        NormalDialogChild:GetPropertyChangedSignal('Visible'):Connect(function()
+            if NormalDialogChild.Visible then
+                NormalDialogChild:WaitForChild('Info')
+                NormalDialogChild.Info:WaitForChild('TextLabel')
+                NormalDialogChild.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
+                )
+                    if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Slippery Slope') then
+                        onTextChangedMiniGame()
+                    --elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
+                    --game:Shutdown()
+                    elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('You found a') then
+                        findButton('Okay')
+                    end
+                end)
+            end
+        end)
+    end
+end)
+localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog:GetPropertyChangedSignal('Visible'):Connect(function(
+)
+    if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Visible then
+        localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog:WaitForChild('Info')
+        localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info:WaitForChild('TextLabel')
+        localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
+        )
+            if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Slippery Slope') then
+                onTextChangedMiniGame()
+            elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
+                game:Shutdown()
+            elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('You found a') then
+                findButton('Okay')
+            end
+        end)
+    end
+end)
+localPlayer.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
+)
+    if localPlayer.PlayerGui.MinigameRewardsApp.Body.Visible then
+        localPlayer.PlayerGui.MinigameRewardsApp.Body:WaitForChild('Button')
+        localPlayer.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild('Face')
+        localPlayer.PlayerGui.MinigameRewardsApp.Body.Button.Face:WaitForChild('TextLabel')
+        localPlayer.PlayerGui.MinigameRewardsApp.Body:WaitForChild('Reward')
+        localPlayer.PlayerGui.MinigameRewardsApp.Body.Reward:WaitForChild('TitleLabel')
+
+        if localPlayer.PlayerGui.MinigameRewardsApp.Body.Button.Face.TextLabel.Text:match('NICE!') then
+            localPlayer.Character.HumanoidRootPart.Anchored = false
+
+            removeGameOverButton()
+
+            isInMiniGame = false
+
+            Teleport.FarmingHome()
+        end
+    end
+end)
+
+
+-----------------------------------
 
 dailyLoginAppClick()
 -- Teleport.FarmingHome()
@@ -1630,8 +1755,8 @@ end)
 task.wait(2)
 startAutoFarm()
 
+task.wait(6)
 -----------------------Rayfield---------------------
-task.wait(5)
 local Window = Rayfield:CreateWindow({
 	Name = "BLN Adopt Me!  Basic Autofarm V4.2",
 	LoadingTitle = "Loading BLN V4 Script ",
@@ -1724,7 +1849,19 @@ end)
 
      end,
  })
-------------- Hatch Eggs Only --------
+
+----------- Minigames -------------
+--[[local FarmToggle = FarmTab:CreateToggle({
+     Name = "Ice Dimension 2025 Minigame",
+     CurrentValue = false,
+     Flag = "Toggle10",
+     Callback = function(Value)
+
+     getgenv().AutoMinigame = Value
+
+     end,
+ }) --]]
+------------ Hatch Eggs Only ---------
 FarmTab:CreateSection("Eggs Only")
 --------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
@@ -1785,7 +1922,6 @@ FarmTab:CreateButton({
         petsDropdown0:Set(GetInventory:TabId('pets'))
     end,
 })
-
 
 FarmTab:CreateButton({
 	Name = "Copy All Inventory to clipboard",
@@ -2283,7 +2419,6 @@ getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
 			
     end,
 })
-
 --------------------update Stats UI ----------------
             while task.wait(5) do
 			StatsGuis:UpdateText("TimeFrame")
@@ -2294,5 +2429,5 @@ getgenv().PotionToggle = AgeUpPotionTab:CreateToggle({
 			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
             end
 
-   --print('Loaded. lastest update 03/04/2025  mm/dd/yyyy')                 
+   --print('Loaded. lastest update 14/02/2025  mm/dd/yyyy')                 
                     
