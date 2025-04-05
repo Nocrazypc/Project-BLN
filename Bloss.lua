@@ -67,7 +67,7 @@
                 }
 
                 ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args))
-                task.wait(0.1)
+                task.wait(3)
             end
         end
 
