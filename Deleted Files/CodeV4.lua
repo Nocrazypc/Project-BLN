@@ -1064,13 +1064,11 @@ local onTextChangedNormalDialog = function()
       end
 end
 
-
-local onTextChangedIceDimension = function()
+--[[local onTextChangedIceDimension = function()
     if localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog.Info.TextLabel.Text:match('Frostbite Bear') then
         findButton('Okay', 'IceDimension2025Dialog')
     end
-end
-
+end --]]
 
 
 localPlayer.Idled:Connect(function()
@@ -1340,7 +1338,7 @@ localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog:GetPropertyChangedSignal('Vi
 end)
 
 --------- kill Frostbite bear Banner -----
-localPlayer.PlayerGui.DialogApp.Dialog.ChildAdded:Connect(function(Child)
+--[[localPlayer.PlayerGui.DialogApp.Dialog.ChildAdded:Connect(function(Child)
     if Child.Name == 'NormalDialog' then
         Child:GetPropertyChangedSignal('Visible'):Connect(function()
             if not Child.Visible then
@@ -1372,7 +1370,7 @@ localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog:GetPropertyChanged
         localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog.Info:WaitForChild('TextLabel')
         localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(onTextChangedIceDimension)
     end
-end)
+end)--]]
 
 --------------------------------------
 
