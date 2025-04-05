@@ -944,8 +944,6 @@ local autoFarm = function()
 			
         hasStartedFarming = true
 
-        local baitboxCount = 0
-			
         while true do
             if isInMiniGame then
                 repeat
