@@ -955,10 +955,13 @@ local autoFarm = function()
 
         while true do
             if isInMiniGame then
+	        local count = 0
                 repeat
-                    print(`\u{23f1}\u{fe0f} Waiting for 50 secs [inside minigame] \u{23f1}\u{fe0f}`)               
+                    --print(`\u{23f1}\u{fe0f} Waiting for 50 secs [inside minigame] \u{23f1}\u{fe0f}`)
+                    count = count + 50
+						
                     task.wait(50)
-                until not isInMiniGame
+                    until not isInMiniGame
                 --until not isInMiniGame or count > 120
 
                 isInMiniGame = false
