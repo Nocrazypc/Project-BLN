@@ -732,7 +732,7 @@ local function onTextChangedMiniGame()
 
         isInMiniGame = true
 		
-        task.wait(2)
+        task.wait(math.random(0.1, 3))
 		
         findButton('Yes')
     else
