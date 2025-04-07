@@ -3,6 +3,43 @@
         local Players = game:GetService('Players')
         local localPlayer = Players.LocalPlayer
         local Blossom = {}
+
+        local createAFKPlateform = function()
+             if Workspace:FindFirstChild('BlossomAFKLocation') then
+                 return
+             end
+ 
+             local part = Instance.new('Part')
+             local SurfaceGui = Instance.new('SurfaceGui')
+             local TextLabel = Instance.new('TextLabel')
+ 
+             part.Position = Workspace.StaticMap.Springfest2025.CherryBlossomViewingArea.Position
+             part.Size = Vector3.new(200, 2, 200)
+             part.Anchored = true
+             part.Transparency = 1
+             part.Name = 'BlossomAFKLocation'
+             part.Parent = Workspace
+             SurfaceGui.Parent = part
+             SurfaceGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+             SurfaceGui.AlwaysOnTop = false
+             SurfaceGui.CanvasSize = Vector2.new(600, 600)
+             SurfaceGui.Face = Enum.NormalId.Top
+             TextLabel.Parent = SurfaceGui
+             TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+             TextLabel.BackgroundTransparency = 1
+             TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+             TextLabel.BorderSizePixel = 0
+             TextLabel.Size = UDim2.new(1, 0, 1, 0)
+             TextLabel.Font = Enum.Font.SourceSans
+             TextLabel.Text = '\u{1f3e1}'
+             TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+             TextLabel.TextScaled = true
+             TextLabel.TextSize = 14
+             TextLabel.TextWrapped = true
+ 
+             task.wait(1)
+         end
+
         local getGlider = function(shakedownInterior)
             local gliderInteractions = shakedownInterior:WaitForChild('GliderInteractions', 15)
 
