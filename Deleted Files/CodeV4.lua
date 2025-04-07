@@ -958,7 +958,6 @@ local autoFarm = function()
 
         while true do
             if isInMiniGame then
-	        local count = 0
                 repeat
                     --print(`\u{23f1}\u{fe0f} Waiting for 60 secs [inside minigame] \u{23f1}\u{fe0f}`)
 						
@@ -977,9 +976,7 @@ local autoFarm = function()
                 task.wait()
                 completeBabyAilments()
             end
-
-            --updateStatsGui()
-            task.wait(5)
+            -- task.wait(5)
         end
     end)
 
