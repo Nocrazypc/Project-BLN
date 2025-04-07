@@ -963,7 +963,7 @@ local autoFarm = function()
                     --print(`\u{23f1}\u{fe0f} Waiting for 50 secs [inside minigame] \u{23f1}\u{fe0f}`)
 						
                     task.wait(50)
-                    until not isInMiniGame
+                    until not isInMiniGame or not Workspace.StaticMap.blossom_shakedown_minigame_state.is_game_active.Value
                 --until not isInMiniGame or count > 120
 
                 isInMiniGame = false
