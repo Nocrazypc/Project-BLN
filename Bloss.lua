@@ -2,6 +2,7 @@
         local ReplicatedStorage = game:GetService('ReplicatedStorage')
         local Players = game:GetService('Players')
         local localPlayer = Players.LocalPlayer
+        local ClientData = require(ReplicatedStorage:WaitForChild('ClientModules'):WaitForChild('Core'):WaitForChild('ClientData'))
         local Blossom = {}
 
         local createAFKPlateform = function()
