@@ -73,6 +73,17 @@
             firetouchinterest(humanoidRootPart, gliderCollision, 0)
         end
 
+         function Blossom.Teleport()
+             createAFKPlateform()
+ 
+             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
+             localPlayer.Character.HumanoidRootPart.CFrame = Workspace.BlossomAFKLocation.CFrame * CFrame.new(math.random(1, 40), 10, math.random(1, 40))
+             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
+ 
+             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+             ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
+         end
+
         function Blossom.StartEvent()
             local isGameActive = Workspace.StaticMap.blossom_shakedown_minigame_state.is_game_active
             local interior = Workspace.Interiors:WaitForChild('BlossomShakedownInterior', 15)
