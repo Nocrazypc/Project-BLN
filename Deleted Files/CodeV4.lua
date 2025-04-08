@@ -860,7 +860,7 @@ local CompletePetAilments = function()
     for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
         if key == 'salon' then
             Ailments:SalonAilment(key, petUnique)
-
+            Blossom.Teleport()
             return true
         elseif key == 'moon' then
             Ailments:MoonAilment(key, petUnique)
@@ -868,11 +868,11 @@ local CompletePetAilments = function()
             return true			
         elseif key == 'pizza_party' then
             Ailments:PizzaPartyAilment(key, petUnique)
-
+            Blossom.Teleport()
             return true
         elseif key == 'school' then
             Ailments:SchoolAilment(key, petUnique)
-
+            Blossom.Teleport()
             return true
         elseif key == 'bored' then
             Ailments:BoredAilment(Piano, petUnique)
