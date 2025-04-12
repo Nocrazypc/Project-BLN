@@ -309,10 +309,6 @@ function StatsGuis:UpdateText(nameOfFrame: string)
 --------------------
     elseif nameOfFrame == "NameFrame" then
         MainFrame.NameFrame.TextLabel.Text = `😎 {localPlayer.Name}`
------------ Auto shutdown timer -----------
-   elseif timeElapsed >= 36000 then
-                 game:Shutdown()
--------------------------------------------
     end
 end
 
