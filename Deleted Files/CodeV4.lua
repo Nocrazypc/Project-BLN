@@ -950,10 +950,9 @@ local autoFarm = function()
     Teleport.PlaceFloorAtFarmingHome()
     Teleport.PlaceFloorAtCampSite()
     Teleport.PlaceFloorAtBeachParty()
-    -- Teleport.FarmingHome()
-	
+    Teleport.FarmingHome()
+    task.wait(5)	
     Teleport.DownloadMainMap()
-    task.wait()
     Blossom.Teleport()
 	
     task.delay(30, function()
