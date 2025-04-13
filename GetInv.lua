@@ -46,7 +46,13 @@
             local petUnique = nil
 
             for _, pet in ClientData.get_data()[localPlayer.Name].inventory.pets do
-                if pet.id ~= 'practice_dog' then
+                if pet.id == 'practice_dog' then
+                    continue
+                end
+                if not pet.properties then
+                    continue
+                end
+                if not pet.properties.friendship_level then
                     continue
                 end
                 if pet.properties.friendship_level > level then
@@ -83,7 +89,7 @@
                     end
                 end
 
-                PetageCounter -= 1
+                PetageCounter = PetageCounter - 1
 
                 if PetageCounter <= 0 and isNeon then
                     PetageCounter = age or 5
@@ -106,6 +112,16 @@
 
             return nil
         end
+        
+       function GetInventory:IsPetInInventory(tabId, uniqueId)
+            for _, v in ClientData.get_data()[localPlayer.Name].inventory[tabId]do
+                if v.unique == uniqueId then
+                    return true
+                end
+            end
+            return false
+        end
+        
         function GetInventory:PriorityEgg()
             for _, v in ipairs(getgenv().SETTINGS.HATCH_EGG_PRIORITY_NAMES)do
                 for _, v2 in ClientData.get_data()[localPlayer.Name].inventory.pets do
