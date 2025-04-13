@@ -973,7 +973,7 @@ local autoFarm = function()
 
             removeHandHeldItem()
 				
-            --GetInventory:IsFarmingSelectedPet()
+            GetInventory:IsFarmingSelectedPet()
 
             if not CompletePetAilments() then
                 task.wait()
