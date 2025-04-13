@@ -435,22 +435,22 @@ local getPet = function()
 	
     if getgenv().SETTINGS.FOCUS_FARM_AGE_POTION or getgenv().FocusFarmAgePotions then
         if GetInventory:GetPetFriendship() then
-            return
+            return true
         end
         if GetInventory:PetRarityAndAge('common', 6) then
-            return
+            return true
         end
         if GetInventory:PetRarityAndAge('legendary', 6) then
-            return
+            return true
         end
         if GetInventory:PetRarityAndAge('ultra_rare', 6) then
-            return
+            return true
         end
         if GetInventory:PetRarityAndAge('rare', 6) then
-            return
+            return true
         end
         if GetInventory:PetRarityAndAge('uncommon', 6) then
-            return
+            return true
         end
     end
     if getgenv().SETTINGS.PET_NEON_PRIORITY then
