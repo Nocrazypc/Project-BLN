@@ -953,6 +953,7 @@ local autoFarm = function()
     --Teleport.FarmingHome()
     	
     Teleport.DownloadMainMap()
+    task.wait(3)
     Blossom.Teleport()
 	
     task.delay(30, function()
