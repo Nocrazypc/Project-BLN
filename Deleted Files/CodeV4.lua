@@ -947,11 +947,11 @@ local autoFarm = function()
     end
 
     CollisionsClient.set_collidable(false)
-    Teleport.PlaceFloorAtFarmingHome()
+    --Teleport.PlaceFloorAtFarmingHome()
     Teleport.PlaceFloorAtCampSite()
     Teleport.PlaceFloorAtBeachParty()
-    Teleport.FarmingHome()
-    task.wait(5)	
+    --Teleport.FarmingHome()
+    	
     Teleport.DownloadMainMap()
     Blossom.Teleport()
 	
@@ -973,7 +973,7 @@ local autoFarm = function()
 
             removeHandHeldItem()
 				
-            GetInventory:IsFarmingSelectedPet()
+            --GetInventory:IsFarmingSelectedPet()
 
             if not CompletePetAilments() then
                 task.wait()
