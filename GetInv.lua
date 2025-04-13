@@ -9,7 +9,7 @@
             return ClientData.get_data()[localPlayer.Name].inventory
         end
 
-        function GetInventory:TabId(tabId)
+        function GetInventory:TabId(tabId: string)
             local inventoryTable = {}
 
             for _, v in ClientData.get_data()[localPlayer.Name].inventory[tabId]do
@@ -71,7 +71,7 @@
 
             return true
         end
-        function GetInventory:PetRarityAndAge(rarity, age)
+        function GetInventory:PetRarityAndAge(rarity: string, age: number)
             local PetageCounter = age or 5
             local isNeon = true
             local petFound = false
@@ -89,7 +89,7 @@
                     end
                 end
 
-                PetageCounter = PetageCounter - 1
+                PetageCounter -= 1
 
                 if PetageCounter <= 0 and isNeon then
                     PetageCounter = age or 5
@@ -100,9 +100,8 @@
 
                 task.wait()
             end
-
-            return false
         end
+
         function GetInventory:GetUniqueId(tabId, nameId)
             for _, v in ClientData.get_data()[localPlayer.Name].inventory[tabId]do
                 if v.id == nameId then
