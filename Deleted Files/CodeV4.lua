@@ -422,68 +422,79 @@ local getEgg = function()
 
     return false
 end
-local getPet = function()
+local getPet = function(whichPet)
+    if getgenv().SETTINGS.FOCUS_FARM_AGE_POTION then
+        print(string.format('Getting pet for %s', tostring(whichPet)))
 
-    if getgenv().SETTINGS.HATCH_EGG_PRIORITY or getgenv().HatchPriorityEggs then
-        if GetInventory:PriorityEgg() then
+        if whichPet == 1 and getgenv().petCurrentlyFarming1 then
+            return
+        end
+        if whichPet == 2 and isProHandler and getgenv().petCurrentlyFarming2 then
             return
         end
 
-        ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('pets', getgenv().SETTINGS.HATCH_EGG_PRIORITY_NAMES[1], {})
+        Misc.DebugModePrint(string.format('\u{1f414}\u{1f414} Getting pet to Farm age up potion, %s \u{1f414}\u{1f414}', tostring(whichPet)))
 
-        return
-    end
-
-	
-    if getgenv().SETTINGS.FOCUS_FARM_AGE_POTION or getgenv().FocusFarmAgePotions then
-        if GetInventory:GetPetFriendship() then
+        if GetInventory:CheckForPetAndEquip('winter_2024_frostbite_cub', whichPet) then
             return true
         end
-        if GetInventory:PetRarityAndAge('common', 6) then
+        if GetInventory:GetPetFriendship(whichPet) then
             return true
         end
-        if GetInventory:PetRarityAndAge('legendary', 6) then
+        if GetInventory:CheckForPetAndEquip('starter_egg', whichPet) then
             return true
         end
-        if GetInventory:PetRarityAndAge('ultra_rare', 6) then
+        if GetInventory:CheckForPetAndEquip('dog', whichPet) then
             return true
         end
-        if GetInventory:PetRarityAndAge('rare', 6) then
+        if GetInventory:CheckForPetAndEquip('cat', whichPet) then
             return true
         end
-        if GetInventory:PetRarityAndAge('uncommon', 6) then
+        if GetInventory:GetHighestGrownPet(6, whichPet) then
             return true
         end
     end
-    if getgenv().SETTINGS.PET_NEON_PRIORITY then
-        if GetInventory:GetNeonPet() then
-            return true
+    if getgenv().SETTINGS.HATCH_EGG_PRIORITY then
+        if GetInventory:PriorityEgg(whichPet) then
+            return
+        end
+
+        local hasMoney = ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('pets', getgenv().SETTINGS.HATCH_EGG_PRIORITY_NAMES[1], {})
+
+        if hasMoney then
+            return
         end
     end
     if getgenv().SETTINGS.PET_ONLY_PRIORITY then
-        if GetInventory:PriorityPet() then
-            return true
+        if GetInventory:PriorityPet(whichPet) then
+            return
         end
     end
+    if getgenv().SETTINGS.PET_NEON_PRIORITY then
+        if GetInventory:GetNeonPet(whichPet) then
+            return
+        end
+    end
+    if GetInventory:PetRarityAndAge('legendary', 5, whichPet) then
+        return
+    end
+    if GetInventory:PetRarityAndAge('ultra_rare', 5, whichPet) then
+        return
+    end
+    if GetInventory:PetRarityAndAge('rare', 5, whichPet) then
+        return
+    end
+    if GetInventory:PetRarityAndAge('uncommon', 5, whichPet) then
+        return
+    end
+    if GetInventory:PetRarityAndAge('common', 5, whichPet) then
+        return
+    end
+    if getEgg(whichPet) then
+        return
+    end
 
-    if GetInventory:PetRarityAndAge('legendary', 5) then
-            return true
-    end
-    if GetInventory:PetRarityAndAge('ultra_rare', 5) then
-            return true
-    end
-    if GetInventory:PetRarityAndAge('rare', 5) then
-            return true
-    end
-    if GetInventory:PetRarityAndAge('uncommon', 5) then
-            return true
-    end
-    if GetInventory:PetRarityAndAge('common', 5) then
-            return true
-    end
-    if getEgg() then
-            return true
-    end
+    return
 end
 local removeHandHeldItem = function()
     local tool = localPlayer.Character:FindFirstChildOfClass('Tool')
@@ -492,42 +503,52 @@ local removeHandHeldItem = function()
         ReplicatedStorage.API['ToolAPI/Unequip']:InvokeServer(tool.unique.Value, {})
     end
 end
-local CheckifEgg = function()
-    local PetUniqueID = ClientData.get('pet_char_wrappers')[1]['pet_unique']
-    local PetAge = ClientData.get('pet_char_wrappers')[1]['pet_progression']['age']
-
-    if PetUniqueID == PetCurrentlyFarming then
+local CheckifEgg = function(whichPet)
+    if not ClientData.get('pet_char_wrappers') then
         return
     end
-    if PetAge ~= 1 then
+    if not ClientData.get('pet_char_wrappers')[whichPet] then
+        return
+    end
+    if table.find(peteggs, ClientData.get('pet_char_wrappers')[whichPet].pet_id) then
         return
     end
 
-    getPet()
+    --Misc.DebugModePrint(string.format('NOT A EGG SO GETTING NEW EGG %s', tostring(whichPet)))
+    getPet(whichPet)
+
+    return
 end
-local SwitchOutFullyGrown = function()
-    if isBuyingOrAging then
-        return
-    end
-    --if ClientData.get('pet_char_wrappers')[1] == nil or false then
-    if not ClientData.get('pet_char_wrappers')[1] then
-        getPet()
 
+local SwitchOutFullyGrown = function(whichPet)
+    if getgenv().isBuyingOrAging then
         return
     end
-	
-    task.wait(1)
-	
-    local PetAge = ClientData.get('pet_char_wrappers')[1]['pet_progression']['age']
+    if not ClientData.get('pet_char_wrappers')[whichPet] then
+        if not Misc.ReEquipPet(whichPet) then
+            Misc.DebugModePrint('SwitchOutFullyGrown: GETTING NEW PETS')
+            getPet(whichPet)
+
+            return
+        end
+
+        task.wait(1)
+    end
+
+    local PetAge = ClientData.get('pet_char_wrappers')[whichPet]['pet_progression']['age']
 
     if PetAge == 6 then
-        getPet()
+        if getgenv().SETTINGS.PET_AUTO_FUSION then
+            Fusion:MakeMega(false)
+            Fusion:MakeMega(true)
+        end
+
+        getPet(whichPet)
 
         return
-    elseif PetAge == 1 then
-        CheckifEgg()
     end
 end
+
 local ClickTradeWindowPopUps = function()
     for _, v in pairs(localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Buttons:GetDescendants())do
         if v.Name == 'TextLabel' then
