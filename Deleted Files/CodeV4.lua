@@ -1405,58 +1405,6 @@ localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog:GetPropertyChangedSignal('Vi
     end
 end)
 
---------- kill Frostbite bear Banner -----
---[[localPlayer.PlayerGui.DialogApp.Dialog.ChildAdded:Connect(function(Child)
-    if Child.Name == 'NormalDialog' then
-        Child:GetPropertyChangedSignal('Visible'):Connect(function()
-            if not Child.Visible then
-                return
-            end
-
-            Child:WaitForChild('Info')
-            Child.Info:WaitForChild('TextLabel')
-            Child.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(onTextChangedNormalDialog)
-        end)
-
-    elseif Child.Name == 'IceDimension2025Dialog' then
-        Child:GetPropertyChangedSignal('Visible'):Connect(function()
-            if not Child.Visible then
-                return
-            end
-            findButton('Okay', 'IceDimension2025Dialog')
-            localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog:WaitForChild('Info')
-            localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog.Info:WaitForChild('TextLabel')
-            localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(onTextChangedIceDimension)
-        end)
-    end
-end)
-localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog:GetPropertyChangedSignal('Visible'):Connect(function(
-)
-    if localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog.Visible then
-        findButton('Okay', 'IceDimension2025Dialog')
-        localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog:WaitForChild('Info')
-        localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog.Info:WaitForChild('TextLabel')
-        localPlayer.PlayerGui.DialogApp.Dialog.IceDimension2025Dialog.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(onTextChangedIceDimension)
-    end
-end)--]]
-
---------------------------------------
-
---[[localPlayer.PlayerGui.DialogApp.Dialog.ChildAdded:Connect(function(Child)
-    if Child.Name ~= 'NormalDialog' then
-        return
-    end
-
-    Child:GetPropertyChangedSignal('Visible'):Connect(function()
-        if not Child.Visible then
-            return
-        end
-
-        Child:WaitForChild('Info')
-        Child.Info:WaitForChild('TextLabel')
-        Child.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(onTextChangedNormalDialog)
-    end)
-end)--]]
 Players.PlayerAdded:Connect(function(player)
     player.CharacterAdded:Connect(function(character)
         if Players.LocalPlayer.Name == getgenv().SETTINGS.TRADE_COLLECTOR_NAME then
