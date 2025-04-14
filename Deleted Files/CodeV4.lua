@@ -831,25 +831,54 @@ local function checkIfPetEquipped()
     end
 end
 
-local CompletePetAilments = function()
-
+local CompletePetAilments = function(whichPet)
     if isInMiniGame then
-         return
+        return
     end
-	
-    checkIfPetEquipped()
+    if not isProHandler and whichPet == 2 then
+        return
+    end
 
-    local petUnique = ClientData.get_data()[localPlayer.Name].pet_char_wrappers[1].pet_unique
+    local petWrapper = ClientData.get_data()[localPlayer.Name].pet_char_wrappers
 
+    if not petWrapper or not petWrapper[whichPet] then
+        if not Misc.ReEquipPet(whichPet) then
+            getPet(whichPet)
+        end
+    end
     if not ClientData.get_data()[localPlayer.Name].ailments_manager then
         return false
     end
     if not ClientData.get_data()[localPlayer.Name].ailments_manager.ailments then
         return false
     end
+    if not ClientData.get_data()[localPlayer.Name].pet_char_wrappers then
+        return false
+    end
+    if not ClientData.get_data()[localPlayer.Name].pet_char_wrappers[whichPet] then
+        return false
+    end
+
+    local petUnique = ClientData.get_data()[localPlayer.Name].pet_char_wrappers[whichPet].pet_unique
+
+    if not petUnique then
+        return false
+    end
     if not ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique] then
         return false
     end
+
+    local petcount = 0
+
+    for _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
+        petcount = petcount + 1
+    end
+
+    if petcount == 0 then
+        return false
+    end
+
+    Ailments.whichPet = whichPet
 
     for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
         if key == 'hungry' then
