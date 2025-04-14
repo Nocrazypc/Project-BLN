@@ -402,14 +402,14 @@ local agePotionCount = function(nameId)
     return count
 end
 
-local getEgg = function()
+local getEgg = function(whichPet)
     for _, v in pairs(ClientData.get_data()[localPlayer.Name].inventory.pets)do
         if v.id == Egg2Buy and v.id ~= 'practice_dog' and v.properties.age ~= 6 and not v.properties.mega_neon then
             ReplicatedStorage.API['ToolAPI/Equip']:InvokeServer(v.unique, {
                 ['use_sound_delay'] = true,
             })
 
-            PetCurrentlyFarming = v.unique
+            getgenv().petCurrentlyFarming1 = v.unique
 
             return true
         end
