@@ -20,6 +20,7 @@ local BulkPotions = loadstring(game:HttpGet("https://raw.githubusercontent.com/N
 local TaskBoard = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/TaskB.lua"))()
 local Clipboard = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/ClipB.lua"))()
 local BuyItems = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Buy.lua"))()
+local Misc = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Misc.lua"))()
 local Blossom = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Bloss.lua"))()
 local clipboard = Clipboard.new()
 local taskBoard = TaskBoard.new()
