@@ -173,6 +173,32 @@ local DailyRewardTable2 = {
     [600] = 'reward_11',
     [660] = 'reward_12',
 }
+local petRaritys = {
+    'common',
+    'uncommon',
+    'rare',
+    'ultra_rare',
+    'legendary',
+}
+local petAges = {
+    'Newborn/Reborn',
+    'Junior/Twinkle',
+    'Pre_Teen/Sparkle',
+    'Teen/Flare',
+    'Post_Teen/Sunshine',
+    'Full_Grown/Luminous',
+}
+local petNeons = {
+    'normal',
+    'neon',
+    'mega_neon',
+}
+local multipleOptionsTable = {
+    ['rarity'] = {},
+    ['ages'] = {},
+    ['neons'] = {},
+}
+
 local petsTable = GetInventory:TabId('pets')
 
 if #petsTable == 0 then
@@ -205,13 +231,6 @@ if #foodTable == 0 then
     }
 end
 
-local pets_legendary = {}
-local pets_ultrarare = {}
-local pets_rare = {}
-local pets_uncommon = {}
-local pets_common = {}
-local Pets_commonto_ultrarare = {}
-local pets_legendary_to_common = {}
 --[[local fireButton = function(button)
     local success, errorMessage = pcall(function()
         firesignal(button.MouseButton1Down)
