@@ -4,6 +4,12 @@
         local InventoryDB = require(ReplicatedStorage:WaitForChild('ClientDB'):WaitForChild('Inventory'):WaitForChild('InventoryDB'))
         local localPlayer = Players.LocalPlayer
         local GetInventory = {}
+        local blackListIds = {
+            'practice_dog',
+            'spring_2025_minigame_spiked_kaijunior',
+            'spring_2025_minigame_scorching_kaijunior',
+            'spring_2025_minigame_toxic_kaijunior',
+            'spring_2025_minigame_spotted_kaijunior',
 
         function GetInventory:GetAll()
             return ClientData.get_data()[localPlayer.Name].inventory
