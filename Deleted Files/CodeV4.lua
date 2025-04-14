@@ -455,32 +455,32 @@ local getPet = function()
     end
     if getgenv().SETTINGS.PET_NEON_PRIORITY then
         if GetInventory:GetNeonPet() then
-            return
+            return true
         end
     end
     if getgenv().SETTINGS.PET_ONLY_PRIORITY then
         if GetInventory:PriorityPet() then
-            return
+            return true
         end
     end
 
     if GetInventory:PetRarityAndAge('legendary', 5) then
-        return
+            return true
     end
     if GetInventory:PetRarityAndAge('ultra_rare', 5) then
-        return
+            return true
     end
     if GetInventory:PetRarityAndAge('rare', 5) then
-        return
+            return true
     end
     if GetInventory:PetRarityAndAge('uncommon', 5) then
-        return
+            return true
     end
     if GetInventory:PetRarityAndAge('common', 5) then
-        return
+            return true
     end
     if getEgg() then
-        return
+            return true
     end
 end
 local removeHandHeldItem = function()
