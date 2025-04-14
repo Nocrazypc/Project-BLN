@@ -1,20 +1,3 @@
-local __DARKLUA_BUNDLE_MODULES
-
-__DARKLUA_BUNDLE_MODULES = {
-    cache = {},
-    load = function(m)
-        if not __DARKLUA_BUNDLE_MODULES.cache[m] then
-            __DARKLUA_BUNDLE_MODULES.cache[m] = {
-                c = __DARKLUA_BUNDLE_MODULES[m](),
-            }
-        end
-
-        return __DARKLUA_BUNDLE_MODULES.cache[m].c
-    end,
-}
-
-----------------------------------------------------
-
 if not game:IsLoaded() then
         game.Loaded:Wait()
 end
