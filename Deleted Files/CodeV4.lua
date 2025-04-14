@@ -46,6 +46,9 @@ local CollisionsClient = require(ReplicatedStorage.ClientModules.Game:WaitForChi
 local localPlayer = Players.LocalPlayer
 local Player = Players.LocalPlayer
 
+localPlayer:WaitForChild('PlayerGui', 600)
+localPlayer.PlayerGui:WaitForChild('NewsApp', 600)
+
 local PickColorConn
 local WelcomeScreen
 local RoleChooserDialogConnection
