@@ -1338,7 +1338,30 @@ DailyClaimConnection = localPlayer.PlayerGui.DailyLoginApp:GetPropertyChangedSig
         DailyClaimConnection = nil
     end
 end)
+-------- Certificate-------------
 
+isProHandler = ClientData.get_data()[localPlayer.Name].subscription_manager.equip_2x_pets.active and true or false
+
+Misc.DebugModePrint(string.format('Does it have Pro Handler Certificate?: %s', tostring(isProHandler)))
+
+if not isProHandler then
+    if not table.find(getgenv().SETTINGS.TRADE_COLLECTOR_NAME, localPlayer.Name) then
+        Misc.DebugModePrint('Checking inventory to see if it has Pro Handler Certificate')
+
+        local proHandlerCert = GetInventory:GetUniqueId('gifts', 'subscription_2024_2x_pet_certificate')
+
+        if proHandlerCert then
+            ReplicatedStorage.API['ToolAPI/ServerUseTool']:FireServer(proHandlerCert, 'END', true)
+            task.wait(1)
+
+            isProHandler = ClientData.get_data()[localPlayer.Name].subscription_manager.equip_2x_pets.active and true or false
+
+            Misc.DebugModePrint(string.format('Does it have Pro Handler Certificate now?: %s', tostring(isProHandler)))
+        end
+    end
+end
+
+-----------------------------------
 Players.LocalPlayer.PlayerGui.QuestIconApp.ImageButton.EventContainer.IsNew:GetPropertyChangedSignal('Position'):Connect(function(
 )
     if taskBoard.NewTaskBool then
