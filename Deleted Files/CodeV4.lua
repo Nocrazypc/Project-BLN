@@ -1843,7 +1843,7 @@ local FarmToggle = FarmTab:CreateToggle({
      Callback = function(Value)
 
          getgenv().FocusFarmAgePotions = Value
-         getPet()
+         getPet(whichPet)
 
      end,
  })
