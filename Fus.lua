@@ -1,73 +1,87 @@
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Players = game:GetService("Players")
+        local ReplicatedStorage = game:GetService('ReplicatedStorage')
+        local Players = game:GetService('Players')
+        local ClientData = require(ReplicatedStorage:WaitForChild('ClientModules'):WaitForChild('Core'):WaitForChild('ClientData'))
+        local localPlayer = Players.LocalPlayer
+        local Fusion = {}
+        local getFullgrownPets = function(mega)
+            local fullgrownTable = {}
 
-local ClientData = require(ReplicatedStorage:WaitForChild("ClientModules"):WaitForChild("Core"):WaitForChild("ClientData"))
+            if mega then
+                for _, v in ClientData.get_data()[localPlayer.Name].inventory.pets do
+                    if v.properties.age == 6 and v.properties.neon then
+                        if not fullgrownTable[v.id] then
+                            fullgrownTable[v.id] = {
+                                ['count'] = 0,
+                                ['unique'] = {},
+                            }
+                        end
 
-local Player = Players.LocalPlayer
+                        do
+                            local __DARKLUA_VAR = fullgrownTable[v.id]
 
-local Fusion = {}
+                            __DARKLUA_VAR['count'] = __DARKLUA_VAR['count'] + 1
+                        end
 
-local function getFullgrownPets(mega: boolean): table
-    local fullgrownTable = {}
+                        table.insert(fullgrownTable[v.id]['unique'], v.unique)
 
-    if mega then
-        for _, v in ClientData.get_data()[Player.Name].inventory.pets do
-            if v.properties.age == 6 and v.properties.neon then
-                if not fullgrownTable[v.id] then
-                    fullgrownTable[v.id] = {["count"] = 0, ["unique"] = {}}
+                        if fullgrownTable[v.id]['count'] >= 4 then
+                            break
+                        end
+                    end
                 end
+            else
+                for _, v in ClientData.get_data()[localPlayer.Name].inventory.pets do
+                    if v.properties.age == 6 and not v.properties.neon and not v.properties.mega_neon then
+                        if not fullgrownTable[v.id] then
+                            fullgrownTable[v.id] = {
+                                ['count'] = 0,
+                                ['unique'] = {},
+                            }
+                        end
 
-                fullgrownTable[v.id]["count"] += 1
-                table.insert(fullgrownTable[v.id]["unique"], v.unique)
+                        do
+                            local __DARKLUA_VAR = fullgrownTable[v.id]
 
-                if fullgrownTable[v.id]["count"] >= 4 then
-                    break
+                            __DARKLUA_VAR['count'] = __DARKLUA_VAR['count'] + 1
+                        end
+
+                        table.insert(fullgrownTable[v.id]['unique'], v.unique)
+
+                        if fullgrownTable[v.id]['count'] >= 4 then
+                            break
+                        end
+                    end
                 end
             end
+
+            return fullgrownTable
         end
 
-    else
-        for _, v in ClientData.get_data()[Player.Name].inventory.pets do
-            if v.properties.age == 6 and not v.properties.neon and not v.properties.mega_neon then
-                if not fullgrownTable[v.id] then
-                    fullgrownTable[v.id] = {["count"] = 0, ["unique"] = {}}
+        function Fusion:MakeMega(bool)
+            repeat
+                local fusionReady = {}
+                local fullgrownTable = getFullgrownPets(bool)
+
+                for _, valueTable in fullgrownTable do
+                    if valueTable.count >= 4 then
+                        table.insert(fusionReady, valueTable.unique[1])
+                        table.insert(fusionReady, valueTable.unique[2])
+                        table.insert(fusionReady, valueTable.unique[3])
+                        table.insert(fusionReady, valueTable.unique[4])
+
+                        break
+                    end
                 end
 
-                fullgrownTable[v.id]["count"] += 1
-                table.insert(fullgrownTable[v.id]["unique"], v.unique)
-                
-                if fullgrownTable[v.id]["count"] >= 4 then
-                    break
+                if #fusionReady >= 4 then
+                    ReplicatedStorage.API:FindFirstChild('PetAPI/DoNeonFusion'):InvokeServer({
+                        unpack(fusionReady),
+                    })
+                    task.wait()
                 end
-            end
-        end
-    end
+            until #fusionReady <= 3
 
-    return fullgrownTable
-end
-
-
-function Fusion:MakeMega(bool: boolean)
-    repeat
-        local fusionReady = {}
-
-        local fullgrownTable = getFullgrownPets(bool)
-
-        for _, valueTable in fullgrownTable do
-            if valueTable.count >= 4 then
-                table.insert(fusionReady, valueTable.unique[1])
-                table.insert(fusionReady, valueTable.unique[2])
-                table.insert(fusionReady, valueTable.unique[3])
-                table.insert(fusionReady, valueTable.unique[4])
-                break
-            end
+            print('\u{1f389} DONE FUSING \u{1f389}')
         end
 
-        if #fusionReady >= 4 then
-            ReplicatedStorage.API:FindFirstChild("PetAPI/DoNeonFusion"):InvokeServer({unpack(fusionReady)})
-        end
-
-    until #fusionReady <= 3
-end
-
-return Fusion
+        return Fusion
