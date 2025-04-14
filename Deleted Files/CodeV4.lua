@@ -117,6 +117,9 @@ getgenv().PetCurrentlyFarming = ''
 getgenv().AutoFusion = false
 getgenv().FocusFarmAgePotions = false
 getgenv().HatchPriorityEggs = false
+getgenv().debugMode = false
+getgenv().petCurrentlyFarming1 = nil
+getgenv().petCurrentlyFarming2 = nil
 
 getgenv().AutoMinigame = true
 
