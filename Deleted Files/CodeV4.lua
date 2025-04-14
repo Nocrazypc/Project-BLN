@@ -1,3 +1,20 @@
+local __DARKLUA_BUNDLE_MODULES
+
+__DARKLUA_BUNDLE_MODULES = {
+    cache = {},
+    load = function(m)
+        if not __DARKLUA_BUNDLE_MODULES.cache[m] then
+            __DARKLUA_BUNDLE_MODULES.cache[m] = {
+                c = __DARKLUA_BUNDLE_MODULES[m](),
+            }
+        end
+
+        return __DARKLUA_BUNDLE_MODULES.cache[m].c
+    end,
+}
+
+----------------------------------------------------
+
 if not game:IsLoaded() then
         game.Loaded:Wait()
 end
@@ -79,13 +96,13 @@ StarterGui:SetCore(
 )
 
 ----------------TransitionsApp-------------
-pcall(function() 
+--[[pcall(function() 
     require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
     require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).sudden_fill = function() return end
     if Player.PlayerGui:FindFirstChild("TransitionsApp") then
         Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
     end
-end)
+end)--]]
 --------------------------------------------
 
 local Bed
@@ -121,8 +138,8 @@ getgenv().AutoFusion = false
 getgenv().FocusFarmAgePotions = false
 getgenv().HatchPriorityEggs = false
 getgenv().debugMode = false
-getgenv().petCurrentlyFarming1 = ''
-getgenv().petCurrentlyFarming2 = ''
+getgenv().petCurrentlyFarming1 = nil
+getgenv().petCurrentlyFarming2 = nil
 
 getgenv().AutoMinigame = true
 
