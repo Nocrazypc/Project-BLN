@@ -805,7 +805,7 @@ local completeBabyAilments = function()
     end
 end
 
-local function checkIfPetEquipped()
+--[[local function checkIfPetEquipped()
     if not ClientData.get('pet_char_wrappers')[1] then
         if not PetCurrentlyFarming then
             getPet()
@@ -832,7 +832,7 @@ local function checkIfPetEquipped()
             return
         end
     end
-end
+end --]]
 
 local CompletePetAilments = function(whichPet)
     if isInMiniGame then
