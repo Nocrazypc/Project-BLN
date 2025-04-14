@@ -1,11 +1,3 @@
-
-
-
-
-
-
-
-
         local ReplicatedStorage = game:GetService('ReplicatedStorage')
         local VirtualInputManager = game:GetService('VirtualInputManager')
         local ClientData = require(ReplicatedStorage:WaitForChild('ClientModules'):WaitForChild('Core'):WaitForChild('ClientData'))
