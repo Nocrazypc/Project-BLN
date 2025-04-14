@@ -1,11 +1,11 @@
         local ReplicatedStorage = game:GetService('ReplicatedStorage')
         local Workspace = game:GetService('Workspace')
         local Players = game:GetService('Players')
-        local Misc = __DARKLUA_BUNDLE_MODULES.load('b')
+        local Misc = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Misc.lua"))()
         local Bypass = require(ReplicatedStorage:WaitForChild('Fsys')).load
         local ClientData = require(ReplicatedStorage:WaitForChild('ClientModules'):WaitForChild('Core'):WaitForChild('ClientData'))
-        local GetInventory = __DARKLUA_BUNDLE_MODULES.load('e')
-        local Teleport = __DARKLUA_BUNDLE_MODULES.load('g')
+        local GetInventory = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/GetInv.lua"))()
+        local Teleport = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Tele.lua"))()
         local localPlayer = Players.LocalPlayer
         local doctorId = nil
         local Ailments = {}
