@@ -1040,17 +1040,18 @@ local autoFarm = function()
         end
     end)
 
-
     if getgenv().SETTINGS.PET_AUTO_FUSION then
-        task.spawn(function()
-            Fusion:MakeMega(false)
-            Fusion:MakeMega(true)
-        end)
+        Fusion:MakeMega(false)
+        Fusion:MakeMega(true)
+        task.wait(1)
     end
 
-    task.wait()
-    getPet()
-end
+    getPet(1)
+    task.wait(2)
+
+    if isProHandler then
+        getPet(2)
+    end
 
 local startAutoFarm = function()
 
