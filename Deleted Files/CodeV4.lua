@@ -53,6 +53,7 @@ local RobuxProductDialogConnection1
 local RobuxProductDialogConnection2
 local banMessageConnection
 local DailyClaimConnection
+local isProHandler = false
 local counter = 0
 local isNewAccount = false
 local isInMiniGame = false
