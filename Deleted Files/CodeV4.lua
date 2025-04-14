@@ -513,7 +513,9 @@ local SwitchOutFullyGrown = function()
 
         return
     end
-
+	
+    task.wait(1)
+	
     local PetAge = ClientData.get('pet_char_wrappers')[1]['pet_progression']['age']
 
     if PetAge == 6 then
