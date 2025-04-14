@@ -10,16 +10,41 @@
             'spring_2025_minigame_scorching_kaijunior',
             'spring_2025_minigame_toxic_kaijunior',
             'spring_2025_minigame_spotted_kaijunior',
+        }
+        local equipWhichPet = function(whichPet, petUnique)
+            if whichPet == 1 then
+                ReplicatedStorage.API['ToolAPI/Equip']:InvokeServer(petUnique, {
+                    ['equip_as_last'] = false,
+                })
+
+                getgenv().petCurrentlyFarming1 = petUnique
+
+                print(string.format('equipWhichPet: %s', tostring(getgenv().petCurrentlyFarming1)))
+
+                return true
+            elseif whichPet == 2 then
+                ReplicatedStorage.API['ToolAPI/Equip']:InvokeServer(petUnique, {
+                    ['equip_as_last'] = true,
+                })
+
+                getgenv().petCurrentlyFarming2 = petUnique
+
+                print(string.format('equipWhichPet: %s', tostring(getgenv().petCurrentlyFarming2)))
+
+                return true
+            end
+
+            return false
+        end
 
         function GetInventory:GetAll()
             return ClientData.get_data()[localPlayer.Name].inventory
         end
-
-        function GetInventory:TabId(tabId: string)
+        function GetInventory:TabId(tabId)
             local inventoryTable = {}
 
             for _, v in ClientData.get_data()[localPlayer.Name].inventory[tabId]do
-                if v.id == 'practice_dog' then
+                if table.find(blackListIds, v.id) then
                     continue
                 end
                 if table.find(inventoryTable, v.id) then
@@ -33,26 +58,37 @@
 
             return inventoryTable
         end
-        
-         function GetInventory:IsFarmingSelectedPet()
+        function GetInventory:IsFarmingSelectedPet(hasProHandler)
+            if hasProHandler then
+                if not ClientData.get('pet_char_wrappers')[2] then
+                    return
+                end
+                if getgenv().petCurrentlyFarming2 == ClientData.get('pet_char_wrappers')[2]['pet_unique'] then
+                    return
+                end
+
+                print('current pet equipped (2) is not the same pet as selected..')
+                print(ReplicatedStorage.API['ToolAPI/Equip']:InvokeServer(getgenv().petCurrentlyFarming2, {}))
+            end
             if not ClientData.get('pet_char_wrappers')[1] then
                 return
             end
-            if getgenv().PetCurrentlyFarming == ClientData.get('pet_char_wrappers')[1]['pet_unique'] then
+            if getgenv().petCurrentlyFarming1 == ClientData.get('pet_char_wrappers')[1]['pet_unique'] then
                 return
             end
-            --print('current pet equipped is not the same pet as selected..')
-            ReplicatedStorage.API['ToolAPI/Equip']:InvokeServer(getgenv().PetCurrentlyFarming, {})
+
+            print('current pet equipped (1) is not the same pet as selected..')
+            ReplicatedStorage.API['ToolAPI/Equip']:InvokeServer(getgenv().petCurrentlyFarming1, {})
             task.wait(2)
+
             return
         end
-        
-        function GetInventory:GetPetFriendship()
+        function GetInventory:GetPetFriendship(whichPet)
             local level = 0
             local petUnique = nil
 
             for _, pet in ClientData.get_data()[localPlayer.Name].inventory.pets do
-                if pet.id == 'practice_dog' then
+                if table.find(blackListIds, pet.id) then
                     continue
                 end
                 if not pet.properties then
@@ -62,6 +98,13 @@
                     continue
                 end
                 if pet.properties.friendship_level > level then
+                    if pet.unique == getgenv().petCurrentlyFarming1 then
+                        continue
+                    end
+                    if pet.unique == getgenv().petCurrentlyFarming2 then
+                        continue
+                    end
+
                     level = pet.properties.friendship_level
                     petUnique = pet.unique
                 end
@@ -71,34 +114,40 @@
                 return false
             end
 
-            ReplicatedStorage.API['ToolAPI/Equip']:InvokeServer(petUnique, {})
-
-            getgenv().PetCurrentlyFarming = petUnique
+            equipWhichPet(whichPet, petUnique)
+            print(string.format('Found pet with friendship level: %s, equipped on: %s', tostring(level), tostring(whichPet)))
 
             return true
         end
-        function GetInventory:PetRarityAndAge(rarity: string, age: number)
-            local PetageCounter = age or 5
+        function GetInventory:GetHighestGrownPet(age, whichPet)
+            local PetageCounter = age
             local isNeon = true
             local petFound = false
 
             while not petFound do
                 for _, pet in ClientData.get_data()[localPlayer.Name].inventory.pets do
-                    for _, petDB in InventoryDB.pets do
-                        if rarity == petDB.rarity and pet.id == petDB.id and pet.id ~= 'practice_dog' and pet.properties.age == PetageCounter and pet.properties.neon == isNeon then
-                            ReplicatedStorage.API['ToolAPI/Equip']:InvokeServer(pet.unique, {})
-
-                            getgenv().PetCurrentlyFarming = pet.unique
-
-                            return true
+                    if table.find(blackListIds, pet.id) then
+                        continue
+                    end
+                    if pet.properties.age == PetageCounter and pet.properties.neon == isNeon then
+                        if pet.unique == getgenv().petCurrentlyFarming1 then
+                            continue
                         end
+                        if pet.unique == getgenv().petCurrentlyFarming2 then
+                            continue
+                        end
+
+                        print(string.format('GetHighestGrownPet: %s', tostring(whichPet)))
+                        equipWhichPet(whichPet, pet.unique)
+
+                        return true
                     end
                 end
 
-                PetageCounter -= 1
+                PetageCounter = PetageCounter - 1
 
                 if PetageCounter <= 0 and isNeon then
-                    PetageCounter = age or 5
+                    PetageCounter = age
                     isNeon = nil
                 elseif PetageCounter <= 0 and isNeon == nil then
                     return false
@@ -106,8 +155,118 @@
 
                 task.wait()
             end
-        end
 
+            return false
+        end
+        function GetInventory:PetRarityAndAge(rarity, age, whichPet)
+            local PetageCounter = age
+            local isNeon = true
+            local petFound = false
+
+            while not petFound do
+                for _, pet in ClientData.get_data()[localPlayer.Name].inventory.pets do
+                    for _, petDB in InventoryDB.pets do
+                        if table.find(blackListIds, pet.id) then
+                            continue
+                        end
+                        if rarity == petDB.rarity and pet.id == petDB.id and pet.properties.age == PetageCounter and pet.properties.neon == isNeon then
+                            if pet.unique == getgenv().petCurrentlyFarming1 then
+                                continue
+                            end
+                            if pet.unique == getgenv().petCurrentlyFarming2 then
+                                continue
+                            end
+
+                            print(string.format('PetRarityAndAge: %s', tostring(whichPet)))
+                            equipWhichPet(whichPet, pet.unique)
+
+                            return true
+                        end
+                    end
+                end
+
+                PetageCounter = PetageCounter - 1
+
+                if PetageCounter <= 0 and isNeon then
+                    PetageCounter = age
+                    isNeon = nil
+                elseif PetageCounter <= 0 and isNeon == nil then
+                    return false
+                end
+
+                task.wait()
+            end
+
+            return false
+        end
+        function GetInventory:CheckForPetAndEquip(nameId, whichPet)
+            local level = 0
+            local petUnique = nil
+
+            for _, pet in ClientData.get_data()[localPlayer.Name].inventory['pets']do
+                if pet.id == nameId then
+                    if not pet.properties then
+                        continue
+                    end
+                    if not pet.properties.friendship_level then
+                        continue
+                    end
+                    if pet.properties.friendship_level > level then
+                        if pet.unique == getgenv().petCurrentlyFarming1 then
+                            continue
+                        end
+                        if pet.unique == getgenv().petCurrentlyFarming2 then
+                            continue
+                        end
+
+                        level = pet.properties.friendship_level
+                        petUnique = pet.unique
+                    end
+                end
+            end
+
+            if petUnique then
+                equipWhichPet(whichPet, petUnique)
+                print(string.format('Found pet with friendship level: %s, equipped on: %s', tostring(level), tostring(whichPet)))
+
+                return true
+            end
+
+            local PetageCounter = 6
+            local isNeon = true
+            local petFound = false
+
+            while not petFound do
+                for _, pet in ClientData.get_data()[localPlayer.Name].inventory.pets do
+                    if pet.id == nameId and pet.properties.age == PetageCounter and pet.properties.neon == isNeon then
+                        if pet.unique == getgenv().petCurrentlyFarming1 then
+                            continue
+                        end
+                        if pet.unique == getgenv().petCurrentlyFarming2 then
+                            continue
+                        end
+
+                        print(string.format('GetHighestGrownPet: %s', tostring(whichPet)))
+                        equipWhichPet(whichPet, pet.unique)
+
+                        return true
+                    end
+                end
+
+                PetageCounter = PetageCounter - 1
+
+                if PetageCounter <= 0 and isNeon then
+                    PetageCounter = 6
+                    isNeon = nil
+                elseif PetageCounter <= 0 and isNeon == nil then
+                    return false
+                end
+
+                task.wait()
+            end
+
+            return false
+        end
         function GetInventory:GetUniqueId(tabId, nameId)
             for _, v in ClientData.get_data()[localPlayer.Name].inventory[tabId]do
                 if v.id == nameId then
@@ -117,25 +276,30 @@
 
             return nil
         end
-        
-       function GetInventory:IsPetInInventory(tabId, uniqueId)
+        function GetInventory:IsPetInInventory(tabId, uniqueId)
             for _, v in ClientData.get_data()[localPlayer.Name].inventory[tabId]do
                 if v.unique == uniqueId then
                     return true
                 end
             end
+
             return false
         end
-        
-        function GetInventory:PriorityEgg()
+        function GetInventory:PriorityEgg(whichPet)
             for _, v in ipairs(getgenv().SETTINGS.HATCH_EGG_PRIORITY_NAMES)do
                 for _, v2 in ClientData.get_data()[localPlayer.Name].inventory.pets do
-                    if v == v2.id and v2.id ~= 'practice_dog' then
-                        ReplicatedStorage.API['ToolAPI/Equip']:InvokeServer(v2.unique, {
-                            ['use_sound_delay'] = true,
-                        })
+                    if table.find(blackListIds, v2.id) then
+                        continue
+                    end
+                    if v == v2.id then
+                        if v2.unique == getgenv().petCurrentlyFarming1 then
+                            continue
+                        end
+                        if v2.unique == getgenv().petCurrentlyFarming2 then
+                            continue
+                        end
 
-                        getgenv().PetCurrentlyFarming = v2.unique
+                        equipWhichPet(whichPet, v2.unique)
 
                         return true
                     end
@@ -155,19 +319,26 @@
 
             return eggs
         end
-        function GetInventory:GetNeonPet()
+        function GetInventory:GetNeonPet(whichPet)
             local Petage = 5
             local isNeon = true
             local found_pet = false
 
             while not found_pet do
                 for _, v in ClientData.get_data()[localPlayer.Name].inventory.pets do
-                    if v.id ~= 'practice_dog' and v.properties.age == Petage and v.properties.neon == isNeon then
-                        ReplicatedStorage.API['ToolAPI/Equip']:InvokeServer(v.unique, {
-                            ['use_sound_delay'] = true,
-                        })
+                    if table.find(blackListIds, v.id) then
+                        continue
+                    end
+                    if v.properties.age == Petage and v.properties.neon == isNeon then
+                        if v.unique == getgenv().petCurrentlyFarming1 then
+                            continue
+                        end
+                        if v.unique == getgenv().petCurrentlyFarming2 then
+                            continue
+                        end
 
-                        getgenv().PetCurrentlyFarming = v.unique
+                        print(string.format('GetNeonPet: %s', tostring(whichPet)))
+                        equipWhichPet(whichPet, v.unique)
 
                         return true
                     end
@@ -186,7 +357,7 @@
 
             return false
         end
-        function GetInventory:PriorityPet()
+        function GetInventory:PriorityPet(whichPet)
             local Petage = 5
             local isNeon = true
             local found_pet = false
@@ -194,12 +365,18 @@
             while found_pet == false do
                 for _, v in ipairs(getgenv().SETTINGS.PET_ONLY_PRIORITY_NAMES)do
                     for _, v2 in pairs(ClientData.get_data()[localPlayer.Name].inventory.pets)do
-                        if v == v2.id and v2.id ~= 'practice_dog' and v2.properties.age == Petage and v2.properties.neon == isNeon then
-                            ReplicatedStorage.API['ToolAPI/Equip']:InvokeServer(v2.unique, {
-                                ['use_sound_delay'] = true,
-                            })
-
-                            getgenv().PetCurrentlyFarming = v2.unique
+                        if v2.unique == getgenv().petCurrentlyFarming1 then
+                            continue
+                        end
+                        if v2.unique == getgenv().petCurrentlyFarming2 then
+                            continue
+                        end
+                        if table.find(blackListIds, v2.id) then
+                            continue
+                        end
+                        if v == v2.id and v2.properties.age == Petage and v2.properties.neon == isNeon then
+                            print('PriorityPet:')
+                            equipWhichPet(whichPet, v2.unique)
 
                             return true
                         end
