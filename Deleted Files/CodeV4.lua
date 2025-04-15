@@ -3805,7 +3805,7 @@ local placeBaitOrPickUp = function(baitUniquePasson)
 
     Misc.DebugModePrint('FIRING BAITBOX', success, errorMessage)
 end
---[[local agePotionCount = function(nameId)
+local agePotionCount = function(nameId)
     local count = 0
 
     for _, v in ClientData.get_data()[localPlayer.Name].inventory.food do
@@ -3816,10 +3816,10 @@ end
 
     return count
 end
-local eventCurrencyAmount = function()
-    return ClientData.get_data()[localPlayer.Name].cherry_blossoms_2025 or 0
-end
-local updateStatsGui = function()
+--local eventCurrencyAmount = function()
+  --  return ClientData.get_data()[localPlayer.Name].cherry_blossoms_2025 or 0
+-- end
+--[[local updateStatsGui = function()
     StatsGuis2:UpdateTextFor('TimeLabel', startTime)
 
     potionsGained = agePotionCount('pet_age_potion') - startPotionAmount
@@ -3847,15 +3847,15 @@ local updateStatsGui = function()
         startEventCurrencyAmount = currentEventCurrency
     end
 
-    TempEventCurrency:UpdateTextFor('TempEventCurrency', eventCurrencyGained)
-    TotalEventCurrency:UpdateTextFor('TotalEventCurrency')
-    TotalPotions:UpdateTextFor('TotalPotions')
-    TotalBucks:UpdateTextFor('TotalBucks')
-    BlankSlot1:UpdateTextFor('BlankSlot1')
-    BlankSlot2:UpdateTextFor('BlankSlot2')
-    TotalShiverBaits:UpdateTextFor('TotalShiverBaits')
-    TotalSubzeroBaits:UpdateTextFor('TotalSubzeroBaits')
-end--]]
+    -- TempEventCurrency:UpdateTextFor('TempEventCurrency', eventCurrencyGained)
+    -- TotalEventCurrency:UpdateTextFor('TotalEventCurrency')
+    -- TotalPotions:UpdateTextFor('TotalPotions')
+    -- TotalBucks:UpdateTextFor('TotalBucks')
+    -- BlankSlot1:UpdateTextFor('BlankSlot1')
+    -- BlankSlot2:UpdateTextFor('BlankSlot2')
+    -- TotalShiverBaits:UpdateTextFor('TotalShiverBaits')
+    -- TotalSubzeroBaits:UpdateTextFor('TotalSubzeroBaits')
+end --]]
 local findBait = function()
     local baits = getgenv().SETTINGS.BAIT_TO_USE_IN_ORDER
 
@@ -4988,8 +4988,8 @@ if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Visible then
     end
 end
 
---[[startTime = DateTime.now().UnixTimestamp
-startPotionAmount = agePotionCount('pet_age_potion')
+startTime = DateTime.now().UnixTimestamp
+--[[startPotionAmount = agePotionCount('pet_age_potion')
 startTinyPotionAmount = agePotionCount('tiny_pet_age_potion')
 startEventCurrencyAmount = eventCurrencyAmount()
 
