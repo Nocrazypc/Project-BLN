@@ -3389,7 +3389,7 @@ local VirtualInputManager = game:GetService('VirtualInputManager')
 local UserGameSettings = UserSettings():GetService('UserGameSettings')
 
 UserGameSettings.GraphicsQualityLevel = 1
--- UserGameSettings.MasterVolume = 0
+UserGameSettings.MasterVolume = 8
 
 local VirtualUser = game:GetService('VirtualUser')
 local StarterGui = game:GetService('StarterGui')
