@@ -4930,6 +4930,15 @@ Misc.DebugModePrint(string.format('SET FPS TO %s', tostring(getgenv().SETTINGS.S
     end,
 })--]]
 
+---- Stats Gui --------
+StatsGuis:UpdateText("NameFrame")
+StatsGuis:UpdateText("TimeFrame")
+StatsGuis:UpdateText("BucksAndPotionFrame")
+StatsGuis:UpdateText("TotalFrame")
+StatsGuis:UpdateText("TotalFrame1")
+--StatsGuis:UpdateText("TotalFrame2")
+
+
 if localPlayer.PlayerGui.NewsApp.Enabled then
     Misc.DebugModePrint('NEWSAPP ENABLED')
 
