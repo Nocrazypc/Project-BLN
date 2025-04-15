@@ -4924,11 +4924,11 @@ end
 
 setfpscap(getgenv().SETTINGS.SET_FPS)
 Misc.DebugModePrint(string.format('SET FPS TO %s', tostring(getgenv().SETTINGS.SET_FPS)))
-StatsGuis2:CopyInventoryButton({
+--[[StatsGuis2:CopyInventoryButton({
     callback = function()
         clipboard:CopyAllInventory()
     end,
-})
+})--]]
 
 if localPlayer.PlayerGui.NewsApp.Enabled then
     Misc.DebugModePrint('NEWSAPP ENABLED')
