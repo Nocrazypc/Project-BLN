@@ -3572,7 +3572,7 @@ local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocr
 --local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local StatsGuis = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Stats.lua"))()
 
-local TempPotions = StatsGuis2.new('TempPotions')
+--[[local TempPotions = StatsGuis2.new('TempPotions')
 local TempTinyPotions = StatsGuis2.new('TempTinyPotions')
 local TempBucks = StatsGuis2.new('TempBucks')
 local TempEventCurrency = StatsGuis2.new('TempEventCurrency')
@@ -3583,7 +3583,7 @@ local TotalEventCurrency = StatsGuis2.new('TotalEventCurrency')
 local BlankSlot1 = StatsGuis2.new('BlankSlot1')
 local BlankSlot2 = StatsGuis2.new('BlankSlot1')
 local TotalShiverBaits = StatsGuis2.new('TotalShiverBaits')
-local TotalSubzeroBaits = StatsGuis2.new('TotalSubzeroBaits')
+local TotalSubzeroBaits = StatsGuis2.new('TotalSubzeroBaits')--]]
 local petsTable = GetInventory:TabId('pets')
 
 if #petsTable == 0 then
