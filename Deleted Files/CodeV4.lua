@@ -5127,7 +5127,7 @@ isProHandler = ClientData.get_data()[localPlayer.Name].subscription_manager.equi
 Misc.DebugModePrint(string.format('Does it have Pro Handler Certificate?: %s', tostring(isProHandler)))
 
 if not isProHandler then
-    if not table.find(getgenv().SETTINGS.TRADE_COLLECTOR_NAME, localPlayer.Name) then
+    --if not table.find(getgenv().SETTINGS.TRADE_COLLECTOR_NAME, localPlayer.Name) then
         Misc.DebugModePrint('Checking inventory to see if it has Pro Handler Certificate')
 
         local proHandlerCert = GetInventory:GetUniqueId('gifts', 'subscription_2024_2x_pet_certificate')
