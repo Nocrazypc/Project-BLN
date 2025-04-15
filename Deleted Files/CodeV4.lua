@@ -3805,7 +3805,7 @@ local placeBaitOrPickUp = function(baitUniquePasson)
 
     Misc.DebugModePrint('FIRING BAITBOX', success, errorMessage)
 end
-local agePotionCount = function(nameId)
+--[[local agePotionCount = function(nameId)
     local count = 0
 
     for _, v in ClientData.get_data()[localPlayer.Name].inventory.food do
@@ -3855,7 +3855,7 @@ local updateStatsGui = function()
     BlankSlot2:UpdateTextFor('BlankSlot2')
     TotalShiverBaits:UpdateTextFor('TotalShiverBaits')
     TotalSubzeroBaits:UpdateTextFor('TotalSubzeroBaits')
-end
+end--]]
 local findBait = function()
     local baits = getgenv().SETTINGS.BAIT_TO_USE_IN_ORDER
 
