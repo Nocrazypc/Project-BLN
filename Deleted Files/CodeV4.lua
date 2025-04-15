@@ -4979,7 +4979,7 @@ if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Visible then
     end
 end
 
-startTime = DateTime.now().UnixTimestamp
+--[[startTime = DateTime.now().UnixTimestamp
 startPotionAmount = agePotionCount('pet_age_potion')
 startTinyPotionAmount = agePotionCount('tiny_pet_age_potion')
 startEventCurrencyAmount = eventCurrencyAmount()
@@ -4996,7 +4996,8 @@ TotalBucks:UpdateTextFor('TotalBucks')
 BlankSlot1:UpdateTextFor('BlankSlot1')
 BlankSlot2:UpdateTextFor('BlankSlot2')
 TotalShiverBaits:UpdateTextFor('TotalShiverBaits')
-TotalSubzeroBaits:UpdateTextFor('TotalSubzeroBaits')
+TotalSubzeroBaits:UpdateTextFor('TotalSubzeroBaits')--]]
+
 findFurniture()
 
 if not Bed then
