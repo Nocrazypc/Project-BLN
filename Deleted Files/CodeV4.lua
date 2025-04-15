@@ -4916,7 +4916,7 @@ PotatoMode.Start()
 StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Captures, false)
 
 UserGameSettings.GraphicsQualityLevel = 1
-UserGameSettings.MasterVolume = 0
+UserGameSettings.MasterVolume = 8
 
 for i, v in debug.getupvalue(RouterClient.init, 7)do
     v.Name = i
