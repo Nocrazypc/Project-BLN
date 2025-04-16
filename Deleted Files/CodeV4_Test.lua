@@ -7022,7 +7022,7 @@ Check the Developer Console for more information.]],
                     }
 
                     ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args))
-                    task.wait(math.random(0.3, 2))
+                    task.wait(math.random(0.1, 0.5))
                 end
 
                 task.wait()
