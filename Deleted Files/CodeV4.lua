@@ -8942,6 +8942,8 @@ end)
  })
 
 ----------- Minigames -------------
+FarmTab:CreateSection("Events & Minigames")
+--------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Cherry Blossom Minigames",
      CurrentValue = false,
