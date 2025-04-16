@@ -8912,6 +8912,19 @@ end)
 
      end,
  })
+-------- Potato Mode --------------
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Low Render / Potato Mode",
+     CurrentValue = false,
+     Flag = "Toggle05",
+     Callback = function(Value)
+
+     while true do
+     PotatoMode.Start()
+     end
+
+     end,
+ })
 
 ----------- Minigames -------------
 --[[local FarmToggle = FarmTab:CreateToggle({
