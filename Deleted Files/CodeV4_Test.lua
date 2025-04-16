@@ -8559,7 +8559,7 @@ repeat
     task.wait(1)
 until localPlayer.PlayerGui.NewsApp.Enabled or localPlayer.Character
 
-PotatoMode.Start()
+-- PotatoMode.Start()
 StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Captures, false)
 
 UserGameSettings.GraphicsQualityLevel = 1
