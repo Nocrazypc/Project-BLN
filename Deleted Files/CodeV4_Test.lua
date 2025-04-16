@@ -8919,9 +8919,9 @@ local FarmToggle = FarmTab:CreateToggle({
      Flag = "Toggle05",
      Callback = function(Value)
 
-     while true do
+
      PotatoMode.Start()
-     end
+
 
      end,
  })
