@@ -7072,16 +7072,7 @@ StarterGui:SetCore(
         Text = "We're Back.. Be Happy!"
     }
 )
------------TransitionsApp Dissabler-----------
-pcall(function() 
-    require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
-    require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).sudden_fill = function() return end
-    if Player.PlayerGui:FindFirstChild("TransitionsApp") then
-        Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
-    end
-end)
---------------------------------------------
-
+--------------------------------
 
 local PickColorConn
 local RoleChooserDialogConnection
@@ -8970,7 +8961,7 @@ end
 
      end,
  }) --]]
------------- Hatch Eggs Only ---------
+--------- Hatch Eggs Only ------------
 FarmTab:CreateSection("Eggs Only")
 --------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
