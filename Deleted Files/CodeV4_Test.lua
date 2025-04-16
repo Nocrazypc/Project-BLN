@@ -7587,7 +7587,7 @@ local getPet = function(whichPet)
             return true
         end
     end
-    if getgenv().SETTINGS.HATCH_EGG_PRIORITY then
+    if getgenv().SETTINGS.HATCH_EGG_PRIORITY or getgenv().HatchPriorityEggs then
         if GetInventory:PriorityEgg(whichPet) then
             return
         end
@@ -7946,7 +7946,7 @@ local autoFarm = function()
 
             removeHandHeldItem()
 
-            if getgenv().SETTINGS.HATCH_EGG_PRIORITY then
+            if getgenv().SETTINGS.HATCH_EGG_PRIORITY or getgenv().HatchPriorityEggs then
                 CheckifEgg(1)
                 task.wait(1)
 
