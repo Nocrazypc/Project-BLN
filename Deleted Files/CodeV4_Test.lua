@@ -9564,18 +9564,19 @@ Rayfield:SetVisibility(true)
 
 
 
---------------------update Stats UI ----------------
-task.spawn(function()
-                    --while true do
+--------------------update Stats UI ------------------------
+StatsGuis:UpdateText("NameFrame")
+
+        task.spawn(function()
+
             while task.wait(5) do
 			StatsGuis:UpdateText("TimeFrame")
 			StatsGuis:UpdateText("BucksAndPotionFrame")
                         StatsGuis:UpdateText("TotalFrame")
                         StatsGuis:UpdateText("TotalFrame1")
                         --StatsGuis:UpdateText("TotalFrame2")
-			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
             end
-end)
-
+        end)
+--------------------------------------------------------------
 
 --Misc.DebugModePrint('Loaded. lastest update 2/25/2025  mm/dd/yyyy')
