@@ -1172,7 +1172,7 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
             Elements.Visible = false
             LoadingFrame.Visible = true
 
-            if not Settings.DisableRayfieldPrompts then
+            --[[if not Settings.DisableRayfieldPrompts then
                 task.spawn(function()
                     while true do
                         task.wait(math.random(180, 600))
@@ -1184,7 +1184,7 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
                         })
                     end
                 end)
-            end
+            end --]]
 
             pcall(function()
                 if not Settings.ConfigurationSaving.FileName then
