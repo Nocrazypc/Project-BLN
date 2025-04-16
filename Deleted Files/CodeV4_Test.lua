@@ -7027,13 +7027,13 @@ Check the Developer Console for more information.]],
                     }
 
                     ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args))
-                    task.wait()
+                    task.wait(math.random(0.3, 2))
                 end
 
                 task.wait()
             end
 
-            print('DONE TEAR')
+            --print('DONE TEAR')
 
             return
         end
