@@ -8944,7 +8944,7 @@ local FarmToggle = FarmTab:CreateToggle({
         task.wait(10)
         if v.id ~= Egg2Buy  then
         task.wait(10)
-        getPet(whichPet)
+        getPet()
 		 end
 	       end
 	    end				
