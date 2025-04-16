@@ -8932,16 +8932,20 @@ end)
 
      end,
  })
--------- Potato Mode --------------
+-------- Transition disabler -------------
 local FarmToggle = FarmTab:CreateToggle({
-     Name = "Low Render / Potato Mode",
+     Name = "Transition Disabler",
      CurrentValue = false,
      Flag = "Toggle05",
      Callback = function(Value)
 
-
-     PotatoMode.Start()
-
+pcall(function() 
+    require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
+    require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).sudden_fill = function() return end
+    if Player.PlayerGui:FindFirstChild("TransitionsApp") then
+        Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
+    end
+end)
 
      end,
  })
