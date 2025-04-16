@@ -7123,6 +7123,8 @@ getgenv().debugMode = false
 getgenv().petCurrentlyFarming1 = nil
 getgenv().petCurrentlyFarming2 = nil
 
+getgenv().AutoMinigame = true
+
 local Egg2Buy = getgenv().SETTINGS.PET_TO_BUY
 local PetToggle
 local TradeAllInventory
