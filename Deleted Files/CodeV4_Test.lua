@@ -6845,7 +6845,7 @@ Check the Developer Console for more information.]],
             TextLabel.BorderSizePixel = 0
             TextLabel.Size = UDim2.new(1, 0, 1, 0)
             TextLabel.Font = Enum.Font.SourceSans
-            TextLabel.Text = '\u{1f3e1}'
+            TextLabel.Text = "🌸🌸🌸"
             TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
             TextLabel.TextScaled = true
             TextLabel.TextSize = 14
@@ -6927,7 +6927,7 @@ Check the Developer Console for more information.]],
                 }
 
                 ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args))
-                task.wait(0.1)
+                task.wait(math.random(0.3, 2))
             end
         end
 
