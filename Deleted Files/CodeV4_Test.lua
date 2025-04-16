@@ -7063,6 +7063,26 @@ localPlayer.PlayerGui:WaitForChild('NewsApp', 600)
 
 local StatsGuis = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Stats.lua"))()
 
+------ Welcome MSG -------
+
+StarterGui:SetCore(
+    "SendNotification",
+    {
+        Title = "Hello Potato 😊",
+        Text = "We're Back.. Be Happy!"
+    }
+)
+-----------TransitionsApp Dissabler-----------
+pcall(function() 
+    require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
+    require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).sudden_fill = function() return end
+    if Player.PlayerGui:FindFirstChild("TransitionsApp") then
+        Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
+    end
+end)
+--------------------------------------------
+
+
 local PickColorConn
 local RoleChooserDialogConnection
 local RobuxProductDialogConnection1
