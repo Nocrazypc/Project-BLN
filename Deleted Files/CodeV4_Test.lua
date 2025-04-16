@@ -7720,6 +7720,8 @@ local onTextChangedMiniGame = function()
     if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME and hasStartedFarming and not isMuleInGame() then
         isInMiniGame = true
 
+        task.wait(math.random(1, 3))
+
         findButton('Yes')
     else
         findButton('No')
