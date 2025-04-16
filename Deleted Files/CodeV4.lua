@@ -7133,7 +7133,7 @@ getgenv().AutoFusion = false
 getgenv().FocusFarmAgePotions = false
 getgenv().HatchPriorityEggs = false
 
-getgenv().AutoMinigame = true
+getgenv().AutoMinigame = false
 
 local Egg2Buy = getgenv().SETTINGS.PET_TO_BUY
 local PetToggle
