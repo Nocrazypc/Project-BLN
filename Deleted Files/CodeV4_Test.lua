@@ -9561,4 +9561,21 @@ NewAltTab:CreateButton({
     end,
 })
 Rayfield:SetVisibility(true)
-Misc.DebugModePrint('Loaded. lastest update 2/25/2025  mm/dd/yyyy')
+
+
+
+--------------------update Stats UI ----------------
+task.spawn(function()
+                    --while true do
+            while task.wait(5) do
+			StatsGuis:UpdateText("TimeFrame")
+			StatsGuis:UpdateText("BucksAndPotionFrame")
+                        StatsGuis:UpdateText("TotalFrame")
+                        StatsGuis:UpdateText("TotalFrame1")
+                        --StatsGuis:UpdateText("TotalFrame2")
+			--[[print(`⏱️ Waiting for 5 secs ⏱️`)--]]
+            end
+end)
+
+
+--Misc.DebugModePrint('Loaded. lastest update 2/25/2025  mm/dd/yyyy')
