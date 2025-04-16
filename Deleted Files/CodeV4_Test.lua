@@ -8153,11 +8153,11 @@ localPlayer.PlayerGui.HintApp.TextLabel:GetPropertyChangedSignal('Text'):Connect
             return
         end
 
-        local amount = text:split('+')[2]:split(' ')[1]
+        --local amount = text:split('+')[2]:split(' ')[1]
 
-        bucksGained = bucksGained + tonumber(amount)
+        --bucksGained = bucksGained + tonumber(amount)
 
-        TempBucks:UpdateTextFor('TempBucks', bucksGained)
+        --TempBucks:UpdateTextFor('TempBucks', bucksGained)
     elseif localPlayer.PlayerGui.HintApp.TextLabel.Text:match('aged up!') then
     end
 end)
@@ -9560,5 +9560,5 @@ NewAltTab:CreateButton({
         buyFurniture('basiccrib')
     end,
 })
-Rayfield:SetVisibility(false)
+Rayfield:SetVisibility(true)
 Misc.DebugModePrint('Loaded. lastest update 2/25/2025  mm/dd/yyyy')
