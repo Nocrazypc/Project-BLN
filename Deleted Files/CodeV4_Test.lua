@@ -6091,237 +6091,317 @@ Check the Developer Console for more information.]],
         local Players = game:GetService('Players')
         local ClientData = require(ReplicatedStorage:WaitForChild('ClientModules'):WaitForChild('Core'):WaitForChild('ClientData'))
         local localPlayer = Players.LocalPlayer
-        local StatsGuis2 = {}
+        local StatsGuis = {}
 
-        StatsGuis2.__index = StatsGuis2
+        StatsGuis.__index = StatsGuis
 
-        local formatTime = function(currentTime)
-            local hours = math.floor(currentTime / 3600)
-            local minutes = math.floor((currentTime % 3600) / 60)
-            local seconds = currentTime % 60
+-- Instances:
 
-            if hours >= 10 then
-                game:Shutdown()
-            end
+local StatsGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local NameFrame = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+local UICorner = Instance.new("UICorner")
+local UIListLayout = Instance.new("UIListLayout")
+local TimeFrame = Instance.new("Frame")
+local TextLabel_2 = Instance.new("TextLabel")
+local UICorner_2 = Instance.new("UICorner")
+local BucksAndPotionFrame = Instance.new("Frame")
+local TextLabel_3 = Instance.new("TextLabel")
+local UICorner_3 = Instance.new("UICorner")
+local TotalFrame = Instance.new("Frame")
+local TextLabel_4 = Instance.new("TextLabel")
+local UICorner_4 = Instance.new("UICorner")
+local TotalFrame1 = Instance.new("Frame")
+local TextLabel_5 = Instance.new("TextLabel")
+local UICorner_5 = Instance.new("UICorner")
+-----Gingerbread slot-----
+--local TotalFrame2 = Instance.new("Frame")
+--local TextLabel_6 = Instance.new("TextLabel")
+--local UICorner_6 = Instance.new("UICorner")
+-------------------------
 
-            return string.format('%02d:%02d:%02d', hours, minutes, seconds)
+
+local startCount = 0
+local startBucksAmount = 0
+--local startgingerbreadAmount = 0
+local startTime = nil
+
+
+--Properties:
+
+StatsGui.Name = "StatsGui"
+StatsGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+StatsGui.ResetOnSpawn = false
+StatsGui.Parent = localPlayer:WaitForChild("PlayerGui")
+
+MainFrame.Name = "MainFrame"
+MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+MainFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+MainFrame.BackgroundTransparency = 1.000
+MainFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+MainFrame.BorderSizePixel = 0
+MainFrame.Position = UDim2.new(0.777189096, 0, 0.403002731, 0) 
+--MainFrame.Position = UDim2.new(0.777189096, 0, 0.363002731, 0)
+MainFrame.Size = UDim2.new(0.200000012, 0, 0.300000006, 0)
+MainFrame.Parent = StatsGui
+
+NameFrame.Name = "NameFrame"
+NameFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+NameFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+NameFrame.BackgroundTransparency = 1.000
+NameFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+NameFrame.BorderSizePixel = 0
+NameFrame.Position = UDim2.new(0.5, 0, 0.119999997, 0)
+NameFrame.Size = UDim2.new(1, 0, 0.25, 0)
+NameFrame.Parent = MainFrame
+
+TextLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+TextLabel.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+TextLabel.BackgroundTransparency = 0.500
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0.498873174, 0, 0.496309608, 0)
+TextLabel.Size = UDim2.new(0.996291697, 0, 0.97639972, 0)
+TextLabel.Font = Enum.Font.FredokaOne
+TextLabel.Text = "Name"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
+TextLabel.Parent = NameFrame
+
+UICorner.CornerRadius = UDim.new(0, 12)
+UICorner.Parent = TextLabel
+
+UIListLayout.Parent = MainFrame
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.Padding = UDim.new(0, 6)
+
+TimeFrame.Name = "TimeFrame"
+TimeFrame.Parent = MainFrame
+TimeFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+TimeFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TimeFrame.BackgroundTransparency = 1.000
+TimeFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TimeFrame.BorderSizePixel = 0
+TimeFrame.Position = UDim2.new(0.5, 0, 0.119999997, 0)
+TimeFrame.Size = UDim2.new(1, 0, 0.25, 0)
+
+TextLabel_2.Parent = TimeFrame
+TextLabel_2.AnchorPoint = Vector2.new(0.5, 0.5)
+TextLabel_2.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+TextLabel_2.BackgroundTransparency = 0.500
+TextLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_2.BorderSizePixel = 0
+TextLabel_2.Position = UDim2.new(0.498873174, 0, 0.496309608, 0)
+TextLabel_2.Size = UDim2.new(0.996291697, 0, 0.97639972, 0)
+TextLabel_2.Font = Enum.Font.FredokaOne
+TextLabel_2.Text = "Name"
+TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.TextScaled = true
+TextLabel_2.TextSize = 14.000
+TextLabel_2.TextWrapped = true
+
+UICorner_2.CornerRadius = UDim.new(0, 12)
+UICorner_2.Parent = TextLabel_2
+
+BucksAndPotionFrame.Name = "BucksAndPotionFrame"
+BucksAndPotionFrame.Parent = MainFrame
+BucksAndPotionFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+BucksAndPotionFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+BucksAndPotionFrame.BackgroundTransparency = 1.000
+BucksAndPotionFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+BucksAndPotionFrame.BorderSizePixel = 0
+BucksAndPotionFrame.Position = UDim2.new(0.5, 0, 0.119999997, 0)
+BucksAndPotionFrame.Size = UDim2.new(1, 0, 0.25, 0)
+
+TextLabel_4.Parent = BucksAndPotionFrame
+TextLabel_4.AnchorPoint = Vector2.new(0.5, 0.5)
+TextLabel_4.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+TextLabel_4.BackgroundTransparency = 0.500
+TextLabel_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_4.BorderSizePixel = 0
+TextLabel_4.Position = UDim2.new(0.498873174, 0, 0.496309608, 0)
+TextLabel_4.Size = UDim2.new(0.996291697, 0, 0.97639972, 0)
+TextLabel_4.Font = Enum.Font.FredokaOne
+TextLabel_4.Text = "Name"
+TextLabel_4.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_4.TextScaled = true
+TextLabel_4.TextSize = 14.000
+TextLabel_4.TextWrapped = true
+
+UICorner_4.CornerRadius = UDim.new(0, 12)
+UICorner_4.Parent = TextLabel_4
+
+
+TotalFrame.Name = "TotalFrame"
+TotalFrame.Parent = MainFrame
+TotalFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+TotalFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TotalFrame.BackgroundTransparency = 1.000
+TotalFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TotalFrame.BorderSizePixel = 0
+TotalFrame.Position = UDim2.new(0.5, 0, 0.119999997, 0)
+TotalFrame.Size = UDim2.new(1, 0, 0.25, 0)
+
+TextLabel_3.Parent = TotalFrame
+TextLabel_3.AnchorPoint = Vector2.new(0.5, 0.5)
+TextLabel_3.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+TextLabel_3.BackgroundTransparency = 0.500
+TextLabel_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_3.BorderSizePixel = 0
+TextLabel_3.Position = UDim2.new(0.498873174, 0, 0.496309608, 0)
+TextLabel_3.Size = UDim2.new(0.996291697, 0, 0.97639972, 0)
+TextLabel_3.Font = Enum.Font.FredokaOne
+TextLabel_3.Text = "Name"
+TextLabel_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_3.TextScaled = true
+TextLabel_3.TextSize = 14.000
+TextLabel_3.TextWrapped = true
+
+UICorner_3.CornerRadius = UDim.new(0, 12)
+UICorner_3.Parent = TextLabel_3
+
+TotalFrame1.Name = "TotalFrame1"
+TotalFrame1.Parent = MainFrame
+TotalFrame1.AnchorPoint = Vector2.new(0.5, 0.5)
+TotalFrame1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TotalFrame1.BackgroundTransparency = 1.000
+TotalFrame1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TotalFrame1.BorderSizePixel = 0
+TotalFrame1.Position = UDim2.new(0.5, 0, 0.119999997, 0)
+TotalFrame1.Size = UDim2.new(1, 0, 0.25, 0)
+
+TextLabel_5.Parent = TotalFrame1
+TextLabel_5.AnchorPoint = Vector2.new(0.5, 0.5)
+TextLabel_5.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+TextLabel_5.BackgroundTransparency = 0.500
+TextLabel_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_5.BorderSizePixel = 0
+TextLabel_5.Position = UDim2.new(0.498873174, 0, 0.496309608, 0)
+TextLabel_5.Size = UDim2.new(0.996291697, 0, 0.97639972, 0)
+TextLabel_5.Font = Enum.Font.FredokaOne
+TextLabel_5.Text = "Name"
+TextLabel_5.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_5.TextScaled = true
+TextLabel_5.TextSize = 14.000
+TextLabel_5.TextWrapped = true
+
+UICorner_5.CornerRadius = UDim.new(0, 12)
+UICorner_5.Parent = TextLabel_5
+
+------ Gingerbread ---------
+
+--[[TotalFrame2.Name = "TotalFrame2"
+TotalFrame2.Parent = MainFrame
+TotalFrame2.AnchorPoint = Vector2.new(0.5, 0.5)
+TotalFrame2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TotalFrame2.BackgroundTransparency = 1.000
+TotalFrame2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TotalFrame2.BorderSizePixel = 0
+TotalFrame2.Position = UDim2.new(0.5, 0, 0.119999997, 0)
+TotalFrame2.Size = UDim2.new(1, 0, 0.25, 0)
+
+TextLabel_6.Parent = TotalFrame2
+TextLabel_6.AnchorPoint = Vector2.new(0.5, 0.5)
+TextLabel_6.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+TextLabel_6.BackgroundTransparency = 0.500
+TextLabel_6.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_6.BorderSizePixel = 0
+TextLabel_6.Position = UDim2.new(0.498873174, 0, 0.496309608, 0)
+TextLabel_6.Size = UDim2.new(0.996291697, 0, 0.97639972, 0)
+TextLabel_6.Font = Enum.Font.FredokaOne
+TextLabel_6.Text = "Name"
+TextLabel_6.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_6.TextScaled = true
+TextLabel_6.TextSize = 14.000
+TextLabel_6.TextWrapped = true
+
+UICorner_6.CornerRadius = UDim.new(0, 12)
+UICorner_6.Parent = TextLabel_6--]]
+
+----------------------------
+
+local function formatTime(currentTime)
+	local hours = math.floor(currentTime / 3600)
+	local minutes = math.floor((currentTime % 3600) / 60)
+	return string.format("%02d:%02d", hours, minutes)
+end
+
+local function formatNumber(num)
+        if num >= 1e6 then
+                -- Millions
+                return string.format("%.1fM", num / 1e6)
+        elseif num >= 1e3 then
+                -- Thousands
+                return string.format("%.0fk", num / 1e3)
+        else
+                -- Less than a thousand
+                return tostring(num)
         end
-        local formatNumber = function(num)
-            if num >= 1e6 then
-                return string.format('%.2fM', num / 1e6)
-            elseif num >= 1e3 then
-                return string.format('%.1fK', num / 1e3)
-            else
-                return string.format('%.0f', num)
-            end
+end
+
+local function bucksAmount()
+    return ClientData.get_data()[localPlayer.Name].money or 0
+end
+
+----- gingerbread------
+
+--[[local function gingerbreadAmount()
+    return ClientData.get_data()[localPlayer.Name].gingerbread_2024 or 0
+end--]]
+
+-----------------------
+
+local function agePotionCount()
+    local count = 0
+    for _, v in ClientData.get_data()[localPlayer.Name].inventory.food do
+        if v.id == "pet_age_potion" then
+            count += 1
         end
-        local bucksAmount = function()
-            return ClientData.get_data()[localPlayer.Name].money or 0
-        end
-        local eventCurrencyAmount = function()
-            return ClientData.get_data()[localPlayer.Name].cherry_blossoms_2025 or 0
-        end
-        local foodItemCount = function(nameId)
-            local count = 0
+    end
+    return count
+end
 
-            for _, v in ClientData.get_data()[localPlayer.Name].inventory.food do
-                if v.id == nameId then
-                    count = count + 1
-                end
-            end
 
-            return count
-        end
+startCount = agePotionCount()
+startBucksAmount = bucksAmount()
+--startgingerbreadAmount = gingerbreadAmount()
+startTime = DateTime.now().UnixTimestamp
 
-        function StatsGuis2.new(name)
-            local self = setmetatable({}, StatsGuis2)
+function StatsGuis:UpdateText(nameOfFrame: string)
+    local MainFrame = localPlayer.PlayerGui.StatsGui.MainFrame
 
-            self.label = Instance.new('TextLabel')
-            self.UICorner = Instance.new('UICorner')
-            self.label.Name = name
-            self.label.BackgroundColor3 = Color3.fromRGB(250, 129, 47)
-            self.label.BackgroundTransparency = 0.25
-            self.label.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            self.label.BorderSizePixel = 0
-            self.label.Size = UDim2.new(0.330000013, 0, 0.486617982, 0)
-            self.label.Font = Enum.Font.FredokaOne
-            self.label.RichText = false
-            self.label.Text = ''
-            self.label.TextColor3 = Color3.fromRGB(255, 255, 255)
-            self.label.TextScaled = true
-            self.label.TextSize = 14
-            self.label.TextStrokeTransparency = 0
-            self.label.TextWrapped = true
-            self.label.Parent = Players.LocalPlayer.PlayerGui.StatsGui.MainFrame.MiddleFrame
-            self.UICorner.CornerRadius = UDim.new(0, 16)
-            self.UICorner.Parent = self.label
-            self.Debounce = false
+    if nameOfFrame == "TimeFrame" then
+        local currentTime = DateTime.now().UnixTimestamp
+        local timeElapsed = currentTime - startTime
+        MainFrame.TimeFrame.TextLabel.Text = `🕒 {formatTime(timeElapsed)}`
+    elseif nameOfFrame == "BucksAndPotionFrame" then
+        local potionCount = agePotionCount() - startCount
+        local bucks = bucksAmount() - startBucksAmount
+        --local gingerbread = gingerbreadAmount() - startgingerbreadAmount
+        if potionCount <= 0 then potionCount = 0 end
+        if bucks <= 0 then bucks = 0 end
+        --if gingerbread <= 0 then gingerbread = 0 end
+        MainFrame.BucksAndPotionFrame.TextLabel.Text = `🧪 {formatNumber(potionCount)} 💰 {formatNumber(bucks)}`
+    elseif nameOfFrame == "TotalFrame" then
+        local potionCount = agePotionCount()
+        MainFrame.TotalFrame.TextLabel.Text = `Total 🧪 {formatNumber(potionCount)}`
+    elseif nameOfFrame == "TotalFrame1" then
+        local bucks = bucksAmount()
+        MainFrame.TotalFrame1.TextLabel.Text = `Total 💰 {formatNumber(bucks)}`
+--- Gingerbread-----
+    --elseif nameOfFrame == "TotalFrame2" then
+        --local gingerbread = gingerbreadAmount()
+        --MainFrame.TotalFrame2.TextLabel.Text = `Total 🍪 {formatNumber(gingerbread)}`
+--------------------
+    elseif nameOfFrame == "NameFrame" then
+        MainFrame.NameFrame.TextLabel.Text = `😎 {localPlayer.Name}`
+    end
+end
 
-            return self
-        end
-        function StatsGuis2.Setup()
-            local StatsGui = Instance.new('ScreenGui')
-            local MainFrame = Instance.new('Frame')
-            local TimeLabel = Instance.new('TextLabel')
-            local UICorner = Instance.new('UICorner')
-            local MiddleFrame = Instance.new('Frame')
-            local UIGridLayout = Instance.new('UIGridLayout')
-            local TextButton = Instance.new('TextButton')
-
-            StatsGui.Name = 'StatsGui'
-            StatsGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-            StatsGui.Parent = Players.LocalPlayer:WaitForChild('PlayerGui')
-            MainFrame.Name = 'MainFrame'
-            MainFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            MainFrame.BackgroundTransparency = 1
-            MainFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            MainFrame.BorderSizePixel = 0
-            MainFrame.Position = UDim2.new(0.276041657, 0, 0.0577475652, 0)
-            MainFrame.Size = UDim2.new(0.674468458, 0, 0.795313776, 0)
-            MainFrame.Parent = StatsGui
-            TimeLabel.Name = 'TimeLabel'
-            TimeLabel.BackgroundColor3 = Color3.fromRGB(250, 129, 47)
-            TimeLabel.BackgroundTransparency = 0.25
-            TimeLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            TimeLabel.BorderSizePixel = 0
-            TimeLabel.Size = UDim2.new(1, 0, 0.200000018, 0)
-            TimeLabel.Font = Enum.Font.FredokaOne
-            TimeLabel.RichText = false
-            TimeLabel.Text = '\u{23f1}\u{fe0f} time'
-            TimeLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-            TimeLabel.TextScaled = true
-            TimeLabel.TextSize = 14
-            TimeLabel.TextStrokeTransparency = 0
-            TimeLabel.TextWrapped = true
-            TimeLabel.Parent = MainFrame
-            UICorner.CornerRadius = UDim.new(0, 16)
-            UICorner.Parent = TimeLabel
-            MiddleFrame.Name = 'MiddleFrame'
-            MiddleFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            MiddleFrame.BackgroundTransparency = 1
-            MiddleFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            MiddleFrame.BorderSizePixel = 0
-            MiddleFrame.Position = UDim2.new(0, 0, 0.219711155, 0)
-            MiddleFrame.Size = UDim2.new(0.999243617, 0, 0.55549103, 0)
-            MiddleFrame.Parent = MainFrame
-            UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
-            UIGridLayout.CellPadding = UDim2.new(0.00999999978, 0, 0.00999999978, 0)
-            UIGridLayout.CellSize = UDim2.new(0.242, 0, 0.5, 0)
-            UIGridLayout.FillDirectionMaxCells = 0
-            UIGridLayout.Parent = MiddleFrame
-            TextButton.AnchorPoint = Vector2.new(0.5, 0.5)
-            TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            TextButton.BackgroundTransparency = 1
-            TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            TextButton.BorderSizePixel = 0
-            TextButton.Position = UDim2.new(0.33, 0, 0.018, 0)
-            TextButton.Size = UDim2.new(0.1, 0, 0.1, 0)
-            TextButton.Font = Enum.Font.FredokaOne
-            TextButton.Text = '\u{1f648}'
-            TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-            TextButton.TextScaled = true
-            TextButton.TextSize = 14
-            TextButton.TextWrapped = true
-            TextButton.TextXAlignment = Enum.TextXAlignment.Left
-            TextButton.Parent = StatsGui
-
-            local TIME_SAVED = nil
-
-            TimeLabel.MouseEnter:Connect(function()
-                TIME_SAVED = TimeLabel.Text
-                TimeLabel.Text = string.format('\u{1f916} %s', tostring(localPlayer.Name))
-            end)
-            TimeLabel.MouseLeave:Connect(function()
-                TimeLabel.Text = TIME_SAVED
-            end)
-
-            local isVisible = true
-
-            TextButton.Activated:Connect(function()
-                isVisible = not isVisible
-                MainFrame.Visible = isVisible
-            end)
-        end
-        function StatsGuis2:CopyInventoryButton(CopyInventorySettings)
-            local CopyInventoryButton = Instance.new('TextButton')
-
-            CopyInventoryButton.AnchorPoint = Vector2.new(0.5, 0.5)
-            CopyInventoryButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            CopyInventoryButton.BackgroundTransparency = 1
-            CopyInventoryButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            CopyInventoryButton.BorderSizePixel = 0
-            CopyInventoryButton.Position = UDim2.new(0.68, 0, 0.88, 0)
-            CopyInventoryButton.Size = UDim2.new(0.2, 0, 0.2, 0)
-            CopyInventoryButton.Font = Enum.Font.FredokaOne
-            CopyInventoryButton.Text = '\u{1f4cb}'
-            CopyInventoryButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-            CopyInventoryButton.TextScaled = true
-            CopyInventoryButton.TextSize = 14
-            CopyInventoryButton.TextWrapped = true
-            CopyInventoryButton.TextXAlignment = Enum.TextXAlignment.Left
-            CopyInventoryButton.Parent = Players.LocalPlayer:WaitForChild('PlayerGui'):WaitForChild('StatsGui')
-
-            CopyInventoryButton.Activated:Connect(function()
-                if self.Debounce then
-                    print('\u{1f6ab} button is on cooldown \u{1f6ab}')
-
-                    return
-                end
-
-                self.Debounce = true
-
-                CopyInventorySettings.callback()
-
-                CopyInventoryButton.Text = '\u{2705}'
-
-                task.wait(1)
-
-                CopyInventoryButton.Text = '\u{1f4cb}'
-                self.Debounce = false
-            end)
-        end
-        function StatsGuis2:UpdateTextFor(labelName, amount)
-            if labelName == 'TimeLabel' then
-                local currentTime = DateTime.now().UnixTimestamp
-                local timeElapsed = currentTime - amount
-
-                Players.LocalPlayer.PlayerGui.StatsGui.MainFrame.TimeLabel.Text = string.format('\u{23f1}\u{fe0f} %s', tostring(formatTime(timeElapsed)))
-            elseif labelName == 'TempPotions' then
-                self.label.Text = string.format('\u{1f9ea} %s', tostring(formatNumber(amount)))
-            elseif labelName == 'TempTinyPotions' then
-                self.label.Text = string.format('\u{2697}\u{fe0f} %s', tostring(formatNumber(amount)))
-            elseif labelName == 'TempBucks' then
-                self.label.Text = string.format('\u{1f4b0} %s', tostring(formatNumber(amount)))
-            elseif labelName == 'TempEventCurrency' then
-                self.label.Text = string.format('\u{1f338} %s', tostring(formatNumber(amount)))
-            elseif labelName == 'TotalPotions' then
-                local formatted = formatNumber(foodItemCount('pet_age_potion'))
-
-                self.label.Text = string.format('\u{1f9ea} %s', tostring(formatted))
-            elseif labelName == 'TotalTinyPotions' then
-                local formatted = formatNumber(foodItemCount('tiny_pet_age_potion'))
-
-                self.label.Text = string.format('\u{2697}\u{fe0f} %s', tostring(formatted))
-            elseif labelName == 'TotalBucks' then
-                local formatted = formatNumber(bucksAmount())
-
-                self.label.Text = string.format('\u{1f4b0} %s', tostring(formatted))
-            elseif labelName == 'TotalEventCurrency' then
-                local formatted = formatNumber(eventCurrencyAmount())
-
-                self.label.Text = string.format('\u{1f338} %s', tostring(formatted))
-            elseif labelName == 'TotalShiverBaits' then
-                local formatted = formatNumber(foodItemCount('ice_dimension_2025_shiver_cone_bait'))
-
-                self.label.Text = string.format('\u{1f43a} %s', tostring(formatted))
-            elseif labelName == 'TotalSubzeroBaits' then
-                local formatted = formatNumber(foodItemCount('ice_dimension_2025_subzero_popsicle_bait'))
-
-                self.label.Text = string.format('\u{1f982} %s', tostring(formatted))
-            end
-        end
-
-        return StatsGuis2
+return StatsGui2
     end
     function __DARKLUA_BUNDLE_MODULES.k()
         local ReplicatedStorage = game:GetService('ReplicatedStorage')
@@ -7420,7 +7500,7 @@ local Trade = __DARKLUA_BUNDLE_MODULES.load('f')
 local Teleport = __DARKLUA_BUNDLE_MODULES.load('g')
 local BuyItems = __DARKLUA_BUNDLE_MODULES.load('h')
 local Ailments = __DARKLUA_BUNDLE_MODULES.load('i')
-local StatsGuis2 = __DARKLUA_BUNDLE_MODULES.load('j')
+local StatsGuis = __DARKLUA_BUNDLE_MODULES.load('j')
 local Clipboard = __DARKLUA_BUNDLE_MODULES.load('k')
 local TradeLicense = __DARKLUA_BUNDLE_MODULES.load('l')
 local BulkPotions = __DARKLUA_BUNDLE_MODULES.load('m')
@@ -7430,20 +7510,17 @@ local Spring2025 = __DARKLUA_BUNDLE_MODULES.load('p')
 local clipboard = Clipboard.new()
 local taskBoard = TaskBoard.new()
 
-StatsGuis2.Setup()
+-------StatsGuisConfig-------
 
-local TempPotions = StatsGuis2.new('TempPotions')
-local TempTinyPotions = StatsGuis2.new('TempTinyPotions')
-local TempBucks = StatsGuis2.new('TempBucks')
-local TempEventCurrency = StatsGuis2.new('TempEventCurrency')
-local TotalPotions = StatsGuis2.new('TotalPotions')
-local TotalTinyPotions = StatsGuis2.new('TotalTinyPotions')
-local TotalBucks = StatsGuis2.new('TotalBucks')
-local TotalEventCurrency = StatsGuis2.new('TotalEventCurrency')
-local BlankSlot1 = StatsGuis2.new('BlankSlot1')
-local BlankSlot2 = StatsGuis2.new('BlankSlot1')
-local TotalShiverBaits = StatsGuis2.new('TotalShiverBaits')
-local TotalSubzeroBaits = StatsGuis2.new('TotalSubzeroBaits')
+StatsGuis:UpdateText("NameFrame")
+StatsGuis:UpdateText("TimeFrame")
+StatsGuis:UpdateText("BucksAndPotionFrame")
+StatsGuis:UpdateText("TotalFrame")
+StatsGuis:UpdateText("TotalFrame1")
+--StatsGuis:UpdateText("TotalFrame2")
+
+---------------------------
+
 local petsTable = GetInventory:TabId('pets')
 
 if #petsTable == 0 then
@@ -7679,43 +7756,7 @@ end
 local eventCurrencyAmount = function()
     return ClientData.get_data()[localPlayer.Name].cherry_blossoms_2025 or 0
 end
-local updateStatsGui = function()
-    StatsGuis2:UpdateTextFor('TimeLabel', startTime)
 
-    potionsGained = agePotionCount('pet_age_potion') - startPotionAmount
-
-    if potionsGained < 0 then
-        potionsGained = 0
-    end
-
-    TempPotions:UpdateTextFor('TempPotions', potionsGained)
-
-    tinyPotionsGained = agePotionCount('tiny_pet_age_potion') - startTinyPotionAmount
-
-    if tinyPotionsGained < 0 then
-        tinyPotionsGained = 0
-    end
-
-    TempTinyPotions:UpdateTextFor('TempTinyPotions', tinyPotionsGained)
-
-    local currentEventCurrency = eventCurrencyAmount()
-
-    if currentEventCurrency >= startEventCurrencyAmount then
-        eventCurrencyGained = eventCurrencyGained + (currentEventCurrency - startEventCurrencyAmount)
-        startEventCurrencyAmount = currentEventCurrency
-    elseif currentEventCurrency < startEventCurrencyAmount then
-        startEventCurrencyAmount = currentEventCurrency
-    end
-
-    TempEventCurrency:UpdateTextFor('TempEventCurrency', eventCurrencyGained)
-    TotalEventCurrency:UpdateTextFor('TotalEventCurrency')
-    TotalPotions:UpdateTextFor('TotalPotions')
-    TotalBucks:UpdateTextFor('TotalBucks')
-    BlankSlot1:UpdateTextFor('BlankSlot1')
-    BlankSlot2:UpdateTextFor('BlankSlot2')
-    TotalShiverBaits:UpdateTextFor('TotalShiverBaits')
-    TotalSubzeroBaits:UpdateTextFor('TotalSubzeroBaits')
-end
 local findBait = function()
     local baits = getgenv().SETTINGS.BAIT_TO_USE_IN_ORDER
 
@@ -8774,7 +8815,7 @@ PotatoMode.Start()
 StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Captures, false)
 
 UserGameSettings.GraphicsQualityLevel = 1
-UserGameSettings.MasterVolume = 0
+UserGameSettings.MasterVolume = 8
 
 for i, v in debug.getupvalue(RouterClient.init, 7)do
     v.Name = i
@@ -8782,11 +8823,11 @@ end
 
 setfpscap(getgenv().SETTINGS.SET_FPS)
 Misc.DebugModePrint(string.format('SET FPS TO %s', tostring(getgenv().SETTINGS.SET_FPS)))
-StatsGuis2:CopyInventoryButton({
+--[[StatsGuis:CopyInventoryButton({
     callback = function()
         clipboard:CopyAllInventory()
     end,
-})
+})--]]
 
 if localPlayer.PlayerGui.NewsApp.Enabled then
     Misc.DebugModePrint('NEWSAPP ENABLED')
@@ -8842,19 +8883,6 @@ startPotionAmount = agePotionCount('pet_age_potion')
 startTinyPotionAmount = agePotionCount('tiny_pet_age_potion')
 startEventCurrencyAmount = eventCurrencyAmount()
 
-StatsGuis2:UpdateTextFor('TimeLabel', startTime)
-TempPotions:UpdateTextFor('TempPotions', potionsGained)
-TempTinyPotions:UpdateTextFor('TempTinyPotions', tinyPotionsGained)
-TempBucks:UpdateTextFor('TempBucks', bucksGained)
-TempEventCurrency:UpdateTextFor('TempEventCurrency', eventCurrencyGained)
-TotalEventCurrency:UpdateTextFor('TotalEventCurrency')
-TotalPotions:UpdateTextFor('TotalPotions')
-TotalTinyPotions:UpdateTextFor('TotalTinyPotions')
-TotalBucks:UpdateTextFor('TotalBucks')
-BlankSlot1:UpdateTextFor('BlankSlot1')
-BlankSlot2:UpdateTextFor('BlankSlot2')
-TotalShiverBaits:UpdateTextFor('TotalShiverBaits')
-TotalSubzeroBaits:UpdateTextFor('TotalSubzeroBaits')
 findFurniture()
 
 if not Bed then
@@ -9770,5 +9798,17 @@ NewAltTab:CreateButton({
         buyFurniture('basiccrib')
     end,
 })
-Rayfield:SetVisibility(false)
+Rayfield:SetVisibility(true)
+
+--------------------update Stats GUI ----------------
+
+            while task.wait(5) do
+			StatsGuis:UpdateText("TimeFrame")
+			StatsGuis:UpdateText("BucksAndPotionFrame")
+                        StatsGuis:UpdateText("TotalFrame")
+                        StatsGuis:UpdateText("TotalFrame1")
+                        --StatsGuis:UpdateText("TotalFrame2")
+            end
+------------------------------------------------------
+
 Misc.DebugModePrint('Loaded. lastest update 2/25/2025  mm/dd/yyyy')
