@@ -7123,6 +7123,10 @@ getgenv().debugMode = false
 getgenv().petCurrentlyFarming1 = nil
 getgenv().petCurrentlyFarming2 = nil
 
+getgenv().AutoFusion = false
+getgenv().FocusFarmAgePotions = false
+getgenv().HatchPriorityEggs = false
+
 getgenv().AutoMinigame = true
 
 local Egg2Buy = getgenv().SETTINGS.PET_TO_BUY
