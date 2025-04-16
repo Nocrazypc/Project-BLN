@@ -8925,7 +8925,7 @@ end)
  })
 -------- Transition disabler -------------
 local FarmToggle = FarmTab:CreateToggle({
-     Name = "Transition Disabler",
+     Name = "Transitions Disabler",
      CurrentValue = false,
      Flag = "Toggle05",
      Callback = function(Value)
