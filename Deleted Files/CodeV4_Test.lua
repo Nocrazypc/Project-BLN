@@ -8178,7 +8178,7 @@ Workspace.StaticMap.blossom_shakedown_minigame_state.is_game_active:GetPropertyC
 
         return
     end
-    if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME and hasStartedFarming and not isMuleInGame() then
+    if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame and hasStartedFarming and not isMuleInGame() then
         isInMiniGame = true
 
         Misc.DebugModePrint(string.format('game ACTIVE setting isInMinigame to %s', tostring(isInMiniGame)))
@@ -8196,7 +8196,7 @@ Workspace.StaticMap.tear_up_toykyo_minigame_state.is_game_active:GetPropertyChan
 
         return
     end
-    if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME and hasStartedFarming and not isMuleInGame() then
+    if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame and hasStartedFarming and not isMuleInGame() then
         isInMiniGame = true
 
         Misc.DebugModePrint(string.format('game ACTIVE setting isInMinigame to %s', tostring(isInMiniGame)))
