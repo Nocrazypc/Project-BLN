@@ -7995,7 +7995,7 @@ local autoFarm = function()
                 end
             end
 
-            updateStatsGui()
+            -- updateStatsGui()
             Misc.DebugModePrint('\u{23f1}\u{fe0f} Waiting for 5 secs \u{23f1}\u{fe0f}')
 
             baitboxCount = baitboxCount + 2
