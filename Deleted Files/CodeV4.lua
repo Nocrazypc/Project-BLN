@@ -7722,7 +7722,7 @@ local removeGameOverButton = function(ScreenGuiName)
     end
 end
 local teleportToFarmSpotOrBlossomSpot = function()
-    if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame then
+    if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame or getgenv().AutoMinigame2 then
         Teleport.DownloadMainMap()
         Spring2025.Teleport()
     else
@@ -8203,7 +8203,7 @@ Workspace.StaticMap.tear_up_toykyo_minigame_state.is_game_active:GetPropertyChan
 
         return
     end
-    if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame and hasStartedFarming and not isMuleInGame() then
+    if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame2 and hasStartedFarming and not isMuleInGame() then
         isInMiniGame = true
 
         Misc.DebugModePrint(string.format('game ACTIVE setting isInMinigame to %s', tostring(isInMiniGame)))
