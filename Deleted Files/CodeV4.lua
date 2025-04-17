@@ -8473,9 +8473,9 @@ localPlayer.PlayerGui.DialogApp.Dialog.ChildAdded:Connect(function(
                 NormalDialogChild.Info:WaitForChild('TextLabel')
                 NormalDialogChild.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
                 )
-                    if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Sakura Swoop') then
+                    if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Sakura Swoop') and getgenv().AutoMinigame then
                         onTextChangedMiniGame()
-                    elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Tear Up Toykyo') then
+                    elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Tear Up Toykyo') and getgenv().AutoMinigame2 then
                         onTextChangedMiniGame()
                     elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
                         game:Shutdown()
