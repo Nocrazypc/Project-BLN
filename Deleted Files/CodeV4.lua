@@ -8946,12 +8946,23 @@ end)
 FarmTab:CreateSection("Events & Minigames")
 --------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
-     Name = "Cherry Blossom Minigames",
+     Name = "Sakura Swoop Minigame",
      CurrentValue = false,
      Flag = "Toggle10",
      Callback = function(Value)
 
      getgenv().AutoMinigame = Value
+
+     end,
+ }) 
+
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Tear Up Toykyo Minigame",
+     CurrentValue = false,
+     Flag = "Toggle11",
+     Callback = function(Value)
+
+     getgenv().AutoMinigame2 = Value
 
      end,
  }) 
