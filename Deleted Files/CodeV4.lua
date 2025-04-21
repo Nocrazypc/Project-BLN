@@ -8894,13 +8894,13 @@ local FarmToggle = FarmTab:CreateToggle({
      Callback = function(Value)
 
          getgenv().FocusFarmAgePotions = Value
-         getPet(1)
+        -- getPet(1)
 
-         task.wait(2)
+         -- task.wait(2)
 
-         if isProHandler then
-         getPet(2)
-         end
+         -- if isProHandler then
+        -- getPet(2)
+        -- end
      end,
  })
 -------------------------------------------
