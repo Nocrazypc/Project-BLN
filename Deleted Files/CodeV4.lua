@@ -7523,8 +7523,8 @@ local findBait = function()
 
     if not baits then
         baits = {
-            'ice_dimension_2025_shiver_cone_bait',
-            'ice_dimension_2025_subzero_popsicle_bait',
+           -- 'ice_dimension_2025_shiver_cone_bait',
+           -- 'ice_dimension_2025_subzero_popsicle_bait',
             'ice_dimension_2025_ice_soup_bait',
         }
     end
