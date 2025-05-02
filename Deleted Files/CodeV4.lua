@@ -8501,7 +8501,7 @@ localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog:GetPropertyChangedSignal('Vi
         end)
     end
 end)
-localPlayer.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
+--[[ localPlayer.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
 )
     if localPlayer.PlayerGui.MinigameRewardsApp.Body.Visible then
         localPlayer.PlayerGui.MinigameRewardsApp.Body:WaitForChild('Button')
@@ -8518,12 +8518,12 @@ localPlayer.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal('Visible'
 
             isInMiniGame = false
 
-            --Teleport.DownloadMainMap()
-            --Spring2025.Teleport()
+            Teleport.DownloadMainMap()
+            Spring2025.Teleport()
         end
     end
-end)
-localPlayer.PlayerGui.MinigameNewsPaperApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
+end) --]]
+--[[localPlayer.PlayerGui.MinigameNewsPaperApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
 )
     if localPlayer.PlayerGui.MinigameNewsPaperApp.Body.Visible then
         localPlayer.PlayerGui.MinigameNewsPaperApp.Body:WaitForChild('Button')
@@ -8538,13 +8538,13 @@ localPlayer.PlayerGui.MinigameNewsPaperApp.Body:GetPropertyChangedSignal('Visibl
 
             isInMiniGame = false
 
-            --Teleport.DownloadMainMap()
-            --Spring2025.Teleport()
+            Teleport.DownloadMainMap()
+            Spring2025.Teleport()
         end
     end
-end)
+end) --]]
 
-localPlayer.PlayerGui.BattlePassApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
+--[[ localPlayer.PlayerGui.BattlePassApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
 )
     if localPlayer.PlayerGui.BattlePassApp.Body.Visible then
         localPlayer.PlayerGui.BattlePassApp.Body:WaitForChild('InnerBody')
@@ -8561,7 +8561,7 @@ localPlayer.PlayerGui.BattlePassApp.Body:GetPropertyChangedSignal('Visible'):Con
             end
         end
     end
-end)
+end)--]]
 localPlayer.Idled:Connect(function()
     VirtualUser:ClickButton2(Vector2.new())
 end)
