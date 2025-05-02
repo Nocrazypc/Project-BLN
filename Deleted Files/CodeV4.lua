@@ -8170,15 +8170,10 @@ localPlayer.PlayerGui.HintApp.TextLabel:GetPropertyChangedSignal('Text'):Connect
             return
         end
 
-        --local amount = text:split('+')[2]:split(' ')[1]
-
-        --bucksGained = bucksGained + tonumber(amount)
-
-        --TempBucks:UpdateTextFor('TempBucks', bucksGained)
     elseif localPlayer.PlayerGui.HintApp.TextLabel.Text:match('aged up!') then
     end
 end)
-Workspace.StaticMap.blossom_shakedown_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function(
+--[[Workspace.StaticMap.blossom_shakedown_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function(
 )
     if not Workspace.StaticMap.blossom_shakedown_minigame_state.is_game_active.Value then
         isInMiniGame = false
@@ -8210,7 +8205,7 @@ Workspace.StaticMap.tear_up_toykyo_minigame_state.is_game_active:GetPropertyChan
 
         Misc.DebugModePrint(string.format('game ACTIVE setting isInMinigame to %s', tostring(isInMiniGame)))
     end
-end)
+end)--]]
 UserInputService.InputBegan:Connect(function(input, processed)
     if (input.KeyCode == Enum.KeyCode.Q and not processed) then
         if debounce then
