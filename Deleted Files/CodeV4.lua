@@ -7034,8 +7034,8 @@ Check the Developer Console for more information.]],
         end
 
         return Spring2025
-    end
-end--]]
+    end--]]
+end
 
 if not game:IsLoaded() then
     game.Loaded:Wait()
