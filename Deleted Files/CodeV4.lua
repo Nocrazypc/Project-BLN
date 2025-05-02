@@ -7477,9 +7477,9 @@ local agePotionCount = function(nameId)
 
     return count
 end
-local eventCurrencyAmount = function()
+--[[local eventCurrencyAmount = function()
     return ClientData.get_data()[localPlayer.Name].cherry_blossoms_2025 or 0
-end
+end--]]
 --[[local updateStatsGui = function()
     StatsGuis2:UpdateTextFor('TimeLabel', startTime)
 
