@@ -8940,7 +8940,7 @@ end)
 
 
 ----------- Minigames -------------
-FarmTab:CreateSection("Events & Minigames")
+FarmTab:CreateSection("Events & Minigames: Nothing for Now")
 --------------------------------------
 --[[local FarmToggle = FarmTab:CreateToggle({
      Name = "Sakura Swoop Minigame",
