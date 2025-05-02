@@ -7840,7 +7840,7 @@ local CompletePetAilments = function(whichPet)
     for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
         if key == 'salon' then
             Ailments:SalonAilment(key, petUnique)
-            teleportToFarmSpotOrBlossomSpot()
+            Teleport.FarmingHome()
 
             return true
         elseif key == 'moon' then
@@ -7849,12 +7849,12 @@ local CompletePetAilments = function(whichPet)
             return true
         elseif key == 'pizza_party' then
             Ailments:PizzaPartyAilment(key, petUnique)
-            teleportToFarmSpotOrBlossomSpot()
+            Teleport.FarmingHome()
 
             return true
         elseif key == 'school' then
             Ailments:SchoolAilment(key, petUnique)
-            teleportToFarmSpotOrBlossomSpot()
+            Teleport.FarmingHome()
 
             return true
         elseif key == 'bored' then
@@ -7897,15 +7897,13 @@ local CompletePetAilments = function(whichPet)
         if key == 'beach_party' then
             Teleport.PlaceFloorAtBeachParty()
             Ailments:BeachPartyAilment(petUnique)
-            Teleport.DownloadMainMap()
-            Spring2025.Teleport()
+            Teleport.FarmingHome()
 
             return true
         elseif key == 'camping' then
             Teleport.PlaceFloorAtCampSite()
             Ailments:CampingAilment(petUnique)
-            Teleport.DownloadMainMap()
-            Spring2025.Teleport()
+            Teleport.FarmingHome()
 
             return true
         end
@@ -7929,7 +7927,7 @@ local autoFarm = function()
     Teleport.PlaceFloorAtFarmingHome()
     Teleport.PlaceFloorAtCampSite()
     Teleport.PlaceFloorAtBeachParty()
-    teleportToFarmSpotOrBlossomSpot()
+    Teleport.FarmingHome()
     task.delay(30, function()
         hasStartedFarming = true
 
