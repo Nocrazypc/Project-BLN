@@ -6806,7 +6806,7 @@ Check the Developer Console for more information.]],
 
         return PotatoMode
     end
-    function __DARKLUA_BUNDLE_MODULES.p()
+    --[[function __DARKLUA_BUNDLE_MODULES.p()
         local Workspace = game:GetService('Workspace')
         local ReplicatedStorage = game:GetService('ReplicatedStorage')
         local Players = game:GetService('Players')
@@ -7035,7 +7035,7 @@ Check the Developer Console for more information.]],
 
         return Spring2025
     end
-end
+end--]]
 
 if not game:IsLoaded() then
     game.Loaded:Wait()
