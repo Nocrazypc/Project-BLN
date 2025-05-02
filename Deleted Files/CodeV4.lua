@@ -7227,7 +7227,7 @@ local TradeLicense = __DARKLUA_BUNDLE_MODULES.load('l')
 local BulkPotions = __DARKLUA_BUNDLE_MODULES.load('m')
 local Tutorials = __DARKLUA_BUNDLE_MODULES.load('n')
 local PotatoMode = __DARKLUA_BUNDLE_MODULES.load('o')
-local Spring2025 = __DARKLUA_BUNDLE_MODULES.load('p')
+--local Spring2025 = __DARKLUA_BUNDLE_MODULES.load('p')
 local clipboard = Clipboard.new()
 local taskBoard = TaskBoard.new()
 
