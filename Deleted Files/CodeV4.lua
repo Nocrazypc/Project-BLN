@@ -8518,8 +8518,8 @@ localPlayer.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal('Visible'
 
             isInMiniGame = false
 
-            Teleport.DownloadMainMap()
-            Spring2025.Teleport()
+            --Teleport.DownloadMainMap()
+            --Spring2025.Teleport()
         end
     end
 end)
@@ -8538,11 +8538,12 @@ localPlayer.PlayerGui.MinigameNewsPaperApp.Body:GetPropertyChangedSignal('Visibl
 
             isInMiniGame = false
 
-            Teleport.DownloadMainMap()
-            Spring2025.Teleport()
+            --Teleport.DownloadMainMap()
+            --Spring2025.Teleport()
         end
     end
 end)
+
 localPlayer.PlayerGui.BattlePassApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
 )
     if localPlayer.PlayerGui.BattlePassApp.Body.Visible then
@@ -8937,10 +8938,11 @@ end)
      end,
  })
 
+
 ----------- Minigames -------------
 FarmTab:CreateSection("Events & Minigames")
 --------------------------------------
-local FarmToggle = FarmTab:CreateToggle({
+--[[local FarmToggle = FarmTab:CreateToggle({
      Name = "Sakura Swoop Minigame",
      CurrentValue = false,
      Flag = "Toggle10",
@@ -8960,7 +8962,7 @@ local FarmToggle = FarmTab:CreateToggle({
      getgenv().AutoMinigame2 = Value
 
      end,
- }) 
+ }) --]]
 --------- Hatch Eggs Only ------------
 FarmTab:CreateSection("Eggs Only")
 --------------------------------------
