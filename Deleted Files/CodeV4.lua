@@ -5092,8 +5092,8 @@ Check the Developer Console for more information.]],
             SurfaceGui.CanvasSize = Vector2.new(600, 600)
             SurfaceGui.Face = Enum.NormalId.Top
             TextLabel.Parent = SurfaceGui
-            TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            TextLabel.BackgroundTransparency = 1
+	    TextLabel.BackgroundColor3 = Color3.fromRGB(30, 160, 0)
+	    TextLabel.BackgroundTransparency = 0.250
             TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
             TextLabel.BorderSizePixel = 0
             TextLabel.Size = UDim2.new(1, 0, 1, 0)
