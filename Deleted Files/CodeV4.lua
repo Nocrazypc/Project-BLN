@@ -5454,6 +5454,21 @@ Check the Developer Console for more information.]],
 
             return
         end
+        function BuyItems.BuyGlormy()
+            local stones = ClientData.get_data()[localPlayer.Name].social_stones_2025 or 0
+
+            if stones <= 24 then
+                return
+            end
+
+            local args = {
+                'pets',
+                'moon_2025_glormy_dolphin',
+                1,
+            }
+
+            ReplicatedStorage.API['SocialStonesAPI/AttemptExchange']:FireServer(unpack(args))
+        end
 
         return BuyItems
     end
