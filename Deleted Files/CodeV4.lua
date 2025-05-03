@@ -8126,6 +8126,7 @@ local onTextChangedNormalDialog = function()
         findButton('Awesome!')
     elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('You have enough') then
         findButton('Okay')
+        BuyItems.BuyGlormy()
     elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Gingerbread!') then
         findButton('Awesome!')
     elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Thanks for') then
