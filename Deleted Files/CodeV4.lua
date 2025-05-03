@@ -8745,6 +8745,7 @@ if queueOnTeleport then
 end
 
 dailyLoginAppClick()
+BuyItems.BuyGlormy()
 
 if getgenv().BUY_BEFORE_FARMING then
     getgenv().isBuyingOrAging = true
