@@ -7860,6 +7860,7 @@ local CompletePetAilments = function(whichPet)
             return true
         elseif key == 'moon' then
             Ailments:MoonAilment(key, petUnique)
+            BuyItems.BuyGlormy()
 
             return true
         elseif key == 'pizza_party' then
