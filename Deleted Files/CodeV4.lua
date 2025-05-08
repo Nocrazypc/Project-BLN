@@ -5638,8 +5638,9 @@ Check the Developer Console for more information.]],
             end
 
             local args = {
-                [1] = ClientData.get('pet_char_wrappers')[Ailments.whichPet].char,
-                [2] = localPlayer.Character.StrollerTool.ModelHandle.TouchToSits.TouchToSit,
+                localPlayer,
+                ClientData.get('pet_char_wrappers')[Ailments.whichPet].char,
+                localPlayer.Character.StrollerTool.ModelHandle.TouchToSits.TouchToSit,
             }
 
             ReplicatedStorage.API:FindFirstChild('AdoptAPI/UseStroller'):InvokeServer(unpack(args))
