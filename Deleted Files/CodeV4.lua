@@ -7928,7 +7928,7 @@ local autoFarm = function()
     Teleport.PlaceFloorAtFarmingHome()
     Teleport.PlaceFloorAtCampSite()
     Teleport.PlaceFloorAtBeachParty()
-    Teleport.DownloadMainMap()
+    --Teleport.DownloadMainMap()
     Teleport.FarmingHome()
     task.delay(30, function()
         hasStartedFarming = true
