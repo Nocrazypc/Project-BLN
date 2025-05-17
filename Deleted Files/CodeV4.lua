@@ -5454,21 +5454,6 @@ Check the Developer Console for more information.]],
 
             return
         end
-        function BuyItems.BuyGlormy()
-            local stones = ClientData.get_data()[localPlayer.Name].social_stones_2025 or 0
-
-            if stones <= 24 then
-                return
-            end
-
-            local args = {
-                'pets',
-                'moon_2025_glormy_dolphin',
-                1,
-            }
-
-            ReplicatedStorage.API['SocialStonesAPI/AttemptExchange']:FireServer(unpack(args))
-        end
 
         return BuyItems
     end
@@ -7861,7 +7846,6 @@ local CompletePetAilments = function(whichPet)
             return true
         elseif key == 'moon' then
             Ailments:MoonAilment(key, petUnique)
-            BuyItems.BuyGlormy()
 
             return true
         elseif key == 'pizza_party' then
@@ -8128,7 +8112,6 @@ local onTextChangedNormalDialog = function()
         findButton('Awesome!')
     elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('You have enough') then
         findButton('Okay')
-        BuyItems.BuyGlormy()
     elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Gingerbread!') then
         findButton('Awesome!')
     elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Thanks for') then
@@ -8747,7 +8730,6 @@ if queueOnTeleport then
 end
 
 dailyLoginAppClick()
-BuyItems.BuyGlormy()
 
 if getgenv().BUY_BEFORE_FARMING then
     getgenv().isBuyingOrAging = true
