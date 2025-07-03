@@ -8124,6 +8124,8 @@ local onTextChangedNormalDialog = function()
         findButton('Okay!')
     elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('You have been refunded') then
         findButton('Awesome!')
+    elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('mailbox') then
+        findButton('Okay')
     end
 end
 local doStarterTutorial = function()
