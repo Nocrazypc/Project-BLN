@@ -9607,6 +9607,7 @@ Rayfield:SetVisibility(true)
 
 --------------------update Stats UI ------------------------
 StatsGuis:UpdateText("NameFrame")
+StatsGuis:UpdateText("BucksAndPotionFrame")
 
         task.spawn(function()
 
