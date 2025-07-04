@@ -7904,7 +7904,7 @@ local CompletePetAilments = function(whichPet)
         elseif key == 'camping' then
             Teleport.PlaceFloorAtCampSite()
             Ailments:CampingAilment(petUnique)
-            task.wait(rng:NextInteger(10, 40))
+            task.wait(20)
             Teleport.FarmingHome()
 
             return true
