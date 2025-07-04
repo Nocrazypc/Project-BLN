@@ -5919,7 +5919,7 @@ Check the Developer Console for more information.]],
         function Ailments:CampingAilment(petUnique)
             Misc.DebugModePrint(string.format('\u{1f3d5}\u{fe0f} Doing camping task on %s \u{1f3d5}\u{fe0f}', tostring(Ailments.whichPet)))
             Teleport.CampSite()
-            task.wait(2)
+            task.wait(6)
             Misc.ReEquipPet(Ailments.whichPet)
             waitForTaskToFinish('camping', petUnique)
         end
@@ -7904,7 +7904,9 @@ local CompletePetAilments = function(whichPet)
         elseif key == 'camping' then
             Teleport.PlaceFloorAtCampSite()
             Ailments:CampingAilment(petUnique)
-            task.wait(20)
+
+            Misc.ReEquipPet(Ailments.whichPet)
+
             Teleport.FarmingHome()
 
             return true
