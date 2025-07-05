@@ -6038,13 +6038,13 @@ Check the Developer Console for more information.]],
             pickMysteryTask(mysteryId, petUnique)
         end
 ------------
-        function Ailment:BonfireAilment(petUnique)
+        function Ailments:BonfireAilment(petUnique)
             Teleport.Bonfire()
             task.wait(2)
             Misc.ReEquipPet(Ailments.whichPet)
             waitForTaskToFinish('summerfest_bonfire', petUnique)
         end
-        function Ailment:BuccaneerBandAilment(petUnique)
+        function Ailments:BuccaneerBandAilment(petUnique)
             ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
             task.wait(2)
 
