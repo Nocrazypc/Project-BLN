@@ -6045,7 +6045,7 @@ Check the Developer Console for more information.]],
             waitForTaskToFinish('summerfest_bonfire', petUnique)
         end
         function Ailments:BuccaneerBandAilment(petUnique)
-            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', Player, ClientData.get_data()[Player.Name].LiveOpsMapType)
+            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
             task.wait(2)
 
             local key = getKeyFrom('summerfest_2025_buccaneer_band')
