@@ -6037,6 +6037,43 @@ Check the Developer Console for more information.]],
             Misc.DebugModePrint('\u{2753} Picking mystery task \u{2753}')
             pickMysteryTask(mysteryId, petUnique)
         end
+------------
+        function Ailment.BonfireAilment(petUnique)
+            Teleport.Bonfire()
+            task.wait(2)
+            Misc.ReEquipPet(Ailments.whichPet)
+            waitForTaskToFinish('summerfest_bonfire', petUnique)
+        end
+        function Ailment.BuccaneerBandAilment(petUnique)
+            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
+            task.wait(2)
+
+            local key = getKeyFrom('summerfest_2025_buccaneer_band')
+
+            if not key then
+                Utils.PrintDebug('didnt find key for band')
+
+                return
+            end
+
+
+            local args = {
+                key,
+                'Guitar',
+                {
+                    ['cframe'] = CFrame.new(-607, 35, -1641, -0, -0, -1, 0, 1, -0, 1, -0, -0),
+                },
+                localPlayer.Character,
+            }
+
+
+            task.spawn(function()
+                ReplicatedStorage.API:FindFirstChild('HousingAPI/ActivateInteriorFurniture'):InvokeServer(unpack(args))
+            end)
+            waitForTaskToFinish('buccaneer_band', petUnique)
+            getUpFromSitting()
+        end
+------------
         function Ailments:BabyHungryAilment()
             Misc.DebugModePrint('\u{1f476}\u{1f374} Doing baby hungry task \u{1f476}\u{1f374}')
 
