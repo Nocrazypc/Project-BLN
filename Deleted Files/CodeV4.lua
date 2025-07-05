@@ -5219,7 +5219,7 @@ Check the Developer Console for more information.]],
 
         function Teleport.Bonfire()
             Teleport.DeleteWater()
-            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
+            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', Player, ClientData.get_data()[Player.Name].LiveOpsMapType)
             task.wait(1)
 
             local npc = workspace.HouseInteriors.furniture:FindFirstChild('summerfest_2025_bonfire_npc', true)
@@ -5230,8 +5230,8 @@ Check the Developer Console for more information.]],
 
             local location = npc.PrimaryPart.Position + Vector3.new(math.random(1, 15), 5, math.random(1, 15))
 
-            localPlayer.Character:MoveTo(location)
-            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+            Player.Character:MoveTo(location)
+            Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
         end
 
 
@@ -6045,7 +6045,7 @@ Check the Developer Console for more information.]],
             waitForTaskToFinish('summerfest_bonfire', petUnique)
         end
         function Ailments:BuccaneerBandAilment(petUnique)
-            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
+            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', Player, ClientData.get_data()[Player.Name].LiveOpsMapType)
             task.wait(2)
 
             local key = getKeyFrom('summerfest_2025_buccaneer_band')
