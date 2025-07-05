@@ -7974,13 +7974,13 @@ local CompletePetAilments = function(whichPet)
 
 			
         elseif key == 'buccaneer_band' then
-            Ailment.BuccaneerBandAilment(petUnique)
+            Ailments:BuccaneerBandAilment(petUnique)
             Teleport.FarmingHome()
 
             return true
 
         elseif key == 'summerfest_bonfire' then
-            Ailment.BonfireAilment(petUnique)
+            Ailments:BonfireAilment(petUnique)
             Teleport.FarmingHome()
 
             return true
