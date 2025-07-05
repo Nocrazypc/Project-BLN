@@ -7933,6 +7933,22 @@ local CompletePetAilments = function(whichPet)
             Teleport.FarmingHome()
 
             return true
+
+
+			
+        elseif key == 'buccaneer_band' then
+            Ailment.BuccaneerBandAilment(petUnique)
+            Teleport.FarmingHome()
+
+            return true
+
+        elseif key == 'summerfest_bonfire' then
+            Ailment.BonfireAilment(petUnique)
+            Teleport.FarmingHome()
+
+            return true
+
+			
         end
     end
     for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
