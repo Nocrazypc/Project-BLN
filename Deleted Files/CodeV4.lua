@@ -5215,6 +5215,29 @@ Check the Developer Console for more information.]],
 
             Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
         end
+
+
+        function Teleport.Bonfire()
+            Teleport.DeleteWater()
+            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
+            task.wait(1)
+
+            local npc = workspace.HouseInteriors.furniture:FindFirstChild('summerfest_2025_bonfire_npc', true)
+
+            if not npc then
+                return
+            end
+
+            local location = npc.PrimaryPart.Position + Vector3.new(math.random(1, 15), 5, math.random(1, 15))
+
+            localPlayer.Character:MoveTo(location)
+            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+        end
+
+
+
+
+
         function Teleport.PlayGround(vec)
             Player.Character:WaitForChild('HumanoidRootPart').Anchored = true
 
