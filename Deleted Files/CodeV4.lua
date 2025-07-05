@@ -5690,6 +5690,17 @@ Check the Developer Console for more information.]],
             end
         end
 
+        local getKeyFrom = function(itemId)
+            for key, value in ClientData.get_data()[localPlayer.Name].house_interior.furniture do
+                if value.id == itemId then
+                    return key
+                end
+            end
+
+            return nil
+        end
+
+		
         local pickMysteryTask = function(mysteryId, petUnique)
             Misc.DebugModePrint(string.format('mystery id: %s', tostring(mysteryId)))
 
