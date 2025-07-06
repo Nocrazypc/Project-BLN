@@ -7986,16 +7986,16 @@ local CompletePetAilments = function(whichPet)
 			
         elseif key == 'buccaneer_band' then
             Ailments:BuccaneerBandAilment(petUnique)
-
             Misc.ReEquipPet(Ailments.whichPet)
+            task.wait(5)
             Teleport.FarmingHome()
 
             return true
 
         elseif key == 'summerfest_bonfire' then
             Ailments:BonfireAilment(petUnique)
-
             Misc.ReEquipPet(Ailments.whichPet)
+            task.wait(5)
             Teleport.FarmingHome()
 
             return true
