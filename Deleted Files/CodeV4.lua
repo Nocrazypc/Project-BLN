@@ -6960,7 +6960,7 @@ Check the Developer Console for more information.]],
             local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
             local distance = character.PrimaryPart and (character.PrimaryPart.Position - part.Position).Magnitude
 
-            if distance >= 10 then
+            if distance >= 5 then
                 character:MoveTo(part.Position)
             end
         end
@@ -6982,7 +6982,8 @@ Check the Developer Console for more information.]],
                 task.wait(1)
             until Summerfest2025.IsSwordEquipped()
 
-            while gameFolder and gameFolder.is_game_active.Value do
+            --while gameFolder and gameFolder.is_game_active.Value do
+            while Summerfest2025.IsSwordEquipped() do
                 Summerfest2025.TeleportTo(blockPart)
                 Summerfest2025.HitEnemy()
                 task.wait(1.01)
