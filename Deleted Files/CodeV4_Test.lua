@@ -8884,7 +8884,7 @@ end)
 FarmTab:CreateSection("Events & Minigames: Nothing for Now")
 --------------------------------------
 --[[local FarmToggle = FarmTab:CreateToggle({
-     Name = "Sakura Swoop Minigame",
+     Name = "Treasure Defense Minigame",
      CurrentValue = false,
      Flag = "Toggle10",
      Callback = function(Value)
