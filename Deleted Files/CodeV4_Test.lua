@@ -8382,19 +8382,19 @@ localPlayer.PlayerGui.MinigameInGameApp:GetPropertyChangedSignal('Enabled'):Conn
         localPlayer.PlayerGui.MinigameInGameApp.Body.Middle:WaitForChild('Container')
         localPlayer.PlayerGui.MinigameInGameApp.Body.Middle.Container:WaitForChild('TitleLabel')
 
-        if localPlayer.PlayerGui.MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('SAKURA SWOOP') then
+        if localPlayer.PlayerGui.MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('Treasure Defense is starting') then
             if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame then
                 isInMiniGame = true
 
                 task.wait(2)
-                --Spring2025.StartSakuraSwoop()
+                Summerfest2025.StartEvent()
             end
         elseif localPlayer.PlayerGui.MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('TEAR UP TOYKYO') then
             if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame2 then
                 isInMiniGame = true
 
                 task.wait(math.random(10, 15))
-                --Spring2025.StartTearUpToykyo()
+                --Summerfest2025.StartEvent2()
             end
         end
     end
