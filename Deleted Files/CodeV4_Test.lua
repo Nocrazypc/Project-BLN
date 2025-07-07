@@ -108,7 +108,7 @@ do
                     SliderBackground = Color3.fromRGB(50, 138, 220),
                     SliderProgress = Color3.fromRGB(50, 138, 220),
                     SliderStroke = Color3.fromRGB(58, 163, 255),
-                    --ToggleBackground = Color3.fromRGB(30, 30, 30),
+                    ToggleBackground = Color3.fromRGB(30, 30, 30),
                     ToggleEnabled = Color3.fromRGB(0, 146, 214),
                     ToggleDisabled = Color3.fromRGB(100, 100, 100),
                     ToggleEnabledStroke = Color3.fromRGB(0, 170, 255),
