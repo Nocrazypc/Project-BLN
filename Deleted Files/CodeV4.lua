@@ -6955,7 +6955,7 @@ Check the Developer Console for more information.]],
         function Summerfest2025.IsSwordEquipped()
             local isSword = Summerfest2025.GetCharacter():FindFirstChild('Sword')
 
-            --print(string.format('IsSwordEquipped: %s', tostring(isSword)))
+            print(string.format('IsSwordEquipped: %s', tostring(isSword)))
 
             return isSword
         end
@@ -6997,7 +6997,7 @@ Check the Developer Console for more information.]],
             until Summerfest2025.IsSwordEquipped()
 
             while gameFolder and gameFolder.is_game_active.Value do
-                --Summerfest2025.TeleportTo(blockPart)
+                Summerfest2025.TeleportTo(blockPart)
                 Summerfest2025.HitEnemy()
                 task.wait(1.01)
             end
