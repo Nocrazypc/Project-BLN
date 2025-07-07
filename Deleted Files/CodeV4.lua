@@ -8463,45 +8463,7 @@ localPlayer.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal('Visible'
         end
     end
 end) 
---[[localPlayer.PlayerGui.MinigameNewsPaperApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
-)
-    if localPlayer.PlayerGui.MinigameNewsPaperApp.Body.Visible then
-        localPlayer.PlayerGui.MinigameNewsPaperApp.Body:WaitForChild('Button')
-        localPlayer.PlayerGui.MinigameNewsPaperApp.Body.Button:WaitForChild('Face')
-        localPlayer.PlayerGui.MinigameNewsPaperApp.Body.Button.Face:WaitForChild('TextLabel')
 
-        if localPlayer.PlayerGui.MinigameNewsPaperApp.Body.Button.Face.TextLabel.Text:match('NICE!') then
-            localPlayer.Character.HumanoidRootPart.Anchored = false
-
-            task.wait(10)
-            removeGameOverButton('MinigameNewsPaperApp')
-
-            isInMiniGame = false
-
-            Teleport.DownloadMainMap()
-            Spring2025.Teleport()
-        end
-    end
-end) --]]
-
---[[ localPlayer.PlayerGui.BattlePassApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
-)
-    if localPlayer.PlayerGui.BattlePassApp.Body.Visible then
-        localPlayer.PlayerGui.BattlePassApp.Body:WaitForChild('InnerBody')
-        localPlayer.PlayerGui.BattlePassApp.Body.InnerBody:WaitForChild('ScrollingFrame')
-        localPlayer.PlayerGui.BattlePassApp.Body.InnerBody.ScrollingFrame:WaitForChild('21')
-
-        if localPlayer.PlayerGui.BattlePassApp.Body.InnerBody.ScrollingFrame[21] then
-            for _, v in localPlayer.PlayerGui.BattlePassApp.Body.InnerBody.ScrollingFrame:GetChildren()do
-                if not v:FindFirstChild('ButtonFrame') then
-                    continue
-                end
-                if v.ButtonFrame:FindFirstChild('ClaimButton') then
-                end
-            end
-        end
-    end
-end)--]]
 localPlayer.Idled:Connect(function()
     VirtualUser:ClickButton2(Vector2.new())
 end)
