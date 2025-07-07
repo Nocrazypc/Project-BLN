@@ -5092,8 +5092,8 @@ Check the Developer Console for more information.]],
             SurfaceGui.CanvasSize = Vector2.new(600, 600)
             SurfaceGui.Face = Enum.NormalId.Top
             TextLabel.Parent = SurfaceGui
-            TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            TextLabel.BackgroundTransparency = 1
+	    TextLabel.BackgroundColor3 = Color3.fromRGB(30, 160, 0)
+	    TextLabel.BackgroundTransparency = 0.250
             TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
             TextLabel.BorderSizePixel = 0
             TextLabel.Size = UDim2.new(1, 0, 1, 0)
@@ -5215,6 +5215,29 @@ Check the Developer Console for more information.]],
 
             Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
         end
+
+
+        function Teleport.Bonfire()
+            Teleport.DeleteWater()
+            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', Player, ClientData.get_data()[Player.Name].LiveOpsMapType)
+            task.wait(1)
+
+            local npc = workspace.HouseInteriors.furniture:FindFirstChild('summerfest_2025_bonfire_npc', true)
+
+            if not npc then
+                return
+            end
+
+            local location = npc.PrimaryPart.Position + Vector3.new(math.random(1, 15), 5, math.random(1, 15))
+
+            Player.Character:MoveTo(location)
+            Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+        end
+
+
+
+
+
         function Teleport.PlayGround(vec)
             Player.Character:WaitForChild('HumanoidRootPart').Anchored = true
 
@@ -5623,8 +5646,9 @@ Check the Developer Console for more information.]],
             end
 
             local args = {
-                [1] = ClientData.get('pet_char_wrappers')[Ailments.whichPet].char,
-                [2] = localPlayer.Character.StrollerTool.ModelHandle.TouchToSits.TouchToSit,
+                localPlayer,
+                ClientData.get('pet_char_wrappers')[Ailments.whichPet].char,
+                localPlayer.Character.StrollerTool.ModelHandle.TouchToSits.TouchToSit,
             }
 
             ReplicatedStorage.API:FindFirstChild('AdoptAPI/UseStroller'):InvokeServer(unpack(args))
@@ -5666,6 +5690,17 @@ Check the Developer Console for more information.]],
             end
         end
 
+        local getKeyFrom = function(itemId)
+            for key, value in ClientData.get_data()[localPlayer.Name].house_interior.furniture do
+                if value.id == itemId then
+                    return key
+                end
+            end
+
+            return nil
+        end
+
+		
         local pickMysteryTask = function(mysteryId, petUnique)
             Misc.DebugModePrint(string.format('mystery id: %s', tostring(mysteryId)))
 
@@ -5918,7 +5953,7 @@ Check the Developer Console for more information.]],
         function Ailments:CampingAilment(petUnique)
             Misc.DebugModePrint(string.format('\u{1f3d5}\u{fe0f} Doing camping task on %s \u{1f3d5}\u{fe0f}', tostring(Ailments.whichPet)))
             Teleport.CampSite()
-            task.wait(2)
+            task.wait(6)
             Misc.ReEquipPet(Ailments.whichPet)
             waitForTaskToFinish('camping', petUnique)
         end
@@ -6013,6 +6048,43 @@ Check the Developer Console for more information.]],
             Misc.DebugModePrint('\u{2753} Picking mystery task \u{2753}')
             pickMysteryTask(mysteryId, petUnique)
         end
+------------
+        function Ailments:BonfireAilment(petUnique)
+            Teleport.Bonfire()
+            task.wait(2)
+            Misc.ReEquipPet(Ailments.whichPet)
+            waitForTaskToFinish('summerfest_bonfire', petUnique)
+        end
+        function Ailments:BuccaneerBandAilment(petUnique)
+            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
+            task.wait(2)
+
+            local key = getKeyFrom('summerfest_2025_buccaneer_band')
+
+            if not key then
+                Utils.PrintDebug('didnt find key for band')
+
+                return
+            end
+
+
+            local args = {
+                key,
+                'Guitar',
+                {
+                    ['cframe'] = CFrame.new(-607, 35, -1641, -0, -0, -1, 0, 1, -0, 1, -0, -0),
+                },
+                localPlayer.Character,
+            }
+
+
+            task.spawn(function()
+                ReplicatedStorage.API:FindFirstChild('HousingAPI/ActivateInteriorFurniture'):InvokeServer(unpack(args))
+            end)
+            waitForTaskToFinish('buccaneer_band', petUnique)
+            getUpFromSitting()
+        end
+------------
         function Ailments:BabyHungryAilment()
             Misc.DebugModePrint('\u{1f476}\u{1f374} Doing baby hungry task \u{1f476}\u{1f374}')
 
@@ -6806,235 +6878,120 @@ Check the Developer Console for more information.]],
 
         return PotatoMode
     end
-    function __DARKLUA_BUNDLE_MODULES.p()
-        local Workspace = game:GetService('Workspace')
-        local ReplicatedStorage = game:GetService('ReplicatedStorage')
+----------------------- Summer 25 Minigame ----------
+        function __DARKLUA_BUNDLE_MODULES.p()
+        local ReplicatedStorage = (game:GetService('ReplicatedStorage'))
+        local Workspace = (game:GetService('Workspace'))
+        local VirtualInputManager = game:GetService('VirtualInputManager')
         local Players = game:GetService('Players')
+        local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
+        local CoconutBonkMinigameClient = (require(ReplicatedStorage.SharedModules.ContentPacks.Summerfest2025.Minigames.CoconutBonkMinigameClient))
+        --local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
+        local Summerfest2025 = {}
         local localPlayer = Players.LocalPlayer
-        local ClientData = require(ReplicatedStorage:WaitForChild('ClientModules'):WaitForChild('Core'):WaitForChild('ClientData'))
-        local Spring2025 = {}
-        local createAFKPlateform = function()
-            if Workspace:FindFirstChild('BlossomAFKLocation') then
-                return
-            end
+        local currentCamera = Workspace.CurrentCamera
+        local viewportSize = currentCamera.ViewportSize
 
-            local part = Instance.new('Part')
-            local SurfaceGui = Instance.new('SurfaceGui')
-            local TextLabel = Instance.new('TextLabel')
-
-            part.Position = Workspace.StaticMap.Springfest2025.CherryBlossomViewingArea.Position
-            part.Size = Vector3.new(200, 2, 200)
-            part.Anchored = true
-            part.Transparency = 1
-            part.Name = 'BlossomAFKLocation'
-            part.Parent = Workspace
-            SurfaceGui.Parent = part
-            SurfaceGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-            SurfaceGui.AlwaysOnTop = false
-            SurfaceGui.CanvasSize = Vector2.new(600, 600)
-            SurfaceGui.Face = Enum.NormalId.Top
-            TextLabel.Parent = SurfaceGui
-            TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            TextLabel.BackgroundTransparency = 1
-            TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            TextLabel.BorderSizePixel = 0
-            TextLabel.Size = UDim2.new(1, 0, 1, 0)
-            TextLabel.Font = Enum.Font.SourceSans
-            TextLabel.Text = "🌸🌸🌸"
-            TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
-            TextLabel.TextScaled = true
-            TextLabel.TextSize = 14
-            TextLabel.TextWrapped = true
-
-            task.wait(1)
-        end
-        local getGlider = function(shakedownInterior)
-            local gliderInteractions = shakedownInterior:WaitForChild('GliderInteractions', 15)
-
-            if not gliderInteractions then
-                return
-            end
-
-            local defaultGlider = gliderInteractions:WaitForChild('spring_2025_default_paraglider', 15)
-
-            if not defaultGlider then
-                return
-            end
-
-            local gliderCollision = defaultGlider:WaitForChild('Collision', 15)
-
-            if not gliderCollision then
-                return
-            end
-            if not gliderCollision:WaitForChild('TouchInterest', 15) then
-                return
-            end
-
-            local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
-
-            if not character then
-                return
-            end
-
-            local humanoidRootPart = character:WaitForChild('HumanoidRootPart')
-
-            firetouchinterest(humanoidRootPart, gliderCollision, 0)
+        function Summerfest2025.GetCharacter()
+            return localPlayer.Character or localPlayer.CharacterAdded:Wait()
         end
 
-        function Spring2025.Teleport()
-            createAFKPlateform()
-
-            localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
-            localPlayer.Character.HumanoidRootPart.CFrame = Workspace.BlossomAFKLocation.CFrame * CFrame.new(math.random(1, 40), 10, math.random(1, 40))
-            localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
-
-            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
-            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
+        function Summerfest2025.HitEnemy()
+            VirtualInputManager:SendMouseButtonEvent(viewportSize.X / 2, viewportSize.Y / 2, 0, true, game, 1)
+            task.wait(0.1)
+            VirtualInputManager:SendMouseButtonEvent(viewportSize.X / 2, viewportSize.Y / 2, 0, false, game, 1)
         end
-        function Spring2025.StartSakuraSwoop()
-            local isGameActive = Workspace.StaticMap.blossom_shakedown_minigame_state.is_game_active
-            local interior = Workspace.Interiors:WaitForChild('BlossomShakedownInterior', 15)
-
-            getGlider(interior)
-
-            if not interior then
-                return
-            end
-
-            local ringsFolder = interior:WaitForChild('Rings', 15)
-
-            if not ringsFolder then
-                return
-            end
-
-            for i, v in ringsFolder:GetDescendants()do
-                if not isGameActive.Value then
-                    return
-                end
-                if not v:IsA('Model') then
+        function Summerfest2025.FindMinigameFolder()
+            for _, child in ipairs(Workspace.StaticMap:GetChildren())do
+                if not child:IsA('Folder') then
                     continue
                 end
 
-                local args = {
-                    [1] = 'blossom_shakedown',
-                    [2] = 'petal_ring_flown_through',
-                    [3] = v.Name,
-                }
+                local folder = string.match(child.Name, 'coconut_bonk::[%w%-]+_minigame_state$')
 
-                ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args))
-                task.wait(math.random(0.3, 2))
-            end
-        end
-
-        local findMinigameState = function(mapName)
-            local staticMap = workspace:FindFirstChild('StaticMap')
-
-            if not staticMap then
-                return nil
-            end
-
-            for _, child in ipairs(staticMap:GetChildren())do
-                if child:IsA('Folder') and string.match(child.Name, '^' .. mapName .. '::[%w%-]+_minigame_state$') then
-                    if child:FindFirstChild('player_user_ids') and string.find(child.player_user_ids.Value, localPlayer.UserId) then
-                        return string.gsub(child.Name, '_minigame_state', '')
-                    end
+                if folder then
+                    return child
                 end
             end
 
             return nil
         end
-        local getBuildingFolder = function(model)
-            for _, v in model.Programmed.Map:GetChildren()do
-                if v.Name == 'Buildings' and v:IsA('Folder') then
-                    return v
-                end
-            end
-
-            return nil
-        end
-
-        function Spring2025.StartTearUpToykyo()
-            local minigameName = findMinigameState('tear_up_toykyo')
-
-            if minigameName then
-                print('Found:', minigameName)
-            else
-                print('Minigame state not found!')
-
-                return
-            end
-
+        function Summerfest2025.GetStairPart()
             local model = Workspace.Interiors:FindFirstChildWhichIsA('Model')
 
             if not model then
-                return print('No model')
+                return
             end
 
-            local buildingFolder = getBuildingFolder(model)
+            local visualFolder = model:FindFirstChild('Visual')
 
-            if not buildingFolder then
-                return print('No building folder')
+            if not visualFolder then
+                return
             end
 
+            local stairModel = (visualFolder:FindFirstChild('Steps'))
+
+            if not stairModel then
+                return
+            end
+
+            return stairModel.Block
+        end
+        function Summerfest2025.IsSwordEquipped()
+            local isSword = Summerfest2025.GetCharacter():FindFirstChild('Sword')
+
+            --print(string.format('IsSwordEquipped: %s', tostring(isSword)))
+
+            return isSword
+        end
+        function Summerfest2025.EquipSword()
+            local coconutBonkId = CoconutBonkMinigameClient.instanced_minigame.minigame_id
+
+            if not coconutBonkId then
+                return
+            end
+
+            Bypass('RouterClient').get('MinigameAPI/MessageServer'):FireServer(coconutBonkId, 'pickup_droppable', 1)
+            task.wait()
+            Bypass('RouterClient').get('MinigameAPI/MessageServer'):FireServer(coconutBonkId, 'pickup_sword')
+        end
+        function Summerfest2025.TeleportTo(part)
             local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
+            local distance = character.PrimaryPart and (character.PrimaryPart.Position - part.Position).Magnitude
 
-            if not character then
-                return print('No Char')
+            if distance >= 5 then
+                character:MoveTo(part.Position)
+            end
+        end
+        function Summerfest2025.StartEvent()
+            local gameFolder = (Summerfest2025.FindMinigameFolder())
+
+            if not gameFolder then
+                return
             end
 
-            local humanoidRootPart = character:WaitForChild('HumanoidRootPart', 10)
+            local blockPart = Summerfest2025.GetStairPart()
 
-            if not humanoidRootPart then
-                return print('No HumanoidRootPart')
+            if not blockPart then
+                return
             end
 
-            while Workspace.StaticMap.tear_up_toykyo_minigame_state.is_game_active.Value do
-                for _, v in buildingFolder:GetChildren()do
-                    if not v.PrimaryPart then
-                        continue
-                    end
-                    if v:GetAttribute('Desaturated') then
-                        continue
-                    end
+            repeat
+                Summerfest2025.EquipSword()
+                task.wait(1)
+            until Summerfest2025.IsSwordEquipped()
 
-                    local distance = (v.PrimaryPart.Position - humanoidRootPart.Position).Magnitude
-
-                    if distance > 250 then
-                        continue
-                    end
-
-                    local id = v:GetAttribute('DestructibleID')
-
-                    if not id then
-                        continue
-                    end
-
-                    local points = localPlayer:GetAttribute('KaijuDestruction')
-
-                    if points and points > 15000 then
-                        return print('DONE TEAR')
-                    end
-
-                    local args = {
-                        [1] = minigameName,
-                        [2] = 'building_destroyed',
-                        [3] = id,
-                    }
-
-                    ReplicatedStorage.API['MinigameAPI/MessageServer']:FireServer(unpack(args))
-                    task.wait(math.random(0.1, 0.5))
-                end
-
-                task.wait()
+            while gameFolder and gameFolder.is_game_active.Value do
+                Summerfest2025.TeleportTo(blockPart)
+                Summerfest2025.HitEnemy()
+                task.wait(1.01)
             end
-
-            --print('DONE TEAR')
-
-            return
         end
 
-        return Spring2025
-    end
+        return Summerfest2025
+     end
+
+-----------------------------------------------------
 end
 
 if not game:IsLoaded() then
@@ -7133,7 +7090,8 @@ getgenv().AutoFusion = false
 getgenv().FocusFarmAgePotions = false
 getgenv().HatchPriorityEggs = false
 
-getgenv().AutoMinigame = true
+getgenv().AutoMinigame = false
+getgenv().AutoMinigame2 = false
 
 local Egg2Buy = getgenv().SETTINGS.PET_TO_BUY
 local PetToggle
@@ -7226,7 +7184,7 @@ local TradeLicense = __DARKLUA_BUNDLE_MODULES.load('l')
 local BulkPotions = __DARKLUA_BUNDLE_MODULES.load('m')
 local Tutorials = __DARKLUA_BUNDLE_MODULES.load('n')
 local PotatoMode = __DARKLUA_BUNDLE_MODULES.load('o')
-local Spring2025 = __DARKLUA_BUNDLE_MODULES.load('p')
+local Summerfest2025 = __DARKLUA_BUNDLE_MODULES.load('p')
 local clipboard = Clipboard.new()
 local taskBoard = TaskBoard.new()
 
@@ -7476,54 +7434,14 @@ local agePotionCount = function(nameId)
 
     return count
 end
-local eventCurrencyAmount = function()
-    return ClientData.get_data()[localPlayer.Name].cherry_blossoms_2025 or 0
-end
---[[local updateStatsGui = function()
-    StatsGuis2:UpdateTextFor('TimeLabel', startTime)
-
-    potionsGained = agePotionCount('pet_age_potion') - startPotionAmount
-
-    if potionsGained < 0 then
-        potionsGained = 0
-    end
-
-    TempPotions:UpdateTextFor('TempPotions', potionsGained)
-
-    tinyPotionsGained = agePotionCount('tiny_pet_age_potion') - startTinyPotionAmount
-
-    if tinyPotionsGained < 0 then
-        tinyPotionsGained = 0
-    end
-
-    TempTinyPotions:UpdateTextFor('TempTinyPotions', tinyPotionsGained)
-
-    local currentEventCurrency = eventCurrencyAmount()
-
-    if currentEventCurrency >= startEventCurrencyAmount then
-        eventCurrencyGained = eventCurrencyGained + (currentEventCurrency - startEventCurrencyAmount)
-        startEventCurrencyAmount = currentEventCurrency
-    elseif currentEventCurrency < startEventCurrencyAmount then
-        startEventCurrencyAmount = currentEventCurrency
-    end
-
-    TempEventCurrency:UpdateTextFor('TempEventCurrency', eventCurrencyGained)
-    TotalEventCurrency:UpdateTextFor('TotalEventCurrency')
-    TotalPotions:UpdateTextFor('TotalPotions')
-    TotalBucks:UpdateTextFor('TotalBucks')
-    BlankSlot1:UpdateTextFor('BlankSlot1')
-    BlankSlot2:UpdateTextFor('BlankSlot2')
-    TotalShiverBaits:UpdateTextFor('TotalShiverBaits')
-    TotalSubzeroBaits:UpdateTextFor('TotalSubzeroBaits')
-end--]]
 
 local findBait = function()
     local baits = getgenv().SETTINGS.BAIT_TO_USE_IN_ORDER
 
     if not baits then
         baits = {
-            'ice_dimension_2025_shiver_cone_bait',
-            'ice_dimension_2025_subzero_popsicle_bait',
+           -- 'ice_dimension_2025_shiver_cone_bait',
+           -- 'ice_dimension_2025_subzero_popsicle_bait',
             'ice_dimension_2025_ice_soup_bait',
         }
     end
@@ -7720,16 +7638,16 @@ local removeGameOverButton = function(ScreenGuiName)
         end
     end
 end
-local teleportToFarmSpotOrBlossomSpot = function()
-    if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame then
+--[[local teleportToFarmSpotOrBlossomSpot = function()
+    if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame or getgenv().AutoMinigame2 then
         Teleport.DownloadMainMap()
         Spring2025.Teleport()
     else
         Teleport.FarmingHome()
     end
-end
+end--]]
 local onTextChangedMiniGame = function()
-    if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame and hasStartedFarming and not isMuleInGame() then
+    if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame or getgenv().AutoMinigame2 and hasStartedFarming and not isMuleInGame() then
         isInMiniGame = true
 
         task.wait(math.random(1, 3))
@@ -7839,7 +7757,7 @@ local CompletePetAilments = function(whichPet)
     for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
         if key == 'salon' then
             Ailments:SalonAilment(key, petUnique)
-            teleportToFarmSpotOrBlossomSpot()
+            Teleport.FarmingHome()
 
             return true
         elseif key == 'moon' then
@@ -7848,12 +7766,12 @@ local CompletePetAilments = function(whichPet)
             return true
         elseif key == 'pizza_party' then
             Ailments:PizzaPartyAilment(key, petUnique)
-            teleportToFarmSpotOrBlossomSpot()
+            Teleport.FarmingHome()
 
             return true
         elseif key == 'school' then
             Ailments:SchoolAilment(key, petUnique)
-            teleportToFarmSpotOrBlossomSpot()
+            Teleport.FarmingHome()
 
             return true
         elseif key == 'bored' then
@@ -7896,17 +7814,38 @@ local CompletePetAilments = function(whichPet)
         if key == 'beach_party' then
             Teleport.PlaceFloorAtBeachParty()
             Ailments:BeachPartyAilment(petUnique)
-            Teleport.DownloadMainMap()
-            Spring2025.Teleport()
+            Teleport.FarmingHome()
 
             return true
         elseif key == 'camping' then
             Teleport.PlaceFloorAtCampSite()
             Ailments:CampingAilment(petUnique)
-            Teleport.DownloadMainMap()
-            Spring2025.Teleport()
+
+            Misc.ReEquipPet(Ailments.whichPet)
+
+            Teleport.FarmingHome()
 
             return true
+
+
+			
+        elseif key == 'buccaneer_band' then
+            Ailments:BuccaneerBandAilment(petUnique)
+            Misc.ReEquipPet(Ailments.whichPet)
+            task.wait(5)
+            Teleport.FarmingHome()
+
+            return true
+
+        elseif key == 'summerfest_bonfire' then
+            Ailments:BonfireAilment(petUnique)
+            Misc.ReEquipPet(Ailments.whichPet)
+            task.wait(5)
+            Teleport.FarmingHome()
+
+            return true
+
+			
         end
     end
     for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
@@ -7928,7 +7867,8 @@ local autoFarm = function()
     Teleport.PlaceFloorAtFarmingHome()
     Teleport.PlaceFloorAtCampSite()
     Teleport.PlaceFloorAtBeachParty()
-    teleportToFarmSpotOrBlossomSpot()
+    Teleport.DownloadMainMap()
+    Teleport.FarmingHome()
     task.delay(30, function()
         hasStartedFarming = true
 
@@ -7943,8 +7883,8 @@ local autoFarm = function()
             end
             if isInMiniGame then
                 repeat
-                    Misc.DebugModePrint('\u{23f1}\u{fe0f} Waiting for 60 secs [inside minigame] \u{23f1}\u{fe0f}')
-                    task.wait(60)
+                   -- Misc.DebugModePrint('\u{23f1}\u{fe0f} Waiting for 60 secs [inside minigame] \u{23f1}\u{fe0f}')
+                   -- task.wait(60)
                 until not isInMiniGame
 
                 isInMiniGame = false
@@ -8109,8 +8049,8 @@ local onTextChangedNormalDialog = function()
         findButton('Yes')
     elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('your inventory!') then
         findButton('Awesome!')
-    elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Burtaur') then
-        findButton('Cool!')
+    elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('You have enough') then
+        findButton('Okay')
     elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Gingerbread!') then
         findButton('Awesome!')
     elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Thanks for') then
@@ -8123,6 +8063,8 @@ local onTextChangedNormalDialog = function()
         findButton('Okay!')
     elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('You have been refunded') then
         findButton('Awesome!')
+    elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('mailbox') then
+        findButton('Okay')
     end
 end
 local doStarterTutorial = function()
@@ -8167,15 +8109,10 @@ localPlayer.PlayerGui.HintApp.TextLabel:GetPropertyChangedSignal('Text'):Connect
             return
         end
 
-        --local amount = text:split('+')[2]:split(' ')[1]
-
-        --bucksGained = bucksGained + tonumber(amount)
-
-        --TempBucks:UpdateTextFor('TempBucks', bucksGained)
     elseif localPlayer.PlayerGui.HintApp.TextLabel.Text:match('aged up!') then
     end
 end)
-Workspace.StaticMap.blossom_shakedown_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function(
+--[[Workspace.StaticMap.blossom_shakedown_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function(
 )
     if not Workspace.StaticMap.blossom_shakedown_minigame_state.is_game_active.Value then
         isInMiniGame = false
@@ -8202,12 +8139,12 @@ Workspace.StaticMap.tear_up_toykyo_minigame_state.is_game_active:GetPropertyChan
 
         return
     end
-    if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame and hasStartedFarming and not isMuleInGame() then
+    if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame2 and hasStartedFarming and not isMuleInGame() then
         isInMiniGame = true
 
         Misc.DebugModePrint(string.format('game ACTIVE setting isInMinigame to %s', tostring(isInMiniGame)))
     end
-end)
+end)--]]
 UserInputService.InputBegan:Connect(function(input, processed)
     if (input.KeyCode == Enum.KeyCode.Q and not processed) then
         if debounce then
@@ -8450,14 +8387,14 @@ localPlayer.PlayerGui.MinigameInGameApp:GetPropertyChangedSignal('Enabled'):Conn
                 isInMiniGame = true
 
                 task.wait(2)
-                Spring2025.StartSakuraSwoop()
+                --Spring2025.StartSakuraSwoop()
             end
         elseif localPlayer.PlayerGui.MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('TEAR UP TOYKYO') then
-            if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame then
+            if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame2 then
                 isInMiniGame = true
 
                 task.wait(math.random(10, 15))
-                Spring2025.StartTearUpToykyo()
+                --Spring2025.StartTearUpToykyo()
             end
         end
     end
@@ -8472,9 +8409,9 @@ localPlayer.PlayerGui.DialogApp.Dialog.ChildAdded:Connect(function(
                 NormalDialogChild.Info:WaitForChild('TextLabel')
                 NormalDialogChild.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
                 )
-                    if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Sakura Swoop') then
+                    if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Sakura Swoop') and getgenv().AutoMinigame then
                         onTextChangedMiniGame()
-                    elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Tear Up Toykyo') then
+                    elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Tear Up Toykyo') and getgenv().AutoMinigame2 then
                         onTextChangedMiniGame()
                     elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
                         game:Shutdown()
@@ -8493,9 +8430,9 @@ localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog:GetPropertyChangedSignal('Vi
         localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info:WaitForChild('TextLabel')
         localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
         )
-            if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Sakura Swoop') then
+            if localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Sakura Swoop') and getgenv().AutoMinigame then
                 onTextChangedMiniGame()
-            elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Tear Up Toykyo') then
+            elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Tear Up Toykyo') and getgenv().AutoMinigame2 then
                 onTextChangedMiniGame()
             elseif localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
                 game:Shutdown()
@@ -8505,7 +8442,7 @@ localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog:GetPropertyChangedSignal('Vi
         end)
     end
 end)
-localPlayer.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
+--[[ localPlayer.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
 )
     if localPlayer.PlayerGui.MinigameRewardsApp.Body.Visible then
         localPlayer.PlayerGui.MinigameRewardsApp.Body:WaitForChild('Button')
@@ -8526,8 +8463,8 @@ localPlayer.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal('Visible'
             Spring2025.Teleport()
         end
     end
-end)
-localPlayer.PlayerGui.MinigameNewsPaperApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
+end) --]]
+--[[localPlayer.PlayerGui.MinigameNewsPaperApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
 )
     if localPlayer.PlayerGui.MinigameNewsPaperApp.Body.Visible then
         localPlayer.PlayerGui.MinigameNewsPaperApp.Body:WaitForChild('Button')
@@ -8546,8 +8483,9 @@ localPlayer.PlayerGui.MinigameNewsPaperApp.Body:GetPropertyChangedSignal('Visibl
             Spring2025.Teleport()
         end
     end
-end)
-localPlayer.PlayerGui.BattlePassApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
+end) --]]
+
+--[[ localPlayer.PlayerGui.BattlePassApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
 )
     if localPlayer.PlayerGui.BattlePassApp.Body.Visible then
         localPlayer.PlayerGui.BattlePassApp.Body:WaitForChild('InnerBody')
@@ -8564,7 +8502,7 @@ localPlayer.PlayerGui.BattlePassApp.Body:GetPropertyChangedSignal('Visible'):Con
             end
         end
     end
-end)
+end)--]]
 localPlayer.Idled:Connect(function()
     VirtualUser:ClickButton2(Vector2.new())
 end)
@@ -8891,13 +8829,13 @@ local FarmToggle = FarmTab:CreateToggle({
      Callback = function(Value)
 
          getgenv().FocusFarmAgePotions = Value
-         getPet(1)
+        -- getPet(1)
 
-         task.wait(2)
+         -- task.wait(2)
 
-         if isProHandler then
-         getPet(2)
-         end
+         -- if isProHandler then
+        -- getPet(2)
+        -- end
      end,
  })
 -------------------------------------------
@@ -8941,23 +8879,28 @@ end)
      end,
  })
 
+
 ----------- Minigames -------------
+FarmTab:CreateSection("Events & Minigames: Nothing for Now")
+--------------------------------------
 --[[local FarmToggle = FarmTab:CreateToggle({
-     Name = "ID 2025 - Slippery Slope Minigame",
+     Name = "Sakura Swoop Minigame",
      CurrentValue = false,
      Flag = "Toggle10",
      Callback = function(Value)
-     --getgenv().AutoMinigame = Value
 
---task.wait(2)    
+     getgenv().AutoMinigame = Value
 
-    --ReplicatedStorage.API["TeamAPI/ChooseTeam"]:InvokeServer("Parents", {["dont_send_back_home"] = true, ["source_for_logging"] = "avatar_editor"})
+     end,
+ }) 
 
-    task.wait(2) do 
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Tear Up Toykyo Minigame",
+     CurrentValue = false,
+     Flag = "Toggle11",
+     Callback = function(Value)
 
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-1/refs/heads/main/Tor_ID.lua"))()
-end
-
+     getgenv().AutoMinigame2 = Value
 
      end,
  }) --]]
@@ -9602,6 +9545,7 @@ Rayfield:SetVisibility(true)
 
 --------------------update Stats UI ------------------------
 StatsGuis:UpdateText("NameFrame")
+StatsGuis:UpdateText("BucksAndPotionFrame")
 
         task.spawn(function()
 
