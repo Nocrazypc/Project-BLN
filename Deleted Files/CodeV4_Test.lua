@@ -7884,7 +7884,7 @@ local autoFarm = function()
             if isInMiniGame then
                 repeat
                    -- Misc.DebugModePrint('\u{23f1}\u{fe0f} Waiting for 60 secs [inside minigame] \u{23f1}\u{fe0f}')
-                   -- task.wait(60)
+                   task.wait(60)
                 until not isInMiniGame
 
                 isInMiniGame = false
