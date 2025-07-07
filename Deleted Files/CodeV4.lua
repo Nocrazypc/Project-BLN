@@ -8845,7 +8845,7 @@ end)
 ----------- Minigames -------------
 FarmTab:CreateSection("Events & Minigames: Nothing for Now")
 --------------------------------------
-local FarmToggle = FarmTab:CreateToggle({
+--[[local FarmToggle = FarmTab:CreateToggle({
      Name = "Treasure Defense Minigame",
      CurrentValue = false,
      Flag = "Toggle10",
@@ -8854,7 +8854,7 @@ local FarmToggle = FarmTab:CreateToggle({
      getgenv().AutoMinigame = Value
 
      end,
- }) 
+ }) --]]
 
 --[[local FarmToggle = FarmTab:CreateToggle({
      Name = "Tear Up Toykyo Minigame",
