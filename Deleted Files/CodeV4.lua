@@ -6996,9 +6996,8 @@ Check the Developer Console for more information.]],
                 task.wait(1)
             until Summerfest2025.IsSwordEquipped()
 
-            --while gameFolder and gameFolder.is_game_active.Value do
-            while blockPart do
-                Summerfest2025.TeleportTo(blockPart)
+            while gameFolder and gameFolder.is_game_active.Value do
+                --Summerfest2025.TeleportTo(blockPart)
                 Summerfest2025.HitEnemy()
                 task.wait(1.01)
             end
