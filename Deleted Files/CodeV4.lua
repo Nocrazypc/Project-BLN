@@ -6899,19 +6899,6 @@ Check the Developer Console for more information.]],
 
         function Summerfest2025.HitEnemy()
 
-	--[[local vim = game:service'VirtualInputManager'
-  task.wait(0.10)
-  vim:SendKeyEvent(true, "E", true, game)
-  task.wait(0.10)
-  vim:SendKeyEvent(true, "E", false, game)--]]
- 
-        --[[local xOffset1 = xOffset or 60
-        local yOffset1 = yOffset or 60
-    
-        VirtualInputManager:SendMouseButtonEvent(button.AbsolutePosition.X + xOffset1, button.AbsolutePosition.Y + yOffset1, 0, true, game, 1)
-        task.wait(0.1)
-        VirtualInputManager:SendMouseButtonEvent(button.AbsolutePosition.X + xOffset1, button.AbsolutePosition.Y + yOffset1, 0, false, game, 1)--]]
-
             VirtualInputManager:SendMouseButtonEvent(viewportSize.X / 2, viewportSize.Y / 2, 0, true, game, 1)
             task.wait(0.1)
             VirtualInputManager:SendMouseButtonEvent(viewportSize.X / 2, viewportSize.Y / 2, 0, false, game, 1)
