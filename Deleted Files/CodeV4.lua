@@ -7299,7 +7299,7 @@ local TradeLicense = __DARKLUA_BUNDLE_MODULES.load('l')
 local BulkPotions = __DARKLUA_BUNDLE_MODULES.load('m')
 local Tutorials = __DARKLUA_BUNDLE_MODULES.load('n')
 local PotatoMode = __DARKLUA_BUNDLE_MODULES.load('o')
---local Spring2025 = __DARKLUA_BUNDLE_MODULES.load('p')
+local Summerfest2025 = __DARKLUA_BUNDLE_MODULES.load('p')
 local clipboard = Clipboard.new()
 local taskBoard = TaskBoard.new()
 
@@ -7549,46 +7549,6 @@ local agePotionCount = function(nameId)
 
     return count
 end
---[[local eventCurrencyAmount = function()
-    return ClientData.get_data()[localPlayer.Name].cherry_blossoms_2025 or 0
-end--]]
---[[local updateStatsGui = function()
-    StatsGuis2:UpdateTextFor('TimeLabel', startTime)
-
-    potionsGained = agePotionCount('pet_age_potion') - startPotionAmount
-
-    if potionsGained < 0 then
-        potionsGained = 0
-    end
-
-    TempPotions:UpdateTextFor('TempPotions', potionsGained)
-
-    tinyPotionsGained = agePotionCount('tiny_pet_age_potion') - startTinyPotionAmount
-
-    if tinyPotionsGained < 0 then
-        tinyPotionsGained = 0
-    end
-
-    TempTinyPotions:UpdateTextFor('TempTinyPotions', tinyPotionsGained)
-
-    local currentEventCurrency = eventCurrencyAmount()
-
-    if currentEventCurrency >= startEventCurrencyAmount then
-        eventCurrencyGained = eventCurrencyGained + (currentEventCurrency - startEventCurrencyAmount)
-        startEventCurrencyAmount = currentEventCurrency
-    elseif currentEventCurrency < startEventCurrencyAmount then
-        startEventCurrencyAmount = currentEventCurrency
-    end
-
-    TempEventCurrency:UpdateTextFor('TempEventCurrency', eventCurrencyGained)
-    TotalEventCurrency:UpdateTextFor('TotalEventCurrency')
-    TotalPotions:UpdateTextFor('TotalPotions')
-    TotalBucks:UpdateTextFor('TotalBucks')
-    BlankSlot1:UpdateTextFor('BlankSlot1')
-    BlankSlot2:UpdateTextFor('BlankSlot2')
-    TotalShiverBaits:UpdateTextFor('TotalShiverBaits')
-    TotalSubzeroBaits:UpdateTextFor('TotalSubzeroBaits')
-end--]]
 
 local findBait = function()
     local baits = getgenv().SETTINGS.BAIT_TO_USE_IN_ORDER
