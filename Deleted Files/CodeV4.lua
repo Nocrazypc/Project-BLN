@@ -8442,8 +8442,7 @@ localPlayer.PlayerGui.DialogApp.Dialog.NormalDialog:GetPropertyChangedSignal('Vi
         end)
     end
 end)
---[[ localPlayer.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
-)
+localPlayer.PlayerGui.MinigameRewardsApp.Body:GetPropertyChangedSignal('Visible'):Connect(function()
     if localPlayer.PlayerGui.MinigameRewardsApp.Body.Visible then
         localPlayer.PlayerGui.MinigameRewardsApp.Body:WaitForChild('Button')
         localPlayer.PlayerGui.MinigameRewardsApp.Body.Button:WaitForChild('Face')
@@ -8459,11 +8458,11 @@ end)
 
             isInMiniGame = false
 
-            Teleport.DownloadMainMap()
-            Spring2025.Teleport()
+            --Teleport.DownloadMainMap()
+            Teleport.FarmingHome()
         end
     end
-end) --]]
+end) 
 --[[localPlayer.PlayerGui.MinigameNewsPaperApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
 )
     if localPlayer.PlayerGui.MinigameNewsPaperApp.Body.Visible then
