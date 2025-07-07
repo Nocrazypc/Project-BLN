@@ -6992,7 +6992,7 @@ Check the Developer Console for more information.]],
      end
 
 -----------------------------------------------------
---end
+end
 
 if not game:IsLoaded() then
     game.Loaded:Wait()
