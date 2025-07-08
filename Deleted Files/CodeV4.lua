@@ -4596,9 +4596,9 @@ do
 
                         humanoidRootPart.Anchored = false
 
-                        task.wait()
+                        task.wait(4)
                         removeGameOverButton('MinigameRewardsApp')
-                        task.wait(6)
+                        task.wait(2)
                         Teleport.FarmingHome()
                         localPlayer:SetAttribute('StopFarmingTemp', false)
                     end
