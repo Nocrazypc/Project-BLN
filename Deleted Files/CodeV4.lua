@@ -4758,329 +4758,8 @@ do
 
         return self
     end
+
     function __DARKLUA_BUNDLE_MODULES.p()
-        local Players = cloneref(game:GetService('Players'))
-        local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
-        local StatsGuiClass = {}
-
-        StatsGuiClass.__index = StatsGuiClass
-
-        local localPlayer = Players.LocalPlayer
-        local otherGuis = {}
-        local DEFAULT_COLOR = Color3.fromRGB(0, 0, 0)
-        local setButtonUiSettings = function(buttonSettings)
-            local button = Instance.new('TextButton')
-
-            button.Name = buttonSettings.Name
-            button.AnchorPoint = Vector2.new(0.5, 0.5)
-            button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            button.BackgroundTransparency = 1
-            button.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            button.BorderSizePixel = 0
-            button.Position = buttonSettings.Position
-            button.Size = UDim2.new(0.2, 0, 0.2, 0)
-            button.Font = Enum.Font.FredokaOne
-            button.Text = buttonSettings.Text
-            button.TextColor3 = Color3.fromRGB(0, 0, 0)
-            button.TextScaled = true
-            button.TextSize = 14
-            button.TextWrapped = true
-            button.TextXAlignment = Enum.TextXAlignment.Left
-            button.Parent = localPlayer:WaitForChild('PlayerGui'):WaitForChild('StatsGui')
-
-            return button
-        end
-
-        function StatsGuiClass.new(name)
-            local self = setmetatable({}, StatsGuiClass)
-
-            self.TextLabel = Instance.new('TextLabel')
-            self.UICorner = Instance.new('UICorner')
-            self.TextLabel.Name = name
-            self.TextLabel.BackgroundColor3 = DEFAULT_COLOR
-            self.TextLabel.BackgroundTransparency = 0.25
-            self.TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            self.TextLabel.BorderSizePixel = 0
-            self.TextLabel.Size = UDim2.new(0.330000013, 0, 0.486617982, 0)
-            self.TextLabel.Font = Enum.Font.FredokaOne
-            self.TextLabel.RichText = false
-            self.TextLabel.Text = ''
-            self.TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-            self.TextLabel.TextScaled = true
-            self.TextLabel.TextSize = 14
-            self.TextLabel.TextStrokeTransparency = 0
-            self.TextLabel.TextWrapped = true
-            self.StatsGui = localPlayer:WaitForChild('PlayerGui'):WaitForChild('StatsGui')
-            self.TextLabel.Parent = self.StatsGui:WaitForChild('MainFrame'):WaitForChild('MiddleFrame')
-            self.UICorner.CornerRadius = UDim.new(0, 16)
-            self.UICorner.Parent = self.TextLabel
-            self.Debounce = false
-
-            return self
-        end
-        function StatsGuiClass.Init()
-            local StatsGui = Instance.new('ScreenGui')
-
-            StatsGui.Name = 'StatsGui'
-            StatsGui.DisplayOrder = 0
-            StatsGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-            StatsGui.Parent = localPlayer:WaitForChild('PlayerGui')
-
-            local MainFrame = Instance.new('Frame')
-
-            MainFrame.Name = 'MainFrame'
-            MainFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            MainFrame.BackgroundTransparency = 1
-            MainFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            MainFrame.BorderSizePixel = 0
-            MainFrame.Position = UDim2.new(0.276041657, 0, 0.0577475652, 0)
-            MainFrame.Size = UDim2.new(0.674468458, 0, 0.795313776, 0)
-            MainFrame.Parent = StatsGui
-            otherGuis.TimeLabel = Instance.new('TextLabel')
-            otherGuis.TimeLabel.Name = 'TimeLabel'
-            otherGuis.TimeLabel.BackgroundColor3 = DEFAULT_COLOR
-            otherGuis.TimeLabel.BackgroundTransparency = 0.25
-            otherGuis.TimeLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            otherGuis.TimeLabel.BorderSizePixel = 0
-            otherGuis.TimeLabel.Size = UDim2.new(1, 0, 0.200000018, 0)
-            otherGuis.TimeLabel.Font = Enum.Font.FredokaOne
-            otherGuis.TimeLabel.RichText = false
-            otherGuis.TimeLabel.Text = '\u{23f1}\u{fe0f} time'
-            otherGuis.TimeLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-            otherGuis.TimeLabel.TextScaled = true
-            otherGuis.TimeLabel.TextSize = 14
-            otherGuis.TimeLabel.TextStrokeTransparency = 0
-            otherGuis.TimeLabel.TextWrapped = true
-            otherGuis.TimeLabel.Parent = MainFrame
-
-            local UICorner = Instance.new('UICorner')
-
-            UICorner.CornerRadius = UDim.new(0, 16)
-            UICorner.Parent = otherGuis.TimeLabel
-
-            local MiddleFrame = Instance.new('Frame')
-
-            MiddleFrame.Name = 'MiddleFrame'
-            MiddleFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            MiddleFrame.BackgroundTransparency = 1
-            MiddleFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            MiddleFrame.BorderSizePixel = 0
-            MiddleFrame.Position = UDim2.new(0, 0, 0.219711155, 0)
-            MiddleFrame.Size = UDim2.new(0.999243617, 0, 0.55549103, 0)
-            MiddleFrame.Parent = MainFrame
-
-            local UIGridLayout = Instance.new('UIGridLayout')
-
-            UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
-            UIGridLayout.CellPadding = UDim2.new(0.00999999978, 0, 0.00999999978, 0)
-            UIGridLayout.CellSize = UDim2.new(0.242, 0, 0.5, 0)
-            UIGridLayout.FillDirectionMaxCells = 0
-            UIGridLayout.Parent = MiddleFrame
-
-            local TextButton = Instance.new('TextButton')
-
-            TextButton.AnchorPoint = Vector2.new(0.5, 0.5)
-            TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            TextButton.BackgroundTransparency = 1
-            TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            TextButton.BorderSizePixel = 0
-            TextButton.Position = UDim2.new(0.33, 0, 0.018, 0)
-            TextButton.Size = UDim2.new(0.1, 0, 0.1, 0)
-            TextButton.Font = Enum.Font.FredokaOne
-            TextButton.Text = '\u{1f648}'
-            TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-            TextButton.TextScaled = true
-            TextButton.TextSize = 14
-            TextButton.TextWrapped = true
-            TextButton.TextXAlignment = Enum.TextXAlignment.Left
-            TextButton.Parent = StatsGui
-
-            local TIME_SAVED
-
-            otherGuis.TimeLabel.MouseEnter:Connect(function()
-                TIME_SAVED = otherGuis.TimeLabel.Text
-                otherGuis.TimeLabel.Text = string.format('\u{1f916} %s', tostring(localPlayer.Name))
-            end)
-            otherGuis.TimeLabel.MouseLeave:Connect(function()
-                otherGuis.TimeLabel.Text = TIME_SAVED
-            end)
-
-            local isVisible = true
-
-            TextButton.Activated:Connect(function()
-                isVisible = not isVisible
-                MainFrame.Visible = isVisible
-            end)
-        end
-        function StatsGuiClass.SetTimeLabelText(startTime)
-            local currentTime = DateTime.now().UnixTimestamp
-            local timeElapsed = currentTime - startTime
-
-            otherGuis.TimeLabel.Text = string.format('\u{23f1}\u{fe0f} %s', tostring(Utils.FormatTime(timeElapsed)))
-        end
-        function StatsGuiClass.CreateButton(buttonSettings)
-            local button = setButtonUiSettings(buttonSettings)
-
-            button.Activated:Connect(function()
-                buttonSettings.Callback()
-
-                button.Text = '\u{2705}'
-
-                task.wait(1)
-
-                button.Text = buttonSettings.Text
-            end)
-        end
-        function StatsGuiClass.UpdateTextForTotal(self)
-            if self.TextLabel.Name == 'TotalPotions' then
-                local formatted = Utils.FormatNumber(Utils.FoodItemCount('pet_age_potion'))
-
-                self.TextLabel.Text = string.format('\u{1f9ea} %s', tostring(formatted))
-            elseif self.TextLabel.Name == 'TotalTinyPotions' then
-                local formatted = Utils.FormatNumber(Utils.FoodItemCount('tiny_pet_age_potion'))
-
-                self.TextLabel.Text = string.format('\u{2697}\u{fe0f} %s', tostring(formatted))
-            elseif self.TextLabel.Name == 'TotalBucks' then
-                local formatted = Utils.FormatNumber(Utils.BucksAmount())
-
-                self.TextLabel.Text = string.format('\u{1f4b0} %s', tostring(formatted))
-            elseif self.TextLabel.Name == 'TotalEventCurrency' then
-                local formatted = Utils.FormatNumber(Utils.EventCurrencyAmount())
-
-                self.TextLabel.Text = string.format('\u{1f3f4}\u{200d}\u{2620}\u{fe0f} %s', tostring(formatted))
-            elseif self.TextLabel.Name == 'TotalShiverBaits' then
-                local formatted = Utils.FormatNumber(Utils.FoodItemCount('ice_dimension_2025_shiver_cone_bait'))
-
-                self.TextLabel.Text = string.format('\u{1f43a} %s', tostring(formatted))
-            elseif self.TextLabel.Name == 'TotalSubzeroBaits' then
-                local formatted = Utils.FormatNumber(Utils.FoodItemCount('ice_dimension_2025_subzero_popsicle_bait'))
-
-                self.TextLabel.Text = string.format('\u{1f982} %s', tostring(formatted))
-            end
-        end
-        function StatsGuiClass.UpdateTextForTemp(self, amount)
-            if self.TextLabel.Name == 'TempPotions' and amount then
-                self.TextLabel.Text = string.format('\u{1f9ea} %s', tostring(Utils.FormatNumber(amount)))
-            elseif self.TextLabel.Name == 'TempTinyPotions' and amount then
-                self.TextLabel.Text = string.format('\u{2697}\u{fe0f} %s', tostring(Utils.FormatNumber(amount)))
-            elseif self.TextLabel.Name == 'TempBucks' and amount then
-                self.TextLabel.Text = string.format('\u{1f4b0} %s', tostring(Utils.FormatNumber(amount)))
-            elseif self.TextLabel.Name == 'TempEventCurrency' and amount then
-                self.TextLabel.Text = string.format('\u{1f3f4}\u{200d}\u{2620}\u{fe0f} %s', tostring(Utils.FormatNumber(amount)))
-            end
-        end
-
-        return StatsGuiClass
-    end
-    function __DARKLUA_BUNDLE_MODULES.q()
-        local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
-        local Players = cloneref(game:GetService('Players'))
-        local StatsGuiClass = __DARKLUA_BUNDLE_MODULES.load('p')
-        local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
-        local self = {}
-        local localPlayer = Players.LocalPlayer
-        local HintApp = (localPlayer:WaitForChild('PlayerGui'):WaitForChild('HintApp'))
-        local startTime = DateTime.now().UnixTimestamp
-        local startPotionAmount
-        local startTinyPotionAmount
-        local startEventCurrencyAmount
-        local potionsGained = 0
-        local tinyPotionsGained = 0
-        local bucksGained = 0
-        local eventCurrencyGained = 0
-        local UpdateTextEvent = Instance.new('BindableEvent')
-
-        UpdateTextEvent.Name = 'UpdateTextEvent'
-        UpdateTextEvent.Parent = ReplicatedStorage
-
-        StatsGuiClass.Init()
-
-        self.TempPotions = StatsGuiClass.new('TempPotions')
-        self.TempTinyPotions = StatsGuiClass.new('TempTinyPotions')
-        self.TempBucks = StatsGuiClass.new('TempBucks')
-        self.TempEventCurrency = StatsGuiClass.new('TempEventCurrency')
-        self.TotalPotions = StatsGuiClass.new('TotalPotions')
-        self.TotalTinyPotions = StatsGuiClass.new('TotalTinyPotions')
-        self.TotalBucks = StatsGuiClass.new('TotalBucks')
-        self.TotalEventCurrency = StatsGuiClass.new('TotalEventCurrency')
-        self.BlankSlot1 = StatsGuiClass.new('BlankSlot1')
-        self.BlankSlot2 = StatsGuiClass.new('BlankSlot2')
-        self.TotalShiverBaits = StatsGuiClass.new('TotalShiverBaits')
-        self.TotalSubzeroBaits = StatsGuiClass.new('TotalSubzeroBaits')
-
-        local updateAllStatsGui = function()
-            StatsGuiClass.SetTimeLabelText(startTime)
-
-            potionsGained = Utils.FoodItemCount('pet_age_potion') - startPotionAmount
-
-            if potionsGained < 0 then
-                potionsGained = 0
-            end
-
-            self.TempPotions:UpdateTextForTemp(potionsGained)
-
-            tinyPotionsGained = Utils.FoodItemCount('tiny_pet_age_potion') - startTinyPotionAmount
-
-            if tinyPotionsGained < 0 then
-                tinyPotionsGained = 0
-            end
-
-            self.TempTinyPotions:UpdateTextForTemp(tinyPotionsGained)
-
-            local currentEventCurrency = Utils.EventCurrencyAmount()
-
-            if currentEventCurrency >= startEventCurrencyAmount then
-                eventCurrencyGained = eventCurrencyGained + (currentEventCurrency - startEventCurrencyAmount)
-                startEventCurrencyAmount = currentEventCurrency
-            elseif currentEventCurrency < startEventCurrencyAmount then
-                startEventCurrencyAmount = currentEventCurrency
-            end
-
-            self.TempEventCurrency:UpdateTextForTemp(eventCurrencyGained)
-            self.TotalEventCurrency:UpdateTextForTotal()
-            self.TotalPotions:UpdateTextForTotal()
-            self.TotalTinyPotions:UpdateTextForTotal()
-            self.TotalBucks:UpdateTextForTotal()
-            self.TotalShiverBaits:UpdateTextForTotal()
-            self.TotalSubzeroBaits:UpdateTextForTotal()
-        end
-
-        function self.Init()
-            startPotionAmount = Utils.FoodItemCount('pet_age_potion')
-            startTinyPotionAmount = Utils.FoodItemCount('tiny_pet_age_potion')
-            startEventCurrencyAmount = Utils.EventCurrencyAmount()
-
-            UpdateTextEvent.Event:Connect(updateAllStatsGui)
-            HintApp.TextLabel:GetPropertyChangedSignal('Text'):Connect(function()
-                if HintApp.TextLabel.Text:match('Bucks') then
-                    local text = HintApp.TextLabel.Text
-
-                    if not text then
-                        return
-                    end
-                    if not text:split('+')[2] then
-                        return
-                    end
-
-                    local amount = tonumber(text:split('+')[2]:split(' ')[1])
-
-                    if not amount then
-                        return
-                    end
-
-                    bucksGained = bucksGained + amount
-
-                    self.TempBucks:UpdateTextForTemp(bucksGained)
-                end
-            end)
-        end
-        function self.Start()
-            UpdateTextEvent:Fire()
-        end
-
-        return self
-    end
-    function __DARKLUA_BUNDLE_MODULES.r()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
@@ -5249,7 +4928,7 @@ do
 
         return self
     end
-    function __DARKLUA_BUNDLE_MODULES.s()
+    function __DARKLUA_BUNDLE_MODULES.q()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
@@ -5283,7 +4962,7 @@ do
 
         return self
     end
-    function __DARKLUA_BUNDLE_MODULES.t()
+    function __DARKLUA_BUNDLE_MODULES.r()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
@@ -5335,7 +5014,7 @@ do
 
         return self
     end
-    function __DARKLUA_BUNDLE_MODULES.u()
+    function __DARKLUA_BUNDLE_MODULES.s()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
         local HttpService = cloneref(game:GetService('HttpService'))
@@ -5541,7 +5220,7 @@ do
 
         return self
     end
-    function __DARKLUA_BUNDLE_MODULES.v()
+    function __DARKLUA_BUNDLE_MODULES.t()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Workspace = cloneref(game:GetService('Workspace'))
         local Players = cloneref(game:GetService('Players'))
@@ -6227,7 +5906,7 @@ do
 
         return Ailment
     end
-    function __DARKLUA_BUNDLE_MODULES.w()
+    function __DARKLUA_BUNDLE_MODULES.u()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
@@ -6435,7 +6114,7 @@ do
 
         return FarmingPet
     end
-    function __DARKLUA_BUNDLE_MODULES.x()
+    function __DARKLUA_BUNDLE_MODULES.v()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
@@ -6796,7 +6475,7 @@ do
 
         return self
     end
-    function __DARKLUA_BUNDLE_MODULES.y()
+    function __DARKLUA_BUNDLE_MODULES.v()
         local InterfaceBuild = '9NBD'
         local Release = 'Build 1.67'
         local RayfieldFolder = 'Rayfield'
