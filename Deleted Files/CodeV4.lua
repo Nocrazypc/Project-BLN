@@ -11682,12 +11682,6 @@ local files = {
         TaskBoardHandler = __DARKLUA_BUNDLE_MODULES.load('r'),
     },
     {
-        AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('x'),
-    },
-    {
-        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('A'),
-    },
-    {
         TradeLicenseHandler = __DARKLUA_BUNDLE_MODULES.load('s'),
     },
     {
@@ -11696,7 +11690,12 @@ local files = {
     {
         WebhookHandler = __DARKLUA_BUNDLE_MODULES.load('u'),
     },
-
+    {
+        AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('x'),
+    },
+    {
+        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('A'),
+    },
 }
 
 Utils.PrintDebug('----- INITIALIZING MODULES -----')
