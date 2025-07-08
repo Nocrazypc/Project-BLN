@@ -11589,7 +11589,7 @@ FarmTab:CreateButton({
         function self.Start()
             task.defer(function()
                 setupRayfield()
-                Rayfield:SetVisibility(false)
+                Rayfield:SetVisibility(true)
             end)
         end
 
