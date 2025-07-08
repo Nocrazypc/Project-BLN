@@ -11691,9 +11691,9 @@ local files = {
     {
         TutorialHandler = __DARKLUA_BUNDLE_MODULES.load('t'),
     },
-    --[[{
+    {
         WebhookHandler = __DARKLUA_BUNDLE_MODULES.load('u'),
-    },--]]
+    },
 
 }
 
