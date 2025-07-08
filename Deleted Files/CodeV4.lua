@@ -6690,7 +6690,7 @@ do
         end
         local startAutoFarm = function()
             task.spawn(function()
-                while getgenv().SETTINGS.ENABLE_AUTO_FARM or getgenv().auto_farm do
+                while getgenv().auto_farm do
                     if game.JobId ~= jobId then
                         getgenv().SETTINGS.ENABLE_AUTO_FARM = false
 
