@@ -11674,16 +11674,10 @@ local files = {
         GameGuiHandler = __DARKLUA_BUNDLE_MODULES.load('n'),
     },
     {
-        TaskBoardHandler = __DARKLUA_BUNDLE_MODULES.load('r'),
-    },
-    {
-        AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('x'),
-    },
-    {
-        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('A'),
-    },
-    {
         PotatoModeHandler = __DARKLUA_BUNDLE_MODULES.load('o'),
+    },
+    {
+        TaskBoardHandler = __DARKLUA_BUNDLE_MODULES.load('r'),
     },
     {
         TradeLicenseHandler = __DARKLUA_BUNDLE_MODULES.load('s'),
@@ -11694,7 +11688,12 @@ local files = {
     {
         WebhookHandler = __DARKLUA_BUNDLE_MODULES.load('u'),
     },
-
+    {
+        AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('x'),
+    },
+    {
+        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('A'),
+    },
 }
 
 Utils.PrintDebug('----- INITIALIZING MODULES -----')
