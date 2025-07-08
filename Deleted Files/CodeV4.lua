@@ -3725,15 +3725,15 @@ do
             Utils.PrintDebug(createPotionObject(potionUniques))
             task.wait(2)
 
-            --[[local mainFrame = (localPlayer:WaitForChild('PlayerGui'):WaitForChild('StatsGui'):WaitForChild('MainFrame'))
-            local TotalPotions = (mainFrame:WaitForChild('MiddleFrame'):WaitForChild('TotalPotions'))
-            local TotalTinyPotions = (mainFrame:WaitForChild('MiddleFrame'):WaitForChild('TotalTinyPotions'))
+            --local mainFrame = (localPlayer:WaitForChild('PlayerGui'):WaitForChild('StatsGui'):WaitForChild('MainFrame'))
+            --local TotalPotions = (mainFrame:WaitForChild('MiddleFrame'):WaitForChild('TotalPotions'))
+            --local TotalTinyPotions = (mainFrame:WaitForChild('MiddleFrame'):WaitForChild('TotalTinyPotions'))
 
-            TotalPotions.Text = string.format('\u{1f9ea} %s', tostring(agePotionCount('pet_age_potion')))
-            TotalTinyPotions.Text = string.format('\u{2697}\u{fe0f} %s', tostring(agePotionCount('tiny_pet_age_potion')))
+            --TotalPotions.Text = string.format('\u{1f9ea} %s', tostring(agePotionCount('pet_age_potion')))
+            --TotalTinyPotions.Text = string.format('\u{2697}\u{fe0f} %s', tostring(agePotionCount('tiny_pet_age_potion')))
 
             return
-        end--]]
+        end
         function BulkPotion.AgeAllPetsOfSameName(petId, maxAmount)
             if getgenv().SETTINGS.PET_AUTO_FUSION then
                 Fusion.MakeMega(false)
