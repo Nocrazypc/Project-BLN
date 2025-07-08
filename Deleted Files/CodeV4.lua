@@ -11604,13 +11604,13 @@ if game.PlaceId ~= 920587237 then
 end
 ------ Welcome MSG -------
 
-StarterGui:SetCore(
+--[[StarterGui:SetCore(
     "SendNotification",
     {
         Title = "Hello Potato 😊",
         Text = "We're Back.. Be Happy!"
     }
-)
+)--]]
 --------------------------------
 local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
 local Players = cloneref(game:GetService('Players'))
