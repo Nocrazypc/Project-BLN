@@ -6347,7 +6347,7 @@ do
                     return
                 end
 
-                Utils.PrintDebug(string.format('\u{1f414}\u{1f414} No starter egg found, trying cdog or cat %s \u{1f414}\u{1f414}', tostring(whichPet)))
+                Utils.PrintDebug(string.format('\u{1f414}\u{1f414} No starter egg found, trying dog or cat %s \u{1f414}\u{1f414}', tostring(whichPet)))
 
                 if GetInventory.GetPetFriendship(potionFarmPets, whichPet) then
                     return
