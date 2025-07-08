@@ -6692,7 +6692,7 @@ do
             task.spawn(function()
                 while getgenv().auto_farm do
                     if game.JobId ~= jobId then
-                        getgenv().SETTINGS.ENABLE_AUTO_FARM = false
+                        getgenv().auto_farm = false
 
                         Utils.PrintDebug(' \u{26d4} not same jobid so exiting \u{26d4}')
                         task.wait(60)
