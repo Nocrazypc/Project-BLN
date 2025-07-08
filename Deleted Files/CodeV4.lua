@@ -11667,9 +11667,6 @@ local files = {
         PotatoModeHandler = __DARKLUA_BUNDLE_MODULES.load('o'),
     },
     {
-        StatsGuiHandler = __DARKLUA_BUNDLE_MODULES.load('q'),
-    },
-    {
         TaskBoardHandler = __DARKLUA_BUNDLE_MODULES.load('r'),
     },
     {
