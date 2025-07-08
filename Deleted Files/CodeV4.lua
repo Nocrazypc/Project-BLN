@@ -10804,7 +10804,7 @@ local FarmTab = Window:CreateTab("Farm", 4483362458)
 FarmTab:CreateButton({
 	Name = "STOP AutoFarm",
 	Callback = function()
-	localPlayer:SetAttribute('StopFarmingTemp', true
+	localPlayer:SetAttribute('StopFarmingTemp', true)
 	end,
 })
 --[[local FarmToggle = FarmTab:CreateToggle({
