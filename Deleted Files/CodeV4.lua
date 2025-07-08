@@ -6887,11 +6887,15 @@ Check the Developer Console for more information.]],
         local Players = game:GetService('Players')
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
         local CoconutBonkMinigameClient = (require(ReplicatedStorage.SharedModules.ContentPacks.Summerfest2025.Minigames.CoconutBonkMinigameClient))
-        local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
+        --local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
         local Summerfest2025 = {}
         local localPlayer = Players.LocalPlayer
         local currentCamera = Workspace.CurrentCamera
         local viewportSize = currentCamera.ViewportSize
+
+        function Summerfest2025.GetCharacter()
+            return localPlayer.Character or localPlayer.CharacterAdded:Wait()
+        end
 
         function Summerfest2025.HitEnemy()
             VirtualInputManager:SendMouseButtonEvent(viewportSize.X / 2, viewportSize.Y / 2, 0, true, game, 1)
@@ -6935,7 +6939,7 @@ Check the Developer Console for more information.]],
             return stairModel.Block
         end
         function Summerfest2025.IsSwordEquipped()
-            local isSword = Utils.GetCharacter():FindFirstChild('Sword')
+            local isSword = Summerfest2025.GetCharacter():FindFirstChild('Sword')
 
             print(string.format('IsSwordEquipped: %s', tostring(isSword)))
 
