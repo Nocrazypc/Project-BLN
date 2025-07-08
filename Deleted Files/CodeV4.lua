@@ -10801,17 +10801,22 @@ Check the Developer Console for more information.]],
 --[[ First Tab - Autofarm ]]
 local FarmTab = Window:CreateTab("Farm", 4483362458)
 ------------------------------------------------
-
-local FarmToggle = FarmTab:CreateToggle({
+FarmTab:CreateButton({
+	Name = "STOP AutoFarm",
+	Callback = function()
+	localPlayer:SetAttribute('StopFarmingTemp', true
+	end,
+})
+--[[local FarmToggle = FarmTab:CreateToggle({
      Name = "AutoFarm",
      CurrentValue = true,
      Flag = "Toggle01",
      Callback = function(Value)
 			
          getgenv().auto_farm = Value
-
+         localPlayer:SetAttribute('StopFarmingTemp', false)
      end,
- })
+ })--]]
 -----------------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Pet Auto Fusion",
