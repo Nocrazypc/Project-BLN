@@ -6694,9 +6694,9 @@ do
                     if game.JobId ~= jobId then
                         getgenv().auto_farm = false
 
-                        Utils.PrintDebug(' \u{26d4} not same jobid so exiting \u{26d4}')
-                        task.wait(60)
-                        game:Shutdown()
+                        --Utils.PrintDebug(' \u{26d4} not same jobid so exiting \u{26d4}')
+                        --task.wait()
+                        --game:Shutdown()
 
                         return
                     end
