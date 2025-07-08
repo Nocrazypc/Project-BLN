@@ -10802,10 +10802,10 @@ Check the Developer Console for more information.]],
 local FarmTab = Window:CreateTab("Farm", 4483362458)
 ------------------------------------------------
 FarmTab:CreateButton({
-	Name = "STOP AutoFarm temporarily (1 min)",
+	Name = "STOP AutoFarm temporarily (2 minutes)",
 	Callback = function()
 	localPlayer:SetAttribute('StopFarmingTemp', true)
-        task.wait(60)
+        task.wait(120)
         localPlayer:SetAttribute('StopFarmingTemp', false)
 	end,
 })
@@ -10894,7 +10894,7 @@ end)
 
 
 ----------- Minigames -------------
-FarmTab:CreateSection("Events & Minigames: Nothing for Now")
+FarmTab:CreateSection("Events & Minigames: SummerFest 2025")
 --------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Treasure Defense Minigame",
