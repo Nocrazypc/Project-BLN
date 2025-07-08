@@ -10802,9 +10802,11 @@ Check the Developer Console for more information.]],
 local FarmTab = Window:CreateTab("Farm", 4483362458)
 ------------------------------------------------
 FarmTab:CreateButton({
-	Name = "STOP AutoFarm",
+	Name = "STOP AutoFarm temporarily (1 min)",
 	Callback = function()
 	localPlayer:SetAttribute('StopFarmingTemp', true)
+        task.wait(60)
+        localPlayer:SetAttribute('StopFarmingTemp', false)
 	end,
 })
 --[[local FarmToggle = FarmTab:CreateToggle({
@@ -11680,6 +11682,12 @@ local files = {
         TaskBoardHandler = __DARKLUA_BUNDLE_MODULES.load('r'),
     },
     {
+        AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('x'),
+    },
+    {
+        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('A'),
+    },
+    {
         TradeLicenseHandler = __DARKLUA_BUNDLE_MODULES.load('s'),
     },
     {
@@ -11688,12 +11696,7 @@ local files = {
     {
         WebhookHandler = __DARKLUA_BUNDLE_MODULES.load('u'),
     },
-    {
-        AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('x'),
-    },
-    {
-        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('A'),
-    },
+
 }
 
 Utils.PrintDebug('----- INITIALIZING MODULES -----')
