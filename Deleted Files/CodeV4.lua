@@ -6806,81 +6806,10 @@ Check the Developer Console for more information.]],
 
         return Tutorials
     end
-    function __DARKLUA_BUNDLE_MODULES.o()
-        local Workspace = game:GetService('Workspace')
-        local Terrain = Workspace:WaitForChild('Terrain')
-        local Lighting = game:GetService('Lighting')
 
-        PotatoMode = {}
-
-        local lowSpecTerrain = function()
-            Terrain.WaterReflectance = 0
-            Terrain.WaterTransparency = 1
-            Terrain.WaterWaveSize = 0
-            Terrain.WaterWaveSpeed = 0
-        end
-        local lowSpecLighting = function()
-            Lighting.Brightness = 0
-            Lighting.GlobalShadows = false
-            Lighting.FogEnd = math.huge
-            Lighting.FogStart = 0
-        end
-        local lowSpecTextures = function(v)
-            if v:IsA('Part') then
-                v.Material = Enum.Material.Plastic
-                v.EnableFluidForces = false
-                v.CastShadow = false
-                v.Reflectance = 0
-            elseif v:IsA('BasePart') and not v:IsA('MeshPart') then
-                v.Material = Enum.Material.Plastic
-                v.Reflectance = 0
-            elseif v:IsA('Decal') or v:IsA('Texture') then
-                v.Transparency = 1
-            elseif v:IsA('ParticleEmitter') or v:IsA('Trail') then
-                v.Lifetime = NumberRange.new(0)
-            elseif v:IsA('Explosion') then
-                v.BlastPressure = 1
-                v.BlastRadius = 1
-            elseif v:IsA('Fire') or v:IsA('SpotLight') or v:IsA('Smoke') or v:IsA('Sparkles') then
-                v.Enabled = false
-            elseif v:IsA('MeshPart') then
-                v.Material = Enum.Material.Plastic
-                v.EnableFluidForces = false
-                v.CastShadow = false
-                v.Reflectance = 0
-                v.TextureID = '10385902758728957'
-            elseif v:IsA('SpecialMesh') then
-                v.TextureId = 0
-            elseif v:IsA('ShirtGraphic') then
-                v.Graphic = 1
-            elseif v:IsA('Shirt') or v:IsA('Pants') then
-                v[v.ClassName .. 'Template'] = 1
-            end
-        end
-
-        function PotatoMode.Start()
-            lowSpecTerrain()
-            lowSpecLighting()
-            sethiddenproperty(Lighting, 'Technology', 2)
-            sethiddenproperty(Terrain, 'Decoration', false)
-            sethiddenproperty(Workspace, 'StreamingMinRadius', 32)
-            sethiddenproperty(Workspace, 'StreamingTargetRadius', 32)
-            Lighting:ClearAllChildren()
-
-            for _, v in pairs(Workspace:GetDescendants())do
-                lowSpecTextures(v)
-            end
-
-            Workspace.DescendantAdded:Connect(function(v)
-                lowSpecTextures(v)
-            end)
-        end
-
-        return PotatoMode
-    end
 ----------------------- Summer 25 Minigame ----------
 
-        function __DARKLUA_BUNDLE_MODULES.p()
+        function __DARKLUA_BUNDLE_MODULES.o()
         local ReplicatedStorage = (game:GetService('ReplicatedStorage'))
         local Workspace = (game:GetService('Workspace'))
         local VirtualInputManager = game:GetService('VirtualInputManager')
