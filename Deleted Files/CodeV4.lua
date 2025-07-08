@@ -6821,12 +6821,11 @@ Check the Developer Console for more information.]],
         local localPlayer = Players.LocalPlayer
         local currentCamera = Workspace.CurrentCamera
         local viewportSize = currentCamera.ViewportSize
-
-        function Summerfest2025.GetCharacter()
-            return localPlayer.Character or localPlayer.CharacterAdded:Wait()
-        end
+        local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
 
         function Summerfest2025.HitEnemy()
+        local viewportSize = currentCamera.ViewportSize
+        local VirtualInputManager = game:GetService('VirtualInputManager')
             VirtualInputManager:SendMouseButtonEvent(viewportSize.X / 2, viewportSize.Y / 2, 0, true, game, 1)
             task.wait(0.1)
             VirtualInputManager:SendMouseButtonEvent(viewportSize.X / 2, viewportSize.Y / 2, 0, false, game, 1)
@@ -6868,7 +6867,8 @@ Check the Developer Console for more information.]],
             return stairModel.Block
         end
         function Summerfest2025.IsSwordEquipped()
-            local isSword = Summerfest2025.GetCharacter():FindFirstChild('Sword')
+            local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
+            local isSword = character:FindFirstChild('Sword')
 
             print(string.format('IsSwordEquipped: %s', tostring(isSword)))
 
