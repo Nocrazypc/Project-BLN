@@ -6062,7 +6062,7 @@ Check the Developer Console for more information.]],
             local key = getKeyFrom('summerfest_2025_buccaneer_band')
 
             if not key then
-                Utils.PrintDebug('didnt find key for band')
+                --Utils.PrintDebug('didnt find key for band')
 
                 return
             end
