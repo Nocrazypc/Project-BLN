@@ -6753,7 +6753,7 @@ do
                     end
 
                     tryFeedAgePotion()
-                    UpdateTextEvent:Fire()
+                    --UpdateTextEvent:Fire()
 
                     local waitTime = rng:NextNumber(1, 5)
 
