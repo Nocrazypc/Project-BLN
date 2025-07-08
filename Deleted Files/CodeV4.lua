@@ -10919,7 +10919,7 @@ local FarmToggle = FarmTab:CreateToggle({
 FarmTab:CreateSection("Eggs Only")
 --------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
-     Name = "Auto Buy & Hatch Eggs",
+     Name = "Hatch Eggs",
      CurrentValue = false,
      Flag = "Toggle201",
      Callback = function(Value)
@@ -10927,7 +10927,7 @@ local FarmToggle = FarmTab:CreateToggle({
 	getgenv().auto_farm = Value	
         
 			
-        while task.wait(15) do
+        --[[while task.wait(15) do
         for _, v in pairs(ClientData.get_data()[localPlayer.Name].inventory.pets)do
         task.wait(5)
         if v.id ~= Egg2Buy  then
@@ -10938,7 +10938,7 @@ local FarmToggle = FarmTab:CreateToggle({
 		 end
 	       end
 	    end				
-	end
+	end--]]
      end,
  })
 ----------------------------------
