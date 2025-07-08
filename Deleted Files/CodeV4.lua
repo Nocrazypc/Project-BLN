@@ -6449,7 +6449,7 @@ do
         local FarmingPet = __DARKLUA_BUNDLE_MODULES.load('w')
         local Fusion = __DARKLUA_BUNDLE_MODULES.load('h')
         local self = {}
-        local UpdateTextEvent = (ReplicatedStorage:WaitForChild('UpdateTextEvent'))
+        --local UpdateTextEvent = (ReplicatedStorage:WaitForChild('UpdateTextEvent'))
         local localPlayer = Players.LocalPlayer
         local rng = Random.new()
         local jobId = game.JobId
