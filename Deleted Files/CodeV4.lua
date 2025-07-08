@@ -6881,9 +6881,13 @@ Check the Developer Console for more information.]],
 ----------------------- Summer 25 Minigame ----------
 
         function __DARKLUA_BUNDLE_MODULES.p()
+        local ReplicatedStorage = (game:GetService('ReplicatedStorage'))
         local Workspace = (game:GetService('Workspace'))
         local VirtualInputManager = game:GetService('VirtualInputManager')
         local Players = game:GetService('Players')
+        local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
+        local CoconutBonkMinigameClient = (require(ReplicatedStorage.SharedModules.ContentPacks.Summerfest2025.Minigames.CoconutBonkMinigameClient))
+        local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
         local Summerfest2025 = {}
         local localPlayer = Players.LocalPlayer
         local currentCamera = Workspace.CurrentCamera
@@ -6930,10 +6934,31 @@ Check the Developer Console for more information.]],
 
             return stairModel.Block
         end
-        function Summerfest2025.TeleportTo(position)
-            local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
+        function Summerfest2025.IsSwordEquipped()
+            local isSword = Utils.GetCharacter():FindFirstChild('Sword')
 
-            character:MoveTo(position)
+            print(string.format('IsSwordEquipped: %s', tostring(isSword)))
+
+            return isSword
+        end
+        function Summerfest2025.EquipSword()
+            local coconutBonkId = CoconutBonkMinigameClient.instanced_minigame.minigame_id
+
+            if not coconutBonkId then
+                return
+            end
+
+            Bypass('RouterClient').get('MinigameAPI/MessageServer'):FireServer(coconutBonkId, 'pickup_droppable', 1)
+            task.wait()
+            Bypass('RouterClient').get('MinigameAPI/MessageServer'):FireServer(coconutBonkId, 'pickup_sword')
+        end
+        function Summerfest2025.TeleportTo(part)
+            local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
+            local distance = character.PrimaryPart and (character.PrimaryPart.Position - part.Position).Magnitude
+
+            if distance >= 5 then
+                character:MoveTo(part.Position)
+            end
         end
         function Summerfest2025.StartEvent()
             local gameFolder = (Summerfest2025.FindMinigameFolder())
@@ -6948,9 +6973,13 @@ Check the Developer Console for more information.]],
                 return
             end
 
-            Summerfest2025.TeleportTo(blockPart.Position)
+            repeat
+                Summerfest2025.EquipSword()
+                task.wait(1)
+            until Summerfest2025.IsSwordEquipped()
 
             while gameFolder and gameFolder.is_game_active.Value do
+                Summerfest2025.TeleportTo(blockPart)
                 Summerfest2025.HitEnemy()
                 task.wait(1.01)
             end
