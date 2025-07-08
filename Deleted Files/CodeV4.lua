@@ -4968,9 +4968,9 @@ do
             elseif self.TextLabel.Name == 'TempEventCurrency' and amount then
                 self.TextLabel.Text = string.format('\u{1f3f4}\u{200d}\u{2620}\u{fe0f} %s', tostring(Utils.FormatNumber(amount)))
             end
-        end--]]
+        end
 
-        return StatsGuiClass
+        return StatsGuiClass--]]
     end
     function __DARKLUA_BUNDLE_MODULES.q()
         --[[local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
@@ -5076,9 +5076,9 @@ do
         end
         function self.Start()
             UpdateTextEvent:Fire()
-        end--]]
+        end
 
-        return self
+        return self--]]
     end
     function __DARKLUA_BUNDLE_MODULES.r()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
