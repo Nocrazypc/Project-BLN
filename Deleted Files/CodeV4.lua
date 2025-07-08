@@ -10799,11 +10799,12 @@ local FarmTab = Window:CreateTab("Farm", 4483362458)
 
 local FarmToggle = FarmTab:CreateToggle({
      Name = "AutoFarm",
-     CurrentValue = true,
+     CurrentValue = false,
      Flag = "Toggle01",
      Callback = function(Value)
 			
          getgenv().auto_farm = Value
+         task.wait(1)
          startAutoFarm()
      end,
  })
