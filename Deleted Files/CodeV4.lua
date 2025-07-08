@@ -6791,7 +6791,7 @@ do
             Utils.PrintDebug('teleported to farming place')
             Utils.PrintDebug('Started Farming')
             localPlayer:SetAttribute('hasStartedFarming', true)
-            startAutoFarm()
+            --startAutoFarm()
         end
 
         return self
