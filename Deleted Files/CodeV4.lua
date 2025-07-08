@@ -10686,6 +10686,36 @@ Check the Developer Console for more information.]],
             ['ages'] = {},
             ['neons'] = {},
         }
+--------------------------------------------
+
+getgenv().auto_accept_trade = false
+getgenv().auto_trade_all_pets = false
+getgenv().auto_trade_fullgrown_neon_and_mega = false
+getgenv().auto_trade_multi_choice = false
+getgenv().auto_trade_custom = false
+getgenv().auto_trade_semi_auto = false
+getgenv().auto_trade_lowtier_pets = false
+getgenv().auto_trade_rarity_pets = false
+getgenv().auto_farm = true
+getgenv().auto_make_neon = false
+getgenv().auto_trade_Legendary = false
+getgenv().auto_trade_custom_gifts = false
+getgenv().auto_trade_all_neons = false
+getgenv().auto_trade_eggs = false
+getgenv().auto_trade_all_inventory = false
+getgenv().feedAgeUpPotionToggle = false
+getgenv().petCurrentlyFarming1 = nil
+getgenv().petCurrentlyFarming2 = nil
+Utils = __DARKLUA_BUNDLE_MODULES.load('a')
+
+getgenv().AutoFusion = false
+getgenv().FocusFarmAgePotions = false
+getgenv().HatchPriorityEggs = false
+
+getgenv().AutoMinigame = false
+getgenv().AutoMinigame2 = false
+
+
 ------------- Rayfield Config -------------        
         local setupRayfield = function()
         local Window = Rayfield:CreateWindow({
@@ -11626,32 +11656,6 @@ for i, v in debug.getupvalue(RouterClient.init, 7)do
     v.Name = i
 end
 
-getgenv().auto_accept_trade = false
-getgenv().auto_trade_all_pets = false
-getgenv().auto_trade_fullgrown_neon_and_mega = false
-getgenv().auto_trade_multi_choice = false
-getgenv().auto_trade_custom = false
-getgenv().auto_trade_semi_auto = false
-getgenv().auto_trade_lowtier_pets = false
-getgenv().auto_trade_rarity_pets = false
-getgenv().auto_farm = true
-getgenv().auto_make_neon = false
-getgenv().auto_trade_Legendary = false
-getgenv().auto_trade_custom_gifts = false
-getgenv().auto_trade_all_neons = false
-getgenv().auto_trade_eggs = false
-getgenv().auto_trade_all_inventory = false
-getgenv().feedAgeUpPotionToggle = false
-getgenv().petCurrentlyFarming1 = nil
-getgenv().petCurrentlyFarming2 = nil
-Utils = __DARKLUA_BUNDLE_MODULES.load('a')
-
-getgenv().AutoFusion = false
-getgenv().FocusFarmAgePotions = false
-getgenv().HatchPriorityEggs = false
-
-getgenv().AutoMinigame = false
-getgenv().AutoMinigame2 = false
 
 local files = {
     {
