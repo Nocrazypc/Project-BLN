@@ -6012,14 +6012,14 @@ do
         function Ailment.BeachPartyAilment(petUnique)
             Utils.PrintDebug(string.format('\u{1f3d6}\u{fe0f} Doing beach party on %s \u{1f3d6}\u{fe0f}', tostring(Ailment.whichPet)))
             Teleport.BeachParty()
-            task.wait(2)
+            task.wait(6)
             Utils.ReEquipPet(Ailment.whichPet)
             waitForTaskToFinish('beach_party', petUnique)
         end
         function Ailment.CampingAilment(petUnique)
             Utils.PrintDebug(string.format('\u{1f3d5}\u{fe0f} Doing camping task on %s \u{1f3d5}\u{fe0f}', tostring(Ailment.whichPet)))
             Teleport.CampSite()
-            task.wait(2)
+            task.wait(6)
             Utils.ReEquipPet(Ailment.whichPet)
             waitForTaskToFinish('camping', petUnique)
         end
