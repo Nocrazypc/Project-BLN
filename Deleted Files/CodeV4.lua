@@ -10804,7 +10804,7 @@ local FarmToggle = FarmTab:CreateToggle({
      Callback = function(Value)
 			
          getgenv().auto_farm = Value
-         startAutoFarm()
+         self.Start()
      end,
  })
 -----------------------------------------------
@@ -10915,7 +10915,7 @@ local FarmToggle = FarmTab:CreateToggle({
      Callback = function(Value)
 	getgenv().HatchPriorityEggs = Value
 	getgenv().auto_farm = Value	
-        startAutoFarm()
+        self.Start()
 			
         while task.wait(15) do
         for _, v in pairs(ClientData.get_data()[localPlayer.Name].inventory.pets)do
