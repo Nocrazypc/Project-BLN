@@ -3979,9 +3979,9 @@ do
                 VirtualUser:ClickButton2(Vector2.new())
             end)
 
-            local UpdateTextEvent = (ReplicatedStorage:WaitForChild('UpdateTextEvent'))
+            --local UpdateTextEvent = (ReplicatedStorage:WaitForChild('UpdateTextEvent'))
 
-            UpdateTextEvent:Fire()
+            --UpdateTextEvent:Fire()
 
             if getgenv().BUY_BEFORE_FARMING then
                 localPlayer:SetAttribute('StopFarmingTemp', true)
