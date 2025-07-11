@@ -2935,8 +2935,11 @@ do
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
         local CoconutBonkMinigameClient = (require(ReplicatedStorage.SharedModules.ContentPacks.Summerfest2025.Minigames.CoconutBonkMinigameClient))
         local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
+        local ClientData = Bypass('ClientData')
+        local RouterClient = Bypass('RouterClient')
         local Summerfest2025 = {}
         local localPlayer = Players.LocalPlayer
+        local playerData = ClientData.get_data()[localPlayer.Name]
         local currentCamera = Workspace.CurrentCamera
         local viewportSize = currentCamera.ViewportSize
 
