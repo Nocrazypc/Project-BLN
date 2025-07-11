@@ -38,7 +38,7 @@ do
             floorPart.Position = humanoidRootPart.Position + Vector3.new(0, -2.2, 0)
             floorPart.Size = Vector3.new(50, 2, 50)
             floorPart.Anchored = true
-            floorPart.Transparency = 0.75
+            floorPart.Transparency = 0.70
             floorPart.Name = 'FloorUnderPlayer'
             floorPart.Parent = Workspace
         end
