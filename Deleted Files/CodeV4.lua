@@ -5581,6 +5581,12 @@ do
                         Utils.PlaceBaitOrPickUp(furniture.lures_2023_normal_lure, baitUnique)
 
                         baitboxCount = 0
+
+                        --Teleport.BeachParty()
+                        Summerfest2025.BuyKeys()
+                        Summerfest2025.GetCannonRewards()
+                        Summerfest2025.OpenChests()
+
                     end
 
                     tryFeedAgePotion()
@@ -5618,6 +5624,10 @@ do
 
             setupFloor()
             CollisionsClient.set_collidable(false)
+            --Teleport.BeachParty()
+            Summerfest2025.BuyKeys()
+            Summerfest2025.GetCannonRewards()
+            Summerfest2025.OpenChests()
             Teleport.FarmingHome()
             Utils.PrintDebug('teleported to farming place')
             Utils.PrintDebug('Started Farming')
