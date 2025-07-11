@@ -5128,40 +5128,23 @@ do
                     return
                 end
 
-                Utils.PrintDebug(string.format('\u{1f414}\u{1f414} Getting pet to Farm age up potion, %s \u{1f414}\u{1f414}', tostring(whichPet)))
+                --Utils.PrintDebug(string.format('\u{1f414}\u{1f414} Getting pet to Farm age up potion, %s \u{1f414}\u{1f414}', tostring(whichPet)))
 
-                if GetInventory.CheckForPetAndEquip({
-                    'starter_egg',
-                }, whichPet) then
+                if GetInventory.CheckForPetAndEquip({'starter_egg'}, whichPet) then
                     return
                 end
 
-                Utils.PrintDebug(string.format('\u{1f414}\u{1f414} No starter egg found, trying dog or cat %s \u{1f414}\u{1f414}', tostring(whichPet)))
+                --Utils.PrintDebug(string.format('\u{1f414}\u{1f414} No starter egg found, trying dog or cat %s \u{1f414}\u{1f414}', tostring(whichPet)))
 
                 if GetInventory.GetPetFriendship(potionFarmPets, whichPet) then
                     return
                 end
 
-                Utils.PrintDebug(string.format('\u{1f414}\u{1f414} No friendship pet. checking if pet without friend exist %s \u{1f414}\u{1f414}', tostring(whichPet)))
+                --Utils.PrintDebug(string.format('\u{1f414}\u{1f414} No friendship pet. checking if pet without friend exist %s \u{1f414}\u{1f414}', tostring(whichPet)))
 
                 if GetInventory.CheckForPetAndEquip(potionFarmPets, whichPet) then
                     return
                 end
-                --[[if GetInventory.CheckForPetAndEquip({
-                    'cracked_egg',
-                }, whichPet) then
-                    return
-                end
-
-                Utils.PrintDebug(string.format('\u{1f414}\u{1f414} No cracked egg found, do you need to buy it %s \u{1f414}\u{1f414}', tostring(whichPet)))
-
-                local hasMoney = RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'cracked_egg', {})
-
-                Utils.PrintDebug(string.format('hasMoney: %s', tostring(hasMoney)))
-
-                if hasMoney then
-                    --return
-                end--]]
             end
             if getgenv().SETTINGS.HATCH_EGG_PRIORITY or getgenv().HatchPriorityEggs then
                 if GetInventory.PriorityEgg(whichPet) then
