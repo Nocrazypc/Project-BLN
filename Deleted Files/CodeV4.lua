@@ -5136,9 +5136,9 @@ do
 
                 --Utils.PrintDebug(string.format('\u{1f414}\u{1f414} No starter egg found, trying dog or cat %s \u{1f414}\u{1f414}', tostring(whichPet)))
 
-                if GetInventory.GetPetFriendship(potionFarmPets, whichPet) then
-                    return
-                end
+                --if GetInventory.GetPetFriendship(potionFarmPets, whichPet) then
+                    --return
+                --end
 
                 --Utils.PrintDebug(string.format('\u{1f414}\u{1f414} No friendship pet. checking if pet without friend exist %s \u{1f414}\u{1f414}', tostring(whichPet)))
 
@@ -5146,11 +5146,9 @@ do
                     return
                 end
 
-               if GetInventory:GetHighestGrownPet(6, whichPet) then
+               if self.GetHighestGrownPett(6, whichPet) then
                    return
                 end
-
-
             end
 
             if getgenv().SETTINGS.HATCH_EGG_PRIORITY or getgenv().HatchPriorityEggs then
