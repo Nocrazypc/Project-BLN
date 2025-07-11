@@ -5146,7 +5146,7 @@ do
                     return
                 end
 
-               if self.GetHighestGrownPett(6, whichPet) then
+               if self.GetHighestGrownPet(6, whichPet) then
                    return
                 end
             end
