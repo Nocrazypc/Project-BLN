@@ -3463,8 +3463,7 @@ do
                     end
                 end
             end)
-            StaticMap.coconut_bonk_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function(
-            )
+            StaticMap.coconut_bonk_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function()
                 if StaticMap.coconut_bonk_minigame_state.is_game_active.Value then
                     if getgenv().auto_farm == false then
                         return
@@ -3472,6 +3471,11 @@ do
                     if getgenv().AutoMinigame == false then
                         return
                     end
+
+                    if localPlayer:GetAttribute('hasStartedFarming') == false then
+                        return
+                    end
+
                     if localPlayer:GetAttribute('StopFarmingTemp') == true then
                         return
                     end
