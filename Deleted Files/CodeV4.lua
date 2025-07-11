@@ -3034,6 +3034,51 @@ do
                 task.wait(1.01)
             end
         end
+        function Summerfest2025.BuyKeys()
+            local keyAmount = playerData.tide_chest_manager.keys_bought
+
+            if keyAmount >= 5 then
+                return
+            end
+
+            for index = keyAmount, 5 do
+                pcall(function()
+                    return RouterClient.get('SummerfestEventAPI/RequestBuyTreasureKey'):InvokeServer()
+                end)
+                task.wait(1)
+            end
+
+            Utils.PrintDebug('Bought Keys')
+        end
+        function Summerfest2025.GetCannonRewards()
+            if not playerData.crows_nest_cannons_manager.can_claim_daily_reward then
+                return
+            end
+
+            for index = 1, 7 do
+                RouterClient.get('SummerfestEventAPI/CrowsNestHit'):FireServer({
+                    cannon_key = tostring(index),
+                })
+                task.wait(1)
+            end
+
+            Utils.PrintDebug('Got Cannon rewards')
+        end
+        function Summerfest2025.OpenChests()
+            local chestOpenedAmount = #playerData.tide_chest_manager.chests_opened
+
+            if chestOpenedAmount >= 6 then
+                return
+            end
+
+            for i = 1, 6 do
+                pcall(function()
+                    return RouterClient.get('SummerfestEventAPI/RequestOpenTideChest'):InvokeServer(i)
+                end)
+            end
+
+            Utils.PrintDebug('Opened all chest')
+        end
 
         return Summerfest2025
     end
