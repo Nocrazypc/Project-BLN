@@ -5145,7 +5145,14 @@ do
                 if GetInventory.CheckForPetAndEquip(potionFarmPets, whichPet) then
                     return
                 end
+
+               if GetInventory:GetHighestGrownPet(6, whichPet) then
+                   return
+                end
+
+
             end
+
             if getgenv().SETTINGS.HATCH_EGG_PRIORITY or getgenv().HatchPriorityEggs then
                 if GetInventory.PriorityEgg(whichPet) then
                     return
