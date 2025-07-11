@@ -5624,7 +5624,6 @@ do
 
             setupFloor()
             CollisionsClient.set_collidable(false)
-            --Teleport.BeachParty()
             Summerfest2025.BuyKeys()
             Summerfest2025.GetCannonRewards()
             Summerfest2025.OpenChests()
