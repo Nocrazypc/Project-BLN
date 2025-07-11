@@ -5146,9 +5146,6 @@ do
                     return
                 end
 
-               --if self.GetHighestGrownPet(6, whichPet) then
-                   --return
-                --end
             end
 
             if getgenv().SETTINGS.HATCH_EGG_PRIORITY or getgenv().HatchPriorityEggs then
