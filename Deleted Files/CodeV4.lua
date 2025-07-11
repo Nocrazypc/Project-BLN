@@ -2998,9 +2998,9 @@ do
                 return
             end
 
-            Bypass('RouterClient').get('MinigameAPI/MessageServer'):FireServer(coconutBonkId, 'pickup_droppable', 1)
+            RouterClient.get('MinigameAPI/MessageServer'):FireServer(coconutBonkId, 'pickup_droppable', 1)
             task.wait()
-            Bypass('RouterClient').get('MinigameAPI/MessageServer'):FireServer(coconutBonkId, 'pickup_sword')
+            RouterClient.get('MinigameAPI/MessageServer'):FireServer(coconutBonkId, 'pickup_sword')
         end
         function Summerfest2025.TeleportTo(part)
             local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
