@@ -3031,7 +3031,7 @@ do
             while gameFolder and gameFolder.is_game_active.Value do
                 Summerfest2025.TeleportTo(blockPart)
                 Summerfest2025.HitEnemy()
-                task.wait(1.01)
+                task.wait(0.5)
             end
         end
         function Summerfest2025.BuyKeys()
