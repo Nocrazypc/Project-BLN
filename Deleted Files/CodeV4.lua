@@ -207,7 +207,7 @@ do
             local minutes = math.floor((currentTime % 3600) / 60)
             local seconds = currentTime % 60
 
-            if hours >= 24 then
+            if hours >= 20 then
                 game:Shutdown()
             end
 
