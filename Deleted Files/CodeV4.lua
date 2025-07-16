@@ -5321,7 +5321,7 @@ do
         local GetInventory = __DARKLUA_BUNDLE_MODULES.load('i')
         local FarmingPet = __DARKLUA_BUNDLE_MODULES.load('w')
         local Fusion = __DARKLUA_BUNDLE_MODULES.load('h')
-        local Summerfest2025 = __DARKLUA_BUNDLE_MODULES.load('m')
+        local Summerfest2025 = __DARKLUA_BUNDLE_MODULES.load('k')
         local self = {}
         --local UpdateTextEvent = (ReplicatedStorage:WaitForChild('UpdateTextEvent'))
         local localPlayer = Players.LocalPlayer
