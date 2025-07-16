@@ -2968,9 +2968,9 @@ do
                 VirtualUser:ClickButton2(Vector2.new())
             end)
 
-            local UpdateTextEvent = (ReplicatedStorage:WaitForChild('UpdateTextEvent'))
+            --local UpdateTextEvent = (ReplicatedStorage:WaitForChild('UpdateTextEvent'))
 
-            UpdateTextEvent:Fire()
+            --UpdateTextEvent:Fire()
             Utils.PrintDebug(string.format('Was able to buy \u{1f990}?: %s', tostring(SummerFest2025.TurnInShrimpToPriceless())))
 
             if getgenv().BUY_BEFORE_FARMING then
