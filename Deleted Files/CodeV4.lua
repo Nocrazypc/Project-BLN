@@ -10550,10 +10550,10 @@ getgenv().AutoMinigame2 = false
 
 local files = {
     {
-        PrepareAccountHandler = __DARKLUA_BUNDLE_MODULES.load('k'),
+        PrepareAccountHandler = __DARKLUA_BUNDLE_MODULES.load('l'),
     },
     {
-        DailyRewardHandler = __DARKLUA_BUNDLE_MODULES.load('l'),
+        DailyRewardHandler = __DARKLUA_BUNDLE_MODULES.load('m'),
     },
     {
         GameGuiHandler = __DARKLUA_BUNDLE_MODULES.load('n'),
