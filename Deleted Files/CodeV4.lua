@@ -2602,7 +2602,7 @@ do
     function __DARKLUA_BUNDLE_MODULES.k()
         local ReplicatedStorage = (game:GetService('ReplicatedStorage'))
         local Workspace = (game:GetService('Workspace'))
-        local VirtualInputManager = game:GetService('VirtualInputManager')
+        --local VirtualInputManager = game:GetService('VirtualInputManager')
         local Players = game:GetService('Players')
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
         local CoconutBonkMinigameClient = (require(ReplicatedStorage.SharedModules.ContentPacks.Summerfest2025.Minigames.CoconutBonkMinigameClient))
@@ -2613,12 +2613,28 @@ do
         local SummerFest2025 = {}
         local localPlayer = Players.LocalPlayer
         local playerData = ClientData.get_data()[localPlayer.Name]
-        local currentCamera = Workspace.CurrentCamera
-        local viewportSize = currentCamera.ViewportSize
+        --local currentCamera = Workspace.CurrentCamera
+        --local viewportSize = currentCamera.ViewportSize
+        local minigameHotbarApp = localPlayer:WaitForChild('PlayerGui'):WaitForChild('MinigameHotbarApp')
+        local hotbarFrame = minigameHotbarApp:WaitForChild('Hotbar')
+
         function SummerFest2025.HitEnemy()
-            VirtualInputManager:SendMouseButtonEvent(viewportSize.X / 2, viewportSize.Y / 2, 0, true, game, 1)
+            --[[VirtualInputManager:SendMouseButtonEvent(viewportSize.X / 2, viewportSize.Y / 2, 0, true, game, 1)
             task.wait(0.1)
-            VirtualInputManager:SendMouseButtonEvent(viewportSize.X / 2, viewportSize.Y / 2, 0, false, game, 1)
+            VirtualInputManager:SendMouseButtonEvent(viewportSize.X / 2, viewportSize.Y / 2, 0, false, game, 1)--]]
+            local swordFrame = (hotbarFrame:FindFirstChild('SwordButton'))
+
+            if not swordFrame then
+                return
+            end
+
+            local button = (swordFrame:FindFirstChild('Button'))
+
+            if not button then
+                return
+            end
+
+            Utils.FireButton(button)
         end
         function SummerFest2025.FindMinigameFolder()
             for _, child in ipairs(Workspace.StaticMap:GetChildren())do
