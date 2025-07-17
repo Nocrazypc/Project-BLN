@@ -1389,6 +1389,7 @@ do
             localPlayer.Character.PrimaryPart.CFrame = Workspace.CampingLocation.CFrame + Vector3.new(rng:NextInteger(1, 30), 5, rng:NextInteger(1, 30))
 
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+            self.DeleteWater()
         end
         function self.BeachParty()
             ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
@@ -1397,6 +1398,7 @@ do
             localPlayer.Character.PrimaryPart.CFrame = Workspace.BeachPartyLocation.CFrame + Vector3.new(math.random(1, 30), 5, math.random(1, 30))
 
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+            self.DeleteWater()
         end
         function self.Bonfire()
             ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
@@ -1412,6 +1414,7 @@ do
 
             localPlayer.Character:MoveTo(location)
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+            self.DeleteWater()
         end
         function self.PlayGround(vec)
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
