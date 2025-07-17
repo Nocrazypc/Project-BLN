@@ -1512,6 +1512,7 @@ do
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
 
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+            self.DeleteWater()
         end
 
         return self
