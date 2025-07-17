@@ -3567,34 +3567,8 @@ do
         local Terrain = (Workspace:WaitForChild('Terrain'))
         local Lighting = (cloneref(game:GetService('Lighting')))
         local self = {}
-        local TURN_ON = false
-        local lowSpecSetFFlags = function()
-            if setfflag then
-                setfflag('FIntRenderShadowIntensity', '0')
-                setfflag('DFFlagDisableDPIScale', 'false')
-                setfflag('DFFlagDebugRenderForceTechnologyVoxel', 'true')
-                setfflag('FIntFRMMinGrassDistance', '0')
-                setfflag('FIntFRMMaxGrassDistance', '0')
-                setfflag('FIntRenderGrassDetailStrands', '0')
-                setfflag('FIntRenderGrassHeightScaler', '0')
-                setfflag('FStringPartTexturePackTablePre2022', '')
-                setfflag('FStringPartTexturePackTable2022', '')
-                setfflag('FStringTerrainMaterialTablePre2022', '')
-                setfflag('FStringTerrainMaterialTable2022', '')
-                setfflag('FFlagDisablePostFx', 'true')
-                setfflag('FIntDebugForceMSAASamples', '0')
-                setfflag('DFFlagTextureQualityOverrideEnabled', 'true')
-                setfflag('DFIntTextureQualityOverride', '0')
-                setfflag('DFIntCSGLevelOfDetailSwitchingDistance', '0')
-                setfflag('DFIntCSGLevelOfDetailSwitchingDistanceL12', '0')
-                setfflag('DFIntCSGLevelOfDetailSwitchingDistanceL23', '0')
-                setfflag('DFIntCSGLevelOfDetailSwitchingDistanceL34', '0')
-                setfflag('DFIntDebugFRMQualityLevelOverride', '1')
-                setfflag('DFIntTextureCompositorActiveJobs', '0')
-                setfflag('FFlagDebugSkyGray', 'true')
-                setfflag('FFlagRenderCheckThreading', 'true')
-            end
-        end
+        local TURN_ON = true
+
         local lowSpecTerrain = function()
             Terrain.WaterReflectance = 0
             Terrain.WaterTransparency = 1
@@ -3620,8 +3594,6 @@ do
                 v.Transparency = 1
             elseif v:IsA('Decal') or v:IsA('Texture') then
                 v.Transparency = 1
-            elseif v:IsA('ParticleEmitter') or v:IsA('Trail') then
-                v.Lifetime = NumberRange.new(0, 0.1)
             elseif v:IsA('Explosion') then
                 v.BlastPressure = 1
                 v.BlastRadius = 1
@@ -3647,10 +3619,10 @@ do
                 return
             end
 
-            lowSpecSetFFlags()
             lowSpecTerrain()
             lowSpecLighting()
             Lighting:ClearAllChildren()
+            Terrain:Clear()
 
             for _, v in pairs(Workspace:GetDescendants())do
                 lowSpecTextures(v)
