@@ -3622,7 +3622,7 @@ do
             lowSpecTerrain()
             lowSpecLighting()
             Lighting:ClearAllChildren()
-            Terrain:Clear()
+            --Terrain:Clear()
 
             for _, v in pairs(Workspace:GetDescendants())do
                 lowSpecTextures(v)
