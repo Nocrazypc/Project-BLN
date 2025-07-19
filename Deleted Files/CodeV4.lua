@@ -422,6 +422,10 @@ do
             return localPlayer.Character or localPlayer.CharacterAdded:Wait()
         end
 
+        function Utils.GetHumanoidRootPart()
+            return (Utils.GetCharacter():WaitForChild('HumanoidRootPart'))
+        end
+
         return Utils
     end
     function __DARKLUA_BUNDLE_MODULES.b()
