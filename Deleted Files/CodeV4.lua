@@ -9853,12 +9853,13 @@ end)
 FarmTab:CreateSection("Events & Minigames: SummerFest 2025")
 --------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
-     Name = "Treasure Defense Minigame",
+     Name = "Treasure Defense Minigame & Cannon Pirate",
      CurrentValue = false,
      Flag = "Toggle10",
      Callback = function(Value)
 
      getgenv().AutoMinigame = Value
+     getgenv().AutoMinigame2 = Value
 
      end,
  })
