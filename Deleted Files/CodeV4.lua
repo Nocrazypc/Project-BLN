@@ -3482,7 +3482,7 @@ do
                 )
                     if DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Treasure Defense is starting') then
                         onTextChangedMiniGame()
-                    elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Tear Up Toykyo') then
+                    elseif NormalDialogChild.Info.TextLabel.Text:match('Cannon Circle is starting') then
                         onTextChangedMiniGame()
                     elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
                         localPlayer:Kick()
@@ -3534,10 +3534,13 @@ do
                         if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame or getgenv().AutoMinigame2 then
                             localPlayer:SetAttribute('StopFarmingTemp', true)
                             task.wait(2)
-                            SummerFest2025.StartEvent()
+                            SummerFest2025.StartTreasureDefenseEvent()
                         end
-                    elseif MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('TEAR UP TOYKYO') then
+                    elseif MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('CANNON CIRCLE') then
                         if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame or getgenv().AutoMinigame2 then
+                            localPlayer:SetAttribute('StopFarmingTemp', true)
+                            task.wait(2)
+                            SummerFest2025.StartCannonCircleEvent()
                         end
                     end
                 end
