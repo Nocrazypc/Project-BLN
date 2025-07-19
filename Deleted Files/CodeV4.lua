@@ -2644,20 +2644,20 @@ do
             return playerSpawns['1']
         end
 		
-        function SummerFest2025.GetStairPart()
+            local getCannonBallPilePart = function()
             local model = Workspace.Interiors:FindFirstChildWhichIsA('Model')
             if not model then
                 return
             end
-            local visualFolder = model:FindFirstChild('Visual')
-            if not visualFolder then
+            local piles = model:WaitForChild('Piles', 6)
+            if not piles then
                 return
             end
-            local stairModel = (visualFolder:FindFirstChild('Steps'))
-            if not stairModel then
+            local interactionPart = (piles:FindFirstChild('InteractionPart', true))
+            if not interactionPart then
                 return
             end
-            return stairModel.Block
+            return interactionPart
         end
         function SummerFest2025.IsSwordEquipped()
             local isSword = Utils.GetCharacter():FindFirstChild('Sword')
