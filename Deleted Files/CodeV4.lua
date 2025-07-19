@@ -1319,7 +1319,7 @@ do
 
             part.Position = Workspace.StaticMap.Beach.BeachPartyAilmentTarget.Position + Vector3.new(0, 
 -10, 0)
-            part.Size = Vector3.new(200, 2, 200)
+            part.Size = Vector3.new(1000, 2, 1000)
             part.Anchored = true
             part.Transparency = 1
             part.Name = 'BeachPartyLocation'
