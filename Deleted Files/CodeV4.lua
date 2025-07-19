@@ -2659,44 +2659,67 @@ do
             end
             return interactionPart
         end
-        function SummerFest2025.IsSwordEquipped()
-            local isSword = Utils.GetCharacter():FindFirstChild('Sword')
-            print(string.format('IsSwordEquipped: %s', tostring(isSword)))
-            return isSword
-        end
-        function SummerFest2025.EquipSword()
-            local coconutBonkId = CoconutBonkMinigameClient.instanced_minigame.minigame_id
-            if not coconutBonkId then
-                return
+        function SummerFest2025.FindMinigameFolder()
+            for _, child in ipairs(Workspace.StaticMap:GetChildren())do
+                if not child:IsA('Folder') then
+                    continue
+                end
+
+	    local folder = string.match(child.Name, 'coconut_bonk::[%w%-]+_minigame_state$')
+                if folder then
+                    return child
+                end
             end
-            RouterClient.get('MinigameAPI/MessageServer'):FireServer(coconutBonkId, 'pickup_droppable', 1)
-            task.wait()
-            RouterClient.get('MinigameAPI/MessageServer'):FireServer(coconutBonkId, 'pickup_sword')
+           return nil			
         end
         function SummerFest2025.TeleportTo(part)
             local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
             local distance = character.PrimaryPart and (character.PrimaryPart.Position - part.Position).Magnitude
-            if distance >= 5 then
+            if distance >= 10 then
                 character:MoveTo(part.Position)
             end
         end
-        function SummerFest2025.StartEvent()
+        function SummerFest2025.StartTreasureDefenseEvent()
+            local humanoidRootPart = Utils.GetHumanoidRootPart()
             local gameFolder = (SummerFest2025.FindMinigameFolder())
+			
             if not gameFolder then
                 return
             end
-            local blockPart = SummerFest2025.GetStairPart()
-            if not blockPart then
+			
+            local spawnPart = getPlayerSpawnPart()
+            if not spawnPart then
                 return
             end
-            repeat
-                SummerFest2025.EquipSword()
-                task.wait(1)
-            until SummerFest2025.IsSwordEquipped()
+			
+            local minigameId = getMinigameId(gameFolder)
+            local shipsByIds = CoconutBonkMinigameClient.instanced_minigame.ships_by_uid
+            local pirateIds = {}
+			
             while gameFolder and gameFolder.is_game_active.Value do
-                SummerFest2025.TeleportTo(blockPart)
-                SummerFest2025.HitEnemy()
-                task.wait(1.01)
+                for _, value in shipsByIds do
+                    for _, data in value.pirates do
+                        if data.pirate_data.health <= 0 then
+                            continue
+                        end
+
+                        local magnitude = (data.npc_controller.model.PrimaryPart.Position - humanoidRootPart.Position).Magnitude
+
+                        if magnitude >= 50 then
+                            continue
+                        end
+
+                        table.insert(pirateIds, data.pirate_data.pirate_uid)
+                    end
+                end
+
+                if #pirateIds >= 1 then
+                    fireRemoteKillEnemies(minigameId, pirateIds)
+                    table.clear(pirateIds)
+                end
+
+                task.wait(1)
+                SummerFest2025.TeleportTo(spawnPart)
             end
         end
         function SummerFest2025.BuyKeys()
