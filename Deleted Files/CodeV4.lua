@@ -2617,41 +2617,33 @@ do
         local SummerFest2025 = {}
         local localPlayer = Players.LocalPlayer
         local playerData = ClientData.get_data()[localPlayer.Name]
-        --local currentCamera = Workspace.CurrentCamera
-        --local viewportSize = currentCamera.ViewportSize
-        local minigameHotbarApp = localPlayer:WaitForChild('PlayerGui'):WaitForChild('MinigameHotbarApp')
-        local hotbarFrame = minigameHotbarApp:WaitForChild('Hotbar')
+        local fireRemoteKillEnemies = function(minigameId, pirateIds)
+            RouterClient.get('MinigameAPI/MessageServer'):FireServer(minigameId, 'pirate_sword_strike', pirateIds)
+        end
+        local getMinigameId = function(gameFolder)
+            return string.gsub(gameFolder.Name, '_minigame_state', '')
+        end
+        local getPlayerSpawnPart = function()
+            local model = Workspace.Interiors:FindFirstChildWhichIsA('Model')
 
-        function SummerFest2025.HitEnemy()
-            --[[VirtualInputManager:SendMouseButtonEvent(viewportSize.X / 2, viewportSize.Y / 2, 0, true, game, 1)
-            task.wait(0.1)
-            VirtualInputManager:SendMouseButtonEvent(viewportSize.X / 2, viewportSize.Y / 2, 0, false, game, 1)--]]
-            local swordFrame = (hotbarFrame:FindFirstChild('SwordButton'))
-
-            if not swordFrame then
+            if not model then
                 return
             end
 
-            local button = (swordFrame:FindFirstChild('Button'))
+            local Game = model:WaitForChild('Game', 6)
 
-            if not button then
+            if not Game then
                 return
             end
 
-            Utils.FireButton(button)
-        end
-        function SummerFest2025.FindMinigameFolder()
-            for _, child in ipairs(Workspace.StaticMap:GetChildren())do
-                if not child:IsA('Folder') then
-                    continue
-                end
-                local folder = string.match(child.Name, 'coconut_bonk::[%w%-]+_minigame_state$')
-                if folder then
-                    return child
-                end
+            local playerSpawns = (Game:WaitForChild('PlayerSpawns', 6))
+
+            if not playerSpawns then
+                return	
             end
-            return nil
+            return playerSpawns['1']
         end
+		
         function SummerFest2025.GetStairPart()
             local model = Workspace.Interiors:FindFirstChildWhichIsA('Model')
             if not model then
