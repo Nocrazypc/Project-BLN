@@ -2832,6 +2832,48 @@ do
             print(RouterClient.get('HousingAPI/ActivateInteriorFurniture'):InvokeServer(unpack(args)))
             return true
         end
+
+        local findMinigameFolderForCannonCircle = function()
+            for _, child in ipairs(Workspace.StaticMap:GetChildren())do
+                if not child:IsA('Folder') then
+                    continue
+                end
+
+                local folder = string.match(child.Name, 'joetation::[%w%-]+_minigame_state$')
+
+                if folder then
+                    return child
+                end
+            end
+
+            return nil
+        end
+
+        function SummerFest2025.StartCannonCircleEvent()
+            local gameFolder = (findMinigameFolderForCannonCircle())
+
+            if not gameFolder then
+                return
+            end
+
+            local cannonballPart = getCannonBallPilePart()
+
+            if not cannonballPart then
+                return
+            end
+
+            print('Found cannonballPart \u{2714}')
+
+            local minigameId = getMinigameId(gameFolder)
+
+            while gameFolder and gameFolder.is_game_active.Value do
+                RouterClient.get('MinigameAPI/MessageServer'):FireServer(minigameId, 'pickup_holdable_from_pile', Utils.GetHumanoidRootPart().Position, workspace:GetServerTimeNow())
+                task.wait(0.25)
+                RouterClient.get('MinigameAPI/MessageServer'):FireServer(minigameId, 'use_cannon', math.random(1, 12), Utils.GetHumanoidRootPart().Position, workspace:GetServerTimeNow())
+                SummerFest2025.TeleportTo(cannonballPart)
+            end
+        end
+
         return SummerFest2025
     end
     function __DARKLUA_BUNDLE_MODULES.l()
