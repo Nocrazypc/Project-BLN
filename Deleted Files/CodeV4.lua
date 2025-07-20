@@ -3336,8 +3336,8 @@ do
         local onTextChangedMiniGame = function()
             local hasStartedFarming = localPlayer:GetAttribute('hasStartedFarming')
 
-            if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame or getgenv().AutoMinigame2 and hasStartedFarming then
-                Utils.FindButton('No')
+            if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame and hasStartedFarming then
+                Utils.FindButton('Yes')
             else
                 Utils.FindButton('No')
             end
