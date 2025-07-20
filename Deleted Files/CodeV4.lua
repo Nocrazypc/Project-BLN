@@ -1321,7 +1321,7 @@ do
 -10, 0)
             part.Size = Vector3.new(1000, 2, 1000)
             part.Anchored = true
-            part.Transparency = 1
+            part.Transparency = 0
             part.Name = 'BeachPartyLocation'
             part.Parent = Workspace
         end
