@@ -2639,7 +2639,7 @@ do
             local playerSpawns = (Game:WaitForChild('PlayerSpawns', 6))
 
             if not playerSpawns then
-                return	
+                return
             end
             return playerSpawns['1']
         end
