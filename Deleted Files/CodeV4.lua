@@ -3337,6 +3337,7 @@ do
             local hasStartedFarming = localPlayer:GetAttribute('hasStartedFarming')
 
             if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame and hasStartedFarming then
+            task.wait(2)
                 Utils.FindButton('Yes')
             else
                 Utils.FindButton('No')
