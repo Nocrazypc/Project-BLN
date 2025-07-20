@@ -9758,10 +9758,10 @@ Check the Developer Console for more information.]],
 local FarmTab = Window:CreateTab("Farm", 4483362458)
 ------------------------------------------------
 FarmTab:CreateButton({
-	Name = "STOP AutoFarm temporarily (2 minutes)",
+	Name = "STOP AutoFarm temporarily (5 minutes)",
 	Callback = function()
 	localPlayer:SetAttribute('StopFarmingTemp', true)
-        task.wait(120)
+        task.wait(300)
         localPlayer:SetAttribute('StopFarmingTemp', false)
 	end,
 })
