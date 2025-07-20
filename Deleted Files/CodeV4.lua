@@ -9859,7 +9859,6 @@ local FarmToggle = FarmTab:CreateToggle({
      Callback = function(Value)
 
      getgenv().AutoMinigame = Value
-     getgenv().AutoMinigame2 = Value
 
      end,
  })
