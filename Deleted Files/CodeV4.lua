@@ -2670,7 +2670,7 @@ do
                     return child
                 end
             end
-           return nil			
+           return nil
         end
         function SummerFest2025.TeleportTo(part)
             local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
@@ -3482,7 +3482,7 @@ do
                 )
                     if DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Treasure Defense is starting') then
                         onTextChangedMiniGame()
-                    elseif NormalDialogChild.Info.TextLabel.Text:match('Cannon Circle is starting') then
+                    elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Cannon Circle is starting') then
                         onTextChangedMiniGame()
                     elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
                         localPlayer:Kick()
@@ -3531,13 +3531,13 @@ do
                     MinigameInGameApp.Body.Middle.Container:WaitForChild('TitleLabel')
 
                     if MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('TREASURE DEFENSE') then
-                        if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame or getgenv().AutoMinigame2 then
+                        if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame then
                             localPlayer:SetAttribute('StopFarmingTemp', true)
                             task.wait(2)
                             SummerFest2025.StartTreasureDefenseEvent()
                         end
                     elseif MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('CANNON CIRCLE') then
-                        if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame or getgenv().AutoMinigame2 then
+                        if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame then
                             localPlayer:SetAttribute('StopFarmingTemp', true)
                             task.wait(2)
                             SummerFest2025.StartCannonCircleEvent()
