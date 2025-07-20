@@ -3511,7 +3511,7 @@ do
                     )
                         if NormalDialogChild.Info.TextLabel.Text:match('Treasure Defense is starting') then
                             onTextChangedMiniGame()
-                        elseif NormalDialogChild.Info.TextLabel.Text:match('Tear Up Toykyo') then
+                        elseif NormalDialogChild.Info.TextLabel.Text:match('Cannon Circle is starting') then
                             onTextChangedMiniGame()
                         elseif NormalDialogChild.Info.TextLabel.Text:match('invitation') then
                             localPlayer:Kick()
