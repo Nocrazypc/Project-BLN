@@ -3652,7 +3652,7 @@ do
         local Terrain = (Workspace:WaitForChild('Terrain'))
         local Lighting = (cloneref(game:GetService('Lighting')))
         local self = {}
-        local TURN_ON = false
+        local TURN_ON = true
 
         local lowSpecTerrain = function()
             Terrain.WaterReflectance = 0
@@ -3705,17 +3705,17 @@ do
             end
 
             lowSpecTerrain()
-            lowSpecLighting()
-            Lighting:ClearAllChildren()
+            --lowSpecLighting()
+            --Lighting:ClearAllChildren()
             Terrain:Clear()
 
-            for _, v in pairs(Workspace:GetDescendants())do
+            --[[for _, v in pairs(Workspace:GetDescendants())do
                 lowSpecTextures(v)
             end
 
             Workspace.DescendantAdded:Connect(function(v)
                 lowSpecTextures(v)
-            end)
+            end)--]]
         end
 
         return self
