@@ -3705,7 +3705,7 @@ do
             end
 
             lowSpecTerrain()
-            lowSpecLighting()
+            --lowSpecLighting()
             --Lighting:ClearAllChildren()
             Terrain:Clear()
 
