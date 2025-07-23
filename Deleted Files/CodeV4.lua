@@ -3338,7 +3338,7 @@ do
 
             if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame and hasStartedFarming then
             task.wait(2)
-                Utils.FindButton('Yes')
+                Utils.FindButton('No')
             else
                 Utils.FindButton('No')
             end
