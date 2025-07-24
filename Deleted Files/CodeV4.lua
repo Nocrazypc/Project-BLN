@@ -2749,10 +2749,10 @@ do
         end
         function SummerFest2025.OpenChests()
             local chestOpenedAmount = #playerData.tide_chest_manager.chests_opened
-            if chestOpenedAmount >= 10 then
+            if chestOpenedAmount >= 6 then
                 return
             end
-            for i = 1, 10 do
+            for i = 1, 6 do
                 pcall(function()
                     return RouterClient.get('SummerfestEventAPI/RequestOpenTideChest'):InvokeServer(i)
                 end)
