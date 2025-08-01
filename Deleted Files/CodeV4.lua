@@ -5098,7 +5098,7 @@ do
         local self = {}
         --local UpdateTextEvent = (ReplicatedStorage:WaitForChild('UpdateTextEvent'))
         local localPlayer = Players.LocalPlayer
-        local rng = Random.new()
+        local rng = Random.new(DateTime.now().UnixTimestamp)
         local jobId = game.JobId
         local furniture = Furniture.GetFurnituresKey()
         local baitboxCount = 0
