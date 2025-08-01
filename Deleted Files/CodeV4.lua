@@ -3333,47 +3333,6 @@ do
                     end
                 end
             end)
-            StaticMap.coconut_bonk_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function()
-                if StaticMap.coconut_bonk_minigame_state.is_game_active.Value then
-                    if getgenv().auto_farm == false then
-                        return
-                    end
-                    if getgenv().AutoMinigame == false then
-                        return
-                    end
-
-                    if localPlayer:GetAttribute('hasStartedFarming') == false then
-                        return
-                    end
-
-                    if localPlayer:GetAttribute('StopFarmingTemp') == true then
-                        return
-                    end
-
-                    localPlayer:SetAttribute('StopFarmingTemp', true)
-                    Bypass('RouterClient').get('MinigameAPI/AttemptJoin'):FireServer('coconut_bonk', true)
-                end
-            end)
-            StaticMap.joetation_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function(
-            )
-                if StaticMap.joetation_minigame_state.is_game_active.Value then
-                    if getgenv().auto_farm == false then
-                        return
-                    end
-                    if getgenv().AutoMinigame == false then
-                        return
-                    end
-                    if localPlayer:GetAttribute('hasStartedFarming') == false then
-                        return
-                    end
-                    if localPlayer:GetAttribute('StopFarmingTemp') == true then
-                        return
-                    end
-
-                    localPlayer:SetAttribute('StopFarmingTemp', true)
-                    Bypass('RouterClient').get('MinigameAPI/AttemptJoin'):FireServer('joetation', true)
-                end
-            end)
         end
         function self.Start()
             TradeApp.Frame.NegotiationFrame.Body.PartnerOffer.Accepted:GetPropertyChangedSignal('ImageTransparency'):Connect(function(
