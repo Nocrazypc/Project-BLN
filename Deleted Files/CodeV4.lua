@@ -9092,7 +9092,7 @@ Check the Developer Console for more information.]],
 
         return RayfieldLibrary
     end
-    function __DARKLUA_BUNDLE_MODULES.z()
+    function __DARKLUA_BUNDLE_MODULES.y()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
@@ -9280,11 +9280,11 @@ Check the Developer Console for more information.]],
 
         return Clipboard
     end
-    function __DARKLUA_BUNDLE_MODULES.A()
+    function __DARKLUA_BUNDLE_MODULES.z()
         local Players = cloneref(game:GetService('Players'))
-        local Rayfield = __DARKLUA_BUNDLE_MODULES.load('y')
+        local Rayfield = __DARKLUA_BUNDLE_MODULES.load('x')
         local GetInventory = __DARKLUA_BUNDLE_MODULES.load('i')
-        local Clipboard = __DARKLUA_BUNDLE_MODULES.load('z')
+        local Clipboard = __DARKLUA_BUNDLE_MODULES.load('y')
         local Fusion = __DARKLUA_BUNDLE_MODULES.load('h')
         local Trade = __DARKLUA_BUNDLE_MODULES.load('e')
         local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
@@ -10316,34 +10316,34 @@ getgenv().AutoMinigame2 = false
 
 local files = {
     {
-        PrepareAccountHandler = __DARKLUA_BUNDLE_MODULES.load('l'),
+        PrepareAccountHandler = __DARKLUA_BUNDLE_MODULES.load('k'),
     },
     {
-        DailyRewardHandler = __DARKLUA_BUNDLE_MODULES.load('m'),
+        DailyRewardHandler = __DARKLUA_BUNDLE_MODULES.load('l'),
     },
     {
-        GameGuiHandler = __DARKLUA_BUNDLE_MODULES.load('n'),
+        GameGuiHandler = __DARKLUA_BUNDLE_MODULES.load('m'),
     },
     {
-        PotatoModeHandler = __DARKLUA_BUNDLE_MODULES.load('o'),
+        PotatoModeHandler = __DARKLUA_BUNDLE_MODULES.load('n'),
     },
     {
-        TaskBoardHandler = __DARKLUA_BUNDLE_MODULES.load('r'),
+        TaskBoardHandler = __DARKLUA_BUNDLE_MODULES.load('q'),
     },
     {
-        TradeLicenseHandler = __DARKLUA_BUNDLE_MODULES.load('s'),
+        TradeLicenseHandler = __DARKLUA_BUNDLE_MODULES.load('r'),
     },
     {
-        TutorialHandler = __DARKLUA_BUNDLE_MODULES.load('t'),
+        TutorialHandler = __DARKLUA_BUNDLE_MODULES.load('s'),
     },
     {
-        WebhookHandler = __DARKLUA_BUNDLE_MODULES.load('u'),
+        WebhookHandler = __DARKLUA_BUNDLE_MODULES.load('t'),
     },
     {
-        AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('x'),
+        AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('w'),
     },
     {
-        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('A'),
+        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('z'),
     },
 }
 
