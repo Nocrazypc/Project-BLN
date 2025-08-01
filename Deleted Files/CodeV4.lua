@@ -2742,6 +2742,9 @@ do
                 Utils.FireButton(AbsPlay)
                 Utils.PrintDebug('NEWSAPP CLICKED')
             end
+
+            findHomeButtonAndClick()
+
             if not localPlayer.Character then
                 Utils.PrintDebug('NO CHARACTER SO WAITING')
                 localPlayer.CharacterAdded:Wait()
