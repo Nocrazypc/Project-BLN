@@ -2617,7 +2617,6 @@ do
         local BuyItem = __DARKLUA_BUNDLE_MODULES.load('g')
         local BulkPotion = __DARKLUA_BUNDLE_MODULES.load('j')
         local Fusion = __DARKLUA_BUNDLE_MODULES.load('h')
-        local SummerFest2025 = __DARKLUA_BUNDLE_MODULES.load('k')
         local self = {}
         local localPlayer = Players.LocalPlayer
         local rng = Random.new()
