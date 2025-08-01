@@ -2670,6 +2670,22 @@ do
             end
         end
 
+        local findHomeButtonAndClick = function()
+            local homeFrame = (DialogApp:FindFirstChild('Home', true))
+
+            if not homeFrame or not homeFrame.Visible then
+                return
+            end
+
+            local button = (homeFrame:WaitForChild('Button', 6))
+
+            if not button then
+                return
+            end
+
+            Utils.FireButton(button)
+        end
+		
         function self.Init()
             DialogApp.Dialog.ThemeColorDialog:GetPropertyChangedSignal('Visible'):Connect(pickColorTutorial)
             Players.PlayerAdded:Connect(function(player)
