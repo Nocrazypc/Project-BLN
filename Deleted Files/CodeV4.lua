@@ -5448,7 +5448,7 @@ do
 
         return self
     end
-    function __DARKLUA_BUNDLE_MODULES.y()
+    function __DARKLUA_BUNDLE_MODULES.x()
         local InterfaceBuild = '9NBD'
         local Release = 'Build 1.67'
         local RayfieldFolder = 'Rayfield'
