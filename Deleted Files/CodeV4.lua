@@ -5306,11 +5306,11 @@ do
                 elseif key == 'camping' then
                     Teleport.PlaceFloorAtCampSite()
                     Ailment.CampingAilment(petUnique)
-                    task.wait(5)
+                    task.wait(10)
                     Teleport.FarmingHome()
 
                     return true
-                elseif key == 'buccaneer_band' then
+               --[[ elseif key == 'buccaneer_band' then
                     Ailment.BuccaneerBandAilment(petUnique)
                     task.wait(5)
                     Teleport.FarmingHome()
@@ -5321,7 +5321,7 @@ do
                     task.wait(5)
                     Teleport.FarmingHome()
 
-                    return true
+                    return true--]]
                 end
             end
             for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
