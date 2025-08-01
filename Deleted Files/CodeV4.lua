@@ -5402,10 +5402,6 @@ do
 
                         baitboxCount = 0
 
-                        Summerfest2025.BuyKeys()
-                        Summerfest2025.GetCannonRewards()
-                        Summerfest2025.OpenChests()
-
                     end
 
                     tryFeedAgePotion()
