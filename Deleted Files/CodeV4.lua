@@ -3276,13 +3276,13 @@ do
                         if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame then
                             localPlayer:SetAttribute('StopFarmingTemp', true)
                             task.wait(2)
-                            SummerFest2025.StartTreasureDefenseEvent()
+
                         end
                     elseif MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('CANNON CIRCLE') then
                         if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame then
                             localPlayer:SetAttribute('StopFarmingTemp', true)
                             task.wait(2)
-                            SummerFest2025.StartCannonCircleEvent()
+
                         end
                     end
                 end
