@@ -3019,8 +3019,10 @@ do
                 Utils.FindButton('Yes')
             elseif TextLabel.Text:match('your inventory!') then
                 Utils.FindButton('Awesome!')
-            elseif TextLabel.Text:match('Burtaur') then
-                Utils.FindButton('Cool!')
+            elseif TextLabel.Text:match("You've chosen this") then
+                Utils.FindButton('Yes')
+            elseif TextLabel.Text:match('You can change this option') then
+                Utils.FindButton('Okay')
             elseif TextLabel.Text:match('You have enough') then
                 Utils.FindButton('Okay')
             elseif TextLabel.Text:match('Thanks for') then
