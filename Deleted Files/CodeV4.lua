@@ -9458,7 +9458,7 @@ end)
 
      end,
  })
-
+FarmTab:CreateDivider()
 ----------- Minigames -------------
 FarmTab:CreateSection("Events & Minigames: Nothing for now")
 --------------------------------------
@@ -9483,6 +9483,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing for now")
 
      end,
  }) --]]
+FarmTab:CreateDivider()
 --------- Hatch Eggs Only ------------
 FarmTab:CreateSection("Eggs Only")
 --------------------------------------
