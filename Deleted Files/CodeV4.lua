@@ -9345,12 +9345,13 @@ Check the Developer Console for more information.]],
 ------------- Rayfield Config -------------        
         local setupRayfield = function()
         local Window = Rayfield:CreateWindow({
-	Name = "BLN Adopt Me!  Basic Autofarm V4.4",
-     DisableRayfieldPrompts = true,
-     DisableBuildWarnings = true,
-     LoadingTitle = "Loading BLN V4 Script ",
-     LoadingSubtitle = "by BlackLastNight 2025",
-	ConfigurationSaving = {
+	        Name = "BLN Adopt Me!  Basic Autofarm V4.4",
+                Theme = 'Default',
+                DisableRayfieldPrompts = true,
+                DisableBuildWarnings = true,
+                LoadingTitle = "Loading BLN V4 Script ",
+                LoadingSubtitle = "by BlackLastNight 2025",
+	        ConfigurationSaving = {
 		Enabled = false,
 		FolderName = nil, -- Create a custom folder for your hub/game
 		FileName = "BLN 4",
@@ -9373,85 +9374,9 @@ Check the Developer Console for more information.]],
                     },
                 },
             })
-            --[[local MiscTab = Window:CreateTab('Misc', 4483362458)
 
-            MiscTab:CreateSection('1 Click = ALL Neon/Mega')
-            MiscTab:CreateButton({
-                Name = 'Make Neons',
-                Callback = function()
-                    Fusion.MakeMega(false)
-                end,
-            })
-            MiscTab:CreateButton({
-                Name = 'Make Megas',
-                Callback = function()
-                    Fusion.MakeMega(true)
-                end,
-            })
-            MiscTab:CreateDivider()
-            MiscTab:CreateButton({
-                Name = 'Get player inventory data',
-                Callback = function()
-                    setclipboard(Clipboard.GetAllInventoryData())
-                end,
-            })
-            MiscTab:CreateButton({
-                Name = 'Get player Detailed inventory data',
-                Callback = function()
-                    setclipboard(Clipboard.CopyDetailedPetInfo())
-                end,
-            })
-            MiscTab:CreateDivider()
-            MiscTab:CreateButton({
-                Name = "Get pets database id's",
-                Callback = function()
-                    setclipboard(Clipboard.GetIdsFromDatabase('pets'))
-                end,
-            })
-            MiscTab:CreateButton({
-                Name = "Get gifts database id's",
-                Callback = function()
-                    setclipboard(Clipboard.GetIdsFromDatabase('gifts'))
-                end,
-            })
-            MiscTab:CreateButton({
-                Name = "Get pet_accessories (pet wear and wings) database id's",
-                Callback = function()
-                    setclipboard(Clipboard.GetIdsFromDatabase('pet_accessories'))
-                end,
-            })
-            MiscTab:CreateButton({
-                Name = "Get toys database id's",
-                Callback = function()
-                    setclipboard(Clipboard.GetIdsFromDatabase('toys'))
-                end,
-            })
-            MiscTab:CreateButton({
-                Name = "Get transport database id's",
-                Callback = function()
-                    setclipboard(Clipboard.GetIdsFromDatabase('transport'))
-                end,
-            })
-            MiscTab:CreateButton({
-                Name = "Get food database id's",
-                Callback = function()
-                    setclipboard(Clipboard.GetIdsFromDatabase('food'))
-                end,
-            })
-            MiscTab:CreateButton({
-                Name = "Get strollers database id's",
-                Callback = function()
-                    setclipboard(Clipboard.GetIdsFromDatabase('strollers'))
-                end,
-            })
-            MiscTab:CreateButton({
-                Name = "Get stickers database id's",
-                Callback = function()
-                    setclipboard(Clipboard.GetIdsFromDatabase('stickers'))
-                end,
-            })--]]
 
---[[ First Tab - Autofarm ]]
+--First Tab - Autofarm
 local FarmTab = Window:CreateTab("Farm", 4483362458)
 ------------------------------------------------
 FarmTab:CreateButton({
@@ -9545,7 +9470,6 @@ end)
      end,
  })
 
-
 ----------- Minigames -------------
 FarmTab:CreateSection("Events & Minigames: Nothing for now")
 --------------------------------------
@@ -9579,7 +9503,7 @@ local FarmToggle = FarmTab:CreateToggle({
      Flag = "Toggle201",
      Callback = function(Value)
 	getgenv().HatchPriorityEggs = Value
-	getgenv().auto_farm = Value	
+	--getgenv().auto_farm = Value	
         
 			
         --[[while task.wait(15) do
@@ -9614,25 +9538,7 @@ FarmTab:CreateButton({
 })
 
 ------------------------
-local petsDropdown0 = FarmTab:CreateDropdown({
-    Name = 'Pet List',
-    Options = petsTable,
-    CurrentOption = { "" },
-    MultipleOptions = false,
-    Flag = 'Dropdown0',
-    Callback = function(Option)
-        selectedPet = Option[1] or 'Nothing'
-    end,
-})
-
-FarmTab:CreateButton({
-    Name = 'Refesh Pet list',
-    Callback = function()
-        petsDropdown0:Set(GetInventory:TabId('pets'))
-    end,
-})
-
-FarmTab:CreateButton({
+--[[FarmTab:CreateButton({
 	Name = "Copy All Inventory to clipboard",
 	Callback = function()
 		Clipboard:CopyAllInventory()
@@ -9644,8 +9550,87 @@ FarmTab:CreateButton({
 	Callback = function()
 		Clipboard:CopyPetInfo()
 	end,
-})
----------------------
+})--]]
+--------- Second Tab -----------
+            local MiscTab = Window:CreateTab('Others', 4483362458)
+
+            --[[MiscTab:CreateSection('1 Click = ALL Neon/Mega')
+            MiscTab:CreateButton({
+                Name = 'Make Neons',
+                Callback = function()
+                    Fusion.MakeMega(false)
+                end,
+            })
+            MiscTab:CreateButton({
+                Name = 'Make Megas',
+                Callback = function()
+                    Fusion.MakeMega(true)
+                end,
+            })
+            MiscTab:CreateDivider()--]]
+            MiscTab:CreateButton({
+                Name = 'Get player inventory data',
+                Callback = function()
+                    setclipboard(Clipboard.GetAllInventoryData())
+                end,
+            })
+            MiscTab:CreateButton({
+                Name = 'Get player Detailed inventory data',
+                Callback = function()
+                    setclipboard(Clipboard.CopyDetailedPetInfo())
+                end,
+            })
+            MiscTab:CreateDivider()
+            MiscTab:CreateButton({
+                Name = "Get pets database id's",
+                Callback = function()
+                    setclipboard(Clipboard.GetIdsFromDatabase('pets'))
+                end,
+            })
+            MiscTab:CreateButton({
+                Name = "Get gifts database id's",
+                Callback = function()
+                    setclipboard(Clipboard.GetIdsFromDatabase('gifts'))
+                end,
+            })
+            MiscTab:CreateButton({
+                Name = "Get pet_accessories (pet wear and wings) database id's",
+                Callback = function()
+                    setclipboard(Clipboard.GetIdsFromDatabase('pet_accessories'))
+                end,
+            })
+            MiscTab:CreateButton({
+                Name = "Get toys database id's",
+                Callback = function()
+                    setclipboard(Clipboard.GetIdsFromDatabase('toys'))
+                end,
+            })
+            MiscTab:CreateButton({
+                Name = "Get transport database id's",
+                Callback = function()
+                    setclipboard(Clipboard.GetIdsFromDatabase('transport'))
+                end,
+            })
+            MiscTab:CreateButton({
+                Name = "Get food database id's",
+                Callback = function()
+                    setclipboard(Clipboard.GetIdsFromDatabase('food'))
+                end,
+            })
+            MiscTab:CreateButton({
+                Name = "Get strollers database id's",
+                Callback = function()
+                    setclipboard(Clipboard.GetIdsFromDatabase('strollers'))
+                end,
+            })
+            MiscTab:CreateButton({
+                Name = "Get stickers database id's",
+                Callback = function()
+                    setclipboard(Clipboard.GetIdsFromDatabase('stickers'))
+                end,
+            })--]]
+
+-------Third Tab --------------
 
             local TradeTab = Window:CreateTab('Auto Trade', 4483362458)
 
