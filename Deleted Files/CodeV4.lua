@@ -2671,6 +2671,7 @@ do
 		
         function self.Init()
             DialogApp.Dialog.ThemeColorDialog:GetPropertyChangedSignal('Visible'):Connect(pickColorTutorial)
+            DialogApp.Dialog.SpawnChooserDialog:GetPropertyChangedSignal('Visible'):Connect(findHomeButtonAndClick)
             Players.PlayerAdded:Connect(function(player)
                 player.CharacterAdded:Connect(function(character)
                     if table.find(getgenv().SETTINGS.TRADE_COLLECTOR_NAME, localPlayer.Name) then
