@@ -5652,8 +5652,6 @@ do
         Rayfield.DisplayOrder = 100
         LoadingFrame.Version.Text = Release
 
-        local Icons = useStudio and require(script.Parent.icons) or loadstring(game:HttpGet(
-[[https://raw.githubusercontent.com/SiriusSoftwareLtd/Rayfield/refs/heads/main/icons.lua]]))()
         local CFileName = nil
         local CEnabled = false
         local Minimised = false
