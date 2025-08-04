@@ -9376,7 +9376,7 @@ Check the Developer Console for more information.]],
             })
 
 
---First Tab - Autofarm
+-----  First Tab - Autofarm -------------------
 local FarmTab = Window:CreateTab("Farm", 4483362458)
 ------------------------------------------------
 FarmTab:CreateButton({
@@ -9387,16 +9387,16 @@ FarmTab:CreateButton({
         localPlayer:SetAttribute('StopFarmingTemp', false)
 	end,
 })
---[[local FarmToggle = FarmTab:CreateToggle({
+local FarmToggle = FarmTab:CreateToggle({
      Name = "AutoFarm",
-     CurrentValue = true,
+     CurrentValue = false,
      Flag = "Toggle01",
      Callback = function(Value)
 			
          getgenv().auto_farm = Value
-         localPlayer:SetAttribute('StopFarmingTemp', false)
+         --localPlayer:SetAttribute('StopFarmingTemp', false)
      end,
- })--]]
+ })
 -----------------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Pet Auto Fusion",
@@ -9520,41 +9520,11 @@ local FarmToggle = FarmTab:CreateToggle({
 	end--]]
      end,
  })
-----------------------------------
-FarmTab:CreateSection("Make ALL Neon/Mega in 1 Click")
-----------------------------------
-FarmTab:CreateButton({
-	Name = "Make Neon Pets",
-	Callback = function()
-		Fusion:MakeMega(false)
-	end,
-})
 
-FarmTab:CreateButton({
-	Name = "Make Mega Pets",
-	Callback = function()
-		Fusion:MakeMega(true)
-	end,
-})
-
-------------------------
---[[FarmTab:CreateButton({
-	Name = "Copy All Inventory to clipboard",
-	Callback = function()
-		Clipboard:CopyAllInventory()
-	end,
-})
-
-FarmTab:CreateButton({
-	Name = "Detailed Pet Inventory clipboard",
-	Callback = function()
-		Clipboard:CopyPetInfo()
-	end,
-})--]]
 --------- Second Tab -----------
             local MiscTab = Window:CreateTab('Others', 4483362458)
 
-            --[[MiscTab:CreateSection('1 Click = ALL Neon/Mega')
+            MiscTab:CreateSection('1 Click = ALL Neon/Mega')
             MiscTab:CreateButton({
                 Name = 'Make Neons',
                 Callback = function()
@@ -9567,7 +9537,7 @@ FarmTab:CreateButton({
                     Fusion.MakeMega(true)
                 end,
             })
-            MiscTab:CreateDivider()--]]
+            MiscTab:CreateDivider()
             MiscTab:CreateButton({
                 Name = 'Get player inventory data',
                 Callback = function()
@@ -9628,9 +9598,9 @@ FarmTab:CreateButton({
                 Callback = function()
                     setclipboard(Clipboard.GetIdsFromDatabase('stickers'))
                 end,
-            })--]]
+            }) 
 
--------Third Tab --------------
+-------Third Tab: AutoTrade --------------
 
             local TradeTab = Window:CreateTab('Auto Trade', 4483362458)
 
