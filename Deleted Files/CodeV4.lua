@@ -9387,7 +9387,7 @@ FarmTab:CreateButton({
         localPlayer:SetAttribute('StopFarmingTemp', false)
 	end,
 })
-local FarmToggle = FarmTab:CreateToggle({
+--[[local FarmToggle = FarmTab:CreateToggle({
      Name = "AutoFarm",
      CurrentValue = false,
      Flag = "Toggle01",
@@ -9396,7 +9396,7 @@ local FarmToggle = FarmTab:CreateToggle({
          getgenv().auto_farm = Value
          --localPlayer:SetAttribute('StopFarmingTemp', false)
      end,
- })
+ })--]]
 -----------------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Pet Auto Fusion",
