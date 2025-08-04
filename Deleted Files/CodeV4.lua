@@ -3000,6 +3000,13 @@ do
                 Utils.FindButton('Next')
             elseif TextLabel.Text:match('Social Stones!') then
                 Utils.FindButton('Okay')
+            elseif TextLabel.Text:match("Today's 2x Code is") then
+                Utils.FindButton('Awesome!')
+                pcall(function()
+                    local message = TextLabel.Text:split("Today's 2x Code is")
+                    local code = message[2]:split('- Use at the Safety Hub!')[1]:gsub('%s+', '')
+                    Utils.FireRedeemCode(code)
+                end)
             elseif TextLabel.Text:match('sent you a trade request') then
                 Utils.FindButton('Accept')
             elseif TextLabel.Text:match('Trade request from') then
@@ -3018,8 +3025,8 @@ do
                 Utils.FindButton('Yes')
             elseif TextLabel.Text:match('your inventory!') then
                 Utils.FindButton('Awesome!')
-            elseif TextLabel.Text:match('40B Visits Celebration') then
-                Utils.FindButton('Awesome!')
+            --elseif TextLabel.Text:match('40B Visits Celebration') then
+                --Utils.FindButton('Awesome!')
             elseif TextLabel.Text:match("You've chosen this") then
                 Utils.FindButton('Yes')
             elseif TextLabel.Text:match('You can change this option') then
