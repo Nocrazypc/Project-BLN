@@ -2293,17 +2293,7 @@ do
 
             return count
         end
-        local agePotionCount = function(nameId)
-            local count = 0
 
-            for _, v in ClientData.get_data()[localPlayer.Name].inventory.food do
-                if v.id == nameId then
-                    count = count + 1
-                end
-            end
-
-            return count
-        end
         local getPotionUniques = function(nameId)
             local potions = {}
             local amountNeeded = PetPotionEffectsDB[nameId].multi_use_count(ClientData.get('pet_char_wrappers')[1], ClientData.get_data()[localPlayer.Name].inventory.pets[ClientData.get('pet_char_wrappers')[1].pet_unique])
