@@ -422,6 +422,10 @@ do
             return (Utils.GetCharacter():WaitForChild('HumanoidRootPart'))
         end
 
+        function Utils.FireRedeemCode(code)
+            RouterClient.get('CodeRedemptionAPI/AttemptRedeemCode'):InvokeServer(code)
+        end
+
         return Utils
     end
     function __DARKLUA_BUNDLE_MODULES.b()
