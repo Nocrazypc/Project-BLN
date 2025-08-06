@@ -4353,14 +4353,14 @@ do
         function Ailment.BeachPartyAilment(petUnique)
             Utils.PrintDebug(string.format('\u{1f3d6}\u{fe0f} Doing beach party on %s \u{1f3d6}\u{fe0f}', tostring(Ailment.whichPet)))
             Teleport.BeachParty()
-            task.wait(6)
+            task.wait(2)
             Utils.ReEquipPet(Ailment.whichPet)
             waitForTaskToFinish('beach_party', petUnique)
         end
         function Ailment.CampingAilment(petUnique)
             Utils.PrintDebug(string.format('\u{1f3d5}\u{fe0f} Doing camping task on %s \u{1f3d5}\u{fe0f}', tostring(Ailment.whichPet)))
             Teleport.CampSite()
-            task.wait(6)
+            task.wait(2)
             Utils.ReEquipPet(Ailment.whichPet)
             waitForTaskToFinish('camping', petUnique)
         end
@@ -4978,29 +4978,29 @@ do
                 if key == 'beach_party' then
                     Teleport.PlaceFloorAtBeachParty()
                     Ailment.BeachPartyAilment(petUnique)
-                    task.wait(5)
+                    --task.wait(5)
                     Teleport.FarmingHome()
 
                     return true
                 elseif key == 'camping' then
                     Teleport.PlaceFloorAtCampSite()
                     Ailment.CampingAilment(petUnique)
-                    task.wait(10)
+                    --task.wait(10)
                     Teleport.FarmingHome()
 
                     return true
-               --[[ elseif key == 'buccaneer_band' then
+               elseif key == 'buccaneer_band' then
                     Ailment.BuccaneerBandAilment(petUnique)
-                    task.wait(5)
+                    --task.wait(5)
                     Teleport.FarmingHome()
 
                     return true
                 elseif key == 'summerfest_bonfire' then
                     Ailment.BonfireAilment(petUnique)
-                    task.wait(5)
+                    --task.wait(5)
                     Teleport.FarmingHome()
 
-                    return true--]]
+                    return true
                 end
             end
             for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
