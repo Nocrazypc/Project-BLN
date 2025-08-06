@@ -9395,8 +9395,8 @@ local FarmToggle = FarmTab:CreateToggle({
          getgenv().AutoFusion = Value
 
 	 while getgenv().AutoFusion do
-	 Fusion:MakeMega(false) -- makes neon
-	 Fusion:MakeMega(true) -- makes mega
+	 Fusion.MakeMega(false) -- makes neon
+	 Fusion.MakeMega(true) -- makes mega
          task.wait(900)
 	end
      end,
