@@ -10025,7 +10025,7 @@ getgenv().AutoFusion = false
 getgenv().FocusFarmAgePotions = false
 getgenv().HatchPriorityEggs = false
 
-getgenv().AutoMinigame = false
+getgenv().AutoMinigame = true
 getgenv().AutoMinigame2 = false
 
 local files = {
