@@ -180,7 +180,7 @@ do
             return ClientData.get_data()[localPlayer.Name].money or 0
         end
         function Utils.EventCurrencyAmount()
-            return ClientData.get_data()[localPlayer.Name].cranky_coins_2025 or 0
+            return ClientData.get_data()[localPlayer.Name].golden_aztec_skulls_2025 or 0
         end
         function Utils.FoodItemCount(nameId)
             local count = 0
