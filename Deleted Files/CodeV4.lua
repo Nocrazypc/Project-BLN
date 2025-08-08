@@ -4762,6 +4762,82 @@ do
         return FarmingPet
     end
     function __DARKLUA_BUNDLE_MODULES.w()
+        local ReplicatedStorage = game:GetService('ReplicatedStorage')
+        local Workspace = (game:GetService('Workspace'))
+        local Players = game:GetService('Players')
+        local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
+        local ClientData = Bypass('ClientData')
+        local RouterClient = Bypass('RouterClient')
+        local AztecEvent = {}
+        local localPlayer = Players.LocalPlayer
+        local playerData = ClientData.get_data()[localPlayer.Name]
+        local filterGetId = function(gameFolder)
+            return string.gsub(gameFolder.Name, '_minigame_state', '')
+        end
+        function AztecEvent.FindMinigameFolder()
+            for _, child in ipairs(Workspace.StaticMap:GetChildren())do
+                if not child:IsA('Folder') then
+                    continue
+                end
+                local folder = string.match(child.Name, 'ruin_rush::[%w%-]+_minigame_state$')
+                if folder then
+                    return child
+                end
+            end
+            return nil
+        end
+        function AztecEvent.FireCollectSkull(minigameId)
+            for index, bool in playerData.ruin_rush_manager.golden_skulls_collected do
+                if bool == false then
+                    local args = {
+                        minigameId,
+                        'pickup_skull',
+                        index,
+                    }
+                    RouterClient.get('MinigameAPI/MessageServer'):FireServer(unpack(args))
+                    task.wait(1)
+                end
+            end
+        end
+        function AztecEvent.JoinMinigame()
+            RouterClient.get('MinigameAPI/LobbyCreate'):InvokeServer('ruin_rush')
+            task.wait(1)
+            local args = {
+                {startup_settings = {}},
+            }
+            RouterClient.get('MinigameAPI/LobbyStart'):FireServer(unpack(args))
+        end
+        function AztecEvent.isSkullCollected()
+            for _, v in playerData.ruin_rush_manager.golden_skulls_collected do
+                if v == false then
+                    return false
+                end
+            end
+            return true
+        end
+        function AztecEvent.StartEvent()
+            if AztecEvent.isSkullCollected() then
+                return
+            end
+            print('Starting Aztec Event...')
+            AztecEvent.JoinMinigame()
+            task.wait(5)
+            local minigameFolder = AztecEvent.FindMinigameFolder()
+            if not minigameFolder then
+                warn('Minigame folder not found!')
+                return
+            end
+            local minigameId = filterGetId(minigameFolder)
+            print(string.format('Minigame ID: %s', tostring(minigameId)))
+            AztecEvent.FireCollectSkull(minigameId)
+            task.wait(5)
+            game:Shutdown()
+            print('Aztec Event Finished successfully!')
+        end
+        return AztecEvent
+    end
+
+    function __DARKLUA_BUNDLE_MODULES.x()		
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
@@ -4774,6 +4850,7 @@ do
         local GetInventory = __DARKLUA_BUNDLE_MODULES.load('i')
         local FarmingPet = __DARKLUA_BUNDLE_MODULES.load('v')
         local Fusion = __DARKLUA_BUNDLE_MODULES.load('h')
+        local AztecEvent = __DARKLUA_BUNDLE_MODULES.load('w')
         local self = {}
         --local UpdateTextEvent = (ReplicatedStorage:WaitForChild('UpdateTextEvent'))
         local localPlayer = Players.LocalPlayer
