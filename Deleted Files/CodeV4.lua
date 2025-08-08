@@ -3221,9 +3221,9 @@ do
                         onTextChangedMiniGame()
                     elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Cannon Circle is starting') then
                         onTextChangedMiniGame()
-                    elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
-                        localPlayer:Kick()
-                        game:Shutdown()
+                    --elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
+                    --    localPlayer:Kick()
+                    --    game:Shutdown()
                     elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('You found a') then
                         Utils.FindButton('Okay')
                     end
