@@ -10054,10 +10054,10 @@ local files = {
         WebhookHandler = __DARKLUA_BUNDLE_MODULES.load('t'),
     },
     {
-        AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('w'),
+        AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('x'),
     },
     {
-        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('z'),
+        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('A'),
     },
 }
 
