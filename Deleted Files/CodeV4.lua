@@ -5160,7 +5160,7 @@ do
 
                         baitboxCount = 0
 
-                        --AztecEvent.StartEvent()
+                        AztecEvent.StartEvent()
                     end
 
                     tryFeedAgePotion()
