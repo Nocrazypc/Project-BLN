@@ -9228,13 +9228,16 @@ FarmTab:CreateDivider()
 FarmTab:CreateSection("Events & Minigames: Aztec Event")
 --------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
-     Name = "Ruins Trek Minigame",
+     Name = " Get Skulls from Ruins Trek Minigame",
      CurrentValue = false,
      Flag = "Toggle10",
      Callback = function(Value)
 	 
-     --AztecEvent.StartEvent()
+	 localPlayer:SetAttribute('StopFarmingTemp', true)
 	 getgenv().AutoMinigame = Value
+     AztecEvent.StartEvent()
+     task.wait(30)
+     localPlayer:SetAttribute('StopFarmingTemp', false)
 
      end,
  })
