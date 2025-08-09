@@ -5202,8 +5202,11 @@ do
             Teleport.FarmingHome()
             Utils.PrintDebug('teleported to farming place')
             Utils.PrintDebug('Started Farming')
-            localPlayer:SetAttribute('hasStartedFarming', false)
+            localPlayer:SetAttribute('hasStartedFarming', true)
             startAutoFarm()
+
+            task.wait(2)
+            localPlayer:SetAttribute('StopFarmingTemp', true)
         end
 
         return self
