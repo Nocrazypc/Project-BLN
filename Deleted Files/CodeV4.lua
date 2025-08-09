@@ -9232,9 +9232,9 @@ local FarmToggle = FarmTab:CreateToggle({
      CurrentValue = false,
      Flag = "Toggle10",
      Callback = function(Value)
-
-	AztecEvent.StartEvent()
-     --getgenv().AutoMinigame = Value
+	 
+     --AztecEvent.StartEvent()
+	 getgenv().AutoMinigame = Value
 
      end,
  })
