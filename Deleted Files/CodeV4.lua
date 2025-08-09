@@ -9136,7 +9136,7 @@ Check the Developer Console for more information.]],
 local FarmTab = Window:CreateTab("Farm", 4483362458)
 ------------------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
-     Name = "Pet AutoFarm",
+     Name = "Start AutoFarm",
      CurrentValue = false,
      Flag = "Toggle01",
      Callback = function(Value)
@@ -9147,7 +9147,7 @@ local FarmToggle = FarmTab:CreateToggle({
  })
 
 FarmTab:CreateButton({
-	Name = "Stop Pet AutoFarm temporarily (5 minutes)",
+	Name = "Stop AutoFarm Temporarily (5 minutes)",
 	Callback = function()
 	    localPlayer:SetAttribute('StopFarmingTemp', true)
         task.wait(300)
