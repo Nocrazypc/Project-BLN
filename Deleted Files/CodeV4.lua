@@ -5118,7 +5118,7 @@ do
                             count = count + 20
 
                             task.wait(20)
-                        until not localPlayer:GetAttribute('StopFarmingTemp') or count > 300
+                        until not localPlayer:GetAttribute('StopFarmingTemp') or count > 600
 
                         localPlayer:SetAttribute('StopFarmingTemp', false)
                     end
