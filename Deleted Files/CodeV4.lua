@@ -9235,7 +9235,7 @@ local FarmToggle = FarmTab:CreateToggle({
 	 
 	 localPlayer:SetAttribute('StopFarmingTemp', true)
 	 getgenv().AutoMinigame = Value
-     AztecEvent.StartEvent()
+     AztecEvent.AztecEvent.StartEvent()
      task.wait(30)
      localPlayer:SetAttribute('StopFarmingTemp', false)
 
