@@ -9225,18 +9225,19 @@ end)
  })
 FarmTab:CreateDivider()
 ----------- Minigames -------------
-FarmTab:CreateSection("Events & Minigames: Nothing for now")
+FarmTab:CreateSection("Events & Minigames: Aztec Event")
 --------------------------------------
---[[local FarmToggle = FarmTab:CreateToggle({
-     Name = "Treasure Defense & Cannon Circle Minigames",
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Ruins Trek Minigame",
      CurrentValue = false,
      Flag = "Toggle10",
      Callback = function(Value)
 
-     getgenv().AutoMinigame = Value
+	AztecEvent.StartEvent()
+     --getgenv().AutoMinigame = Value
 
      end,
- })--]]
+ })
 
 --[[local FarmToggle = FarmTab:CreateToggle({
      Name = "Tear Up Toykyo Minigame",
