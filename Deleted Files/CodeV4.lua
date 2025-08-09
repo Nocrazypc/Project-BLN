@@ -5199,8 +5199,6 @@ do
             setupFloor()
             CollisionsClient.set_collidable(false)
             --AztecEvent.StartEvent()
-            Teleport.BeachParty()
-            task.wait(5)
             Teleport.FarmingHome()
             Utils.PrintDebug('teleported to farming place')
             Utils.PrintDebug('Started Farming')
