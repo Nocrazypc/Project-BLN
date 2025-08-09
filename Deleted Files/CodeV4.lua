@@ -9149,7 +9149,7 @@ local FarmToggle = FarmTab:CreateToggle({
 FarmTab:CreateButton({
 	Name = "Stop Pet AutoFarm temporarily (5 minutes)",
 	Callback = function()
-	localPlayer:SetAttribute('StopFarmingTemp', true)
+	    localPlayer:SetAttribute('StopFarmingTemp', true)
         task.wait(300)
         localPlayer:SetAttribute('StopFarmingTemp', false)
 	end,
