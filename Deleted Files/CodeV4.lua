@@ -5205,7 +5205,6 @@ do
             localPlayer:SetAttribute('hasStartedFarming', true)
             startAutoFarm()
 
-            task.wait(2)
             localPlayer:SetAttribute('StopFarmingTemp', true)
         end
 
