@@ -9249,7 +9249,13 @@ local FarmToggle = FarmTab:CreateToggle({
 	 getgenv().AutoMinigame = Value
      AztecEvent.StartEvent()
 
-     --task.wait(10)
+     task.wait(10)
+   if LocalPlayer.Character then
+        local Humanoid = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+        if Humanoid then
+            Humanoid.Health = 0 
+        end
+    end
 
      end,
  })
