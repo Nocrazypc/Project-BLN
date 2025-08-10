@@ -9231,7 +9231,7 @@ FarmTab:CreateDivider()
 FarmTab:CreateSection("Events & Minigames: Aztec Event")
 --------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
-     Name = " Get daily Skulls from Ruins Trek Minigame & Exit",
+     Name = " Get daily Skulls from Ruins Trek Minigame",
      CurrentValue = false,
      Flag = "Toggle10",
      Callback = function(Value)
