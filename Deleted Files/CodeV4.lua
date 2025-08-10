@@ -4769,6 +4769,7 @@ do
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
         local ClientData = Bypass('ClientData')
         local RouterClient = Bypass('RouterClient')
+        local Teleport = __DARKLUA_BUNDLE_MODULES.load('f')
         local AztecEvent = {}
         local localPlayer = Players.LocalPlayer
         local playerData = ClientData.get_data()[localPlayer.Name]
