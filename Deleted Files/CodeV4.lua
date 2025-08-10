@@ -9250,8 +9250,8 @@ local FarmToggle = FarmTab:CreateToggle({
      AztecEvent.StartEvent()
 
      task.wait(10)
-     game:GetService("ReplicatedStorage"):WaitForChild("API"):WaitForChild("TeamAPI/Spawn"):InvokeServer()
-
+     --game:GetService("ReplicatedStorage"):WaitForChild("API"):WaitForChild("TeamAPI/Spawn"):InvokeServer()
+     Player:LoadCharacter()
      end,
  })
 
