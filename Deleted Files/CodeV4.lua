@@ -9249,6 +9249,9 @@ local FarmToggle = FarmTab:CreateToggle({
 	 getgenv().AutoMinigame = Value
      AztecEvent.StartEvent()
 
+     task.wait(10)
+     game:GetService("ReplicatedStorage"):WaitForChild("API"):WaitForChild("TeamAPI/Spawn"):InvokeServer()
+
      end,
  })
 
