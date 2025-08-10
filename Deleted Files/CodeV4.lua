@@ -9254,8 +9254,8 @@ local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
      AztecEvent.StartEvent()
 
      task.wait(10)
-   if LocalPlayer.Character then
-        local Humanoid = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+   if localPlayer.Character then
+        local Humanoid = localPlayer.Character:FindFirstChildOfClass("Humanoid")
         if Humanoid then
             Humanoid.Health = 0 
         end
