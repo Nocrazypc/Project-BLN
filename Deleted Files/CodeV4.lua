@@ -4831,7 +4831,7 @@ do
             print(string.format('Minigame ID: %s', tostring(minigameId)))
             AztecEvent.FireCollectSkull(minigameId)
             task.wait(5)
-            game:Shutdown()
+            --game:Shutdown()
             print('Aztec Event Finished successfully!')
         end
         return AztecEvent
