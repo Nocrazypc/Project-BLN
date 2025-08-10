@@ -9244,7 +9244,11 @@ local FarmToggle = FarmTab:CreateToggle({
      CurrentValue = false,
      Flag = "Toggle10",
      Callback = function(Value)
-     
+
+local Players = cloneref(game:GetService('Players'))
+local localPlayer = Players.LocalPlayer
+local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
+
      local AztecEvent = __DARKLUA_BUNDLE_MODULES.load('w')
 	 getgenv().AutoMinigame = Value
      AztecEvent.StartEvent()
