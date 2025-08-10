@@ -3015,7 +3015,7 @@ do
             elseif TextLabel.Text:match('your inventory!') then
                 Utils.FindButton('Awesome!')
             elseif TextLabel.Text:match('You will not earn') then
-                task.wait(7)
+                task.wait(5)
                 Utils.FindButton('Exit Game')
             elseif TextLabel.Text:match("You've chosen this") then
                 Utils.FindButton('Yes')
