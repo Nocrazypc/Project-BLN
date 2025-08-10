@@ -4839,9 +4839,7 @@ do
             task.wait(5)
             --game:Shutdown()
             print('Aztec Event Finished successfully!')
-            --Teleport.FarmingHome()
-            --task.wait(12)
-            --Teleport.FarmingHome()
+
             localPlayer:SetAttribute('StopFarmingTemp', false)
 
         end
