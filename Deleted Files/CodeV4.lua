@@ -9246,11 +9246,8 @@ local FarmToggle = FarmTab:CreateToggle({
      Callback = function(Value)
 
      local AztecEvent = __DARKLUA_BUNDLE_MODULES.load('w')
-	 localPlayer:SetAttribute('StopFarmingTemp', true)
 	 getgenv().AutoMinigame = Value
      AztecEvent.StartEvent()
-     task.wait(30)
-     localPlayer:SetAttribute('StopFarmingTemp', false)
 
      end,
  })
