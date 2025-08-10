@@ -9249,11 +9249,8 @@ local FarmToggle = FarmTab:CreateToggle({
 	 getgenv().AutoMinigame = Value
      AztecEvent.StartEvent()
 
-     task.wait(10)
-     --game:GetService("ReplicatedStorage"):WaitForChild("API"):WaitForChild("TeamAPI/Spawn"):InvokeServer()
-    game:GetService("ReplicatedStorage"):WaitForChild("API"):WaitForChild("TeamAPI/ChooseTeam"):InvokeServer('Babies', {
-                ['dont_send_back_home'] = false,
-            })
+     --task.wait(10)
+
      end,
  })
 
