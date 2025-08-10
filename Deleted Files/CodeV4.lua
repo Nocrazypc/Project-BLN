@@ -9245,21 +9245,11 @@ local FarmToggle = FarmTab:CreateToggle({
      Flag = "Toggle10",
      Callback = function(Value)
 
-local Players = cloneref(game:GetService('Players'))
-local localPlayer = Players.LocalPlayer
-local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
-
      local AztecEvent = __DARKLUA_BUNDLE_MODULES.load('w')
 	 getgenv().AutoMinigame = Value
      AztecEvent.StartEvent()
 
-     task.wait(10)
-   if localPlayer.Character then
-        local Humanoid = localPlayer.Character:FindFirstChildOfClass("Humanoid")
-        if Humanoid then
-            Humanoid.Health = 0 
-        end
-    end
+     --task.wait(10)
 
      end,
  })
