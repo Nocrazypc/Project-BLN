@@ -4820,19 +4820,26 @@ do
                 return
             end
             print('Starting Aztec Event...')
+            localPlayer:SetAttribute('StopFarmingTemp', true)
             AztecEvent.JoinMinigame()
             task.wait(5)
             local minigameFolder = AztecEvent.FindMinigameFolder()
             if not minigameFolder then
                 warn('Minigame folder not found!')
+            localPlayer:SetAttribute('StopFarmingTemp', false)
                 return
             end
             local minigameId = filterGetId(minigameFolder)
             print(string.format('Minigame ID: %s', tostring(minigameId)))
             AztecEvent.FireCollectSkull(minigameId)
             task.wait(5)
-            game:Shutdown()
+            --game:Shutdown()
             print('Aztec Event Finished successfully!')
+            Teleport.FarmingHome()
+            task.wait(10)
+            Teleport.FarmingHome()
+            localPlayer:SetAttribute('StopFarmingTemp', false)
+
         end
         return AztecEvent
     end
