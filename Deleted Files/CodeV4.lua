@@ -9244,8 +9244,6 @@ local FarmToggle = FarmTab:CreateToggle({
 	 getgenv().AutoMinigame = Value
      AztecEvent.StartEvent()
 
-     --task.wait(10)
-
      end,
  })
 
