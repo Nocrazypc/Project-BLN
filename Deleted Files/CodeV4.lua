@@ -9169,7 +9169,7 @@ local FarmToggle = FarmTab:CreateToggle({
 	 while getgenv().AutoFusion do
 	 Fusion.MakeMega(false) -- makes neon
 	 Fusion.MakeMega(true) -- makes mega
-         task.wait(900)
+         task.wait(600)
 	end
      end,
  })
@@ -9242,7 +9242,11 @@ local FarmToggle = FarmTab:CreateToggle({
 
      local AztecEvent = __DARKLUA_BUNDLE_MODULES.load('w')
 	 getgenv().AutoMinigame = Value
-     AztecEvent.StartEvent()
+
+	 while task.wait(3) do
+         AztecEvent.StartEvent()
+         task.wait(3600)
+         end
 
      end,
  })
