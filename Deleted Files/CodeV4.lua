@@ -5207,14 +5207,13 @@ do
 
             setupFloor()
             CollisionsClient.set_collidable(false)
+            localPlayer:SetAttribute('StopFarmingTemp', true) --Test
             AztecEvent.StartEvent()
             Teleport.FarmingHome()
             --Utils.PrintDebug('teleported to farming place')
             --Utils.PrintDebug('Started Farming')
             localPlayer:SetAttribute('hasStartedFarming', true)
             startAutoFarm()
-
-            localPlayer:SetAttribute('StopFarmingTemp', true)
         end
 
         return self
