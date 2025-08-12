@@ -4769,6 +4769,7 @@ do
         local Workspace = (game:GetService('Workspace'))
         local Players = game:GetService('Players')
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
+        local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
         local ClientData = Bypass('ClientData')
         local RouterClient = Bypass('RouterClient')
         local Teleport = __DARKLUA_BUNDLE_MODULES.load('f')
