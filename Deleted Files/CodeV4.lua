@@ -9253,6 +9253,8 @@ local FarmToggle = FarmTab:CreateToggle({
 
 	 while task.wait(3) do
          AztecEvent.StartEvent()
+         task.wait(20)
+         AztecEvent.BuyRoyalEgg()
          task.wait(3600)
          end
 
