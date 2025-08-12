@@ -4820,6 +4820,13 @@ do
             end
             return true
         end
+        function AztecEvent.BuyRoyalEgg()
+            if Utils.EventCurrencyAmount() <= 14 then
+                return
+            end
+
+            RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'aztec_egg_2025_royal_aztec_egg', {buy_count = 1})
+        end
         function AztecEvent.StartEvent()
             if AztecEvent.isSkullCollected() then
                 return
