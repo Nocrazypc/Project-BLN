@@ -5202,21 +5202,19 @@ do
                 task.wait(2)
             end
 
+            setupFloor()
+            CollisionsClient.set_collidable(false)
+            localPlayer:SetAttribute('StopFarmingTemp', true) --Test
+            Teleport.FarmingHome()
+            localPlayer:SetAttribute('hasStartedFarming', true)
+            Utils.UnEquipAllPets()
+            task.wait(2)
             FarmingPet.GetPetToFarm(1)
             task.wait(2)
 
             if localPlayer:GetAttribute('isProHandler') == true then
                 FarmingPet.GetPetToFarm(2)
             end
-
-            setupFloor()
-            CollisionsClient.set_collidable(false)
-            localPlayer:SetAttribute('StopFarmingTemp', true) --Test
-            -- AztecEvent.StartEvent()
-            Teleport.FarmingHome()
-            --Utils.PrintDebug('teleported to farming place')
-            --Utils.PrintDebug('Started Farming')
-            localPlayer:SetAttribute('hasStartedFarming', true)
             startAutoFarm()
         end
 
