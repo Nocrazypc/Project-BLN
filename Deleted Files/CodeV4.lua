@@ -9268,9 +9268,9 @@ local FarmToggle = FarmTab:CreateToggle({
 
 FarmTab:CreateDivider()
 ----------- Minigames -------------
-FarmTab:CreateSection("Events & Minigames: Aztec Event")
+FarmTab:CreateSection("Events & Minigames: Nothing")
 --------------------------------------
-local FarmToggle = FarmTab:CreateToggle({
+--[[local FarmToggle = FarmTab:CreateToggle({
      Name = " Get daily Skulls from Temple Trek Minigame",
      CurrentValue = false,
      Flag = "Toggle10",
@@ -9287,7 +9287,7 @@ local FarmToggle = FarmTab:CreateToggle({
          end
 
      end,
- })
+ })--]]
 
 --[[local FarmToggle = FarmTab:CreateToggle({
      Name = "Tear Up Toykyo Minigame",
