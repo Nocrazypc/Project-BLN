@@ -4765,7 +4765,7 @@ do
         return FarmingPet
     end
     function __DARKLUA_BUNDLE_MODULES.w()
-        local ReplicatedStorage = game:GetService('ReplicatedStorage')
+        --[[local ReplicatedStorage = game:GetService('ReplicatedStorage')
         local Workspace = (game:GetService('Workspace'))
         local Players = game:GetService('Players')
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
@@ -4847,7 +4847,7 @@ do
             print('Aztec Event Finished successfully!')
 
         end
-        return AztecEvent
+        return AztecEvent --]]
     end
 
     function __DARKLUA_BUNDLE_MODULES.x()
