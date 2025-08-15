@@ -9246,9 +9246,10 @@ local FarmToggle = FarmTab:CreateToggle({
      CurrentValue = false,
      Flag = "Toggle201",
      Callback = function(Value)
-	getgenv().HatchPriorityEggs = Value
-	--getgenv().auto_farm = Value	
-        
+
+	    --getgenv().auto_farm = Value	
+        getgenv().HatchPriorityEggs = Value
+        localPlayer:SetAttribute('StopFarmingTemp', false)
 			
         --[[while task.wait(15) do
         for _, v in pairs(ClientData.get_data()[localPlayer.Name].inventory.pets)do
