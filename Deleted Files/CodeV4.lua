@@ -9236,6 +9236,35 @@ end)
 
      end,
  })
+
+FarmTab:CreateDivider()
+--------- Hatch Eggs Only ------------
+FarmTab:CreateSection("Eggs Only")
+--------------------------------------
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Hatch Eggs",
+     CurrentValue = false,
+     Flag = "Toggle201",
+     Callback = function(Value)
+	getgenv().HatchPriorityEggs = Value
+	--getgenv().auto_farm = Value	
+        
+			
+        --[[while task.wait(15) do
+        for _, v in pairs(ClientData.get_data()[localPlayer.Name].inventory.pets)do
+        task.wait(5)
+        if v.id ~= Egg2Buy  then
+        task.wait(10)
+        if v.id ~= Egg2Buy  then
+        task.wait(10)
+        getPet()
+		 end
+	       end
+	    end				
+	end--]]
+     end,
+ })
+
 FarmTab:CreateDivider()
 ----------- Minigames -------------
 FarmTab:CreateSection("Events & Minigames: Aztec Event")
@@ -9269,33 +9298,7 @@ local FarmToggle = FarmTab:CreateToggle({
 
      end,
  }) --]]
-FarmTab:CreateDivider()
---------- Hatch Eggs Only ------------
-FarmTab:CreateSection("Eggs Only")
---------------------------------------
-local FarmToggle = FarmTab:CreateToggle({
-     Name = "Hatch Eggs",
-     CurrentValue = false,
-     Flag = "Toggle201",
-     Callback = function(Value)
-	getgenv().HatchPriorityEggs = Value
-	--getgenv().auto_farm = Value	
-        
-			
-        --[[while task.wait(15) do
-        for _, v in pairs(ClientData.get_data()[localPlayer.Name].inventory.pets)do
-        task.wait(5)
-        if v.id ~= Egg2Buy  then
-        task.wait(10)
-        if v.id ~= Egg2Buy  then
-        task.wait(10)
-        getPet()
-		 end
-	       end
-	    end				
-	end--]]
-     end,
- })
+
 
 --------- Second Tab -----------
             local MiscTab = Window:CreateTab('Others', 4483362458)
