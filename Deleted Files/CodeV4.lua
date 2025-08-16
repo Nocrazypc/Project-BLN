@@ -3017,8 +3017,6 @@ do
             elseif TextLabel.Text:match('You will not earn') then
                 task.wait(5)
                 Utils.FindButton('Exit Game')
-                task.wait(10)
-                Teleport.FarmingHome()
             elseif TextLabel.Text:match("You've chosen this") then
                 Utils.FindButton('Yes')
             elseif TextLabel.Text:match('You can change this option') then
