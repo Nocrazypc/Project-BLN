@@ -36,9 +36,9 @@ do
             local floorPart = Instance.new('Part')
 
             floorPart.Position = humanoidRootPart.Position + Vector3.new(0, -2.2, 0)
-            floorPart.Size = Vector3.new(50, 2, 50)
+            floorPart.Size = Vector3.new(100, 2, 100)
             floorPart.Anchored = true
-            floorPart.Transparency = 0.70
+            floorPart.Transparency = 0.50
             floorPart.Name = 'FloorUnderPlayer'
             floorPart.Parent = Workspace
         end
