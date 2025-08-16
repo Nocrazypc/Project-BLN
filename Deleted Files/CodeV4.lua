@@ -5107,8 +5107,8 @@ do
             Teleport.PlaceFloorAtFarmingHome()
             Teleport.PlaceFloorAtCampSite()
             Teleport.PlaceFloorAtBeachParty()
-            Teleport.DownloadMainMap()
         end
+
         local startAutoFarm = function()
             task.spawn(function()
                 while getgenv().auto_farm do
