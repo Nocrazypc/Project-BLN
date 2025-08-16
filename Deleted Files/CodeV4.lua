@@ -3363,34 +3363,34 @@ do
             Lighting.FogStart = 0
         end
         local lowSpecTextures = function(v)
-            if v:IsA('Part') then
-                v.Material = Enum.Material.Plastic
-                v.EnableFluidForces = false
-                v.CastShadow = false
-                v.Reflectance = 0
-                v.Transparency = 1
-            elseif v:IsA('BasePart') and not v:IsA('MeshPart') then
-                v.Material = Enum.Material.Plastic
-                v.Reflectance = 0
-                v.Transparency = 1
-            elseif v:IsA('Decal') or v:IsA('Texture') then
-                v.Transparency = 1
-            elseif v:IsA('Explosion') then
+            --if v:IsA('Part') then
+                --v.Material = Enum.Material.Plastic
+                --v.EnableFluidForces = false
+                --v.CastShadow = false
+                --v.Reflectance = 0
+                --v.Transparency = 1
+            --elseif v:IsA('BasePart') and not v:IsA('MeshPart') then
+                --v.Material = Enum.Material.Plastic
+                --v.Reflectance = 0
+                --v.Transparency = 1
+            --elseif v:IsA('Decal') or v:IsA('Texture') then
+                --v.Transparency = 1
+            if v:IsA('Explosion') then
                 v.BlastPressure = 1
                 v.BlastRadius = 1
             elseif v:IsA('Fire') or v:IsA('SpotLight') or v:IsA('Smoke') or v:IsA('Sparkles') then
                 v.Enabled = false
-            elseif v:IsA('MeshPart') then
-                v.Material = Enum.Material.Plastic
-                v.EnableFluidForces = false
-                v.CastShadow = false
-                v.Reflectance = 0
-                v.TextureID = '10385902758728957'
-                v.Transparency = 1
-            elseif v:IsA('SpecialMesh') then
-                v.TextureId = 0
-            elseif v:IsA('ShirtGraphic') then
-                v.Graphic = 1
+            --elseif v:IsA('MeshPart') then
+                --v.Material = Enum.Material.Plastic
+                --v.EnableFluidForces = false
+                --v.CastShadow = false
+                --v.Reflectance = 0
+                --v.TextureID = '10385902758728957'
+                --v.Transparency = 1
+            --elseif v:IsA('SpecialMesh') then
+                --v.TextureId = 0
+            --elseif v:IsA('ShirtGraphic') then
+                --v.Graphic = 1
             end
         end
 
@@ -3401,7 +3401,7 @@ do
             end
 
             lowSpecTerrain()
-            lowSpecLighting()
+            --lowSpecLighting()
             --Lighting:ClearAllChildren()
             Terrain:Clear()
 
