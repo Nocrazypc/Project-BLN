@@ -5203,7 +5203,10 @@ do
             setupFloor()
             CollisionsClient.set_collidable(false)
             localPlayer:SetAttribute('StopFarmingTemp', true) --Test
+            task.wait(2)
             Teleport.FarmingHome()
+            Utils.PrintDebug('teleported to farming place')
+            Utils.PrintDebug('Started Farming')
             localPlayer:SetAttribute('hasStartedFarming', true)
             Utils.UnEquipAllPets()
             task.wait(2)
