@@ -422,9 +422,9 @@ do
             return (Utils.GetCharacter():WaitForChild('HumanoidRootPart'))
         end
 
-        function Utils.FireRedeemCode(code)
-            RouterClient.get('CodeRedemptionAPI/AttemptRedeemCode'):InvokeServer(code)
-        end
+        --function Utils.FireRedeemCode(code)
+            --RouterClient.get('CodeRedemptionAPI/AttemptRedeemCode'):InvokeServer(code)
+        --end
 
         return Utils
     end
