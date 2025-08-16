@@ -3401,17 +3401,17 @@ do
             end
 
             lowSpecTerrain()
-            --lowSpecLighting()
+            lowSpecLighting()
             --Lighting:ClearAllChildren()
             Terrain:Clear()
 
-            --[[for _, v in pairs(Workspace:GetDescendants())do
+            for _, v in pairs(Workspace:GetDescendants())do
                 lowSpecTextures(v)
             end
 
             Workspace.DescendantAdded:Connect(function(v)
                 lowSpecTextures(v)
-            end)--]]
+            end)
         end
 
         return self
