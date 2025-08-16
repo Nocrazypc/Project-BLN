@@ -4340,7 +4340,7 @@ do
 
                 furnitureAilments(litterBoxId, ClientData.get('pet_char_wrappers')[Ailment.whichPet]['char'])
             else
-                self.DownloadMainMap()
+                Teleport.DownloadMainMap()
                 task.wait(5)
 
                 localPlayer.Character.HumanoidRootPart.CFrame = Workspace.HouseInteriors.furniture:FindFirstChild('AilmentsRefresh2024FireHydrant', true).PrimaryPart.CFrame + Vector3.new(5, 5, 5)
