@@ -5210,7 +5210,6 @@ do
             setupFloor()
             CollisionsClient.set_collidable(false)
             Teleport.DownloadMainMap()
-            task.wait(5)
             Teleport.FarmingHome()
             --Utils.PrintDebug('teleported to farming place')
             --Utils.PrintDebug('Started Farming')
