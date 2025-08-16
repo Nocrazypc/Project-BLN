@@ -1303,7 +1303,7 @@ do
             local campsite = Workspace.StaticMap.Campsite.CampsiteOrigin
             local part = Instance.new('Part')
 
-            part.Position = campsite.Position + Vector3.new(0, -1, 0)
+            part.Position = campsite.Position + Vector3.new(0, 5, 0)
             part.Size = Vector3.new(200, 2, 200)
             part.Anchored = true
             part.Transparency = 1
