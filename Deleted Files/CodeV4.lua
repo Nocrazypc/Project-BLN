@@ -1257,7 +1257,7 @@ do
             local SurfaceGui = Instance.new('SurfaceGui')
             local TextLabel = Instance.new('TextLabel')
 
-            part.Position = Vector3.new(10000, 0, 10000)
+            part.Position = Vector3.new(1000, 0, 1000)
             part.Size = Vector3.new(200, 2, 200)
             part.Anchored = true
             part.Transparency = 1
@@ -1269,13 +1269,13 @@ do
             SurfaceGui.CanvasSize = Vector2.new(600, 600)
             SurfaceGui.Face = Enum.NormalId.Top
             TextLabel.Parent = SurfaceGui
-	    TextLabel.BackgroundColor3 = Color3.fromRGB(30, 160, 0)
-	    TextLabel.BackgroundTransparency = 0.250
+	        TextLabel.BackgroundColor3 = Color3.fromRGB(30, 160, 0)
+	        TextLabel.BackgroundTransparency = 0.250
             TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
             TextLabel.BorderSizePixel = 0
             TextLabel.Size = UDim2.new(1, 0, 1, 0)
             TextLabel.Font = Enum.Font.SourceSans
-	    TextLabel.Text = "🍕🍕😋"
+	        TextLabel.Text = "🍕🍕😋"
             TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
             TextLabel.TextScaled = true
             TextLabel.TextSize = 14
