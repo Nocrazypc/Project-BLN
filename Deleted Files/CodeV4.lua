@@ -5209,6 +5209,7 @@ do
 
             setupFloor()
             CollisionsClient.set_collidable(false)
+            self.DownloadMainMap()
             --AztecEvent.StartEvent()
             Teleport.FarmingHome()
             --Utils.PrintDebug('teleported to farming place')
