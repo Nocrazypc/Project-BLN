@@ -5200,13 +5200,6 @@ do
                 task.wait(2)
             end
 
-            FarmingPet.GetPetToFarm(1)
-            task.wait(2)
-
-            if localPlayer:GetAttribute('isProHandler') == true then
-                FarmingPet.GetPetToFarm(2)
-            end
-
             setupFloor()
             CollisionsClient.set_collidable(false)
             Teleport.DownloadMainMap()
@@ -5214,6 +5207,17 @@ do
             --Utils.PrintDebug('teleported to farming place')
             --Utils.PrintDebug('Started Farming')
             localPlayer:SetAttribute('hasStartedFarming', true)
+            Utils.UnEquipAllPets()
+
+            task.wait(2)
+
+            FarmingPet.GetPetToFarm(1)
+            task.wait(2)
+
+            if localPlayer:GetAttribute('isProHandler') == true then
+                FarmingPet.GetPetToFarm(2)
+            end
+
             startAutoFarm()
 
             localPlayer:SetAttribute('StopFarmingTemp', true)
@@ -5221,6 +5225,7 @@ do
 
         return self
     end
+
     function __DARKLUA_BUNDLE_MODULES.y()
         local InterfaceBuild = '9NBD'
         local Release = 'Build 1.67'
