@@ -5099,7 +5099,6 @@ do
                     Teleport.PlaceFloorAtCampSite()
                     Ailment.CampingAilment(petUnique)
                     --Teleport.FarmingHome()
-                    Teleport.CampSite()
 
                     return true
                elseif key == 'buccaneer_band' then
