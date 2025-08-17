@@ -5121,7 +5121,7 @@ do
             return false
         end
         local setupFloor = function()
-            Teleport.PlaceFloorAtFarmingHome()
+            --Teleport.PlaceFloorAtFarmingHome()
             Teleport.PlaceFloorAtCampSite()
             Teleport.PlaceFloorAtBeachParty()
         end
