@@ -5072,9 +5072,9 @@ do
 
                     return true
                 elseif key == 'camping' then
-                    Teleport.PlaceFloorAtCampSite()
+                    --Teleport.PlaceFloorAtCampSite()
                     Ailment.CampingAilment(petUnique)
-                    Teleport.FarmingHome()
+                    --Teleport.FarmingHome()
 
                     return true
                elseif key == 'buccaneer_band' then
