@@ -1347,7 +1347,7 @@ do
         end
         function self.FarmingHome()
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
-            localPlayer.Character.HumanoidRootPart.CFrame = Workspace.FarmingHomeLocation.CFrame * CFrame.new(rng:NextInteger(1, 40), 10, rng:NextInteger(1, 40))
+            localPlayer.Character.HumanoidRootPart.CFrame = Workspace.FarmingHomeLocation.CFrame * CFrame.new(rng:NextInteger(1, 30), 10, rng:NextInteger(1, 30))
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
 
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
