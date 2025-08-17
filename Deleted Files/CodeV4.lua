@@ -4218,9 +4218,7 @@ do
             Utils.PrintDebug(string.format('\u{1f95b} Finished thirsty task on %s \u{1f95b}', tostring(Ailment.whichPet)))
         end
         function Ailment.SickAilment()
-            task.wait(3)
             Utils.ReEquipPet(Ailment.whichPet)
-            task.wait(2)
 
             if doctorId then
                 Utils.PrintDebug(string.format('\u{1fa79} Doing sick task on %s \u{1fa79}', tostring(Ailment.whichPet)))
