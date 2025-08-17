@@ -5005,10 +5005,10 @@ do
                     Ailment.ThirstyAilment()
 
                     return true
-                elseif key == 'sick' then
-                    Ailment.SickAilment()
+                --elseif key == 'sick' then
+                    --Ailment.SickAilment()
 
-                    return true
+                    --return true
                 elseif key == 'pet_me' then
                     Ailment.PetMeAilment()
 
