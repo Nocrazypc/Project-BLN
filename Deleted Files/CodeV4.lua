@@ -1248,7 +1248,7 @@ do
         end
 
         function self.Init() end
-        function self.PlaceFloorAtFarmingHome()
+        --[[function self.PlaceFloorAtFarmingHome()
             if Workspace:FindFirstChild('FarmingHomeLocation') then
                 return
             end
@@ -1295,7 +1295,7 @@ do
             part.Transparency = 1
             part.Name = 'CameraPartLocation'
             part.Parent = Workspace
-        end
+        end--]]
         function self.PlaceFloorAtCampSite()
             if Workspace:FindFirstChild('CampingLocation') then
                 return
