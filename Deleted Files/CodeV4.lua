@@ -5017,7 +5017,8 @@ do
             for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
                 if key == 'salon' then
                     Ailment.SalonAilment(key, petUnique)
-                    Teleport.FarmingHome()
+                    --Teleport.FarmingHome()
+                    Teleport.Campsite()
 
                     return true
                 elseif key == 'moon' then
@@ -5026,12 +5027,14 @@ do
                     return true
                 elseif key == 'pizza_party' then
                     Ailment.PizzaPartyAilment(key, petUnique)
-                    Teleport.FarmingHome()
+                    --Teleport.FarmingHome()
+                    Teleport.Campsite()
 
                     return true
                 elseif key == 'school' then
                     Ailment.SchoolAilment(key, petUnique)
-                    Teleport.FarmingHome()
+                    --Teleport.FarmingHome()
+                    Teleport.Campsite()
 
                     return true
                 elseif key == 'bored' then
@@ -5087,25 +5090,29 @@ do
                     Teleport.PlaceFloorAtBeachParty()
                     Ailment.BeachPartyAilment(petUnique)
                     task.wait(5)
-                    Teleport.FarmingHome()
+                    --Teleport.FarmingHome()
+                    Teleport.Campsite()
 
                     return true
                 elseif key == 'camping' then
                     Teleport.PlaceFloorAtCampSite()
                     Ailment.CampingAilment(petUnique)
-                    Teleport.FarmingHome()
+                    --Teleport.FarmingHome()
+                    Teleport.Campsite()
 
                     return true
                elseif key == 'buccaneer_band' then
                     Ailment.BuccaneerBandAilment(petUnique)
                     task.wait(5)
-                    Teleport.FarmingHome()
+                    --Teleport.FarmingHome()
+                    Teleport.Campsite()
 
                     return true
                 elseif key == 'summerfest_bonfire' then
                     Ailment.BonfireAilment(petUnique)
                     task.wait(5)
-                    Teleport.FarmingHome()
+                    --Teleport.FarmingHome()
+                    Teleport.Campsite()
 
                     return true
                 end
