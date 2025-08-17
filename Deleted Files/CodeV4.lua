@@ -5019,7 +5019,7 @@ do
                 if key == 'salon' then
                     Ailment.SalonAilment(key, petUnique)
                     --Teleport.FarmingHome()
-                    Teleport.Campsite()
+                    Teleport.CampSite()
 
                     return true
                 elseif key == 'moon' then
@@ -5029,13 +5029,13 @@ do
                 elseif key == 'pizza_party' then
                     Ailment.PizzaPartyAilment(key, petUnique)
                     --Teleport.FarmingHome()
-                    Teleport.Campsite()
+                    Teleport.CampSite()
 
                     return true
                 elseif key == 'school' then
                     Ailment.SchoolAilment(key, petUnique)
                     --Teleport.FarmingHome()
-                    Teleport.Campsite()
+                    Teleport.CampSite()
 
                     return true
                 elseif key == 'bored' then
@@ -5092,28 +5092,28 @@ do
                     Ailment.BeachPartyAilment(petUnique)
                     task.wait(5)
                     --Teleport.FarmingHome()
-                    Teleport.Campsite()
+                    Teleport.CampSite()
 
                     return true
                 elseif key == 'camping' then
                     Teleport.PlaceFloorAtCampSite()
                     Ailment.CampingAilment(petUnique)
                     --Teleport.FarmingHome()
-                    Teleport.Campsite()
+                    Teleport.CampSite()
 
                     return true
                elseif key == 'buccaneer_band' then
                     Ailment.BuccaneerBandAilment(petUnique)
                     task.wait(5)
                     --Teleport.FarmingHome()
-                    Teleport.Campsite()
+                    Teleport.CampSite()
 
                     return true
                 elseif key == 'summerfest_bonfire' then
                     Ailment.BonfireAilment(petUnique)
                     task.wait(5)
                     --Teleport.FarmingHome()
-                    Teleport.Campsite()
+                    Teleport.CampSite()
 
                     return true
                 end
@@ -5229,7 +5229,7 @@ do
             setupFloor()
             CollisionsClient.set_collidable(false)
             --Teleport.FarmingHome()
-            Teleport.Campsite()
+            Teleport.CampSite()
             --Utils.PrintDebug('teleported to farming place')
             --Utils.PrintDebug('Started Farming')
             localPlayer:SetAttribute('hasStartedFarming', true)
