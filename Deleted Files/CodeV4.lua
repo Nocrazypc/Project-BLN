@@ -3396,7 +3396,7 @@ do
                 v.Transparency = 1
             elseif v:IsA('Decal') or v:IsA('Texture') then
                 v.Transparency = 1
-            if v:IsA('Explosion') then
+            elseif v:IsA('Explosion') then
                 v.BlastPressure = 1
                 v.BlastRadius = 1
             elseif v:IsA('Fire') or v:IsA('SpotLight') or v:IsA('Smoke') or v:IsA('Sparkles') then
