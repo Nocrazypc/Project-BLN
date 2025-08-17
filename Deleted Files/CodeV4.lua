@@ -3369,7 +3369,7 @@ do
         local Terrain = (Workspace:WaitForChild('Terrain'))
         local Lighting = (cloneref(game:GetService('Lighting')))
         local self = {}
-        local TURN_ON = false
+        local TURN_ON = true
 
         local lowSpecTerrain = function()
             Terrain.WaterReflectance = 0
@@ -3384,34 +3384,34 @@ do
             Lighting.FogStart = 0
         end
         local lowSpecTextures = function(v)
-            --if v:IsA('Part') then
-                --v.Material = Enum.Material.Plastic
-                --v.EnableFluidForces = false
-                --v.CastShadow = false
-                --v.Reflectance = 0
-                --v.Transparency = 1
-            --elseif v:IsA('BasePart') and not v:IsA('MeshPart') then
-                --v.Material = Enum.Material.Plastic
-                --v.Reflectance = 0
-                --v.Transparency = 1
-            --elseif v:IsA('Decal') or v:IsA('Texture') then
-                --v.Transparency = 1
+            if v:IsA('Part') then
+                v.Material = Enum.Material.Plastic
+                v.EnableFluidForces = false
+                v.CastShadow = false
+                v.Reflectance = 0
+                v.Transparency = 1
+            elseif v:IsA('BasePart') and not v:IsA('MeshPart') then
+                v.Material = Enum.Material.Plastic
+                v.Reflectance = 0
+                v.Transparency = 1
+            elseif v:IsA('Decal') or v:IsA('Texture') then
+                v.Transparency = 1
             if v:IsA('Explosion') then
                 v.BlastPressure = 1
                 v.BlastRadius = 1
             elseif v:IsA('Fire') or v:IsA('SpotLight') or v:IsA('Smoke') or v:IsA('Sparkles') then
                 v.Enabled = false
-            --elseif v:IsA('MeshPart') then
-                --v.Material = Enum.Material.Plastic
-                --v.EnableFluidForces = false
-                --v.CastShadow = false
-                --v.Reflectance = 0
-                --v.TextureID = '10385902758728957'
-                --v.Transparency = 1
-            --elseif v:IsA('SpecialMesh') then
-                --v.TextureId = 0
-            --elseif v:IsA('ShirtGraphic') then
-                --v.Graphic = 1
+            elseif v:IsA('MeshPart') then
+                v.Material = Enum.Material.Plastic
+                v.EnableFluidForces = false
+                v.CastShadow = false
+                v.Reflectance = 0
+                v.TextureID = '10385902758728957'
+                v.Transparency = 1
+            elseif v:IsA('SpecialMesh') then
+                v.TextureId = 0
+            elseif v:IsA('ShirtGraphic') then
+                v.Graphic = 1
             end
         end
 
@@ -3426,13 +3426,13 @@ do
             --Lighting:ClearAllChildren()
             Terrain:Clear()
 
-            for _, v in pairs(Workspace:GetDescendants())do
+            --[[for _, v in pairs(Workspace:GetDescendants())do
                 lowSpecTextures(v)
             end
 
             Workspace.DescendantAdded:Connect(function(v)
                 lowSpecTextures(v)
-            end)
+            end)--]]
         end
 
         return self
