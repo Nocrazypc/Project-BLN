@@ -5058,7 +5058,7 @@ do
                     if furniture.stylishshower == 'nil' then
                         continue
                     end
-
+                    task.wait(90) -- test
                     Ailment.DirtyAilment(furniture.stylishshower, petUnique)
 
                     return true
