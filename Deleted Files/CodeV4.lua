@@ -9248,7 +9248,7 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
     end 
 end)
 -------------------------------------
-for i,v in pairs(game:GetService("ReplicatedStorage").ClientModules.Game.PetEntities.PetPerformancesFolder.Emotes:GetChildren()) do 
+--[[for i,v in pairs(game:GetService("ReplicatedStorage").ClientModules.Game.PetEntities.PetPerformancesFolder.Emotes:GetChildren()) do 
     if v:IsA("ModuleScript") then 
         require(v).step = function() return end 
     end
@@ -9268,7 +9268,7 @@ for Data,Effect in pairs(require(game:GetService("ReplicatedStorage").ClientModu
     if type(Data) == "function" then 
         Data = function() return end 
     end
-end
+end--]]
 --------------------------------------
      end,
  })
