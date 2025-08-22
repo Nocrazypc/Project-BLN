@@ -4539,7 +4539,7 @@ do
 
                 stuckCount = stuckCount + 1
 
-                task.wait(1)
+                task.wait(2)
             until not ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments['hungry'] or stuckCount >= 30
 
             if stuckCount >= 30 then
@@ -4558,7 +4558,7 @@ do
 
                 stuckCount = stuckCount + 1
 
-                task.wait(1)
+                task.wait(2)
             until not ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments['thirsty'] or stuckCount >= 30
 
             if stuckCount >= 30 then
