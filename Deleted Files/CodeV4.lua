@@ -1303,13 +1303,32 @@ do
 
             local campsite = Workspace.StaticMap.Campsite.CampsiteOrigin
             local part = Instance.new('Part')
+            local SurfaceGui = Instance.new('SurfaceGui')
+            local TextLabel = Instance.new('TextLabel')
 
-            part.Position = campsite.Position + Vector3.new(0, 0, 0)
+            part.Position = campsite.Position + Vector3.new(0, 30, 0)
             part.Size = Vector3.new(200, 2, 200)
             part.Anchored = true
             part.Transparency = 1
             part.Name = 'CampingLocation'
             part.Parent = Workspace
+			SurfaceGui.Parent = part
+            SurfaceGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+            SurfaceGui.AlwaysOnTop = false
+            SurfaceGui.CanvasSize = Vector2.new(600, 600)
+            SurfaceGui.Face = Enum.NormalId.Top
+            TextLabel.Parent = SurfaceGui
+	        TextLabel.BackgroundColor3 = Color3.fromRGB(30, 160, 0)
+	        TextLabel.BackgroundTransparency = 0
+            TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            TextLabel.BorderSizePixel = 0
+            TextLabel.Size = UDim2.new(1, 0, 1, 0)
+            TextLabel.Font = Enum.Font.SourceSans
+	        TextLabel.Text = "🌲🌲🌲"
+            TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+            TextLabel.TextScaled = true
+            TextLabel.TextSize = 14
+            TextLabel.TextWrapped = true
         end
         function self.PlaceFloorAtBeachParty()
             if Workspace:FindFirstChild('BeachPartyLocation') then
