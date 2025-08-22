@@ -2784,7 +2784,7 @@ do
             Utils.PlaceBaitOrPickUp(furnitureKeys.lures_2023_normal_lure, baitUnique)
             task.wait(1)
             --Utils.UnEquipAllPets()
-            --Teleport.PlaceFloorAtFarmingHome()
+            Teleport.PlaceFloorAtFarmingHome()
             Teleport.PlaceFloorAtCampSite()
             Teleport.PlaceFloorAtBeachParty()
 
