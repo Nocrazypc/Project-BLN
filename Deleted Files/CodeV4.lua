@@ -1317,6 +1317,8 @@ do
             end
 
             local part = Instance.new('Part')
+            local SurfaceGui = Instance.new('SurfaceGui')
+            local TextLabel = Instance.new('TextLabel')
 
             part.Position = Workspace.StaticMap.Beach.BeachPartyAilmentTarget.Position + Vector3.new(0, -10, 0)
             part.Size = Vector3.new(1000, 2, 1000)
