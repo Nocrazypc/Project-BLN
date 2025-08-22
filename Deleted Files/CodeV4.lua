@@ -5131,7 +5131,7 @@ do
                     tryFeedAgePotion()
                     --UpdateTextEvent:Fire()
 
-                    local waitTime = rng:NextNumber(1, 10)
+                    local waitTime = rng:NextNumber(15, 20)
 
                     baitboxCount = baitboxCount + waitTime
 
