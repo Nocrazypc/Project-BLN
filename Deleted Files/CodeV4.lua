@@ -9988,7 +9988,7 @@ local StatsGuis = loadstring(game:HttpGet("https://raw.githubusercontent.com/Noc
 
 
 repeat
-    task.wait(1)
+    task.wait(5)
 until NewsApp.Enabled or localPlayer.Character
 
 for i, v in debug.getupvalue(RouterClient.init, 7)do
