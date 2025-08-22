@@ -3983,7 +3983,7 @@ do
 
             if not hasFood then
                 ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', FoodPassOn, {})
-                task.wait(1)
+                task.wait(2)
                 FoodAilments(FoodPassOn)
             end
         end
