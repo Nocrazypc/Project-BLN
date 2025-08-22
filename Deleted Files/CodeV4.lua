@@ -1248,7 +1248,7 @@ do
         end
 
         function self.Init() end
-        --[[function self.PlaceFloorAtFarmingHome()
+        function self.PlaceFloorAtFarmingHome()
             if Workspace:FindFirstChild('FarmingHomeLocation') then
                 return
             end
@@ -1258,7 +1258,7 @@ do
             local SurfaceGui = Instance.new('SurfaceGui')
             local TextLabel = Instance.new('TextLabel')
 
-            part.Position = campsite.Position + Vector3.new(0, 30, 0)
+            part.Position = campsite.Position + Vector3.new(0, 50, 0)
             part.Size = Vector3.new(200, 2, 200)
             part.Anchored = true
             part.Transparency = 1
@@ -1281,7 +1281,7 @@ do
             TextLabel.TextScaled = true
             TextLabel.TextSize = 14
             TextLabel.TextWrapped = true
-        end--]]
+        end
         function self.PlaceCameraPart()
             if Workspace:FindFirstChild('CameraPartLocation') then
                 return
