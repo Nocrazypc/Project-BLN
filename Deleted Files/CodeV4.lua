@@ -4029,10 +4029,10 @@ do
 
             if not doctor then
                 repeat
-                    task.wait(5)
+                    task.wait(3)
 
                     doctor = Workspace.HouseInteriors.furniture:FindFirstChild('Doctor', true)
-                    stuckCount = stuckCount + 5
+                    stuckCount = stuckCount + 3
                     isStuck = stuckCount > 30 and true or false
                 until doctor or isStuck
             end
@@ -4057,16 +4057,16 @@ do
             local isStuck = false
 
             ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('Hospital')
-            task.wait(5)
+            task.wait(3)
 
             local doctor = Workspace.HouseInteriors.furniture:FindFirstChild('Doctor', true)
 
             if not doctor then
                 repeat
-                    task.wait(5)
+                    task.wait(3)
 
                     doctor = Workspace.HouseInteriors.furniture:FindFirstChild('Doctor', true)
-                    stuckCount = stuckCount + 5
+                    stuckCount = stuckCount + 3
                     isStuck = stuckCount > 30 and true or false
                 until doctor or isStuck
             end
