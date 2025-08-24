@@ -5030,7 +5030,7 @@ do
                 elseif key == 'camping' then
                     Teleport.PlaceFloorAtCampSite()
                     Ailment.CampingAilment(petUnique)
-                    task.wait(165) -- test
+                    task.wait(160) -- test
                     Teleport.FarmingHome()
 
                     return true
