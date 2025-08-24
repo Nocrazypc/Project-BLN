@@ -4991,7 +4991,7 @@ do
                     if furniture.stylishshower == 'nil' then
                         continue
                     end
-                    task.wait(65) -- test
+                    --task.wait(65) -- test
                     Ailment.DirtyAilment(furniture.stylishshower, petUnique)
 
                     return true
@@ -5030,6 +5030,7 @@ do
                 elseif key == 'camping' then
                     Teleport.PlaceFloorAtCampSite()
                     Ailment.CampingAilment(petUnique)
+                    task.wait(165) -- test
                     Teleport.FarmingHome()
 
                     return true
