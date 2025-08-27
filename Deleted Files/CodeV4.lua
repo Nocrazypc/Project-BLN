@@ -9111,12 +9111,10 @@ local FarmToggle = FarmTab:CreateToggle({
      CurrentValue = false,
      Flag = "Toggle01",
      Callback = function(Value)
-			
-          local Teleport = __DARKLUA_BUNDLE_MODULES.load('f')
-          task.wait(3)
+	
+		  task.wait(3)
           Teleport.FarmingHome()
-			
-         --getgenv().auto_farm = Value
+		  --getgenv().auto_farm = Value
          localPlayer:SetAttribute('StopFarmingTemp', false)
      end,
  })
@@ -9233,11 +9231,9 @@ local FarmToggle = FarmTab:CreateToggle({
      CurrentValue = false,
      Flag = "Toggle201",
      Callback = function(Value)
-
-        local Teleport = __DARKLUA_BUNDLE_MODULES.load('f')
+	
         task.wait(3)
         Teleport.FarmingHome()
-
 	    --getgenv().auto_farm = Value	
         getgenv().HatchPriorityEggs = Value
         localPlayer:SetAttribute('StopFarmingTemp', false)
