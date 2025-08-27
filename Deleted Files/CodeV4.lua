@@ -5029,9 +5029,11 @@ do
                     return true
                 elseif key == 'camping' then
                     Teleport.PlaceFloorAtCampSite()
+                    task.wait(5) -- test
                     Ailment.CampingAilment(petUnique)
-                    task.wait(160) -- test
+                    task.wait(150) -- test
                     Teleport.FarmingHome()
+                    task.wait(5) -- test
 
                     return true
                elseif key == 'buccaneer_band' then
