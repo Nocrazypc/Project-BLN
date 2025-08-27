@@ -1430,7 +1430,7 @@ do
             ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
             task.wait(1)
 
-            localPlayer.Character.PrimaryPart.CFrame = Workspace.CampingLocation.CFrame + Vector3.new(rng:NextInteger(1, 30), 5, rng:NextInteger(1, 30))
+            localPlayer.Character.PrimaryPart.CFrame = Workspace.CampingLocation.CFrame + Vector3.new(rng:NextInteger(1, 30), 10, rng:NextInteger(1, 30))
 
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
             self.DeleteWater()
