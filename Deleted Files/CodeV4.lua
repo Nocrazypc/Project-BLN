@@ -9019,6 +9019,7 @@ Check the Developer Console for more information.]],
         local Trade = __DARKLUA_BUNDLE_MODULES.load('e')
         local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
         local BulkPotion = __DARKLUA_BUNDLE_MODULES.load('j')
+        local Teleport = __DARKLUA_BUNDLE_MODULES.load('f')
         local self = {}
         local localPlayer = Players.LocalPlayer
         local cooldown = false
