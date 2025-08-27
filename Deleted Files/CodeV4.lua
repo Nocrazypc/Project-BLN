@@ -9112,6 +9112,8 @@ local FarmToggle = FarmTab:CreateToggle({
      Callback = function(Value)
 			
           local Teleport = __DARKLUA_BUNDLE_MODULES.load('f')
+          task.wait(3)
+          Teleport.FarmingHome()
 			
          --getgenv().auto_farm = Value
          localPlayer:SetAttribute('StopFarmingTemp', false)
