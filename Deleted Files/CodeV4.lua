@@ -4946,14 +4946,11 @@ do
         return FarmingPet
     end
     function __DARKLUA_BUNDLE_MODULES.w()
-
-    end
-
-    function __DARKLUA_BUNDLE_MODULES.x()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
         local ClientData = Bypass('ClientData')
+        local RouterClient = Bypass('RouterClient')
         local CollisionsClient = Bypass('CollisionsClient')
         local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
         local Ailment = __DARKLUA_BUNDLE_MODULES.load('u')
@@ -4970,6 +4967,24 @@ do
         local furniture = Furniture.GetFurnituresKey()
         local baitboxCount = 0
         local strollerId = GetInventory.GetUniqueId('strollers', 'stroller-default')
+-----------------  Home event -------------
+        local tryRedeemHomepass = function()
+            local count = ClientData.get_data()[localPlayer.Name].battle_pass_manager.house_pets_2025_pass_1.rewards_claimed
+            if not count then
+                return
+            end
+            if count >= 20 then
+                if Utils.BucksAmount() >= 1500 then
+                    print('max redeemed. need to reset homepass')
+                    RouterClient.get('BattlePassAPI/AttemptBattlePassReset'):InvokeServer('house_pets_2025_pass_1')
+                    return
+                end
+                print('max redeemed. but has no money to reset')
+                return
+            end
+            RouterClient.get('BattlePassAPI/ClaimReward'):InvokeServer('house_pets_2025_pass_1', count + 1)
+        end
+--------------------------------------------
         local tryFeedAgePotion = function()
             if not getgenv().SETTINGS.FOCUS_FARM_AGE_POTION then
                 if ClientData.get('pet_char_wrappers')[1] and table.find(GetInventory.GetPetEggs(), ClientData.get('pet_char_wrappers')[1].pet_id) then
