@@ -10203,16 +10203,13 @@ local files = {
         PotatoModeHandler = __DARKLUA_BUNDLE_MODULES.load('n'),
     },
     {
-        TaskBoardHandler = __DARKLUA_BUNDLE_MODULES.load('q'),
+        TradeLicenseHandler = __DARKLUA_BUNDLE_MODULES.load('q'),
     },
     {
-        TradeLicenseHandler = __DARKLUA_BUNDLE_MODULES.load('r'),
+        TutorialHandler = __DARKLUA_BUNDLE_MODULES.load('r'),
     },
     {
-        TutorialHandler = __DARKLUA_BUNDLE_MODULES.load('s'),
-    },
-    {
-        WebhookHandler = __DARKLUA_BUNDLE_MODULES.load('t'),
+        WebhookHandler = __DARKLUA_BUNDLE_MODULES.load('s'),
     },
     {
         AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('w'),
