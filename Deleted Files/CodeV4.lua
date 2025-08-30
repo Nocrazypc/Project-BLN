@@ -4857,7 +4857,89 @@ do
 
             return
         end
-
+-------------  task Board House event pets --------------------
+        function FarmingPet.GetTaskBoardPet(whichPet)
+            print('Getting Task Board Pet')
+            for _, v in ClientData.get('quest_manager')['quests_cached']do
+                if v['entry_name']:match('house_pets_2025_small_hatch_egg') or v['entry_name']:match('house_pets_2025_medium_hatch_egg') then
+                    if farmEgg() then
+                        return true
+                    end
+                end
+            end
+            for _, v in ClientData.get('quest_manager')['quests_cached']do
+                if v['entry_name']:match('house_pets_2025_buy_gumball_egg') then
+                    RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'aztec_egg_2025_aztec_egg', {})
+                end
+            end
+            for _, v in ClientData.get('quest_manager')['quests_cached']do
+                if v['entry_name']:match('house_pets_2025_large_ailments_common') then
+                    if GetInventory.GetPetRarity() == 'common' then
+                        return true
+                    end
+                    if GetInventory.PetRarityAndAge('common', 6, whichPet) then
+                        return true
+                    end
+                    if farmEgg() then
+                        return true
+                    end
+                end
+            end
+            for _, v in ClientData.get('quest_manager')['quests_cached']do
+                if v['entry_name']:match('house_pets_2025_large_ailments_uncommon') then
+                    if GetInventory.GetPetRarity() == 'uncommon' then
+                        return true
+                    end
+                    if GetInventory.PetRarityAndAge('uncommon', 6, whichPet) then
+                        return true
+                    end
+                    if farmEgg() then
+                        return true
+                    end
+                end
+            end
+            for _, v in ClientData.get('quest_manager')['quests_cached']do
+                if v['entry_name']:match('house_pets_2025_large_ailments_rare') then
+                    if GetInventory.GetPetRarity() == 'rare' then
+                        return true
+                    end
+                    if GetInventory.PetRarityAndAge('rare', 6, whichPet) then
+                        return true
+                    end
+                    if farmEgg() then
+                        return true
+                    end
+                end
+            end
+            for _, v in ClientData.get('quest_manager')['quests_cached']do
+                if v['entry_name']:match('house_pets_2025_large_ailments_ultra_rare') then
+                    if GetInventory.GetPetRarity() == 'ultra_rare' then
+                        return true
+                    end
+                    if GetInventory.PetRarityAndAge('ultra_rare', 6, whichPet) then
+                        return true
+                    end
+                    if farmEgg() then
+                        return true
+                    end
+                end
+            end
+            for _, v in ClientData.get('quest_manager')['quests_cached']do
+                if v['entry_name']:match('house_pets_2025_large_ailments_legendary') then
+                    if GetInventory.GetPetRarity() == 'legendary' then
+                        return true
+                    end
+                    if GetInventory.PetRarityAndAge('legendary', 6, whichPet) then
+                        return true
+                    end
+                    if farmEgg() then
+                        return true
+                    end
+                end
+            end
+            return false
+        end
+--------------------------------------------------------------------------------
         return FarmingPet
     end
     function __DARKLUA_BUNDLE_MODULES.w()
