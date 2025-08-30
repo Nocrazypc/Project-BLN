@@ -3376,29 +3376,6 @@ do
                     end
                 end
             end)
-            BattlePassApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
-            )
-                if BattlePassApp.Body.Visible then
-                    BattlePassApp.Body:WaitForChild('InnerBody')
-                    BattlePassApp.Body.InnerBody:WaitForChild('ScrollingFrame')
-
-                    local lastNumber = tostring(#BattlePassApp.Body.InnerBody.ScrollingFrame:GetChildren())
-
-                    if not BattlePassApp.Body.InnerBody.ScrollingFrame:WaitForChild(lastNumber, 10) then
-                        return
-                    end
-
-                    for _, v in BattlePassApp.Body.InnerBody.ScrollingFrame:GetChildren()do
-                        local ButtonFrame = (v:FindFirstChild('ButtonFrame'))
-
-                        if not ButtonFrame then
-                            continue
-                        end
-                        if ButtonFrame:FindFirstChild('ClaimButton') then
-                        end
-                    end
-                end
-            end)
         end
         function self.Start()
             TradeApp.Frame.NegotiationFrame.Body.PartnerOffer.Accepted:GetPropertyChangedSignal('ImageTransparency'):Connect(function(
