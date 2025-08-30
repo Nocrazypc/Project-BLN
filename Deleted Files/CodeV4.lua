@@ -6796,11 +6796,6 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
                     Passthrough = true
                 end
             end
-            if Settings.KeySystem then
-                repeat
-                    task.wait()
-                until Passthrough
-            end
 
             Notifications.Template.Visible = false
             Notifications.Visible = true
