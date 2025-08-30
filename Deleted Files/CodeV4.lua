@@ -5292,9 +5292,10 @@ do
                     end
 
                     tryFeedAgePotion()
+                    tryRedeemHomepass()
                     --UpdateTextEvent:Fire()
 
-                    local waitTime = rng:NextNumber(15, 20)
+                    local waitTime = rng:NextNumber(5, 15)
 
                     baitboxCount = baitboxCount + waitTime
 
@@ -5319,9 +5320,10 @@ do
 
             setupFloor()
             CollisionsClient.set_collidable(false)
+            --task.wait(2)
             --Teleport.FarmingHome()
-            --Utils.PrintDebug('teleported to farming place')
-            --Utils.PrintDebug('Started Farming')
+            Utils.PrintDebug('teleported to farming place')
+            Utils.PrintDebug('Started Farming')
             localPlayer:SetAttribute('hasStartedFarming', true)
             Utils.UnEquipAllPets()
 
@@ -5342,7 +5344,7 @@ do
         return self
     end
 
-    function __DARKLUA_BUNDLE_MODULES.y()
+    function __DARKLUA_BUNDLE_MODULES.x()
         local InterfaceBuild = '9NBD'
         local Release = 'Build 1.67'
         local RayfieldFolder = 'Rayfield'
