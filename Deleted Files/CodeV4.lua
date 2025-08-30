@@ -3594,7 +3594,7 @@ do
                 elseif v['entry_name']:match('tutorial') then
                     RouterClient.get('QuestAPI/ClaimQuest'):InvokeServer(v['unique_id'])
                     task.wait()
-                elseif v['entry_name']:match('celestial_2024_small_open_gift') then
+                elseif v['entry_name']:match('house_pets_2025_small_open_gift') then
                     RouterClient.get('ShopAPI/BuyItem'):InvokeServer('gifts', 'smallgift', {})
                     task.wait(1)
 
