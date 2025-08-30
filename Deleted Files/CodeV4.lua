@@ -3012,7 +3012,6 @@ do
         local DialogApp = (PlayerGui:WaitForChild('DialogApp'))
         local MinigameRewardsApp = (PlayerGui:WaitForChild('MinigameRewardsApp'))
         local MinigameInGameApp = (PlayerGui:WaitForChild('MinigameInGameApp'))
-        local BattlePassApp = (PlayerGui:WaitForChild('BattlePassApp'))
         local TradeApp = (PlayerGui:WaitForChild('TradeApp'))
         local certificateConn
         local starterPackAppConn
