@@ -4655,8 +4655,8 @@ do
             'basic_egg_2022_mouse',
         }
         local petEggs = GetInventory.GetPetEggs()
-
-        --[[local farmEgg = function()
+------------------ added for Home event -------------------------
+        local farmEgg = function()
             if not Utils.IsPetEquipped(1) then
                 FarmingPet.GetPetToFarm(1)
             end
@@ -4675,7 +4675,8 @@ do
                 end
                 return false
             end
-        end--]]
+        end
+--------------------------------------------------------------------
 
         local isfocusFarmPets = function()
             local equippedPet = ClientData.get('pet_char_wrappers') and ClientData.get('pet_char_wrappers')[1]
