@@ -2050,6 +2050,18 @@ do
 
             return false
         end
+        function self.GetPetRarity()
+            if not Utils.IsPetEquipped(1) then
+                return nil
+            end
+            local farmingPetId = ClientData.get('pet_char_wrappers')[1]['pet_id']
+            for _, petDB in InventoryDB.pets do
+                if petDB.id == farmingPetId then
+                    return petDB.rarity
+                end
+            end
+            return nil
+        end
         function self.PetRarityAndAge(rarity, age, whichPet)
             local PetageCounter = age
             local isNeon = true
