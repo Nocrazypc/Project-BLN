@@ -4215,11 +4215,11 @@ do
 
             repeat
                 babyJump()
-                task.wait(1)
+                task.wait(0.5)
 
                 local taskActive = ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique] and ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][ailment] and true or false
 
-                task.wait(1)
+                task.wait(0.5)
 
                 isStuck = (tick() - stuckCount) >= 120 and true or false
             until not taskActive or isStuck
