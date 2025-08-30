@@ -133,6 +133,18 @@ do
 
             RouterClient.get('PetAPI/ConsumeFoodObject'):FireServer(agePotion, ClientData.get('pet_char_wrappers')[1].pet_unique)
         end
+		
+        function Utils.CreatePetObject(objectUnique)
+            local args = {
+                [1] = '__Enum_PetObjectCreatorType_2',
+                [2] = {
+                    ['pet_unique'] = ClientData.get('pet_char_wrappers')[1].pet_unique,
+                    ['unique_id'] = objectUnique,
+                },
+            }
+            RouterClient.get('PetObjectAPI/CreatePetObject'):InvokeServer(unpack(args))
+        end
+		
         function Utils.FeedAgePotion(petEggs, FoodPassOn)
             for _, v in ClientData.get_data()[localPlayer.Name].inventory.food do
                 if v.id == FoodPassOn then
