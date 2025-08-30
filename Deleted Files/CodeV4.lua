@@ -1881,6 +1881,7 @@ do
         local RouterClient = Bypass('RouterClient')
         local InventoryDB = Bypass('InventoryDB')
         local AllowOrDenyList = __DARKLUA_BUNDLE_MODULES.load('c')
+        local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
         local self = {}
         local localPlayer = Players.LocalPlayer
         local eggList = {}
