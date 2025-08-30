@@ -4786,7 +4786,17 @@ do
                 if GetInventory.CheckForPetAndEquip(potionFarmPets, whichPet) then
                     return
                 end
-
+                --[[ if GetInventory.CheckForPetAndEquip({
+                    'cracked_egg',
+                }, whichPet) then
+                    return
+                end
+                Utils.PrintDebug(string.format('\u{1f414}\u{1f414} No cracked egg found, buying it %s \u{1f414}\u{1f414}', tostring(whichPet)))
+                local hasMoney = RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'cracked_egg', {})
+                Utils.PrintDebug(string.format('hasMoney: %s', tostring(hasMoney)))
+                if hasMoney then
+                    return
+                end --]]
             end
 
             if getgenv().SETTINGS.HATCH_EGG_PRIORITY or getgenv().HatchPriorityEggs then
