@@ -10136,6 +10136,7 @@ end
 if game.PlaceId ~= 920587237 then
     return
 end
+--setfpscap(getgenv().SETTINGS.SET_FPS or 2)
 
 local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
 local Players = cloneref(game:GetService('Players'))
@@ -10213,10 +10214,10 @@ local files = {
         WebhookHandler = __DARKLUA_BUNDLE_MODULES.load('t'),
     },
     {
-        AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('x'),
+        AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('w'),
     },
     {
-        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('A'),
+        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('z'),
     },
 }
 
