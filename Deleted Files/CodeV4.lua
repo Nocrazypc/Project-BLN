@@ -3346,19 +3346,19 @@ do
                     end
                 end
             end)
-            BattlePassApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
+            HomePassApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
             )
-                if BattlePassApp.Body.Visible then
-                    BattlePassApp.Body:WaitForChild('InnerBody')
-                    BattlePassApp.Body.InnerBody:WaitForChild('ScrollingFrame')
+                if HomePassApp.Body.Visible then
+                    HomePassApp.Body:WaitForChild('InnerBody')
+                    HomePassApp.Body.InnerBody:WaitForChild('ScrollingFrame')
 
-                    local lastNumber = tostring(#BattlePassApp.Body.InnerBody.ScrollingFrame:GetChildren())
+                    local lastNumber = tostring(#HomePassApp.Body.InnerBody.ScrollingFrame:GetChildren())
 
-                    if not BattlePassApp.Body.InnerBody.ScrollingFrame:WaitForChild(lastNumber, 10) then
+                    if not HomePassApp.Body.InnerBody.ScrollingFrame:WaitForChild(lastNumber, 10) then
                         return
                     end
 
-                    for _, v in BattlePassApp.Body.InnerBody.ScrollingFrame:GetChildren()do
+                    for _, v in HomePassApp.Body.InnerBody.ScrollingFrame:GetChildren()do
                         local ButtonFrame = (v:FindFirstChild('ButtonFrame'))
 
                         if not ButtonFrame then
