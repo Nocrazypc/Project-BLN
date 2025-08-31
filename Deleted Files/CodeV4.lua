@@ -5266,7 +5266,7 @@ do
 
                     task.wait(1)
 
-                    if not getgenv().SETTINGS.FOCUS_FARM_AGE_POTION or getgenv().FocusFarmAgePotions then
+                    if not --[[getgenv().SETTINGS.FOCUS_FARM_AGE_POTION or--]] getgenv().FocusFarmAgePotions then
                         FarmingPet.SwitchOutFullyGrown(1)
 
                         if localPlayer:GetAttribute('isProHandler') then
