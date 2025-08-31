@@ -5321,8 +5321,7 @@ do
             Utils.UnEquipAllPets()
             task.wait(2)
             FarmingPet.GetPetToFarm(1)
-            task.wait(1) --- test Home pass
-            Taskboard:NewClaim() --- test Home pass
+
             task.wait(2)
 
             if localPlayer:GetAttribute('isProHandler') == true then
