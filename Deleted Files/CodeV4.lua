@@ -5251,7 +5251,7 @@ do
                             task.wait(1)
                         end
                     end
-                    if getgenv().SETTINGS.FOCUS_FARM_AGE_POTION or getgenv().FocusFarmAgePotions then
+                    if --[[getgenv().SETTINGS.FOCUS_FARM_AGE_POTION or--]] getgenv().FocusFarmAgePotions then
                          Taskboard:NewClaim()
                          task.wait(1) --- test
                          if not FarmingPet.GetTaskBoardPet(1) then
