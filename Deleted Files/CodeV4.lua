@@ -5318,13 +5318,10 @@ do
             Utils.PrintDebug('Started Farming')
             localPlayer:SetAttribute('hasStartedFarming', true)
             Utils.UnEquipAllPets()
-
             task.wait(2)
-
-            Taskboard:NewClaim() --- test Home pass
-            if not FarmingPet.GetTaskBoardPet(1) then   --- test Home pass
             FarmingPet.GetPetToFarm(1)
-            end   --- test Home pass
+            task.wait(1) --- test Home pass
+            Taskboard:NewClaim() --- test Home pass
             task.wait(2)
 
             if localPlayer:GetAttribute('isProHandler') == true then
