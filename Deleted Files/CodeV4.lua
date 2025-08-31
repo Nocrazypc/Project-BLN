@@ -4865,8 +4865,30 @@ do
 -------------  task Board House event pets --------------------
         function FarmingPet.GetTaskBoardPet(whichPet)
             print('Getting Task Board Pet')
+
+            if not Utils.IsPetEquipped(whichPet) then
+                FarmingPet.GetPetToFarm(whichPet)
+            end
+            for _, v in ClientData.get('quest_manager')['quests_cached']do
+                if v['entry_name']:match('house_pets_2025_potion_drank') then
+                    for _, v in ClientData.get_data()[localPlayer.Name].inventory.food do
+                        if v['id'] == 'pet_grow_potion' then
+                            print('Found potion, using it')
+                            Utils.CreatePetObject(v['unique'])
+                            return true
+                        end
+                    end
+                    if Utils.BucksAmount() >= 10000 then
+                        print('Buying grow potion')
+                        RouterClient.get('ShopAPI/BuyItem'):InvokeServer('food', 'pet_grow_potion', {buy_count = 1})
+                        task.wait(1)
+                    end
+                end
+            end
+
             for _, v in ClientData.get('quest_manager')['quests_cached']do
                 if v['entry_name']:match('house_pets_2025_small_hatch_egg') or v['entry_name']:match('house_pets_2025_medium_hatch_egg') then
+                    print('Buying Farming Egg')
                     if farmEgg() then
                         return true
                     end
@@ -4874,7 +4896,11 @@ do
             end
             for _, v in ClientData.get('quest_manager')['quests_cached']do
                 if v['entry_name']:match('house_pets_2025_buy_gumball_egg') then
-                    RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'aztec_egg_2025_aztec_egg', {})
+                    if Utils.BucksAmount() >= 10000 then
+                        print('Buying gumball egg')
+                        Teleport.Nursery()
+                        RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'aztec_egg_2025_aztec_egg', {})
+                    end
                 end
             end
             for _, v in ClientData.get('quest_manager')['quests_cached']do
@@ -4883,9 +4909,6 @@ do
                         return true
                     end
                     if GetInventory.PetRarityAndAge('common', 6, whichPet) then
-                        return true
-                    end
-                    if farmEgg() then
                         return true
                     end
                 end
@@ -4898,9 +4921,6 @@ do
                     if GetInventory.PetRarityAndAge('uncommon', 6, whichPet) then
                         return true
                     end
-                    if farmEgg() then
-                        return true
-                    end
                 end
             end
             for _, v in ClientData.get('quest_manager')['quests_cached']do
@@ -4909,9 +4929,6 @@ do
                         return true
                     end
                     if GetInventory.PetRarityAndAge('rare', 6, whichPet) then
-                        return true
-                    end
-                    if farmEgg() then
                         return true
                     end
                 end
@@ -4924,9 +4941,6 @@ do
                     if GetInventory.PetRarityAndAge('ultra_rare', 6, whichPet) then
                         return true
                     end
-                    if farmEgg() then
-                        return true
-                    end
                 end
             end
             for _, v in ClientData.get('quest_manager')['quests_cached']do
@@ -4935,9 +4949,6 @@ do
                         return true
                     end
                     if GetInventory.PetRarityAndAge('legendary', 6, whichPet) then
-                        return true
-                    end
-                    if farmEgg() then
                         return true
                     end
                 end
