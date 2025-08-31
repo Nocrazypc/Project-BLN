@@ -5253,9 +5253,9 @@ do
                     end
                     if getgenv().SETTINGS.FOCUS_FARM_AGE_POTION or getgenv().FocusFarmAgePotions then
                          Taskboard:NewClaim()
-                         task.wait(2) --- test
+                         task.wait(1) --- test
                          if not FarmingPet.GetTaskBoardPet(1) then
-                          FarmingPet.GetPetToFarm(1)
+                          -- FarmingPet.GetPetToFarm(1) --test
                          end
                         task.wait(1)
                     end
