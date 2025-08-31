@@ -5323,8 +5323,8 @@ do
 
             Taskboard:NewClaim() --- test Home pass
             if not FarmingPet.GetTaskBoardPet(1) then   --- test Home pass
-
             FarmingPet.GetPetToFarm(1)
+            end   --- test Home pass
             task.wait(2)
 
             if localPlayer:GetAttribute('isProHandler') == true then
