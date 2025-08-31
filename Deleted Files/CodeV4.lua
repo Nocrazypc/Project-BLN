@@ -5257,7 +5257,7 @@ do
                             FarmingPet.GetPetToFarm(1)
                         end
                         task.wait(1)
-                        end
+                    end
                     if not completePetAilments(1) then
                         task.wait()
                         completeBabyAilments()
