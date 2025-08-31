@@ -5321,6 +5321,9 @@ do
 
             task.wait(2)
 
+            Taskboard:NewClaim() --- test Home pass
+            if not FarmingPet.GetTaskBoardPet(1) then   --- test Home pass
+
             FarmingPet.GetPetToFarm(1)
             task.wait(2)
 
