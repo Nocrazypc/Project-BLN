@@ -5255,7 +5255,7 @@ do
                          Taskboard:NewClaim()
                          task.wait(1) --- test
                          if not FarmingPet.GetTaskBoardPet(1) then
-                          -- FarmingPet.GetPetToFarm(1) --test
+                         FarmingPet.GetPetToFarm(1)
                          end
                         task.wait(1)
                     end
