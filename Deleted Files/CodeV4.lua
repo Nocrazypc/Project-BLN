@@ -4601,7 +4601,7 @@ do
                 if GetInventory.CheckForPetAndEquip(potionFarmPets, whichPet) then
                     return
                 end
------------------------ added in Home event------
+
                 if GetInventory.CheckForPetAndEquip({
                     'cracked_egg',
                 }, whichPet) then
@@ -4613,7 +4613,6 @@ do
                 if hasMoney then
                     return
                 end
-------------------------------------------------
             end
 
             if getgenv().SETTINGS.HATCH_EGG_PRIORITY or getgenv().HatchPriorityEggs then
