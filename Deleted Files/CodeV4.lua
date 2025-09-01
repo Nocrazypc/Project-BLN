@@ -3862,6 +3862,7 @@ do
                 }, petCharOrPlayerChar)
             end)
         end
+
         local isDoctorLoaded = function()
             local stuckCount = 0
             local isStuck = false
@@ -3869,10 +3870,10 @@ do
 
             if not doctor then
                 repeat
-                    task.wait(3)
+                    task.wait(5)
 
                     doctor = Workspace.HouseInteriors.furniture:FindFirstChild('Doctor', true)
-                    stuckCount = stuckCount + 3
+                    stuckCount = stuckCount + 5
                     isStuck = stuckCount > 30 and true or false
                 until doctor or isStuck
             end
@@ -3897,16 +3898,16 @@ do
             local isStuck = false
 
             ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('Hospital')
-            task.wait(3)
+            task.wait(5)
 
             local doctor = Workspace.HouseInteriors.furniture:FindFirstChild('Doctor', true)
 
             if not doctor then
                 repeat
-                    task.wait(3)
+                    task.wait(5)
 
                     doctor = Workspace.HouseInteriors.furniture:FindFirstChild('Doctor', true)
-                    stuckCount = stuckCount + 3
+                    stuckCount = stuckCount + 5
                     isStuck = stuckCount > 30 and true or false
                 until doctor or isStuck
             end
