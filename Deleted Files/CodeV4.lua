@@ -9296,7 +9296,7 @@ local FarmToggle = FarmTab:CreateToggle({
 -------------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Focus Farm Age Potions",
-     CurrentValue = false,
+     CurrentValue = true,  -- true for for home event only
      Flag = "Toggle033",
      Callback = function(Value)
 
