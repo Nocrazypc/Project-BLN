@@ -4978,7 +4978,7 @@ do
         end
 --------------------------------------------
         local tryFeedAgePotion = function()
-            if not getgenv().SETTINGS.FOCUS_FARM_AGE_POTION then
+            if not --[[getgenv().SETTINGS.FOCUS_FARM_AGE_POTION or--]] getgenv().FocusFarmAgePotions then
                 if ClientData.get('pet_char_wrappers')[1] and table.find(GetInventory.GetPetEggs(), ClientData.get('pet_char_wrappers')[1].pet_id) then
                     Utils.PrintDebug('is egg, not feeding age potion')
                 else
