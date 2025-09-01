@@ -4571,7 +4571,7 @@ do
             end
         end
         function FarmingPet.GetPetToFarm(whichPet)
-            if getgenv().SETTINGS.FOCUS_FARM_AGE_POTION or getgenv().FocusFarmAgePotions then
+            if --[[getgenv().SETTINGS.FOCUS_FARM_AGE_POTION or--]] getgenv().FocusFarmAgePotions then
                 if whichPet == 1 and isfocusFarmPets() then
                     Utils.PrintDebug(string.format('Has focusFarmpets equipped, %s', tostring(whichPet)))
 
