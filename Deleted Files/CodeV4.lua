@@ -5253,7 +5253,6 @@ do
                     end
                     if --[[getgenv().SETTINGS.FOCUS_FARM_AGE_POTION or--]] getgenv().FocusFarmAgePotions then
                          Taskboard:NewClaim()
-                         task.wait(1)
                          if not FarmingPet.GetTaskBoardPet(1) then
                          FarmingPet.GetPetToFarm(1)
                          end
