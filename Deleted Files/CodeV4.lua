@@ -9259,7 +9259,7 @@ local FarmTab = Window:CreateTab("Farm", 4483362458)
 ------------------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Start AutoFarm",
-     CurrentValue = false,
+     CurrentValue = true,
      Flag = "Toggle01",
      Callback = function(Value)
 	
@@ -9296,7 +9296,7 @@ local FarmToggle = FarmTab:CreateToggle({
 -------------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Focus Farm Age Potions",
-     CurrentValue = false,
+     CurrentValue = true,
      Flag = "Toggle033",
      Callback = function(Value)
 
@@ -9313,7 +9313,7 @@ local FarmToggle = FarmTab:CreateToggle({
 -------------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Low Render / Hide Parts",
-     CurrentValue = false,
+     CurrentValue = true,
      Flag = "Toggle04",
      Callback = function(Value)
         
@@ -9358,7 +9358,7 @@ end--]]
 -------- Transition disabler -------------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Transitions Disabler",
-     CurrentValue = false,
+     CurrentValue = true,
      Flag = "Toggle05",
      Callback = function(Value)
 
