@@ -9263,10 +9263,11 @@ local FarmToggle = FarmTab:CreateToggle({
      Flag = "Toggle01",
      Callback = function(Value)
 	
-		  task.wait(30)
+		  task.wait(3)
           Teleport.FarmingHome()
 		  --getgenv().auto_farm = Value
-         localPlayer:SetAttribute('StopFarmingTemp', false)
+          task.wait(5)
+          localPlayer:SetAttribute('StopFarmingTemp', false)
      end,
  })
 
