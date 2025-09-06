@@ -9252,8 +9252,41 @@ Check the Developer Console for more information.]],
                     },
                 },
             })
+------- autostart some toggled rayfield options---------------
+task.spawn(function()
 
+for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
+    if v:IsA("BasePart") and Value then
+        v.Transparency = 1 
+    elseif v:IsA("BasePart") and not Value then
+        v.Transparency = 0 
+    end 
+end 
 
+game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
+    if v:IsA('BasePart') and Value then
+        v.Transparency = 1 
+    end 
+end)
+task.wait(1)
+
+pcall(function() 
+    require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
+    require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).sudden_fill = function() return end
+    if Player.PlayerGui:FindFirstChild("TransitionsApp") then
+        Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
+    end
+end)
+
+		  getgenv().FocusFarmAgePotions = true
+		
+		  task.wait(10)
+          Teleport.FarmingHome()
+          localPlayer:SetAttribute('StopFarmingTemp', false)
+	
+end)
+
+-------------------------------------------------------------------------------
 -----  First Tab - Autofarm -------------------
 local FarmTab = Window:CreateTab("Farm", 4483362458)
 ------------------------------------------------
