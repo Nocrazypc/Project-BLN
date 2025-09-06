@@ -10233,25 +10233,10 @@ for index, _table in ipairs(files)do
     end
 end
 
---------------------update Stats Gui ------------------------
-StatsGuis:UpdateText("NameFrame")
-StatsGuis:UpdateText("BucksAndPotionFrame")
 
-        task.spawn(function()
 
-            while task.wait() do
-			StatsGuis:UpdateText("TimeFrame")
-			StatsGuis:UpdateText("BucksAndPotionFrame")
-                        StatsGuis:UpdateText("TotalFrame")
-                        StatsGuis:UpdateText("TotalFrame1")
-                        --StatsGuis:UpdateText("TotalFrame2")
-            task.wait(5) 
-            end
-        end)
---------------------------------------------------------------
-
-------- autostart some toggled options for Feli---------------
-
+--------------------------- Autostart some toggled options for Feli---------------------------------------------------
+-------- Low Render- Hide parts ------------------------
 task.spawn(function()
         
 for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
@@ -10268,7 +10253,7 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
     end 
 end)
 end)
--------------------------------------------------------------------------------
+---------------------Transitions Remover -------------------
 pcall(function() 
     require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
     require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).sudden_fill = function() return end
@@ -10276,10 +10261,26 @@ pcall(function()
         Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
     end
 end)
-------------------------------------------------------------------------------
+----------------------- Focus Farm Pet ----------------------
 
 		  getgenv().FocusFarmAgePotions = true
 		
 		  task.wait(3)
 
           localPlayer:SetAttribute('StopFarmingTemp', false)
+-------------------------------------------------------------------------------------------------------------------------
+
+-------------------- Updater Stats Gui ------------------------
+
+        task.spawn(function()
+
+            while task.wait() do
+			StatsGuis:UpdateText("TimeFrame")
+			StatsGuis:UpdateText("BucksAndPotionFrame")
+            StatsGuis:UpdateText("TotalFrame")
+            StatsGuis:UpdateText("TotalFrame1")
+            --StatsGuis:UpdateText("TotalFrame2")
+            task.wait(5) 
+            end
+        end)
+--------------------------------------------------------------
