@@ -10250,7 +10250,6 @@ StatsGuis:UpdateText("BucksAndPotionFrame")
 --------------------------------------------------------------
 
 ------- autostart some toggled rayfield options for Feli---------------
-task.spawn(function()
 
 for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
     if v:IsA("BasePart") and Value then
@@ -10265,8 +10264,8 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
         v.Transparency = 1 
     end 
 end)
-task.wait(1)
 
+-------------------------------------------------------------------------------
 pcall(function() 
     require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
     require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).sudden_fill = function() return end
@@ -10274,13 +10273,10 @@ pcall(function()
         Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
     end
 end)
+------------------------------------------------------------------------------
 
 		  getgenv().FocusFarmAgePotions = true
 		
 		  task.wait(3)
 
           localPlayer:SetAttribute('StopFarmingTemp', false)
-	
-end)
-
--------------------------------------------------------------------------------
