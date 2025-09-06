@@ -9281,7 +9281,7 @@ end)
 		  getgenv().FocusFarmAgePotions = true
 		
 		  task.wait(10)
-          Teleport.FarmingHome()
+
           localPlayer:SetAttribute('StopFarmingTemp', false)
 	
 end)
