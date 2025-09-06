@@ -10239,12 +10239,13 @@ StatsGuis:UpdateText("BucksAndPotionFrame")
 
         task.spawn(function()
 
-            while task.wait(5) do
+            while task.wait() do
 			StatsGuis:UpdateText("TimeFrame")
 			StatsGuis:UpdateText("BucksAndPotionFrame")
                         StatsGuis:UpdateText("TotalFrame")
                         StatsGuis:UpdateText("TotalFrame1")
                         --StatsGuis:UpdateText("TotalFrame2")
+            task.wait(5) 
             end
         end)
 --------------------------------------------------------------
