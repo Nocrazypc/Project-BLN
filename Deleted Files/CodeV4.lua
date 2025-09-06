@@ -5314,7 +5314,7 @@ do
             setupFloor()
             CollisionsClient.set_collidable(false)
             task.wait(2)
-            --Teleport.FarmingHome()
+            Teleport.FarmingHome()
             Utils.PrintDebug('teleported to farming place')
             Utils.PrintDebug('Started Farming')
             localPlayer:SetAttribute('hasStartedFarming', true)
