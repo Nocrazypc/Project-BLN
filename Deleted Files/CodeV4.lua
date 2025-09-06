@@ -10114,7 +10114,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         function self.Start()
             task.defer(function()
                 setupRayfield()
-                Rayfield:SetVisibility(true)
+                Rayfield:SetVisibility(false)  --- RayField UI Visibility ----
             end)
         end
 
