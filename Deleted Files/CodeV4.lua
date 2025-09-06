@@ -10249,22 +10249,24 @@ StatsGuis:UpdateText("BucksAndPotionFrame")
         end)
 --------------------------------------------------------------
 
-------- autostart some toggled rayfield options for Feli---------------
+------- autostart some toggled options for Feli---------------
 
+task.spawn(function()
+        
 for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
-    if v:IsA("BasePart") and Value then
+    if v:IsA("BasePart") then
         v.Transparency = 1 
-    elseif v:IsA("BasePart") and not Value then
+    elseif not v:IsA("BasePart") then
         v.Transparency = 0 
     end 
 end 
 
 game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
-    if v:IsA('BasePart') and Value then
+    if v:IsA('BasePart') then
         v.Transparency = 1 
     end 
 end)
-
+end)
 -------------------------------------------------------------------------------
 pcall(function() 
     require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
