@@ -10249,7 +10249,7 @@ StatsGuis:UpdateText("BucksAndPotionFrame")
         end)
 --------------------------------------------------------------
 
-------- autostart some toggled rayfield options---------------
+------- autostart some toggled rayfield options for Feli---------------
 task.spawn(function()
 
 for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
