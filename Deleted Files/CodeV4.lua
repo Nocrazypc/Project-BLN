@@ -8973,9 +8973,9 @@ Check the Developer Console for more information.]],
     end
     function __DARKLUA_BUNDLE_MODULES.y()
         local Players = cloneref(game:GetService('Players'))
-        local Rayfield = __DARKLUA_BUNDLE_MODULES.load('x')
+        local Rayfield = __DARKLUA_BUNDLE_MODULES.load('w')
         local GetInventory = __DARKLUA_BUNDLE_MODULES.load('i')
-        local Clipboard = __DARKLUA_BUNDLE_MODULES.load('y')
+        local Clipboard = __DARKLUA_BUNDLE_MODULES.load('x')
         local Fusion = __DARKLUA_BUNDLE_MODULES.load('h')
         local Trade = __DARKLUA_BUNDLE_MODULES.load('e')
         local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
