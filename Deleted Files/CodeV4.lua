@@ -10088,10 +10088,7 @@ end)
 ----------------------- Focus Farm Pet ----------------------
 
 		  getgenv().FocusFarmAgePotions = true
-		
-		  task.wait(3)
 
-          localPlayer:SetAttribute('StopFarmingTemp', false)
 -------------------------------------------------------------------------------------------------------------------------
 
 -------------------- Updater Stats Gui ------------------------
