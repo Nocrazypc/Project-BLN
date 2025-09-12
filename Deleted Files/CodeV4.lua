@@ -10151,7 +10151,8 @@ end)
 
 		  getgenv().FocusFarmAgePotions = true
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------
+          localPlayer:SetAttribute('StopFarmingTemp', false)
 
 -------------------- Updater Stats Gui ------------------------
 StatsGuis:UpdateText("NameFrame")
