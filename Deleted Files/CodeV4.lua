@@ -8936,7 +8936,7 @@ Check the Developer Console for more information.]],
 ------------- Rayfield Config -------------        
         local setupRayfield = function()
         local Window = Rayfield:CreateWindow({
-	        Name = "BLN Adopt Me!  Basic Autofarm V4.4",
+	        Name = "BLN Adopt Me!  Basic Autofarm V4.4 - Feli Mode ❤",
                 Theme = 'Default',
                 DisableRayfieldPrompts = true,
                 DisableBuildWarnings = true,
