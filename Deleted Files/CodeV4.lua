@@ -2892,7 +2892,6 @@ do
             end
 
             localPlayer:SetAttribute('StopFarmingTemp', false)
-            --RouterClient.get('CodeRedemptionAPI/AttemptRedeemCode'):InvokeServer('VISITS')
         end
 
         return self
