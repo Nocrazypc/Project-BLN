@@ -3439,6 +3439,22 @@ do
                     end
                 end
             end)
+            PlaytimePayoutsApp:GetPropertyChangedSignal('Enabled'):Connect(function(
+            )
+                if not PlaytimePayoutsApp.Enabled then
+                    return
+                end
+
+                PlaytimePayoutsApp:WaitForChild('Frame')
+                PlaytimePayoutsApp.Frame:WaitForChild('Container')
+                PlaytimePayoutsApp.Frame.Container:WaitForChild('CashOutContainer')
+                PlaytimePayoutsApp.Frame.Container.CashOutContainer:WaitForChild('CashOutButton')
+
+                local button = (PlaytimePayoutsApp.Frame.Container.CashOutContainer.CashOutButton:WaitForChild('DepthButton'))
+
+                Utils.FireButton(button)
+                print('\u{1f911} Cashed out playtime rewards')
+            end)
         end
         function self.Start()
             TradeApp.Frame.NegotiationFrame.Body.PartnerOffer.Accepted:GetPropertyChangedSignal('ImageTransparency'):Connect(function(
