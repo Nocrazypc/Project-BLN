@@ -2054,6 +2054,49 @@ do
 
             return false
         end
+
+        function self.GetHighestGrownPetForIdle(age)
+            local PetageCounter = age
+            local isNeon = true
+            local petFound = false
+            local petUniques = {}
+
+            while not petFound do
+                for _, pet in ClientData.get_data()[localPlayer.Name].inventory.pets do
+                    if table.find(AllowOrDenyList.Denylist, pet.id) then
+                        continue
+                    end
+                    if pet.properties.age == PetageCounter and pet.properties.neon == isNeon then
+                        if pet.unique == getgenv().petCurrentlyFarming1 then
+                            continue
+                        end
+                        if pet.unique == getgenv().petCurrentlyFarming2 then
+                            continue
+                        end
+
+                        table.insert(petUniques, pet.unique)
+
+                        if #petUniques >= 4 then
+                            return petUniques
+                        end
+                    end
+                end
+
+                PetageCounter = PetageCounter - 1
+
+                if PetageCounter <= 0 and isNeon then
+                    PetageCounter = age
+                    isNeon = nil
+                elseif PetageCounter <= 0 and isNeon == nil then
+                    return petUniques
+                end
+
+                task.wait()
+            end
+
+            return petUniques
+        end
+		
         function self.GetPetRarity()
             if not Utils.IsPetEquipped(1) then
                 return nil
