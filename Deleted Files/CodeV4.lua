@@ -4749,7 +4749,6 @@ do
 
             return
         end
--------------  task Board House event pets --------------------
         function FarmingPet.GetTaskBoardPet(whichPet)
             print('Getting Task Board Pet')
 
