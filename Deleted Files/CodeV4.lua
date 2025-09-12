@@ -2815,6 +2815,16 @@ do
                 localPlayer.CharacterAdded:Wait()
             end
 
+            local success, err = pcall(function()
+                return RouterClient.get('TeamAPI/Spawn'):InvokeServer()
+            end)
+
+            if not success then
+                Utils.PrintDebug(string.format('Error spawning to house: %s', tostring(err)))
+            end
+
+            task.wait(1)
+
             local furnitureKeys = Furniture.GetFurnituresKey()
 
             loopFurniture(furnitureKeys)
