@@ -4702,24 +4702,7 @@ do
         local furniture = Furniture.GetFurnituresKey()
         local baitboxCount = 0
         local strollerId = GetInventory.GetUniqueId('strollers', 'stroller-default')
------------------  Home event -------------
-        local tryRedeemHomepass = function()
-            local count = ClientData.get_data()[localPlayer.Name].battle_pass_manager.house_pets_2025_pass_2.rewards_claimed
-            if not count then
-                return
-            end
-            if count >= 20 then
-                if Utils.BucksAmount() >= 1500 then
-                    print('max redeemed. need to reset homepass')
-                    RouterClient.get('BattlePassAPI/AttemptBattlePassReset'):InvokeServer('house_pets_2025_pass_2')
-                    return
-                end
-                print('max redeemed. but has no money to reset')
-                return
-            end
-            RouterClient.get('BattlePassAPI/ClaimReward'):InvokeServer('house_pets_2025_pass_2', count + 1)
-        end
---------------------------------------------
+
         local tryFeedAgePotion = function()
             if not --[[getgenv().SETTINGS.FOCUS_FARM_AGE_POTION or--]] getgenv().FocusFarmAgePotions then
                 if ClientData.get('pet_char_wrappers')[1] and table.find(GetInventory.GetPetEggs(), ClientData.get('pet_char_wrappers')[1].pet_id) then
