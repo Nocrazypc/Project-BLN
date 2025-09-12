@@ -492,6 +492,9 @@ do
 
             RouterClient.get('HousingAPI/BuyFurnitures'):InvokeServer(unpack(args))
         end
+        function self.subscribeToHouse(playerName)
+            RouterClient.get('HousingAPI/SubscribeToHouse'):FireServer(playerName)
+        end
 
         return self
     end
