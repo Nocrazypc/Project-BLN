@@ -4977,11 +4977,7 @@ do
                         end
                     end
                     if --[[getgenv().SETTINGS.FOCUS_FARM_AGE_POTION or--]] getgenv().FocusFarmAgePotions then
-                         Taskboard:NewClaim()
-                         if not FarmingPet.GetTaskBoardPet(1) then
                          FarmingPet.GetPetToFarm(1)
-                         end
-                        task.wait(1)
                     end
                     if not completePetAilments(1) then
                         task.wait()
@@ -5009,7 +5005,6 @@ do
                     end
 
                     tryFeedAgePotion()
-                    tryRedeemHomepass()
                     --UpdateTextEvent:Fire()
 
                     local waitTime = rng:NextNumber(5, 15)
