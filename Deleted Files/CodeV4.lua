@@ -10155,7 +10155,6 @@ end)
 
 -------------------- Updater Stats Gui ------------------------
 StatsGuis:UpdateText("NameFrame")
-StatsGuis:UpdateText("BucksAndPotionFrame")
 
         task.spawn(function()
             while task.wait() do
