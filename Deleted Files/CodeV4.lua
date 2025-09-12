@@ -4297,7 +4297,9 @@ do
             local toyId = GetInventory.GetUniqueId('toys', 'squeaky_bone_default')
 
             if not toyId then
-                return false, Utils.PrintDebug("\u{26a0}\u{fe0f} Doesn't have squeaky_bone so exiting \u{26a0}\u{fe0f}")
+                Utils.PrintDebug("\u{26a0}\u{fe0f} Doesn't have squeaky_bone so exiting \u{26a0}\u{fe0f}")
+
+                return false
             end
 
             local args = {
