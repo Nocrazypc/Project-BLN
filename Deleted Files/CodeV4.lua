@@ -9953,10 +9953,11 @@ local NewsApp = (localPlayer:WaitForChild('PlayerGui'):WaitForChild('NewsApp'))
 
 local StatsGuis = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Stats.lua"))()
 
-
-repeat
-    task.wait(5)
-until NewsApp.Enabled or localPlayer.Character
+if not NewsApp.Enabled then
+    repeat
+        task.wait(5)
+    until NewsApp.Enabled or localPlayer.Character
+end
 
 for i, v in debug.getupvalue(RouterClient.init, 7)do
     v.Name = i
