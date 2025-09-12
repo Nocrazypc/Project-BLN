@@ -9927,10 +9927,10 @@ local files = {
         WebhookHandler = __DARKLUA_BUNDLE_MODULES.load('s'),
     },
     {
-        AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('w'),
+        AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('v'),
     },
     {
-        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('z'),
+        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('w'),
     },
 }
 
