@@ -5096,7 +5096,6 @@ do
                     end
 
                     tryFeedAgePotion()
-                    tryRedeemHomepass()
                     --UpdateTextEvent:Fire()
 
                     local waitTime = rng:NextNumber(5, 15)
