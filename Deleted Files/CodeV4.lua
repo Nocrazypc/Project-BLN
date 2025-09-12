@@ -3470,7 +3470,6 @@ do
         local Lighting = (cloneref(game:GetService('Lighting')))
         local self = {}
         local TURN_ON = false
-        local TURN_ON = getgenv().SETTINGS.POTATO_MODE or false
 
         local lowSpecTerrain = function()
             Terrain.WaterReflectance = 0
