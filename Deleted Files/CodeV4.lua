@@ -3161,8 +3161,8 @@ do
                 Utils.FindButton('Okay')
             elseif TextLabel.Text:match('Pay 1500 Bucks') then
                 Utils.FindButton('Yes')
-            elseif TextLabel.Text:match("You've completed the entire Homepass!") then
-                Utils.FindButton('Okay')
+            elseif TextLabel.Text:match('Pet Pen!') then
+                Utils.FindButton('Go to Pet Pen')
             elseif TextLabel.Text:match('The Homepass has been restarted') then
                 Utils.FindButton('Okay')
             end
