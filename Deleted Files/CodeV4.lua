@@ -3102,6 +3102,12 @@ do
                 Utils.FindButton('Okay')
             elseif TextLabel.Text:match('mailbox') then
                 Utils.FindButton('Okay')
+            elseif TextLabel.Text:match('Pay 1500 Bucks') then
+                Utils.FindButton('Yes')
+            elseif TextLabel.Text:match("You've completed the entire Homepass!") then
+                Utils.FindButton('Okay')
+            elseif TextLabel.Text:match('The Homepass has been restarted') then
+                Utils.FindButton('Okay')
             end
         end
         local removeGameOverButton = function(screenGuiName)
@@ -4670,9 +4676,101 @@ do
 
             return
         end
+-------------  task Board House event pets --------------------
+        function FarmingPet.GetTaskBoardPet(whichPet)
+            print('Getting Task Board Pet')
+
+            if not Utils.IsPetEquipped(whichPet) then
+                FarmingPet.GetPetToFarm(whichPet)
+            end
+            for _, v in ClientData.get('quest_manager')['quests_cached']do
+                if v['entry_name']:match('house_pets_2025_potion_drank') then
+                    for _, v in ClientData.get_data()[localPlayer.Name].inventory.food do
+                        if v['id'] == 'pet_grow_potion' then
+                            print('Found potion, using it')
+                            Utils.CreatePetObject(v['unique'])
+                            return true
+                        end
+                    end
+                    if Utils.BucksAmount() >= 10000 then
+                        print('Buying grow potion')
+                        RouterClient.get('ShopAPI/BuyItem'):InvokeServer('food', 'pet_grow_potion', {buy_count = 1})
+                        task.wait(1)
+                    end
+                end
+            end
+
+            for _, v in ClientData.get('quest_manager')['quests_cached']do
+                if v['entry_name']:match('house_pets_2025_small_hatch_egg') or v['entry_name']:match('house_pets_2025_medium_hatch_egg') then
+                    print('Buying Farming Egg')
+                    if farmEgg() then
+                        return true
+                    end
+                end
+            end
+            for _, v in ClientData.get('quest_manager')['quests_cached']do
+                if v['entry_name']:match('house_pets_2025_buy_gumball_egg') then
+                    if Utils.BucksAmount() >= 10000 then
+                        print('Buying gumball egg')
+                        Teleport.Nursery()
+                        RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'aztec_egg_2025_aztec_egg', {})
+                    end
+                end
+            end
+            for _, v in ClientData.get('quest_manager')['quests_cached']do
+                if v['entry_name']:match('house_pets_2025_large_ailments_common') then
+                    if GetInventory.GetPetRarity() == 'common' then
+                        return true
+                    end
+                    if GetInventory.PetRarityAndAge('common', 6, whichPet) then
+                        return true
+                    end
+                end
+            end
+            for _, v in ClientData.get('quest_manager')['quests_cached']do
+                if v['entry_name']:match('house_pets_2025_large_ailments_uncommon') then
+                    if GetInventory.GetPetRarity() == 'uncommon' then
+                        return true
+                    end
+                    if GetInventory.PetRarityAndAge('uncommon', 6, whichPet) then
+                        return true
+                    end
+                end
+            end
+            for _, v in ClientData.get('quest_manager')['quests_cached']do
+                if v['entry_name']:match('house_pets_2025_large_ailments_rare') then
+                    if GetInventory.GetPetRarity() == 'rare' then
+                        return true
+                    end
+                    if GetInventory.PetRarityAndAge('rare', 6, whichPet) then
+                        return true
+                    end
+                end
+            end
+            for _, v in ClientData.get('quest_manager')['quests_cached']do
+                if v['entry_name']:match('house_pets_2025_large_ailments_ultra_rare') then
+                    if GetInventory.GetPetRarity() == 'ultra_rare' then
+                        return true
+                    end
+                    if GetInventory.PetRarityAndAge('ultra_rare', 6, whichPet) then
+                        return true
+                    end
+                end
+            end
+            for _, v in ClientData.get('quest_manager')['quests_cached']do
+                if v['entry_name']:match('house_pets_2025_large_ailments_legendary') then
+                    if GetInventory.GetPetRarity() == 'legendary' then
+                        return true
+                    end
+                    if GetInventory.PetRarityAndAge('legendary', 6, whichPet) then
+                        return true
+                    end
+                end
+            end
+            return false
+        end
         return FarmingPet
     end
-
     function __DARKLUA_BUNDLE_MODULES.v()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
@@ -4864,7 +4962,24 @@ do
         local furniture = Furniture.GetFurnituresKey()
         local baitboxCount = 0
         local strollerId = GetInventory.GetUniqueId('strollers', 'stroller-default')
-
+-----------------  Home event -------------
+        local tryRedeemHomepass = function()
+            local count = ClientData.get_data()[localPlayer.Name].battle_pass_manager.house_pets_2025_pass_2.rewards_claimed
+            if not count then
+                return
+            end
+            if count >= 20 then
+                if Utils.BucksAmount() >= 1500 then
+                    print('max redeemed. need to reset homepass')
+                    RouterClient.get('BattlePassAPI/AttemptBattlePassReset'):InvokeServer('house_pets_2025_pass_2')
+                    return
+                end
+                print('max redeemed. but has no money to reset')
+                return
+            end
+            RouterClient.get('BattlePassAPI/ClaimReward'):InvokeServer('house_pets_2025_pass_2', count + 1)
+        end
+--------------------------------------------
         local tryFeedAgePotion = function()
             if not --[[getgenv().SETTINGS.FOCUS_FARM_AGE_POTION or--]] getgenv().FocusFarmAgePotions then
                 if ClientData.get('pet_char_wrappers')[1] and table.find(GetInventory.GetPetEggs(), ClientData.get('pet_char_wrappers')[1].pet_id) then
@@ -5140,7 +5255,11 @@ do
                         end
                     end
                     if --[[getgenv().SETTINGS.FOCUS_FARM_AGE_POTION or--]] getgenv().FocusFarmAgePotions then
+                         Taskboard:NewClaim()
+                         if not FarmingPet.GetTaskBoardPet(1) then
                          FarmingPet.GetPetToFarm(1)
+                         end
+                        task.wait(1)
                     end
                     if not completePetAilments(1) then
                         task.wait()
@@ -5168,7 +5287,7 @@ do
                     end
 
                     tryFeedAgePotion()
-                    Taskboard:NewClaim()
+                    tryRedeemHomepass()
                     --UpdateTextEvent:Fire()
 
                     local waitTime = rng:NextNumber(5, 15)
@@ -9106,7 +9225,7 @@ Check the Developer Console for more information.]],
 ------------- Rayfield Config -------------        
         local setupRayfield = function()
         local Window = Rayfield:CreateWindow({
-	        Name = "BLN Adopt Me! Autofarm V4.4 - Feli Mode ❤",
+	        Name = "BLN Adopt Me!  Basic Autofarm V4.4",
                 Theme = 'Default',
                 DisableRayfieldPrompts = true,
                 DisableBuildWarnings = true,
@@ -9996,7 +10115,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         function self.Start()
             task.defer(function()
                 setupRayfield()
-                Rayfield:SetVisibility(false)  --- Rayfield Hide UI ----
+                Rayfield:SetVisibility(false)  --- RayField UI Visibility ----
             end)
         end
 
@@ -10155,6 +10274,7 @@ end)
 
 -------------------- Updater Stats Gui ------------------------
 StatsGuis:UpdateText("NameFrame")
+StatsGuis:UpdateText("BucksAndPotionFrame")
 
         task.spawn(function()
             while task.wait() do
@@ -10167,4 +10287,3 @@ StatsGuis:UpdateText("NameFrame")
             end
         end)
 --------------------------------------------------------------
-
