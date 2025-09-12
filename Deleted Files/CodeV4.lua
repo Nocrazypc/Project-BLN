@@ -479,7 +479,7 @@ do
             return furnitures
         end
         function self.BuyFurniture(furnitureId)
-            local args = {
+            --[[local args = {
                 {
                     {
                         ['kind'] = furnitureId,
@@ -490,7 +490,7 @@ do
                 },
             }
 
-            RouterClient.get('HousingAPI/BuyFurnitures'):InvokeServer(unpack(args))
+            RouterClient.get('HousingAPI/BuyFurnitures'):InvokeServer(unpack(args))--]]
         end
         function self.subscribeToHouse(playerName)
             RouterClient.get('HousingAPI/SubscribeToHouse'):FireServer(playerName)
