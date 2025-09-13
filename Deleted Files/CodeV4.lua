@@ -9430,7 +9430,7 @@ local FarmToggle = FarmTab:CreateToggle({
 	
 		  task.wait(3)
           Teleport.FarmingHome()
-		  --getgenv().auto_farm = Value
+		  getgenv().auto_farm = Value
           localPlayer:SetAttribute('StopFarmingTemp', false)
      end,
  })
@@ -9543,7 +9543,7 @@ local FarmToggle = FarmTab:CreateToggle({
      Callback = function(Value)
 	
         task.wait(3)
-        Teleport.FarmingHome()
+        --Teleport.FarmingHome()
 	    --getgenv().auto_farm = Value	
         getgenv().HatchPriorityEggs = Value
         localPlayer:SetAttribute('StopFarmingTemp', false)
@@ -10430,7 +10430,7 @@ pcall(function()
 end)
 ----------------------- Focus Farm Pet ----------------------
 
-		  getgenv().FocusFarmAgePotions = true
+		  --getgenv().FocusFarmAgePotions = true
 
 -------------------------star AutoFarm-------------------------------
           --localPlayer:SetAttribute('StopFarmingTemp', false)
@@ -10444,8 +10444,6 @@ end)
 
 -------------------- Updater Stats Gui ------------------------
 StatsGuis:UpdateText("NameFrame")
-StatsGuis:UpdateText("BucksAndPotionFrame")
-
         task.spawn(function()
             while task.wait() do
 			StatsGuis:UpdateText("TimeFrame")
