@@ -3077,7 +3077,7 @@ do
         local MinigameRewardsApp = (PlayerGui:WaitForChild('MinigameRewardsApp'))
         local MinigameInGameApp = (PlayerGui:WaitForChild('MinigameInGameApp'))
         local TradeApp = (PlayerGui:WaitForChild('TradeApp'))
-        local PlaytimePayoutsApp = (PlayerGui:WaitForChild('PlaytimePayoutsApp', 5))
+        local PlaytimePayoutsApp = (PlayerGui:WaitForChild('PlaytimePayoutsApp'))
         local certificateConn
         local starterPackAppConn
         local getNormalDialogTextLabel = function()
