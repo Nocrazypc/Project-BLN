@@ -10194,7 +10194,10 @@ local files = {
         AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('v'),
     },
     {
-        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('y'),
+        PetOfflineHandler = __DARKLUA_BUNDLE_MODULES.load('x'),
+    },
+    {
+        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('A'),
     },
 }
 
