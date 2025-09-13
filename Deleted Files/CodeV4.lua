@@ -245,14 +245,14 @@ do
             if firesignal then
                 pcall(function()
                     local mouseButton1Down = button.MouseButton1Down
-                    local mouseButton1Click = button.MouseButton1Click
                     local mouseButton1Up = button.MouseButton1Up
+                    local mouseButton1Click = button.MouseButton1Click
 
                     firesignal(mouseButton1Down)
-                    task.wait(1)
-                    firesignal(mouseButton1Click)
-                    task.wait(1)
+                    task.wait(0.5)
                     firesignal(mouseButton1Up)
+                    task.wait(0.5)
+                    firesignal(mouseButton1Click)
                 end)
             else
                 Utils.ClickGuiButton(button)
