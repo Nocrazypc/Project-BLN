@@ -3270,20 +3270,21 @@ do
                 return
             end
 
-            PlaytimePayoutsApp:WaitForChild('Frame')
+            --[[PlaytimePayoutsApp:WaitForChild('Frame')
             PlaytimePayoutsApp.Frame:WaitForChild('Container')
             PlaytimePayoutsApp.Frame.Container:WaitForChild('CashOutContainer')
             PlaytimePayoutsApp.Frame.Container.CashOutContainer:WaitForChild('CashOutButton')
 
-            local cashbutton = (PlaytimePayoutsApp.Frame.Container.CashOutContainer.CashOutButton:WaitForChild('DepthButton'))
-            task.wait(3)
+            local cashbutton = (PlaytimePayoutsApp.Frame.Container.CashOutContainer.CashOutButton:WaitForChild('DepthButton'))--]]
+
+            local cashbutton = (PlaytimePayoutsApp:WaitForChild('Frame'):WaitForChild('Container'):WaitForChild('CashOutContainer'):WaitForChild('CashOutButton'))
+            local cashbutton1 = (PlaytimePayoutsApp:WaitForChild('Frame'):WaitForChild('Container'):WaitForChild('CashOutContainer'):WaitForChild('CashOutButton'):WaitForChild('DepthButton'))
+            task.wait(1)
             --Utils.FireButton(cashbutton)
 
             FireSig(cashbutton)
-            task.wait(2)
-            FireSig(cashbutton) 
-
-
+            task.wait()
+            FireSig(cashbutton1)
 
             print('\u{1f911} Cashed out playtime rewards')
         end
