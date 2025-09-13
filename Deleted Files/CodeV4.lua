@@ -10365,9 +10365,9 @@ local files = {
     {
         TutorialHandler = __DARKLUA_BUNDLE_MODULES.load('r'),
     },
-    {
-        WebhookHandler = __DARKLUA_BUNDLE_MODULES.load('s'),
-    },
+    -- {
+       -- WebhookHandler = __DARKLUA_BUNDLE_MODULES.load('s'),
+    -- },
     {
         AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('v'),
     },
