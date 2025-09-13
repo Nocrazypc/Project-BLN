@@ -3077,7 +3077,7 @@ do
         local MinigameRewardsApp = (PlayerGui:WaitForChild('MinigameRewardsApp'))
         local MinigameInGameApp = (PlayerGui:WaitForChild('MinigameInGameApp'))
         local TradeApp = (PlayerGui:WaitForChild('TradeApp'))
-        local PlaytimePayoutsApp = (PlayerGui:WaitForChild('PlaytimePayoutsApp'))
+        local PlaytimePayoutsApp = (PlayerGui:WaitForChild('PlaytimePayoutsApp', 5))
         local certificateConn
         local starterPackAppConn
         local getNormalDialogTextLabel = function()
@@ -3246,24 +3246,18 @@ do
             end)
         end
         local tryClickPlaytimePayout = function()
+
             if not PlaytimePayoutsApp.Enabled then
                 return
             end
 
-            --[[PlaytimePayoutsApp:WaitForChild('Frame', 2)
+            PlaytimePayoutsApp:WaitForChild('Frame', 2)
             PlaytimePayoutsApp.Frame:WaitForChild('Container', 2)
             PlaytimePayoutsApp.Frame.Container:WaitForChild('CashOutContainer', 2)
             PlaytimePayoutsApp.Frame.Container.CashOutContainer:WaitForChild('CashOutButton', 2)
 
-            local cashbutton = (PlaytimePayoutsApp.Frame.Container.CashOutContainer.CashOutButton:WaitForChild('DepthButton'))--]]
-
-            local cashbutton = PlaytimePayoutsApp:WaitForChild('Frame', 2)
-                            :WaitForChild('Container', 2)
-                            :WaitForChild('CashOutContainer', 2)
-                            :WaitForChild('CashOutButton', 2)
-                            :WaitForChild('DepthButton',2)
-
-
+            local cashbutton = (PlaytimePayoutsApp.Frame.Container.CashOutContainer.CashOutButton:WaitForChild('DepthButton, 2'))
+            task.wait(10)
             Utils.FireButton(cashbutton)
             print('\u{1f911} Cashed out playtime rewards')
         end
