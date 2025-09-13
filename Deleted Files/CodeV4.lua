@@ -10432,8 +10432,15 @@ end)
 
 		  getgenv().FocusFarmAgePotions = true
 
--------------------------------------------------------------------
-          localPlayer:SetAttribute('StopFarmingTemp', false)
+-------------------------star AutoFarm-------------------------------
+          --localPlayer:SetAttribute('StopFarmingTemp', false)
+
+-----------------------Pay Check--------------------------
+        task.spawn(function()
+            while task.wait(30) do
+            tryClickPlaytimePayout()
+            end
+        end)
 
 -------------------- Updater Stats Gui ------------------------
 StatsGuis:UpdateText("NameFrame")
