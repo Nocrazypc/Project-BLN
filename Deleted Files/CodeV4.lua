@@ -4749,7 +4749,7 @@ do
 
             return
         end
-        function FarmingPet.GetTaskBoardPet(whichPet)
+        --[[function FarmingPet.GetTaskBoardPet(whichPet)
             print('Getting Task Board Pet')
 
             if not Utils.IsPetEquipped(whichPet) then
@@ -4842,7 +4842,7 @@ do
             return false
         end
         return FarmingPet
-    end
+    end --]]
     function __DARKLUA_BUNDLE_MODULES.v()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
