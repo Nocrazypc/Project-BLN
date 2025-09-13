@@ -3248,43 +3248,19 @@ do
         local tryClickPlaytimePayout = function()
 
     local function FireSig(button)
-        pcall(function()
-            for _, connection in pairs(getconnections(button.MouseButton1Down)) do
-                connection:Fire()
-            end
-            task.wait(0.1)
-            for _, connection in pairs(getconnections(button.MouseButton1Up)) do
-                connection:Fire()
-            end
-            for _, connection in pairs(getconnections(button.MouseButton1Click)) do
-                connection:Fire()
-                --[[print(button.Name .. " clicked!")--]]
-            end
-        end)
-    end
-
-
-            local PlaytimePayoutsApp = (PlayerGui:WaitForChild('PlaytimePayoutsApp'))
 
             if not PlaytimePayoutsApp.Enabled then
                 return
             end
 
-            --[[PlaytimePayoutsApp:WaitForChild('Frame')
+            PlaytimePayoutsApp:WaitForChild('Frame')
             PlaytimePayoutsApp.Frame:WaitForChild('Container')
             PlaytimePayoutsApp.Frame.Container:WaitForChild('CashOutContainer')
             PlaytimePayoutsApp.Frame.Container.CashOutContainer:WaitForChild('CashOutButton')
 
-            local cashbutton = (PlaytimePayoutsApp.Frame.Container.CashOutContainer.CashOutButton:WaitForChild('DepthButton'))--]]
+            local button = (PlaytimePayoutsApp.Frame.Container.CashOutContainer.CashOutButton:WaitForChild('DepthButton'))
 
-            local cashbutton = (PlaytimePayoutsApp:WaitForChild('Frame'):WaitForChild('Container'):WaitForChild('CashOutContainer'):WaitForChild('CashOutButton'))
-            local cashbutton1 = (PlaytimePayoutsApp:WaitForChild('Frame'):WaitForChild('Container'):WaitForChild('CashOutContainer'):WaitForChild('CashOutButton'):WaitForChild('DepthButton'))
-            task.wait(1)
-            --Utils.FireButton(cashbutton)
-
-            FireSig(cashbutton)
-            task.wait()
-            FireSig(cashbutton1)
+            Utils.FireButton(button)
 
             print('\u{1f911} Cashed out playtime rewards')
         end
