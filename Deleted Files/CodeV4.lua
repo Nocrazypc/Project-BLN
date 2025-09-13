@@ -3245,6 +3245,12 @@ do
                 end)
             end)
         end
+
+
+
+
+game:GetService("Players").LocalPlayer.PlayerGui.PlaytimePayoutsApp.Enabled = false
+
         local tryClickPlaytimePayout = function()
 
     local function FireSig(button)
