@@ -3249,11 +3249,9 @@ do
 
 
 
-game:GetService("Players").LocalPlayer.PlayerGui.PlaytimePayoutsApp.Enabled = false
+    Players.LocalPlayer.PlayerGui.PlaytimePayoutsApp.Enabled = false
 
         local tryClickPlaytimePayout = function()
-
-    local function FireSig(button)
 
             if not PlaytimePayoutsApp.Enabled then
                 return
@@ -3268,7 +3266,7 @@ game:GetService("Players").LocalPlayer.PlayerGui.PlaytimePayoutsApp.Enabled = fa
 
             Utils.FireButton(button)
             task.wait(5)
-            game:GetService("Players").LocalPlayer.PlayerGui.PlaytimePayoutsApp.Enabled = false
+            Players.LocalPlayer.PlayerGui.PlaytimePayoutsApp.Enabled = false
 
             --print('\u{1f911} Cashed out playtime rewards')
         end
