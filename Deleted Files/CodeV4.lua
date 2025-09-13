@@ -3255,12 +3255,12 @@ do
             PlaytimePayoutsApp.Frame.Container:WaitForChild('CashOutContainer')
             PlaytimePayoutsApp.Frame.Container.CashOutContainer:WaitForChild('CashOutButton')
 
-            --local button = (PlaytimePayoutsApp.Frame.Container.CashOutContainer.CashOutButton:WaitForChild('DepthButton'))
-            local button = (PlaytimePayoutsApp.Frame.Container.CashOutContainer:WaitForChild('CashOutButton'))
+            local button = (PlaytimePayoutsApp.Frame.Container.CashOutContainer.CashOutButton:WaitForChild('DepthButton'))
 
             Utils.FireButton(button)
             print('\u{1f911} Cashed out playtime rewards')
         end
+
         function self.Init()
             local Dialog = (DialogApp:WaitForChild('Dialog'))
 
