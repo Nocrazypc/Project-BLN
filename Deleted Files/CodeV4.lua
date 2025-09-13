@@ -8967,7 +8967,7 @@ Check the Developer Console for more information.]],
 
         return RayfieldLibrary
     end
-    function __DARKLUA_BUNDLE_MODULES.x()
+    function __DARKLUA_BUNDLE_MODULES.z()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
