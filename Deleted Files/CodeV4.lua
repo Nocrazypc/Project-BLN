@@ -3253,7 +3253,7 @@ do
             PlaytimePayoutsApp:WaitForChild('Frame', 2)
             PlaytimePayoutsApp.Frame:WaitForChild('Container', 2)
             PlaytimePayoutsApp.Frame.Container:WaitForChild('CashOutContainer', 2)
-            PlaytimePayoutsApp.Frame.Container.CashOutContainer:WaitForChild('CashOutButton'. 2)
+            PlaytimePayoutsApp.Frame.Container.CashOutContainer:WaitForChild('CashOutButton', 2)
 
             local cashbutton = (PlaytimePayoutsApp.Frame.Container.CashOutContainer.CashOutButton:WaitForChild('DepthButton'))
 
