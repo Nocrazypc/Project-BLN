@@ -5219,6 +5219,118 @@ do
     end
 
     function __DARKLUA_BUNDLE_MODULES.w()
+        local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
+        local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
+        local RouterClient = Bypass('RouterClient')
+        local PetOffline = {}
+
+        function PetOffline.AddPet(petId)
+            RouterClient.get('IdleProgressionAPI/AddPet'):FireServer(petId)
+            print('Added pet to offline farming: ' .. petId)
+        end
+        function PetOffline.RemovePet(petId)
+            RouterClient.get('IdleProgressionAPI/RemovePet'):FireServer(petId)
+        end
+        function PetOffline.ClaimAllXP()
+            RouterClient.get('IdleProgressionAPI/CommitAllProgression'):FireServer()
+            print('Claimed all XP')
+        end
+
+        return PetOffline
+    end
+    function __DARKLUA_BUNDLE_MODULES.x()
+        local ReplicatedStorage = game:GetService('ReplicatedStorage')
+        local Players = game:GetService('Players')
+        local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
+        local ClientData = Bypass('ClientData')
+        local RouterClient = (Bypass('RouterClient'))
+        local PetOffline = __DARKLUA_BUNDLE_MODULES.load('w')
+        local GetInventory = __DARKLUA_BUNDLE_MODULES.load('i')
+        local PetOfflineHandler = {}
+        local localPlayer = Players.LocalPlayer
+        local CurrentIdlePets = {}
+        local updateCurrentIdlePets = function()
+            CurrentIdlePets = {}
+
+            local idleManager = ClientData.get_data()[localPlayer.Name].idle_progression_manager
+
+            for key, value in idleManager.active_pets do
+                table.insert(CurrentIdlePets, key)
+            end
+        end
+        local removeAllMaxedPets = function()
+            local idleManager = ClientData.get_data()[localPlayer.Name].idle_progression_manager
+
+            for key, value in idleManager.active_pets do
+                if value.max_age then
+                    PetOffline.RemovePet(key)
+                    task.wait(1)
+                end
+            end
+
+            updateCurrentIdlePets()
+        end
+        local addAllPetsToidleFarm = function()
+            if #CurrentIdlePets >= 4 then
+                return
+            end
+
+            local petUniques = GetInventory.GetHighestGrownPetForIdle(5)
+
+            print(string.format('how many pets ids ther is in table: %s', tostring(#petUniques)))
+
+            for _, unique in ipairs(petUniques)do
+                if table.find(CurrentIdlePets, unique) then
+                    print(string.format('Pet %s is already in idle farm, skipping...', tostring(unique)))
+
+                    continue
+                end
+
+                PetOffline.AddPet(unique)
+                task.wait(1)
+            end
+        end
+
+        function PetOfflineHandler.Init()
+            RouterClient.get('PetAPI/PetProgressed').OnClientEvent:Connect(PetOffline.ClaimAllXP)
+            RouterClient.get('DataAPI/DataChanged').OnClientEvent:Connect(function(
+                _,
+                dataType,
+                data
+            )
+                if dataType ~= 'idle_progression_manager' then
+                    return
+                end
+                if not data then
+                    return
+                end
+                if data.age_up_pending then
+                    print('Age up pending, claiming all XP...')
+                    PetOffline.ClaimAllXP()
+                end
+
+                for key, value in data.active_pets do
+                    if value.max_age then
+                        PetOffline.RemovePet(key)
+                        task.wait(1)
+                    end
+                end
+
+                updateCurrentIdlePets()
+                addAllPetsToidleFarm()
+            end)
+        end
+        function PetOfflineHandler.Start()
+            PetOffline.ClaimAllXP()
+            task.wait(2)
+            removeAllMaxedPets()
+            task.wait(2)
+            addAllPetsToidleFarm()
+        end
+
+        return PetOfflineHandler
+    end
+    function __DARKLUA_BUNDLE_MODULES.y()
         local InterfaceBuild = '9NBD'
         local Release = 'Build 1.67'
         local RayfieldFolder = 'Rayfield'
