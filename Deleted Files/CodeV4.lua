@@ -5212,7 +5212,7 @@ do
 
             startAutoFarm()
 
-            localPlayer:SetAttribute('StopFarmingTemp', true)
+            --localPlayer:SetAttribute('StopFarmingTemp', true)
         end
 
         return self
