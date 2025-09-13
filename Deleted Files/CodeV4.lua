@@ -10426,12 +10426,6 @@ pcall(function()
         Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
     end
 end)
------------------------ Focus Farm Pet ----------------------
-
-		  --getgenv().FocusFarmAgePotions = true
-
--------------------------star AutoFarm-------------------------------
-          --localPlayer:SetAttribute('StopFarmingTemp', false)
 
 -----------------------Pay Check--------------------------
         task.spawn(function()
