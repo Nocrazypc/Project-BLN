@@ -3267,8 +3267,10 @@ game:GetService("Players").LocalPlayer.PlayerGui.PlaytimePayoutsApp.Enabled = fa
             local button = (PlaytimePayoutsApp.Frame.Container.CashOutContainer.CashOutButton:WaitForChild('DepthButton'))
 
             Utils.FireButton(button)
+            task.wait(5)
+            game:GetService("Players").LocalPlayer.PlayerGui.PlaytimePayoutsApp.Enabled = false
 
-            print('\u{1f911} Cashed out playtime rewards')
+            --print('\u{1f911} Cashed out playtime rewards')
         end
 
         function self.Init()
