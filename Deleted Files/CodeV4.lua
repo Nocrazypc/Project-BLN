@@ -9543,8 +9543,6 @@ local FarmToggle = FarmTab:CreateToggle({
      Callback = function(Value)
 	
         task.wait(3)
-        --Teleport.FarmingHome()
-	    --getgenv().auto_farm = Value	
         getgenv().HatchPriorityEggs = Value
         localPlayer:SetAttribute('StopFarmingTemp', false)
 
