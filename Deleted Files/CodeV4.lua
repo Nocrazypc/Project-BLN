@@ -10321,7 +10321,6 @@ getgenv().auto_trade_custom = false
 getgenv().auto_trade_semi_auto = false
 getgenv().auto_trade_lowtier_pets = false
 getgenv().auto_trade_rarity_pets = false
-getgenv().auto_farm = true
 getgenv().auto_make_neon = false
 getgenv().auto_trade_Legendary = false
 getgenv().auto_trade_custom_gifts = false
@@ -10333,8 +10332,9 @@ getgenv().petCurrentlyFarming1 = nil
 getgenv().petCurrentlyFarming2 = nil
 Utils = __DARKLUA_BUNDLE_MODULES.load('a')
 
+getgenv().auto_farm = true
 getgenv().AutoFusion = false
-getgenv().FocusFarmAgePotions = false
+getgenv().FocusFarmAgePotions = true
 getgenv().HatchPriorityEggs = false
 
 getgenv().AutoMinigame = false
