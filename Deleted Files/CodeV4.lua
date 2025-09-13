@@ -3246,11 +3246,6 @@ do
             end)
         end
 
-
-
-
-    Players.LocalPlayer.PlayerGui.PlaytimePayoutsApp.Enabled = false
-
         local tryClickPlaytimePayout = function()
 
             if not PlaytimePayoutsApp.Enabled then
@@ -3265,10 +3260,12 @@ do
             local button = (PlaytimePayoutsApp.Frame.Container.CashOutContainer.CashOutButton:WaitForChild('DepthButton'))
 
             Utils.FireButton(button)
-            task.wait(5)
-            Players.LocalPlayer.PlayerGui.PlaytimePayoutsApp.Enabled = false
 
-            --print('\u{1f911} Cashed out playtime rewards')
+            task.wait(5)
+
+            if PlaytimePayoutsApp.Enabled then
+            Players.LocalPlayer.PlayerGui.PlaytimePayoutsApp.Enabled = false --- Closing the shitty check
+            end
         end
 
         function self.Init()
