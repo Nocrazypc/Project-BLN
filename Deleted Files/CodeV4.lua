@@ -3279,6 +3279,8 @@ do
             task.wait(3)
             --Utils.FireButton(cashbutton)
 
+            FireSig(cashbutton)
+            task.wait(2)
             FireSig(cashbutton) 
 
 
