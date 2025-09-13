@@ -10429,13 +10429,6 @@ pcall(function()
     end
 end)
 
------------------------Pay Check--------------------------
-        task.spawn(function()
-            while task.wait(30) do
-            tryClickPlaytimePayout()
-            end
-        end)
-
 -------------------- Updater Stats Gui ------------------------
 StatsGuis:UpdateText("NameFrame")
         task.spawn(function()
