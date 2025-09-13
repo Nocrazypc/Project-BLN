@@ -5285,11 +5285,11 @@ do
 
             local petUniques = GetInventory.GetHighestGrownPetForIdle(5)
 
-            print(string.format('how many pets ids ther is in table: %s', tostring(#petUniques)))
+            --print(string.format('how many pets ids ther is in table: %s', tostring(#petUniques)))
 
             for _, unique in ipairs(petUniques)do
                 if table.find(CurrentIdlePets, unique) then
-                    print(string.format('Pet %s is already in idle farm, skipping...', tostring(unique)))
+                    --print(string.format('Pet %s is already in idle farm, skipping...', tostring(unique)))
 
                     continue
                 end
@@ -5313,7 +5313,7 @@ do
                     return
                 end
                 if data.age_up_pending then
-                    print('Age up pending, claiming all XP...')
+                    --print('Age up pending, claiming all XP...')
                     PetOffline.ClaimAllXP()
                 end
 
