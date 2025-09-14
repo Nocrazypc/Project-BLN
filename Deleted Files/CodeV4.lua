@@ -5257,6 +5257,7 @@ do
         local PetOfflineHandler = {}
         local localPlayer = Players.LocalPlayer
         local CurrentIdlePets = {}
+        local petProgrssedDebounce = false
         local updateCurrentIdlePets = function()
             CurrentIdlePets = {}
 
@@ -5312,6 +5313,13 @@ do
                 if not data then
                     return
                 end
+		
+                if petProgrssedDebounce then
+                    return
+                end
+
+                petProgrssedDebounce = true
+		
                 if data.age_up_pending then
                     --print('Age up pending, claiming all XP...')
                     PetOffline.ClaimAllXP()
@@ -5326,6 +5334,8 @@ do
 
                 updateCurrentIdlePets()
                 addAllPetsToidleFarm()
+
+                petProgrssedDebounce = false
             end)
         end
         function PetOfflineHandler.Start()
