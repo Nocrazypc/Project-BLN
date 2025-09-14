@@ -5301,7 +5301,6 @@ do
         end
 
         function PetOfflineHandler.Init()
-            RouterClient.get('PetAPI/PetProgressed').OnClientEvent:Connect(PetOffline.ClaimAllXP)
             RouterClient.get('DataAPI/DataChanged').OnClientEvent:Connect(function(
                 _,
                 dataType,
