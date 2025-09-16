@@ -1904,7 +1904,8 @@ do
         local InventoryDB = Bypass('InventoryDB')
         local AllowOrDenyList = __DARKLUA_BUNDLE_MODULES.load('c')
         local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
-        local self = {}
+        local GetInventory = {}
+        --local PetsToReleaseList = getgenv().SETTINGS.PETS_TO_AGE_IN_PEN or {}
         local localPlayer = Players.LocalPlayer
         local eggList = {}
         local equipWhichPet = function(whichPet, petUnique)
@@ -1929,9 +1930,48 @@ do
             return false
         end
 
-        function self.GetAgeablePets()
+       --[[function GetInventory.GetPetUniquesForPetPen(
+            petIds,
+            CurrentIdlePets,
+            amount
+        )
+            local petUniques = {}
+            for _, v in ClientData.get_data()[localPlayer.Name].inventory.pets do
+                if not table.find(petIds, v.id) then
+                    continue
+                end
+                if table.find(CurrentIdlePets, v.unique) then
+                    continue
+                end
+                if v.properties.age == 6 then
+                    continue
+                end
+                if v.properties.mega_neon then
+                    continue
+                end
+                table.insert(petUniques, v.unique)
+                if #petUniques >= amount then
+                    break
+                end
+            end
+            return petUniques
+        end
+        function GetInventory.GetPetsToRelease()
+            local petUniques = {}
+            for _, pet in ClientData.get_data()[localPlayer.Name].inventory.pets do
+                if not table.find(PetsToReleaseList, pet.id) then
+                    continue
+                end
+                if pet.properties.mega_neon then
+                    petUniques[pet.unique] = true
+                end
+            end
+            return petUniques
+        end --]]		
+
+        function GetInventory.GetAgeablePets()
             local ageablePets = {}
-            local eggList = self.GetPetEggs()
+            local eggList = GetInventory.GetPetEggs()
 
             for _, pet in ClientData.get_data()[localPlayer.Name].inventory.pets do
                 if table.find(AllowOrDenyList.Denylist, pet.id) then
@@ -1954,10 +1994,10 @@ do
 
             return ageablePets
         end
-        function self.GetAll()
+        function GetInventory.GetAll()
             return ClientData.get_data()[localPlayer.Name].inventory
         end
-        function self.TabId(tabId)
+        function GetInventory.TabId(tabId)
             local inventoryTable = {}
 
             for _, v in ClientData.get_data()[localPlayer.Name].inventory[tabId]do
@@ -1975,7 +2015,7 @@ do
 
             return inventoryTable
         end
-        function self.IsFarmingSelectedPet(hasProHandler)
+        function GetInventory.IsFarmingSelectedPet(hasProHandler)
             if hasProHandler then
                 if not ClientData.get('pet_char_wrappers')[2] then
                     return
@@ -1996,7 +2036,7 @@ do
             RouterClient.get('ToolAPI/Equip'):InvokeServer(getgenv().petCurrentlyFarming1, {})
             task.wait(2)
         end
-        function self.GetPetFriendship(petTable, whichPet)
+        function GetInventory.GetPetFriendship(petTable, whichPet)
             local level = 0
             local petUnique = nil
 
@@ -2034,7 +2074,7 @@ do
 
             return true
         end
-        function self.GetHighestGrownPet(age, whichPet)
+        function GetInventory.GetHighestGrownPet(age, whichPet)
             local PetageCounter = age
             local isNeon = true
             local petFound = false
@@ -2073,7 +2113,7 @@ do
             return false
         end
 
-        function self.GetHighestGrownPetForIdle(age)
+        function GetInventory.GetHighestGrownPetForIdle(age)
             local PetageCounter = age
             local isNeon = true
             local petFound = false
@@ -2115,7 +2155,7 @@ do
             return petUniques
         end
 		
-        function self.GetPetRarity()
+        function GetInventory.GetPetRarity()
             if not Utils.IsPetEquipped(1) then
                 return nil
             end
@@ -2127,7 +2167,7 @@ do
             end
             return nil
         end
-        function self.PetRarityAndAge(rarity, age, whichPet)
+        function GetInventory.PetRarityAndAge(rarity, age, whichPet)
             local PetageCounter = age
             local isNeon = true
             local petFound = false
@@ -2167,7 +2207,7 @@ do
 
             return false
         end
-        function self.CheckForPetAndEquip(nameIds, whichPet)
+        function GetInventory.CheckForPetAndEquip(nameIds, whichPet)
             local level = 0
             local petUnique = nil
 
@@ -2233,7 +2273,7 @@ do
 
             return false
         end
-        function self.GetUniqueId(tabId, nameId)
+        function GetInventory.GetUniqueId(tabId, nameId)
             for _, v in ClientData.get_data()[localPlayer.Name].inventory[tabId]do
                 if v.id == nameId then
                     return v.unique
@@ -2242,7 +2282,7 @@ do
 
             return nil
         end
-        function self.IsPetInInventory(tabId, uniqueId)
+        function GetInventory.IsPetInInventory(tabId, uniqueId)
             for _, v in ClientData.get_data()[localPlayer.Name].inventory[tabId]do
                 if v.unique == uniqueId then
                     return true
@@ -2251,7 +2291,7 @@ do
 
             return false
         end
-        function self.PriorityEgg(whichPet)
+        function GetInventory.PriorityEgg(whichPet)
             for _, v in ipairs(getgenv().SETTINGS.HATCH_EGG_PRIORITY_NAMES)do
                 for _, v2 in ClientData.get_data()[localPlayer.Name].inventory.pets do
                     if table.find(AllowOrDenyList.Denylist, v2.id) then
@@ -2274,7 +2314,7 @@ do
 
             return false
         end
-        function self.GetPetEggs()
+        function GetInventory.GetPetEggs()
             if #eggList >= 1 then
                 return eggList
             end
@@ -2287,7 +2327,7 @@ do
 
             return eggList
         end
-        function self.GetNeonPet(whichPet)
+        function GetInventory.GetNeonPet(whichPet)
             local Petage = 5
             local isNeon = true
             local found_pet = false
@@ -2324,7 +2364,7 @@ do
 
             return false
         end
-        function self.PriorityPet(whichPet)
+        function GetInventory.PriorityPet(whichPet)
             local Petage = 5
             local isNeon = true
             local found_pet = false
@@ -2366,7 +2406,7 @@ do
             return false
         end
 
-        return self
+        return GetInventory
     end
     function __DARKLUA_BUNDLE_MODULES.j()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
