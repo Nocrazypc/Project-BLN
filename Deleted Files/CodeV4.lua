@@ -1299,7 +1299,7 @@ do
             TextLabel.TextSize = 14
             TextLabel.TextWrapped = true
         end
-        --[[function self.PlaceCameraPart()
+        --[[function Teleport.PlaceCameraPart()
             if Workspace:FindFirstChild('CameraPartLocation') then
                 return
             end
@@ -1313,7 +1313,7 @@ do
             part.Name = 'CameraPartLocation'
             part.Parent = Workspace
         end--]]
-        function self.PlaceFloorAtCampSite()
+        function Teleport.PlaceFloorAtCampSite()
             if Workspace:FindFirstChild('CampingLocation') then
                 return
             end
@@ -1347,7 +1347,7 @@ do
             TextLabel.TextSize = 14
             TextLabel.TextWrapped = true
         end
-        function self.PlaceFloorAtBeachParty()
+        function Teleport.PlaceFloorAtBeachParty()
             if Workspace:FindFirstChild('BeachPartyLocation') then
                 return
             end
@@ -1382,7 +1382,7 @@ do
             TextLabel.TextWrapped = true
 			
         end
-        function self.placeFloorOnJoinZone()
+        function Teleport.placeFloorOnJoinZone()
             for _, v in Workspace:GetChildren()do
                 if v.Name == 'FloorPart2' then
                     return
@@ -1398,18 +1398,18 @@ do
             part.Name = 'FloorPart2'
             part.Parent = Workspace
         end
-        function self.DeleteWater()
+        function Teleport.DeleteWater()
             Workspace.Terrain:Clear()
         end
-        function self.FarmingHome()
+        function Teleport.FarmingHome()
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
             localPlayer.Character.HumanoidRootPart.CFrame = Workspace.FarmingHomeLocation.CFrame * CFrame.new(rng:NextInteger(1, 30), 10, rng:NextInteger(1, 30))
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
 
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
-            self.DeleteWater()
+            Teleport.DeleteWater()
         end
-        function self.MainMap()
+        function Teleport.MainMap()
             local isAlreadyOnMainMap = Workspace:FindFirstChild('Interiors'):FindFirstChild('center_map_plot', true)
 
             if isAlreadyOnMainMap then
@@ -1427,10 +1427,10 @@ do
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
 
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
-            self.DeleteWater()
+            Teleport.DeleteWater()
             task.wait(2)
         end
-        function self.Nursery()
+        function Teleport.Nursery()
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
 
             SetLocationFunc('Nursery', 'MainDoor', {})
@@ -1444,25 +1444,41 @@ do
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
             task.wait(2)
         end
-        function self.CampSite()
+
+        function Teleport.Recycler()
+            localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
+            SetLocationFunc('Nursery', 'MainDoor', {})
+            task.wait(1)
+            Workspace.Interiors:WaitForChild(tostring(Workspace.Interiors:FindFirstChildWhichIsA('Model')))
+            local recyclerModel = (workspace.Interiors.Nursery:WaitForChild('Recycler', 60))
+            if not recyclerModel then
+                return
+            end
+            localPlayer.Character:MoveTo(recyclerModel:GetPivot().Position)
+            localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
+            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+            task.wait(2)
+        end
+		
+        function Teleport.CampSite()
             ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
             task.wait(1)
 
             localPlayer.Character.PrimaryPart.CFrame = Workspace.CampingLocation.CFrame + Vector3.new(rng:NextInteger(1, 30), 5, rng:NextInteger(1, 30))
 
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
-            self.DeleteWater()
+            Teleport.DeleteWater()
         end
-        function self.BeachParty()
+        function Teleport.BeachParty()
             ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
             task.wait(1)
 
             localPlayer.Character.PrimaryPart.CFrame = Workspace.BeachPartyLocation.CFrame + Vector3.new(math.random(1, 30), 5, math.random(1, 30))
 
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
-            self.DeleteWater()
+            Teleport.DeleteWater()
         end
-        function self.Bonfire()
+        function Teleport.Bonfire()
             ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
             task.wait(1)
 
@@ -1476,9 +1492,9 @@ do
 
             localPlayer.Character:MoveTo(location)
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
-            self.DeleteWater()
+            Teleport.DeleteWater()
         end
-        function self.PlayGround(vec)
+        function Teleport.PlayGround(vec)
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
 
             SetLocationFunc('MainMap', 'Neighborhood/MainDoor', {})
@@ -1489,9 +1505,9 @@ do
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
 
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
-            self.DeleteWater()
+            Teleport.DeleteWater()
         end
-        function self.DownloadMainMap()
+        function Teleport.DownloadMainMap()
             local interiors = Workspace:WaitForChild('Interiors', 30)
 
             if not interiors then
@@ -1513,11 +1529,11 @@ do
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
 
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
-            self.DeleteWater()
+            Teleport.DeleteWater()
 
             return true
         end
-        function self.MoonZone()
+        function Teleport.MoonZone()
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
 
             SetLocationFunc('MoonInterior', 'MainDoor', {})
@@ -1528,7 +1544,7 @@ do
 
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
         end
-        function self.SkyCastle()
+        function Teleport.SkyCastle()
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
 
             local isAlreadyOnSkyCastle = Workspace:WaitForChild('Interiors'):FindFirstChild('SkyCastle')
@@ -1556,7 +1572,7 @@ do
 
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
         end
-        function self.Neighborhood()
+        function Teleport.Neighborhood()
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
 
             SetLocationFunc('Neighborhood', 'MainDoor', {})
@@ -1574,10 +1590,10 @@ do
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
 
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
-            self.DeleteWater()
+            Teleport.DeleteWater()
         end
 
-        return self
+        return Teleport
     end
     function __DARKLUA_BUNDLE_MODULES.g()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
