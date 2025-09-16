@@ -9281,9 +9281,9 @@ Check the Developer Console for more information.]],
     end
     function __DARKLUA_BUNDLE_MODULES.B()
         local Players = cloneref(game:GetService('Players'))
-        local Rayfield = __DARKLUA_BUNDLE_MODULES.load('y')
+        local Rayfield = __DARKLUA_BUNDLE_MODULES.load('z')
         local GetInventory = __DARKLUA_BUNDLE_MODULES.load('i')
-        local Clipboard = __DARKLUA_BUNDLE_MODULES.load('z')
+        local Clipboard = __DARKLUA_BUNDLE_MODULES.load('A')
         local Fusion = __DARKLUA_BUNDLE_MODULES.load('h')
         local Trade = __DARKLUA_BUNDLE_MODULES.load('e')
         local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
@@ -10485,16 +10485,16 @@ local files = {
        -- WebhookHandler = __DARKLUA_BUNDLE_MODULES.load('s'),
     -- },
     {
-        AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('v'),
+        AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('w'),
     },
     {
-        PetOfflineHandler = __DARKLUA_BUNDLE_MODULES.load('x'),
+        PetOfflineHandler = __DARKLUA_BUNDLE_MODULES.load('y'),
     },
     {
-        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('A'),
+        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('B'),
     },
     {
-        TaskBoardHandler = __DARKLUA_BUNDLE_MODULES.load('B'),
+        TaskBoardHandler = __DARKLUA_BUNDLE_MODULES.load('C'),
     },
 }
 
