@@ -5263,6 +5263,7 @@ do
 
                         baitboxCount = 0
 
+                        --tryToReleasePets()
                     end
 
                     tryFeedAgePotion()
@@ -5278,7 +5279,9 @@ do
             end)
         end
 
-        function self.Init() end
+        function self.Init()
+            --RouterClient.get('PayAPI/DisablePopups'):FireServer()
+        end
         function self.Start()
             if not getgenv().auto_farm then
                 Utils.PrintDebug('ENABLE_AUTO_FARM is false')
@@ -5291,6 +5294,7 @@ do
                 task.wait(2)
             end
 
+            --tryToReleasePets()
             setupFloor()
             CollisionsClient.set_collidable(false)
             task.wait(2)
