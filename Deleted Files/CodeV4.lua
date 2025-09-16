@@ -9091,7 +9091,7 @@ Check the Developer Console for more information.]],
 
         return RayfieldLibrary
     end
-    function __DARKLUA_BUNDLE_MODULES.z()
+    function __DARKLUA_BUNDLE_MODULES.A()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
@@ -9279,7 +9279,7 @@ Check the Developer Console for more information.]],
 
         return Clipboard
     end
-    function __DARKLUA_BUNDLE_MODULES.A()
+    function __DARKLUA_BUNDLE_MODULES.B()
         local Players = cloneref(game:GetService('Players'))
         local Rayfield = __DARKLUA_BUNDLE_MODULES.load('y')
         local GetInventory = __DARKLUA_BUNDLE_MODULES.load('i')
@@ -9340,7 +9340,7 @@ Check the Developer Console for more information.]],
         }
 -------------------------------------------
 
-    function __DARKLUA_BUNDLE_MODULES.B()
+    function __DARKLUA_BUNDLE_MODULES.C()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
