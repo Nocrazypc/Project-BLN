@@ -4814,7 +4814,7 @@ do
             return
         end
         function FarmingPet.GetTaskBoardPet(whichPet)
-            print('Getting Task Board Pet')
+            Utils.PrintDebug('Getting Task Board Pet')
 
             if not Utils.IsPetEquipped(whichPet) then
                 FarmingPet.GetPetToFarm(whichPet)
@@ -4823,13 +4823,13 @@ do
                 if v['entry_name']:match('house_pets_2025_potion_drank') then
                     for _, v in ClientData.get_data()[localPlayer.Name].inventory.food do
                         if v['id'] == 'pet_grow_potion' then
-                            print('Found potion, using it')
+                            Utils.PrintDebug('Found potion, using it')
                             Utils.CreatePetObject(v['unique'])
                             return true
                         end
                     end
                     if Utils.BucksAmount() >= 10000 then
-                        print('Buying grow potion')
+                        Utils.PrintDebug('Buying grow potion')
                         RouterClient.get('ShopAPI/BuyItem'):InvokeServer('food', 'pet_grow_potion', {buy_count = 1})
                         task.wait(1)
                     end
@@ -4838,7 +4838,7 @@ do
 
             for _, v in ClientData.get('quest_manager')['quests_cached']do
                 if v['entry_name']:match('house_pets_2025_small_hatch_egg') or v['entry_name']:match('house_pets_2025_medium_hatch_egg') then
-                    print('Buying Farming Egg')
+                    Utils.PrintDebug('Buying Farming Egg')
                     if farmEgg() then
                         return true
                     end
@@ -4847,7 +4847,7 @@ do
             for _, v in ClientData.get('quest_manager')['quests_cached']do
                 if v['entry_name']:match('house_pets_2025_buy_gumball_egg') then
                     if Utils.BucksAmount() >= 10000 then
-                        print('Buying gumball egg')
+                        Utils.PrintDebug('Buying gumball egg')
                         Teleport.Nursery()
                         RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'aztec_egg_2025_aztec_egg', {})
                     end
