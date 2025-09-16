@@ -5297,7 +5297,6 @@ do
                 task.wait(2)
             end
 
-            --tryToReleasePets()
             setupFloor()
             CollisionsClient.set_collidable(false)
             task.wait(2)
@@ -5305,6 +5304,7 @@ do
             Utils.PrintDebug('teleported to farming place')
             Utils.PrintDebug('Started Farming')
             localPlayer:SetAttribute('hasStartedFarming', true)
+            --tryToReleasePets()
             Utils.UnEquipAllPets()
             task.wait(2)
             FarmingPet.GetPetToFarm(1)
