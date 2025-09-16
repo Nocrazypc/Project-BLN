@@ -4909,9 +4909,31 @@ do
     end 
     function __DARKLUA_BUNDLE_MODULES.v()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
+        local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
+        local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
+        local RouterClient = Bypass('RouterClient')
+        local PetRelease = {}
+        function PetRelease.Use(petUniques)
+            RouterClient.get('HousingAPI/ActivateInteriorFurniture'):InvokeServer('f-27', 'UseBlock', {
+                action = 'use',
+                uniques = petUniques,
+            }, Utils.GetCharacter())
+            Utils.PrintDebug('Added Pets To Release')
+        end
+        function PetRelease.Claim()
+            RouterClient.get('HousingAPI/ActivateInteriorFurniture'):InvokeServer('f-27', 'UseBlock', {
+                action = 'claim',
+            }, Utils.GetCharacter())
+            Utils.PrintDebug('Claimed Eggs from Release pets')
+        end
+        return PetRelease
+    end
+    function __DARKLUA_BUNDLE_MODULES.w()
+        local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
         local ClientData = Bypass('ClientData')
+        local RouterClient = Bypass('RouterClient')
         local CollisionsClient = Bypass('CollisionsClient')
         local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
         local Ailment = __DARKLUA_BUNDLE_MODULES.load('t')
@@ -4920,6 +4942,7 @@ do
         local GetInventory = __DARKLUA_BUNDLE_MODULES.load('i')
         local FarmingPet = __DARKLUA_BUNDLE_MODULES.load('u')
         local Fusion = __DARKLUA_BUNDLE_MODULES.load('h')
+        --local PetRelease = __DARKLUA_BUNDLE_MODULES.load('v')
         local self = {}
         --local UpdateTextEvent = (ReplicatedStorage:WaitForChild('UpdateTextEvent'))
         local localPlayer = Players.LocalPlayer
@@ -4928,7 +4951,18 @@ do
         local furniture = Furniture.GetFurnituresKey()
         local baitboxCount = 0
         local strollerId = GetInventory.GetUniqueId('strollers', 'stroller-default')
-
+        --[[local tryToReleasePets = function()
+            if getgenv().ENABLE_RELEASE_PETS == false then
+                return
+            end
+            Teleport.Recycler()
+            PetRelease.Claim()
+            task.wait(1)
+            local petsToRelease = GetInventory.GetPetsToRelease()
+            if petsToRelease and next(petsToRelease) ~= nil then
+                PetRelease.Use(petsToRelease)
+            end
+        end--]]
         local tryFeedAgePotion = function()
             if not --[[getgenv().SETTINGS.FOCUS_FARM_AGE_POTION or--]] getgenv().FocusFarmAgePotions then
                 if ClientData.get('pet_char_wrappers')[1] and table.find(GetInventory.GetPetEggs(), ClientData.get('pet_char_wrappers')[1].pet_id) then
