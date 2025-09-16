@@ -1235,7 +1235,7 @@ do
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
         local ClientData = Bypass('ClientData')
         local CollisionsClient = Bypass('CollisionsClient')
-        local self = {}
+        local Teleport = {}
         local localPlayer = Players.LocalPlayer
         local getconstants = getconstants or debug.getconstants
         local getgc = getgc or get_gc_objects or debug.getgc
@@ -1264,8 +1264,8 @@ do
             set_thread_identity(k)
         end
 
-        function self.Init() end
-        function self.PlaceFloorAtFarmingHome()
+        function Teleport.Init() end
+        function Teleport.PlaceFloorAtFarmingHome()
             if Workspace:FindFirstChild('FarmingHomeLocation') then
                 return
             end
