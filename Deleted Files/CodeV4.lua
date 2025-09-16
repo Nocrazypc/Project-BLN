@@ -2929,7 +2929,12 @@ do
                 Utils.PrintDebug(string.format('Error spawning to house: %s', tostring(err)))
             end
 
-            task.wait(1)
+            task.wait(5)
+
+            if not localPlayer.Character then
+                Utils.PrintDebug('NO CHARACTER SO WAITING')
+                localPlayer.CharacterAdded:Wait()
+            end
 
             local furnitureKeys = Furniture.GetFurnituresKey()
 
