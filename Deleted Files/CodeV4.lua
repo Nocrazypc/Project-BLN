@@ -4961,6 +4961,7 @@ do
                 return
             end
             Teleport.Recycler()
+            task.wait(5)
             PetRelease.Claim()
             task.wait(1)
             local petsToRelease = GetInventory.GetPetsToRelease()
