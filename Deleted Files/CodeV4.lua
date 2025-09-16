@@ -1955,8 +1955,9 @@ do
                 end
             end
             return petUniques
-        end
-        function GetInventory.GetPetsToRelease()
+        end--]]
+
+        --[[function GetInventory.GetPetsToRelease()
             local petUniques = {}
             for _, pet in ClientData.get_data()[localPlayer.Name].inventory.pets do
                 if not table.find(PetsToReleaseList, pet.id) then
