@@ -4964,10 +4964,7 @@ do
             task.wait(5)
             PetRelease.Claim()
             task.wait(1)
-            local petsToRelease = GetInventory.GetPetsToRelease()
-            if petsToRelease and next(petsToRelease) ~= nil then
-                PetRelease.Use(petsToRelease)
-            end
+            PetRelease.Use(GetInventory.GetPetsToRelease())
         end--]]
         local tryFeedAgePotion = function()
             if not --[[getgenv().SETTINGS.FOCUS_FARM_AGE_POTION or--]] getgenv().FocusFarmAgePotions then
