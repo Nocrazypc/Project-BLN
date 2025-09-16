@@ -1454,7 +1454,11 @@ do
             if not recyclerModel then
                 return
             end
-            localPlayer.Character:MoveTo(recyclerModel:GetPivot().Position)
+
+            local teleportPostion = recyclerModel:GetPivot().Position
+
+            localPlayer.Character:MoveTo(teleportPostion)
+			
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
             task.wait(2)
