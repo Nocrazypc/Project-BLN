@@ -4914,7 +4914,7 @@ do
         end
         return FarmingPet
     end 
-    function __DARKLUA_BUNDLE_MODULES.v()
+    function __DARKLUA_BUNDLE_MODULES.t()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
