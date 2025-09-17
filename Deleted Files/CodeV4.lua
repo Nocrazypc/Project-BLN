@@ -5287,7 +5287,7 @@ do
         end
         function self.Start()
             if not getgenv().auto_farm then
-                Utils.PrintDebug('ENABLE_AUTO_FARM is false')
+                Utils.PrintDebug('AUTO_FARM is false')
 
                 return
             end
