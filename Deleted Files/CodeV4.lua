@@ -5360,11 +5360,12 @@ do
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
         local ClientData = Bypass('ClientData')
         local RouterClient = (Bypass('RouterClient'))
-        local PetOffline = __DARKLUA_BUNDLE_MODULES.load('x')
+        local PetOffline = __DARKLUA_BUNDLE_MODULES.load('v')
         local GetInventory = __DARKLUA_BUNDLE_MODULES.load('i')
         local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
         local PetOfflineHandler = {}
         local localPlayer = Players.LocalPlayer
+        --local petsInPenList = getgenv().SETTINGS.PETS_TO_AGE_IN_PEN
         local CurrentIdlePets = {}
         local petProgrssedDebounce = false
         local updateCurrentIdlePets = function()
