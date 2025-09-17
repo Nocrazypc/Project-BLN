@@ -4595,7 +4595,7 @@ do
 
         return Ailment
     end
-    function __DARKLUA_BUNDLE_MODULES.u()
+    function __DARKLUA_BUNDLE_MODULES.s()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
@@ -4607,6 +4607,7 @@ do
         local Teleport = __DARKLUA_BUNDLE_MODULES.load('f')
         local FarmingPet = {}
         local localPlayer = Players.LocalPlayer
+        --local petToBuy = 'aztec_egg_2025_aztec_egg'
         local potionFarmPets = {
             'dog',
             'cat',
@@ -4934,7 +4935,7 @@ do
         end
         return PetRelease
     end
-    function __DARKLUA_BUNDLE_MODULES.w()
+    function __DARKLUA_BUNDLE_MODULES.u()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
@@ -4950,7 +4951,6 @@ do
         local Fusion = __DARKLUA_BUNDLE_MODULES.load('h')
         --local PetRelease = __DARKLUA_BUNDLE_MODULES.load('v')
         local self = {}
-        --local UpdateTextEvent = (ReplicatedStorage:WaitForChild('UpdateTextEvent'))
         local localPlayer = Players.LocalPlayer
         local rng = Random.new(DateTime.now().UnixTimestamp)
         local jobId = game.JobId
@@ -5271,7 +5271,6 @@ do
                     end
 
                     tryFeedAgePotion()
-                    --UpdateTextEvent:Fire()
 
                     local waitTime = rng:NextNumber(5, 15)
 
@@ -5324,7 +5323,7 @@ do
         return self
     end
 
-    function __DARKLUA_BUNDLE_MODULES.x()
+    function __DARKLUA_BUNDLE_MODULES.v()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
@@ -5355,7 +5354,7 @@ do
 
         return PetOffline
     end
-    function __DARKLUA_BUNDLE_MODULES.y()
+    function __DARKLUA_BUNDLE_MODULES.w()
         local ReplicatedStorage = game:GetService('ReplicatedStorage')
         local Players = game:GetService('Players')
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
@@ -5448,6 +5447,10 @@ do
             end)
         end
         function PetOfflineHandler.Start()
+            if getgenv().SETTINGS.ENABLE_AUTO_FARM == false then
+                return
+            end
+
             PetOffline.ClaimAllXP()
             task.wait(2)
             removeAllMaxedPets()
@@ -5458,10 +5461,18 @@ do
         return PetOfflineHandler
     end
 
-    function __DARKLUA_BUNDLE_MODULES.z()
+    function __DARKLUA_BUNDLE_MODULES.x()
 
     end
 
+    function __DARKLUA_BUNDLE_MODULES.y()
+
+    end
+
+    function __DARKLUA_BUNDLE_MODULES.z()
+
+    end
+---------------------------------------------------
     function __DARKLUA_BUNDLE_MODULES.A()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
