@@ -5448,7 +5448,7 @@ do
             end)
         end
         function PetOfflineHandler.Start()
-            if getgenv().ENABLE_AUTO_FARM == false then
+            if getgenv().auto_farm == false then
                 return
             end
 
