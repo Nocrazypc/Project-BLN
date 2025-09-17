@@ -249,9 +249,9 @@ do
                     local mouseButton1Click = button.MouseButton1Click
 
                     firesignal(mouseButton1Down)
-                    task.wait(0.5)
+                    task.wait(1)
                     firesignal(mouseButton1Up)
-                    task.wait(0.5)
+                    task.wait(1)
                     firesignal(mouseButton1Click)
                 end)
             else
