@@ -3615,13 +3615,6 @@ do
         return self
     end
     function __DARKLUA_BUNDLE_MODULES.o()
-
-    end
-    function __DARKLUA_BUNDLE_MODULES.p()
-
-    end
-
-    function __DARKLUA_BUNDLE_MODULES.q()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
