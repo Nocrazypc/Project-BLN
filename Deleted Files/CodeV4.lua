@@ -6904,8 +6904,8 @@ end
 
 
 
---------------------------- Autostart some toggled options for Feli---------------------------------------------------
--------- Low Render- Hide parts ------------------------
+-------------- Autostart some toggled options for Feli---------------------
+-------- Low Render- Hide parts ------------
 task.spawn(function()
         
 for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
@@ -6922,7 +6922,7 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
     end 
 end)
 end)
----------------------Transitions Remover -------------------
+--------Transitions Remover -------------
 pcall(function() 
     require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
     require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).sudden_fill = function() return end
@@ -6931,7 +6931,7 @@ pcall(function()
     end
 end)
 
--------------------- Updater Stats Gui ------------------------
+------ Updater Stats Gui ---------------
 StatsGuis:UpdateText("NameFrame")
         task.spawn(function()
             while task.wait() do
@@ -6943,4 +6943,4 @@ StatsGuis:UpdateText("NameFrame")
             task.wait(5) 
             end
         end)
---------------------------------------------------------------
+-----------------------------------------
