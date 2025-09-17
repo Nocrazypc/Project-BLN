@@ -6870,9 +6870,9 @@ local files = {
     {
         PetOfflineHandler = __DARKLUA_BUNDLE_MODULES.load('y'),
     },
-    -- {
-      -- RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('B'),
-    -- },
+    {
+       RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('B'),
+    },
     {
         TaskBoardHandler = __DARKLUA_BUNDLE_MODULES.load('C'),
     },
