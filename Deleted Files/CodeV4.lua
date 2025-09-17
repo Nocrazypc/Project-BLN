@@ -1655,6 +1655,9 @@ do
             if not currency then
                 return 0, Utils.PrintDebug('NO CURRENCY ON PLAYER')
             end
+            if not valuesTable.cost then
+                return 0, Utils.PrintDebug('Pet doesnt have Cost to it?')
+            end
 
             local count = 0
 
