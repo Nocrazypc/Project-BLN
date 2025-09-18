@@ -5241,7 +5241,7 @@ do
                             task.wait(1)
                         end
                     end
-                    if --[[getgenv().SETTINGS.FOCUS_FARM_AGE_POTION or--]] getgenv().FocusFarmAgePotions then
+                    if getgenv().FOCUS_FARM_AGE_POTION then
                          FarmingPet.GetPetToFarm(1)
                     end
                     if not completePetAilments(1) then
