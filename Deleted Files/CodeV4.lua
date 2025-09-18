@@ -6808,6 +6808,16 @@ local RouterClient = (Bypass('RouterClient'))
 local localPlayer = Players.LocalPlayer
 local NewsApp = (localPlayer:WaitForChild('PlayerGui'):WaitForChild('NewsApp'))
 
+if not NewsApp.Enabled then
+    repeat
+        task.wait(5)
+    until NewsApp.Enabled or localPlayer.Character
+end
+
+for i, v in debug.getupvalue(RouterClient.init, 7)do
+    v.Name = i
+end
+
 -------------- Stats GUIs ---------------
 local StatsGuis = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Stats.lua"))()
 StatsGuis:UpdateText("NameFrame")
@@ -6823,16 +6833,6 @@ StatsGuis:UpdateText("NameFrame")
             end
         end)
 -----------------------------------------
-
-if not NewsApp.Enabled then
-    repeat
-        task.wait(5)
-    until NewsApp.Enabled or localPlayer.Character
-end
-
-for i, v in debug.getupvalue(RouterClient.init, 7)do
-    v.Name = i
-end
 
 getgenv().auto_accept_trade = false
 getgenv().auto_trade_all_pets = false
