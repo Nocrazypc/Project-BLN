@@ -6845,7 +6845,7 @@ getgenv().FocusFarmAgePotions = true
 getgenv().HatchPriorityEggs = false
 
 getgenv().ENABLE_RELEASE_PETS = false
---getgenv().PETS_TO_AGE_IN_PEN = {}
+getgenv().PETS_TO_AGE_IN_PEN = {}
 
 getgenv().AutoMinigame = false
 getgenv().AutoMinigame2 = false
