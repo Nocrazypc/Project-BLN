@@ -6808,8 +6808,21 @@ local RouterClient = (Bypass('RouterClient'))
 local localPlayer = Players.LocalPlayer
 local NewsApp = (localPlayer:WaitForChild('PlayerGui'):WaitForChild('NewsApp'))
 
+-------------- Stats GUIs ---------------
 local StatsGuis = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Stats.lua"))()
 StatsGuis:UpdateText("NameFrame")
+---- Updater ---
+        task.spawn(function()
+            while task.wait() do
+			StatsGuis:UpdateText("TimeFrame")
+			StatsGuis:UpdateText("BucksAndPotionFrame")
+            StatsGuis:UpdateText("TotalFrame")
+            StatsGuis:UpdateText("TotalFrame1")
+            --StatsGuis:UpdateText("TotalFrame2")
+            task.wait(5) 
+            end
+        end)
+-----------------------------------------
 
 if not NewsApp.Enabled then
     repeat
@@ -6940,17 +6953,3 @@ pcall(function()
         Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
     end
 end)
-
------- Updater Stats Gui ---------------
--- StatsGuis:UpdateText("NameFrame")
-        task.spawn(function()
-            while task.wait() do
-			StatsGuis:UpdateText("TimeFrame")
-			StatsGuis:UpdateText("BucksAndPotionFrame")
-            StatsGuis:UpdateText("TotalFrame")
-            StatsGuis:UpdateText("TotalFrame1")
-            --StatsGuis:UpdateText("TotalFrame2")
-            task.wait(5) 
-            end
-        end)
------------------------------------------
