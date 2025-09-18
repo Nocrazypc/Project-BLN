@@ -6809,6 +6809,7 @@ local localPlayer = Players.LocalPlayer
 local NewsApp = (localPlayer:WaitForChild('PlayerGui'):WaitForChild('NewsApp'))
 
 local StatsGuis = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Stats.lua"))()
+StatsGuis:UpdateText("NameFrame")
 
 if not NewsApp.Enabled then
     repeat
@@ -6941,7 +6942,7 @@ pcall(function()
 end)
 
 ------ Updater Stats Gui ---------------
-StatsGuis:UpdateText("NameFrame")
+-- StatsGuis:UpdateText("NameFrame")
         task.spawn(function()
             while task.wait() do
 			StatsGuis:UpdateText("TimeFrame")
