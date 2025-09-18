@@ -5365,7 +5365,7 @@ do
         local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
         local PetOfflineHandler = {}
         local localPlayer = Players.LocalPlayer
-        --local petsInPenList = getgenv().SETTINGS.PETS_TO_AGE_IN_PEN
+        local petsInPenList = getgenv().SETTINGS.PETS_TO_AGE_IN_PEN
         local CurrentIdlePets = {}
         local petProgrssedDebounce = false
         local updateCurrentIdlePets = function()
