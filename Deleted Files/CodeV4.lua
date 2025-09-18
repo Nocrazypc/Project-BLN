@@ -1912,7 +1912,7 @@ do
         local AllowOrDenyList = __DARKLUA_BUNDLE_MODULES.load('c')
         local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
         local GetInventory = {}
-        --local PetsToReleaseList = getgenv().SETTINGS.PETS_TO_AGE_IN_PEN or {}
+        --local PetsToReleaseList = getgenv().PETS_TO_AGE_IN_PEN or {}
         local localPlayer = Players.LocalPlayer
         local eggList = {}
         local equipWhichPet = function(whichPet, petUnique)
