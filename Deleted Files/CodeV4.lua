@@ -5974,7 +5974,7 @@ local FarmToggle = FarmTab:CreateToggle({
      Flag = "Toggle033",
      Callback = function(Value)
 
-         getgenv().FocusFarmAgePotions = Value
+         getgenv().FOCUS_FARM_AGE_POTION = Value
 
      end,
  })
