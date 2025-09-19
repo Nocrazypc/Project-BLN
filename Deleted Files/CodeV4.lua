@@ -6936,7 +6936,7 @@ StarterGui:SetCore(
     "SendNotification",
     {
         Title = "Feli Mode Activated 💗 ",
-        Text = "😘😘😘🤗🤗🤗🥰🥰🥰!"
+        Text = "😘 😘 😘 🤗 🤗 🤗 🥰 🥰 🥰"
     }
 )
 
