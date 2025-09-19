@@ -5898,7 +5898,7 @@ local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocr
 
         local setupRayfield = function()
         local Window = Rayfield:CreateWindow({
-	        Name = "BLN Adopt Me!  Autofarm V4.4 - Feli Mode ❤",
+	        Name = "BLN Adopt Me! Autofarm V4.4",
                 Theme = 'Default',
                 DisableRayfieldPrompts = true,
                 DisableBuildWarnings = true,
