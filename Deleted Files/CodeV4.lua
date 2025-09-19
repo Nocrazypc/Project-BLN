@@ -6928,6 +6928,18 @@ end
 
 
 -------------- Autostart some toggled options for Feli---------------------
+
+local CoreGui = game:GetService("CoreGui")
+local StarterGui = game:GetService("StarterGui")
+
+StarterGui:SetCore(
+    "SendNotification",
+    {
+        Title = "Feli Mode Activated 💗 ",
+        Text = "😘😘😘🤗🤗🤗🥰🥰🥰!"
+    }
+)
+
 -------- Low Render- Hide parts ------------
 task.spawn(function()
         
