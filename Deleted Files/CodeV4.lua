@@ -4612,7 +4612,7 @@ do
             'dog',
             'cat',
             'starter_egg',
-            'cracked_egg',
+            --'cracked_egg',
             'basic_egg_2022_ant',
             'basic_egg_2022_mouse',
         }
