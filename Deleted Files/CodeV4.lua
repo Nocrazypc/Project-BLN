@@ -11001,6 +11001,19 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         end
         function HalloweenHandler2025.Start()
             print('HalloweenHandler2025 Started')
+            task.spawn(function()
+                while true do
+                    local dt = (DateTime.now():ToUniversalTime())
+                    if dt.Minute >= 17 and dt.Minute < 20 then
+                        print("\u{23f0} It's 17 minutes past the hour (UTC)!")
+                        feedYarnApple()
+                    elseif dt.Minute >= 47 and dt.Minute < 50 then
+                        print("\u{23f0} It's 47 minutes past the hour (UTC)!")
+                        feedYarnApple()
+                    end
+                    task.wait(30)
+                end
+            end)
         end
         return HalloweenHandler2025
     end
