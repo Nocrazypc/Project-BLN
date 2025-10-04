@@ -5485,13 +5485,13 @@ do
         local RouterClient = Bypass('RouterClient')
         local CollisionsClient = Bypass('CollisionsClient')
         local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
-        local Ailment = __DARKLUA_BUNDLE_MODULES.load('r')
+        local Ailment = __DARKLUA_BUNDLE_MODULES.load('u')
         local Furniture = __DARKLUA_BUNDLE_MODULES.load('b')
         local Teleport = __DARKLUA_BUNDLE_MODULES.load('f')
         local GetInventory = __DARKLUA_BUNDLE_MODULES.load('i')
-        local FarmingPet = __DARKLUA_BUNDLE_MODULES.load('s')
+        local FarmingPet = __DARKLUA_BUNDLE_MODULES.load('v')
         local Fusion = __DARKLUA_BUNDLE_MODULES.load('h')
-        --local PetRelease = __DARKLUA_BUNDLE_MODULES.load('t')
+        --local PetRelease = __DARKLUA_BUNDLE_MODULES.load('w')
         local self = {}
         local localPlayer = Players.LocalPlayer
         local rng = Random.new(DateTime.now().UnixTimestamp)
