@@ -776,7 +776,10 @@ do
                     end
                 end
 
-                task.wait(math.random(20, 30))
+				if waitForActiveTrade() then
+                    return true
+                end
+                task.wait()
             end
         end
         function self.SelectTabAndTrade(tab, selectedItem)
