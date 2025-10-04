@@ -10930,11 +10930,31 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
         local RouterClient = Bypass('RouterClient')
+        local GetInventory = __DARKLUA_BUNDLE_MODULES.load('i')
+        local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
         local HauntletMinigameClient = (require(ReplicatedStorage.SharedModules.ContentPacks.Halloween2025.Minigames.HauntletMinigameClient))
         local Players = cloneref(game:GetService('Players'))
         local localPlayer = Players.LocalPlayer
         local PlayerGui = (localPlayer:WaitForChild('PlayerGui'))
         local HauntletInGameApp = (PlayerGui:WaitForChild('HauntletInGameApp'))
+        local isFedYarnApple = false
+        local feedYarnApple = function()
+            if isFedYarnApple then
+                return
+            end
+            local yarnAppleUnique = GetInventory.GetUniqueId('food', 'halloween_2025_yarn_apple')
+            if not yarnAppleUnique then
+                Utils.PrintDebug('No yarn apple found in inventory')
+                return
+            end
+            Utils.Equip(yarnAppleUnique, false)
+            task.wait(1)
+            RouterClient.get('HalloweenEventAPI/ProgressTaming'):InvokeServer(true)
+            isFedYarnApple = true
+            task.delay(240, function()
+                isFedYarnApple = false
+            end)
+        end
         local getMinigameId = function()
             return (HauntletMinigameClient.instanced_minigame and {
                 (HauntletMinigameClient.instanced_minigame.minigame_id),
