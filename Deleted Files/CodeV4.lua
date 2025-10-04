@@ -6013,7 +6013,7 @@ do
         return PetOfflineHandler
     end
 
-    function __DARKLUA_BUNDLE_MODULES.A()  --- Rayfield Library
+    function __DARKLUA_BUNDLE_MODULES.A()  ---Rayfield Library
         local InterfaceBuild = '9NBD'
         local Release = 'Build 1.67'
         local RayfieldFolder = 'Rayfield'
@@ -7464,11 +7464,6 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
                 else
                     Passthrough = true
                 end
-            end
-            if Settings.KeySystem then
-                repeat
-                    task.wait()
-                until Passthrough
             end
 
             Notifications.Template.Visible = false
@@ -8957,7 +8952,8 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
                             Toggle.Title.Text = 'Callback Error'
 
                             print('Rayfield | ' .. ToggleSettings.Name .. ' Callback Error ' .. tostring(Response))
-                            warn([[Check docs.sirius.menu for help with Rayfield specific development.]])
+                            warn(
+[[Check docs.sirius.menu for help with Rayfield specific development.]])
                             task.wait(0.5)
 
                             Toggle.Title.Text = ToggleSettings.Name
