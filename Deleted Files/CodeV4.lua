@@ -9544,8 +9544,6 @@ Check the Developer Console for more information.]],
         }
 
 ------------- Rayfield Config ------------- 
-local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Rayfield/main/Source1.lua"))()
-
         local setupRayfield = function()
         local Window = Rayfield:CreateWindow({
 	        Name = "BLN Adopt Me! Autofarm V4.4  😎",
