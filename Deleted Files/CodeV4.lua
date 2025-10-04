@@ -6647,10 +6647,10 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
         local useMobileSizing
 
         if Rayfield.AbsoluteSize.X < minSize.X and Rayfield.AbsoluteSize.Y < minSize.Y then
-            useMobileSizing = true
+            useMobileSizing = false
         end
         if UserInputService.TouchEnabled then
-            useMobilePrompt = true
+            useMobilePrompt = false
         end
 
         local Main = Rayfield.Main
