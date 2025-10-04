@@ -10601,7 +10601,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
 
         return self
     end
-end
     function __DARKLUA_BUNDLE_MODULES.C()
         local HalloweenHandler2025 = {}
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
