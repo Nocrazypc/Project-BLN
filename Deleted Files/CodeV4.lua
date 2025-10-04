@@ -10765,26 +10765,25 @@ local files = {
         PotatoModeHandler = __DARKLUA_BUNDLE_MODULES.load('n'),
     },
     {
-        TradeLicenseHandler = __DARKLUA_BUNDLE_MODULES.load('o'),
+        TradeLicenseHandler = __DARKLUA_BUNDLE_MODULES.load('r'),
     },
     {
-        TutorialHandler = __DARKLUA_BUNDLE_MODULES.load('p'),
-    },
-    -- {
-       -- WebhookHandler = __DARKLUA_BUNDLE_MODULES.load('q'),
-    -- },
-    {
-        AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('u'),
+        TutorialHandler = __DARKLUA_BUNDLE_MODULES.load('s'),
     },
     {
-        PetOfflineHandler = __DARKLUA_BUNDLE_MODULES.load('w'),
+        AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('x'),
     },
-	-------------------------------------------------------------
+    {
+       PetOfflineHandler = __DARKLUA_BUNDLE_MODULES.load('z'),
+    },
     {
        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('B'),
     },
     {
-        TaskBoardHandler = __DARKLUA_BUNDLE_MODULES.load('C'),
+       HalloweenHandler2025 = __DARKLUA_BUNDLE_MODULES.load('C'),
+    },
+    {
+       TaskBoardHandler = __DARKLUA_BUNDLE_MODULES.load('q'),  --
     },
 }
 
