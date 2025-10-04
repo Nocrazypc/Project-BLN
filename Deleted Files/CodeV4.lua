@@ -6013,9 +6013,7 @@ do
         return PetOfflineHandler
     end
 
-    function __DARKLUA_BUNDLE_MODULES.A()  ---Rayfield Library
-
-
+    function __DARKLUA_BUNDLE_MODULES.A()
         if debugX then
             warn('Initialising Rayfield')
         end
@@ -6079,11 +6077,9 @@ do
 
             return (success and {result} or {nil})[1]
         end
-
-
-
+        local requestsDisabled = true
         local InterfaceBuild = '3K3W'
-        local Release = 'Build 1.68
+        local Release = 'Build 1.68'
         local RayfieldFolder = 'Rayfield'
         local ConfigurationFolder = RayfieldFolder .. '/Configurations'
         local ConfigurationExtension = '.rfld'
@@ -6092,7 +6088,7 @@ do
                 rayfieldOpen = {
                     Type = 'bind',
                     Value = 'K',
-                    Name = 'Open UI',
+                    Name = 'Rayfield Keybind',
                 },
             },
             System = {
@@ -6103,54 +6099,178 @@ do
                 },
             },
         }
-        local HttpService = game:GetService('HttpService')
-        local RunService = game:GetService('RunService')
+        local overriddenSettings = {}
+        local overrideSetting = function(category, name, value)
+            overriddenSettings[string.format('%s.%s', tostring(category), tostring(name))] = value
+        end
+        local getSetting = function(category, name)
+            if overriddenSettings[string.format('%s.%s', tostring(category), tostring(name))] ~= nil then
+                return overriddenSettings[string.format('%s.%s', tostring(category), tostring(name))]
+            elseif settingsTable[category][name] ~= nil then
+                return settingsTable[category][name].Value
+            end
+        end
+
+        if requestsDisabled then
+            overrideSetting('System', 'usageAnalytics', false)
+        end
+
+        local HttpService = getService('HttpService')
+        local RunService = getService('RunService')
         local useStudio = RunService:IsStudio() or false
         local settingsCreated = false
+        local settingsInitialized = false
         local cachedSettings
-        local request = (syn and syn.request) or (fluxus and fluxus.request) or (http and http.request) or http_request or request
+        local prompt = loadWithTimeout(
+[[https://raw.githubusercontent.com/SiriusSoftwareLtd/Sirius/refs/heads/request/prompt.lua]])
+        local requestFunc = (syn and syn.request) or (fluxus and fluxus.request) or (http and http.request) or http_request or request
+
+        if not prompt and not useStudio then
+            warn('Failed to load prompt library, using fallback')
+
+            prompt = {
+                create = function() end,
+            }
+        end
+
         local loadSettings = function()
             local file = nil
+            local success, result = pcall(function()
+                task.spawn(function()
+                    if isfolder and isfolder(RayfieldFolder) then
+                        if isfile and isfile(RayfieldFolder .. '/settings' .. ConfigurationExtension) then
+                            file = readfile(RayfieldFolder .. '/settings' .. ConfigurationExtension)
+                        end
+                    end
+                    if useStudio then
+                        file = '\t\t{"General":{"rayfieldOpen":{"Value":"K","Type":"bind","Name":"Rayfield Keybind","Element":{"HoldToInteract":false,"Ext":true,"Name":"Rayfield Keybind","Set":null,"CallOnChange":true,"Callback":null,"CurrentKeybind":"K"}}},"System":{"usageAnalytics":{"Value":false,"Type":"toggle","Name":"Anonymised Analytics","Element":{"Ext":true,"Name":"Anonymised Analytics","Set":null,"CurrentValue":false,"Callback":null}}}}\n\t'
+                    end
+                    if file then
+                        local success, decodedFile = pcall(function()
+                            return HttpService:JSONDecode(file)
+                        end)
 
-            if isfolder and isfolder(RayfieldFolder) then
-                if isfile and isfile(RayfieldFolder .. '/settings' .. ConfigurationExtension) then
-                    file = readfile(RayfieldFolder .. '/settings' .. ConfigurationExtension)
-                end
-            end
-            if file then
-                local success, decodedFile = pcall(function()
-                    return HttpService:JSONDecode(file)
-                end)
+                        if success then
+                            file = decodedFile
+                        else
+                            file = {}
+                        end
+                    else
+                        file = {}
+                    end
+                    if not settingsCreated then
+                        cachedSettings = file
 
-                if success then
-                    file = decodedFile
-                else
-                    file = {}
-                end
-            else
-                file = {}
-            end
-            if not settingsCreated then
-                cachedSettings = file
+                        return
+                    end
+                    if file ~= {} then
+                        for categoryName, settingCategory in pairs(settingsTable)do
+                            if file[categoryName] then
+                                for settingName, setting in pairs(settingCategory)do
+                                    if file[categoryName][settingName] then
+                                        setting.Value = file[categoryName][settingName].Value
 
-                return
-            end
-            if file ~= {} then
-                for categoryName, settingCategory in pairs(settingsTable)do
-                    if file[categoryName] then
-                        for settingName, setting in pairs(settingCategory)do
-                            if file[categoryName][settingName] then
-                                setting.Value = file[categoryName][settingName].Value
-
-                                setting.Element:Set(setting.Value)
+                                        setting.Element:Set(getSetting(categoryName, settingName))
+                                    end
+                                end
                             end
                         end
                     end
+
+                    settingsInitialized = true
+                end)
+            end)
+
+            if not success then
+                if writefile then
+                    warn(
+[[Rayfield had an issue accessing configuration saving capability.]])
                 end
             end
         end
 
+        if debugX then
+            warn('Now Loading Settings Configuration')
+        end
+
         loadSettings()
+
+        if debugX then
+            warn('Settings Loaded')
+        end
+
+        local analyticsLib
+        local sendReport = function(ev_n, sc_n)
+            warn('Failed to load report function')
+        end
+
+        if not requestsDisabled then
+            if debugX then
+                warn('Querying Settings for Reporter Information')
+            end
+
+            analyticsLib = loadWithTimeout('https://analytics.sirius.menu/script')
+
+            if not analyticsLib then
+                warn('Failed to load analytics reporter')
+
+                analyticsLib = nil
+            elseif analyticsLib and type(analyticsLib.load) == 'function' then
+                analyticsLib:load()
+            else
+                warn('Analytics library loaded but missing load function')
+
+                analyticsLib = nil
+            end
+
+            sendReport = function(ev_n, sc_n)
+                if not (type(analyticsLib) == 'table' and type(analyticsLib.isLoaded) == 'function' and analyticsLib:isLoaded()) then
+                    warn('Analytics library not loaded')
+
+                    return
+                end
+                if useStudio then
+                    print('Sending Analytics')
+                else
+                    if debugX then
+                        warn('Reporting Analytics')
+                    end
+
+                    analyticsLib:report({
+                        ['name'] = ev_n,
+                        ['script'] = {
+                            ['name'] = sc_n,
+                            ['version'] = Release,
+                        },
+                    }, {
+                        ['version'] = InterfaceBuild,
+                    })
+
+                    if debugX then
+                        warn('Finished Report')
+                    end
+                end
+            end
+
+            if cachedSettings and (#cachedSettings == 0 or (cachedSettings.System and cachedSettings.System.usageAnalytics and cachedSettings.System.usageAnalytics.Value)) then
+                sendReport('execution', 'Rayfield')
+            elseif not cachedSettings then
+                sendReport('execution', 'Rayfield')
+            end
+        end
+
+        local promptUser = 2
+
+        if promptUser == 1 and prompt and type(prompt.create) == 'function' then
+            prompt.create('Be cautious when running scripts', 
+[[Please be careful when running scripts from unknown developers. This script has already been ran.
+
+<font transparency='0.3'>Some scripts may steal your items or in-game goods.</font>]], 'Okay', '', function(
+            ) end)
+        end
+        if debugX then
+            warn('Moving on to continue initialisation')
+        end
 
         local RayfieldLibrary = {
             Flags = {},
@@ -6187,19 +6307,283 @@ do
                     InputBackground = Color3.fromRGB(30, 30, 30),
                     InputStroke = Color3.fromRGB(65, 65, 65),
                     PlaceholderColor = Color3.fromRGB(178, 178, 178),
-
+                },
+                Ocean = {
+                    TextColor = Color3.fromRGB(230, 240, 240),
+                    Background = Color3.fromRGB(20, 30, 30),
+                    Topbar = Color3.fromRGB(25, 40, 40),
+                    Shadow = Color3.fromRGB(15, 20, 20),
+                    NotificationBackground = Color3.fromRGB(25, 35, 35),
+                    NotificationActionsBackground = Color3.fromRGB(230, 240, 240),
+                    TabBackground = Color3.fromRGB(40, 60, 60),
+                    TabStroke = Color3.fromRGB(50, 70, 70),
+                    TabBackgroundSelected = Color3.fromRGB(100, 180, 180),
+                    TabTextColor = Color3.fromRGB(210, 230, 230),
+                    SelectedTabTextColor = Color3.fromRGB(20, 50, 50),
+                    ElementBackground = Color3.fromRGB(30, 50, 50),
+                    ElementBackgroundHover = Color3.fromRGB(40, 60, 60),
+                    SecondaryElementBackground = Color3.fromRGB(30, 45, 45),
+                    ElementStroke = Color3.fromRGB(45, 70, 70),
+                    SecondaryElementStroke = Color3.fromRGB(40, 65, 65),
+                    SliderBackground = Color3.fromRGB(0, 110, 110),
+                    SliderProgress = Color3.fromRGB(0, 140, 140),
+                    SliderStroke = Color3.fromRGB(0, 160, 160),
+                    ToggleBackground = Color3.fromRGB(30, 50, 50),
+                    ToggleEnabled = Color3.fromRGB(0, 130, 130),
+                    ToggleDisabled = Color3.fromRGB(70, 90, 90),
+                    ToggleEnabledStroke = Color3.fromRGB(0, 160, 160),
+                    ToggleDisabledStroke = Color3.fromRGB(85, 105, 105),
+                    ToggleEnabledOuterStroke = Color3.fromRGB(50, 100, 100),
+                    ToggleDisabledOuterStroke = Color3.fromRGB(45, 65, 65),
+                    DropdownSelected = Color3.fromRGB(30, 60, 60),
+                    DropdownUnselected = Color3.fromRGB(25, 40, 40),
+                    InputBackground = Color3.fromRGB(30, 50, 50),
+                    InputStroke = Color3.fromRGB(50, 70, 70),
+                    PlaceholderColor = Color3.fromRGB(140, 160, 160),
+                },
+                AmberGlow = {
+                    TextColor = Color3.fromRGB(255, 245, 230),
+                    Background = Color3.fromRGB(45, 30, 20),
+                    Topbar = Color3.fromRGB(55, 40, 25),
+                    Shadow = Color3.fromRGB(35, 25, 15),
+                    NotificationBackground = Color3.fromRGB(50, 35, 25),
+                    NotificationActionsBackground = Color3.fromRGB(245, 230, 215),
+                    TabBackground = Color3.fromRGB(75, 50, 35),
+                    TabStroke = Color3.fromRGB(90, 60, 45),
+                    TabBackgroundSelected = Color3.fromRGB(230, 180, 100),
+                    TabTextColor = Color3.fromRGB(250, 220, 200),
+                    SelectedTabTextColor = Color3.fromRGB(50, 30, 10),
+                    ElementBackground = Color3.fromRGB(60, 45, 35),
+                    ElementBackgroundHover = Color3.fromRGB(70, 50, 40),
+                    SecondaryElementBackground = Color3.fromRGB(55, 40, 30),
+                    ElementStroke = Color3.fromRGB(85, 60, 45),
+                    SecondaryElementStroke = Color3.fromRGB(75, 50, 35),
+                    SliderBackground = Color3.fromRGB(220, 130, 60),
+                    SliderProgress = Color3.fromRGB(250, 150, 75),
+                    SliderStroke = Color3.fromRGB(255, 170, 85),
+                    ToggleBackground = Color3.fromRGB(55, 40, 30),
+                    ToggleEnabled = Color3.fromRGB(240, 130, 30),
+                    ToggleDisabled = Color3.fromRGB(90, 70, 60),
+                    ToggleEnabledStroke = Color3.fromRGB(255, 160, 50),
+                    ToggleDisabledStroke = Color3.fromRGB(110, 85, 75),
+                    ToggleEnabledOuterStroke = Color3.fromRGB(200, 100, 50),
+                    ToggleDisabledOuterStroke = Color3.fromRGB(75, 60, 55),
+                    DropdownSelected = Color3.fromRGB(70, 50, 40),
+                    DropdownUnselected = Color3.fromRGB(55, 40, 30),
+                    InputBackground = Color3.fromRGB(60, 45, 35),
+                    InputStroke = Color3.fromRGB(90, 65, 50),
+                    PlaceholderColor = Color3.fromRGB(190, 150, 130),
+                },
+                Light = {
+                    TextColor = Color3.fromRGB(40, 40, 40),
+                    Background = Color3.fromRGB(245, 245, 245),
+                    Topbar = Color3.fromRGB(230, 230, 230),
+                    Shadow = Color3.fromRGB(200, 200, 200),
+                    NotificationBackground = Color3.fromRGB(250, 250, 250),
+                    NotificationActionsBackground = Color3.fromRGB(240, 240, 240),
+                    TabBackground = Color3.fromRGB(235, 235, 235),
+                    TabStroke = Color3.fromRGB(215, 215, 215),
+                    TabBackgroundSelected = Color3.fromRGB(255, 255, 255),
+                    TabTextColor = Color3.fromRGB(80, 80, 80),
+                    SelectedTabTextColor = Color3.fromRGB(0, 0, 0),
+                    ElementBackground = Color3.fromRGB(240, 240, 240),
+                    ElementBackgroundHover = Color3.fromRGB(225, 225, 225),
+                    SecondaryElementBackground = Color3.fromRGB(235, 235, 235),
+                    ElementStroke = Color3.fromRGB(210, 210, 210),
+                    SecondaryElementStroke = Color3.fromRGB(210, 210, 210),
+                    SliderBackground = Color3.fromRGB(150, 180, 220),
+                    SliderProgress = Color3.fromRGB(100, 150, 200),
+                    SliderStroke = Color3.fromRGB(120, 170, 220),
+                    ToggleBackground = Color3.fromRGB(220, 220, 220),
+                    ToggleEnabled = Color3.fromRGB(0, 146, 214),
+                    ToggleDisabled = Color3.fromRGB(150, 150, 150),
+                    ToggleEnabledStroke = Color3.fromRGB(0, 170, 255),
+                    ToggleDisabledStroke = Color3.fromRGB(170, 170, 170),
+                    ToggleEnabledOuterStroke = Color3.fromRGB(100, 100, 100),
+                    ToggleDisabledOuterStroke = Color3.fromRGB(180, 180, 180),
+                    DropdownSelected = Color3.fromRGB(230, 230, 230),
+                    DropdownUnselected = Color3.fromRGB(220, 220, 220),
+                    InputBackground = Color3.fromRGB(240, 240, 240),
+                    InputStroke = Color3.fromRGB(180, 180, 180),
+                    PlaceholderColor = Color3.fromRGB(140, 140, 140),
+                },
+                Amethyst = {
+                    TextColor = Color3.fromRGB(240, 240, 240),
+                    Background = Color3.fromRGB(30, 20, 40),
+                    Topbar = Color3.fromRGB(40, 25, 50),
+                    Shadow = Color3.fromRGB(20, 15, 30),
+                    NotificationBackground = Color3.fromRGB(35, 20, 40),
+                    NotificationActionsBackground = Color3.fromRGB(240, 240, 250),
+                    TabBackground = Color3.fromRGB(60, 40, 80),
+                    TabStroke = Color3.fromRGB(70, 45, 90),
+                    TabBackgroundSelected = Color3.fromRGB(180, 140, 200),
+                    TabTextColor = Color3.fromRGB(230, 230, 240),
+                    SelectedTabTextColor = Color3.fromRGB(50, 20, 50),
+                    ElementBackground = Color3.fromRGB(45, 30, 60),
+                    ElementBackgroundHover = Color3.fromRGB(50, 35, 70),
+                    SecondaryElementBackground = Color3.fromRGB(40, 30, 55),
+                    ElementStroke = Color3.fromRGB(70, 50, 85),
+                    SecondaryElementStroke = Color3.fromRGB(65, 45, 80),
+                    SliderBackground = Color3.fromRGB(100, 60, 150),
+                    SliderProgress = Color3.fromRGB(130, 80, 180),
+                    SliderStroke = Color3.fromRGB(150, 100, 200),
+                    ToggleBackground = Color3.fromRGB(45, 30, 55),
+                    ToggleEnabled = Color3.fromRGB(120, 60, 150),
+                    ToggleDisabled = Color3.fromRGB(94, 47, 117),
+                    ToggleEnabledStroke = Color3.fromRGB(140, 80, 170),
+                    ToggleDisabledStroke = Color3.fromRGB(124, 71, 150),
+                    ToggleEnabledOuterStroke = Color3.fromRGB(90, 40, 120),
+                    ToggleDisabledOuterStroke = Color3.fromRGB(80, 50, 110),
+                    DropdownSelected = Color3.fromRGB(50, 35, 70),
+                    DropdownUnselected = Color3.fromRGB(35, 25, 50),
+                    InputBackground = Color3.fromRGB(45, 30, 60),
+                    InputStroke = Color3.fromRGB(80, 50, 110),
+                    PlaceholderColor = Color3.fromRGB(178, 150, 200),
+                },
+                Green = {
+                    TextColor = Color3.fromRGB(30, 60, 30),
+                    Background = Color3.fromRGB(235, 245, 235),
+                    Topbar = Color3.fromRGB(210, 230, 210),
+                    Shadow = Color3.fromRGB(200, 220, 200),
+                    NotificationBackground = Color3.fromRGB(240, 250, 240),
+                    NotificationActionsBackground = Color3.fromRGB(220, 235, 220),
+                    TabBackground = Color3.fromRGB(215, 235, 215),
+                    TabStroke = Color3.fromRGB(190, 210, 190),
+                    TabBackgroundSelected = Color3.fromRGB(245, 255, 245),
+                    TabTextColor = Color3.fromRGB(50, 80, 50),
+                    SelectedTabTextColor = Color3.fromRGB(20, 60, 20),
+                    ElementBackground = Color3.fromRGB(225, 240, 225),
+                    ElementBackgroundHover = Color3.fromRGB(210, 225, 210),
+                    SecondaryElementBackground = Color3.fromRGB(235, 245, 235),
+                    ElementStroke = Color3.fromRGB(180, 200, 180),
+                    SecondaryElementStroke = Color3.fromRGB(180, 200, 180),
+                    SliderBackground = Color3.fromRGB(90, 160, 90),
+                    SliderProgress = Color3.fromRGB(70, 130, 70),
+                    SliderStroke = Color3.fromRGB(100, 180, 100),
+                    ToggleBackground = Color3.fromRGB(215, 235, 215),
+                    ToggleEnabled = Color3.fromRGB(60, 130, 60),
+                    ToggleDisabled = Color3.fromRGB(150, 175, 150),
+                    ToggleEnabledStroke = Color3.fromRGB(80, 150, 80),
+                    ToggleDisabledStroke = Color3.fromRGB(130, 150, 130),
+                    ToggleEnabledOuterStroke = Color3.fromRGB(100, 160, 100),
+                    ToggleDisabledOuterStroke = Color3.fromRGB(160, 180, 160),
+                    DropdownSelected = Color3.fromRGB(225, 240, 225),
+                    DropdownUnselected = Color3.fromRGB(210, 225, 210),
+                    InputBackground = Color3.fromRGB(235, 245, 235),
+                    InputStroke = Color3.fromRGB(180, 200, 180),
+                    PlaceholderColor = Color3.fromRGB(120, 140, 120),
+                },
+                Bloom = {
+                    TextColor = Color3.fromRGB(60, 40, 50),
+                    Background = Color3.fromRGB(255, 240, 245),
+                    Topbar = Color3.fromRGB(250, 220, 225),
+                    Shadow = Color3.fromRGB(230, 190, 195),
+                    NotificationBackground = Color3.fromRGB(255, 235, 240),
+                    NotificationActionsBackground = Color3.fromRGB(245, 215, 225),
+                    TabBackground = Color3.fromRGB(240, 210, 220),
+                    TabStroke = Color3.fromRGB(230, 200, 210),
+                    TabBackgroundSelected = Color3.fromRGB(255, 225, 235),
+                    TabTextColor = Color3.fromRGB(80, 40, 60),
+                    SelectedTabTextColor = Color3.fromRGB(50, 30, 50),
+                    ElementBackground = Color3.fromRGB(255, 235, 240),
+                    ElementBackgroundHover = Color3.fromRGB(245, 220, 230),
+                    SecondaryElementBackground = Color3.fromRGB(255, 235, 240),
+                    ElementStroke = Color3.fromRGB(230, 200, 210),
+                    SecondaryElementStroke = Color3.fromRGB(230, 200, 210),
+                    SliderBackground = Color3.fromRGB(240, 130, 160),
+                    SliderProgress = Color3.fromRGB(250, 160, 180),
+                    SliderStroke = Color3.fromRGB(255, 180, 200),
+                    ToggleBackground = Color3.fromRGB(240, 210, 220),
+                    ToggleEnabled = Color3.fromRGB(255, 140, 170),
+                    ToggleDisabled = Color3.fromRGB(200, 180, 185),
+                    ToggleEnabledStroke = Color3.fromRGB(250, 160, 190),
+                    ToggleDisabledStroke = Color3.fromRGB(210, 180, 190),
+                    ToggleEnabledOuterStroke = Color3.fromRGB(220, 160, 180),
+                    ToggleDisabledOuterStroke = Color3.fromRGB(190, 170, 180),
+                    DropdownSelected = Color3.fromRGB(250, 220, 225),
+                    DropdownUnselected = Color3.fromRGB(240, 210, 220),
+                    InputBackground = Color3.fromRGB(255, 235, 240),
+                    InputStroke = Color3.fromRGB(220, 190, 200),
+                    PlaceholderColor = Color3.fromRGB(170, 130, 140),
+                },
+                DarkBlue = {
+                    TextColor = Color3.fromRGB(230, 230, 230),
+                    Background = Color3.fromRGB(20, 25, 30),
+                    Topbar = Color3.fromRGB(30, 35, 40),
+                    Shadow = Color3.fromRGB(15, 20, 25),
+                    NotificationBackground = Color3.fromRGB(25, 30, 35),
+                    NotificationActionsBackground = Color3.fromRGB(45, 50, 55),
+                    TabBackground = Color3.fromRGB(35, 40, 45),
+                    TabStroke = Color3.fromRGB(45, 50, 60),
+                    TabBackgroundSelected = Color3.fromRGB(40, 70, 100),
+                    TabTextColor = Color3.fromRGB(200, 200, 200),
+                    SelectedTabTextColor = Color3.fromRGB(255, 255, 255),
+                    ElementBackground = Color3.fromRGB(30, 35, 40),
+                    ElementBackgroundHover = Color3.fromRGB(40, 45, 50),
+                    SecondaryElementBackground = Color3.fromRGB(35, 40, 45),
+                    ElementStroke = Color3.fromRGB(45, 50, 60),
+                    SecondaryElementStroke = Color3.fromRGB(40, 45, 55),
+                    SliderBackground = Color3.fromRGB(0, 90, 180),
+                    SliderProgress = Color3.fromRGB(0, 120, 210),
+                    SliderStroke = Color3.fromRGB(0, 150, 240),
+                    ToggleBackground = Color3.fromRGB(35, 40, 45),
+                    ToggleEnabled = Color3.fromRGB(0, 120, 210),
+                    ToggleDisabled = Color3.fromRGB(70, 70, 80),
+                    ToggleEnabledStroke = Color3.fromRGB(0, 150, 240),
+                    ToggleDisabledStroke = Color3.fromRGB(75, 75, 85),
+                    ToggleEnabledOuterStroke = Color3.fromRGB(20, 100, 180),
+                    ToggleDisabledOuterStroke = Color3.fromRGB(55, 55, 65),
+                    DropdownSelected = Color3.fromRGB(30, 70, 90),
+                    DropdownUnselected = Color3.fromRGB(25, 30, 35),
+                    InputBackground = Color3.fromRGB(25, 30, 35),
+                    InputStroke = Color3.fromRGB(45, 50, 60),
+                    PlaceholderColor = Color3.fromRGB(150, 150, 160),
+                },
+                Serenity = {
+                    TextColor = Color3.fromRGB(50, 55, 60),
+                    Background = Color3.fromRGB(240, 245, 250),
+                    Topbar = Color3.fromRGB(215, 225, 235),
+                    Shadow = Color3.fromRGB(200, 210, 220),
+                    NotificationBackground = Color3.fromRGB(210, 220, 230),
+                    NotificationActionsBackground = Color3.fromRGB(225, 230, 240),
+                    TabBackground = Color3.fromRGB(200, 210, 220),
+                    TabStroke = Color3.fromRGB(180, 190, 200),
+                    TabBackgroundSelected = Color3.fromRGB(175, 185, 200),
+                    TabTextColor = Color3.fromRGB(50, 55, 60),
+                    SelectedTabTextColor = Color3.fromRGB(30, 35, 40),
+                    ElementBackground = Color3.fromRGB(210, 220, 230),
+                    ElementBackgroundHover = Color3.fromRGB(220, 230, 240),
+                    SecondaryElementBackground = Color3.fromRGB(200, 210, 220),
+                    ElementStroke = Color3.fromRGB(190, 200, 210),
+                    SecondaryElementStroke = Color3.fromRGB(180, 190, 200),
+                    SliderBackground = Color3.fromRGB(200, 220, 235),
+                    SliderProgress = Color3.fromRGB(70, 130, 180),
+                    SliderStroke = Color3.fromRGB(150, 180, 220),
+                    ToggleBackground = Color3.fromRGB(210, 220, 230),
+                    ToggleEnabled = Color3.fromRGB(70, 160, 210),
+                    ToggleDisabled = Color3.fromRGB(180, 180, 180),
+                    ToggleEnabledStroke = Color3.fromRGB(60, 150, 200),
+                    ToggleDisabledStroke = Color3.fromRGB(140, 140, 140),
+                    ToggleEnabledOuterStroke = Color3.fromRGB(100, 120, 140),
+                    ToggleDisabledOuterStroke = Color3.fromRGB(120, 120, 130),
+                    DropdownSelected = Color3.fromRGB(220, 230, 240),
+                    DropdownUnselected = Color3.fromRGB(200, 210, 220),
+                    InputBackground = Color3.fromRGB(220, 230, 240),
+                    InputStroke = Color3.fromRGB(180, 190, 200),
+                    PlaceholderColor = Color3.fromRGB(150, 150, 150),
                 },
             },
         }
-        local CoreGui = game:GetService('CoreGui')
-        local Players = game:GetService('Players')
-        local TweenService = game:GetService('TweenService')
-        local UserInputService = game:GetService('UserInputService')
+        local UserInputService = getService('UserInputService')
+        local TweenService = getService('TweenService')
+        local Players = getService('Players')
+        local CoreGui = getService('CoreGui')
         local Rayfield = useStudio and script.Parent:FindFirstChild('Rayfield') or game:GetObjects('rbxassetid://10804731440')[1]
         local buildAttempts = 0
-        local correctBuild = true
+        local correctBuild = false
         local warned
         local globalLoaded
+        local rayfieldDestroyed = false
 
         repeat
             if Rayfield:FindFirstChild('Build') and Rayfield.Build.Value == InterfaceBuild then
@@ -6208,13 +6592,18 @@ do
                 break
             end
 
-            correctBuild = true
+            correctBuild = false
 
-	--[[if not warned then
-		warn('Rayfield | Build Mismatch')
-		print('Rayfield may encounter issues as you are running an incompatible interface version ('.. ((Rayfield:FindFirstChild('Build') and Rayfield.Build.Value) or 'No Build') ..').\n\nThis version of Rayfield is intended for interface build '..InterfaceBuild..'.')
-		warned = true
-	end--]]
+            if not warned then
+                warn('Rayfield | Build Mismatch')
+                print(
+[[Rayfield may encounter issues as you are running an incompatible interface version (]] .. ((Rayfield:FindFirstChild('Build') and Rayfield.Build.Value) or 'No Build') .. 
+[[).
+
+This version of Rayfield is intended for interface build ]] .. InterfaceBuild .. '.')
+
+                warned = true
+            end
 
             toDestroy, Rayfield = Rayfield, useStudio and script.Parent:FindFirstChild('Rayfield') or game:GetObjects('rbxassetid://10804731440')[1]
 
@@ -6258,7 +6647,7 @@ do
         local useMobileSizing
 
         if Rayfield.AbsoluteSize.X < minSize.X and Rayfield.AbsoluteSize.Y < minSize.Y then
-            useMobileSizing = false
+            useMobileSizing = true
         end
         if UserInputService.TouchEnabled then
             useMobilePrompt = true
@@ -6279,6 +6668,8 @@ do
         Rayfield.DisplayOrder = 100
         LoadingFrame.Version.Text = Release
 
+        local Icons = loadWithTimeout(
+[[https://raw.githubusercontent.com/SiriusSoftwareLtd/Rayfield/refs/heads/main/icons.lua]])
         local CFileName = nil
         local CEnabled = false
         local Minimised = false
@@ -6334,13 +6725,20 @@ do
             end
         end
         local getIcon = function(name)
+            if not Icons then
+                warn(
+[[Lucide Icons: Cannot use icons as icons library is not loaded]])
+
+                return
+            end
+
             name = (string.match(string.lower(name), '^%s*(.*)%s*$'))
 
             local sizedicons = Icons['48px']
             local r = sizedicons[name]
 
             if not r then
-                error('Lucide Icons: Failed to find icon by the name of "' .. name .. '.', 2)
+                error(string.format('Lucide Icons: Failed to find icon by the name of "%s"', tostring(name)), 2)
             end
 
             local rirs = r[2]
@@ -6361,6 +6759,21 @@ do
 
             return asset
         end
+        local getAssetUri = function(id)
+            local assetUri = 'rbxassetid://0'
+
+            if type(id) == 'number' then
+                assetUri = 'rbxassetid://' .. id
+            elseif type(id) == 'string' and not Icons then
+                warn(
+[[Rayfield | Cannot use Lucide icons as icons library is not loaded]])
+            else
+                warn(
+[[Rayfield | The icon argument must either be an icon ID (number) or a Lucide icon name (string)]])
+            end
+
+            return assetUri
+        end
         local makeDraggable = function(
             object,
             dragObject,
@@ -6373,7 +6786,7 @@ do
             local screenGui = object:FindFirstAncestorWhichIsA('ScreenGui')
 
             if screenGui and screenGui.IgnoreGuiInset then
-                offset = offset + game:GetService('GuiService'):GetGuiInset()
+                offset = offset + getService('GuiService'):GetGuiInset()
             end
 
             local connectFunctions = function()
@@ -6481,8 +6894,17 @@ do
             return Color3.fromRGB(Color.R, Color.G, Color.B)
         end
         local LoadConfiguration = function(Configuration)
-            local Data = HttpService:JSONDecode(Configuration)
+            local success, Data = pcall(function()
+                return HttpService:JSONDecode(Configuration)
+            end)
             local changed
+
+            if not success then
+                warn(
+[[Rayfield had an issue decoding the configuration file, please try delete the file and reopen Rayfield.]])
+
+                return
+            end
 
             for FlagName, Flag in pairs(RayfieldLibrary.Flags)do
                 local FlagValue = Data[FlagName]
@@ -6575,14 +6997,14 @@ do
                 newNotification.Description.Text = data.Content or 'Unknown Content'
 
                 if data.Image then
-                    if typeof(data.Image) == 'string' then
+                    if typeof(data.Image) == 'string' and Icons then
                         local asset = getIcon(data.Image)
 
                         newNotification.Icon.Image = 'rbxassetid://' .. asset.id
                         newNotification.Icon.ImageRectOffset = asset.imageRectOffset
                         newNotification.Icon.ImageRectSize = asset.imageRectSize
                     else
-                        newNotification.Icon.Image = 'rbxassetid://' .. (data.Image or 0)
+                        newNotification.Icon.Image = getAssetUri(data.Image)
                     end
                 else
                     newNotification.Icon.Image = 'rbxassetid://0'
@@ -6747,7 +7169,7 @@ do
                     RayfieldLibrary:Notify({
                         Title = 'Interface Hidden',
                         Content = 
-[[The interface has been hidden, you can unhide the interface by tapping 'Show Rayfield'.]],
+[[The interface has been hidden, you can unhide the interface by tapping 'Show'.]],
                         Duration = 7,
                         Image = 4400697855,
                     })
@@ -6755,7 +7177,7 @@ do
                     RayfieldLibrary:Notify({
                         Title = 'Interface Hidden',
                         Content = string.format(
-[[The interface has been hidden, you can unhide the interface by tapping %s.]], tostring(settingsTable.General.rayfieldOpen.Value or 'K')),
+[[The interface has been hidden, you can unhide the interface by tapping %s.]], tostring(getSetting('General', 'rayfieldOpen'))),
                         Duration = 7,
                         Image = 4400697855,
                     })
@@ -7058,7 +7480,7 @@ do
 
             Debounce = false
         end
-        local updateSettings = function()
+        local saveSettings = function()
             local encoded
             local success, err = pcall(function()
                 encoded = HttpService:JSONEncode(settingsTable)
@@ -7074,6 +7496,16 @@ do
                     writefile(RayfieldFolder .. '/settings' .. ConfigurationExtension, encoded)
                 end
             end
+        end
+        local updateSetting = function(category, setting, value)
+            if not settingsInitialized then
+                return
+            end
+
+            settingsTable[category][setting].Value = value
+            overriddenSettings[string.format('%s.%s', tostring(category), tostring(setting))] = nil
+
+            saveSettings()
         end
         local createSettings = function(window)
             if not (writefile and isfile and readfile and isfolder and makefolder) and not useStudio then
@@ -7101,7 +7533,7 @@ do
             for categoryName, settingCategory in pairs(settingsTable)do
                 newTab:CreateSection(categoryName)
 
-                for _, setting in pairs(settingCategory)do
+                for settingName, setting in pairs(settingCategory)do
                     if setting.Type == 'input' then
                         setting.Element = newTab:CreateInput({
                             Name = setting.Name,
@@ -7110,9 +7542,7 @@ do
                             Ext = true,
                             RemoveTextAfterFocusLost = setting.ClearOnFocus,
                             Callback = function(Value)
-                                setting.Value = Value
-
-                                updateSettings()
+                                updateSetting(categoryName, settingName, Value)
                             end,
                         })
                     elseif setting.Type == 'toggle' then
@@ -7121,9 +7551,7 @@ do
                             CurrentValue = setting.Value,
                             Ext = true,
                             Callback = function(Value)
-                                setting.Value = Value
-
-                                updateSettings()
+                                updateSetting(categoryName, settingName, Value)
                             end,
                         })
                     elseif setting.Type == 'bind' then
@@ -7134,9 +7562,7 @@ do
                             Ext = true,
                             CallOnChange = true,
                             Callback = function(Value)
-                                setting.Value = Value
-
-                                updateSettings()
+                                updateSetting(categoryName, settingName, Value)
                             end,
                         })
                     end
@@ -7146,10 +7572,25 @@ do
             settingsCreated = true
 
             loadSettings()
-            updateSettings()
+            saveSettings()
         end
 
         function RayfieldLibrary:CreateWindow(Settings)
+            print('creating window')
+
+            if Rayfield:FindFirstChild('Loading') then
+                if getgenv and not getgenv().rayfieldCached then
+                    Rayfield.Enabled = true
+                    Rayfield.Loading.Visible = true
+
+                    task.wait(1.4)
+
+                    Rayfield.Loading.Visible = false
+                end
+            end
+            if getgenv then
+                getgenv().rayfieldCached = true
+            end
             if not correctBuild and not Settings.DisableBuildWarnings then
                 task.delay(3, function()
                     RayfieldLibrary:Notify({
@@ -7164,8 +7605,28 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
                     })
                 end)
             end
+            if Settings.ToggleUIKeybind then
+                local keybind = Settings.ToggleUIKeybind
+
+                if type(keybind) == 'string' then
+                    keybind = string.upper(keybind)
+
+                    assert(pcall(function()
+                        return Enum.KeyCode[keybind]
+                    end), 'ToggleUIKeybind must be a valid KeyCode')
+                    overrideSetting('General', 'rayfieldOpen', keybind)
+                elseif typeof(keybind) == 'EnumItem' then
+                    assert(keybind.EnumType == Enum.KeyCode, 'ToggleUIKeybind must be a KeyCode enum')
+                    overrideSetting('General', 'rayfieldOpen', keybind.Name)
+                else
+                    error('ToggleUIKeybind must be a string or KeyCode enum')
+                end
+            end
             if isfolder and not isfolder(RayfieldFolder) then
                 makefolder(RayfieldFolder)
+            end
+            if not requestsDisabled then
+                sendReport('window_created', Settings.Name or 'Unknown')
             end
 
             local Passthrough = false
@@ -7182,6 +7643,11 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
             Main.Shadow.Image.ImageTransparency = 1
             LoadingFrame.Title.TextTransparency = 1
             LoadingFrame.Subtitle.TextTransparency = 1
+
+            if Settings.ShowText then
+                MPrompt.Title.Text = 'Show ' .. Settings.ShowText
+            end
+
             LoadingFrame.Version.TextTransparency = 1
             LoadingFrame.Title.Text = Settings.LoadingTitle or 'Rayfield'
             LoadingFrame.Subtitle.Text = Settings.LoadingSubtitle or 'Interface Suite'
@@ -7194,14 +7660,14 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
                 Topbar.Title.Position = UDim2.new(0, 47, 0.5, 0)
 
                 if Settings.Icon then
-                    if typeof(Settings.Icon) == 'string' then
+                    if typeof(Settings.Icon) == 'string' and Icons then
                         local asset = getIcon(Settings.Icon)
 
                         Topbar.Icon.Image = 'rbxassetid://' .. asset.id
                         Topbar.Icon.ImageRectOffset = asset.imageRectOffset
                         Topbar.Icon.ImageRectSize = asset.imageRectSize
                     else
-                        Topbar.Icon.Image = 'rbxassetid://' .. (Settings.Icon or 0)
+                        Topbar.Icon.Image = getAssetUri(Settings.Icon)
                     end
                 else
                     Topbar.Icon.Image = 'rbxassetid://0'
@@ -7232,7 +7698,7 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
             Elements.Visible = false
             LoadingFrame.Visible = true
 
-            --[[if not Settings.DisableRayfieldPrompts then
+            if not Settings.DisableRayfieldPrompts then
                 task.spawn(function()
                     while true do
                         task.wait(math.random(180, 600))
@@ -7244,7 +7710,7 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
                         })
                     end
                 end)
-            end --]]
+            end
 
             pcall(function()
                 if not Settings.ConfigurationSaving.FileName then
@@ -7281,14 +7747,14 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
                 end
             end
 
-            if Settings.Discord and not useStudio then
+            if Settings.Discord and Settings.Discord.Enabled and not useStudio then
                 if isfolder and not isfolder(RayfieldFolder .. '/Discord Invites') then
                     makefolder(RayfieldFolder .. '/Discord Invites')
                 end
                 if isfile and not isfile(RayfieldFolder .. '/Discord Invites' .. '/' .. Settings.Discord.Invite .. ConfigurationExtension) then
-                    if request then
+                    if requestFunc then
                         pcall(function()
-                            request({
+                            requestFunc({
                                 Url = 'http://127.0.0.1:6463/rpc?v=1',
                                 Method = 'POST',
                                 Headers = {
@@ -7311,7 +7777,7 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
                     end
                 end
             end
-            if Settings.KeySystem then
+            if (Settings.KeySystem) then
                 if not Settings.KeySettings then
                     Passthrough = true
 
@@ -7533,6 +7999,11 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
                     Passthrough = true
                 end
             end
+            if Settings.KeySystem then
+                repeat
+                    task.wait()
+                until Passthrough
+            end
 
             Notifications.Template.Visible = false
             Notifications.Visible = true
@@ -7567,14 +8038,14 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
                 TabButton.Size = UDim2.new(0, TabButton.Title.TextBounds.X + 30, 0, 30)
 
                 if Image and Image ~= 0 then
-                    if typeof(Image) == 'string' then
+                    if typeof(Image) == 'string' and Icons then
                         local asset = getIcon(Image)
 
                         TabButton.Image.Image = 'rbxassetid://' .. asset.id
                         TabButton.Image.ImageRectOffset = asset.imageRectOffset
                         TabButton.Image.ImageRectSize = asset.imageRectSize
                     else
-                        TabButton.Image.Image = 'rbxassetid://' .. Image
+                        TabButton.Image.Image = getAssetUri(Image)
                     end
 
                     TabButton.Title.AnchorPoint = Vector2.new(0, 0.5)
@@ -7708,6 +8179,9 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
                     Button.Interact.MouseButton1Click:Connect(function()
                         local Success, Response = pcall(ButtonSettings.Callback)
 
+                        if rayfieldDestroyed then
+                            return
+                        end
                         if not Success then
                             TweenService:Create(Button, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {
                                 BackgroundColor3 = Color3.fromRGB(85, 0, 0),
@@ -7731,7 +8205,7 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
                             TweenService:Create(Button.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
                         else
                             if not ButtonSettings.Ext then
-                                SaveConfiguration()
+                                SaveConfiguration(ButtonSettings.Name .. '\n')
                             end
 
                             TweenService:Create(Button, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {
@@ -7994,7 +8468,7 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
                         ColorPickerSettings.Color = Color3.fromRGB(r, g, b)
 
                         if not ColorPickerSettings.Ext then
-                            SaveConfiguration()
+                            SaveConfiguration(ColorPickerSettings.Flag .. '\n' .. tostring(ColorPickerSettings.Color))
                         end
                     end
 
@@ -8169,14 +8643,14 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
                     Label.UIStroke.Color = Color or SelectedTheme.SecondaryElementStroke
 
                     if Icon then
-                        if typeof(Icon) == 'string' then
+                        if typeof(Icon) == 'string' and Icons then
                             local asset = getIcon(Icon)
 
                             Label.Icon.Image = 'rbxassetid://' .. asset.id
                             Label.Icon.ImageRectOffset = asset.imageRectOffset
                             Label.Icon.ImageRectSize = asset.imageRectSize
                         else
-                            Label.Icon.Image = 'rbxassetid://' .. (Icon or 0)
+                            Label.Icon.Image = getAssetUri(Icon)
                         end
                     else
                         Label.Icon.Image = 'rbxassetid://0'
@@ -8186,14 +8660,14 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
                         Label.Title.Size = UDim2.new(1, -100, 0, 14)
 
                         if Icon then
-                            if typeof(Icon) == 'string' then
+                            if typeof(Icon) == 'string' and Icons then
                                 local asset = getIcon(Icon)
 
                                 Label.Icon.Image = 'rbxassetid://' .. asset.id
                                 Label.Icon.ImageRectOffset = asset.imageRectOffset
                                 Label.Icon.ImageRectSize = asset.imageRectSize
                             else
-                                Label.Icon.Image = 'rbxassetid://' .. (Icon or 0)
+                                Label.Icon.Image = getAssetUri(Icon)
                             end
                         else
                             Label.Icon.Image = 'rbxassetid://0'
@@ -8230,14 +8704,14 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
                             Label.Title.Size = UDim2.new(1, -100, 0, 14)
 
                             if Icon then
-                                if typeof(Icon) == 'string' then
+                                if typeof(Icon) == 'string' and Icons then
                                     local asset = getIcon(Icon)
 
                                     Label.Icon.Image = 'rbxassetid://' .. asset.id
                                     Label.Icon.ImageRectOffset = asset.imageRectOffset
                                     Label.Icon.ImageRectSize = asset.imageRectSize
                                 else
-                                    Label.Icon.Image = 'rbxassetid://' .. (Icon or 0)
+                                    Label.Icon.Image = getAssetUri(Icon)
                                 end
                             else
                                 Label.Icon.Image = 'rbxassetid://0'
@@ -8789,7 +9263,7 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
                     Keybind.KeybindFrame.KeybindBox.FocusLost:Connect(function()
                         CheckingForKey = false
 
-                        if Keybind.KeybindFrame.KeybindBox.Text == nil or '' then
+                        if Keybind.KeybindFrame.KeybindBox.Text == nil or Keybind.KeybindFrame.KeybindBox.Text == '' then
                             Keybind.KeybindFrame.KeybindBox.Text = KeybindSettings.CurrentKeybind
 
                             if not KeybindSettings.Ext then
@@ -9008,6 +9482,10 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
                         end
 
                         local Success, Response = pcall(function()
+                            if debugX then
+                                warn("Running toggle '" .. ToggleSettings.Name .. "' (Interact)")
+                            end
+
                             ToggleSettings.Callback(ToggleSettings.CurrentValue)
                         end)
 
@@ -9098,6 +9576,10 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
                         end
 
                         local Success, Response = pcall(function()
+                            if debugX then
+                                warn("Running toggle '" .. ToggleSettings.Name .. "' (:Set)")
+                            end
+
                             ToggleSettings.Callback(ToggleSettings.CurrentValue)
                         end)
 
@@ -9455,7 +9937,13 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
                 end
             end
 
-            createSettings(Window)
+            local success, result = pcall(function()
+                createSettings(Window)
+            end)
+
+            if not success then
+                warn('Rayfield had an issue creating settings.')
+            end
 
             return Window
         end
@@ -9481,7 +9969,12 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
         function RayfieldLibrary:IsVisible()
             return not Hidden
         end
+
+        local hideHotkeyConnection
+
         function RayfieldLibrary:Destroy()
+            rayfieldDestroyed = true
+
             hideHotkeyConnection:Disconnect()
             Rayfield:Destroy()
         end
@@ -9557,7 +10050,7 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
             Topbar.Settings.MouseButton1Click:Connect(function()
                 task.spawn(function()
                     for _, OtherTabButton in ipairs(TabList:GetChildren())do
-                        if OtherTabButton.Name ~= 'Template' and OtherTabButton.ClassName == 'Frame' and OtherTabButton.Name ~= 'Placeholder' then
+                        if OtherTabButton.Name ~= 'Template' and OtherTabButton.ClassName == 'Frame' and OtherTabButton ~= TabButton and OtherTabButton.Name ~= 'Placeholder' then
                             TweenService:Create(OtherTabButton, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {
                                 BackgroundColor3 = SelectedTheme.TabBackground,
                             }):Play()
@@ -9587,7 +10080,7 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
             input,
             processed
         )
-            if input.KeyCode == Enum.KeyCode[settingsTable.General.rayfieldOpen.Value or 'K'] and not processed then
+            if (input.KeyCode == Enum.KeyCode[getSetting('General', 'rayfieldOpen')]) and not processed then
                 if Debounce then
                     return
                 end
