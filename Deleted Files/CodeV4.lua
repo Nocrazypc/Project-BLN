@@ -27,10 +27,9 @@ do
         local localPlayer = Players.LocalPlayer
 
         function Utils.TryRedeemGoodieBag()
-            Utils.PrintDebug(string.format('catTimer: %s', tostring(ClientData.get_data()[localPlayer.Name].halloween_2025_catbats_timer.timestamp)))
-            Utils.PrintDebug(string.format('timeNow: %s', tostring(DateTime.now().UnixTimestamp)))
-            local catbatTime = ClientData.get_data()[localPlayer.Name].halloween_2025_catbats_timer.timestamp
-            if DateTime.now().UnixTimestamp > catbatTime then
+            local catbatTime = ClientData.get_data()[localPlayer.Name].kitty_bat_manager.last_treat_claimed_timestamp
+
+            if DateTime.now().UnixTimestamp > catbatTime + (600) + 5 then
                 RouterClient.get('HalloweenEventAPI/ClaimTreatBag'):InvokeServer()
                 Utils.PrintDebug('\u{1f36c} Claimed cat Goodies Bag \u{1f36c}')
             end
