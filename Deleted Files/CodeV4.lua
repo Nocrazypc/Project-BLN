@@ -3969,10 +3969,8 @@ do
                 if not dataInfo.properties then
                     return
                 end
-                if dataInfo.properties.neon or dataInfo.properties.mega_neon or table.find(AllowOrDenyList.Allowlist, dataInfo.id) then
-                    if dataInfo.properties.neon and dataInfo.properties.age ~= 6 then
-                        return
-                    end
+                if table.find(AllowOrDenyList.Allowlist, dataInfo.id) then
+			
                     if self.UniqueString == dataInfo.unique then
                         return
                     end
