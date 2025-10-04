@@ -5869,7 +5869,6 @@ do
             RouterClient.get('HalloweenEventAPI/ClaimTreatBag'):InvokeServer()
             startAutoFarm()
 
-            --localPlayer:SetAttribute('StopFarmingTemp', true)
         end
 
         return self
