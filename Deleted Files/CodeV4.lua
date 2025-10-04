@@ -1538,6 +1538,28 @@ do
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
             Teleport.DeleteWater()
         end
+        function Teleport.PipeOrgan()
+            local isAlreadyOnMainMap = Workspace.Interiors:FindFirstChild('center_map_plot', true)
+            if isAlreadyOnMainMap then
+                return true
+            end
+            CollisionsClient.set_collidable(false)
+            localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
+            SetLocationFunc('MainMap', 'Neighborhood/MainDoor', {})
+            local mainmapfall = Workspace.Interiors:WaitForChild(tostring(Workspace.Interiors:FindFirstChildWhichIsA('Model')))
+            local pianoStaircase = mainmapfall:WaitForChild('Event'):WaitForChild('PipeOrgan'):WaitForChild('PianoStaircase')
+            if not pianoStaircase then
+                return false
+            end
+            local keyPart = pianoStaircase:WaitForChild('Keys'):WaitForChild('1')
+            local newPosition = keyPart.PrimaryPart.Position + Vector3.new(5, 0, 0)
+            localPlayer.Character:MoveTo(newPosition)
+            localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
+            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+            Teleport.DeleteWater()
+            task.wait(2)
+            return true			
+        end
         function Teleport.PlayGround(vec)
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
 
