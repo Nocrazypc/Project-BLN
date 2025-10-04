@@ -26,6 +26,32 @@ do
         local debugMode = getgenv().SETTINGS.DEBUG_MODE or false
         local localPlayer = Players.LocalPlayer
 
+        function Utils.TryRedeemGoodieBag()
+            Utils.PrintDebug(string.format('catTimer: %s', tostring(ClientData.get_data()[localPlayer.Name].halloween_2025_catbats_timer.timestamp)))
+            Utils.PrintDebug(string.format('timeNow: %s', tostring(DateTime.now().UnixTimestamp)))
+            local catbatTime = ClientData.get_data()[localPlayer.Name].halloween_2025_catbats_timer.timestamp
+            if DateTime.now().UnixTimestamp > catbatTime then
+                RouterClient.get('HalloweenEventAPI/ClaimTreatBag'):InvokeServer()
+                Utils.PrintDebug('\u{1f36c} Claimed cat Goodies Bag \u{1f36c}')
+            end
+        end
+        function Utils.MoveToWithTimeout(humanoid, target, timeout)
+            local reached = false
+            local connection
+            humanoid:MoveTo(target)
+            connection = humanoid.MoveToFinished:Connect(function(success)
+                reached = success
+            end)
+            local startTime = tick()
+            repeat
+                task.wait(0.1)
+            until reached or (tick() - startTime) >= timeout
+            if connection then
+                connection:Disconnect()
+            end
+            return reached
+        end		
+
         function Utils.PlaceFLoorUnderPlayer()
             if Workspace:FindFirstChild('FloorUnderPlayer') then
                 return
