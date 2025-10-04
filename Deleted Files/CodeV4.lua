@@ -10962,17 +10962,17 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         end
         local pickDoor = function(hauntletId, stageLevel)
             RouterClient.get('MinigameAPI/MessageServer'):FireServer(hauntletId, 'player_selected_door', stageLevel, math.random(1, 3))
-            print(string.format('Picked door for stage %s', tostring(stageLevel)))
+            --print(string.format('Picked door for stage %s', tostring(stageLevel)))
         end
         local startHauntlet = function()
             local minigameId = getMinigameId()
             if not minigameId then
-                print('No minigame ID found, cannot start Hauntlet')
+                --print('No minigame ID found, cannot start Hauntlet')
                 return
             end
             while true do
                 if not HauntletMinigameClient.instanced_minigame then
-                    print('No instanced minigame found, exiting loop')
+                    --print('No instanced minigame found, exiting loop')
                     return
                 end
                 pickDoor(minigameId, HauntletMinigameClient.instanced_minigame.round)
@@ -10980,11 +10980,11 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             end
         end
         function HalloweenHandler2025.Init()
-            print('HalloweenHandler2025 Initialized')
+            --print('HalloweenHandler2025 Initialized')
             HauntletInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function(
             )
                 if HauntletInGameApp.Enabled then
-                    print('Hauntlet In-Game App Enabled')
+                    --print('Hauntlet In-Game App Enabled')
                     HauntletInGameApp:WaitForChild('Body')
                     HauntletInGameApp.Body:WaitForChild('Middle')
                     HauntletInGameApp.Body.Middle:WaitForChild('Container')
@@ -10992,7 +10992,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     if localPlayer:GetAttribute('hasStartedFarming') == true then
                         localPlayer:SetAttribute('StopFarmingTemp', true)
                         task.wait(2)
-                        print('\u{2764}\u{2764} Starting Hauntlet \u{2764}\u{2764}')
+                        --print('\u{2764}\u{2764} Starting Hauntlet \u{2764}\u{2764}')
                         startHauntlet()
                         localPlayer:SetAttribute('StopFarmingTemp', false)
                     end
@@ -11000,15 +11000,15 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             end)
         end
         function HalloweenHandler2025.Start()
-            print('HalloweenHandler2025 Started')
+            --print('HalloweenHandler2025 Started')
             task.spawn(function()
                 while true do
                     local dt = (DateTime.now():ToUniversalTime())
                     if dt.Minute >= 17 and dt.Minute < 20 then
-                        print("\u{23f0} It's 17 minutes past the hour (UTC)!")
+                        --print("\u{23f0} It's 17 minutes past the hour (UTC)!")
                         feedYarnApple()
                     elseif dt.Minute >= 47 and dt.Minute < 50 then
-                        print("\u{23f0} It's 47 minutes past the hour (UTC)!")
+                        --print("\u{23f0} It's 47 minutes past the hour (UTC)!")
                         feedYarnApple()
                     end
                     task.wait(30)
