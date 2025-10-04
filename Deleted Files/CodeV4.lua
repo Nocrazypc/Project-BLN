@@ -360,15 +360,15 @@ do
 
             Utils.PrintDebug('UnEquipped all pets')
         end
-        function Utils.Equip(petUnique, EquipAsLast)
+        function Utils.Equip(unique, EquipAsLast)
             local success, errorMessage = pcall(function()
-                ReplicatedStorage.API['ToolAPI/Equip']:InvokeServer(petUnique, {
+                ReplicatedStorage.API['ToolAPI/Equip']:InvokeServer(unique, {
                     ['equip_as_last'] = EquipAsLast,
                 })
             end)
 
             if not success then
-                Utils.PrintDebug('Failed to equip pet:', errorMessage)
+                Utils.PrintDebug('Failed to equip:', errorMessage)
 
                 return false
             end
