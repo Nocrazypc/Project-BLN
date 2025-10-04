@@ -3573,7 +3573,7 @@ do
                 DialogApp.Dialog.NormalDialog.Info:WaitForChild('TextLabel')
                 DialogApp.Dialog.NormalDialog.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
                 )
-                    if DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Treasure Defense is starting') then
+                    if DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('The Hauntlet is starting') then
                         onTextChangedMiniGame()
                     elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Cannon Circle is starting') then
                         onTextChangedMiniGame()
@@ -3602,7 +3602,7 @@ do
                     NormalDialogChild.Info:WaitForChild('TextLabel')
                     NormalDialogChild.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
                     )
-                        if NormalDialogChild.Info.TextLabel.Text:match('Treasure Defense is starting') then
+                        if NormalDialogChild.Info.TextLabel.Text:match('The Hauntlet is starting') then
                             onTextChangedMiniGame()
                         elseif NormalDialogChild.Info.TextLabel.Text:match('Cannon Circle is starting') then
                             onTextChangedMiniGame()
