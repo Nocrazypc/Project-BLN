@@ -223,7 +223,18 @@ do
         function Utils.FoodItemCount(nameId)
             local count = 0
 
-            for ExampleObjects, v in ClientData.get_data()[localPlayer.Name].inventory.food do
+            for _, v in ClientData.get_data()[localPlayer.Name].inventory.food do
+                if v.id == nameId then
+                    count = count + 1
+                end
+            end
+
+            return count
+        end
+        function Utils.PetItemCount(nameId)
+            local count = 0
+
+            for _, v in ClientData.get_data()[localPlayer.Name].inventory.pets do
                 if v.id == nameId then
                     count = count + 1
                 end
