@@ -5446,7 +5446,7 @@ do
                             FarmingPet.SwitchOutFullyGrown(2)
                         end
                     end
-                    if baitboxCount > 600 then
+                    if baitboxCount > 180 then
                         local baitUnique = Utils.FindBait()
 
                         Utils.PlaceBaitOrPickUp(furniture.lures_2023_normal_lure, baitUnique)
@@ -5459,6 +5459,8 @@ do
                     end
 
                     tryFeedAgePotion()
+                    Utils.TryRedeemGoodieBag()
+                    --UpdateTextEvent:Fire()
 
                     local waitTime = rng:NextNumber(5, 15)
 
@@ -5503,6 +5505,7 @@ do
                 FarmingPet.GetPetToFarm(2)
             end
 
+            RouterClient.get('HalloweenEventAPI/ClaimTreatBag'):InvokeServer()
             startAutoFarm()
 
             --localPlayer:SetAttribute('StopFarmingTemp', true)
