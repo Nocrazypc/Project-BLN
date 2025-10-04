@@ -6014,8 +6014,76 @@ do
     end
 
     function __DARKLUA_BUNDLE_MODULES.A()  ---Rayfield Library
-        local InterfaceBuild = '9NBD'
-        local Release = 'Build 1.67'
+
+
+        if debugX then
+            warn('Initialising Rayfield')
+        end
+
+        local getService = function(name)
+            local service = game:GetService(name)
+
+            return (cloneref and {
+                (cloneref(service)),
+            } or {service})[1]
+        end
+        local loadWithTimeout = function(url, timeout)
+            assert(type(url) == 'string', 'Expected string, got ' .. type(url))
+
+            timeout = timeout or 5
+
+            local requestCompleted = false
+            local success, result = false, nil
+            local requestThread = task.spawn(function()
+                local fetchSuccess, fetchResult = pcall(game.HttpGet, game, url)
+
+                if not fetchSuccess or #fetchResult == 0 then
+                    if #fetchResult == 0 then
+                        fetchResult = 'Empty response'
+                    end
+
+                    success, result = false, fetchResult
+                    requestCompleted = true
+
+                    return
+                end
+
+                local content = fetchResult
+                local execSuccess, execResult = pcall(function()
+                    return loadstring(content)()
+                end)
+
+                success, result = execSuccess, execResult
+                requestCompleted = true
+            end)
+            local timeoutThread = task.delay(timeout, function()
+                if not requestCompleted then
+                    warn(string.format('Request for %s timed out after %s seconds', tostring(url), tostring(timeout)))
+                    task.cancel(requestThread)
+
+                    result = 'Request timed out'
+                    requestCompleted = true
+                end
+            end)
+
+            while not requestCompleted do
+                task.wait()
+            end
+
+            if coroutine.status(timeoutThread) ~= 'dead' then
+                task.cancel(timeoutThread)
+            end
+            if not success then
+                warn(string.format('Failed to process %s: %s', tostring(url), tostring(result)))
+            end
+
+            return (success and {result} or {nil})[1]
+        end
+
+
+
+        local InterfaceBuild = '3K3W'
+        local Release = 'Build 1.68
         local RayfieldFolder = 'Rayfield'
         local ConfigurationFolder = RayfieldFolder .. '/Configurations'
         local ConfigurationExtension = '.rfld'
