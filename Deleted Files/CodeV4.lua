@@ -1163,10 +1163,10 @@ do
 
                         for _, item in v do
                             if table.find(getgenv().SETTINGS.TRADE_LIST, item.id) or item.properties.age == 6 or item.properties.neon or item.properties.mega_neon then
-							    --[[ if getgenv().SETTINGS.ENABLE_RELEASE_PETS == true and table.find(getgenv().SETTINGS.PETS_TO_AGE_IN_PEN, item.id) then
+								--[[ if getgenv().SETTINGS.ENABLE_RELEASE_PETS == true and table.find(getgenv().SETTINGS.PETS_TO_AGE_IN_PEN, item.id) then
                                     continue
                                 end--]]
-                                if table.find(AllowOrDenyList.Denylist, item.id) then													
+                                if table.find(AllowOrDenyList.Denylist, item.id) then
                                     continue
                                 end
                                 if not ClientData.get_data()[localPlayer.Name].in_active_trade then
