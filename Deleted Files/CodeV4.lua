@@ -2000,34 +2000,107 @@ do
         end
 
        --[[function GetInventory.GetPetUniquesForPetPen(
-            petIds,
+            petIdList,
             CurrentIdlePets,
             amount
         )
+            local PetageCounter = 5
+            local isNeon = true
             local petUniques = {}
-            for _, v in ClientData.get_data()[localPlayer.Name].inventory.pets do
-                if not table.find(petIds, v.id) then
-                    continue
-                end
-                if table.find(CurrentIdlePets, v.unique) then
-                    continue
-                end
-                if v.properties.age == 6 then
-                    continue
-                end
-                if v.properties.mega_neon then
-                    continue
-                end
-                table.insert(petUniques, v.unique)
-                if #petUniques >= amount then
-                    break
-                end
-            end
-            return petUniques
-        end--]]
 
-        --[[function GetInventory.GetPetsToRelease()
+            while true do
+                for _, petId in ipairs(petIdList)do
+                    if petId == 'pet_recycler_2025_crystal_egg' then
+                        continue
+                    end
+
+                    for _, pet in ClientData.get_data()[localPlayer.Name].inventory.pets do
+                        if petId ~= pet.id then
+                            continue
+                        end
+                        if table.find(AllowOrDenyList.Denylist, pet.id) then
+                            continue
+                        end
+                        if pet.properties.age == PetageCounter and pet.properties.neon == isNeon then
+                            if pet.unique == getgenv().petCurrentlyFarming1 then
+                                continue
+                            end
+                            if pet.unique == getgenv().petCurrentlyFarming2 then
+                                continue
+                            end
+
+                            table.insert(petUniques, pet.unique)
+
+                            if #petUniques >= amount then
+                                return petUniques
+                            end
+                        end
+                    end
+                end
+
+                PetageCounter = PetageCounter - 1
+
+                if PetageCounter <= 0 and isNeon then
+                    PetageCounter = 5
+                    isNeon = nil
+                elseif PetageCounter <= 0 and isNeon == nil then
+                    return petUniques
+                end
+
+                task.wait(1)
+            end
+
+            return petUniques
+        end
+        function GetInventory.GetPetsRarityAndAgeForPen(rarity, whichPet)
+            local PetageCounter = 5
+            local isNeon = true
+            local petFound = false
             local petUniques = {}
+
+            while not petFound do
+                for _, pet in ClientData.get_data()[localPlayer.Name].inventory.pets do
+                    for _, petDB in InventoryDB.pets do
+                        if table.find(AllowOrDenyList.Denylist, pet.id) then
+                            continue
+                        end
+                        if table.find(eggList, pet.id) then
+                            continue
+                        end
+                        if rarity == petDB.rarity and pet.id == petDB.id and pet.properties.age == PetageCounter and pet.properties.neon == isNeon then
+                            if pet.unique == getgenv().petCurrentlyFarming1 then
+                                continue
+                            end
+                            if pet.unique == getgenv().petCurrentlyFarming2 then
+                                continue
+                            end
+
+                            table.insert(petUniques, pet.unique)
+
+                            if #petUniques >= 4 then
+                                return petUniques
+                            end
+                        end
+                    end
+                end
+
+                PetageCounter = PetageCounter - 1
+
+                if PetageCounter <= 0 and isNeon then
+                    PetageCounter = 5
+                    isNeon = nil
+                elseif PetageCounter <= 0 and isNeon == nil then
+                    return petUniques
+                end
+
+                task.wait(1)
+            end
+
+            return petUniques
+        end
+        function GetInventory.GetPetsToRelease()
+            local petUniques = {}
+
             for _, pet in ClientData.get_data()[localPlayer.Name].inventory.pets do
                 if not table.find(PetsToReleaseList, pet.id) then
                     continue
@@ -2036,9 +2109,10 @@ do
                     petUniques[pet.unique] = true
                 end
             end
-            return petUniques
-        end --]]		
 
+            return petUniques
+        end--]]		
+		
         function GetInventory.GetAgeablePets()
             local ageablePets = {}
             local eggList = GetInventory.GetPetEggs()
