@@ -5731,6 +5731,10 @@ do
                     Teleport.FarmingHome()
 
                     return true
+                elseif key == 'scale_the_organ' then
+                    Ailment.ScaleTheOrgan()
+
+                    return true
                 end
             end
             for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
