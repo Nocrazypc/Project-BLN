@@ -1546,10 +1546,6 @@ do
             Teleport.DeleteWater()
         end
         function Teleport.PipeOrgan()
-            local isAlreadyOnMainMap = Workspace.Interiors:FindFirstChild('center_map_plot', true)
-            if isAlreadyOnMainMap then
-                return true
-            end
             CollisionsClient.set_collidable(false)
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
             SetLocationFunc('MainMap', 'Neighborhood/MainDoor', {})
