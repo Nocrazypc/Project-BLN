@@ -5842,7 +5842,7 @@ do
         return PetOfflineHandler
     end
 
-    function __DARKLUA_BUNDLE_MODULES.A()  --- Rayfield
+    function __DARKLUA_BUNDLE_MODULES.A()  --- Rayfield Library
         local InterfaceBuild = '9NBD'
         local Release = 'Build 1.67'
         local RayfieldFolder = 'Rayfield'
