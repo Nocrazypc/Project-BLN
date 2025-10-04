@@ -602,7 +602,7 @@ do
             end
         end
         local waitForActiveTrade = function()
-            local timeOut = 60
+            local timeOut = math.random(10, 20)
 
             while not ClientData.get_data()[localPlayer.Name].in_active_trade do
                 task.wait(1)
