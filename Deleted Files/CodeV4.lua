@@ -3118,10 +3118,6 @@ do
                 VirtualUser:ClickButton2(Vector2.new())
             end)
 
-            --local UpdateTextEvent = (ReplicatedStorage:WaitForChild('UpdateTextEvent'))
-
-            --UpdateTextEvent:Fire()
-
             if getgenv().BUY_BEFORE_FARMING then
                 localPlayer:SetAttribute('StopFarmingTemp', true)
                 BuyItem.StartBuyItems(getgenv().BUY_BEFORE_FARMING)
