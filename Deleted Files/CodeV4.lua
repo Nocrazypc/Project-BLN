@@ -5901,178 +5901,7 @@ do
             ['ages'] = {},
             ['neons'] = {},
         }
---------------------- Claim taskboard ----------------------
 
-    function __DARKLUA_BUNDLE_MODULES.B()
-        local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
-        local Players = cloneref(game:GetService('Players'))
-        local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
-        local ClientData = Bypass('ClientData')
-        local RouterClient = Bypass('RouterClient')
-        local self = {}
-        local localPlayer = Players.LocalPlayer
-        local PlayerGui = localPlayer:WaitForChild('PlayerGui')
-        local neonTable = {
-            ['neon_fusion'] = true,
-            ['mega_neon_fusion'] = true,
-        }
-        local claimTable = {
-            ['hatch_three_eggs'] = {3},
-            ['fully_age_three_pets'] = {3},
-            ['fully_age_up_a_pet_to_its_max_age'] = {1},
-            ['make_two_trades'] = {2},
-            ['equip_two_accessories'] = {2},
-            ['buy_three_furniture_items_with_friends_coop_budget'] = {3},
-            ['buy_five_furniture_items'] = {5},
-            ['buy_fifteen_furniture_items'] = {15},
-            ['play_as_a_baby_for_twenty_five_minutes'] = {1500},
-            ['play_for_thirty_minutes'] = {1800},
-            ['sunshine_2024_playtime'] = {2400},
-            ['bonus_week_2024_small_ailments'] = {5},
-            ['bonus_week_2024_small_hatch_egg'] = {1},
-            ['bonus_week_2024_small_age_potion_drank'] = {1},
-            ['bonus_week_2024_small_ailment_orange'] = {1},
-            ['bonus_week_2024_medium_ailment_hungry_sleepy_bored'] = {3},
-            ['bonus_week_2024_medium_ailment_catch_bored'] = {2},
-            ['bonus_week_2024_medium_ailment_toilet_dirty_sleepy'] = {3},
-            ['bonus_week_2024_medium_ailment_pizza_hungry'] = {2},
-            ['bonus_week_2024_medium_ailment_salon_dirty'] = {2},
-            ['bonus_week_2024_medium_ailment_school_ride'] = {2},
-            ['bonus_week_2024_medium_ailment_walk_beach'] = {2},
-            ['bonus_week_2024_medium_ailments'] = {15},
-            ['bonus_week_2024_large_ailments_common'] = {30},
-            ['bonus_week_2024_large_ailments_legendary'] = {30},
-            ['bonus_week_2024_large_ailments_ultra_rare'] = {30},
-            ['bonus_week_2024_large_ailments_uncommon'] = {30},
-            ['bonus_week_2024_large_ailments_rare'] = {30},
-            ['bonus_week_2024_large_ailments'] = {30},
-        }
-
-        function self.Init()
-            self.NewTaskBool = true
-            self.NewClaimBool = true
-            self.NeonTable = neonTable
-            self.ClaimTable = claimTable
-        end
-        function self.Start()
-            local ImageButton = PlayerGui:WaitForChild('QuestIconApp'):WaitForChild('ImageButton')
-            local IsNew = ImageButton:WaitForChild('EventContainer'):WaitForChild('IsNew')
-            local IsClaimable = ImageButton:WaitForChild('EventContainer'):WaitForChild('IsClaimable')
-
-            IsNew:GetPropertyChangedSignal('Position'):Connect(function()
-                if self.NewTaskBool then
-                    self.NewTaskBool = false
-
-                    RouterClient.get('QuestAPI/MarkQuestsViewed'):FireServer()
-                    self:NewTask()
-                end
-            end)
-            IsClaimable:GetPropertyChangedSignal('Position'):Connect(function()
-                if self.NewClaimBool then
-                    self.NewClaimBool = false
-
-                    self:NewClaim()
-                end
-            end)
-            self:NewClaim()
-            self:NewTask()
-        end
-        function self.QuestCount()
-            local Count = 0
-
-            for _, v in pairs(ClientData.get('quest_manager')['quests_cached'])do
-                if v['entry_name']:match('teleport') or v['entry_name']:match('navigate') or v['entry_name']:match('nav') or v['entry_name']:match('gosh_2022_sick') then
-                    Count = Count + 0
-                else
-                    Count = Count + 1
-                end
-            end
-
-            return Count
-        end
-
-        local reRollCount = function()
-            for _, v in pairs(ClientData.get('quest_manager')['daily_quest_data'])do
-                if v == 1 or v == 0 then
-                    return v
-                end
-            end
-
-            return 0
-        end
-
-        function self:NewTask()
-            self.NewTaskBool = false
-
-            for _, v in pairs(ClientData.get('quest_manager')['quests_cached'])do
-                if v['entry_name']:match('teleport') then
-                    task.wait()
-                elseif v['entry_name']:match('tutorial') then
-                    RouterClient.get('QuestAPI/ClaimQuest'):InvokeServer(v['unique_id'])
-                    task.wait()
-                elseif v['entry_name']:match('celestial_2024_small_open_gift') then
-                    RouterClient.get('ShopAPI/BuyItem'):InvokeServer('gifts', 'smallgift', {})
-                    task.wait(1)
-
-                    for _, v in ClientData.get_data()[localPlayer.Name].inventory.gifts do
-                        if v['id'] == 'smallgift' then
-                            RouterClient.get('ShopAPI/OpenGift'):InvokeServer(v['unique'])
-
-                            break
-                        end
-                    end
-
-                    task.wait()
-                else
-                    if self.QuestCount() == 1 then
-                        if self.NeonTable[v['entry_name'] ] then
-                            RouterClient.get('QuestAPI/ClaimQuest'):InvokeServer(v['unique_id'])
-                            task.wait()
-                        elseif not self.NeonTable[v['entry_name'] ] and reRollCount() >= 1 then
-                            RouterClient.get('QuestAPI/RerollQuest'):FireServer(v['unique_id'])
-                            task.wait()
-                        end
-                    elseif self.QuestCount() > 1 then
-                        if self.NeonTable[v['entry_name'] ] then
-                            RouterClient.get('QuestAPI/ClaimQuest'):InvokeServer(v['unique_id'])
-                            task.wait()
-                        elseif not self.NeonTable[v['entry_name'] ] and reRollCount() >= 1 then
-                            RouterClient.get('QuestAPI/RerollQuest'):FireServer(v['unique_id'])
-                            task.wait()
-                        elseif not self.NeonTable[v['entry_name'] ] and reRollCount() <= 0 then
-                            RouterClient.get('QuestAPI/ClaimQuest'):InvokeServer(v['unique_id'])
-                            task.wait()
-                        end
-                    end
-                end
-            end
-
-            task.wait(1)
-
-            self.NewTaskBool = true
-        end
-        function self:NewClaim()
-            self.NewClaimBool = false
-
-            for _, v in pairs(ClientData.get('quest_manager')['quests_cached'])do
-                if self.ClaimTable[v['entry_name'] ] then
-                    if v['steps_completed'] == self.ClaimTable[v['entry_name'] ][1] then
-                        RouterClient.get('QuestAPI/ClaimQuest'):InvokeServer(v['unique_id'])
-                        task.wait()
-                    end
-                elseif not self.ClaimTable[v['entry_name'] ] and v['steps_completed'] == 1 then
-                    RouterClient.get('QuestAPI/ClaimQuest'):InvokeServer(v['unique_id'])
-                    task.wait()
-                end
-            end
-
-            task.wait(1)
-
-            self.NewClaimBool = true
-        end
-
-        return self
-    end
 ------------- Rayfield Config ------------- 
 local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Rayfield/main/Source1.lua"))()
 
@@ -6966,6 +6795,66 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
 
         return self
     end
+
+    function __DARKLUA_BUNDLE_MODULES.C()
+        local HalloweenHandler2025 = {}
+        local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
+        local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
+        local RouterClient = Bypass('RouterClient')
+        local HauntletMinigameClient = (require(ReplicatedStorage.SharedModules.ContentPacks.Halloween2025.Minigames.HauntletMinigameClient))
+        local Players = cloneref(game:GetService('Players'))
+        local localPlayer = Players.LocalPlayer
+        local PlayerGui = (localPlayer:WaitForChild('PlayerGui'))
+        local HauntletInGameApp = (PlayerGui:WaitForChild('HauntletInGameApp'))
+        local getMinigameId = function()
+            return (HauntletMinigameClient.instanced_minigame and {
+                (HauntletMinigameClient.instanced_minigame.minigame_id),
+            } or {nil})[1]
+        end
+        local pickDoor = function(hauntletId, stageLevel)
+            RouterClient.get('MinigameAPI/MessageServer'):FireServer(hauntletId, 'player_selected_door', stageLevel, math.random(1, 3))
+            print(string.format('Picked door for stage %s', tostring(stageLevel)))
+        end
+        local startHauntlet = function()
+            local minigameId = getMinigameId()
+            if not minigameId then
+                print('No minigame ID found, cannot start Hauntlet')
+                return
+            end
+            while true do
+                if not HauntletMinigameClient.instanced_minigame then
+                    print('No instanced minigame found, exiting loop')
+                    return
+                end
+                pickDoor(minigameId, HauntletMinigameClient.instanced_minigame.round)
+                task.wait(2)
+            end
+        end
+        function HalloweenHandler2025.Init()
+            print('HalloweenHandler2025 Initialized')
+            HauntletInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function(
+            )
+                if HauntletInGameApp.Enabled then
+                    print('Hauntlet In-Game App Enabled')
+                    HauntletInGameApp:WaitForChild('Body')
+                    HauntletInGameApp.Body:WaitForChild('Middle')
+                    HauntletInGameApp.Body.Middle:WaitForChild('Container')
+                    HauntletInGameApp.Body.Middle.Container:WaitForChild('TitleLabel')
+                    if localPlayer:GetAttribute('hasStartedFarming') == true then
+                        localPlayer:SetAttribute('StopFarmingTemp', true)
+                        task.wait(2)
+                        print('\u{2764}\u{2764} Starting Hauntlet \u{2764}\u{2764}')
+                        startHauntlet()
+                        localPlayer:SetAttribute('StopFarmingTemp', false)
+                    end
+                end
+            end)
+        end
+        function HalloweenHandler2025.Start()
+            print('HalloweenHandler2025 Started')
+        end
+        return HalloweenHandler2025
+    end
 end
 
 if not game:IsLoaded() then
@@ -6977,11 +6866,19 @@ end
 --setfpscap(getgenv().SETTINGS.SET_FPS or 2)
 
 local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
+--local GuiService = game:GetService('GuiService')
 local Players = cloneref(game:GetService('Players'))
 local UserGameSettings = UserSettings():GetService('UserGameSettings')
 
 UserGameSettings.GraphicsQualityLevel = 1
 UserGameSettings.MasterVolume = 8
+
+--[[GuiService.Changed:Connect(function()
+    if GuiService:GetErrorCode().Value == 0 then
+        return
+    end
+    game:Shutdown()
+end)--]]
 
 local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
 local RouterClient = (Bypass('RouterClient'))
