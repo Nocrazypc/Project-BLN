@@ -5846,7 +5846,7 @@ do
         local Players = cloneref(game:GetService('Players'))
         local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Rayfield/main/Source1.lua"))()
         local GetInventory = __DARKLUA_BUNDLE_MODULES.load('i')
-        local Clipboard = __DARKLUA_BUNDLE_MODULES.load('A')
+        local Clipboard = __DARKLUA_BUNDLE_MODULES.load('p')
         local Fusion = __DARKLUA_BUNDLE_MODULES.load('h')
         local Trade = __DARKLUA_BUNDLE_MODULES.load('e')
         local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
