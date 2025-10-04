@@ -3655,8 +3655,8 @@ do
                         task.wait(4)
                         removeGameOverButton('MinigameRewardsApp')
                         task.wait(2)
+	                    localPlayer:SetAttribute('StopFarmingTemp', false)
                         Teleport.FarmingHome()
-                        localPlayer:SetAttribute('StopFarmingTemp', false)
                     end
                 end
             end)
