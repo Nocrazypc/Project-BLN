@@ -4676,6 +4676,26 @@ do
             waitForTaskToFinish('buccaneer_band', petUnique)
             getUpFromSitting()
         end
+        function Ailment.ScaleTheOrgan()
+            Utils.PrintDebug('\u{1f3b9} Doing scale the organ \u{1f3b9}')
+            if not Teleport.PipeOrgan() then
+                return
+            end
+            local keys = Workspace.Interiors['MainMap!Fall'].Event.PipeOrgan.PianoStaircase.Keys
+            local newPosition = keys[1].PrimaryPart.Position + Vector3.new(5, 0, 0)
+            localPlayer.Character:MoveTo(newPosition)
+            task.wait(1)
+            for i = 1, 29 do
+                local key = (keys and {
+                    (keys[i]),
+                } or {nil})[1]
+                if not (key and key.PrimaryPart) then
+                    Utils.PrintDebug(string.format('No primary part for key index: %s', tostring(i)))
+                    continue
+                end
+                Utils.MoveToWithTimeout(localPlayer.Character.Humanoid, key.PrimaryPart.Position, 10)
+            end
+        end
         function Ailment.BabyHungryAilment()
             Utils.PrintDebug('\u{1f476}\u{1f374} Doing baby hungry task \u{1f476}\u{1f374}')
 
