@@ -218,7 +218,7 @@ do
             return ClientData.get_data()[localPlayer.Name].money or 0
         end
         function Utils.EventCurrencyAmount()
-            --return ClientData.get_data()[localPlayer.Name].pet_recycler_manager.saved_points
+            return ClientData.get_data()[localPlayer.Name].candy_2025 or 0
         end
         function Utils.FoodItemCount(nameId)
             local count = 0
