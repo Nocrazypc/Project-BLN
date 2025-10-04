@@ -3622,7 +3622,7 @@ do
                     MinigameInGameApp.Body.Middle:WaitForChild('Container')
                     MinigameInGameApp.Body.Middle.Container:WaitForChild('TitleLabel')
 
-                    if MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('TREASURE DEFENSE') then
+                    if MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('The Hauntlet') then
                         if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame then
                             localPlayer:SetAttribute('StopFarmingTemp', true)
                             task.wait(2)
