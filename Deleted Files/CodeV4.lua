@@ -5652,19 +5652,7 @@ do
 
         return PetOfflineHandler
     end
-------------- free----------------------------
-    function __DARKLUA_BUNDLE_MODULES.x()
 
-    end
-
-    function __DARKLUA_BUNDLE_MODULES.y()
-
-    end
-
-    function __DARKLUA_BUNDLE_MODULES.z()
-
-    end
----------------------------------------------------
     function __DARKLUA_BUNDLE_MODULES.A()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
