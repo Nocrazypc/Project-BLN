@@ -5893,7 +5893,7 @@ do
                 FarmingPet.GetPetToFarm(2)
             end
 
-            RouterClient.get('HalloweenEventAPI/ClaimTreatBag'):InvokeServer()
+            Utils.TryRedeemGoodieBag()
             startAutoFarm()
 
         end
