@@ -3682,7 +3682,7 @@ do
             end)
         end
         function self.Start()
-            --tryClickPlaytimePayout()
+            tryClickPlaytimePayout()
             TradeApp.Frame.NegotiationFrame.Body.PartnerOffer.Accepted:GetPropertyChangedSignal('ImageTransparency'):Connect(function(
             )
                 Trade.AutoAcceptTrade()
