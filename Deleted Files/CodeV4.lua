@@ -11023,7 +11023,7 @@ if not game:IsLoaded() then
     game.Loaded:Wait()
 end
 if getgenv().loaded == true then
-    print('SCRIPT ALREADY LOADED')
+    --print('SCRIPT ALREADY LOADED')
     return
 end
 getgenv().loaded = true
