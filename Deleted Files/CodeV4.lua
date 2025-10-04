@@ -6650,7 +6650,7 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
             useMobileSizing = false
         end
         if UserInputService.TouchEnabled then
-            useMobilePrompt = false
+            useMobilePrompt = true
         end
 
         local Main = Rayfield.Main
