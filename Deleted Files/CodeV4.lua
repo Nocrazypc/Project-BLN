@@ -5588,9 +5588,9 @@ do
                     Ailment.BabyDirtyAilment(furniture.stylishshower)
 
                     return
-			   elseif key == 'scale_the_organ' then
+			   --[[elseif key == 'scale_the_organ' then
                     Ailment.ScaleTheOrgan()
-                    return true
+                    return true--]]
                 end
             end
         end
