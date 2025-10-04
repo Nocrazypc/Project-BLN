@@ -5901,9 +5901,9 @@ do
             ['ages'] = {},
             ['neons'] = {},
         }
--------------------------------------------
+--------------------- Claim taskboard ----------------------
 
-    function __DARKLUA_BUNDLE_MODULES.C()
+    function __DARKLUA_BUNDLE_MODULES.B()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
