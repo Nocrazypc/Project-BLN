@@ -10145,7 +10145,7 @@ local FarmToggle = FarmTab:CreateToggle({
 -------------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Low Render / Hide Parts",
-     CurrentValue = true,
+     CurrentValue = false,
      Flag = "Toggle04",
      Callback = function(Value)
         
@@ -11198,7 +11198,7 @@ end
 
 -------------- Autostart some toggled options for Feli---------------------
 
-local CoreGui = game:GetService("CoreGui")
+--[[local CoreGui = game:GetService("CoreGui")
 local StarterGui = game:GetService("StarterGui")
 
 StarterGui:SetCore(
@@ -11225,7 +11225,7 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
         v.Transparency = 1 
     end 
 end)
-end)
+end) --]]
 --------Transitions Remover -------------
 pcall(function() 
     require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
