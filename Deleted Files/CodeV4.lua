@@ -3765,17 +3765,17 @@ do
             end
 
             lowSpecTerrain()
-            lowSpecLighting() --
-            Lighting:ClearAllChildren() --
+           -- lowSpecLighting() --
+            -- Lighting:ClearAllChildren() --
             Terrain:Clear()
 
-            for _, v in pairs(Workspace:GetDescendants())do --
-                lowSpecTextures(v) --
-            end --
+            -- for _, v in pairs(Workspace:GetDescendants())do --
+               -- lowSpecTextures(v) --
+            -- end --
 
-            Workspace.DescendantAdded:Connect(function(v) --
-                lowSpecTextures(v) --
-            end) --
+           -- Workspace.DescendantAdded:Connect(function(v) --
+               -- lowSpecTextures(v) --
+            -- end) --
         end
 
         return self
