@@ -5046,7 +5046,13 @@ do
                 return
             end
 
-            local event = Workspace.Interiors['MainMap!Fall']:WaitForChild('Event', 10)
+            local mainMap = Workspace.Interiors:WaitForChild('MainMap!Fall', 10)
+
+            if not mainMap then
+                return
+            end
+
+            local event = mainMap:WaitForChild('Event', 10)
 
             if not event then
                 return
@@ -5076,7 +5082,7 @@ do
             task.wait(1)
 
             for i = 1, 29 do
-                if localPlayer:GetAttribute('StopFarmingTemp') then
+                if localPlayer:GetAttribute('StopFarmingTemp') == true then
                     return
                 end
 
