@@ -31,6 +31,18 @@ do
 
             if DateTime.now().UnixTimestamp > catbatTime + (600) + 5 then
                 RouterClient.get('HalloweenEventAPI/ClaimTreatBag'):InvokeServer()
+	-------------------------------------------------------------------
+        local CoreGui = game:GetService("CoreGui")
+        local StarterGui = game:GetService("StarterGui")
+        StarterGui:SetCore(
+             "SendNotification",
+          {
+            Title = "Hiiii  🎃 ",
+            Text = "Candies claimed from the Bad-Batman bag  🍬 🧛 🦇!"
+
+          }
+		)
+    ------------------------------------------------------------------
                 Utils.PrintDebug('\u{1f36c} Claimed cat Goodies Bag \u{1f36c}')
             end
         end
