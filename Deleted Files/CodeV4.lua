@@ -3712,7 +3712,7 @@ do
         local Terrain = (Workspace:WaitForChild('Terrain'))
         local Lighting = (cloneref(game:GetService('Lighting')))
         local self = {}
-        local TURN_ON = false
+        local TURN_ON = true
 
         local lowSpecTerrain = function()
             Terrain.WaterReflectance = 0
