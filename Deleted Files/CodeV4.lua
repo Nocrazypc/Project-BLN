@@ -37,8 +37,8 @@ do
         StarterGui:SetCore(
              "SendNotification",
           {
-            Title = "Hiiii  🎃 ",
-            Text = "Candies claimed from the Bad-Batman bag  🍬 🧛 🦇!"
+            Title = "Boo! 🎃 ",
+            Text = "Candies or Yarn Apples taken of the bag 🍬 🧛 🦇!"
 
           }
 		)
