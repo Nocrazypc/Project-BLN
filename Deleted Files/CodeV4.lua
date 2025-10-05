@@ -4642,8 +4642,15 @@ do
             Utils.PrintDebug(string.format('mystery id: %s', tostring(mysteryId)))
 
             local ailmentsList = {}
+            local mysteryData = ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][mysteryId]
 
-            for i, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][mysteryId]['components']['mystery']['components']do
+            if not mysteryData then
+                Utils.PrintDebug('No mystery data found')
+
+                return
+            end
+
+            for i, _ in mysteryData['components']['mystery']['components']do
                 table.insert(ailmentsList, i)
             end
 
@@ -4653,8 +4660,8 @@ do
                     ReplicatedStorage.API['AilmentsAPI/ChooseMysteryAilment']:FireServer(petUnique, 'mystery', i, ailment)
                     task.wait(3)
 
-                    if not ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][mysteryId] then
-                        Utils.PrintDebug(string.format('\u{1f449} Picked %s ailment from mystery card \u{1f448}', tostring(ailment)))
+                    if not (ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique] and ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][mysteryId]) then
+                    Utils.PrintDebug(string.format('\u{1f449} Picked %s ailment from mystery card \u{1f448}', tostring(ailment)))
 
                         return
                     end
