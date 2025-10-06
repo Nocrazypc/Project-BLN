@@ -3470,16 +3470,20 @@ do
                 return
             end
 
-            PlaytimePayoutsApp:WaitForChild('Frame')
-            PlaytimePayoutsApp.Frame:WaitForChild('Container')
-            PlaytimePayoutsApp.Frame.Container:WaitForChild('CashOutContainer')
-            PlaytimePayoutsApp.Frame.Container.CashOutContainer:WaitForChild('CashOutButton')
+            if PlaytimePayoutsApp.Enabled then
+            Players.LocalPlayer.PlayerGui.PlaytimePayoutsApp.Enabled = false
+            end
 
-            local button = (PlaytimePayoutsApp.Frame.Container.CashOutContainer.CashOutButton:WaitForChild('DepthButton'))
+            --PlaytimePayoutsApp:WaitForChild('Frame')
+            --PlaytimePayoutsApp.Frame:WaitForChild('Container')
+            --PlaytimePayoutsApp.Frame.Container:WaitForChild('CashOutContainer')
+            --PlaytimePayoutsApp.Frame.Container.CashOutContainer:WaitForChild('CashOutButton')
 
-            Utils.FireButton(button)
+            --local button = (PlaytimePayoutsApp.Frame.Container.CashOutContainer.CashOutButton:WaitForChild('DepthButton'))
 
-            task.wait(1)
+            --Utils.FireButton(button)
+
+            --task.wait(1)
 
             --[[if PlaytimePayoutsApp.Enabled then
             Players.LocalPlayer.PlayerGui.PlaytimePayoutsApp.Enabled = false --- Closing the shitty check
