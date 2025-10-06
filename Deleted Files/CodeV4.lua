@@ -3470,24 +3470,23 @@ do
                 return
             end
 
+            --[[PlaytimePayoutsApp:WaitForChild('Frame')
+            PlaytimePayoutsApp.Frame:WaitForChild('Container')
+            PlaytimePayoutsApp.Frame.Container:WaitForChild('CashOutContainer')
+            PlaytimePayoutsApp.Frame.Container.CashOutContainer:WaitForChild('CashOutButton')
+
+            local button = (PlaytimePayoutsApp.Frame.Container.CashOutContainer.CashOutButton:WaitForChild('DepthButton'))
+
+            Utils.FireButton(button)
+
+            task.wait(5)
+
             if PlaytimePayoutsApp.Enabled then
-            Players.LocalPlayer.PlayerGui.PlaytimePayoutsApp.Enabled = false
-            end
-
-            --PlaytimePayoutsApp:WaitForChild('Frame')
-            --PlaytimePayoutsApp.Frame:WaitForChild('Container')
-            --PlaytimePayoutsApp.Frame.Container:WaitForChild('CashOutContainer')
-            --PlaytimePayoutsApp.Frame.Container.CashOutContainer:WaitForChild('CashOutButton')
-
-            --local button = (PlaytimePayoutsApp.Frame.Container.CashOutContainer.CashOutButton:WaitForChild('DepthButton'))
-
-            --Utils.FireButton(button)
-
-            --task.wait(1)
-
-            --[[if PlaytimePayoutsApp.Enabled then
-            Players.LocalPlayer.PlayerGui.PlaytimePayoutsApp.Enabled = false --- Closing the shitty check
+            Players.LocalPlayer.PlayerGui.PlaytimePayoutsApp.Enabled = false 
             end--]]
+
+            Players.LocalPlayer.PlayerGui.PlaytimePayoutsApp.Enabled = false --- Closing the shitty check app
+
         end
 
         function self.Init()
