@@ -11,7 +11,6 @@ local localPlayer = Players.LocalPlayer
 local StatsGui = Instance.new("ScreenGui")
 local MainFrame = Instance.new("Frame")
 local NameFrame = Instance.new("Frame")
-local GuiPopupButton = Instance.new("TextButton")
 local TextLabel = Instance.new("TextLabel")
 local UICorner = Instance.new("UICorner")
 local UIListLayout = Instance.new("UIListLayout")
@@ -232,27 +231,7 @@ TextLabel_6.TextWrapped = true
 
 UICorner_6.CornerRadius = UDim.new(0, 12)
 UICorner_6.Parent = TextLabel_6--]]
----------------3D Render -------------
-GuiPopupButton.Name = "GuiPopupButton"
-GuiPopupButton.Text = "3D Render On"
-GuiPopupButton.AnchorPoint = Vector2.new(0.5, 0.5)
-GuiPopupButton.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
-GuiPopupButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-GuiPopupButton.BorderSizePixel = 0
-GuiPopupButton.Position = UDim2.new(0.65, 0, 0.91, 0)
-GuiPopupButton.Size = UDim2.new(0.1, 0, 0.1, 0)
-GuiPopupButton.Font = Enum.Font.SourceSans
-GuiPopupButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-GuiPopupButton.TextScaled = true
-GuiPopupButton.TextSize = 14.000
-GuiPopupButton.TextWrapped = true
-GuiPopupButton.Parent = MainFrame
 
-GuiPopupButton.MouseButton1Click:Connect(function()
-    RunService:Set3dRenderingEnabled(true)
-    task.wait(20)
-    RunService:Set3dRenderingEnabled(false)
-end)
 ----------------------------
 
 local function formatTime(currentTime)
