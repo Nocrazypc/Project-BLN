@@ -11,6 +11,7 @@ local localPlayer = Players.LocalPlayer
 local StatsGui = Instance.new("ScreenGui")
 local MainFrame = Instance.new("Frame")
 local NameFrame = Instance.new("Frame")
+local ButtonFrame = Instance.new("Frame")
 local TextLabel = Instance.new("TextLabel")
 local UICorner = Instance.new("UICorner")
 local UIListLayout = Instance.new("UIListLayout")
@@ -88,28 +89,6 @@ UICorner.Parent = TextLabel
 UIListLayout.Parent = MainFrame
 UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 UIListLayout.Padding = UDim.new(0, 6)
-
--------------- button 3D Render ----------
-
-local NameFrameButton = Instance.new("TextButton")
-
-NameFrameButton.Text = ""
-NameFrameButton.AnchorPoint = Vector2.new(0.5, 0.5)
-NameFrameButton.BackgroundTransparency = 1.000
-NameFrameButton.Position = UDim2.new(0.5, 0, 0.119999997, 0)
-NameFrameButton.Size = UDim2.new(1, 0, 0.25, 0)
-NameFrameButton.Parent = MainFrame
-
-NameFrameButton.MouseButton1Click:Connect(function()
-	if guiCooldown then return end
-	guiCooldown = true
-    RunService:Set3dRenderingEnabled(true)
-    task.wait(20)
-    RunService:Set3dRenderingEnabled(false)
-	task.wait()
-	guiCooldown = false
---------------------------------------
-
 
 TimeFrame.Name = "TimeFrame"
 TimeFrame.Parent = MainFrame
@@ -253,8 +232,33 @@ TextLabel_6.TextWrapped = true
 
 UICorner_6.CornerRadius = UDim.new(0, 12)
 UICorner_6.Parent = TextLabel_6--]]
-----------------------------
+---------------3D Render -------------
+local MinitGui = Instance.new("ScreenGui")
+local GuiPopupButton = Instance.new("TextButton")
 
+GuiPopupButton.Text = "3D Render On"
+GuiPopupButton.AnchorPoint = Vector2.new(0.5, 0.5)
+GuiPopupButton.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+GuiPopupButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+GuiPopupButton.BorderSizePixel = 0
+GuiPopupButton.Position = UDim2.new(0.65, 0, 0.91, 0)
+GuiPopupButton.Size = UDim2.new(0.1, 0, 0.1, 0)
+GuiPopupButton.Font = Enum.Font.SourceSans
+GuiPopupButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+GuiPopupButton.TextScaled = true
+GuiPopupButton.TextSize = 14.000
+GuiPopupButton.TextWrapped = true
+GuiPopupButton.Parent = MiniGui
+
+GuiPopupButton.MouseButton1Click:Connect(function()
+	if guiCooldown then return end
+	guiCooldown = true
+    RunService:Set3dRenderingEnabled(true)
+    task.wait(20)
+    RunService:Set3dRenderingEnabled(false)
+	task.wait()
+	guiCooldown = false
+end)
 ----------------------------
 
 local function formatTime(currentTime)
