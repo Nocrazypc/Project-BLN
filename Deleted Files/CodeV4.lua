@@ -10104,6 +10104,7 @@ local FarmToggle = FarmTab:CreateToggle({
           Teleport.FarmingHome()
 		  --getgenv().auto_farm = Value
           localPlayer:SetAttribute('StopFarmingTemp', false)
+	      RunService:Set3dRenderingEnabled(true) --
      end,
  })
 
