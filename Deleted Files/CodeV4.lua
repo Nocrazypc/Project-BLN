@@ -10010,6 +10010,7 @@ Check the Developer Console for more information.]],
         local Teleport = __DARKLUA_BUNDLE_MODULES.load('f')
         local self = {}
         local localPlayer = Players.LocalPlayer
+        local RunService = game:GetService("RunService")
         local cooldown = false
         local selectedPlayer
         local selectedPet
