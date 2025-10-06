@@ -11242,7 +11242,6 @@ end)
 pcall(function()
 local RunService = game:GetService("RunService")	
 local UserInputService = game:GetService("UserInputService")
-local StatsGuis = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Stats.lua"))()
 		
 --UserInputService.WindowFocusReleased:Connect(function()
         --if Settings.Render then
