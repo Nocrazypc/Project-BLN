@@ -3479,11 +3479,11 @@ do
 
             Utils.FireButton(button)
 
-            task.wait(5)
+            task.wait(1)
 
-            if PlaytimePayoutsApp.Enabled then
+            --[[if PlaytimePayoutsApp.Enabled then
             Players.LocalPlayer.PlayerGui.PlaytimePayoutsApp.Enabled = false --- Closing the shitty check
-            end
+            end--]]
         end
 
         function self.Init()
