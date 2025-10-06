@@ -11244,7 +11244,34 @@ local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
 		
 
-            RunService:Set3dRenderingEnabled(false)
+RunService:Set3dRenderingEnabled(false)
 
+
+
+local GuiPopupButton = Instance.new("TextButton")
+
+GuiPopupButton.Text = "3D Render On"
+GuiPopupButton.AnchorPoint = Vector2.new(0.5, 0.5)
+GuiPopupButton.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+GuiPopupButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+GuiPopupButton.BorderSizePixel = 0
+GuiPopupButton.Position = UDim2.new(0.65, 0, 0.91, 0)
+GuiPopupButton.Size = UDim2.new(0.1, 0, 0.1, 0)
+GuiPopupButton.Font = Enum.Font.SourceSans
+GuiPopupButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+GuiPopupButton.TextScaled = true
+GuiPopupButton.TextSize = 14.000
+GuiPopupButton.TextWrapped = true
+GuiPopupButton.Parent = TestGui
+
+GuiPopupButton.MouseButton1Click:Connect(function()
+	if guiCooldown then return end
+	guiCooldown = true
+    RunService:Set3dRenderingEnabled(true)
+    task.wait(20)
+    RunService:Set3dRenderingEnabled(false)
+	task.wait()
+	guiCooldown = false
+end)
 
 end)
