@@ -11241,9 +11241,26 @@ end)
 
 pcall(function()
 local RunService = game:GetService("RunService")	
-local UserInputService = game:GetService("UserInputService")
+local CoreGui = game:GetService("CoreGui")
 
 RunService:Set3dRenderingEnabled(false)
+		
+if gethui then
+	MinitGui.Parent = gethui()
+elseif syn.protect_gui then
+	syn.protect_gui(MiniGui)
+	MiniGui.Parent = CoreGui
+elseif CoreGui:FindFirstChild("RobloxGui") then
+	MiniGui.Parent = CoreGui:FindFirstChild("RobloxGui")
+else
+	MiniGui.Parent = CoreGui
+end
+
+MiniGui.Name = "MiniGui"
+MiniGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+
+
 
 local MinitGui = Instance.new("ScreenGui")
 local GuiPopupButton = Instance.new("TextButton")
