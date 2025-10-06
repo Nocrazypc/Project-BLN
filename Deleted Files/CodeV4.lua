@@ -11243,26 +11243,29 @@ pcall(function()
 local RunService = game:GetService("RunService")	
 local UserInputService = game:GetService("UserInputService")
 		
---UserInputService.WindowFocusReleased:Connect(function()
-        --if Settings.Render then
             RunService:Set3dRenderingEnabled(false)
-            --if table.find(Table, game.PlaceId) then
-                --Set(20)
-            --else
-                --Set(5)
-           -- end
+
+    local function onMouseRightClick()
+            RunService:Set3dRenderingEnabled(true)
+            task.wait(20)
+	    RunService:Set3dRenderingEnabled(false)
+    end
+
+    userInputService.InputBegan:Connect(function(input, gameProcessedEvent)
+        if input.UserInputType == Enum.UserInputType.MouseButton2 and not gameProcessedEvent then
+            onMouseRightClick()
+        end
+    end)
+
+
+
+
+            --RunService:Set3dRenderingEnabled(true)
+            --Set(20)
+			--task.wait(20)
+			--RunService:Set3dRenderingEnabled(false)
         --end 
     --end)
---UserInputService.WindowFocused:Connect(function()
---MouseButton1Click:Connect(function()
-onMouseRightClick:Connect(function()
-        --if Settings.Render then
-            RunService:Set3dRenderingEnabled(true)
-            --Set(20)
-			task.wait(20)
-			RunService:Set3dRenderingEnabled(false)
-        --end 
-    end)
 
 		
 --[[local RunService = game:GetService("RunService")		
