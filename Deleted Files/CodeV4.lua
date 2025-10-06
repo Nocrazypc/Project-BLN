@@ -11251,8 +11251,8 @@ local UserInputService = game:GetService("UserInputService")
 	    RunService:Set3dRenderingEnabled(false)
     end
 
-    userInputService.InputBegan:Connect(function(input, gameProcessedEvent)
-        if input.UserInputType == Enum.UserInputType.MouseButton2 and not gameProcessedEvent then
+    userInputService.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton2 then
             onMouseRightClick()
         end
     end)
