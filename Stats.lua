@@ -233,9 +233,9 @@ TextLabel_6.TextWrapped = true
 UICorner_6.CornerRadius = UDim.new(0, 12)
 UICorner_6.Parent = TextLabel_6--]]
 ---------------3D Render -------------
-local MinitGui = Instance.new("ScreenGui")
-local GuiPopupButton = Instance.new("TextButton")
 
+local GuiPopupButton = Instance.new("TextButton")
+NameFrame.Name = "3D"
 GuiPopupButton.Text = "3D Render On"
 GuiPopupButton.AnchorPoint = Vector2.new(0.5, 0.5)
 GuiPopupButton.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
@@ -248,16 +248,12 @@ GuiPopupButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 GuiPopupButton.TextScaled = true
 GuiPopupButton.TextSize = 14.000
 GuiPopupButton.TextWrapped = true
-GuiPopupButton.Parent = MiniGui
+GuiPopupButton.Parent = MainFrame
 
 GuiPopupButton.MouseButton1Click:Connect(function()
-	if guiCooldown then return end
-	guiCooldown = true
     RunService:Set3dRenderingEnabled(true)
     task.wait(20)
     RunService:Set3dRenderingEnabled(false)
-	task.wait()
-	guiCooldown = false
 end)
 ----------------------------
 
