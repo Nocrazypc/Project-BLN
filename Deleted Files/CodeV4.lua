@@ -10988,18 +10988,18 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             HauntletInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function(
             )
                 if HauntletInGameApp.Enabled then
-                    --print('Hauntlet In-Game App Enabled')
+				    RunService:Set3dRenderingEnabled(false) -- 3D Off
                     HauntletInGameApp:WaitForChild('Body')
                     HauntletInGameApp.Body:WaitForChild('Middle')
                     HauntletInGameApp.Body.Middle:WaitForChild('Container')
                     HauntletInGameApp.Body.Middle.Container:WaitForChild('TitleLabel')
                     if localPlayer:GetAttribute('hasStartedFarming') == true then
                         localPlayer:SetAttribute('StopFarmingTemp', true)
-				        RunService:Set3dRenderingEnabled(false) -- 3D Off
                         task.wait(2)
                         --print('\u{2764}\u{2764} Starting Hauntlet \u{2764}\u{2764}')
                         startHauntlet()
                         localPlayer:SetAttribute('StopFarmingTemp', false)
+					    task.wait(6)
 				        RunService:Set3dRenderingEnabled(true) -- 3D On
                     end
                 end
