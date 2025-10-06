@@ -11130,7 +11130,7 @@ getgenv().HatchPriorityEggs = false
 getgenv().ENABLE_RELEASE_PETS = false
 getgenv().PETS_TO_AGE_IN_PEN = {}
 
-getgenv().POTATO_MODE = true
+getgenv().POTATO_MODE = false
 
 getgenv().AutoMinigame = true
 getgenv().AutoMinigame2 = false
@@ -11209,7 +11209,7 @@ StarterGui:SetCore(
         Text = "😘 😘 😘 🤗 🤗 🤗 🥰 🥰 🥰"
     }
 )
---]]
+
 -------- Low Render- Hide parts ------------
 task.spawn(function()
         
@@ -11226,7 +11226,7 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
         v.Transparency = 1 
     end 
 end)
-end)
+end)--]]
 --------Transitions Remover -------------
 pcall(function() 
     require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
@@ -11234,4 +11234,8 @@ pcall(function()
     if Player.PlayerGui:FindFirstChild("TransitionsApp") then
         Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
     end
+end)
+
+pcall(function() 
+    RunService:Set3dRenderingEnabled(false)
 end)
