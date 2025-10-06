@@ -11242,12 +11242,10 @@ end)
 pcall(function()
 local RunService = game:GetService("RunService")	
 local UserInputService = game:GetService("UserInputService")
-		
 
 RunService:Set3dRenderingEnabled(false)
 
-
-
+local MinitGui = Instance.new("ScreenGui")
 local GuiPopupButton = Instance.new("TextButton")
 
 GuiPopupButton.Text = "3D Render On"
@@ -11262,7 +11260,7 @@ GuiPopupButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 GuiPopupButton.TextScaled = true
 GuiPopupButton.TextSize = 14.000
 GuiPopupButton.TextWrapped = true
-GuiPopupButton.Parent = TestGui
+GuiPopupButton.Parent = MiniGui
 
 GuiPopupButton.MouseButton1Click:Connect(function()
 	if guiCooldown then return end
