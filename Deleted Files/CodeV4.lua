@@ -11195,8 +11195,6 @@ for index, _table in ipairs(files)do
     end
 end
 
-
-
 -------------- Autostart some toggled options for Feli---------------------
 
 --[[local CoreGui = game:GetService("CoreGui")
@@ -11209,7 +11207,7 @@ StarterGui:SetCore(
         Text = "😘 😘 😘 🤗 🤗 🤗 🥰 🥰 🥰"
     }
 )
-
+--]]
 -------- Low Render- Hide parts ------------
 task.spawn(function()
         
@@ -11226,7 +11224,7 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
         v.Transparency = 1 
     end 
 end)
-end)--]]
+end)
 --------Transitions Remover -------------
 pcall(function() 
     require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
@@ -11234,12 +11232,4 @@ pcall(function()
     if Player.PlayerGui:FindFirstChild("TransitionsApp") then
         Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
     end
-end)
-
------------Render Off  --------------
-pcall(function()
-local RunService = game:GetService("RunService")	
-
-RunService:Set3dRenderingEnabled(false)
-
 end)
