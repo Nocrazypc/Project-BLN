@@ -11237,31 +11237,33 @@ pcall(function()
 end)
 
 --------------------
-Settings.Render = true
+--Settings.Render = true
 
 pcall(function()
 local RunService = game:GetService("RunService")	
 local UserInputService = game:GetService("UserInputService")
 --local Table = {6152116144, 185655149}
-local Set = setfpscap
+--local Set = setfpscap
 		
 --UserInputService.WindowFocusReleased:Connect(function()
-        if Settings.Render then
+        --if Settings.Render then
             RunService:Set3dRenderingEnabled(false)
             --if table.find(Table, game.PlaceId) then
-                Set(20)
-            else
-                Set(5)
+                --Set(20)
+            --else
+                --Set(5)
            -- end
-        end 
+        --end 
     --end)
 --UserInputService.WindowFocused:Connect(function()
- MouseButton2Click:Connect(function()
+ MouseButton1Click:Connect(function()
 
-        if Settings.Render then
+        --if Settings.Render then
             RunService:Set3dRenderingEnabled(true)
-            Set(20)
-        end 
+            --Set(20)
+			task.wait(20)
+			RunService:Set3dRenderingEnabled(false)
+        --end 
     end)
 
 		
