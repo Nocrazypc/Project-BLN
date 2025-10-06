@@ -11254,8 +11254,8 @@ local UserInputService = game:GetService("UserInputService")
         --end 
     --end)
 --UserInputService.WindowFocused:Connect(function()
- StatsGuis.MouseButton1Click:Connect(function()
-
+--MouseButton1Click:Connect(function()
+onMouseRightClick:Connect(function()
         --if Settings.Render then
             RunService:Set3dRenderingEnabled(true)
             --Set(20)
