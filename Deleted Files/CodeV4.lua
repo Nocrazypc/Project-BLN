@@ -11242,8 +11242,7 @@ end)
 pcall(function()
 local RunService = game:GetService("RunService")	
 local UserInputService = game:GetService("UserInputService")
---local Table = {6152116144, 185655149}
---local Set = setfpscap
+local StatsGuis = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Stats.lua"))()
 		
 --UserInputService.WindowFocusReleased:Connect(function()
         --if Settings.Render then
@@ -11256,7 +11255,7 @@ local UserInputService = game:GetService("UserInputService")
         --end 
     --end)
 --UserInputService.WindowFocused:Connect(function()
- MouseButton1Click:Connect(function()
+ StatsGuis.MouseButton1Click:Connect(function()
 
         --if Settings.Render then
             RunService:Set3dRenderingEnabled(true)
