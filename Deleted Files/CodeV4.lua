@@ -10940,6 +10940,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         local Players = cloneref(game:GetService('Players'))
         local localPlayer = Players.LocalPlayer
         local PlayerGui = (localPlayer:WaitForChild('PlayerGui'))
+        local RunService = game:GetService("RunService")
         local HauntletInGameApp = (PlayerGui:WaitForChild('HauntletInGameApp'))
         local isFedYarnApple = false
         local feedYarnApple = function()
@@ -10984,8 +10985,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             end
         end
         function HalloweenHandler2025.Init()
-            local RunService = game:GetService("RunService")
-            --print('HalloweenHandler2025 Initialized')
             HauntletInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function(
             )
                 if HauntletInGameApp.Enabled then
