@@ -10983,6 +10983,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             end
         end
         function HalloweenHandler2025.Init()
+            local RunService = game:GetService("RunService")
             --print('HalloweenHandler2025 Initialized')
             HauntletInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function(
             )
