@@ -11209,7 +11209,7 @@ StarterGui:SetCore(
         Text = "😘 😘 😘 🤗 🤗 🤗 🥰 🥰 🥰"
     }
 )
-
+--]]
 -------- Low Render- Hide parts ------------
 task.spawn(function()
         
@@ -11226,7 +11226,7 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
         v.Transparency = 1 
     end 
 end)
-end) --]]
+end)
 --------Transitions Remover -------------
 pcall(function() 
     require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
