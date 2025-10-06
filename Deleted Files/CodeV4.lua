@@ -10999,7 +10999,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                         --print('\u{2764}\u{2764} Starting Hauntlet \u{2764}\u{2764}')
                         startHauntlet()
                         localPlayer:SetAttribute('StopFarmingTemp', false)
-					    task.wait(6)
+					    task.wait(1)
 				        RunService:Set3dRenderingEnabled(true) -- 3D On
                     end
                 end
