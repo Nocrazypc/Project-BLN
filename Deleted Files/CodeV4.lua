@@ -11264,5 +11264,5 @@ UserInputService.WindowFocused:Connect(function()
 
 		
 --[[local RunService = game:GetService("RunService")		
-    RunService:Set3dRenderingEnabled(false)
-end)--]]
+    RunService:Set3dRenderingEnabled(false)--]]
+end)
