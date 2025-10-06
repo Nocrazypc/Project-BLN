@@ -91,7 +91,6 @@ UIListLayout.Padding = UDim.new(0, 6)
 
 -------------- button 3D Render ----------
 
-
 local NameFrameButton = Instance.new("TextButton")
 
 NameFrameButton.Text = ""
@@ -99,7 +98,7 @@ NameFrameButton.AnchorPoint = Vector2.new(0.5, 0.5)
 NameFrameButton.BackgroundTransparency = 1.000
 NameFrameButton.Position = UDim2.new(0.5, 0, 0.119999997, 0)
 NameFrameButton.Size = UDim2.new(1, 0, 0.25, 0)
-NameFrameButton.Parent = NameFrame
+NameFrameButton.Parent = MainFrame
 
 NameFrameButton.MouseButton1Click:Connect(function()
 	if guiCooldown then return end
