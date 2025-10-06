@@ -10161,29 +10161,7 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
         v.Transparency = 1 
     end 
 end)
--------------------------------------
---[[for i,v in pairs(game:GetService("ReplicatedStorage").ClientModules.Game.PetEntities.PetPerformancesFolder.Emotes:GetChildren()) do 
-    if v:IsA("ModuleScript") then 
-        require(v).step = function() return end 
-    end
-end    
 
-for i,v in pairs(game:GetService("ReplicatedStorage").ClientModules.Game.PetEntities.PetReactions:GetChildren()) do 
-    require(v).init_reaction = function() return end 
-end  
-
-for i,v in pairs(game:GetService("ReplicatedStorage").ClientModules.Game.PetEntities.PetPerformancesFolder.Transitions:GetChildren()) do 
-    if v:IsA("ModuleScript") then 
-        require(v).step = function() return end 
-    end
-end   
-
-for Data,Effect in pairs(require(game:GetService("ReplicatedStorage").ClientModules.Core.UIManager.Apps.SpecialEffectsApp)) do 
-    if type(Data) == "function" then 
-        Data = function() return end 
-    end
-end--]]
---------------------------------------
      end,
  })
 -------- Transition disabler -------------
