@@ -11245,7 +11245,7 @@ local UserInputService = game:GetService("UserInputService")
 --local Table = {6152116144, 185655149}
 local Set = setfpscap
 		
-UserInputService.WindowFocusReleased:Connect(function()
+--UserInputService.WindowFocusReleased:Connect(function()
         if Settings.Render then
             RunService:Set3dRenderingEnabled(false)
             --if table.find(Table, game.PlaceId) then
@@ -11254,8 +11254,10 @@ UserInputService.WindowFocusReleased:Connect(function()
                 Set(5)
            -- end
         end 
-    end)
-UserInputService.WindowFocused:Connect(function()
+    --end)
+--UserInputService.WindowFocused:Connect(function()
+ MouseButton2Click:Connect(function()
+
         if Settings.Render then
             RunService:Set3dRenderingEnabled(true)
             Set(20)
