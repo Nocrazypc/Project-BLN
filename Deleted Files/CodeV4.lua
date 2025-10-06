@@ -11246,7 +11246,7 @@ local CoreGui = game:GetService("CoreGui")
 RunService:Set3dRenderingEnabled(false)
 		
 if gethui then
-	MinitGui.Parent = gethui()
+	MiniGui.Parent = gethui()
 elseif syn.protect_gui then
 	syn.protect_gui(MiniGui)
 	MiniGui.Parent = CoreGui
