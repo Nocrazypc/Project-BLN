@@ -11127,7 +11127,7 @@ getgenv().HatchPriorityEggs = false
 getgenv().ENABLE_RELEASE_PETS = false
 getgenv().PETS_TO_AGE_IN_PEN = {}
 
-getgenv().3DRenderOFF = Value
+getgenv().RenderOFF = false
 getgenv().POTATO_MODE = false
 
 getgenv().AutoMinigame = true
