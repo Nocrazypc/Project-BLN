@@ -11008,7 +11008,11 @@ FarmTab:CreateSection("Events & Minigames: Halloween 2025 Activated")
                         startHauntlet()
                         localPlayer:SetAttribute('StopFarmingTemp', false)
 					    task.wait(1)
-				        RunService:Set3dRenderingEnabled(true) -- 3D On
+					
+					  if not getgenv().3DRenderOFF then
+				         RunService:Set3dRenderingEnabled(true) -- 3D On
+					  end
+					
                     end
                 end
             end)
