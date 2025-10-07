@@ -10186,14 +10186,14 @@ local FarmToggle = FarmTab:CreateToggle({
     task.wait(3)
 	getgenv().3DRenderOFF = Value
 
-	if getgenv().3DRenderOFF == true do
+	--if getgenv().3DRenderOFF == true do
     RunService:Set3dRenderingEnabled(false)
-	   end
-	end
-	if getgenv().3DRenderOFF == false do
-    RunService:Set3dRenderingEnabled(true)
-		end
-	end
+	   --end
+	--end
+	--if getgenv().3DRenderOFF == false do
+    --RunService:Set3dRenderingEnabled(true)
+		--end
+	--end
 	
      end,
  })
