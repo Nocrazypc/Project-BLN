@@ -10108,7 +10108,8 @@ local FarmToggle = FarmTab:CreateToggle({
           Teleport.FarmingHome()
 		  --getgenv().auto_farm = Value
           localPlayer:SetAttribute('StopFarmingTemp', false)
-	      RunService:Set3dRenderingEnabled(true) --
+	      RunService:Set3dRenderingEnabled(true) 
+	      getgenv().RenderOFF = false
      end,
  })
 
@@ -10184,13 +10185,9 @@ local FarmToggle = FarmTab:CreateToggle({
      Callback = function(Value)
      local RunService = game:GetService("RunService")
 
-            getgenv().RenderOFF = Value
-
-			task.wait(15)	
-				
-            while getgenv().RenderOFF do		
-			    RunService:Set3dRenderingEnabled(false)
-            end
+		    task.wait(15)	
+			RunService:Set3dRenderingEnabled(false)
+	        getgenv().RenderOFF = true
 			
      end,
  })
