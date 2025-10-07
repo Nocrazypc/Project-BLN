@@ -10176,23 +10176,23 @@ pcall(function()
 end)
      end,
  })
--------- Transition disabler -------------
---[[local FarmToggle = FarmTab:CreateToggle({
-     Name = "Transitions Disabler",
-     CurrentValue = true,
+
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "3D Render Disabler",
+     CurrentValue = false,
      Flag = "Toggle05",
      Callback = function(Value)
 
-pcall(function() 
-    require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
-    require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).sudden_fill = function() return end
-    if Player.PlayerGui:FindFirstChild("TransitionsApp") then
-        Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
-    end
-end)
+	getgenv().3DRenderOFF = Value
 
+	if getgenv().3DRenderOFF then
+    RunService:Set3dRenderingEnabled(false)
+	elseif not getgenv().3DRenderOFF then
+    RunService:Set3dRenderingEnabled(true)
+	end
+	
      end,
- })--]]
+ })
 
 FarmTab:CreateDivider()
 --------- Hatch Eggs Only ------------
