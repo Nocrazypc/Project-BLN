@@ -11012,9 +11012,9 @@ FarmTab:CreateSection("Events & Minigames: Halloween 2025 Activated")
                         localPlayer:SetAttribute('StopFarmingTemp', false)
 					
 					    task.wait(1)
-					    if not getgenv().3DRenderOFF then
+					    --if not getgenv().3DRenderOFF then
 				         RunService:Set3dRenderingEnabled(true) -- 3D On
-					    end
+					    --end
 					
                     end
                 end
