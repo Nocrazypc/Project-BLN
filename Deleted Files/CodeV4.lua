@@ -10188,6 +10188,9 @@ local FarmToggle = FarmTab:CreateToggle({
 	     if getgenv().3DRenderOFF do
             RunService:Set3dRenderingEnabled(false)
 	     end
+	     if not getgenv().3DRenderOFF do
+            RunService:Set3dRenderingEnabled(true)
+	     end
 
      end,
  })
