@@ -10185,7 +10185,7 @@ local FarmToggle = FarmTab:CreateToggle({
      local RunService = game:GetService("RunService")
 			
     task.wait(3)
-	getgenv().RenderOFF = Value
+	getgenv().RenderOFF = CurrentValue
 
 	if getgenv().RenderOFF do
     RunService:Set3dRenderingEnabled(false)
