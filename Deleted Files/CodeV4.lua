@@ -10183,19 +10183,15 @@ local FarmToggle = FarmTab:CreateToggle({
      Flag = "Toggle05",
      Callback = function(Value)
      local RunService = game:GetService("RunService")
-			
-    task.wait(3)
-	getgenv().RenderOFF = CurrentValue
 
-	if getgenv().RenderOFF do
-    RunService:Set3dRenderingEnabled(false)
-	   end
-	end
-	if not getgenv().RenderOFF do
-    RunService:Set3dRenderingEnabled(true)
-		end
-	end
-	
+            getgenv().RenderOFF = Value
+
+			task.wait(15)	
+				
+            while getgenv().RenderOFF then				
+			    RunService:Set3dRenderingEnabled(false)
+            end
+			
      end,
  })
 
@@ -11127,7 +11123,6 @@ getgenv().HatchPriorityEggs = false
 getgenv().ENABLE_RELEASE_PETS = false
 getgenv().PETS_TO_AGE_IN_PEN = {}
 
-getgenv().RenderOFF = false
 getgenv().POTATO_MODE = false
 
 getgenv().AutoMinigame = true
