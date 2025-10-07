@@ -11010,11 +11010,11 @@ FarmTab:CreateSection("Events & Minigames: Halloween 2025 Activated")
                         --print('\u{2764}\u{2764} Starting Hauntlet \u{2764}\u{2764}')
                         startHauntlet()
                         localPlayer:SetAttribute('StopFarmingTemp', false)
-					    task.wait(1)
 					
-					  if not getgenv().3DRenderOFF then
+					    task.wait(1)
+					    if not getgenv().3DRenderOFF then
 				         RunService:Set3dRenderingEnabled(true) -- 3D On
-					  end
+					    end
 					
                     end
                 end
@@ -11128,6 +11128,7 @@ getgenv().ENABLE_RELEASE_PETS = false
 getgenv().PETS_TO_AGE_IN_PEN = {}
 
 getgenv().POTATO_MODE = false
+getgenv().3DRenderOFF = false
 
 getgenv().AutoMinigame = true
 getgenv().AutoMinigame2 = false
