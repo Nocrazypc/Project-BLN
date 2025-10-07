@@ -10108,7 +10108,7 @@ local FarmToggle = FarmTab:CreateToggle({
           Teleport.FarmingHome()
 		  --getgenv().auto_farm = Value
           localPlayer:SetAttribute('StopFarmingTemp', false)
-	      RunService:Set3dRenderingEnabled(true) --
+	      --RunService:Set3dRenderingEnabled(true) --
      end,
  })
 
@@ -10148,7 +10148,7 @@ local FarmToggle = FarmTab:CreateToggle({
  })
 -------------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
-     Name = "Low Render / Hide Parts",
+     Name = "Low Render / Hide Parts & Transitions Disabler",
      CurrentValue = true,
      Flag = "Toggle04",
      Callback = function(Value)
@@ -10166,23 +10166,28 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
         v.Transparency = 1 
     end 
 end)
-
-     end,
- })
--------- Transition disabler -------------
-local FarmToggle = FarmTab:CreateToggle({
-     Name = "Transitions Disabler",
-     CurrentValue = true,
-     Flag = "Toggle05",
-     Callback = function(Value)
-
+-----
 pcall(function() 
     require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
     require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).sudden_fill = function() return end
     if Player.PlayerGui:FindFirstChild("TransitionsApp") then
         Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
     end
-end)
+end)	
+     end,
+ })
+
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "3D Render Disabler",
+     CurrentValue = false,
+     Flag = "Toggle05",
+     Callback = function(Value)
+	
+         getgenv().3DRenderOFF = Value
+
+	     if getgenv().3DRenderOFF do
+            RunService:Set3dRenderingEnabled(false)
+	     end
 
      end,
  })
@@ -10206,7 +10211,7 @@ local FarmToggle = FarmTab:CreateToggle({
 
 FarmTab:CreateDivider()
 ----------- Minigames -------------
-FarmTab:CreateSection("Events & Minigames: Nothing")
+FarmTab:CreateSection("Events & Minigames: Halloween 2025 Activated")
 --------------------------------------
 --[[local FarmToggle = FarmTab:CreateToggle({
      Name = " Get daily Skulls from Temple Trek Minigame",
