@@ -10188,7 +10188,7 @@ local FarmToggle = FarmTab:CreateToggle({
 
 			task.wait(15)	
 				
-            while getgenv().RenderOFF then				
+            while getgenv().RenderOFF do		
 			    RunService:Set3dRenderingEnabled(false)
             end
 			
