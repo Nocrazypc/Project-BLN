@@ -11126,7 +11126,7 @@ getgenv().ENABLE_RELEASE_PETS = false
 getgenv().PETS_TO_AGE_IN_PEN = {}
 
 getgenv().POTATO_MODE = false
-getgenv().3DRenderOFF = false
+getgenv().3DRender_OFF = false
 
 getgenv().AutoMinigame = true
 getgenv().AutoMinigame2 = false
