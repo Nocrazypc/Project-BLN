@@ -10148,7 +10148,7 @@ local FarmToggle = FarmTab:CreateToggle({
  })
 -------------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
-     Name = "Low Render / Hide Parts",
+     Name = "Low Render / Hide Parts & Transitions Disabler",
      CurrentValue = true,
      Flag = "Toggle04",
      Callback = function(Value)
@@ -10166,11 +10166,18 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
         v.Transparency = 1 
     end 
 end)
-
+--
+pcall(function() 
+    require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
+    require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).sudden_fill = function() return end
+    if Player.PlayerGui:FindFirstChild("TransitionsApp") then
+        Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
+    end
+end)
      end,
  })
 -------- Transition disabler -------------
-local FarmToggle = FarmTab:CreateToggle({
+--[[local FarmToggle = FarmTab:CreateToggle({
      Name = "Transitions Disabler",
      CurrentValue = true,
      Flag = "Toggle05",
@@ -10185,7 +10192,7 @@ pcall(function()
 end)
 
      end,
- })
+ })--]]
 
 FarmTab:CreateDivider()
 --------- Hatch Eggs Only ------------
