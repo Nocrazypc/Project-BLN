@@ -10182,6 +10182,7 @@ local FarmToggle = FarmTab:CreateToggle({
      CurrentValue = false,
      Flag = "Toggle05",
      Callback = function(Value)
+     local RunService = game:GetService("RunService")
 			
     task.wait(3)
 	getgenv().3DRenderOFF = Value
