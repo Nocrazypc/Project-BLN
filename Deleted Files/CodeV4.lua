@@ -10108,7 +10108,7 @@ local FarmToggle = FarmTab:CreateToggle({
           Teleport.FarmingHome()
 		  --getgenv().auto_farm = Value
           localPlayer:SetAttribute('StopFarmingTemp', false)
-	      --RunService:Set3dRenderingEnabled(true) --
+	      RunService:Set3dRenderingEnabled(true) --
      end,
  })
 
@@ -10148,7 +10148,7 @@ local FarmToggle = FarmTab:CreateToggle({
  })
 -------------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
-     Name = "Low Render / Hide Parts & Transitions Disabler",
+     Name = "Low Render / Hide Parts",
      CurrentValue = true,
      Flag = "Toggle04",
      Callback = function(Value)
@@ -10166,34 +10166,26 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
         v.Transparency = 1 
     end 
 end)
------
+
+     end,
+ })
+-------- Transition disabler -------------
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Transitions Disabler",
+     CurrentValue = true,
+     Flag = "Toggle05",
+     Callback = function(Value)
+
 pcall(function() 
     require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
     require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).sudden_fill = function() return end
     if Player.PlayerGui:FindFirstChild("TransitionsApp") then
         Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
     end
-end)	
+end)
+
      end,
  })
-
---[[local FarmToggle = FarmTab:CreateToggle({
-     Name = "3D Render Disabler",
-     CurrentValue = false,
-     Flag = "Toggle05",
-     Callback = function(Value)
-	
-         getgenv().3DRender_OFF = Value
-
-	     if getgenv().3DRender_OFF then
-            RunService:Set3dRenderingEnabled(false)
-	     
-	     elseif not getgenv().3DRender_OFF then
-            RunService:Set3dRenderingEnabled(true)
-         end
-
-     end,
- })--]]
 
 FarmTab:CreateDivider()
 --------- Hatch Eggs Only ------------
@@ -10214,7 +10206,7 @@ local FarmToggle = FarmTab:CreateToggle({
 
 FarmTab:CreateDivider()
 ----------- Minigames -------------
-FarmTab:CreateSection("Events & Minigames: Halloween 2025 Activated")
+FarmTab:CreateSection("Events & Minigames: Nothing")
 --------------------------------------
 --[[local FarmToggle = FarmTab:CreateToggle({
      Name = " Get daily Skulls from Temple Trek Minigame",
@@ -11010,11 +11002,9 @@ FarmTab:CreateSection("Events & Minigames: Halloween 2025 Activated")
                         --print('\u{2764}\u{2764} Starting Hauntlet \u{2764}\u{2764}')
                         startHauntlet()
                         localPlayer:SetAttribute('StopFarmingTemp', false)
+					    task.wait(1)
+				        RunService:Set3dRenderingEnabled(true) -- 3D On
                     end
-					task.wait(1)
-	                if not getgenv().3DRender_OFF then
-				         RunService:Set3dRenderingEnabled(true) -- 3D On
-	                end				
                 end
             end)
         end
