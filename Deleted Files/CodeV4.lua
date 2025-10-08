@@ -10178,7 +10178,7 @@ end)
      end,
  })
 
-local FarmToggle = FarmTab:CreateToggle({
+--[[local FarmToggle = FarmTab:CreateToggle({
      Name = "3D Render Disabler",
      CurrentValue = false,
      Flag = "Toggle05",
@@ -10190,7 +10190,22 @@ local FarmToggle = FarmTab:CreateToggle({
 	        getgenv().RenderOFF = true
 			
      end,
+ })--]]
+
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Potato Mode",
+     CurrentValue = false,
+     Flag = "Toggle06",
+     Callback = function(Value)
+
+		    task.wait(15)	
+			getgenv().POTATO_MODE = true
+     end,
  })
+
+
+getgenv().POTATO_MODE = false
+
 
 FarmTab:CreateDivider()
 --------- Hatch Eggs Only ------------
