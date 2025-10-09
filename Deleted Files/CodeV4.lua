@@ -10182,7 +10182,6 @@ FarmTab:CreateButton({
 	Name = "3D Render ON",
 	Callback = function()
            RunService:Set3dRenderingEnabled(true)
-		   getgenv().RenderOFF = false
 	end,
 })
 
