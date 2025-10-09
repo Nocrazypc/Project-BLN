@@ -10176,23 +10176,6 @@ end)
      end,
  })
 
-FarmTab:CreateButton({
-	Name = "3D Render ON",
-	Callback = function()
-           RunService:Set3dRenderingEnabled(true)
-		   getgenv().RenderOFF = false
-	end,
-})
-
-FarmTab:CreateButton({
-	Name = "3D Render OFF",
-	Callback = function()
-	        task.wait(15)
-			RunService:Set3dRenderingEnabled(false)
-		    getgenv().RenderOFF = true
-	end,
-})
-
 FarmTab:CreateDivider()
 --------- Hatch Eggs Only ------------
 FarmTab:CreateSection("Eggs Only")
