@@ -10193,20 +10193,6 @@ FarmTab:CreateButton({
 	end,
 })
 
---[[local FarmToggle = FarmTab:CreateToggle({
-     Name = "3D Render Disabler",
-     CurrentValue = false,
-     Flag = "Toggle05",
-     Callback = function(Value)
-     local RunService = game:GetService("RunService")
-
-		    task.wait(15)	
-			RunService:Set3dRenderingEnabled(false)
-	        getgenv().RenderOFF = true
-			
-     end,
- })--]]
-
 FarmTab:CreateDivider()
 --------- Hatch Eggs Only ------------
 FarmTab:CreateSection("Eggs Only")
