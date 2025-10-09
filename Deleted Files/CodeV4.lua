@@ -10198,14 +10198,10 @@ local FarmToggle = FarmTab:CreateToggle({
      Flag = "Toggle06",
      Callback = function(Value)
 
-		    task.wait(15)	
+		    task.wait(5)	
 			getgenv().POTATO_MODE = true
      end,
  })
-
-
-getgenv().POTATO_MODE = false
-
 
 FarmTab:CreateDivider()
 --------- Hatch Eggs Only ------------
