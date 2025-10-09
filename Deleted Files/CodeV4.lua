@@ -3298,6 +3298,7 @@ do
         local PlaytimePayoutsApp = (PlayerGui:WaitForChild('PlaytimePayoutsApp'))
         local certificateConn
         local starterPackAppConn
+        local RunService = game:GetService("RunService")
         local getNormalDialogTextLabel = function()
             local Dialog = (DialogApp and {
                 (DialogApp:FindFirstChild('Dialog')),
@@ -3671,6 +3672,7 @@ do
                         task.wait(2)
 	                    localPlayer:SetAttribute('StopFarmingTemp', false)
                         Teleport.FarmingHome()
+	                    RunService:Set3dRenderingEnabled(true) -- 3D On
                     end
                 end
             end)
