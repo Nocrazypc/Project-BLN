@@ -10109,7 +10109,7 @@ local FarmToggle = FarmTab:CreateToggle({
 		  --getgenv().auto_farm = Value
           localPlayer:SetAttribute('StopFarmingTemp', false)
 	      RunService:Set3dRenderingEnabled(true) 
-	      --getgenv().RenderOFF = false
+	      getgenv().RenderOFF = false
      end,
  })
 
