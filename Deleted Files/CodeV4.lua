@@ -10996,7 +10996,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             HauntletInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function(
             )
                 if HauntletInGameApp.Enabled then
-				   -- RunService:Set3dRenderingEnabled(false) -- 3D Off
                     HauntletInGameApp:WaitForChild('Body')
                     HauntletInGameApp.Body:WaitForChild('Middle')
                     HauntletInGameApp.Body.Middle:WaitForChild('Container')
@@ -11008,9 +11007,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                         startHauntlet()
                         localPlayer:SetAttribute('StopFarmingTemp', false)
 					    task.wait(1)
-					    --[[ if getgenv().RenderOFF == false then
-				         RunService:Set3dRenderingEnabled(true) -- 3D On
-						end	--]]
                     end
                 end
             end)
