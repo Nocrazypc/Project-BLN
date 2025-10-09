@@ -10176,6 +10176,20 @@ end)
      end,
  })
 
+FarmTab:CreateButton({
+	Name = "3D Render ON",
+	Callback = function()
+           RunService:Set3dRenderingEnabled(true)
+	end,
+})
+
+FarmTab:CreateButton({
+	Name = "3D Render Disabler OFF",
+	Callback = function()
+			RunService:Set3dRenderingEnabled(false)
+	end,
+})
+
 --[[local FarmToggle = FarmTab:CreateToggle({
      Name = "3D Render Disabler",
      CurrentValue = false,
