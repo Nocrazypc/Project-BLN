@@ -10192,17 +10192,6 @@ end)
      end,
  })--]]
 
-local FarmToggle = FarmTab:CreateToggle({
-     Name = "Potato Mode",
-     CurrentValue = false,
-     Flag = "Toggle06",
-     Callback = function(Value)
-
-		    task.wait(5)	
-			getgenv().POTATO_MODE = true
-     end,
- })
-
 FarmTab:CreateDivider()
 --------- Hatch Eggs Only ------------
 FarmTab:CreateSection("Eggs Only")
