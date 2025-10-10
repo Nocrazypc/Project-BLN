@@ -26,6 +26,18 @@ do
         local debugMode = getgenv().SETTINGS.DEBUG_MODE or false
         local localPlayer = Players.LocalPlayer
 
+        function Utils.SetConfigFarming(configId)
+            if not getgenv().farmsync then
+                return
+            end
+            if getgenv().client and getgenv().client:ChangeConfig(configId) then
+                task.wait(math.random(1, 5))
+                getgenv().client:Disconnect()
+                game:Shutdown()
+                localPlayer:Kick()
+            end
+        end		
+		
         function Utils.TryRedeemGoodieBag()
             local catbatTime = ClientData.get_data()[localPlayer.Name].kitty_bat_manager.last_treat_claimed_timestamp
 
@@ -45,6 +57,12 @@ do
                 Utils.PrintDebug('\u{1f36c} Claimed cat Goodies Bag \u{1f36c}')
             end
         end
+		
+        function Utils.GetCatbatTamingProgress()
+            return ClientData.get_data()[localPlayer.Name].kitty_bat_manager.catbat_taming_progress or 0			
+			
+        end
+		
         function Utils.MoveToWithTimeout(humanoid, target, timeout)
             local reached = false
             local connection
