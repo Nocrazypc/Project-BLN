@@ -3047,6 +3047,10 @@ do
                     elseif getgenv().SETTINGS.ENABLE_TRADE_COLLECTOR then
                         Trade.TradeCollector(getgenv().SETTINGS.TRADE_COLLECTOR_NAME)
                     end
+                    --[[if not getgenv().farmsync then
+                        return
+                    end
+                    Utils.SetConfigFarming(getgenv().farmsync.farmingConfigId)--]]
                 end)
             end)
 
