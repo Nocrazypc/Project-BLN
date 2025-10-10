@@ -3650,7 +3650,7 @@ do
                     )
                         if NormalDialogChild.Info.TextLabel.Text:match('The Hauntlet is starting') then
                             onTextChangedMiniGame()
-                        elseif NormalDialogChild.Info.TextLabel.Text:match('Cannon Circle is starting') then
+                        elseif NormalDialogChild.Info.TextLabel.Text:match('The Costume Party') then
                             onTextChangedMiniGame()
                         -- elseif NormalDialogChild.Info.TextLabel.Text:match('invitation') then
                           --  localPlayer:Kick()
