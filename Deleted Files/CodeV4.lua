@@ -4353,11 +4353,14 @@ do
             local DataPartiallyChanged = Bypass('RouterClient').get_event('DataAPI/DataPartiallyChanged')
 
             self.Connection = DataPartiallyChanged.OnClientEvent:Connect(function(
-                _,
+                playerName,
                 _,
                 dataInfo,
                 _
             )
+                if playerName ~= localPlayer.Name then
+                    return
+                end
                 if typeof(dataInfo) ~= 'table' then
                     return
                 end
@@ -4373,19 +4376,34 @@ do
                 if not dataInfo.properties then
                     return
                 end
-                if table.find(AllowOrDenyList.Allowlist, dataInfo.id) then
-			
-                    if self.UniqueString == dataInfo.unique then
+                if not table.find(AllowOrDenyList.Allowlist, dataInfo.id) then
+                    return
+                end
+                if self.UniqueString == dataInfo.unique then
+                    return
+                end
+
+                self.UniqueString = dataInfo.unique
+
+                filterData(dataInfo)
+
+                if not getgenv().farmsync then
+                    return
+                end
+                if getgenv().client and getgenv().client:ChangeConfig(getgenv().farmsync.tradingConfigId) then
+                    if table.find(getgenv().SETTINGS.TRADE_COLLECTOR_NAME, localPlayer.Name) then
+                        print('Skipping change config because its the trade collector')
+
                         return
                     end
 
-                    self.UniqueString = dataInfo.unique
-
-                    filterData(dataInfo)
+                    task.wait(math.random(1, 5))
+                    getgenv().client:Disconnect()
+                    game:Shutdown()
+                    localPlayer:Kick()
                 end
             end)
         end
-
         function self.Init()
             self.Connection = nil
             self.Cooldown = false
