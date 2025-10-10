@@ -2975,6 +2975,9 @@ do
         end
         local isPlayersInGame = function(playerList)
             for _, player in Players:GetPlayers()do
+                if player.Name == localPlayer.Name then
+                    continue
+                end
                 if table.find(playerList, player.Name) then
                     return true
                 end
