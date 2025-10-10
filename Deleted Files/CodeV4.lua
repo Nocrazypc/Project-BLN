@@ -10920,6 +10920,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             end
         end
         function HalloweenHandler2025.Init()
+            --print('HalloweenHandler2025 Initialized')
             HauntletInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function(
             )
                 if HauntletInGameApp.Enabled then
@@ -10931,7 +10932,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     if localPlayer:GetAttribute('hasStartedFarming') == true then
                         localPlayer:SetAttribute('StopFarmingTemp', true)
                         task.wait(2)
-                        --print('\u{2764}\u{2764} Starting Hauntlet \u{2764}\u{2764}')
                         startHauntlet()
                         localPlayer:SetAttribute('StopFarmingTemp', false)
 					    task.wait(3)
@@ -10941,7 +10941,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             end)
         end
         function HalloweenHandler2025.Start()
-            --print('HalloweenHandler2025 Started')
             task.spawn(function()
                 while true do
                     local dt = (DateTime.now():ToUniversalTime())
