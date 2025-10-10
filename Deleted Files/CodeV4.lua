@@ -3621,7 +3621,7 @@ do
                 )
                     if DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('The Hauntlet is starting') then
                         onTextChangedMiniGame()
-                    elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('The Costume Party') then
+                    elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Costume Party') then
                         onTextChangedMiniGame()
                     --elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
                     --    localPlayer:Kick()
