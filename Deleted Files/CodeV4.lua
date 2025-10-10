@@ -3175,6 +3175,11 @@ do
             elseif getgenv().SETTINGS.ENABLE_TRADE_COLLECTOR and isPlayersInGame(getgenv().SETTINGS.TRADE_COLLECTOR_NAME) then
                 Utils.PrintDebug('Trading MULE collector')
                 Trade.TradeCollector(getgenv().SETTINGS.TRADE_COLLECTOR_NAME)
+	
+                --[[if not getgenv().farmsync then
+                    return
+                end
+                Utils.SetConfigFarming(getgenv().farmsync.farmingConfigId)--]]
             end
 
             localPlayer:SetAttribute('StopFarmingTemp', false)
