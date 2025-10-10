@@ -5814,7 +5814,7 @@ do
                 if key == 'beach_party' then
                     Teleport.PlaceFloorAtBeachParty()
                     Ailment.BeachPartyAilment(petUnique)
-                    task.wait(5)
+                    task.wait(2)
                     Teleport.FarmingHome()
 
                     return true
@@ -5827,13 +5827,13 @@ do
                     return true
                elseif key == 'buccaneer_band' then
                     Ailment.BuccaneerBandAilment(petUnique)
-                    task.wait(5)
+                    task.wait(2)
                     Teleport.FarmingHome()
 
                     return true
                 elseif key == 'summerfest_bonfire' then
                     Ailment.BonfireAilment(petUnique)
-                    task.wait(5)
+                    task.wait(2)
                     Teleport.FarmingHome()
 
                     return true
