@@ -3510,9 +3510,10 @@ do
             local button = (PlaytimePayoutsApp.Frame.Container.CashOutContainer.CashOutButton:WaitForChild('DepthButton'))
 
             Utils.FireButton(button)
+            task.wait(1)
+            Utils.PrintDebug('\u{1f911} Cashed out playtime rewards')
 
-            task.wait(5)
-
+            task.wait(4)
             if PlaytimePayoutsApp.Enabled then
             Players.LocalPlayer.PlayerGui.PlaytimePayoutsApp.Enabled = false 
             end--]]
