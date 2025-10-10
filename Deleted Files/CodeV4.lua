@@ -10921,6 +10921,9 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         end
         function HalloweenHandler2025.Init()
             --print('HalloweenHandler2025 Initialized')
+            RouterClient.get('SettingsAPI/SetBooleanFlag'):FireServer('arachnophobia_mode_seen', true)
+            RouterClient.get('SettingsAPI/SetSetting'):FireServer('arachnophobia_mode', false)
+
             HauntletInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function(
             )
                 if HauntletInGameApp.Enabled then
