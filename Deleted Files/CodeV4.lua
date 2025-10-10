@@ -26,7 +26,7 @@ do
         local debugMode = getgenv().SETTINGS.DEBUG_MODE or false
         local localPlayer = Players.LocalPlayer
 
-        function Utils.SetConfigFarming(configId)
+        --[[function Utils.SetConfigFarming(configId)
             if not getgenv().farmsync then
                 return
             end
@@ -36,7 +36,7 @@ do
                 game:Shutdown()
                 localPlayer:Kick()
             end
-        end		
+        end	--]]	
 		
         function Utils.TryRedeemGoodieBag()
             local catbatTime = ClientData.get_data()[localPlayer.Name].kitty_bat_manager.last_treat_claimed_timestamp
