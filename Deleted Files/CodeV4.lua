@@ -10730,187 +10730,71 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
 
             TradeTab:CreateSection('Send Custom Pet, sends ALL ages of selected pet')
 
-            local petsDropdown = TradeTab:CreateDropdown({
-                Name = 'Select a Pet',
-                Options = {
-                    '',
-                },
-                CurrentOption = {
-                    '',
-                },
-                MultipleOptions = false,
-                Flag = 'Dropdown1',
-                Callback = function(Option)
-                    selectedPet = Option[1] or ''
-                end,
-            })
+            local inventoryTabs = {
+                'pets',
+                'food',
+                'strollers',
+                'pet_accessories',
+                'gifts',
+                'transport',
+                'toys',
+                'stickers',
+            }
+            local dropdowns = {}
+            local selectedItems = {}
+            local toggles = {}
 
-            TradeTab:CreateButton({
-                Name = 'Refresh Pet list',
-                Callback = function()
-                    petsDropdown:Refresh(GetInventory.TabId('pets'))
-                end,
-            })
+            for _, tabName in ipairs(inventoryTabs)do
+                dropdowns[tabName] = TradeTab:CreateDropdown({
+                    Name = string.format('Select a %s', tostring(tabName)),
+                    Options = {
+                        '',
+                    },
+                    CurrentOption = {
+                        '',
+                    },
+                    MultipleOptions = false,
+                    Flag = 'Dropdown1',
+                    Callback = function(Option)
+                        selectedItems[tabName] = Option[1] or ''
+                    end,
+                })
 
-            PetToggle = TradeTab:CreateToggle({
-                Name = 'Auto Trade Selected Pet',
-                CurrentValue = false,
-                Flag = 'Toggle1',
-                Callback = function(Value)
-                    getgenv().auto_trade_custom = Value
+                TradeTab:CreateButton({
+                    Name = string.format('Refresh %s list', tostring(tabName)),
+                    Callback = function()
+                        dropdowns[tabName]:Refresh(GetInventory.TabId(tabName))
+                    end,
+                })
 
-                    while getgenv().auto_trade_custom do
-                        Trade.SendTradeRequest({selectedPlayer})
-                        Trade.SelectTabAndTrade('pets', selectedPet)
+                toggles[tabName] = TradeTab:CreateToggle({
+                    Name = string.format('Auto Trade Selected %s', tostring(tabName)),
+                    CurrentValue = false,
+                    Flag = 'Toggle1',
+                    Callback = function(Value)
+                        getgenv().auto_trade_custom = Value
 
-                        local hasPets = Trade.AcceptNegotiationAndConfirm()
+                        while getgenv().auto_trade_custom do
+                            Trade.SendTradeRequest({selectedPlayer})
+                            Trade.SelectTabAndTrade(tabName, selectedItems[tabName])
 
-                        if not hasPets then
-                            PetToggle:Set(false)
+                            local hasPets = Trade.AcceptNegotiationAndConfirm()
+
+                            if not hasPets then
+                                toggles[tabName]:Set(false)
+                                Rayfield:Notify({
+                                    Title = tostring(tabName:upper()),
+                                    Content = 'Finished trading',
+                                })
+                            end
+
+                            task.wait()
                         end
+                    end,
+                })
 
-                        task.wait()
-                    end
-                end,
-            })
-
-            TradeTab:CreateSection(' ')
-
-            local giftsDropdown = TradeTab:CreateDropdown({
-                Name = 'Select gift',
-                Options = {
-                    '',
-                },
-                CurrentOption = {
-                    '',
-                },
-                MultipleOptions = false,
-                Flag = 'Dropdown1',
-                Callback = function(Option)
-                    selectedGift = Option[1] or 'Nothing'
-                end,
-            })
-
-            TradeTab:CreateButton({
-                Name = 'Refresh Gift list',
-                Callback = function()
-                    giftsDropdown:Refresh(GetInventory.TabId('gifts'))
-                end,
-            })
-
-            GiftToggle = TradeTab:CreateToggle({
-                Name = 'Auto Trade Custom Gift',
-                CurrentValue = false,
-                Flag = 'Toggle1',
-                Callback = function(Value)
-                    getgenv().auto_trade_custom = Value
-
-                    while getgenv().auto_trade_custom do
-                        Trade.SendTradeRequest({selectedPlayer})
-                        Trade.SelectTabAndTrade('gifts', selectedGift)
-
-                        local hasPets = Trade.AcceptNegotiationAndConfirm()
-
-                        if not hasPets then
-                            GiftToggle:Set(false)
-                        end
-
-                        task.wait()
-                    end
-                end,
-            })
-
-            TradeTab:CreateSection(' ')
-
-            local toysDropdown = TradeTab:CreateDropdown({
-                Name = 'Select toys',
-                Options = {
-                    '',
-                },
-                CurrentOption = {
-                    '',
-                },
-                MultipleOptions = false,
-                Flag = 'Dropdown1',
-                Callback = function(Option)
-                    selectedToy = Option[1] or 'Nothing'
-                end,
-            })
-
-            TradeTab:CreateButton({
-                Name = 'Refresh Toy list',
-                Callback = function()
-                    toysDropdown:Refresh(GetInventory.TabId('toys'))
-                end,
-            })
-
-            ToyToggle = TradeTab:CreateToggle({
-                Name = 'Auto Trade Custom Toy',
-                CurrentValue = false,
-                Flag = 'Toggle1',
-                Callback = function(Value)
-                    getgenv().auto_trade_custom = Value
-
-                    while getgenv().auto_trade_custom do
-                        Trade.SendTradeRequest({selectedPlayer})
-                        Trade.SelectTabAndTrade('toys', selectedToy)
-
-                        local hasPets = Trade.AcceptNegotiationAndConfirm()
-
-                        if not hasPets then
-                            ToyToggle:Set(false)
-                        end
-
-                        task.wait()
-                    end
-                end,
-            })
-
-            TradeTab:CreateSection(' ')
-
-            local foodDropdown = TradeTab:CreateDropdown({
-                Name = 'Select food',
-                Options = {
-                    '',
-                },
-                CurrentOption = {
-                    '',
-                },
-                MultipleOptions = false,
-                Flag = 'Dropdown1',
-                Callback = function(Option)
-                    selectedFood = Option[1] or 'Nothing'
-                end,
-            })
-
-            TradeTab:CreateButton({
-                Name = 'Refresh Food list',
-                Callback = function()
-                    foodDropdown:Refresh(GetInventory.TabId('food'))
-                end,
-            })
-
-            FoodToggle = TradeTab:CreateToggle({
-                Name = 'Auto Trade Custom Food',
-                CurrentValue = false,
-                Flag = 'Toggle1',
-                Callback = function(Value)
-                    getgenv().auto_trade_custom = Value
-
-                    while getgenv().auto_trade_custom do
-                        Trade.SendTradeRequest({selectedPlayer})
-                        Trade.SelectTabAndTrade('food', selectedFood)
-
-                        local hasPets = Trade.AcceptNegotiationAndConfirm()
-
-                        if not hasPets then
-                            FoodToggle:Set(false)
-                        end
-
-                        task.wait()
-                    end
-                end,
-            })
+                TradeTab:CreateSection(' ')
+            end
 
             local ageUpPotionTab = Window:CreateTab('Age Up Potion', 4483362458)
             local petToAge = ageUpPotionTab:CreateDropdown({
