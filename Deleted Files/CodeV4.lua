@@ -588,6 +588,7 @@ do
                 'ice_dimension_2025_frostbite_bear',
                 'pet_recycler_2025_emberlight',
                 'pet_recycler_2025_giant_panda',
+				'halloween_2025_bat_cat',
             },
         }
     end
