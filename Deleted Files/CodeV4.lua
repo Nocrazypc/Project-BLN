@@ -10065,13 +10065,8 @@ Check the Developer Console for more information.]],
         local RunService = game:GetService("RunService")
         local cooldown = false
         local selectedPlayer
-        local selectedPet
         local selectedAgeablePet
         local selectedAgeableNumber
-        local selectedGift
-        local selectedToy
-        local selectedFood
-        local PetToggle
         local TradeAllInventory
         local AllPetsToggle
         local LegendaryToggle
@@ -10082,9 +10077,6 @@ Check the Developer Console for more information.]],
         local TradeAllNeons
         local LowTierToggle
         local RarityToggle
-        local GiftToggle
-        local ToyToggle
-        local FoodToggle
         local petRaritys = {
             'common',
             'uncommon',
