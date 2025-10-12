@@ -3321,16 +3321,13 @@ do
         return self
     end
         function __DARKLUA_BUNDLE_MODULES.m()
-        local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
-        local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
         local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
         local Trade = __DARKLUA_BUNDLE_MODULES.load('e')
         local Teleport = __DARKLUA_BUNDLE_MODULES.load('f')
         local self = {}
         local localPlayer = Players.LocalPlayer
         local PlayerGui = localPlayer:WaitForChild('PlayerGui')
-        local StaticMap = (workspace:WaitForChild('StaticMap'))
         local DialogApp = (PlayerGui:WaitForChild('DialogApp'))
         local MinigameRewardsApp = (PlayerGui:WaitForChild('MinigameRewardsApp'))
         local MinigameInGameApp = (PlayerGui:WaitForChild('MinigameInGameApp'))
