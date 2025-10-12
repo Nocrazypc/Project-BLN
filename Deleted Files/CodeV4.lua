@@ -6000,7 +6000,7 @@ do
         end
         function PetOffline.GetAmountOfPetsInPen()
             local count = 0
-            for _, _ in ClientData.get_data()[localPlayer.Name].idle_progression_manager.active_pets do
+            for _, v in ClientData.get_data()[localPlayer.Name].idle_progression_manager.active_pets do
                 count = count + 1
             end
             return count
