@@ -3718,22 +3718,6 @@ do
                     end
                 end
             end)
-            StaticMap.hauntlet_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function(
-            )
-                if StaticMap.hauntlet_minigame_state.is_game_active.Value then
-                    if getgenv().auto_farm == false then
-                        return
-                    end
-                    if localPlayer:GetAttribute('hasStartedFarming') == false then
-                        return
-                    end
-                    if localPlayer:GetAttribute('StopFarmingTemp') == true then
-                        return
-                    end
-                    localPlayer:SetAttribute('StopFarmingTemp', true)
-                    Bypass('RouterClient').get('MinigameAPI/AttemptJoin'):FireServer('hauntlet', true)
-                end
-            end)
             PlaytimePayoutsApp:GetPropertyChangedSignal('Enabled'):Connect(function(
             )
             tryClickPlaytimePayout()
