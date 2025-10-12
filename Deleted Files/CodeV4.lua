@@ -3418,7 +3418,7 @@ do
                 Utils.FindButton('Go to Pet Pen')
             elseif TextLabel.Text:match('The Homepass has been restarted') then
                 Utils.FindButton('Okay')
-            elseif TextLabel.Text:match('Cannon Circle is starting') then
+            elseif TextLabel.Text:match('Costume Party starts') then
                 Utils.FindButton('Okay')
             elseif TextLabel.Text:match('Step away from') then
                 Utils.FindButton('Okay')
