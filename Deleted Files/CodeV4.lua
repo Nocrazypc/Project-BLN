@@ -4381,10 +4381,13 @@ do
 
                 filterData(dataInfo)
 
-                if not getgenv().farmsync then
+                if not getgenv().FARMSYNC then
                     return
                 end
-                if getgenv().client and getgenv().client:ChangeConfig(getgenv().farmsync.tradingConfigId) then
+                if not getgenv().FARMSYNC.ENABLED then
+                    return
+                end		
+                if getgenv().client and getgenv().client:ChangeConfig(getgenv().FARMSYNC.TRADING_CONFIG_ID) then
                     if table.find(getgenv().SETTINGS.TRADE_COLLECTOR_NAME, localPlayer.Name) then
                         print('Skipping change config because its the trade collector')
 
