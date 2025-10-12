@@ -10925,24 +10925,17 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 isFedYarnApple = false
             end)
         end
-        local getMinigameId = function()
-            return (HauntletMinigameClient.instanced_minigame and {
-                (HauntletMinigameClient.instanced_minigame.minigame_id),
-            } or {nil})[1]
-        end
         local pickDoor = function(hauntletId, stageLevel)
             RouterClient.get('MinigameAPI/MessageServer'):FireServer(hauntletId, 'player_selected_door', stageLevel, math.random(1, 3))
-            --print(string.format('Picked door for stage %s', tostring(stageLevel)))
         end
         local startHauntlet = function()
-            local minigameId = getMinigameId()
+            local minigameId = getMinigameId(HauntletMinigameClient)
             if not minigameId then
                 --print('No minigame ID found, cannot start Hauntlet')
                 return
             end
             while true do
                 if not HauntletMinigameClient.instanced_minigame then
-                    --print('No instanced minigame found, exiting loop')
                     return
                 end
                 pickDoor(minigameId, HauntletMinigameClient.instanced_minigame.round)
@@ -10957,7 +10950,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             HauntletInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function(
             )
                 if HauntletInGameApp.Enabled then
-			        RunService:Set3dRenderingEnabled(false) -- 3D Off
+				    RunService:Set3dRenderingEnabled(false) -- 3D Off
                     HauntletInGameApp:WaitForChild('Body')
                     HauntletInGameApp.Body:WaitForChild('Middle')
                     HauntletInGameApp.Body.Middle:WaitForChild('Container')
@@ -10968,12 +10961,60 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                         startHauntlet()
                         localPlayer:SetAttribute('StopFarmingTemp', false)
 					    task.wait(3)
-                        RunService:Set3dRenderingEnabled(true) -- 3D On
+                    RunService:Set3dRenderingEnabled(true) -- 3D On
                     end
+                end
+            end)
+            FashionFrenzyInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function(
+            )
+                if FashionFrenzyInGameApp.Enabled then
+                    FashionFrenzyInGameApp:WaitForChild('Body')
+                    FashionFrenzyInGameApp.Body:WaitForChild('Middle')
+                    FashionFrenzyInGameApp.Body.Middle:WaitForChild('Container')
+                    FashionFrenzyInGameApp.Body.Middle.Container:WaitForChild('TitleLabel')
+                    if localPlayer:GetAttribute('hasStartedFarming') == true then
+                        localPlayer:SetAttribute('StopFarmingTemp', true)
+                        task.wait(2)
+                        startFashionFrenzy()
+                        localPlayer:SetAttribute('StopFarmingTemp', false)
+                    end
+                end
+            end)
+            StaticMap.hauntlet_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function(
+            )
+                if StaticMap.hauntlet_minigame_state.is_game_active.Value then
+                    if getgenv().SETTINGS.ENABLE_AUTO_FARM == false then
+                        return
+                    end
+                    if localPlayer:GetAttribute('hasStartedFarming') == false then
+                        return
+                    end
+                    if localPlayer:GetAttribute('StopFarmingTemp') == true then
+                        return
+                    end
+                    localPlayer:SetAttribute('StopFarmingTemp', true)
+                    Bypass('RouterClient').get('MinigameAPI/AttemptJoin'):FireServer('hauntlet', true)
+                end
+            end)
+            StaticMap.costume_party_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function(
+            )
+                if StaticMap.costume_party_minigame_state.is_game_active.Value then
+                    if getgenv().SETTINGS.ENABLE_AUTO_FARM == false then
+                        return
+                    end
+                    if localPlayer:GetAttribute('hasStartedFarming') == false then
+                        return
+                    end
+                    if localPlayer:GetAttribute('StopFarmingTemp') == true then
+                        return
+                    end
+                    localPlayer:SetAttribute('StopFarmingTemp', true)
+                    Bypass('RouterClient').get('MinigameAPI/AttemptJoin'):FireServer('costume_party', true)
                 end
             end)
         end
         function HalloweenHandler2025.Start()
+	    -- print('HalloweenHandler2025 Started')
             task.spawn(function()
                 while true do
                     local dt = (DateTime.now():ToUniversalTime())
