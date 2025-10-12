@@ -10860,13 +10860,54 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         local RouterClient = Bypass('RouterClient')
         local GetInventory = __DARKLUA_BUNDLE_MODULES.load('i')
         local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
+        local contentPacks = (ReplicatedStorage:WaitForChild('SharedModules'):WaitForChild('ContentPacks'))
         local HauntletMinigameClient = (require(ReplicatedStorage.SharedModules.ContentPacks.Halloween2025.Minigames.HauntletMinigameClient))
+        local FashionFrenzyMinigameClient = (require(contentPacks.Halloween2025.Minigames.FashionFrenzyMinigameClient))
         local Players = cloneref(game:GetService('Players'))
         local localPlayer = Players.LocalPlayer
         local PlayerGui = (localPlayer:WaitForChild('PlayerGui'))
+        local StaticMap = (workspace:WaitForChild('StaticMap'))
         local RunService = game:GetService("RunService")
         local HauntletInGameApp = (PlayerGui:WaitForChild('HauntletInGameApp'))
+        local FashionFrenzyInGameApp = (PlayerGui:WaitForChild('FashionFrenzyInGameApp'))
         local isFedYarnApple = false
+        local getMinigameId = function(module)
+            return (module.instanced_minigame and {
+                (module.instanced_minigame.minigame_id),
+            } or {nil})[1]
+        end
+        local placePet = function(minigame_id)
+            RouterClient.get('MinigameAPI/MessageServer'):FireServer(minigame_id, 'try_select_pet_for_player', getgenv().petCurrentlyFarming1)
+        end
+        local getPetAccessories = function(module)
+            return module.instanced_minigame.accessory_kinds
+        end
+        local addItemToPet = function(minigameId)
+            local accessories = getPetAccessories(FashionFrenzyMinigameClient)
+            if not accessories then
+                print('No accessories found for pet')
+                return
+            end
+            local itemAccessory = accessories[math.random(1, #accessories)]
+            RouterClient.get('MinigameAPI/MessageServer'):FireServer(minigameId, 'try_pick_up_accessory', itemAccessory)
+            task.wait(1)
+            RouterClient.get('MinigameAPI/MessageServer'):FireServer(minigameId, 'try_equip_accessory', itemAccessory)
+        end
+        local startFashionFrenzy = function()
+            local minigameId = getMinigameId(FashionFrenzyMinigameClient)
+            if not minigameId then
+                print('No minigame ID found, cannot start FashionFrenzy')
+                return
+            end
+            while true do
+                if not FashionFrenzyMinigameClient.instanced_minigame then
+                    return
+                end
+                placePet(minigameId)
+                addItemToPet(minigameId)
+                task.wait(10)
+            end
+        end
         local feedYarnApple = function()
             if isFedYarnApple then
                 return
