@@ -5252,7 +5252,7 @@ do
         local Teleport = __DARKLUA_BUNDLE_MODULES.load('f')
         local FarmingPet = {}
         local localPlayer = Players.LocalPlayer
-        --local petToBuy = 'aztec_egg_2025_aztec_egg'
+        local petToBuy = 'aztec_egg_2025_aztec_egg'
         local potionFarmPets = {
             'dog',
             'cat',
@@ -5314,7 +5314,7 @@ do
         end
         local getEgg = function()
             for _, v in ClientData.get_data()[localPlayer.Name].inventory.pets do
-                if v.id == getgenv().SETTINGS.PET_TO_BUY and v.id ~= 'practice_dog' and v.properties.age ~= 6 and not v.properties.mega_neon then
+                if v.id == petToBuy and v.id ~= 'practice_dog' and v.properties.age ~= 6 and not v.properties.mega_neon then
                     RouterClient.get('ToolAPI/Equip'):InvokeServer(v.unique, {
                         ['use_sound_delay'] = true,
                     })
@@ -5325,7 +5325,7 @@ do
                 end
             end
 
-            local BuyEgg = RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', getgenv().SETTINGS.PET_TO_BUY, {})
+            local BuyEgg = RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', petToBuy, {})
 
             if BuyEgg == 'too little money' then
                 return false
