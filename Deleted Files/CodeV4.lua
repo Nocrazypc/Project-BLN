@@ -10968,6 +10968,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             FashionFrenzyInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function(
             )
                 if FashionFrenzyInGameApp.Enabled then
+				    RunService:Set3dRenderingEnabled(false) -- 3D Off
                     FashionFrenzyInGameApp:WaitForChild('Body')
                     FashionFrenzyInGameApp.Body:WaitForChild('Middle')
                     FashionFrenzyInGameApp.Body.Middle:WaitForChild('Container')
@@ -10977,6 +10978,8 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                         task.wait(2)
                         startFashionFrenzy()
                         localPlayer:SetAttribute('StopFarmingTemp', false)
+				        task.wait(3)
+				        RunService:Set3dRenderingEnabled(true) -- 3D On
                     end
                 end
             end)
