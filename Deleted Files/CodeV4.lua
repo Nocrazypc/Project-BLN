@@ -10961,7 +10961,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                         startHauntlet()
                         localPlayer:SetAttribute('StopFarmingTemp', false)
 					    task.wait(3)
-                    RunService:Set3dRenderingEnabled(true) -- 3D On
+                        RunService:Set3dRenderingEnabled(true) -- 3D On
                     end
                 end
             end)
