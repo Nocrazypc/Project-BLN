@@ -3756,6 +3756,9 @@ do
                 Trade.AutoAcceptTrade()
             end)
         end
+        function self.Start()
+            tryClickPlaytimePayout()
+        end
 
         return self
     end
