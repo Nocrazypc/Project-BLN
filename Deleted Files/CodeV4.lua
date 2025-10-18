@@ -9280,14 +9280,621 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
 
         function self.Init() end
         function self.Start()
-            task.defer(function()
                 setupRayfield()
                 Rayfield:SetVisibility(false)  --- RayField UI Visibility ----
-            end)
         end
 
         return self
     end
+    function __DARKLUA_BUNDLE_MODULES.w()
+        local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
+        local Workspace = cloneref(game:GetService('Workspace'))
+        local Players = cloneref(game:GetService('Players'))
+        local Ailment = {}
+        local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
+        local ClientData = (Bypass('ClientData'))
+        local RouterClient = (Bypass('RouterClient'))
+        local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
+        local GetInventory = __DARKLUA_BUNDLE_MODULES.load('i')
+        local Teleport = __DARKLUA_BUNDLE_MODULES.load('f')
+        local localPlayer = Players.LocalPlayer
+        local doctorId = nil
+        Ailment.whichPet = 1
+        local consumeFood = function()
+            local foodItem = Workspace.PetObjects:WaitForChild(tostring(Workspace.PetObjects:FindFirstChildWhichIsA('Model')), 10)
+            if not foodItem then
+                Utils.PrintDebug('NO food item in workspace')
+                return
+            end
+            if not Utils.IsPetEquipped(Ailment.whichPet) then
+                return
+            end
+            ReplicatedStorage.API['PetAPI/ConsumeFoodObject']:FireServer(foodItem, ClientData.get('pet_char_wrappers')[Ailment.whichPet].pet_unique)
+        end
+        local function FoodAilments(FoodPassOn)
+            local hasFood = false
+            for _, v in ClientData.get_data()[localPlayer.Name].inventory.food do
+                if v.id == FoodPassOn then
+                    hasFood = true
+                    if not Utils.IsPetEquipped(Ailment.whichPet) then
+                        Utils.PrintDebug('\u{26a0}\u{fe0f} Trying to feed pet but no pet equipped \u{26a0}\u{fe0f}')
+                        return
+                    end
+                    ReplicatedStorage.API['PetObjectAPI/CreatePetObject']:InvokeServer('__Enum_PetObjectCreatorType_2', {
+                        ['pet_unique'] = ClientData.get('pet_char_wrappers')[Ailment.whichPet].pet_unique,
+                        ['unique_id'] = v.unique,
+                    })
+                    consumeFood()
+                    return
+                end
+            end
+            if not hasFood then
+                ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', FoodPassOn, {})
+                task.wait(2)
+                FoodAilments(FoodPassOn)
+            end
+        end
+        local getKeyFrom = function(itemId)
+            for key, value in ClientData.get_data()[localPlayer.Name].house_interior.furniture do
+                if value.id == itemId then
+                    return key
+                end
+            end
+            return nil
+        end
+        local useToolOnBaby = function(uniqueId)
+            ReplicatedStorage.API['ToolAPI/ServerUseTool']:FireServer(uniqueId, 'END')
+        end
+        local PianoAilment = function(pianoId, petCharOrPlayerChar)
+            local args = {
+                localPlayer,
+                pianoId,
+                'Seat1',
+                {
+                    ['cframe'] = localPlayer.Character.HumanoidRootPart.CFrame,
+                },
+                petCharOrPlayerChar,
+            }
+            task.spawn(function()
+                ReplicatedStorage.API:FindFirstChild('HousingAPI/ActivateFurniture'):InvokeServer(unpack(args))
+            end)
+        end
+        local furnitureAilments = function(nameId, petCharOrPlayerChar)
+            task.spawn(function()
+                ReplicatedStorage.API['HousingAPI/ActivateFurniture']:InvokeServer(localPlayer, nameId, 'UseBlock', {
+                    ['cframe'] = localPlayer.Character.HumanoidRootPart.CFrame,
+                }, petCharOrPlayerChar)
+            end)
+        end
+        local isDoctorLoaded = function()
+            local stuckCount = 0
+            local isStuck = false
+            local doctor = Workspace.HouseInteriors.furniture:FindFirstChild('Doctor', true)
+            if not doctor then
+                repeat
+                    task.wait(5)
+                    doctor = Workspace.HouseInteriors.furniture:FindFirstChild('Doctor', true)
+                    stuckCount = stuckCount + 5
+                    isStuck = stuckCount > 30 and true or false
+                until doctor or isStuck
+            end
+            if isStuck then
+                Utils.PrintDebug("\u{26a0}\u{fe0f} Wasn't able to find Doctor Id \u{26a0}\u{fe0f}")
+                return false
+            end
+            return true
+        end
+        local getDoctorId = function()
+            if doctorId then
+                Utils.PrintDebug(string.format('Doctor Id: %s', tostring(doctorId)))
+                return
+            end
+            Utils.PrintDebug('\u{1fa79} Getting Doctor ID \u{1fa79}')
+            local stuckCount = 0
+            local isStuck = false
+            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('Hospital')
+            task.wait(5)
+            local doctor = Workspace.HouseInteriors.furniture:FindFirstChild('Doctor', true)
+            if not doctor then
+                repeat
+                    task.wait(5)
+                    doctor = Workspace.HouseInteriors.furniture:FindFirstChild('Doctor', true)
+                    stuckCount = stuckCount + 5
+                    isStuck = stuckCount > 30 and true or false
+                until doctor or isStuck
+            end
+            if isStuck then
+                Utils.PrintDebug("\u{26a0}\u{fe0f} Wasn't able to find Doctor Id \u{26a0}\u{fe0f}")
+                return
+            end
+            if doctor then
+                doctorId = doctor:GetAttribute('furniture_unique')
+                if doctorId then
+                    Utils.PrintDebug(string.format('Found doctor Id: %s', tostring(doctorId)))
+                end
+            end
+        end
+        local useStroller = function()
+            local strollerTool = localPlayer.Character:FindFirstChild('StrollerTool')
+            if not strollerTool then
+                return false
+            end
+            local args = {
+                localPlayer,
+                ClientData.get('pet_char_wrappers')[Ailment.whichPet].char,
+                localPlayer.Character.StrollerTool.ModelHandle.TouchToSits.TouchToSit,
+            }
+            ReplicatedStorage.API:FindFirstChild('AdoptAPI/UseStroller'):InvokeServer(unpack(args))
+            return true
+        end
+        local babyJump = function()
+            if localPlayer.Character.Humanoid:GetState() == Enum.HumanoidStateType.Freefall then
+                return
+            end
+            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+        end
+        local getUpFromSitting = function()
+            ReplicatedStorage.API['AdoptAPI/ExitSeatStates']:FireServer()
+            task.wait()
+            ReplicatedStorage.API['AdoptAPI/ExitSeatStates']:FireServer()
+            task.wait(1)
+            Utils.PrintDebug('Exited from seat')
+        end
+        local function babyGetFoodAndEat(FoodPassOn)
+            local hasFood = false
+            for _, v in ClientData.get_data()[localPlayer.Name].inventory.food do
+                if v.id == FoodPassOn then
+                    hasFood = true
+                    ReplicatedStorage.API['ToolAPI/Equip']:InvokeServer(v.unique, {})
+                    task.wait(1)
+                    useToolOnBaby(v.unique)
+                    return
+                end
+            end
+            if not hasFood then
+                ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', FoodPassOn, {})
+                task.wait(1)
+                babyGetFoodAndEat(FoodPassOn)
+            end
+        end
+        local pickMysteryTask = function(mysteryId, petUnique)
+            Utils.PrintDebug(string.format('mystery id: %s', tostring(mysteryId)))
+            local ailmentsList = {}
+            local mysteryData = ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][mysteryId]
+            if not mysteryData then
+                Utils.PrintDebug('No mystery data found')
+                return
+            end
+            for i, _ in mysteryData['components']['mystery']['components']do
+                table.insert(ailmentsList, i)
+            end
+            for i = 1, 3 do
+                for _, ailment in ailmentsList do
+                    Utils.PrintDebug(string.format('card: %s, ailment: %s', tostring(i), tostring(ailment)))
+                    ReplicatedStorage.API['AilmentsAPI/ChooseMysteryAilment']:FireServer(petUnique, 'mystery', i, ailment)
+                    task.wait(3)
+                    if not (ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique] and ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][mysteryId]) then
+                        Utils.PrintDebug(string.format('\u{1f449} Picked %s ailment from mystery card \u{1f448}', tostring(ailment)))
+                        return
+                    end
+                end
+            end
+        end
+        local waitForTaskToFinish = function(ailment, petUnique)
+            Utils.PrintDebug(string.format('\u{23f3} Waiting for %s to finish \u{23f3}', tostring(string.upper(ailment))))
+            local count = 0
+            repeat
+                task.wait(5)
+                local taskActive = ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique] and ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][ailment] and true or false
+                count = count + 5
+            until not taskActive or count >= 60
+            if count >= 60 then
+                Utils.PrintDebug(string.format('\u{26a0}\u{fe0f} Waited too long for ailment: %s, must be stuck \u{26a0}\u{fe0f}', tostring(ailment)))
+                Utils.ReEquipPet(1)
+                Utils.ReEquipPet(2)
+            else
+                Utils.PrintDebug(string.format('\u{1f389} %s task finished \u{1f389}', tostring(ailment)))
+            end
+        end
+        local waitForJumpingToFinish = function(ailment, petUnique)
+            Utils.PrintDebug(string.format('\u{23f3} Waiting for %s to finish \u{23f3}', tostring(string.upper(ailment))))
+            local stuckCount = tick()
+            local isStuck = false
+            repeat
+                babyJump()
+                task.wait(0.5)
+                local taskActive = ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique] and ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][ailment] and true or false
+                task.wait(0.5)
+                isStuck = (tick() - stuckCount) >= 120 and true or false
+            until not taskActive or isStuck
+            if isStuck then
+                Utils.PrintDebug(string.format('\u{26d4} %s ailment is stuck so exiting task \u{26d4}', tostring(ailment)))
+            else
+                Utils.PrintDebug(string.format('\u{1f389} %s ailment finished \u{1f389}', tostring(ailment)))
+            end
+        end
+        local babyWaitForTaskToFinish = function(ailment)
+            Utils.PrintDebug(string.format('\u{23f3} Waiting for BABY %s to finish \u{23f3}', tostring(string.upper(ailment))))
+            local count = 0
+            repeat
+                task.wait(5)
+                local taskActive = ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments and ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments[ailment] and true or false
+                count = count + 5
+            until not taskActive or count >= 60
+            if count >= 60 then
+                Utils.PrintDebug(string.format('\u{26a0}\u{fe0f} Waited too long for ailment: %s, must be stuck \u{26a0}\u{fe0f}', tostring(ailment)))
+            else
+                Utils.PrintDebug(string.format('\u{1f389} %s task finished \u{1f389}', tostring(string.upper(ailment))))
+            end
+        end
+        function Ailment.HungryAilment()
+            Utils.PrintDebug(string.format('\u{1f356} Doing hungry task on %s \u{1f356}', tostring(Ailment.whichPet)))
+            Utils.ReEquipPet(Ailment.whichPet)
+            FoodAilments('icecream')
+            Utils.PrintDebug(string.format('\u{1f356} Finished hungry task on %s \u{1f356}', tostring(Ailment.whichPet)))
+        end
+        function Ailment.ThirstyAilment()
+            Utils.PrintDebug(string.format('\u{1f95b} Doing thirsty task on %s \u{1f95b}', tostring(Ailment.whichPet)))
+            Utils.ReEquipPet(Ailment.whichPet)
+            FoodAilments('water')
+            Utils.PrintDebug(string.format('\u{1f95b} Finished thirsty task on %s \u{1f95b}', tostring(Ailment.whichPet)))
+        end
+        function Ailment.SickAilment()
+            Utils.ReEquipPet(Ailment.whichPet)
+            if doctorId then
+                Utils.PrintDebug(string.format('\u{1fa79} Doing sick task on %s \u{1fa79}', tostring(Ailment.whichPet)))
+                ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('Hospital')
+                if not isDoctorLoaded() then
+                    Utils.PrintDebug(string.format('\u{1fa79}\u{26a0}\u{fe0f} Doctor didnt load on %s \u{1fa79}\u{26a0}\u{fe0f}', tostring(Ailment.whichPet)))
+                    return
+                end
+                local args = {
+                    [1] = doctorId,
+                    [2] = 'UseBlock',
+                    [3] = 'Yes',
+                    [4] = game:GetService('Players').LocalPlayer.Character,
+                }
+                ReplicatedStorage.API:FindFirstChild('HousingAPI/ActivateInteriorFurniture'):InvokeServer(unpack(args))
+                Utils.PrintDebug(string.format('\u{1fa79} SICK task Finished on %s \u{1fa79}', tostring(Ailment.whichPet)))
+            else
+                getDoctorId()
+            end
+        end
+        function Ailment.PetMeAilment()
+            Utils.ReEquipPet(Ailment.whichPet)
+            Utils.PrintDebug(string.format('\u{1f431} Doing pet me task on %s \u{1f431}', tostring(Ailment.whichPet)))
+            if not Utils.IsPetEquipped(Ailment.whichPet) then
+                return
+            end
+            ReplicatedStorage.API['AdoptAPI/FocusPet']:FireServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet].char)
+            task.wait(1)
+            if not Utils.IsPetEquipped(Ailment.whichPet) then
+                return
+            end
+            ReplicatedStorage.API['PetAPI/ReplicateActivePerformances']:FireServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet].char, {
+                ['FocusPet'] = true,
+                ['Petting'] = true,
+            })
+            task.wait(1)
+            if not Utils.IsPetEquipped(Ailment.whichPet) then
+                return
+            end
+            Bypass('RouterClient').get('AilmentsAPI/ProgressPetMeAilment'):FireServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet].pet_unique)
+            Utils.PrintDebug('\u{1f431} RAN PETME AILMENT \u{1f431}')
+        end
+        function Ailment.SalonAilment(ailment, petUnique)
+            Utils.ReEquipPet(Ailment.whichPet)
+            Utils.PrintDebug(string.format('\u{1f457} Doing salon task on %s \u{1f457}', tostring(Ailment.whichPet)))
+            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('Salon')
+            waitForTaskToFinish(ailment, petUnique)
+            Utils.PrintDebug(string.format('\u{1f457} Finished salon task on %s \u{1f457}', tostring(Ailment.whichPet)))
+        end
+        function Ailment.MoonAilment(ailment, petUnique)
+            Utils.ReEquipPet(Ailment.whichPet)
+            Utils.PrintDebug(string.format('\u{1f31a} Doing moon task on %s \u{1f31a}', tostring(Ailment.whichPet)))
+            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MoonInterior')
+            waitForTaskToFinish(ailment, petUnique)
+            Utils.PrintDebug(string.format('\u{1f31a} Doing moon task on %s \u{1f31a}', tostring(Ailment.whichPet)))
+        end
+        function Ailment.PizzaPartyAilment(ailment, petUnique)
+            Utils.ReEquipPet(Ailment.whichPet)
+            Utils.PrintDebug(string.format('\u{1f355} Doing pizza party task on %s \u{1f355}', tostring(Ailment.whichPet)))
+            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('PizzaShop')
+            waitForTaskToFinish(ailment, petUnique)
+            Utils.PrintDebug(string.format('\u{1f355} Finished pizza party task on %s \u{1f355}', tostring(Ailment.whichPet)))
+        end
+        function Ailment.SchoolAilment(ailment, petUnique)
+            Utils.ReEquipPet(Ailment.whichPet)
+            Utils.PrintDebug(string.format('\u{1f3eb} Doing school task on %s \u{1f3eb}', tostring(Ailment.whichPet)))
+            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('School')
+            waitForTaskToFinish(ailment, petUnique)
+            Utils.PrintDebug(string.format('\u{1f3eb} Finished school task on %s \u{1f3eb}', tostring(Ailment.whichPet)))
+        end
+        function Ailment.BoredAilment(pianoId, petUnique)
+            Utils.ReEquipPet(Ailment.whichPet)
+            Utils.PrintDebug(string.format('\u{1f971} Doing bored task on %s \u{1f971}', tostring(Ailment.whichPet)))
+            if pianoId then
+                if not Utils.IsPetEquipped(Ailment.whichPet) then
+                    return
+                end
+                PianoAilment(pianoId, ClientData.get('pet_char_wrappers')[Ailment.whichPet]['char'])
+            else
+                Teleport.PlayGround(Vector3.new(20, 10, math.random(15, 30)))
+            end
+            waitForTaskToFinish('bored', petUnique)
+            Utils.PrintDebug(string.format('\u{1f971} Finished bored task on %s \u{1f971}', tostring(Ailment.whichPet)))
+        end
+        function Ailment.SleepyAilment(bedId, petUnique)
+            if not bedId then
+                Utils.PrintDebug(string.format('NO bedId: %s', tostring(bedId)))
+                return
+            end
+            Utils.ReEquipPet(Ailment.whichPet)
+            Utils.PrintDebug(string.format('\u{1f634} Doing sleep task on %s \u{1f634}', tostring(Ailment.whichPet)))
+            if not Utils.IsPetEquipped(Ailment.whichPet) then
+                return
+            end
+            furnitureAilments(bedId, ClientData.get('pet_char_wrappers')[Ailment.whichPet]['char'])
+            waitForTaskToFinish('sleepy', petUnique)
+        end
+        function Ailment.DirtyAilment(showerId, petUnique)
+            if not showerId then
+                Utils.PrintDebug(string.format('NO showerId: %s', tostring(showerId)))
+                return
+            end
+            Utils.ReEquipPet(Ailment.whichPet)
+            Utils.PrintDebug(string.format('\u{1f9fc} Doing dirty task on %s \u{1f9fc}', tostring(Ailment.whichPet)))
+            if not Utils.IsPetEquipped(Ailment.whichPet) then
+                return
+            end
+            furnitureAilments(showerId, ClientData.get('pet_char_wrappers')[Ailment.whichPet]['char'])
+            waitForTaskToFinish('dirty', petUnique)
+        end
+        function Ailment.ToiletAilment(litterBoxId, petUnique)
+            Utils.ReEquipPet(Ailment.whichPet)
+            Utils.PrintDebug(string.format('\u{1f6bd} Doing toilet task on %s \u{1f6bd}', tostring(Ailment.whichPet)))
+            if litterBoxId then
+                if not Utils.IsPetEquipped(Ailment.whichPet) then
+                    return
+                end
+                furnitureAilments(litterBoxId, ClientData.get('pet_char_wrappers')[Ailment.whichPet]['char'])
+            else
+                Teleport.DownloadMainMap()
+                task.wait(5)
+                localPlayer.Character.HumanoidRootPart.CFrame = Workspace.HouseInteriors.furniture:FindFirstChild('AilmentsRefresh2024FireHydrant', true).PrimaryPart.CFrame + Vector3.new(5, 5, 5)
+                task.wait(2)
+                Utils.ReEquipPet(Ailment.whichPet)
+            end
+            waitForTaskToFinish('toilet', petUnique)
+        end
+        function Ailment.BeachPartyAilment(petUnique)
+            Utils.PrintDebug(string.format('\u{1f3d6}\u{fe0f} Doing beach party on %s \u{1f3d6}\u{fe0f}', tostring(Ailment.whichPet)))
+            Teleport.BeachParty()
+            task.wait(2)
+            Utils.ReEquipPet(Ailment.whichPet)
+            waitForTaskToFinish('beach_party', petUnique)
+        end
+        function Ailment.CampingAilment(petUnique)
+            Utils.PrintDebug(string.format('\u{1f3d5}\u{fe0f} Doing camping task on %s \u{1f3d5}\u{fe0f}', tostring(Ailment.whichPet)))
+            Teleport.CampSite()
+            task.wait(2)
+            Utils.ReEquipPet(Ailment.whichPet)
+            waitForTaskToFinish('camping', petUnique)
+        end
+        function Ailment.WalkAilment(petUnique)
+            Utils.ReEquipPet(Ailment.whichPet)
+            Utils.PrintDebug(string.format('\u{1f9ae} Doing walking task on %s \u{1f9ae}', tostring(Ailment.whichPet)))
+            if not Utils.IsPetEquipped(Ailment.whichPet) then
+                return
+            end
+            ReplicatedStorage.API['AdoptAPI/HoldBaby']:FireServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet]['char'])
+            waitForJumpingToFinish('walk', petUnique)
+            if not Utils.IsPetEquipped(Ailment.whichPet) then
+                return
+            end
+            ReplicatedStorage.API:FindFirstChild('AdoptAPI/EjectBaby'):FireServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet]['char'])
+        end
+        function Ailment.HalloweenWalkAilment(petUnique)
+            Utils.ReEquipPet(Ailment.whichPet)
+            Utils.PrintDebug(string.format('\u{1f9ae} Doing walking task on %s \u{1f9ae}', tostring(Ailment.whichPet)))
+            if not Utils.IsPetEquipped(Ailment.whichPet) then
+                return
+            end
+            ReplicatedStorage.API['AdoptAPI/HoldBaby']:FireServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet]['char'])
+            waitForJumpingToFinish('wear_scare', petUnique)
+            if not Utils.IsPetEquipped(Ailment.whichPet) then
+                return
+            end
+            ReplicatedStorage.API:FindFirstChild('AdoptAPI/EjectBaby'):FireServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet]['char'])
+        end
+        function Ailment.RideAilment(strollerId, petUnique)
+            if not strollerId then
+                Utils.PrintDebug(string.format('NO strollerId: %s', tostring(strollerId)))
+                return
+            end
+            Utils.ReEquipPet(Ailment.whichPet)
+            Utils.PrintDebug(string.format('\u{1f697} Doing ride task on %s \u{1f697}', tostring(Ailment.whichPet)))
+            ReplicatedStorage.API:FindFirstChild('ToolAPI/Equip'):InvokeServer(strollerId, {})
+            task.wait(1)
+            if not Utils.IsPetEquipped(Ailment.whichPet) then
+                return
+            end
+            if not useStroller() then
+                return
+            end
+            waitForJumpingToFinish('ride', petUnique)
+            if not Utils.IsPetEquipped(Ailment.whichPet) then
+                return
+            end
+            ReplicatedStorage.API:FindFirstChild('AdoptAPI/EjectBaby'):FireServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet]['char'])
+        end
+        function Ailment.PlayAilment(ailment, petUnique)
+            Utils.ReEquipPet(Ailment.whichPet)
+            Utils.PrintDebug(string.format('\u{1f9b4} Doing play task on %s \u{1f9b4}', tostring(Ailment.whichPet)))
+            local toyId = GetInventory.GetUniqueId('toys', 'squeaky_bone_default')
+            if not toyId then
+                Utils.PrintDebug("\u{26a0}\u{fe0f} Doesn't have squeaky_bone so exiting \u{26a0}\u{fe0f}")
+                return false
+            end
+            local count = 0
+            repeat
+                Utils.PrintDebug('\u{1f9b4} Throwing toy \u{1f9b4}')
+                ReplicatedStorage.API:FindFirstChild('PetObjectAPI/CreatePetObject'):InvokeServer('__Enum_PetObjectCreatorType_1', {
+                    ['reaction_name'] = 'ThrowToyReaction',
+                    ['unique_id'] = toyId,
+                })
+                task.wait(10)
+                local taskActive = ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique] and ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][ailment] and true or false
+                count = count + 1
+            until not taskActive or count >= 6
+            if count >= 6 then
+                Utils.PrintDebug('Play task got stuck so requiping pet')
+                Utils.ReEquipPet(Ailment.whichPet)
+                return false
+            end
+            Utils.PrintDebug(string.format('\u{1f9b4} Finished play task on %s \u{1f9b4}', tostring(Ailment.whichPet)))
+            return true
+        end
+        function Ailment.MysteryAilment(mysteryId, petUnique)
+            Utils.PrintDebug('\u{2753} Picking mystery task \u{2753}')
+            pickMysteryTask(mysteryId, petUnique)
+        end
+        function Ailment.BonfireAilment(petUnique)
+            Utils.PrintDebug(string.format('\u{1f3d6}\u{fe0f} Doing bonfire on %s \u{1f3d6}\u{fe0f}', tostring(Ailment.whichPet)))
+            Teleport.Bonfire()
+            task.wait(2)
+            Utils.ReEquipPet(Ailment.whichPet)
+            waitForTaskToFinish('summerfest_bonfire', petUnique)
+        end
+        function Ailment.BuccaneerBandAilment(petUnique)
+            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
+            task.wait(2)
+            local key = getKeyFrom('summerfest_2025_buccaneer_band')
+            if not key then
+                Utils.PrintDebug('didnt find key for band')
+                return
+            end
+            Utils.PrintDebug('Doing Band task')
+            task.spawn(function()
+                ReplicatedStorage.API:FindFirstChild('HousingAPI/ActivateInteriorFurniture'):InvokeServer(key, 'Guitar', {
+                    ['cframe'] = CFrame.new(-607, 35, -1641, -0, -0, -1, 0, 1, -0, 1, -0, -0),
+                }, localPlayer.Character)
+            end)
+            waitForTaskToFinish('buccaneer_band', petUnique)
+            getUpFromSitting()
+        end
+        function Ailment.ScaleTheOrgan()
+            Utils.PrintDebug('\u{1f3b9} Doing scale the organ \u{1f3b9}')
+            if not Teleport.PipeOrgan() then
+                return
+            end
+            local mainMap = Workspace.Interiors:WaitForChild('MainMap!Fall', 10)
+            if not mainMap then
+                return
+            end
+            local event = mainMap:WaitForChild('Event', 10)
+            if not event then
+                return
+            end
+            local pipeOrgan = event:WaitForChild('PipeOrgan', 10)
+            if not pipeOrgan then
+                return
+            end
+            local pianoStaircase = pipeOrgan:WaitForChild('PianoStaircase', 10)
+            if not pianoStaircase then
+                return
+            end
+            local keys = pianoStaircase:WaitForChild('Keys', 10)
+            if not keys then
+                return
+            end
+            local newPosition = keys:WaitForChild('1').PrimaryPart.Position + Vector3.new(5, 0, 0)
+            localPlayer.Character:MoveTo(newPosition)
+            task.wait(1)
+            for i = 1, 29 do
+                if localPlayer:GetAttribute('StopFarmingTemp') == true then
+                    return
+                end
+                local key = keys and keys:FindFirstChild(tostring(i))
+                if not (key and key.PrimaryPart) then
+                    Utils.PrintDebug(string.format('No primary part for key index: %s', tostring(i)))
+                    return
+                end
+                Utils.MoveToWithTimeout(localPlayer.Character.Humanoid, key.PrimaryPart.Position, 10)
+            end
+        end
+        function Ailment.Popcorn()
+            Utils.PrintDebug('\u{1f37f} Doing popcorn task \u{1f37f}')
+            for i = 1, 6 do
+                RouterClient.get('HalloweenEventAPI/ClaimLilyPadCandy'):FireServer(i)
+                print(string.format('Claimed lilypad candy %s', tostring(i)))
+                task.wait(1)
+            end
+        end
+        function Ailment.BabyHungryAilment()
+            Utils.PrintDebug('\u{1f476}\u{1f374} Doing baby hungry task \u{1f476}\u{1f374}')
+            local stuckCount = 0
+            repeat
+                babyGetFoodAndEat('icecream')
+                stuckCount = stuckCount + 1
+                task.wait(2)
+            until not ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments['hungry'] or stuckCount >= 30
+            if stuckCount >= 30 then
+                Utils.PrintDebug('\u{26a0}\u{fe0f} Waited too long for Baby Hungry. Must be stuck \u{26a0}\u{fe0f}')
+            else
+                Utils.PrintDebug('\u{1f476}\u{1f374} Baby hungry task Finished \u{1f476}\u{1f374}')
+            end
+        end
+        function Ailment.BabyThirstyAilment()
+            Utils.PrintDebug('\u{1f476}\u{1f95b} Doing baby water task \u{1f476}\u{1f95b}')
+            local stuckCount = 0
+            repeat
+                babyGetFoodAndEat('lemonade')
+                stuckCount = stuckCount + 1
+                task.wait(2)
+            until not ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments['thirsty'] or stuckCount >= 30
+            if stuckCount >= 30 then
+                Utils.PrintDebug('\u{26a0}\u{fe0f} Waited too long for Baby Thirsty. Must be stuck \u{26a0}\u{fe0f}')
+            else
+                Utils.PrintDebug('\u{1f476}\u{1f95b} Baby water task Finished \u{1f476}\u{1f95b}')
+            end
+        end
+        function Ailment.BabyBoredAilment(pianoId)
+            Utils.PrintDebug('\u{1f476}\u{1f971} Doing bored task \u{1f476}\u{1f971}')
+            getUpFromSitting()
+            if pianoId then
+                PianoAilment(pianoId, localPlayer.Character)
+            else
+                Teleport.PlayGround(Vector3.new(20, 10, math.random(15, 30)))
+            end
+            babyWaitForTaskToFinish('bored')
+            getUpFromSitting()
+        end
+        function Ailment.BabySleepyAilment(bedId)
+            if not bedId then
+                Utils.PrintDebug(string.format('NO bedId: %s', tostring(bedId)))
+                return
+            end
+            Utils.PrintDebug('\u{1f476}\u{1f634} Doing sleepy task \u{1f476}\u{1f634}')
+            getUpFromSitting()
+            furnitureAilments(bedId, localPlayer.Character)
+            babyWaitForTaskToFinish('sleepy')
+            getUpFromSitting()
+        end
+        function Ailment.BabyDirtyAilment(showerId)
+            if not showerId then
+                Utils.PrintDebug(string.format('NO showerId: %s', tostring(showerId)))
+                return
+            end
+            Utils.PrintDebug('\u{1f476}\u{1f9fc} Doing dirty task \u{1f476}\u{1f9fc}')
+            getUpFromSitting()
+            furnitureAilments(showerId, localPlayer.Character)
+            babyWaitForTaskToFinish('dirty')
+            getUpFromSitting()
+        end
+        return Ailment
+    end
+
     function __DARKLUA_BUNDLE_MODULES.C()
         local HalloweenHandler2025 = {}
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
