@@ -10485,10 +10485,9 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                         task.wait(2)
                         Utils.PlaceBaitOrPickUp(furniture.lures_2023_normal_lure, baitUnique)
                         baitboxCount = 0
-                        --tryToReleasePets()
+                        tryToReleasePets()
                     end
                     tryFeedAgePotion()
-                    Utils.TryRedeemGoodieBag()
                     --UpdateTextEvent:Fire()
                     local waitTime = rng:NextNumber(5, 15)
                     baitboxCount = baitboxCount + waitTime
