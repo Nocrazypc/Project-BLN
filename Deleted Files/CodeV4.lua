@@ -10943,6 +10943,27 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     end
                 end
             end)
+            MinigameInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function(
+            )
+                if MinigameInGameApp.Enabled then
+				    RunService:Set3dRenderingEnabled(false) -- 3D Off			
+                    MinigameInGameApp:WaitForChild('Body')
+                    MinigameInGameApp.Body:WaitForChild('Middle')
+                    MinigameInGameApp.Body.Middle:WaitForChild('Container')
+                    MinigameInGameApp.Body.Middle.Container:WaitForChild('TitleLabel')
+
+                    if MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('SLEEP OR TREAT') then
+                        if localPlayer:GetAttribute('hasStartedFarming') == true then
+                            localPlayer:SetAttribute('StopFarmingTemp', true)
+                            task.wait(2)
+                            startTrickDash()
+                            localPlayer:SetAttribute('StopFarmingTemp', false)
+				            task.wait(3)
+				            RunService:Set3dRenderingEnabled(true) -- 3D On					
+                        end
+                    end
+                end
+            end)
             StaticMap.hauntlet_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function(
             )
                 if StaticMap.hauntlet_minigame_state.is_game_active.Value then
@@ -10975,6 +10996,22 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     Bypass('RouterClient').get('MinigameAPI/AttemptJoin'):FireServer('costume_party', true)
                 end
             end)
+            StaticMap.sleep_or_treat_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function(
+            )
+                if StaticMap.sleep_or_treat_minigame_state.is_game_active.Value then
+                    if getgenv().SETTINGS.ENABLE_AUTO_FARM == false then
+                        return
+                    end
+                    if localPlayer:GetAttribute('hasStartedFarming') == false then
+                        return
+                    end
+                    if localPlayer:GetAttribute('StopFarmingTemp') == true then
+                        return
+                    end
+                    localPlayer:SetAttribute('StopFarmingTemp', true)
+                    Bypass('RouterClient').get('MinigameAPI/AttemptJoin'):FireServer('sleep_or_treat', true)
+                end
+            end)
         end
         function HalloweenHandler2025.Start()
 	    -- print('HalloweenHandler2025 Started')
@@ -10988,6 +11025,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                         --print("\u{23f0} It's 47 minutes past the hour (UTC)!")
                         feedYarnApple()
                     end
+                    Utils.TryRedeemGoodieBag()			
                     task.wait(30)
                 end
             end)
