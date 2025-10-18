@@ -10518,7 +10518,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             FarmingPet.GetPetToFarm(1)
             task.wait(2)
             if localPlayer:GetAttribute('isProHandler') == true then
-                FarmingPet.GetPetToFarm(2)
+            FarmingPet.GetPetToFarm(2)
             end
             Utils.TryRedeemGoodieBag()
             startAutoFarm()
