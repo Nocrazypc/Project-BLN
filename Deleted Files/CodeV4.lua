@@ -10488,6 +10488,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                         --tryToReleasePets()
                     end
                     tryFeedAgePotion()
+                    Utils.TryRedeemGoodieBag()
                     --UpdateTextEvent:Fire()
                     local waitTime = rng:NextNumber(5, 15)
                     baitboxCount = baitboxCount + waitTime
