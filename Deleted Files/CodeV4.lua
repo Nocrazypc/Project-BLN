@@ -9911,7 +9911,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             'dog',
             'cat',
             'starter_egg',
-            'cracked_egg',
+            --'cracked_egg',
             'basic_egg_2022_ant',
             'basic_egg_2022_mouse',
         }
@@ -10023,15 +10023,19 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 }, whichPet) then
                     return
                 end
-                Utils.PrintDebug(string.format('\u{1f414}\u{1f414} No cracked egg found, buying it %s \u{1f414}\u{1f414}', tostring(whichPet)))
-                local hasMoney = RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'cracked_egg', {})
+                --Utils.PrintDebug(string.format('\u{1f414}\u{1f414} No cracked egg found, buying it %s \u{1f414}\u{1f414}', tostring(whichPet)))
+                --local hasMoney = RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'cracked_egg', {})
                 Utils.PrintDebug(string.format('hasMoney: %s', tostring(hasMoney)))
                 if hasMoney then
                     return
                 end
             end
-            if getgenv().SETTINGS.HATCH_EGG_PRIORITY then
+            if getgenv().SETTINGS.HATCH_EGG_PRIORITY or getgenv().HatchPriorityEggs then
                 if GetInventory.PriorityEgg(whichPet) then
+                    return
+                end
+                local hasMoney = RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', getgenv().SETTINGS.HATCH_EGG_PRIORITY_NAMES[1], {})
+                if hasMoney then
                     return
                 end
             end
@@ -10040,8 +10044,10 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     return
                 end
             end
-            if GetInventory.GetNeonPet(whichPet) then
-                return
+            if getgenv().SETTINGS.PET_NEON_PRIORITY then
+                if GetInventory.GetNeonPet(whichPet) then
+                    return
+                end
             end
             if GetInventory.PetRarityAndAge('legendary', 5, whichPet) then
                 return
@@ -10169,7 +10175,27 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         end
         return FarmingPet
     end
-
+    function __DARKLUA_BUNDLE_MODULES.y()
+        local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
+        local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
+        local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
+        local RouterClient = Bypass('RouterClient')
+        local PetRelease = {}
+        function PetRelease.Use(petUniques)
+            RouterClient.get('HousingAPI/ActivateInteriorFurniture'):InvokeServer('f-27', 'UseBlock', {
+                action = 'use',
+                uniques = petUniques,
+            }, Utils.GetCharacter())
+            Utils.PrintDebug('Added Pets To Release')
+        end
+        function PetRelease.Claim()
+            RouterClient.get('HousingAPI/ActivateInteriorFurniture'):InvokeServer('f-27', 'UseBlock', {
+                action = 'claim',
+            }, Utils.GetCharacter())
+            Utils.PrintDebug('Claimed Eggs from Release pets')
+        end
+        return PetRelease
+    end
 
 
     function __DARKLUA_BUNDLE_MODULES.C()
