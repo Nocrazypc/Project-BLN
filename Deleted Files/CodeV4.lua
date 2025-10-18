@@ -3447,62 +3447,12 @@ do
                 return
             end
 
-            Utils.PrintDebug(string.format('onTextChangedNormalDialog: %s', tostring(TextLabel.Text)))
+            for pattern, button in patterns do
+                if TextLabel.Text:match(pattern) then
+                    Utils.FindButton(button)
 
-            if TextLabel.Text:match('Be careful when trading') then
-                Utils.FindButton('Okay')
-            elseif TextLabel.Text:match('This trade seems unbalanced') then
-                Utils.FindButton('Next')
-            elseif TextLabel.Text:match('Social Stones!') then
-                Utils.FindButton('Okay')
-            elseif TextLabel.Text:match('sent you a trade request') then
-                Utils.FindButton('Accept')
-            elseif TextLabel.Text:match('Trade request from') then
-                Utils.FindButton('Okay')
-            elseif TextLabel.Text:match('Any items lost') then
-                Utils.FindButton('I understand')
-            elseif TextLabel.Text:match('4.5%% Legendary') then
-                Utils.FindButton('Okay')
-            elseif TextLabel.Text:match('You have been awarded') then
-                Utils.FindButton('Awesome!')
-            elseif TextLabel.Text:match('Thanks for subscribing!') then
-                Utils.FindButton('Okay')
-            elseif TextLabel.Text:match("Let's start the day") then
-                Utils.FindButton('Start')
-            elseif TextLabel.Text:match('Are you subscribed') then
-                Utils.FindButton('Yes')
-            elseif TextLabel.Text:match('your inventory!') then
-                Utils.FindButton('Awesome!')
-            elseif TextLabel.Text:match("You've chosen this") then
-                Utils.FindButton('Yes')
-            elseif TextLabel.Text:match('You can change this option') then
-                Utils.FindButton('Okay')
-            elseif TextLabel.Text:match('You have enough') then
-                Utils.FindButton('Okay')
-            elseif TextLabel.Text:match('Thanks for') then
-                Utils.FindButton('Okay')
-            elseif TextLabel.Text:match('Right now') then
-                Utils.FindButton('Next')
-            elseif TextLabel.Text:match('You can customize it') then
-                Utils.FindButton('Start')
-            elseif TextLabel.Text:match('Your subscription') then
-                Utils.FindButton('Okay!')
-            elseif TextLabel.Text:match('You have been refunded') then
-                Utils.FindButton('Awesome!')
-            elseif TextLabel.Text:match("You can't afford this") then
-                Utils.FindButton('Okay')
-            elseif TextLabel.Text:match('mailbox') then
-                Utils.FindButton('Okay')
-            elseif TextLabel.Text:match('Pay 1500 Bucks') then
-                Utils.FindButton('Yes')
-            elseif TextLabel.Text:match('Pet Pen!') then
-                Utils.FindButton('Go to Pet Pen')
-            elseif TextLabel.Text:match('The Homepass has been restarted') then
-                Utils.FindButton('Okay')
-            elseif TextLabel.Text:match('Costume Party starts') then
-                Utils.FindButton('Okay')
-            elseif TextLabel.Text:match('Step away from') then
-                Utils.FindButton('Okay')
+                    return
+                end
             end
         end
         local removeGameOverButton = function(screenGuiName)
