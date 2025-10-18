@@ -4513,8 +4513,6 @@ do
     end
     function __DARKLUA_BUNDLE_MODULES.u()
 
-
-    function __DARKLUA_BUNDLE_MODULES.A()
         if debugX then
             warn('Initialising Rayfield')
         end
