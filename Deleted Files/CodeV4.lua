@@ -3685,10 +3685,13 @@ do
                     NormalDialogChild.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
                     )
                         if NormalDialogChild.Info.TextLabel.Text:match('The Hauntlet is starting') then
+                            task.wait(1)	
                             Utils.FindButton('No')
                         elseif NormalDialogChild.Info.TextLabel.Text:match('Costume Party is starting') then
+                            task.wait(1)	
                             Utils.FindButton('No')
                         elseif NormalDialogChild.Info.TextLabel.Text:match('Sleep or Treat is starting') then
+                            task.wait(1)	
                             Utils.FindButton('No')					
                         -- elseif NormalDialogChild.Info.TextLabel.Text:match('invitation') then
                           --  localPlayer:Kick()
