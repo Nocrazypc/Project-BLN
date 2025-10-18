@@ -3739,7 +3739,7 @@ do
                         task.wait(2)
 	                    localPlayer:SetAttribute('StopFarmingTemp', false)
                         Teleport.FarmingHome()
-	                    RunService:Set3dRenderingEnabled(true) -- 3D On
+                        RunService:Set3dRenderingEnabled(true) -- 3D On
                     end
                 end
             end)
@@ -3747,9 +3747,6 @@ do
             )
             tryClickPlaytimePayout()
             end)
-        end
-        function self.Start()
-            tryClickPlaytimePayout()
             TradeApp.Frame.NegotiationFrame.Body.PartnerOffer.Accepted:GetPropertyChangedSignal('ImageTransparency'):Connect(function(
             )
                 Trade.AutoAcceptTrade()
