@@ -10655,6 +10655,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         local contentPacks = (ReplicatedStorage:WaitForChild('SharedModules'):WaitForChild('ContentPacks'))
         local HauntletMinigameClient = (require(ReplicatedStorage.SharedModules.ContentPacks.Halloween2025.Minigames.HauntletMinigameClient))
         local FashionFrenzyMinigameClient = (require(contentPacks.Halloween2025.Minigames.FashionFrenzyMinigameClient))
+        local TreatDashClient = (require(contentPacks.Halloween2025.Minigames.TreatDashClient))
         local Players = cloneref(game:GetService('Players'))
         local localPlayer = Players.LocalPlayer
         local PlayerGui = (localPlayer:WaitForChild('PlayerGui'))
@@ -10662,6 +10663,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         local RunService = game:GetService("RunService")
         local HauntletInGameApp = (PlayerGui:WaitForChild('HauntletInGameApp'))
         local FashionFrenzyInGameApp = (PlayerGui:WaitForChild('FashionFrenzyInGameApp'))
+        local MinigameInGameApp = (PlayerGui:WaitForChild('MinigameInGameApp'))
         local isFedYarnApple = false
         local getMinigameId = function(module)
             return (module.instanced_minigame and {
@@ -10717,22 +10719,188 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 isFedYarnApple = false
             end)
         end
-        local pickDoor = function(hauntletId, stageLevel)
-            RouterClient.get('MinigameAPI/MessageServer'):FireServer(hauntletId, 'player_selected_door', stageLevel, math.random(1, 3))
+        local pickDoor = function(hauntletId, stageLevel, whichDoor)
+            RouterClient.get('MinigameAPI/MessageServer'):FireServer(hauntletId, 'player_selected_door', stageLevel, whichDoor)
+        end
+        local getPlayerHealth = function()
+            return HauntletMinigameClient.instanced_minigame.player_health[localPlayer].current
+        end
+        local getInventoryCountFor = function(itemName)
+            return HauntletMinigameClient.instanced_minigame and HauntletMinigameClient.instanced_minigame.inventory[itemName] or 0
+        end
+        local useItemForHauntlet = function(hauntletId, itemName)
+            RouterClient.get('MinigameAPI/MessageServer'):FireServer(hauntletId, 'player_used_item', itemName)
+        end
+        local getRoomInstanceFor = function(round)
+            local rooms = HauntletMinigameClient.instanced_minigame and HauntletMinigameClient.instanced_minigame.interior and HauntletMinigameClient.instanced_minigame.interior:FindFirstChild('Rooms')
+            if not rooms then
+                print('DIDNT FIND ROOMS FOLDER')
+                return
+            end
+            return rooms:FindFirstChild(round)
+        end
+        local getExitDoorsFolder = function(round)
+            local room = getRoomInstanceFor(round)
+            if not room then
+                return
+            end
+            return room:FindFirstChild('ExitDoors')
+        end
+        local checkDoorPriority = function(
+            doorEntryName,
+            keyName,
+            exitDoors,
+            minigameId,
+            round
+        )
+            for _, v in exitDoors:GetChildren()do
+                if not (v and v:IsA('Model')) then
+                    print('v not found')
+                    return false
+                end
+                local entryName = v:GetAttribute('entry_name')
+                local doorNumber = tonumber(v.Name)
+                if typeof(doorNumber) ~= 'number' then
+                    print(string.format('NOT A NUMBER: %s', tostring(doorNumber)))
+                    continue
+                end
+                if entryName == doorEntryName then
+                    if not keyName or getInventoryCountFor(keyName) >= 1 then
+                        Utils.GetCharacter():MoveTo(v:GetPivot().Position - Vector3.new(
+-5, 0, 0))
+                        task.wait(1)
+                        pickDoor(minigameId, round, doorNumber)
+                        print(string.format('Picked Door from - round: %s door: %s name: %s', tostring(round), tostring(doorNumber), tostring(doorEntryName)))
+                        return true
+                    end
+                end
+            end
+
+            return false
         end
         local startHauntlet = function()
             local minigameId = getMinigameId(HauntletMinigameClient)
+
             if not minigameId then
-                --print('No minigame ID found, cannot start Hauntlet')
+                print('No minigame ID found, cannot start Hauntlet')
+
                 return
             end
+
             while true do
-                if not HauntletMinigameClient.instanced_minigame then
+                local instancedMinigame = HauntletMinigameClient.instanced_minigame
+
+                if not instancedMinigame then
                     return
                 end
-                pickDoor(minigameId, HauntletMinigameClient.instanced_minigame.round)
+
+                local health = getPlayerHealth()
+
+                print(string.format('PLAYERS CURRENT HEALTH: %s', tostring(health)))
+
+                if health == 1 then
+                    local healItems = {
+                        'HeartPotion',
+                        'GoldenHeartPotion',
+                    }
+
+                    for _, item in ipairs(healItems)do
+                        if getInventoryCountFor(item) >= 1 then
+                            useItemForHauntlet(minigameId, item)
+                            task.wait(1)
+
+                            break
+                        end
+                    end
+                end
+                if getInventoryCountFor('MonsterRepellant') >= 1 then
+                    useItemForHauntlet(minigameId, 'MonsterRepellant')
+                    task.wait(1)
+                end
+
+                local doorChecks = {
+                    {
+                        type = 'Golden',
+                        key = 'GoldenKey',
+                    },
+                    {
+                        type = 'Locked',
+                        key = 'Key',
+                    },
+                    {
+                        type = 'Shadow',
+                    },
+                    {
+                        type = 'Rotten',
+                    },
+                    {
+                        type = 'Normal',
+                    },
+                    {
+                        type = 'Starter',
+                    },
+                }
+
+                for _, check in ipairs(doorChecks)do
+                    local round = instancedMinigame.round or 0
+
+                    if round == 0 then
+                        return
+                    end
+
+                    local exitDoors = getExitDoorsFolder(round)
+
+                    if not exitDoors then
+                        return
+                    end
+
+                    local result = checkDoorPriority(check.type, check.key, exitDoors, minigameId, round)
+
+                    if result then
+                        task.wait(2)
+
+                        break
+                    end
+                end
+
                 task.wait(2)
             end
+        end
+        local teleportToDeposit = function()
+            local depositPosition = TreatDashClient.instanced_minigame.deposit:GetPivot().Position
+
+            Utils.GetCharacter():MoveTo(depositPosition)
+        end
+        local kockOnDoors = function(minigameId)
+            for _, house in ipairs(TreatDashClient.instanced_minigame.houses)do
+                for _ = 1, 3 do
+                    if not TreatDashClient.instanced_minigame then
+                        return
+                    end
+                    if house.disabled then
+                        continue
+                    end
+
+                    RouterClient.get('MinigameAPI/MessageServer'):FireServer(minigameId, 'house_knock', house.plot_number)
+                    task.wait(1)
+                end
+            end
+        end
+        local startTrickDash = function()
+            local minigameId = getMinigameId(TreatDashClient)
+
+            if not minigameId then
+                print('No minigame ID found, cannot start trickDash')
+
+                return
+            end
+            if not TreatDashClient.instanced_minigame then
+                return
+            end
+
+            teleportToDeposit()
+            kockOnDoors(minigameId)
+            print(' TRICK OR TREAT FINISHED ')
         end
         function HalloweenHandler2025.Init()
             --print('HalloweenHandler2025 Initialized')
