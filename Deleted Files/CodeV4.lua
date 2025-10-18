@@ -3651,9 +3651,11 @@ do
                 DialogApp.Dialog.NormalDialog.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
                 )
                     if DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('The Hauntlet is starting') then
-                        onTextChangedMiniGame()
+                        Utils.FindButton('No')
                     elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Costume Party is starting') then
-                        onTextChangedMiniGame()
+                        Utils.FindButton('No')
+                    elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Sleep or Treat is starting') then
+                        Utils.FindButton('No')			
                     --elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
                     --    localPlayer:Kick()
                     --    game:Shutdown()
@@ -3680,9 +3682,11 @@ do
                     NormalDialogChild.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
                     )
                         if NormalDialogChild.Info.TextLabel.Text:match('The Hauntlet is starting') then
-                            onTextChangedMiniGame()
+                            Utils.FindButton('No')
                         elseif NormalDialogChild.Info.TextLabel.Text:match('Costume Party is starting') then
-                            onTextChangedMiniGame()
+                            Utils.FindButton('No')
+                        elseif NormalDialogChild.Info.TextLabel.Text:match('Sleep or Treat is starting') then
+                            Utils.FindButton('No')					
                         -- elseif NormalDialogChild.Info.TextLabel.Text:match('invitation') then
                           --  localPlayer:Kick()
                            -- game:Shutdown()
