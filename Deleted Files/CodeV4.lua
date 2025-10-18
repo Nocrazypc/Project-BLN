@@ -10198,6 +10198,339 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
     end
 
 
+
+    function __DARKLUA_BUNDLE_MODULES.z()
+        local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
+        local Players = cloneref(game:GetService('Players'))
+        local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
+        local ClientData = Bypass('ClientData')
+        local RouterClient = Bypass('RouterClient')
+        local CollisionsClient = Bypass('CollisionsClient')
+        local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
+        local Ailment = __DARKLUA_BUNDLE_MODULES.load('w')
+        local Furniture = __DARKLUA_BUNDLE_MODULES.load('b')
+        local Teleport = __DARKLUA_BUNDLE_MODULES.load('f')
+        local GetInventory = __DARKLUA_BUNDLE_MODULES.load('i')
+        local FarmingPet = __DARKLUA_BUNDLE_MODULES.load('x')
+        local Fusion = __DARKLUA_BUNDLE_MODULES.load('h')
+        local PetRelease = __DARKLUA_BUNDLE_MODULES.load('y')
+        local self = {}
+        local UpdateTextEvent = (ReplicatedStorage:WaitForChild('UpdateTextEvent'))
+        local localPlayer = Players.LocalPlayer
+        local rng = Random.new(DateTime.now().UnixTimestamp)
+        local jobId = game.JobId
+        local furniture = Furniture.GetFurnituresKey()
+        local baitboxCount = 0
+        local strollerId = GetInventory.GetUniqueId('strollers', 'stroller-default')
+        --[[local tryToReleasePets = function()
+            if getgenv().ENABLE_RELEASE_PETS == false then
+                return
+            end
+            Teleport.Recycler()
+            task.wait(5)
+            PetRelease.Claim()
+            task.wait(1)
+            PetRelease.Use(GetInventory.GetPetsToRelease())
+        end--]]
+        local tryFeedAgePotion = function()
+            if not getgenv().FOCUS_FARM_AGE_POTION then
+                if ClientData.get('pet_char_wrappers')[1] and table.find(GetInventory.GetPetEggs(), ClientData.get('pet_char_wrappers')[1].pet_id) then
+                    Utils.PrintDebug('is egg, not feeding age potion')
+                else
+                    if ClientData.get('pet_char_wrappers')[1] and table.find(getgenv().SETTINGS.PET_ONLY_PRIORITY_NAMES, ClientData.get('pet_char_wrappers')[1].pet_unique) then
+                        Utils.PrintDebug('FEEDING AGE POTION')
+                        Utils.FeedAgePotion(GetInventory.GetPetEggs(), 'pet_age_potion')
+                        task.wait()
+                        Utils.FeedAgePotion(GetInventory.GetPetEggs(), 'tiny_pet_age_potion')
+                    end
+                end
+            end
+        end
+        local completeBabyAilments = function()
+            if localPlayer:GetAttribute('StopFarmingTemp') == true then
+                return
+            end
+            for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments do
+                if key == 'hungry' then
+                    Ailment.BabyHungryAilment()
+                    return
+                elseif key == 'thirsty' then
+                    Ailment.BabyThirstyAilment()
+                    return
+                elseif key == 'bored' then
+                    if furniture.piano == 'nil' then
+                        continue
+                    end
+                    Ailment.BabyBoredAilment(furniture.piano)
+                    return
+                elseif key == 'sleepy' then
+                    if furniture.basiccrib == 'nil' then
+                        continue
+                    end
+                    Ailment.BabySleepyAilment(furniture.basiccrib)
+                    return
+                elseif key == 'dirty' then
+                    if furniture.stylishshower == 'nil' then
+                        continue
+                    end
+                    Ailment.BabyDirtyAilment(furniture.stylishshower)
+                    return
+                           --[[elseif key == 'scale_the_organ' then
+                    Ailment.ScaleTheOrgan()
+                    return true--]]
+                end
+            end
+        end
+        local completePetAilments = function(whichPet)
+            if localPlayer:GetAttribute('StopFarmingTemp') == true then
+                return false
+            end
+            if localPlayer:GetAttribute('IsProHandler') == false and whichPet == 2 then
+                return false
+            end
+            local petWrapper = ClientData.get_data()[localPlayer.Name].pet_char_wrappers
+            if not petWrapper or not petWrapper[whichPet] then
+                if not Utils.IsPetEquipped(whichPet) then
+                    Utils.PrintDebug('Getting pet because its not equipped')
+                    FarmingPet.GetPetToFarm(whichPet)
+                end
+            end
+            if not ClientData.get_data()[localPlayer.Name].ailments_manager then
+                return false
+            end
+            if not ClientData.get_data()[localPlayer.Name].ailments_manager.ailments then
+                return false
+            end
+            if not ClientData.get_data()[localPlayer.Name].pet_char_wrappers then
+                return false
+            end
+            if not ClientData.get_data()[localPlayer.Name].pet_char_wrappers[whichPet] then
+                return false
+            end
+            local petUnique = ClientData.get_data()[localPlayer.Name].pet_char_wrappers[whichPet].pet_unique
+            if not petUnique then
+                return false
+            end
+            if not ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique] then
+                return false
+            end
+            local petcount = 0
+            for _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
+                petcount = petcount + 1
+            end
+            if petcount == 0 then
+                return false
+            end
+            Ailment.whichPet = whichPet
+            for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
+                if key == 'hungry' then
+                    Ailment.HungryAilment()
+                    return true
+                elseif key == 'thirsty' then
+                    Ailment.ThirstyAilment()
+                    return true
+                elseif key == 'sick' then
+                    Ailment.SickAilment()
+                    return true
+                elseif key == 'pet_me' then
+                    Ailment.PetMeAilment()
+                    return true
+                end
+            end
+            for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
+                if key == 'salon' then
+                    Ailment.SalonAilment(key, petUnique)
+                    Teleport.FarmingHome()
+                    return true
+                elseif key == 'moon' then
+                    Ailment.MoonAilment(key, petUnique)
+                    return true
+                elseif key == 'pizza_party' then
+                    Ailment.PizzaPartyAilment(key, petUnique)
+                    Teleport.FarmingHome()
+                    return true
+                elseif key == 'school' then
+                    Ailment.SchoolAilment(key, petUnique)
+                    Teleport.FarmingHome()
+                    return true
+                elseif key == 'bored' then
+                    if furniture.piano == 'nil' then
+                        continue
+                    end
+                    Ailment.BoredAilment(furniture.piano, petUnique)
+                    return true
+                elseif key == 'sleepy' then
+                    if furniture.basiccrib == 'nil' then
+                        continue
+                    end
+                    Ailment.SleepyAilment(furniture.basiccrib, petUnique)
+                    return true
+                elseif key == 'dirty' then
+                    if furniture.stylishshower == 'nil' then
+                        continue
+                    end
+                    --task.wait(65) -- test
+                    Ailment.DirtyAilment(furniture.stylishshower, petUnique)
+                    return true
+                elseif key == 'walk' then
+                    Ailment.WalkAilment(petUnique)
+                    return true
+                elseif key == 'toilet' then
+                    if furniture.ailments_refresh_2024_litter_box == 'nil' then
+                        continue
+                    end
+                    Ailment.ToiletAilment(furniture.ailments_refresh_2024_litter_box, petUnique)
+                    return true
+                elseif key == 'ride' then
+                    Ailment.RideAilment(strollerId, petUnique)
+                    return true
+                elseif key == 'play' then
+                    if not Ailment.PlayAilment(key, petUnique) then
+                        return false
+                    end
+                    return true
+                end
+            end
+            for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
+                if key == 'beach_party' then
+                    Teleport.PlaceFloorAtBeachParty()
+                    Ailment.BeachPartyAilment(petUnique)
+                    task.wait(2)
+                    Teleport.FarmingHome()
+                    return true
+                elseif key == 'camping' then
+                    Teleport.PlaceFloorAtCampSite()
+                    Ailment.CampingAilment(petUnique)
+                    task.wait(160) -- test
+                    Teleport.FarmingHome()
+                    return true
+               elseif key == 'buccaneer_band' then
+                    Ailment.BuccaneerBandAilment(petUnique)
+                    task.wait(2)
+                    Teleport.FarmingHome()
+                    return true
+                elseif key == 'summerfest_bonfire' then
+                    Ailment.BonfireAilment(petUnique)
+                    task.wait(2)
+                    Teleport.FarmingHome()
+                    return true
+                --[[elseif key == 'scale_the_organ' then
+                    Ailment.ScaleTheOrgan()
+                    return true--]]
+                end
+            end
+            for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
+                if key:match('mystery') then
+                    Ailment.MysteryAilment(key, petUnique)
+                    return true
+                end
+            end
+            return false
+        end
+        local setupFloor = function()
+            Teleport.PlaceFloorAtFarmingHome()
+            Teleport.PlaceFloorAtCampSite()
+            Teleport.PlaceFloorAtBeachParty()
+        end
+        local startAutoFarm = function()
+            task.spawn(function()
+                while getgenv().auto_farm do
+                    if game.JobId ~= jobId then
+                        getgenv().auto_farm = false
+                        --Utils.PrintDebug(' \u{26d4} not same jobid so exiting \u{26d4}')
+                        --task.wait()
+                        --game:Shutdown()
+                        return
+                    end
+                    if localPlayer:GetAttribute('StopFarmingTemp') == true then
+                        local count = 0
+                        repeat
+                            Utils.PrintDebug('Stopping because its buying or aging or in minigame')
+                            count = count + 20
+                            task.wait(20)
+                        until not localPlayer:GetAttribute('StopFarmingTemp') or count > 600
+                        localPlayer:SetAttribute('StopFarmingTemp', false)
+                    end
+                    Utils.RemoveHandHeldItem()
+                    if getgenv().SETTINGS.HATCH_EGG_PRIORITY or getgenv().HatchPriorityEggs then
+                        FarmingPet.CheckIfEgg(1)
+                        task.wait(1)
+                        if localPlayer:GetAttribute('isProHandler') then
+                            FarmingPet.CheckIfEgg(2)
+                            task.wait(1)
+                        end
+                    end
+                    if getgenv().FOCUS_FARM_AGE_POTION then
+                         FarmingPet.GetPetToFarm(1)
+                    end
+                    if not completePetAilments(1) then
+                        task.wait()
+                        completeBabyAilments()
+                    end
+                    task.wait(1)
+                    if not getgenv().FOCUS_FARM_AGE_POTION then
+                        FarmingPet.SwitchOutFullyGrown(1)
+                        if localPlayer:GetAttribute('isProHandler') then
+                            FarmingPet.SwitchOutFullyGrown(2)
+                        end
+                    end
+                    if baitboxCount > 180 then
+                        local baitUnique = Utils.FindBait()
+                        Utils.PlaceBaitOrPickUp(furniture.lures_2023_normal_lure, baitUnique)
+                        task.wait(2)
+                        Utils.PlaceBaitOrPickUp(furniture.lures_2023_normal_lure, baitUnique)
+                        baitboxCount = 0
+                        --tryToReleasePets()
+                    end
+                    tryFeedAgePotion()
+                    Utils.TryRedeemGoodieBag()
+                    --UpdateTextEvent:Fire()
+                    local waitTime = rng:NextNumber(5, 15)
+                    baitboxCount = baitboxCount + waitTime
+                    Utils.PrintDebug(string.format('waiting %s', tostring(waitTime)))
+                    task.wait(waitTime)
+                end
+            end)
+        end
+        function self.Init()
+            --RouterClient.get('PayAPI/DisablePopups'):FireServer()
+        end
+        function self.Start()
+            if not getgenv().auto_farm then
+                Utils.PrintDebug('AUTO_FARM is false')
+                return
+            end
+            if getgenv().SETTINGS.PET_AUTO_FUSION or getgenv().AutoFusion then
+                Fusion.MakeMega(false)
+                Fusion.MakeMega(true)
+                task.wait(2)
+            end
+            setupFloor()
+            CollisionsClient.set_collidable(false)
+            task.wait(2)
+            Teleport.FarmingHome()
+            Utils.PrintDebug('teleported to farming place')
+            Utils.PrintDebug('Started Farming')
+            localPlayer:SetAttribute('hasStartedFarming', true)
+            --tryToReleasePets()
+            Utils.UnEquipAllPets()
+            task.wait(2)
+            FarmingPet.GetPetToFarm(1)
+            task.wait(2)
+            if localPlayer:GetAttribute('isProHandler') == true then
+                FarmingPet.GetPetToFarm(2)
+            end
+            Utils.TryRedeemGoodieBag()
+            startAutoFarm()
+        end
+        return self
+    end
+
+
+
+
+
+
     function __DARKLUA_BUNDLE_MODULES.C()
         local HalloweenHandler2025 = {}
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
