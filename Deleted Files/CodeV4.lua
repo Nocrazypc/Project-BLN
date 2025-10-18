@@ -1434,7 +1434,7 @@ do
             TextLabel.TextSize = 14
             TextLabel.TextWrapped = true
         end
-        --[[function Teleport.PlaceCameraPart()
+        function Teleport.PlaceCameraPart()
             if Workspace:FindFirstChild('CameraPartLocation') then
                 return
             end
@@ -1447,7 +1447,7 @@ do
             part.Transparency = 1
             part.Name = 'CameraPartLocation'
             part.Parent = Workspace
-        end--]]
+        end
         function Teleport.PlaceFloorAtCampSite()
             if Workspace:FindFirstChild('CampingLocation') then
                 return
