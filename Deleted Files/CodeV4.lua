@@ -10525,7 +10525,35 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         end
         return self
     end
-
+    function __DARKLUA_BUNDLE_MODULES.A()
+        local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
+        local Players = cloneref(game:GetService('Players'))
+        local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
+        local RouterClient = Bypass('RouterClient')
+        local ClientData = Bypass('ClientData')
+        local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
+        local PetOffline = {}
+        local localPlayer = Players.LocalPlayer
+        function PetOffline.AddPet(petId)
+            RouterClient.get('IdleProgressionAPI/AddPet'):FireServer(petId)
+            Utils.PrintDebug('Added pet to offline farming: ' .. petId)
+        end
+        function PetOffline.RemovePet(petId)
+            RouterClient.get('IdleProgressionAPI/RemovePet'):FireServer(petId)
+        end
+        function PetOffline.ClaimAllXP()
+            RouterClient.get('IdleProgressionAPI/CommitAllProgression'):FireServer()
+            Utils.PrintDebug('Claimed all XP')
+        end
+        function PetOffline.GetAmountOfPetsInPen()
+            local count = 0
+            for _, v in ClientData.get_data()[localPlayer.Name].idle_progression_manager.active_pets do
+                count = count + 1
+            end
+            return count
+        end
+        return PetOffline
+    end
 
 
 
