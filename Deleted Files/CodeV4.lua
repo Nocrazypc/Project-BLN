@@ -11034,6 +11034,8 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
     end
 end
 
+--setfpscap(getgenv().SETTINGS.SET_FPS or 2)
+
 if not game:IsLoaded() then
     game.Loaded:Wait()
 end
@@ -11095,6 +11097,7 @@ StatsGuis:UpdateText("NameFrame")
 -----------------------------------------
 
 getgenv().auto_accept_trade = false
+getgenv().autoTrading = false
 getgenv().auto_trade_all_pets = false
 getgenv().auto_trade_fullgrown_neon_and_mega = false
 getgenv().auto_trade_multi_choice = false
@@ -11149,13 +11152,13 @@ local files = {
         TutorialHandler = __DARKLUA_BUNDLE_MODULES.load('s'),
     },
     {
-        AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('x'),
+        AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('z'),
     },
     {
-       PetOfflineHandler = __DARKLUA_BUNDLE_MODULES.load('z'),
+       RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('v'),
     },
     {
-       RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('B'),
+       PetOfflineHandler = __DARKLUA_BUNDLE_MODULES.load('B'),
     },
     {
        HalloweenHandler2025 = __DARKLUA_BUNDLE_MODULES.load('C'),
