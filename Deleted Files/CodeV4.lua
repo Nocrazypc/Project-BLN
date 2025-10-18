@@ -9022,6 +9022,44 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     end
                 end,
             })
+            petsToggle1 = TradeTab:CreateToggle({
+                Name = 'Auto Trade Normal Fullgrown Only',
+                CurrentValue = false,
+                Flag = 'Toggle1',
+                Callback = function(Value)
+                    getgenv().autoTrading = Value
+                    while getgenv().autoTrading do
+                        if selectedPlayer then
+                            Trade.SendTradeRequest({selectedPlayer})
+                        end
+                        Trade.NormalFullgrownOnly()
+                        local hasPets = Trade.AcceptNegotiationAndConfirm()
+                        if not hasPets then
+                            petsToggle1:Set(false)
+                        end
+                        task.wait()
+                    end
+                end,
+            })
+            petsToggle2 = TradeTab:CreateToggle({
+                Name = 'Auto Trade Normal Newborn to Postteen Only',
+                CurrentValue = false,
+                Flag = 'Toggle1',
+                Callback = function(Value)
+                    getgenv().autoTrading = Value
+                    while getgenv().autoTrading do
+                        if selectedPlayer then
+                            Trade.SendTradeRequest({selectedPlayer})
+                        end
+                        Trade.NormalNewbornToPostteen()
+                        local hasPets = Trade.AcceptNegotiationAndConfirm()
+                        if not hasPets then
+                            petsToggle2:Set(false)
+                        end
+                        task.wait()
+                    end
+                end,
+            })
 
             TradeTab:CreateSection('Multiple Choice')
 
