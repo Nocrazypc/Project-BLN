@@ -10215,7 +10215,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         local Fusion = __DARKLUA_BUNDLE_MODULES.load('h')
         local PetRelease = __DARKLUA_BUNDLE_MODULES.load('y')
         local self = {}
-        local UpdateTextEvent = (ReplicatedStorage:WaitForChild('UpdateTextEvent'))
+        --local UpdateTextEvent = (ReplicatedStorage:WaitForChild('UpdateTextEvent'))
         local localPlayer = Players.LocalPlayer
         local rng = Random.new(DateTime.now().UnixTimestamp)
         local jobId = game.JobId
