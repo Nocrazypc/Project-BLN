@@ -9894,6 +9894,283 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         end
         return Ailment
     end
+   function __DARKLUA_BUNDLE_MODULES.x()
+        local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
+        local Players = cloneref(game:GetService('Players'))
+        local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
+        local ClientData = Bypass('ClientData')
+        local RouterClient = Bypass('RouterClient')
+        local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
+        local GetInventory = __DARKLUA_BUNDLE_MODULES.load('i')
+        local Fusion = __DARKLUA_BUNDLE_MODULES.load('h')
+        local Teleport = __DARKLUA_BUNDLE_MODULES.load('f')
+        local FarmingPet = {}
+        local localPlayer = Players.LocalPlayer
+        local petToBuy = 'aztec_egg_2025_aztec_egg'
+        local potionFarmPets = {
+            'dog',
+            'cat',
+            'starter_egg',
+            'cracked_egg',
+            'basic_egg_2022_ant',
+            'basic_egg_2022_mouse',
+        }
+        local petEggs = GetInventory.GetPetEggs()
+        local farmEgg = function()
+            if not Utils.IsPetEquipped(1) then
+                FarmingPet.GetPetToFarm(1)
+            end
+            local petName = tostring(ClientData.get('pet_char_wrappers')[1].char)
+            if petName:match('Egg') then
+                return true
+            end
+            if GetInventory.CheckForPetAndEquip({
+                'aztec_egg_2025_aztec_egg',
+            }, 1) then
+                return true
+            else
+                local hasMoney = RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'aztec_egg_2025_aztec_egg', {})
+                if hasMoney then
+                    return true
+                end
+                return false
+            end
+        end
+        local isfocusFarmPets = function()
+            local equippedPet = ClientData.get('pet_char_wrappers') and ClientData.get('pet_char_wrappers')[1]
+            if not equippedPet then
+                return false
+            end
+            local petId = equippedPet.pet_id
+            if not petId then
+                return false
+            end
+            local result = table.find(potionFarmPets, petId) and true or false
+            return result
+        end
+        local isProHandler = function()
+            local subscription = ClientData.get_data()[localPlayer.Name].subscription_equip_2x_pets
+            if not subscription then
+                localPlayer:SetAttribute('isProHandler', false)
+                return
+            end
+            localPlayer:SetAttribute('isProHandler', subscription.active)
+        end
+        local getEgg = function()
+            for _, v in ClientData.get_data()[localPlayer.Name].inventory.pets do
+                if v.id == petToBuy and v.id ~= 'practice_dog' and v.properties.age ~= 6 and not v.properties.mega_neon then
+                    RouterClient.get('ToolAPI/Equip'):InvokeServer(v.unique, {
+                        ['use_sound_delay'] = true,
+                    })
+                    getgenv().petCurrentlyFarming1 = v.unique
+                    return true
+                end
+            end
+            local BuyEgg = RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', petToBuy, {})
+            if BuyEgg == 'too little money' then
+                return false
+            end
+            return false
+        end
+        function FarmingPet.SwitchOutFullyGrown(whichPet)
+            if localPlayer:GetAttribute('StopFarmingTemp') == true then
+                return
+            end
+            if not ClientData.get('pet_char_wrappers')[whichPet] then
+                if not Utils.ReEquipPet(whichPet) then
+                    Utils.PrintDebug('switchOutFullyGrown: GETTING NEW PETS')
+                    FarmingPet.GetPetToFarm(whichPet)
+                    return
+                end
+                task.wait(1)
+            end
+            local PetAge = ClientData.get('pet_char_wrappers')[whichPet]['pet_progression']['age']
+            if PetAge == 6 then
+                if getgenv().SETTINGS.PET_AUTO_FUSION then
+                    Fusion.MakeMega(false)
+                    Fusion.MakeMega(true)
+                end
+                FarmingPet.GetPetToFarm(whichPet)
+                return
+            end
+        end
+        function FarmingPet.GetPetToFarm(whichPet)
+            if getgenv().SETTINGS.FOCUS_FARM_AGE_POTION then
+                if whichPet == 1 and isfocusFarmPets() then
+                    Utils.PrintDebug(string.format('Has focusFarmpets equipped, %s', tostring(whichPet)))
+                    return
+                end
+                isProHandler()
+                if whichPet == 2 and localPlayer:GetAttribute('isProHandler') == true and getgenv().petCurrentlyFarming2 then
+                    return
+                end
+                Utils.PrintDebug(string.format('\u{1f414}\u{1f414} Getting pet to Farm age up potion, %s \u{1f414}\u{1f414}', tostring(whichPet)))
+                if GetInventory.CheckForPetAndEquip({
+                    'starter_egg',
+                }, whichPet) then
+                    return
+                end
+                Utils.PrintDebug(string.format('\u{1f414}\u{1f414} No starter egg found, trying cdog or cat %s \u{1f414}\u{1f414}', tostring(whichPet)))
+                if GetInventory.GetPetFriendship(potionFarmPets, whichPet) then
+                    return
+                end
+                Utils.PrintDebug(string.format('\u{1f414}\u{1f414} No friendship pet. checking if pet without friend exist %s \u{1f414}\u{1f414}', tostring(whichPet)))
+                if GetInventory.CheckForPetAndEquip(potionFarmPets, whichPet) then
+                    return
+                end
+                if GetInventory.CheckForPetAndEquip({
+                    'cracked_egg',
+                }, whichPet) then
+                    return
+                end
+                Utils.PrintDebug(string.format('\u{1f414}\u{1f414} No cracked egg found, buying it %s \u{1f414}\u{1f414}', tostring(whichPet)))
+                local hasMoney = RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'cracked_egg', {})
+                Utils.PrintDebug(string.format('hasMoney: %s', tostring(hasMoney)))
+                if hasMoney then
+                    return
+                end
+            end
+            if getgenv().SETTINGS.HATCH_EGG_PRIORITY then
+                if GetInventory.PriorityEgg(whichPet) then
+                    return
+                end
+            end
+            if getgenv().SETTINGS.PET_ONLY_PRIORITY then
+                if GetInventory.PriorityPet(whichPet) then
+                    return
+                end
+            end
+            if GetInventory.GetNeonPet(whichPet) then
+                return
+            end
+            if GetInventory.PetRarityAndAge('legendary', 5, whichPet) then
+                return
+            end
+            if GetInventory.PetRarityAndAge('ultra_rare', 5, whichPet) then
+                return
+            end
+            if GetInventory.PetRarityAndAge('rare', 5, whichPet) then
+                return
+            end
+            if GetInventory.PetRarityAndAge('uncommon', 5, whichPet) then
+                return
+            end
+            if GetInventory.PetRarityAndAge('common', 5, whichPet) then
+                return
+            end
+            if getEgg() then
+                return
+            end
+            return
+        end
+        function FarmingPet.CheckIfEgg(whichPet)
+            if not ClientData.get('pet_char_wrappers') then
+                return
+            end
+            if not ClientData.get('pet_char_wrappers')[whichPet] then
+                return
+            end
+            if table.find(petEggs, ClientData.get('pet_char_wrappers')[whichPet].pet_id) then
+                return
+            end
+            Utils.PrintDebug(string.format('NOT A EGG SO GETTING NEW EGG %s', tostring(whichPet)))
+            FarmingPet.GetPetToFarm(whichPet)
+            return
+        end
+        function FarmingPet.GetTaskBoardPet(whichPet)
+            Utils.PrintDebug('Getting Task Board Pet')
+            if not Utils.IsPetEquipped(whichPet) then
+                FarmingPet.GetPetToFarm(whichPet)
+            end
+            for _, v in ClientData.get('quest_manager')['quests_cached']do
+                if v['entry_name']:match('house_pets_2025_potion_drank') then
+                    for _, v in ClientData.get_data()[localPlayer.Name].inventory.food do
+                        if v['id'] == 'pet_grow_potion' then
+                            Utils.PrintDebug('Found potion, using it')
+                            Utils.CreatePetObject(v['unique'])
+                            return true
+                        end
+                    end
+                    if Utils.BucksAmount() >= 10000 then
+                        Utils.PrintDebug('Buying grow potion')
+                        RouterClient.get('ShopAPI/BuyItem'):InvokeServer('food', 'pet_grow_potion', {buy_count = 1})
+                        task.wait(1)
+                    end
+                end
+            end
+            for _, v in ClientData.get('quest_manager')['quests_cached']do
+                if v['entry_name']:match('house_pets_2025_small_hatch_egg') or v['entry_name']:match('house_pets_2025_medium_hatch_egg') then
+                    Utils.PrintDebug('Buying Farming Egg')
+                    if farmEgg() then
+                        return true
+                    end
+                end
+            end
+            for _, v in ClientData.get('quest_manager')['quests_cached']do
+                if v['entry_name']:match('house_pets_2025_buy_gumball_egg') then
+                    if Utils.BucksAmount() >= 10000 then
+                        Utils.PrintDebug('Buying gumball egg')
+                        Teleport.Nursery()
+                        RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'aztec_egg_2025_aztec_egg', {})
+                    end
+                end
+            end
+            for _, v in ClientData.get('quest_manager')['quests_cached']do
+                if v['entry_name']:match('house_pets_2025_large_ailments_common') then
+                    if GetInventory.GetPetRarity() == 'common' then
+                        return true
+                    end
+                    if GetInventory.PetRarityAndAge('common', 6, whichPet) then
+                        return true
+                    end
+                end
+            end
+            for _, v in ClientData.get('quest_manager')['quests_cached']do
+                if v['entry_name']:match('house_pets_2025_large_ailments_uncommon') then
+                    if GetInventory.GetPetRarity() == 'uncommon' then
+                        return true
+                    end
+                    if GetInventory.PetRarityAndAge('uncommon', 6, whichPet) then
+                        return true
+                    end
+                end
+            end
+            for _, v in ClientData.get('quest_manager')['quests_cached']do
+                if v['entry_name']:match('house_pets_2025_large_ailments_rare') then
+                    if GetInventory.GetPetRarity() == 'rare' then
+                        return true
+                    end
+                    if GetInventory.PetRarityAndAge('rare', 6, whichPet) then
+                        return true
+                    end
+                end
+            end
+            for _, v in ClientData.get('quest_manager')['quests_cached']do
+                if v['entry_name']:match('house_pets_2025_large_ailments_ultra_rare') then
+                    if GetInventory.GetPetRarity() == 'ultra_rare' then
+                        return true
+                    end
+                    if GetInventory.PetRarityAndAge('ultra_rare', 6, whichPet) then
+                        return true
+                    end
+                end
+            end
+            for _, v in ClientData.get('quest_manager')['quests_cached']do
+                if v['entry_name']:match('house_pets_2025_large_ailments_legendary') then
+                    if GetInventory.GetPetRarity() == 'legendary' then
+                        return true
+                    end
+                    if GetInventory.PetRarityAndAge('legendary', 6, whichPet) then
+                        return true
+                    end
+                end
+            end
+            return false
+        end
+        return FarmingPet
+    end
+
+
 
     function __DARKLUA_BUNDLE_MODULES.C()
         local HalloweenHandler2025 = {}
