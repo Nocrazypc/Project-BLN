@@ -1001,6 +1001,61 @@ do
                 end
             end
         end
+        function self.NormalFullgrownOnly()
+            if not waitForActiveTrade() then
+                return
+            end
+            local waitForAdded = 0
+            for _, pet in ClientData.get_data()[localPlayer.Name].inventory.pets do
+                if table.find(AllowOrDenyList.Denylist, pet.id) then
+                    continue
+                end
+                if getgenv().SETTINGS.ENABLE_RELEASE_PETS == true and table.find(getgenv().SETTINGS.PETS_TO_AGE_IN_PEN, pet.id) then
+                    continue
+                end
+                if pet.properties.age == 6 and not (pet.properties.neon or pet.properties.mega_neon) then
+                    if not ClientData.get_data()[localPlayer.Name].in_active_trade then
+                        return
+                    end
+                    if #ClientData.get_data()[localPlayer.Name].trade.sender_offer.items >= 18 then
+                        return
+                    end
+                    RouterClient.get('TradeAPI/AddItemToOffer'):FireServer(pet.unique)
+                    waitForAdded = waitForAdded + 1
+                    repeat
+                        task.wait(0.1)
+                    until #ClientData.get_data()[localPlayer.Name].trade.sender_offer.items >= waitForAdded or not ClientData.get_data()[localPlayer.Name].in_active_trade
+                end
+            end
+        end
+        function self.NormalNewbornToPostteen()
+            if not waitForActiveTrade() then
+                return
+            end
+            local waitForAdded = 0
+            for _, pet in ClientData.get_data()[localPlayer.Name].inventory.pets do
+                if table.find(AllowOrDenyList.Denylist, pet.id) then
+                    continue
+                end
+                if getgenv().SETTINGS.ENABLE_RELEASE_PETS == true and table.find(getgenv().SETTINGS.PETS_TO_AGE_IN_PEN, pet.id) then
+                    continue
+                end
+                if pet.properties.age <= 5 and not (pet.properties.neon or pet.properties.mega_neon) then
+                    if not ClientData.get_data()[localPlayer.Name].in_active_trade then
+                        return
+                    end
+                    if #ClientData.get_data()[localPlayer.Name].trade.sender_offer.items >= 18 then
+                        return
+                    end
+                    RouterClient.get('TradeAPI/AddItemToOffer'):FireServer(pet.unique)
+                    waitForAdded = waitForAdded + 1
+                    repeat
+                        task.wait(0.1)
+                    until #ClientData.get_data()[localPlayer.Name].trade.sender_offer.items >= waitForAdded or not ClientData.get_data()[localPlayer.Name].in_active_trade
+                    task.wait(0.1)
+                end
+            end
+        end
         function self.AllPetsOfSameRarity(rarity)
             inActiveTrade()
 
