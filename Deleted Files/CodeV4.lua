@@ -10388,6 +10388,11 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     if not Ailment.PlayAilment(key, petUnique) then
                         return false
                     end
+	
+                    return true
+                elseif key == 'wear_scare' then
+                    Ailment.HalloweenWalkAilment(petUnique)
+
                     return true
                 end
             end
