@@ -3486,16 +3486,6 @@ do
                 end
             end
         end
-        local onTextChangedMiniGame = function()
-            local hasStartedFarming = localPlayer:GetAttribute('hasStartedFarming')
-
-            if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame and hasStartedFarming then
-            task.wait(1)
-                Utils.FindButton('No')
-            else
-                Utils.FindButton('No')
-            end
-        end
         local friendTradeAccept = function()
             local dialogFrame = (DialogApp:WaitForChild('Dialog'))
 
