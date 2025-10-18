@@ -11055,9 +11055,9 @@ if game.PlaceId ~= 920587237 then
 end
 --setfpscap(getgenv().SETTINGS.SET_FPS or 2)
 
-local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
+local ReplicatedStorage = game:GetService('ReplicatedStorage')
 --local GuiService = game:GetService('GuiService')
-local Players = cloneref(game:GetService('Players'))
+local Players = game:GetService('Players')
 local UserGameSettings = UserSettings():GetService('UserGameSettings')
 
 UserGameSettings.GraphicsQualityLevel = 1
