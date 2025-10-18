@@ -2101,9 +2101,6 @@ do
 
             while true do
                 for _, petId in ipairs(petIdList)do
-                    if petId == 'pet_recycler_2025_crystal_egg' then
-                        continue
-                    end
 
                     for _, pet in ClientData.get_data()[localPlayer.Name].inventory.pets do
                         if petId ~= pet.id then
