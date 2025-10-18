@@ -10428,9 +10428,13 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     task.wait(2)
                     Teleport.FarmingHome()
                     return true
-                --[[elseif key == 'scale_the_organ' then
+                elseif key == 'scale_the_organ' then
+                    RunService:Set3dRenderingEnabled(false) -- 3D Off
                     Ailment.ScaleTheOrgan()
-                    return true--]]
+                    task.wait(3)
+                    RunService:Set3dRenderingEnabled(true) -- 3D On
+                    Teleport.FarmingHome()
+                    return true
                 end
             end
             for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
