@@ -3388,6 +3388,35 @@ do
         local certificateConn
         local starterPackAppConn
         local RunService = game:GetService("RunService")
+        local patterns = {
+            ['Be careful when trading'] = 'Okay',
+            ['This trade seems unbalanced'] = 'Next',
+            ['Social Stones!'] = 'Okay',
+            ['sent you a trade request'] = 'Accept',
+            ['Trade request from'] = 'Okay',
+            ['Any items lost'] = 'I understand',
+            ['4.5%% Legendary'] = 'Okay',
+            ['You have been awarded'] = 'Awesome!',
+            ['Thanks for subscribing!'] = 'Okay',
+            ["Let's start the day"] = 'Start',
+            ['Are you subscribed'] = 'Yes',
+            ['your inventory!'] = 'Awesome!',
+            ["You've chosen this"] = 'Yes',
+            ['You can change this option'] = 'Okay',
+            ['You have enough'] = 'Okay',
+            ['Thanks for'] = 'Okay',
+            ['Right now'] = 'Next',
+            ['You can customize it'] = 'Start',
+            ['Your subscription'] = 'Okay!',
+            ['You have been refunded'] = 'Awesome!',
+            ["You can't afford this"] = 'Okay',
+            ['mailbox'] = 'Okay',
+            ['Pay 1500 Bucks'] = 'Yes',
+            ['Pet Pen!'] = 'Go to Pet Pen',
+            ['The Homepass has been restarted'] = 'Okay',
+            ['Costume Party starts'] = 'Okay',
+            ['Step away from'] = 'Okay',
+        }
         local getNormalDialogTextLabel = function()
             local Dialog = (DialogApp and {
                 (DialogApp:FindFirstChild('Dialog')),
