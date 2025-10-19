@@ -10750,7 +10750,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         local getRoomInstanceFor = function(round)
             local rooms = HauntletMinigameClient.instanced_minigame and HauntletMinigameClient.instanced_minigame.interior and HauntletMinigameClient.instanced_minigame.interior:FindFirstChild('Rooms')
             if not rooms then
-                print('DIDNT FIND ROOMS FOLDER')
+                -- print('DIDNT FIND ROOMS FOLDER')
                 return
             end
             return rooms:FindFirstChild(round)
@@ -10905,7 +10905,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
 
             teleportToDeposit()
             kockOnDoors(minigameId)
-            print(' TRICK OR TREAT FINISHED ')
+            -- print(' TRICK OR TREAT FINISHED ')
         end
         function HalloweenHandler2025.Init()
             --print('HalloweenHandler2025 Initialized')
