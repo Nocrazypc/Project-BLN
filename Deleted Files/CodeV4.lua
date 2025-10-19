@@ -5816,7 +5816,7 @@ This version of Rayfield is intended for interface build ]] .. InterfaceBuild ..
         end
 
         function RayfieldLibrary:CreateWindow(Settings)
-            print('creating window')
+            --print('creating window')
 
             if Rayfield:FindFirstChild('Loading') then
                 if getgenv and not getgenv().rayfieldCached then
