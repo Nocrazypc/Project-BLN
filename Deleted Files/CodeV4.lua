@@ -10782,9 +10782,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 end
                 if entryName == doorEntryName then
                     if not keyName or getInventoryCountFor(keyName) >= 1 then
-                        Utils.GetCharacter():MoveTo(v:GetPivot().Position - Vector3.new(
--5, 0, 0))
-                        task.wait(1)
                         pickDoor(minigameId, round, doorNumber)
                         print(string.format('Picked Door from - round: %s door: %s name: %s', tostring(round), tostring(doorNumber), tostring(doorEntryName)))
                         return true
