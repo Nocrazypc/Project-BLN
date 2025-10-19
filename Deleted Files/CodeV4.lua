@@ -10833,14 +10833,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
 
                 local doorChecks = {
                     {
-                        type = 'Golden',
-                        key = 'GoldenKey',
-                    },
-                    {
-                        type = 'Locked',
-                        key = 'Key',
-                    },
-                    {
                         type = 'Shadow',
                     },
                     {
