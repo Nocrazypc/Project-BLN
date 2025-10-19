@@ -10417,7 +10417,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 elseif key == 'camping' then
                     Teleport.PlaceFloorAtCampSite()
                     Ailment.CampingAilment(petUnique)
-                    task.wait(160) -- test
+                    task.wait(140) -- test
                     Teleport.FarmingHome()
                     return true
                elseif key == 'buccaneer_band' then
