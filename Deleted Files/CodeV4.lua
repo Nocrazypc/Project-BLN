@@ -10431,10 +10431,8 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     Teleport.FarmingHome()
                     return true
                 elseif key == 'scale_the_organ' then
-                    RunService:Set3dRenderingEnabled(false) -- 3D Off
                     Ailment.ScaleTheOrgan()
-                    task.wait(3)
-                    RunService:Set3dRenderingEnabled(true) -- 3D On
+                    task.wait(2)
                     Teleport.FarmingHome()
                     return true
                 end
