@@ -10283,10 +10283,8 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     Ailment.BabyDirtyAilment(furniture.stylishshower)
                     return
                 elseif key == 'scale_the_organ' then
-                    RunService:Set3dRenderingEnabled(false) -- 3D Off
                     Ailment.ScaleTheOrgan()
                     task.wait(3)
-                    RunService:Set3dRenderingEnabled(true) -- 3D On
                     Teleport.FarmingHome()
                     return true
                 end
