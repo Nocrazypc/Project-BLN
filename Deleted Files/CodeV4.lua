@@ -10287,6 +10287,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     Ailment.ScaleTheOrgan()
                     task.wait(3)
                     RunService:Set3dRenderingEnabled(true) -- 3D On
+                    Teleport.FarmingHome()
                     return true
                 end
             end
