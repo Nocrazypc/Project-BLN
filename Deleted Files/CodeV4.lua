@@ -9304,7 +9304,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         local GetInventory = __DARKLUA_BUNDLE_MODULES.load('i')
         local Teleport = __DARKLUA_BUNDLE_MODULES.load('f')
         local localPlayer = Players.LocalPlayer
-        local RunService = game:GetService("RunService")
         local doctorId = nil
         Ailment.whichPet = 1
         local consumeFood = function()
@@ -9791,7 +9790,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             getUpFromSitting()
         end
         function Ailment.ScaleTheOrgan()
-            RunService:Set3dRenderingEnabled(false) -- 3D Off
             Utils.PrintDebug('\u{1f3b9} Doing scale the organ \u{1f3b9}')
             if not Teleport.PipeOrgan() then
                 return
@@ -9830,7 +9828,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 end
                 Utils.MoveToWithTimeout(localPlayer.Character.Humanoid, key.PrimaryPart.Position, 10)
             end
-                RunService:Set3dRenderingEnabled(true) -- 3D On
         end
         function Ailment.Popcorn()
             Utils.PrintDebug('\u{1f37f} Doing popcorn task \u{1f37f}')
