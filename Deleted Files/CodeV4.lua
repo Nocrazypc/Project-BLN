@@ -9833,7 +9833,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             Utils.PrintDebug('\u{1f37f} Doing popcorn task \u{1f37f}')
             for i = 1, 6 do
                 RouterClient.get('HalloweenEventAPI/ClaimLilyPadCandy'):FireServer(i)
-                print(string.format('Claimed lilypad candy %s', tostring(i)))
+                --print(string.format('Claimed lilypad candy %s', tostring(i)))
                 task.wait(1)
             end
         end
