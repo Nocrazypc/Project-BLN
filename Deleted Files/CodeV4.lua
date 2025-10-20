@@ -10463,18 +10463,17 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                         return
                     end
                     if localPlayer:GetAttribute('StopFarmingTemp') == true then
-		                local count = 0
-		
+                        local count = 0
+
                         repeat
-			
                             Utils.PrintDebug('Stopping because its buying or aging or in minigame')
 
                             count = count + 20
-			
+
                             task.wait(20)
                         until localPlayer:GetAttribute('StopFarmingTemp') == false or count >= 180
-		
-                        localPlayer:SetAttribute('StopFarmingTemp', false)		
+
+                        localPlayer:SetAttribute('StopFarmingTemp', false)
                     end
 		
                     Utils.RemoveHandHeldItem()
