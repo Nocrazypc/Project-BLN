@@ -10876,6 +10876,11 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     },
                 }
 
+                instancedMinigame = HauntletMinigameClient.instanced_minigame
+                if not instancedMinigame then
+                    return
+                end
+
                 for _, check in ipairs(doorChecks)do
                     local round = instancedMinigame.round or 0
 
