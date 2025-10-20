@@ -10383,7 +10383,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     if furniture.stylishshower == 'nil' then
                         continue
                     end
-                    --task.wait(65) -- test
                     Ailment.DirtyAilment(furniture.stylishshower, petUnique)
                     return true
                 elseif key == 'walk' then
