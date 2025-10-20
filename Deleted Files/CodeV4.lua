@@ -10915,7 +10915,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             Utils.GetCharacter():MoveTo(depositPosition + Vector3.new(0, 5, 0))
         end
         local kockOnDoors = function(minigameId)
-            if not TreatDashClient.instanced_minigame then
+            if not (TreatDashClient.instanced_minigame and TreatDashClient.instanced_minigame.houses) then
                 return
             end
 
