@@ -11280,3 +11280,6 @@ pcall(function()
         Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
     end
 end)
+
+task.wait(3)     
+localPlayer:SetAttribute('hasStartedFarming', true)
