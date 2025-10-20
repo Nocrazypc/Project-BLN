@@ -10852,20 +10852,14 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                         end
                     end
                 end
-                if getInventoryCountFor('MonsterRepellant') >= 1 then
-                    useItemForHauntlet(minigameId, 'MonsterRepellant')
-                    task.wait(1)
-                end
 
                 local doorChecks = {
                     {
-                        type = 'Golden',
-                        key = 'GoldenKey',
+                        type = 'Starter',
                     },
                     {
-                        type = 'Locked',
-                        key = 'Key',
-                    },		
+                        type = 'Normal',
+                    },
                     {
                         type = 'Shadow',
                     },
@@ -10873,10 +10867,12 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                         type = 'Rotten',
                     },
                     {
-                        type = 'Normal',
+                        type = 'Locked',
+                        key = 'Key',
                     },
                     {
-                        type = 'Starter',
+                        type = 'Golden',
+                        key = 'GoldenKey',
                     },
                 }
 
