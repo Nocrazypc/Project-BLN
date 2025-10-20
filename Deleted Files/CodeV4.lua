@@ -10463,11 +10463,18 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                         return
                     end
                     if localPlayer:GetAttribute('StopFarmingTemp') == true then
+		                local count = 0
+		
                         repeat
+			
                             Utils.PrintDebug('Stopping because its buying or aging or in minigame')
+
+                            count = count + 20
+			
                             task.wait(20)
-                        until localPlayer:GetAttribute('StopFarmingTemp') == false
+                        until localPlayer:GetAttribute('StopFarmingTemp') == false or count >= 180
                     end
+		
                     Utils.RemoveHandHeldItem()
                     if getgenv().SETTINGS.HATCH_EGG_PRIORITY or getgenv().HatchPriorityEggs then
                         FarmingPet.CheckIfEgg(1)
