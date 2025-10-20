@@ -11278,5 +11278,5 @@ pcall(function()
     end
 end)
 
-task.wait(20)     
+task.wait(60)     
 localPlayer:SetAttribute('hasStartedFarming', true)
