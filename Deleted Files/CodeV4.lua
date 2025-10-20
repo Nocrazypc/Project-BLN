@@ -10473,6 +10473,8 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
 			
                             task.wait(20)
                         until localPlayer:GetAttribute('StopFarmingTemp') == false or count >= 180
+		
+                        localPlayer:SetAttribute('StopFarmingTemp', false)		
                     end
 		
                     Utils.RemoveHandHeldItem()
