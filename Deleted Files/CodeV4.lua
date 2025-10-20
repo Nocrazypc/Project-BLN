@@ -9682,8 +9682,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         end
         function Ailment.CampingAilment(petUnique)
             Utils.PrintDebug(string.format('\u{1f3d5}\u{fe0f} Doing camping task on %s \u{1f3d5}\u{fe0f}', tostring(Ailment.whichPet)))
-            --Teleport.CampSite()
-	        Teleport.FarmingHome()  --- test to avoid camping teleport
+            Teleport.CampSite()
             task.wait(2)
             Utils.ReEquipPet(Ailment.whichPet)
             waitForTaskToFinish('camping', petUnique)
