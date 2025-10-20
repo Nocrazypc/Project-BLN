@@ -10743,10 +10743,32 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             RouterClient.get('MinigameAPI/MessageServer'):FireServer(hauntletId, 'player_selected_door', stageLevel, whichDoor)
         end
         local getPlayerHealth = function()
-            return HauntletMinigameClient.instanced_minigame.player_health[localPlayer].current
+            local instancedMinigame = HauntletMinigameClient.instanced_minigame
+
+            if not instancedMinigame then
+                return 0
+            end
+
+            local playersHealth = instancedMinigame.player_health
+
+            if not playersHealth then
+                return 0
+            end
+
+            return (playersHealth[localPlayer] and {
+                (playersHealth[localPlayer].current),
+            } or {0})[1]
         end
         local getInventoryCountFor = function(itemName)
-            return HauntletMinigameClient.instanced_minigame and HauntletMinigameClient.instanced_minigame.inventory[itemName] or 0
+            local instancedMinigame = HauntletMinigameClient.instanced_minigame
+
+            if not instancedMinigame then
+                return 0
+            end
+
+            return (instancedMinigame.inventory and {
+                (instancedMinigame.inventory[itemName]),
+            } or {0})[1]
         end
         local useItemForHauntlet = function(hauntletId, itemName)
             RouterClient.get('MinigameAPI/MessageServer'):FireServer(hauntletId, 'player_used_item', itemName)
