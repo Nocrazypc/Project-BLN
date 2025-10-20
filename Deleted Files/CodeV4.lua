@@ -10907,14 +10907,27 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             end
         end
         local teleportToDeposit = function()
-            local depositPosition = TreatDashClient.instanced_minigame.deposit:GetPivot().Position
+            local depositPosition = (TreatDashClient.instanced_minigame.deposit and {
+                (TreatDashClient.instanced_minigame.deposit:GetPivot().Position),
+            } or {nil})[1]
+
+            if not depositPosition then
+                return
+            end
 
             Utils.GetCharacter():MoveTo(depositPosition + Vector3.new(0, 5, 0))
         end
         local kockOnDoors = function(minigameId)
+            if not TreatDashClient.instanced_minigame then
+                return
+            end
+
             for _, house in ipairs(TreatDashClient.instanced_minigame.houses)do
                 for _ = 1, 3 do
                     if not TreatDashClient.instanced_minigame then
+                        return
+                    end
+                    if not house then
                         return
                     end
                     if house.disabled then
