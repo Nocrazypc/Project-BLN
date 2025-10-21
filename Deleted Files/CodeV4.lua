@@ -9789,7 +9789,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             waitForTaskToFinish('buccaneer_band', petUnique)
             getUpFromSitting()
         end
-        function Ailment.ScaleTheOrgan()
+        --[[function Ailment.ScaleTheOrgan()
             Utils.PrintDebug('\u{1f3b9} Doing scale the organ \u{1f3b9}')
             if not Teleport.PipeOrgan() then
                 return
@@ -9828,7 +9828,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 end
                 Utils.MoveToWithTimeout(localPlayer.Character.Humanoid, key.PrimaryPart.Position, 10)
             end
-        end
+        end--]]
         function Ailment.Popcorn()
             Utils.PrintDebug('\u{1f37f} Doing popcorn task \u{1f37f}')
             for i = 1, 6 do
