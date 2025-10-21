@@ -10537,7 +10537,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             Teleport.FarmingHome()
             Utils.PrintDebug('teleported to farming place')
             Utils.PrintDebug('Started Farming')
-            --localPlayer:SetAttribute('hasStartedFarming', true)
+            localPlayer:SetAttribute('hasStartedFarming', true)
             --tryToReleasePets()
             Utils.UnEquipAllPets()
             task.wait(2)
@@ -10548,6 +10548,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             end
             Utils.TryRedeemGoodieBag()
             startAutoFarm()
+            localPlayer:SetAttribute('StopFarmingTemp', true)
         end
         return self
     end
@@ -11288,4 +11289,4 @@ pcall(function()
 end)
 
 task.wait(180)     
-localPlayer:SetAttribute('hasStartedFarming', true)
+localPlayer:SetAttribute('StopFarmingTemp', false)
