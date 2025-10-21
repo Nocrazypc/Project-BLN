@@ -10472,7 +10472,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                             count = count + 20
 
                             task.wait(20)
-                        until localPlayer:GetAttribute('StopFarmingTemp') == false or count >= 180
+                        until localPlayer:GetAttribute('StopFarmingTemp') == false or count >= 220
 
                         localPlayer:SetAttribute('StopFarmingTemp', false)
                     end
