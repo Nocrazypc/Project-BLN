@@ -10287,6 +10287,11 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     task.wait(3)
                     Teleport.FarmingHome()
                     return true--]]
+
+	            elseif key == 'popcorn' then
+                    Ailment.Popcorn()
+                    return 
+
                 end
             end
         end
