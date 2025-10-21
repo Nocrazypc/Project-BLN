@@ -10419,7 +10419,8 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 elseif key == 'camping' then
                     Teleport.PlaceFloorAtCampSite()
                     Ailment.CampingAilment(petUnique)
-                    task.wait(130) -- test to keep tasks pending before sick task appears
+                    task.wait(2)
+                    --task.wait(130) -- test to keep tasks pending before sick task appears
                     Teleport.FarmingHome()
                     return true
                elseif key == 'buccaneer_band' then
