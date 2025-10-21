@@ -11293,5 +11293,5 @@ pcall(function()
     end
 end)
 
-task.wait(180)     
+task.wait(240)     
 localPlayer:SetAttribute('StopFarmingTemp', false)
