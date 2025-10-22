@@ -1641,8 +1641,7 @@ do
             CollisionsClient.set_collidable(false)
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
             SetLocationFunc('MainMap', 'Neighborhood/MainDoor', {})
-            local mainmapfall = Workspace.Interiors:WaitForChild(tostring(Workspace.Interiors:FindFirstChildWhichIsA('Model')))
-            local pianoStaircase = mainmapfall:WaitForChild('Event'):WaitForChild('PipeOrgan'):WaitForChild('PianoStaircase')
+
             if not pianoStaircase then
                 return false
             end
