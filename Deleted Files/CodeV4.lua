@@ -10736,7 +10736,9 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             RouterClient.get('MinigameAPI/MessageServer'):FireServer(minigame_id, 'try_select_pet_for_player', getgenv().petCurrentlyFarming1)
         end
         local getPetAccessories = function(module)
-            return module.instanced_minigame.accessory_kinds
+            return (module.instanced_minigame and {
+                (module.instanced_minigame.accessory_kinds),
+            } or {nil})[1]
         end
         local addItemToPet = function(minigameId)
             local accessories = getPetAccessories(FashionFrenzyMinigameClient)
