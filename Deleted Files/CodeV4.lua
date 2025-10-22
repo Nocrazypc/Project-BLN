@@ -10890,7 +10890,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     for _, item in ipairs(healItems)do
                         if getInventoryCountFor(item) >= 1 then
                             useItemForHauntlet(minigameId, item)
-                            task.wait(1)
 
                             break
                         end
