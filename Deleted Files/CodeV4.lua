@@ -535,18 +535,20 @@ do
         function self.GetFurnituresKey()
             Utils.PrintDebug('getting furniture ids')
 
-            for key, value in ClientData.get_data()[localPlayer.Name].house_interior.furniture do
-                if value.id == 'basiccrib' then
-                    furnitures['basiccrib'] = key
-                elseif value.id == 'stylishshower' or value.id == 'modernshower' then
-                    furnitures['stylishshower'] = key
-                    furnitures['modernshower'] = key
-                elseif value.id == 'piano' then
-                    furnitures['piano'] = key
-                elseif value.id == 'lures_2023_normal_lure' then
-                    furnitures['lures_2023_normal_lure'] = key
-                elseif value.id == 'ailments_refresh_2024_litter_box' then
-                    furnitures['ailments_refresh_2024_litter_box'] = key
+            if ClientData.get_data()[localPlayer.Name].house_interior then
+                for key, value in ClientData.get_data()[localPlayer.Name].house_interior.furniture do
+                    if value.id == 'basiccrib' then
+                        furnitures['basiccrib'] = key
+                    elseif value.id == 'stylishshower' or value.id == 'modernshower' then
+                        furnitures['stylishshower'] = key
+                        furnitures['modernshower'] = key
+                    elseif value.id == 'piano' then
+                        furnitures['piano'] = key
+                    elseif value.id == 'lures_2023_normal_lure' then
+                        furnitures['lures_2023_normal_lure'] = key
+                    elseif value.id == 'ailments_refresh_2024_litter_box' then
+                        furnitures['ailments_refresh_2024_litter_box'] = key
+                    end
                 end
             end
 
