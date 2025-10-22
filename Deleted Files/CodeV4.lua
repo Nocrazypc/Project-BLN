@@ -287,6 +287,10 @@ do
             local minutes = math.floor((currentTime % 3600) / 60)
             local seconds = currentTime % 60
 
+            if hours >= 24 then
+                game:Shutdown()
+            end
+			
             return string.format('%02d:%02d:%02d', hours, minutes, seconds)
         end
         function Utils.ClickGuiButton(button, xOffset, yOffset)
