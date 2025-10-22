@@ -9868,6 +9868,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 --print(string.format('Claimed lilypad candy %s', tostring(i)))
                 task.wait(2)
             end
+            Utils.ReEquipPet(Ailment.whichPet) --test
         end
         function Ailment.BabyHungryAilment()
             Utils.PrintDebug('\u{1f476}\u{1f374} Doing baby hungry task \u{1f476}\u{1f374}')
