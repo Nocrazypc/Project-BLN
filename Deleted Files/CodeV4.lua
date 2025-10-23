@@ -10253,6 +10253,10 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         local FarmingPet = __DARKLUA_BUNDLE_MODULES.load('x')
         local Fusion = __DARKLUA_BUNDLE_MODULES.load('h')
         local PetRelease = __DARKLUA_BUNDLE_MODULES.load('y')
+	    local contentPacks = (ReplicatedStorage:WaitForChild('SharedModules'):WaitForChild('ContentPacks'))
+        local HauntletMinigameClient = (require(contentPacks.Halloween2025.Minigames.HauntletMinigameClient))
+        local FashionFrenzyMinigameClient = (require(contentPacks.Halloween2025.Minigames.FashionFrenzyMinigameClient))
+        local TreatDashClient = (require(contentPacks.Halloween2025.Minigames.TreatDashClient))
         local self = {}
         --local UpdateTextEvent = (ReplicatedStorage:WaitForChild('UpdateTextEvent'))
         local localPlayer = Players.LocalPlayer
