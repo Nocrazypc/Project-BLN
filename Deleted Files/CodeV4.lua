@@ -11010,13 +11010,21 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             HauntletInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function(
             )
                 if HauntletInGameApp.Enabled then
-				    RunService:Set3dRenderingEnabled(false) -- 3D Off
-                    HauntletInGameApp:WaitForChild('Body')
-                    HauntletInGameApp.Body:WaitForChild('Middle')
-                    HauntletInGameApp.Body.Middle:WaitForChild('Container')
-                    HauntletInGameApp.Body.Middle.Container:WaitForChild('TitleLabel')
+		            if not HauntletInGameApp:WaitForChild('Body', 10) then
+                        return
+                    end
+                    if not HauntletInGameApp.Body:WaitForChild('Middle', 10) then
+                        return
+                    end
+                    if not HauntletInGameApp.Body.Middle:WaitForChild('Container', 10) then
+                        return
+                    end
+                    if not HauntletInGameApp.Body.Middle.Container:WaitForChild('TitleLabel', 10) then
+                        return
+                    end
                     if localPlayer:GetAttribute('hasStartedFarming') == true then
                         localPlayer:SetAttribute('StopFarmingTemp', true)
+						RunService:Set3dRenderingEnabled(false) -- 3D Off
                         task.wait(2)
                         startHauntlet()
                         localPlayer:SetAttribute('StopFarmingTemp', false)
@@ -11028,13 +11036,21 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             FashionFrenzyInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function(
             )
                 if FashionFrenzyInGameApp.Enabled then
-				    RunService:Set3dRenderingEnabled(false) -- 3D Off
-                    FashionFrenzyInGameApp:WaitForChild('Body')
-                    FashionFrenzyInGameApp.Body:WaitForChild('Middle')
-                    FashionFrenzyInGameApp.Body.Middle:WaitForChild('Container')
-                    FashionFrenzyInGameApp.Body.Middle.Container:WaitForChild('TitleLabel')
+                    if not FashionFrenzyInGameApp:WaitForChild('Body', 10) then
+                        return
+                    end
+                    if not FashionFrenzyInGameApp.Body:WaitForChild('Middle', 10) then
+                        return
+                    end
+                    if not FashionFrenzyInGameApp.Body.Middle:WaitForChild('Container', 10) then
+                        return
+                    end
+                    if not FashionFrenzyInGameApp.Body.Middle.Container:WaitForChild('TitleLabel', 10) then
+                        return
+                    end
                     if localPlayer:GetAttribute('hasStartedFarming') == true then
                         localPlayer:SetAttribute('StopFarmingTemp', true)
+						RunService:Set3dRenderingEnabled(false) -- 3D Off
                         task.wait(2)
                         startFashionFrenzy()
                         localPlayer:SetAttribute('StopFarmingTemp', false)
@@ -11046,15 +11062,22 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             MinigameInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function(
             )
                 if MinigameInGameApp.Enabled then
-				    RunService:Set3dRenderingEnabled(false) -- 3D Off			
-                    MinigameInGameApp:WaitForChild('Body')
-                    MinigameInGameApp.Body:WaitForChild('Middle')
-                    MinigameInGameApp.Body.Middle:WaitForChild('Container')
-                    MinigameInGameApp.Body.Middle.Container:WaitForChild('TitleLabel')
-
+                    if not MinigameInGameApp:WaitForChild('Body', 10) then
+                        return
+                    end
+                    if not MinigameInGameApp.Body:WaitForChild('Middle', 10) then
+                        return
+                    end
+                    if not MinigameInGameApp.Body.Middle:WaitForChild('Container', 10) then
+                        return
+                    end
+                    if not MinigameInGameApp.Body.Middle.Container:WaitForChild('TitleLabel', 10) then
+                        return
+                    end
                     if MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('SLEEP OR TREAT') then
                         if localPlayer:GetAttribute('hasStartedFarming') == true then
                             localPlayer:SetAttribute('StopFarmingTemp', true)
+            			    RunService:Set3dRenderingEnabled(false) -- 3D Off
                             task.wait(2)
                             startTrickDash()
                             localPlayer:SetAttribute('StopFarmingTemp', false)
