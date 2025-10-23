@@ -10474,11 +10474,11 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     task.wait(2)
                     Teleport.FarmingHome()
                     return true
-                --[[elseif key == 'scale_the_organ' then
+                elseif key == 'scale_the_organ' then
                     Ailment.ScaleTheOrgan()
-                    task.wait(2)
+                    task.wait(3)
                     Teleport.FarmingHome()
-                    return true--]]
+                    return true
                 end
             end
             for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
