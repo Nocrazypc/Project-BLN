@@ -42,6 +42,11 @@ do
         end--]]
 		
         function Utils.TryRedeemGoodieBag()
+			
+            if localPlayer:GetAttribute('StopFarmingTemp') == true then
+                return
+            end
+			
             local catbatTime = ClientData.get_data()[localPlayer.Name].kitty_bat_manager.last_treat_claimed_timestamp
 
             if DateTime.now().UnixTimestamp > catbatTime + (600) + 5 then
