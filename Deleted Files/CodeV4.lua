@@ -10391,9 +10391,9 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     Ailment.PetMeAilment()
                     return true
 
-	                elseif key == 'popcorn' then
+	                --[[elseif key == 'popcorn' then
                     Ailment.Popcorn()
-                    return true
+                    return true--]]
 		
                 end
             end
