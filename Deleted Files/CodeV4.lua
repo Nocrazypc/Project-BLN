@@ -11176,7 +11176,7 @@ getgenv().loaded = true
 if game.PlaceId ~= 920587237 then
     return
 end
---setfpscap(getgenv().SETTINGS.SET_FPS or 2)
+setfpscap(getgenv().SETTINGS.SET_FPS or 4)
 
 local ReplicatedStorage = game:GetService('ReplicatedStorage')
 --local GuiService = game:GetService('GuiService')
