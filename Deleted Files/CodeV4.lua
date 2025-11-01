@@ -11162,7 +11162,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
     end
 end
 
---setfpscap(getgenv().SETTINGS.SET_FPS or 2)
+setfpscap(getgenv().SETTINGS.SET_FPS or 4)
 
 if not game:IsLoaded() then
     game.Loaded:Wait()
