@@ -10252,16 +10252,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     end
                     Ailment.BabyDirtyAilment(furniture.stylishshower)
                     return
-                --[[elseif key == 'scale_the_organ' then
-                    Ailment.ScaleTheOrgan()
-                    task.wait(3)
-                    Teleport.FarmingHome()
-                    return true--]]
-
-	            elseif key == 'popcorn' then
-                    Ailment.Popcorn()
-                    return true
-
                 end
             end
         end
