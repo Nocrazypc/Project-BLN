@@ -9765,6 +9765,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             end)
             waitForTaskToFinish('buccaneer_band', petUnique)
             getUpFromSitting()
+            end
         end
         function Ailment.BabyHungryAilment()
             Utils.PrintDebug('\u{1f476}\u{1f374} Doing baby hungry task \u{1f476}\u{1f374}')
