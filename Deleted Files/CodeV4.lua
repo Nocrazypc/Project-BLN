@@ -10543,9 +10543,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             if localPlayer:GetAttribute('isProHandler') == true then
             FarmingPet.GetPetToFarm(2)
             end
-            Utils.TryRedeemGoodieBag()
             startAutoFarm()
-            localPlayer:SetAttribute('StopFarmingTemp', true)
         end
         return self
     end
