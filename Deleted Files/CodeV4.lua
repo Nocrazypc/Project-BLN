@@ -10584,7 +10584,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         end
         return PetOfflineHandler
     end
-
+end
 --setfpscap(getgenv().SETTINGS.SET_FPS or 4)
 
 if not game:IsLoaded() then
