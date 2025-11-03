@@ -9690,19 +9690,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             end
             ReplicatedStorage.API:FindFirstChild('AdoptAPI/EjectBaby'):FireServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet]['char'])
         end
-        function Ailment.HalloweenWalkAilment(petUnique)
-            Utils.ReEquipPet(Ailment.whichPet)
-            Utils.PrintDebug(string.format('\u{1f9ae} Doing walking task on %s \u{1f9ae}', tostring(Ailment.whichPet)))
-            if not Utils.IsPetEquipped(Ailment.whichPet) then
-                return
-            end
-            ReplicatedStorage.API['AdoptAPI/HoldBaby']:FireServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet]['char'])
-            waitForJumpingToFinish('wear_scare', petUnique)
-            if not Utils.IsPetEquipped(Ailment.whichPet) then
-                return
-            end
-            ReplicatedStorage.API:FindFirstChild('AdoptAPI/EjectBaby'):FireServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet]['char'])
-        end
         function Ailment.RideAilment(strollerId, petUnique)
             if not strollerId then
                 Utils.PrintDebug(string.format('NO strollerId: %s', tostring(strollerId)))
