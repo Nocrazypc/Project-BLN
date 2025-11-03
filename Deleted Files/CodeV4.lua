@@ -10457,9 +10457,13 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             FarmingPet.GetPetToFarm(2)
             end
             startAutoFarm()
+
+            --localPlayer:SetAttribute('StopFarmingTemp', true)
         end
+
         return self
     end
+
     function __DARKLUA_BUNDLE_MODULES.A()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
