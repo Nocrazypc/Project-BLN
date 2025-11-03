@@ -10309,11 +10309,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 elseif key == 'pet_me' then
                     Ailment.PetMeAilment()
                     return true
-
-	                --[[elseif key == 'popcorn' then
-                    Ailment.Popcorn()
-                    return true--]]
-		
                 end
             end
             for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
