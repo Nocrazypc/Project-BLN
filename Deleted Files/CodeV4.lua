@@ -40,53 +40,6 @@ do
                 localPlayer:Kick()
             end
         end--]]
-		
-        function Utils.TryRedeemGoodieBag()
-			
-            if localPlayer:GetAttribute('StopFarmingTemp') == true then
-                return
-            end
-			
-            local catbatTime = ClientData.get_data()[localPlayer.Name].kitty_bat_manager.last_treat_claimed_timestamp
-
-            if DateTime.now().UnixTimestamp > catbatTime + (600) + 5 then
-                RouterClient.get('HalloweenEventAPI/ClaimTreatBag'):InvokeServer()
-	-----------------------------------------------------------------
-        local CoreGui = game:GetService("CoreGui")
-        local StarterGui = game:GetService("StarterGui")
-        StarterGui:SetCore(
-             "SendNotification",
-          {
-            Title = "Booooo! 👻",
-            Text = "Candies or Yarn Apples taken from the bag 🍬 🎃 🦇!"
-          }
-		)
-    -----------------------------------------------------------------
-                Utils.PrintDebug('\u{1f36c} Claimed cat Goodies Bag \u{1f36c}')
-            end
-        end
-		
-        function Utils.GetCatbatTamingProgress()
-            return ClientData.get_data()[localPlayer.Name].kitty_bat_manager.catbat_taming_progress or 0			
-			
-        end
-		
-        function Utils.MoveToWithTimeout(humanoid, target, timeout)
-            local reached = false
-            local connection
-            humanoid:MoveTo(target)
-            connection = humanoid.MoveToFinished:Connect(function(success)
-                reached = success
-            end)
-            local startTime = tick()
-            repeat
-                task.wait(0.1)
-            until reached or (tick() - startTime) >= timeout
-            if connection then
-                connection:Disconnect()
-            end
-            return reached
-        end		
 
         function Utils.PlaceFLoorUnderPlayer()
             if Workspace:FindFirstChild('FloorUnderPlayer') then
