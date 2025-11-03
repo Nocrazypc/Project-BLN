@@ -9766,46 +9766,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             waitForTaskToFinish('buccaneer_band', petUnique)
             getUpFromSitting()
         end
-        function Ailment.ScaleTheOrgan()
-            Utils.PrintDebug('\u{1f3b9} Doing scale the organ \u{1f3b9}')
-            if not Teleport.PipeOrgan() then
-                return
-            end
-            local mainMap = Workspace.Interiors:WaitForChild('MainMap!Fall', 10)
-            if not mainMap then
-                return
-            end
-            local event = mainMap:WaitForChild('Event', 10)
-            if not event then
-                return
-            end
-            local pipeOrgan = event:WaitForChild('PipeOrgan', 10)
-            if not pipeOrgan then
-                return
-            end
-            local pianoStaircase = pipeOrgan:WaitForChild('PianoStaircase', 10)
-            if not pianoStaircase then
-                return
-            end
-            local keys = pianoStaircase:WaitForChild('Keys', 10)
-            if not keys then
-                return
-            end
-            local newPosition = keys:WaitForChild('1').PrimaryPart.Position + Vector3.new(5, 0, 0)
-            localPlayer.Character:MoveTo(newPosition)
-            task.wait(1)
-            for i = 1, 29 do
-                if localPlayer:GetAttribute('StopFarmingTemp') == true then
-                    return
-                end
-                local key = keys and keys:FindFirstChild(tostring(i))
-                if not (key and key.PrimaryPart) then
-                    Utils.PrintDebug(string.format('No primary part for key index: %s', tostring(i)))
-                    return
-                end
-                Utils.MoveToWithTimeout(localPlayer.Character.Humanoid, key.PrimaryPart.Position, 10)
-            end
-        end
         function Ailment.BabyHungryAilment()
             Utils.PrintDebug('\u{1f476}\u{1f374} Doing baby hungry task \u{1f476}\u{1f374}')
             local stuckCount = 0
