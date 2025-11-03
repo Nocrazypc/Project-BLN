@@ -10374,18 +10374,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                         --game:Shutdown()
                         return
                     end
-                    if localPlayer:GetAttribute('StopFarmingTemp') == true then
-                        repeat
-                            Utils.PrintDebug('Stopping because its in minigame')
-                            task.wait(30)
-
-                            if not (HauntletMinigameClient.instanced_minigame or FashionFrenzyMinigameClient.instanced_minigame or TreatDashClient.instanced_minigame) then
-                                localPlayer:SetAttribute('StopFarmingTemp', false)
-                                print('no active minigames so setting StopFarmingTemp to false')
-                                task.wait(10)
-                            end
-                        until localPlayer:GetAttribute('StopFarmingTemp') == false
-                    end		
                     Utils.RemoveHandHeldItem()
                     if getgenv().SETTINGS.HATCH_EGG_PRIORITY or getgenv().HatchPriorityEggs then
                         FarmingPet.CheckIfEgg(1)
