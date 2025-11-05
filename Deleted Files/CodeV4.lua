@@ -10607,7 +10607,7 @@ local Players = game:GetService('Players')
 local UserGameSettings = UserSettings():GetService('UserGameSettings')
 
 UserGameSettings.GraphicsQualityLevel = 1
-UserGameSettings.MasterVolume = 0
+UserGameSettings.MasterVolume = 8
 
 --[[GuiService.Changed:Connect(function()
     if GuiService:GetErrorCode().Value == 0 then
