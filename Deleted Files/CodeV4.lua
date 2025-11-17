@@ -4026,7 +4026,7 @@ do
     end
 
     function __DARKLUA_BUNDLE_MODULES.q()  ----------- Claim taskboard   
-        local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
+       --[[ local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
         local ClientData = Bypass('ClientData')
@@ -4193,8 +4193,8 @@ do
             self.NewClaimBool = true
         end
 
-        return self
-    end
+        return self--]]
+    end 
 
     function __DARKLUA_BUNDLE_MODULES.r()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
