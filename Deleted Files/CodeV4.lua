@@ -10654,19 +10654,4 @@ pcall(function()
 end)
 -----------------------------------------------
 
-function farmGingerbreads()
-    local GingerbreadMarkers = ReplicatedStorage.Resources.IceSkating.GingerbreadMarkers
-    for _, v in GingerbreadMarkers:GetChildren() do
-        if v:IsA("BasePart") and not ClientData.get_data()[localPlayer.Name].winter_2025_gingerbread_captured_list[v.Name] then
-            ReplicatedStorage.API:FindFirstChild("WinterEventAPI/PickUpGingerbread"):InvokeServer(v.Name)
-        end
-    end
-    task.wait(1)
-    ReplicatedStorage.API:FindFirstChild("WinterEventAPI/RedeemPendingGingerbread"):FireServer()
-end
 
- task.spawn(function()
-     while task.wait(120) do
-     farmGingerbreads()
-	 end
-   end)
