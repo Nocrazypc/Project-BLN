@@ -10673,6 +10673,27 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             return false
         end
 
+        local tryCollectGingerbread = function()
+            for _, v in ipairs(ginerbreadIds)do
+                IceSkatingNet.PickUpGingerbread:fire_server({
+                    interior_name = 'MainMap!Christmas',
+                    gingerbread_id = v,
+                })
+                task.wait(0.1)
+            end
+
+            IceSkatingNet.RedeemPendingGingerbread:fire_server()
+        end
+        local tryExchangeGingerbread = function()
+            local usesLeft = ClientData.get_data()[localPlayer.Name].winter_2025_manager.exchange_kiosk_uses_left
+
+            if usesLeft == 0 then
+                return
+            end
+
+            RouterClient.get('WinterEventAPI/UseExchangeKiosk'):InvokeServer()
+        end
+
         function Christmas2025Handler.Init() end
         function Christmas2025Handler.Start()
             task.spawn(function()
@@ -10684,6 +10705,17 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     end
 
                     task.wait(18E2)
+                end
+            end)
+            tryCollectGingerbread()
+            RouterClient.get('WeatherAPI/WeatherUpdated').OnClientEvent:Connect(function(
+                dayOrNight
+            )
+                task.wait(2)
+
+                if dayOrNight == 'DAY' then
+                    tryCollectGingerbread()
+                    tryExchangeGingerbread()
                 end
             end)
         end
