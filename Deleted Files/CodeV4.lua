@@ -10640,11 +10640,15 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
     end
     function __DARKLUA_BUNDLE_MODULES.D()
         local ReplicatedStorage = game:GetService('ReplicatedStorage')
-        local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
-        local RouterClient = Bypass('RouterClient')
         local Players = game:GetService('Players')
-        local localPlayer = Players.LocalPlayer
+        local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
+        local ContentPacks = ReplicatedStorage:WaitForChild('SharedModules'):WaitForChild('ContentPacks')
+        local IceSkating = ContentPacks:WaitForChild('Winter2025'):WaitForChild('Game'):WaitForChild('IceSkating')
+        local IceSkatingNet = (require(IceSkating:WaitForChild('IceSkatingNet')))
+        local ginerbreadIds = __DARKLUA_BUNDLE_MODULES.load('C')
+        local RouterClient = Bypass('RouterClient')
         local ClientData = Bypass('ClientData')
+        local localPlayer = Players.LocalPlayer
         local Christmas2025Handler = {}
         local isRewardClaimed = function(dayNumber)
         local adventManager = ClientData.get_data()[localPlayer.Name].winter_2025_advent_manager
