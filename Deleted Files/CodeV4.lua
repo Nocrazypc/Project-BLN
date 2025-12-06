@@ -10653,12 +10653,6 @@ pcall(function()
     end
 end)
 -----------------------------------------------
-local RS = game:GetService("ReplicatedStorage")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local ClientData = require(RS.ClientModules.Core.ClientData)
-local Player = game:GetService("Players").LocalPlayer
-local HRP = Player.Character.HumanoidRootPart
-local RS = game.ReplicatedStorage
 
 function farmGingerbreads()
     local GingerbreadMarkers = ReplicatedStorage.Resources.IceSkating.GingerbreadMarkers
