@@ -3667,7 +3667,7 @@ do
                 DialogApp.Dialog.NormalDialog.Info:WaitForChild('TextLabel')
                 DialogApp.Dialog.NormalDialog.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
                 )
-                    if DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('The Hauntlet is starting') then
+                    if DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Bah Humbug is starting') then
                         task.wait(1)			
                         Utils.FindButton('No')
                     elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Costume Party is starting') then
