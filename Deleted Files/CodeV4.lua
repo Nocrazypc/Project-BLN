@@ -10410,8 +10410,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         end
         return PetOfflineHandler
     end
-end
-
+-------------------------------------------------
     function __DARKLUA_BUNDLE_MODULES.C()
         local ReplicatedStorage = game:GetService('ReplicatedStorage')
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
@@ -10457,6 +10456,7 @@ end
 
         return Christmas2025Handler
     end
+---------------------------------------------------------------
 end
 
 --setfpscap(getgenv().SETTINGS.SET_FPS or 4)
