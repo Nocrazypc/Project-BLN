@@ -10178,6 +10178,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     Teleport.FarmingHome()
                     return true
                 elseif key == 'camping' then
+			        getRewardFromAdventCalendar()
                     Teleport.PlaceFloorAtCampSite()
                     Ailment.CampingAilment(petUnique)
                     task.wait(130) -- test to keep tasks pending before sick task appears
