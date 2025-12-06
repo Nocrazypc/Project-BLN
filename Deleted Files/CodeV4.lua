@@ -10411,6 +10411,54 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         return PetOfflineHandler
     end
 end
+
+    function __DARKLUA_BUNDLE_MODULES.C()
+        local ReplicatedStorage = game:GetService('ReplicatedStorage')
+        local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
+        local RouterClient = Bypass('RouterClient')
+        local Players = game:GetService('Players')
+        local localPlayer = Players.LocalPlayer
+        local ClientData = Bypass('ClientData')
+        local Christmas2025Handler = {}
+        local isRewardClaimed = function(dayNumber)
+        local adventManager = ClientData.get_data()[localPlayer.Name].winter_2025_advent_manager
+
+            if not adventManager then
+                return nil
+            end
+            if not adventManager.rewards_claimed then
+                return nil
+            end
+            if adventManager.rewards_claimed[dayNumber] then
+                print('Reward ' .. dayNumber .. ' already claimed')
+
+                return true
+            end
+
+            print('Reward ' .. dayNumber .. ' not claimed yet')
+
+            return false
+        end
+
+        function Christmas2025Handler.Init() end
+        function Christmas2025Handler.Start()
+            task.spawn(function()
+                while true do
+                    local dt = (DateTime.now():ToLocalTime())
+
+                    if isRewardClaimed(dt.Day) == false then
+                        RouterClient.get('WinterEventAPI/AdventCalendarTryTakeReward'):InvokeServer(dt.Day)
+                    end
+
+                    task.wait(18E2)
+                end
+            end)
+        end
+
+        return Christmas2025Handler
+    end
+end
+
 --setfpscap(getgenv().SETTINGS.SET_FPS or 4)
 
 if not game:IsLoaded() then
@@ -10536,6 +10584,9 @@ local files = {
     },
     {
        PetOfflineHandler = __DARKLUA_BUNDLE_MODULES.load('B'),
+    },
+    {
+       Christmas2025Handler = __DARKLUA_BUNDLE_MODULES.load('C'),
     },
 }
 
