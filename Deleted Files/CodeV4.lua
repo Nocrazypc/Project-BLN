@@ -10652,4 +10652,27 @@ pcall(function()
         Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
     end
 end)
+-----------------------------------------------
+local RS = game:GetService("ReplicatedStorage")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ClientData = require(RS.ClientModules.Core.ClientData)
+local Player = game:GetService("Players").LocalPlayer
+local HRP = Player.Character.HumanoidRootPart
+local RS = game.ReplicatedStorage
 
+function farmGingerbreads()
+    for _, v in RS.Resources.IceSkating.GingerbreadMarkers:GetChildren() do
+        if v:IsA("BasePart") then
+            local a,b = RS.API:FindFirstChild("WinterEventAPI/PickUpGingerbread"):InvokeServer(v.Name)
+            task.wait()
+        end
+    end
+    task.wait(1)
+    RS.API:FindFirstChild("WinterEventAPI/RedeemPendingGingerbread"):FireServer()
+end
+
+ task.spawn(function()
+     while task.wait(120) do
+     farmGingerbreads()
+	 end
+   end)
