@@ -10661,14 +10661,14 @@ local HRP = Player.Character.HumanoidRootPart
 local RS = game.ReplicatedStorage
 
 function farmGingerbreads()
-    for _, v in RS.Resources.IceSkating.GingerbreadMarkers:GetChildren() do
-        if v:IsA("BasePart") then
-            local a,b = RS.API:FindFirstChild("WinterEventAPI/PickUpGingerbread"):InvokeServer(v.Name)
-            task.wait()
+    local GingerbreadMarkers = ReplicatedStorage.Resources.IceSkating.GingerbreadMarkers
+    for _, v in GingerbreadMarkers:GetChildren() do
+        if v:IsA("BasePart") and not ClientData.get_data()[localPlayer.Name].winter_2025_gingerbread_captured_list[v.Name] then
+            ReplicatedStorage.API:FindFirstChild("WinterEventAPI/PickUpGingerbread"):InvokeServer(v.Name)
         end
     end
     task.wait(1)
-    RS.API:FindFirstChild("WinterEventAPI/RedeemPendingGingerbread"):FireServer()
+    ReplicatedStorage.API:FindFirstChild("WinterEventAPI/RedeemPendingGingerbread"):FireServer()
 end
 
  task.spawn(function()
