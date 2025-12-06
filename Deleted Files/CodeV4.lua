@@ -10659,10 +10659,13 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             if not adventManager.rewards_claimed then
                 return nil
             end
-            if adventManager.rewards_claimed[dayNumber] then
-                print('Reward ' .. dayNumber .. ' already claimed')
 
-                return true
+            for _, dayClaimed in adventManager.rewards_claimed do
+                if dayClaimed == dayNumber then
+                    print('Reward ' .. dayNumber .. ' already claimed')
+
+                    return true
+                end
             end
 
             print('Reward ' .. dayNumber .. ' not claimed yet')
