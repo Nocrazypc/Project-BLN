@@ -3668,7 +3668,7 @@ do
                 DialogApp.Dialog.NormalDialog.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
                 )
                     if DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Bah Humbug is starting') then
-                        task.wait(3)			
+                        task.wait(1)			
                         Utils.FindButton('No')
                     elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Costume Party is starting') then
                         task.wait(1)		
@@ -3701,7 +3701,7 @@ do
                     NormalDialogChild.Info:WaitForChild('TextLabel')
                     NormalDialogChild.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
                     )
-                        if NormalDialogChild.Info.TextLabel.Text:match('The Hauntlet is starting') then
+                        if NormalDialogChild.Info.TextLabel.Text:match('Bah Humbug is starting') then
                             task.wait(1)	
                             Utils.FindButton('No')
                         elseif NormalDialogChild.Info.TextLabel.Text:match('Costume Party is starting') then
