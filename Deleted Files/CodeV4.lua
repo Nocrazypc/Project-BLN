@@ -10852,7 +10852,7 @@ local files = {
        PetOfflineHandler = __DARKLUA_BUNDLE_MODULES.load('B'),
     },
     {
-       Christmas2025Handler = __DARKLUA_BUNDLE_MODULES.load('C'),
+       Christmas2025Handler = __DARKLUA_BUNDLE_MODULES.load('D'),
     },
 }
 
