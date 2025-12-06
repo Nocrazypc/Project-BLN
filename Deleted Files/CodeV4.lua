@@ -9608,6 +9608,36 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             Utils.ReEquipPet(Ailment.whichPet)
             waitForTaskToFinish('summerfest_bonfire', petUnique)
         end
+        function Ailment.IceSkating(petUnique)
+            Utils.PrintDebug(string.format('\u{26f8} Doing ice_skating on %s \u{26f8}', tostring(Ailment.whichPet)))
+            Teleport.GingerbreadCollectionCircle()
+            task.wait(2)
+            Utils.ReEquipPet(Ailment.whichPet)
+            waitForTaskToFinish('ice_skating', petUnique)
+        end
+        function Ailment.RideTheTrain(petUnique)
+            Utils.PrintDebug(string.format('\u{1f682} Doing ride_the_train on %s \u{1f682}', tostring(Ailment.whichPet)))
+            Teleport.GingerbreadCollectionCircle()
+            task.wait(2)
+            Utils.ReEquipPet(Ailment.whichPet)
+
+            local remote = ReplicatedStorage.adoptme_new_net[
+[[adoptme_legacy_shared.ContentPacks.Winter2025.Game.Train.WinterTrainNet:7]] ]
+            local trainSeats = workspace:WaitForChild('WinterTrainSeats', 10)
+
+            if not trainSeats then
+                return
+            end
+
+            local seat = trainSeats:WaitForChild('Seat', 10)
+
+            if not seat then
+                return
+            end
+
+            remote:FireServer({carriage = seat})
+            waitForTaskToFinish('ride_the_train', petUnique)
+        end
         function Ailment.BuccaneerBandAilment(petUnique)
             ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
             task.wait(2)
