@@ -3523,7 +3523,7 @@ do
                 return
             end
 
-            --[[PlaytimePayoutsApp:WaitForChild('Frame')
+            PlaytimePayoutsApp:WaitForChild('Frame')
             PlaytimePayoutsApp.Frame:WaitForChild('Container')
             PlaytimePayoutsApp.Frame.Container:WaitForChild('CashOutContainer')
             PlaytimePayoutsApp.Frame.Container.CashOutContainer:WaitForChild('CashOutButton')
@@ -3534,12 +3534,12 @@ do
             task.wait(1)
             Utils.PrintDebug('\u{1f911} Cashed out playtime rewards')
 
-            task.wait(4)
+            --[[task.wait(4)
             if PlaytimePayoutsApp.Enabled then
             Players.LocalPlayer.PlayerGui.PlaytimePayoutsApp.Enabled = false 
             end--]]
 
-            Players.LocalPlayer.PlayerGui.PlaytimePayoutsApp.Enabled = false --- Closing the shitty check app
+            --Players.LocalPlayer.PlayerGui.PlaytimePayoutsApp.Enabled = false --- Closing the shitty check app
 
         end
 
