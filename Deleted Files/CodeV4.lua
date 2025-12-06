@@ -1575,6 +1575,39 @@ do
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
             Teleport.DeleteWater()
         end
+		    function Teleport.GingerbreadCollectionCircle()
+            SetLocationFunc('MainMap', 'Neighborhood/MainDoor', {})
+            task.wait(1)
+            Workspace.Interiors:WaitForChild(tostring(Workspace.Interiors:FindFirstChildWhichIsA('Model')))
+
+            local christmasMap = Workspace.Interiors:WaitForChild('MainMap!Christmas', 10)
+
+            if not christmasMap then
+                return
+            end
+
+            local eventFolder = christmasMap:WaitForChild('Event', 10)
+
+            if not eventFolder then
+                return
+            end
+
+            local iceSkatingFolder = eventFolder:WaitForChild('IceSkating', 10)
+
+            if not iceSkatingFolder then
+                return
+            end
+
+            local navPart = iceSkatingFolder:WaitForChild('GingerbreadCollectionNavPart', 10)
+
+            if not navPart then
+                return
+            end
+
+            localPlayer.Character:MoveTo(navPart.Position)
+            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+            Teleport.DeleteWater()
+        end
         function Teleport.Bonfire()
             ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
             task.wait(1)
