@@ -10227,11 +10227,11 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     task.wait(130) -- test to keep tasks pending before sick task appears
                     Teleport.FarmingHome()
                     return true
-                elseif key == 'ice_skating' then
+                --[[elseif key == 'ice_skating' then
                     Ailment.IceSkating(petUnique)
                     task.wait(2)
                     Teleport.FarmingHome()
-                    return true
+                    return true--]]
                 elseif key == 'ride_the_train' then
                     Ailment.RideTheTrain(petUnique)
                     task.wait(2)
