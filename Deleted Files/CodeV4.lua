@@ -542,11 +542,6 @@ do
                 'cracked_egg',
                 'basic_egg_2022_ant',
                 'basic_egg_2022_mouse',
-                'spring_2025_minigame_spiked_kaijunior',
-                'spring_2025_minigame_scorching_kaijunior',
-                'spring_2025_minigame_toxic_kaijunior',
-                'spring_2025_minigame_spotted_kaijunior',
-                'beach_2024_mahi_spinning_rod_temporary',
                 'sandwich-default',
                 'squeaky_bone_default',
                 'trade_license',
@@ -555,7 +550,6 @@ do
                 'ice_dimension_2025_frostbite_bear',
                 'pet_recycler_2025_emberlight',
                 'pet_recycler_2025_giant_panda',
-				'halloween_2025_bat_cat',
             },
         }
     end
