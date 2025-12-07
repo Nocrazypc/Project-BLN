@@ -10318,9 +10318,11 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             end)
         end
         function self.Init()
-            --RouterClient.get('PayAPI/DisablePopups'):FireServer()
+            RouterClient.get('PayAPI/DisablePopups'):FireServer()
         end
         function self.Start()
+            RouterClient.get('HousingAPI/ClaimAllDeliveries'):FireServer()
+
             if not getgenv().auto_farm then
                 Utils.PrintDebug('AUTO_FARM is false')
                 return
