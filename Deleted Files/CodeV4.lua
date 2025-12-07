@@ -10650,6 +10650,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         local ginerbreadIds = __DARKLUA_BUNDLE_MODULES.load('C')
         local RouterClient = Bypass('RouterClient')
         local ClientData = Bypass('ClientData')
+        local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
         local localPlayer = Players.LocalPlayer
         local Christmas2025Handler = {}
         local isRewardClaimed = function(dayNumber)
@@ -10690,6 +10691,10 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             local usesLeft = ClientData.get_data()[localPlayer.Name].winter_2025_manager.exchange_kiosk_uses_left
 
             if usesLeft == 0 then
+                return
+            end
+
+            if Utils.BucksAmount() < 50000 then
                 return
             end
 
