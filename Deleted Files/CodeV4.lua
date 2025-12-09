@@ -10733,7 +10733,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
 end
 
 setfpscap(2)
-task.wait(30)
+task.wait(5)
 
 if not game:IsLoaded() then
     game.Loaded:Wait()
@@ -10902,7 +10902,7 @@ StarterGui:SetCore(
 )
 --]]
 -------- Low Render- Hide parts ------------
-task.wait(15)
+task.wait(10)
 task.spawn(function()
         
 for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
