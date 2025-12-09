@@ -10383,7 +10383,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 --local UpdateTextEvent = (ReplicatedStorage:WaitForChild('UpdateTextEvent'))
 
                 while getgenv().auto_farm do
-                    --getgenv().lastTimeFarming = DateTime.now().UnixTimestamp
+                    getgenv().lastTimeFarming = DateTime.now().UnixTimestamp
 
                     local success, result = pcall(function()
                         startAutoFarm()
@@ -10393,7 +10393,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                             Teleport.FarmingHome()
                         end
 
-                        UpdateTextEvent:Fire()
+                        --UpdateTextEvent:Fire()
                     end)
 
                     if not success then
