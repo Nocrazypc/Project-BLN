@@ -10732,7 +10732,8 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
 ---------------------------------------------------------------
 end
 
---setfpscap(getgenv().SETTINGS.SET_FPS or 4)
+setfpscap(2)
+task.wait(30)
 
 if not game:IsLoaded() then
     game.Loaded:Wait()
@@ -10746,7 +10747,7 @@ getgenv().loaded = true
 if game.PlaceId ~= 920587237 then
     return
 end
---setfpscap(getgenv().SETTINGS.SET_FPS or 4)
+setfpscap(2)
 
 local ReplicatedStorage = game:GetService('ReplicatedStorage')
 --local GuiService = game:GetService('GuiService')
