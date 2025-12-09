@@ -10262,12 +10262,12 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     Ailment.IceSkating(petUnique)
                     task.wait(2)
                     Teleport.FarmingHome()
-                    return true
+                    return true--]]
                 elseif key == 'ride_the_train' then
                     Ailment.RideTheTrain(petUnique)
                     task.wait(2)
                     Teleport.FarmingHome()
-                    return true--]]
+                    return true
                 end
             end
             for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
