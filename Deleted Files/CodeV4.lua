@@ -10378,9 +10378,31 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             if localPlayer:GetAttribute('isProHandler') == true then
             FarmingPet.GetPetToFarm(2)
             end
-            startAutoFarm()
 
-            --localPlayer:SetAttribute('StopFarmingTemp', true)
+            task.defer(function()
+                --local UpdateTextEvent = (ReplicatedStorage:WaitForChild('UpdateTextEvent'))
+
+                while getgenv().auto_farm do
+                    --getgenv().lastTimeFarming = DateTime.now().UnixTimestamp
+
+                    local success, result = pcall(function()
+                        startAutoFarm()
+
+                        if ClientData.get_data()[localPlayer.Name].winter_2025_train_gingerbread then
+                            Ailment.SoloRideTheTrain()
+                            Teleport.FarmingHome()
+                        end
+
+                        UpdateTextEvent:Fire()
+                    end)
+
+                    if not success then
+                        print(string.format('AutoFarm Errored: %s', tostring(result)))
+                    end
+
+                    task.wait(1)
+                end
+            end)
         end
 
         return self
