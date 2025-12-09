@@ -10901,7 +10901,7 @@ StarterGui:SetCore(
 )
 --]]
 -------- Low Render- Hide parts ------------
-task.wait(10)
+task.wait(15)
 task.spawn(function()
         
 for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
