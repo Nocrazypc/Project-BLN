@@ -3136,7 +3136,7 @@ do
             end
         end
         function self.Start()
-            --setfpscap(getgenv().SETTINGS.SET_FPS)
+            setfpscap(2)
             StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Captures, false)
 
             if DialogApp.Dialog.ThemeColorDialog.Visible then
