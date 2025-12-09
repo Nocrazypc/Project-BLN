@@ -10912,16 +10912,4 @@ pcall(function()
         Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
     end
 end)
------------------------------------------------
-
-local CoreGui = game:GetService("CoreGui")
-local StarterGui = game:GetService("StarterGui")
-
-StarterGui:SetCore(
-    "SendNotification",
-    {
-        Title = "Feli Mode Activated 💗 ",
-        Text = "😘 😘 😘 🤗 🤗 🤗 🥰 🥰 🥰"
-    }
-)
-.............................................-
+----------------------------------------
