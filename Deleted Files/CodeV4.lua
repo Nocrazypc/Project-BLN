@@ -9638,37 +9638,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             remote:FireServer({carriage = seat})
             waitForTaskToFinish('ride_the_train', petUnique)
         end
-        function Ailment.SoloRideTheTrain()
-            Utils.PrintDebug('\u{1f682} Riding the Train \u{1f682}')
-            Teleport.GingerbreadCollectionCircle()
-            task.wait(2)
-
-            local remote = ReplicatedStorage.adoptme_new_net[
-[[adoptme_legacy_shared.ContentPacks.Winter2025.Game.Train.WinterTrainNet:7]] ]
-            local trainSeats = workspace:WaitForChild('WinterTrainSeats', 10)
-
-            if not trainSeats then
-                return
-            end
-
-            local seat = trainSeats:WaitForChild('Seat', 10)
-
-            if not seat then
-                return
-            end
-
-            remote:FireServer({carriage = seat})
-
-            local count = 0
-
-            repeat
-                task.wait(10)
-
-                count = count + 10
-            until not ClientData.get_data()[localPlayer.Name].winter_2025_train_gingerbread or count > 120
-
-            getUpFromSitting()
-        end
         function Ailment.BuccaneerBandAilment(petUnique)
             ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
             task.wait(2)
@@ -10262,12 +10231,12 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     Ailment.IceSkating(petUnique)
                     task.wait(2)
                     Teleport.FarmingHome()
-                    return true--]]
+                    return true
                 elseif key == 'ride_the_train' then
                     Ailment.RideTheTrain(petUnique)
                     task.wait(2)
                     Teleport.FarmingHome()
-                    return true
+                    return true--]]
                 end
             end
             for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
@@ -10380,31 +10349,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             end
             startAutoFarm()
 
-
-            task.defer(function()
-                --local UpdateTextEvent = (ReplicatedStorage:WaitForChild('UpdateTextEvent'))
-
-                while getgenv().auto_farm do
-                    getgenv().lastTimeFarming = DateTime.now().UnixTimestamp
-
-                    local success, result = pcall(function()
-                        --startAutoFarm()
-
-                        if ClientData.get_data()[localPlayer.Name].winter_2025_train_gingerbread then
-                            Ailment.SoloRideTheTrain()
-                            Teleport.FarmingHome()
-                        end
-
-                        --UpdateTextEvent:Fire()
-                    end)
-
-                    --if not success then
-                        --print(string.format('AutoFarm Errored: %s', tostring(result)))
-                    --end
-
-                    task.wait(1)
-                end
-            end)
+            --localPlayer:SetAttribute('StopFarmingTemp', true)
         end
 
         return self
