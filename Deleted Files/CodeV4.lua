@@ -10841,9 +10841,6 @@ local files = {
     {
         PotatoModeHandler = __DARKLUA_BUNDLE_MODULES.load('n'),
     },
-	--[[{
-        TaskBoardHandler = __DARKLUA_BUNDLE_MODULES.load('q'),  --
-    },--]]
     {
         TradeLicenseHandler = __DARKLUA_BUNDLE_MODULES.load('r'),
     },
@@ -10889,20 +10886,8 @@ for index, _table in ipairs(files)do
 end
 
 -------------- Autostart some toggled options for Feli---------------------
-
---[[local CoreGui = game:GetService("CoreGui")
-local StarterGui = game:GetService("StarterGui")
-
-StarterGui:SetCore(
-    "SendNotification",
-    {
-        Title = "Feli Mode Activated 💗 ",
-        Text = "😘 😘 😘 🤗 🤗 🤗 🥰 🥰 🥰"
-    }
-)
---]]
+task.wait(15)
 -------- Low Render- Hide parts ------------
-task.wait(10)
 task.spawn(function()
         
 for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
@@ -10929,4 +10914,14 @@ pcall(function()
 end)
 -----------------------------------------------
 
+local CoreGui = game:GetService("CoreGui")
+local StarterGui = game:GetService("StarterGui")
 
+StarterGui:SetCore(
+    "SendNotification",
+    {
+        Title = "Feli Mode Activated 💗 ",
+        Text = "😘 😘 😘 🤗 🤗 🤗 🥰 🥰 🥰"
+    }
+)
+.............................................-
