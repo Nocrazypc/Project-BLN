@@ -3574,28 +3574,6 @@ do
         function self.Init()
             local Dialog = (DialogApp:WaitForChild('Dialog'))
 
-            Dialog:WaitForChild('ItemPreviewDialog'):GetPropertyChangedSignal('Visible'):Connect(function(
-            )
-                if not Dialog.ItemPreviewDialog.Visible then
-                    return
-                end
-
-                local infoButton = Dialog.ItemPreviewDialog:WaitForChild('Info', 10)
-
-                if not infoButton then
-                    return
-                end
-
-                local textLabel = (infoButton:WaitForChild('TextLabel', 10))
-
-                if not textLabel then
-                    return
-                end
-                if textLabel.Text:match('A new pet has been delivered') then
-                    --localPlayer:Kick('A new pet has been delivered')
-                    --game:Shutdown()
-                end
-            end)
             Dialog:GetPropertyChangedSignal('Visible'):Connect(friendTradeAccept)
             Dialog:WaitForChild('FriendAfterTradeDialog'):GetPropertyChangedSignal('Visible'):Connect(function(
             )
@@ -3624,34 +3602,21 @@ do
                 end
             end)
             Dialog.ChildAdded:Connect(function(Child)
-                if Child.Name == 'NormalDialog' then
-                    Child:GetPropertyChangedSignal('Visible'):Connect(function()
-                        local myChild = Child
-
-                        if not myChild.Visible then
-                            return
-                        end
-                        if not myChild:WaitForChild('Info', 10) then
-                            return
-                        end
-                        if not myChild.Info:WaitForChild('TextLabel', 10) then
-                            return
-                        end
-
-                        myChild.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(onTextChangedNormalDialog)
-                    end)
-                elseif Child.Name == 'ItemPreviewDialog' then
-                    Child:GetPropertyChangedSignal('Visible'):Connect(function()
-                        local myChild = Child
-
-                        if not myChild.Visible then
-                            return
-                        end
-
-                        task.wait(2)
-                        --game:Shutdown()
-                    end)
+                if Child.Name ~= 'NormalDialog' then
+                    return
                 end
+
+                Child:GetPropertyChangedSignal('Visible'):Connect(function()
+                    local myChild = Child
+
+                    if not myChild.Visible then
+                        return
+                    end
+
+                    myChild:WaitForChild('Info')
+                    myChild.Info:WaitForChild('TextLabel')
+                    myChild.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(onTextChangedNormalDialog)
+                end)
             end)
 
             local CertificateApp = (PlayerGui:WaitForChild('CertificateApp'))
@@ -3732,21 +3697,23 @@ do
                     if not NormalDialogChild.Visible then
                         return
                     end
-                    if not NormalDialogChild:WaitForChild('Info', 10) then
-                        return
-                    end
-                    if not NormalDialogChild.Info:WaitForChild('TextLabel', 10) then
-                        return
-                    end
 
+                    NormalDialogChild:WaitForChild('Info')
+                    NormalDialogChild.Info:WaitForChild('TextLabel')
                     NormalDialogChild.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
                     )
-                        local text = NormalDialogChild.Info.TextLabel.Text
-
-                        if text:match('Bah Humbug is starting') or text:match('Costume Party is starting') or text:match('Sleep or Treat is starting') then
+                        if NormalDialogChild.Info.TextLabel.Text:match('Bah Humbug is starting') then
+                            task.wait(1)	
                             Utils.FindButton('No')
-                        elseif NormalDialogChild.Info.TextLabel.Text:match('invitation') then
-                            --game:Shutdown()
+                        elseif NormalDialogChild.Info.TextLabel.Text:match('A new pet has been delivered') then
+                            task.wait(2)	
+                            Utils.FindButton('Go to mailbox')
+                        elseif NormalDialogChild.Info.TextLabel.Text:match('Sleep or Treat is starting') then
+                            task.wait(1)	
+                            Utils.FindButton('No')					
+                        -- elseif NormalDialogChild.Info.TextLabel.Text:match('invitation') then
+                          --  localPlayer:Kick()
+                           -- game:Shutdown()
                         elseif NormalDialogChild.Info.TextLabel.Text:match('You found a') then
                             Utils.FindButton('Okay')
                         end
