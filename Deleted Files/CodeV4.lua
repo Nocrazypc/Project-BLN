@@ -3628,17 +3628,35 @@ do
                     return
                 end
 
-                Child:GetPropertyChangedSignal('Visible'):Connect(function()
-                    local myChild = Child
+            Dialog.ChildAdded:Connect(function(Child)
+                if Child.Name == 'NormalDialog' then
+                    Child:GetPropertyChangedSignal('Visible'):Connect(function()
+                        local myChild = Child
 
-                    if not myChild.Visible then
-                        return
-                    end
+                        if not myChild.Visible then
+                            return
+                        end
+                        if not myChild:WaitForChild('Info', 10) then
+                            return
+                        end
+                        if not myChild.Info:WaitForChild('TextLabel', 10) then
+                            return
+                        end
 
-                    myChild:WaitForChild('Info')
-                    myChild.Info:WaitForChild('TextLabel')
-                    myChild.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(onTextChangedNormalDialog)
-                end)
+                        myChild.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(onTextChangedNormalDialog)
+                    end)
+                elseif Child.Name == 'ItemPreviewDialog' then
+                    Child:GetPropertyChangedSignal('Visible'):Connect(function()
+                        local myChild = Child
+
+                        if not myChild.Visible then
+                            return
+                        end
+
+                        task.wait(2)
+                        --game:Shutdown()
+                    end)
+                end
             end)
 
             local CertificateApp = (PlayerGui:WaitForChild('CertificateApp'))
