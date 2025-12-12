@@ -3406,6 +3406,7 @@ do
         local starterPackAppConn
         local RunService = game:GetService("RunService")
         local patterns = {
+            ["You haven't collected the Gingerbread"] = 'No',
             ['Be careful when trading'] = 'Okay',
             ['This trade seems unbalanced'] = 'Next',
             ['Social Stones!'] = 'Okay',
