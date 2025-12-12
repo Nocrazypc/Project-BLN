@@ -3623,7 +3623,6 @@ do
                     normalDialog.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(onTextChangedNormalDialog)
                 end
             end)
-
             Dialog.ChildAdded:Connect(function(Child)
                 if Child.Name == 'NormalDialog' then
                     Child:GetPropertyChangedSignal('Visible'):Connect(function()
