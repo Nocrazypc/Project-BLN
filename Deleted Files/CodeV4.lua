@@ -9150,12 +9150,15 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
         local ClientData = (Bypass('ClientData'))
         local RouterClient = (Bypass('RouterClient'))
+        local WinterTrainNet = (require(ReplicatedStorage.SharedModules.ContentPacks.Winter2025.Game.Train.WinterTrainNet))
         local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
         local GetInventory = __DARKLUA_BUNDLE_MODULES.load('i')
         local Teleport = __DARKLUA_BUNDLE_MODULES.load('f')
         local localPlayer = Players.LocalPlayer
         local doctorId = nil
+
         Ailment.whichPet = 1
+
         local consumeFood = function()
             local foodItem = Workspace.PetObjects:WaitForChild(tostring(Workspace.PetObjects:FindFirstChildWhichIsA('Model')), 10)
             if not foodItem then
