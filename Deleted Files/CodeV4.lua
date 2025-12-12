@@ -3591,7 +3591,8 @@ do
                 if not textLabel then
                     return
                 end
-                if textLabel.Text:match('A new pet has been delivered to your mailbox!') then
+                if textLabel.Text:match('A new pet has been delivered') then
+                    --localPlayer:Kick('A new pet has been delivered')
                     --game:Shutdown()
                 end
             end)
