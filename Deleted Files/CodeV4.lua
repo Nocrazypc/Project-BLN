@@ -9625,8 +9625,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             task.wait(2)
             Utils.ReEquipPet(Ailment.whichPet)
 
-            local remote = ReplicatedStorage.adoptme_new_net[
-[[adoptme_legacy_shared.ContentPacks.Winter2025.Game.Train.WinterTrainNet:7]] ]
             local trainSeats = workspace:WaitForChild('WinterTrainSeats', 10)
 
             if not trainSeats then
@@ -9639,17 +9637,16 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 return
             end
 
-            remote:FireServer({carriage = seat})
+            WinterTrainNet.EnterCarriageSeat:fire_server({carriage = seat})
             waitForTaskToFinish('ride_the_train', petUnique)
+            getUpFromSitting()
         end
         function Ailment.SoloRideTheTrain()
             Utils.PrintDebug('\u{1f682} Riding the Train \u{1f682}')
             Teleport.GingerbreadCollectionCircle()
             task.wait(2)
 
-            local remote = ReplicatedStorage.adoptme_new_net[
-[[adoptme_legacy_shared.ContentPacks.Winter2025.Game.Train.WinterTrainNet:7]] ]
-            local trainSeats = workspace:WaitForChild('WinterTrainSeats', 10)10)
+            local trainSeats = workspace:WaitForChild('WinterTrainSeats', 10)
 
             if not trainSeats then
                 return
@@ -9661,7 +9658,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 return
             end
 
-            remote:FireServer({carriage = seat})
+            WinterTrainNet.EnterCarriageSeat:fire_server({carriage = seat})
 
             local count = 0
 
