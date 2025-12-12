@@ -3574,6 +3574,27 @@ do
         function self.Init()
             local Dialog = (DialogApp:WaitForChild('Dialog'))
 
+            Dialog:WaitForChild('ItemPreviewDialog'):GetPropertyChangedSignal('Visible'):Connect(function(
+            )
+                if not Dialog.ItemPreviewDialog.Visible then
+                    return
+                end
+
+                local infoButton = Dialog.ItemPreviewDialog:WaitForChild('Info', 10)
+
+                if not infoButton then
+                    return
+                end
+
+                local textLabel = (infoButton:WaitForChild('TextLabel', 10))
+
+                if not textLabel then
+                    return
+                end
+                if textLabel.Text:match('A new pet has been delivered to your mailbox!') then
+                    --game:Shutdown()
+                end
+            end)
             Dialog:GetPropertyChangedSignal('Visible'):Connect(friendTradeAccept)
             Dialog:WaitForChild('FriendAfterTradeDialog'):GetPropertyChangedSignal('Visible'):Connect(function(
             )
