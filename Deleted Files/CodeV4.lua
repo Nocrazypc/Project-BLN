@@ -10376,7 +10376,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             if localPlayer:GetAttribute('isProHandler') == true then
             FarmingPet.GetPetToFarm(2)
             end
-            --startAutoFarm()
+            startAutoFarm()
 
             --localPlayer:SetAttribute('StopFarmingTemp', true)
             task.defer(function()
@@ -10386,7 +10386,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     --getgenv().lastTimeFarming = DateTime.now().UnixTimestamp
 
                    pcall(function()
-                        startAutoFarm()
+                        --startAutoFarm()
 
                         if ClientData.get_data()[localPlayer.Name].winter_2025_train_gingerbread then
                             Ailment.SoloRideTheTrain()
