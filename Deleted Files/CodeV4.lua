@@ -3732,23 +3732,21 @@ do
                     if not NormalDialogChild.Visible then
                         return
                     end
+                    if not NormalDialogChild:WaitForChild('Info', 10) then
+                        return
+                    end
+                    if not NormalDialogChild.Info:WaitForChild('TextLabel', 10) then
+                        return
+                    end
 
-                    NormalDialogChild:WaitForChild('Info')
-                    NormalDialogChild.Info:WaitForChild('TextLabel')
                     NormalDialogChild.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
                     )
-                        if NormalDialogChild.Info.TextLabel.Text:match('Bah Humbug is starting') then
-                            task.wait(1)	
+                        local text = NormalDialogChild.Info.TextLabel.Text
+
+                        if text:match('Bah Humbug is starting') or text:match('Costume Party is starting') or text:match('Sleep or Treat is starting') then
                             Utils.FindButton('No')
-                        elseif NormalDialogChild.Info.TextLabel.Text:match('A new pet has been delivered') then
-                            task.wait(2)	
-                            Utils.FindButton('Go to mailbox')
-                        elseif NormalDialogChild.Info.TextLabel.Text:match('Sleep or Treat is starting') then
-                            task.wait(1)	
-                            Utils.FindButton('No')					
-                        -- elseif NormalDialogChild.Info.TextLabel.Text:match('invitation') then
-                          --  localPlayer:Kick()
-                           -- game:Shutdown()
+                        elseif NormalDialogChild.Info.TextLabel.Text:match('invitation') then
+                            --game:Shutdown()
                         elseif NormalDialogChild.Info.TextLabel.Text:match('You found a') then
                             Utils.FindButton('Okay')
                         end
