@@ -3671,9 +3671,9 @@ do
                     if DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Bah Humbug is starting') then
                         task.wait(1)			
                         Utils.FindButton('No')
-                    elseif NormalDialogChild.Info.TextLabel.Text:match('A new pet has been delivered') then
-                        task.wait(2)	
-                        Utils.FindButton('Go to Mailbox')
+                    elseif NormalDialogChild.Info.TextLabel.Text:match('Sleighball is starting') then
+                        task.wait(1)	
+                        Utils.FindButton('No')
                     elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Sleep or Treat is starting') then
                         task.wait(1)		
                         Utils.FindButton('No')			
