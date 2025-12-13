@@ -1608,7 +1608,7 @@ do
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
             Teleport.DeleteWater()
 ----------------------------------------------
-pcall(function()
+--[[pcall(function()
         
 for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
     if v:IsA("BasePart") then
@@ -1621,7 +1621,7 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
         v.Transparency = 1 
     end 
 end)
-end)
+end)--]]
 ----------------------------------------------
         end
         function Teleport.Bonfire()
