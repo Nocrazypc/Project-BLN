@@ -9644,6 +9644,23 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         function Ailment.SoloRideTheTrain()
             Utils.PrintDebug('\u{1f682} Riding the Train \u{1f682}')
             Teleport.GingerbreadCollectionCircle()
+---------------------------------------------------
+task.wait(2)
+for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
+    if v:IsA("BasePart") then
+        v.Transparency = 1 
+    elseif not v:IsA("BasePart") then
+        v.Transparency = 0 
+    end 
+end 
+
+game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
+    if v:IsA('BasePart') then
+        v.Transparency = 1 
+    end 
+end)
+
+--------------------------------------------------
             task.wait(2)
 
             local trainSeats = workspace:WaitForChild('WinterTrainSeats', 10)
