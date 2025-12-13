@@ -10938,7 +10938,7 @@ for index, _table in ipairs(files)do
 end
 
 -------------- Autostart some toggled options for Feli---------------------
-task.wait(90)
+task.wait(180)
 -------- Low Render- Hide parts ------------
 task.spawn(function()
         
