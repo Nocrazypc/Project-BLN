@@ -10957,9 +10957,9 @@ for index, _table in ipairs(files)do
 end
 
 -------------- Autostart some toggled options for Feli---------------------
-task.wait(5)
+task.wait(30)
 -------- Low Render- Hide parts ------------
-task.spawn(function()
+pcall(function()
         
 for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
     if v:IsA("BasePart") then
