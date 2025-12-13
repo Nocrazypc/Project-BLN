@@ -8468,7 +8468,7 @@ for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
     if v:IsA("BasePart") and Value then
         v.Transparency = 1 
     elseif v:IsA("BasePart") and not Value then
-        v.Transparency = 0 
+        v.Transparency = 1 --- is zero for switch 
     end 
 end 
 
