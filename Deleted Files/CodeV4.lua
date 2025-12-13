@@ -1607,22 +1607,6 @@ do
             localPlayer.Character:MoveTo(navPart.Position)
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
             Teleport.DeleteWater()
-----------------------------------------------
---[[pcall(function()
-        
-for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
-    if v:IsA("BasePart") then
-        v.Transparency = 1 
-    end 
-end 
-
-game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
-    if v:IsA('BasePart') then
-        v.Transparency = 1 
-    end 
-end)
-end)--]]
-----------------------------------------------
         end
         function Teleport.Bonfire()
             ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
