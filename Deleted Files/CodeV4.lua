@@ -1623,6 +1623,24 @@ do
             localPlayer.Character:MoveTo(location)
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
             Teleport.DeleteWater()
+			----------------------------------------------
+task.spawn(function()
+        
+for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
+    if v:IsA("BasePart") then
+        v.Transparency = 1 
+    elseif not v:IsA("BasePart") then
+        v.Transparency = 0 
+    end 
+end 
+
+game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
+    if v:IsA('BasePart') then
+        v.Transparency = 1 
+    end 
+end)
+end)
+			----------------------------------------------
         end
         function Teleport.PipeOrgan()
             CollisionsClient.set_collidable(false)
