@@ -1613,8 +1613,6 @@ pcall(function()
 for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
     if v:IsA("BasePart") then
         v.Transparency = 1 
-    elseif not v:IsA("BasePart") then
-        v.Transparency = 0 
     end 
 end 
 
