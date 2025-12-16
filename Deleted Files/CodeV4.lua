@@ -4097,57 +4097,8 @@ do
         return self
     end
     function __DARKLUA_BUNDLE_MODULES.s()
-        local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
-        local Players = cloneref(game:GetService('Players'))
-        local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
-        local ClientData = Bypass('ClientData')
-        local RouterClient = Bypass('RouterClient')
-        local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
-        local LegacyTutorial = (require(ReplicatedStorage:WaitForChild('ClientModules'):WaitForChild('Game'):WaitForChild('Tutorial'):WaitForChild('LegacyTutorial')))
-        local self = {}
-        local localPlayer = Players.LocalPlayer
-        local completeNewStarterTutorial = function()
-            local success, errorMessage = pcall(function()
-                task.wait(10)
-                RouterClient.get('TutorialAPI/ReportDiscreteStep'):FireServer('npc_interaction')
-                task.wait(2)
-                RouterClient.get('TutorialAPI/ChoosePet'):FireServer('dog')
-                task.wait(2)
-                RouterClient.get('TutorialAPI/ReportDiscreteStep'):FireServer('cured_dirty_ailment')
-                task.wait(2)
-                RouterClient.get('TutorialAPI/ReportTutorialCompleted'):FireServer()
-                task.wait(2)
-                LegacyTutorial.cancel_tutorial()
-                task.wait(2)
-                RouterClient.get('LegacyTutorialAPI/MarkTutorialCompleted'):FireServer()
-            end)
-
-            Utils.PrintDebug('CompleteNewStarterTutorial:', success, errorMessage)
-        end
-        local doStarterTutorial = function()
-            Utils.FindButton('Next')
-            task.wait(2)
-            Utils.PrintDebug('doing tutorial')
-            completeNewStarterTutorial()
-            task.wait(1)
-            Utils.PrintDebug('doing trade license')
-            task.wait(1)
-            Utils.FindButton('Next')
-        end
-
-        function self.Init() end
-        function self.Start()
-            local tutorial3Completed = ClientData.get_data()[localPlayer.Name].boolean_flags.tutorial_v3_completed
-            local tutorialManagerComleted = ClientData.get_data()[localPlayer.Name].tutorial_manager.completed
-
-            if not tutorial3Completed and not tutorialManagerComleted then
-                Utils.PrintDebug('New alt detected. doing tutorial')
-                doStarterTutorial()
-            end
-        end
-
-        return self
     end
+
     function __DARKLUA_BUNDLE_MODULES.t()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
