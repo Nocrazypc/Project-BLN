@@ -9734,6 +9734,8 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             --'cracked_egg',
             'basic_egg_2022_ant',
             'basic_egg_2022_mouse',
+            '2d_tuesdays_2025_2d_kitty',
+
         }
         local petEggs = GetInventory.GetPetEggs()
         local farmEgg = function()
