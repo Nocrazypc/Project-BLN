@@ -1338,6 +1338,7 @@ do
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
         local ClientData = Bypass('ClientData')
         local CollisionsClient = Bypass('CollisionsClient')
+		local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
         local Teleport = {}
         local localPlayer = Players.LocalPlayer
         local getconstants = getconstants or debug.getconstants
