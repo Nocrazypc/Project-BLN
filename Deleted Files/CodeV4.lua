@@ -468,6 +468,11 @@ do
             return localPlayer.Character or localPlayer.CharacterAdded:Wait()
         end
 
+		
+        function Utils.GetHumanoid()
+            return (Utils.GetCharacter():WaitForChild('Humanoid'))
+        end
+
         function Utils.GetHumanoidRootPart()
             return (Utils.GetCharacter():WaitForChild('HumanoidRootPart'))
         end
