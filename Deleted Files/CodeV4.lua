@@ -9730,12 +9730,12 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         local potionFarmPets = {
 
             '2d_tuesdays_2025_2d_kitty',
-            'dog',
-            'cat',
-            'starter_egg',
+            --'dog',
+            --'cat',
+            --'starter_egg',
             --'cracked_egg',
-            'basic_egg_2022_ant',
-            'basic_egg_2022_mouse',
+           -- 'basic_egg_2022_ant',
+          -- 'basic_egg_2022_mouse',
             
         }
         local petEggs = GetInventory.GetPetEggs()
