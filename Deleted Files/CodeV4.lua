@@ -10855,9 +10855,6 @@ local files = {
         TradeLicenseHandler = __DARKLUA_BUNDLE_MODULES.load('r'),
     },
     {
-        TutorialHandler = __DARKLUA_BUNDLE_MODULES.load('s'),
-    },
-    {
        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('v'),
     },	
     {
