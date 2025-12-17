@@ -10788,6 +10788,18 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             end
         end
 
+        local tryTamePug = function()
+            local yarnBait = GetInventory.GetUniqueId('food', 'winter_2025_yarn_beanie_bait')
+
+            if not yarnBait then
+                Utils.PrintDebug('No yarn bait found in inventory')
+
+                return
+            end
+
+            RouterClient.get('WinterEventAPI/ProgressTaming'):InvokeServer(true)
+        end
+
         function Christmas2025Handler.Init()
             --print('Initializing Christmas2025Handler')
             MinigameInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function(
