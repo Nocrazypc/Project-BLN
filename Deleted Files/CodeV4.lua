@@ -10778,12 +10778,10 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
 
         local startSleighball = function()
             while SleighballClient.instanced_minigame do
-                print('inside minigame')
 
                 local teamColor = SleighballClient.instanced_minigame.team
                 local giftsById = SleighballClient.instanced_minigame.gifts_by_id
                 local gameFolder = SleighballClient.instanced_minigame.game_folder
-
 
                 if SleighballClient.instanced_minigame.scores[teamColor] >= 10 then
                     break
