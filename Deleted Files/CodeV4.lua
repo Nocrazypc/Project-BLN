@@ -10726,7 +10726,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
         local localPlayer = Players.LocalPlayer
         local PlayerGui = (localPlayer:WaitForChild('PlayerGui'))
-        local StaticMap = (workspace:WaitForChild('StaticMap'))
         local MinigameInGameApp = (PlayerGui:WaitForChild('MinigameInGameApp'))
         local Christmas2025Handler = {}
         local isRewardClaimed = function(dayNumber)
