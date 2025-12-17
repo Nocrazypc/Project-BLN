@@ -10723,7 +10723,13 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
 
             return false
         end
+        local tryRedeemAdventCalendar = function()
+            local dt = (DateTime.now():ToLocalTime())
 
+            if isRewardClaimed(dt.Day) == false then
+                RouterClient.get('WinterEventAPI/AdventCalendarTryTakeReward'):InvokeServer(dt.Day)
+            end
+        end
         local tryCollectGingerbread = function()
             for _, v in ipairs(ginerbreadIds)do
                 IceSkatingNet.PickUpGingerbread:fire_server({
