@@ -10370,9 +10370,23 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         end
         function self.Init()
             RouterClient.get('PayAPI/DisablePopups'):FireServer()
+            RouterClient.get('WeatherAPI/WeatherUpdated').OnClientEvent:Connect(function(
+                dayOrNight
+            )
+                task.wait(2)
+
+                if dayOrNight == 'NIGHT' then
+                    DailiesNetService.try_to_claim_daily_rewards('vanilla')
+                    task.wait(1)
+                    DailiesNetService.try_to_claim_tab_reward('vanilla')
+                    task.wait(1)
+                    DailiesNetService.try_to_claim_tab_reward('2d_tuesdays')
+                end
+            end)
         end
         function self.Start()
             RouterClient.get('HousingAPI/ClaimAllDeliveries'):FireServer()
+            DailiesNetService.try_to_claim_tab_reward('2d_tuesdays')
 
             if not getgenv().auto_farm then
                 Utils.PrintDebug('AUTO_FARM is false')
