@@ -10746,6 +10746,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         local Christmas2025Handler = {}
         local isRewardClaimed = function(dayNumber)
         local adventManager = ClientData.get_data()[localPlayer.Name].winter_2025_advent_manager
+        local RunService = game:GetService("RunService")
 
             if not adventManager then
                 return nil
@@ -10876,6 +10877,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                         if localPlayer:GetAttribute('hasStartedFarming') == true then
                             localPlayer:SetAttribute('StopFarmingTemp', true)
                             task.wait(10)
+					        RunService:Set3dRenderingEnabled(false) -- 3D Off
                             startSleighball()
                             localPlayer:SetAttribute('StopFarmingTemp', false)
                         end
