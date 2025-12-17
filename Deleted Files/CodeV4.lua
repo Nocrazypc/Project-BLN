@@ -3431,7 +3431,10 @@ do
         return self
     end
         function __DARKLUA_BUNDLE_MODULES.m()
+        local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
+        local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
+        local RouterClient = Bypass('RouterClient')
         local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
         local Trade = __DARKLUA_BUNDLE_MODULES.load('e')
         local Teleport = __DARKLUA_BUNDLE_MODULES.load('f')
