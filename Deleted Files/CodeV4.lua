@@ -10070,6 +10070,9 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         local Fusion = __DARKLUA_BUNDLE_MODULES.load('h')
         local PetRelease = __DARKLUA_BUNDLE_MODULES.load('y')
 	    local contentPacks = (ReplicatedStorage:WaitForChild('SharedModules'):WaitForChild('ContentPacks'))
+        local SleighballClient = (require(ContentPacks.Winter2025.Minigames.SleighballClient))
+        local modules = ReplicatedStorage:WaitForChild('new'):WaitForChild('modules')
+        local DailiesNetService = (require(modules:WaitForChild('Dailies'):WaitForChild('DailiesNetService')))
         local self = {}
         --local UpdateTextEvent = (ReplicatedStorage:WaitForChild('UpdateTextEvent'))
         local localPlayer = Players.LocalPlayer
