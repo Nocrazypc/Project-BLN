@@ -10840,7 +10840,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         end
 
         function Christmas2025Handler.Init()
-            --print('Initializing Christmas2025Handler')
+            print('Initializing Christmas2025Handler')
             MinigameInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function(
             )
                 if MinigameInGameApp.Enabled then
