@@ -10307,7 +10307,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
 			---------------------------
 			            if not SleighballClient.instanced_minigame then
                         localPlayer:SetAttribute('StopFarmingTemp', false)
-                        print('no active minigames so setting StopFarmingTemp to false')
+                        --print('no active minigames so setting StopFarmingTemp to false')
                         task.wait(10)
                         end
 			---------------------------
