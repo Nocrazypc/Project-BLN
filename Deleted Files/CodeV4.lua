@@ -3805,7 +3805,7 @@ do
                         Teleport.FarmingHome()
                         Utils.GetHumanoidRootPart().Anchored = false
 	                    localPlayer:SetAttribute('StopFarmingTemp', false)
-				        RunService:Set3dRenderingEnabled(true) -- 3D On
+				        --RunService:Set3dRenderingEnabled(true) -- 3D On
 
                     end
                 end
