@@ -10773,7 +10773,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
 
                 if SleighballClient.instanced_minigame.scores[teamColor] >= 10 then
                     break
-	end
+	            end
 	
                 local giftRoot = giftsById and giftsById[1] and giftsById[1].instance and giftsById[1].instance:FindFirstChild('Root')
 
@@ -10795,10 +10795,18 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     Utils.GetHumanoidRootPart().Anchored = true
                 end
 
-                task.wait(2)
+                task.wait(0.2)
 
                 Utils.GetHumanoidRootPart().Anchored = false
             end
+
+            Utils.GetHumanoidRootPart().Anchored = true
+
+            while SleighballClient.instanced_minigame do
+                task.wait(10)
+            end
+
+            print('LEFT MINIGAME Sleighball')
         end
 
         local tryTamePug = function()
