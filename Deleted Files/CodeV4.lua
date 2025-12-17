@@ -1508,7 +1508,9 @@ do
         end
         function Teleport.FarmingHome()
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
-            localPlayer.Character.HumanoidRootPart.CFrame = Workspace.FarmingHomeLocation.CFrame * CFrame.new(rng:NextInteger(1, 30), 10, rng:NextInteger(1, 30))
+			
+            Utils.GetCharacter():MoveTo(Workspace.FarmingHomeLocation.Position)
+			
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
 
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
