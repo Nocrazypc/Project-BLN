@@ -3206,15 +3206,11 @@ do
 
             RouterClient.get('HousingAPI/SetDoorLocked'):InvokeServer(true)
             Utils.PlaceFLoorUnderPlayer()
----------------------------------------------------------------------------
-            RouterClient.get('TeamAPI/ChooseTeam'):InvokeServer('Parents', {
+
+            RouterClient.get('TeamAPI/ChooseTeam'):InvokeServer('Babies', {
                 ['dont_send_back_home'] = true,
             })
---------------------------------------------------------------------------
-            --[[RouterClient.get('TeamAPI/ChooseTeam'):InvokeServer('Babies', {
-                ['dont_send_back_home'] = true,
-            })
-            Utils.PrintDebug('turned to baby')--]]
+            Utils.PrintDebug('turned to baby')
 
             if not localPlayer.Character then
                 Utils.PrintDebug('NO CHARACTER SO WAITING')
