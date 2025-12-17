@@ -10876,7 +10876,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                         if localPlayer:GetAttribute('hasStartedFarming') == true then
                             localPlayer:SetAttribute('StopFarmingTemp', true)
                             task.wait(10)
-					        RunService:Set3dRenderingEnabled(false) -- 3D Off
                             startSleighball()
                             localPlayer:SetAttribute('StopFarmingTemp', false)
                         end
