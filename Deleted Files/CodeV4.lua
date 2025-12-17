@@ -3803,9 +3803,9 @@ do
                         RouterClient.get('TeamAPI/Spawn'):InvokeServer()
                         task.wait(2)
                         Teleport.FarmingHome()
-                        --RunService:Set3dRenderingEnabled(true) -- 3D On
                         Utils.GetHumanoidRootPart().Anchored = false
 	                    localPlayer:SetAttribute('StopFarmingTemp', false)
+				        RunService:Set3dRenderingEnabled(true) -- 3D On
 
                     end
                 end
