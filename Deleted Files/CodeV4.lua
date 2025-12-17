@@ -10846,18 +10846,8 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             end)
         end
         function Christmas2025Handler.Start()
-            task.spawn(function()
-                while true do
-                    local dt = (DateTime.now():ToLocalTime())
-
-                    if isRewardClaimed(dt.Day) == false then
-                        RouterClient.get('WinterEventAPI/AdventCalendarTryTakeReward'):InvokeServer(dt.Day)
-                    end
-
-                    task.wait(18E2)
-                end
-            end)
             tryCollectGingerbread()
+            tryTamePug()
             RouterClient.get('WeatherAPI/WeatherUpdated').OnClientEvent:Connect(function(
                 dayOrNight
             )
@@ -10866,6 +10856,8 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 if dayOrNight == 'DAY' then
                     tryCollectGingerbread()
                     tryExchangeGingerbread()
+                    tryRedeemAdventCalendar()
+                    tryTamePug()
                 end
             end)
         end
