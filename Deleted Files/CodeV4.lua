@@ -3767,17 +3767,15 @@ do
                     MinigameRewardsApp.Body.Reward:WaitForChild('TitleLabel')
 
                     if MinigameRewardsApp.Body.Button.Face.TextLabel.Text:match('NICE!') then
-                        local character = (localPlayer.Character)
-                        local humanoidRootPart = (character:WaitForChild('HumanoidRootPart'))
-
-                        humanoidRootPart.Anchored = false
-
+                        Utils.GetHumanoidRootPart().Anchored = true
                         task.wait(4)
                         removeGameOverButton('MinigameRewardsApp')
                         task.wait(2)
-	                    localPlayer:SetAttribute('StopFarmingTemp', false)
                         Teleport.FarmingHome()
-                        RunService:Set3dRenderingEnabled(true) -- 3D On
+                        --RunService:Set3dRenderingEnabled(true) -- 3D On
+                        Utils.GetHumanoidRootPart().Anchored = false
+	                    localPlayer:SetAttribute('StopFarmingTemp', false)
+
                     end
                 end
             end)
