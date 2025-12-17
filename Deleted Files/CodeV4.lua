@@ -1533,7 +1533,7 @@ do
         function Teleport.FarmingHome()
             Utils.GetCharacter():WaitForChild('HumanoidRootPart').Anchored = true
 			
-            Utils.GetCharacter():MoveTo(Workspace.FarmingHomeLocation.Position + Vector3.new(0, 5, 0))
+            Utils.GetCharacter():MoveTo(Workspace.FarmingHomeLocation.Position + Vector3.new(rng:NextInteger(1, 30), 10, rng:NextInteger(1, 30))
 			
             Utils.GetCharacter():WaitForChild('HumanoidRootPart').Anchored = false
 
