@@ -3717,7 +3717,7 @@ do
                         Utils.FindButton('No')
                     elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Sleighball is starting') then
                         task.wait(1)	
-                        Utils.FindButton('No')
+                        Utils.FindButton('Yes')
                     elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Sleep or Treat is starting') then
                         task.wait(1)		
                         Utils.FindButton('No')			
