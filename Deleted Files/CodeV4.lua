@@ -1531,13 +1531,13 @@ do
             Workspace.Terrain:Clear()
         end
         function Teleport.FarmingHome()
-            localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
+            Utils.GetCharacter():WaitForChild('HumanoidRootPart').Anchored = true
 			
-            Utils.GetCharacter():MoveTo(Workspace.FarmingHomeLocation.Position)
+            Utils.GetCharacter():MoveTo(Workspace.FarmingHomeLocation.Position + Vector3.new(0, 5, 0))
 			
-            localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
+            Utils.GetCharacter():WaitForChild('HumanoidRootPart').Anchored = false
 
-            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+            Utils.GetCharacter().Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
             Teleport.DeleteWater()
         end
         function Teleport.MainMap()
