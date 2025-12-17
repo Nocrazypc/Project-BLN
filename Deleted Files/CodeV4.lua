@@ -9760,7 +9760,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         local petToBuy = 'aztec_egg_2025_aztec_egg'
         local potionFarmPets = {
             '2d_kitty',
-            '2d_tuesdays_2025_2d_kitty',
             'dog',
             'cat',
             'starter_egg',
