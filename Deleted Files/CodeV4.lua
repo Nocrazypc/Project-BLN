@@ -9759,15 +9759,13 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         local localPlayer = Players.LocalPlayer
         local petToBuy = 'aztec_egg_2025_aztec_egg'
         local potionFarmPets = {
-
-            '2d_tuesdays_2025_2d_kitty',
+            '2d_kitty',
             'dog',
             'cat',
             'starter_egg',
             'cracked_egg',
             'basic_egg_2022_ant',
-            'basic_egg_2022_mouse',
-            
+            'basic_egg_2022_mouse',           
         }
         local petEggs = GetInventory.GetPetEggs()
         local farmEgg = function()
