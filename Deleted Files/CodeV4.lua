@@ -10769,12 +10769,18 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 local teamColor = SleighballClient.instanced_minigame.team
                 local giftsById = SleighballClient.instanced_minigame.gifts_by_id
                 local gameFolder = SleighballClient.instanced_minigame.game_folder
+
+
+                if SleighballClient.instanced_minigame.scores[teamColor] >= 10 then
+                    break
+	end
+	
                 local giftRoot = giftsById and giftsById[1] and giftsById[1].instance and giftsById[1].instance:FindFirstChild('Root')
 
                 if giftRoot then
                     Utils.GetHumanoidRootPart().CFrame = giftRoot.CFrame
 
-                    task.wait(1)
+                    task.wait(0.1)
 
                     Utils.GetHumanoidRootPart().Anchored = true
                 end
@@ -10784,7 +10790,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 if teamGoalPart then
                     Utils.GetHumanoidRootPart().CFrame = gameFolder.Goals[teamColor .. 'Goal'].CFrame
 
-                    task.wait(1)
+                    task.wait(0.1)
 
                     Utils.GetHumanoidRootPart().Anchored = true
                 end
