@@ -3241,7 +3241,7 @@ do
             Utils.PrintDebug(string.format('LitterBox: %s \u{1f6bd}', tostring(furnitureKeys.ailments_refresh_2024_litter_box)))
 
             if furnitureKeys.basiccrib == 'nil' then
-                localPlayer:Kick("No bed found, can't farm without a bed")
+                localPlayer:Kick("No crib found, can't farm without a crib")
 
                 return
             end
