@@ -3800,6 +3800,7 @@ do
                         Utils.GetHumanoidRootPart().Anchored = true
                         task.wait(4)
                         removeGameOverButton('MinigameRewardsApp')
+                        RouterClient.get('TeamAPI/Spawn'):InvokeServer()
                         task.wait(2)
                         Teleport.FarmingHome()
                         --RunService:Set3dRenderingEnabled(true) -- 3D On
