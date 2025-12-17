@@ -9863,6 +9863,12 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     print('FOUND A 2D Kitty', whichPet)
                     return
                 end
+                if GetInventory.CheckForPetAndEquip({
+                    '2d_tuesdays_2025_2d_kitty',
+                }, whichPet) then
+                    print('FOUND A 2D Kitty', whichPet)
+                    return
+                end
                 Utils.PrintDebug(string.format('\u{1f414}\u{1f414} Getting pet to Farm age up potion, %s \u{1f414}\u{1f414}', tostring(whichPet)))
                 if GetInventory.CheckForPetAndEquip({
                     'starter_egg',
