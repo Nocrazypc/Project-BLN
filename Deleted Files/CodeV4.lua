@@ -46,7 +46,31 @@ do
                 localPlayer:Kick()
             end
         end--]]
+        function Utils.GetPugTamingProgress()
+            return ClientData.get_data()[localPlayer.Name].snowball_pug_manager.snowballpug_taming_progress or 0
+        end
+        function Utils.MoveToWithTimeout(humanoid, target, timeout)
+            local reached = false
+            local connection
 
+            humanoid:MoveTo(target)
+
+            connection = humanoid.MoveToFinished:Connect(function(success)
+                reached = success
+            end)
+
+            local startTime = tick()
+
+            repeat
+                task.wait(0.1)
+            until reached or (tick() - startTime) >= timeout
+
+            if connection then
+                connection:Disconnect()
+            end
+
+            return reached
+		end
         function Utils.PlaceFLoorUnderPlayer()
             if Workspace:FindFirstChild('FloorUnderPlayer') then
                 return
