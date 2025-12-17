@@ -10318,6 +10318,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
 			---------------------------
 			            if not SleighballClient.instanced_minigame then
                         localPlayer:SetAttribute('StopFarmingTemp', false)
+				        RunService:Set3dRenderingEnabled(true) -- 3D On
                         --print('no active minigames so setting StopFarmingTemp to false')
                         task.wait(10)
                         end
