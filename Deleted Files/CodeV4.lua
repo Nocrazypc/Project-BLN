@@ -10840,7 +10840,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 task.wait(10)
             end
 
-            print('LEFT MINIGAME Sleighball')
+            --print('LEFT MINIGAME Sleighball')
         end
 
         local tryTamePug = function()
