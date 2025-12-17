@@ -10663,14 +10663,18 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         local ReplicatedStorage = game:GetService('ReplicatedStorage')
         local Players = game:GetService('Players')
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
-        local ContentPacks = ReplicatedStorage:WaitForChild('SharedModules'):WaitForChild('ContentPacks')
-        local IceSkating = ContentPacks:WaitForChild('Winter2025'):WaitForChild('Game'):WaitForChild('IceSkating')
+        local ContentPacks = (ReplicatedStorage:WaitForChild('SharedModules'):WaitForChild('ContentPacks'))
+        local IceSkating = (ContentPacks:WaitForChild('Winter2025'):WaitForChild('Game'):WaitForChild('IceSkating'))
+        local SleighballClient = (require(ContentPacks.Winter2025.Minigames.SleighballClient))
         local IceSkatingNet = (require(IceSkating:WaitForChild('IceSkatingNet')))
         local ginerbreadIds = __DARKLUA_BUNDLE_MODULES.load('C')
         local RouterClient = Bypass('RouterClient')
         local ClientData = Bypass('ClientData')
         local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
         local localPlayer = Players.LocalPlayer
+        local PlayerGui = (localPlayer:WaitForChild('PlayerGui'))
+        local StaticMap = (workspace:WaitForChild('StaticMap'))
+        local MinigameInGameApp = (PlayerGui:WaitForChild('MinigameInGameApp'))
         local Christmas2025Handler = {}
         local isRewardClaimed = function(dayNumber)
         local adventManager = ClientData.get_data()[localPlayer.Name].winter_2025_advent_manager
@@ -10720,7 +10724,84 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             RouterClient.get('WinterEventAPI/UseExchangeKiosk'):InvokeServer()
         end
 
-        function Christmas2025Handler.Init() end
+        local startSleighball = function()
+            while SleighballClient.instanced_minigame do
+                print('inside minigame')
+
+                local teamColor = SleighballClient.instanced_minigame.team
+                local giftsById = SleighballClient.instanced_minigame.gifts_by_id
+                local gameFolder = SleighballClient.instanced_minigame.game_folder
+                local giftRoot = giftsById and giftsById[1] and giftsById[1].instance and giftsById[1].instance:FindFirstChild('Root')
+
+                if giftRoot then
+                    Utils.GetHumanoidRootPart().CFrame = giftRoot.CFrame
+
+                    task.wait(1)
+
+                    Utils.GetHumanoidRootPart().Anchored = true
+                end
+
+                local teamGoalPart = gameFolder and gameFolder:FindFirstChild('Goals') and gameFolder.Goals:FindFirstChild(teamColor .. 'Goal')
+
+                if teamGoalPart then
+                    Utils.GetHumanoidRootPart().CFrame = gameFolder.Goals[teamColor .. 'Goal'].CFrame
+
+                    task.wait(1)
+
+                    Utils.GetHumanoidRootPart().Anchored = true
+                end
+
+                task.wait(2)
+
+                Utils.GetHumanoidRootPart().Anchored = false
+            end
+        end
+
+        function Christmas2025Handler.Init()
+            --print('Initializing Christmas2025Handler')
+            MinigameInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function(
+            )
+                if MinigameInGameApp.Enabled then
+                    if not MinigameInGameApp:WaitForChild('Body', 10) then
+                        return
+                    end
+                    if not MinigameInGameApp.Body:WaitForChild('Middle', 10) then
+                        return
+                    end
+                    if not MinigameInGameApp.Body.Middle:WaitForChild('Container', 10) then
+                        return
+                    end
+                    if not MinigameInGameApp.Body.Middle.Container:WaitForChild('TitleLabel', 10) then
+                        return
+                    end
+                    if MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('SLEIGHBALL') then
+                        if localPlayer:GetAttribute('hasStartedFarming') == true then
+                            localPlayer:SetAttribute('StopFarmingTemp', true)
+                            task.wait(10)
+                            startSleighball()
+                            localPlayer:SetAttribute('StopFarmingTemp', false)
+                        end
+                    end
+                end
+            end)
+            StaticMap.sleighball_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function(
+            )
+                if StaticMap.sleighball_minigame_state.is_game_active.Value then
+                    if getgenv().SETTINGS.ENABLE_AUTO_FARM == false then
+                        return
+                    end
+                    if localPlayer:GetAttribute('hasStartedFarming') == false then
+                        return
+                    end
+                    if localPlayer:GetAttribute('StopFarmingTemp') == true then
+                        return
+                    end
+
+                    localPlayer:SetAttribute('StopFarmingTemp', true)
+                    Bypass('RouterClient').get('MinigameAPI/AttemptJoin'):FireServer('sleighball', true)
+                end
+            end)
+        end
         function Christmas2025Handler.Start()
             task.spawn(function()
                 while true do
