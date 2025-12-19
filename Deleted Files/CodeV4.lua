@@ -3719,7 +3719,7 @@ do
                     elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Sleighball is starting') then
                         task.wait(1)	
                         Utils.FindButton('No')
-                    elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Sleep or Treat is starting') then
+                    elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Starry Bounce is starting') then
                         task.wait(1)		
                         Utils.FindButton('No')			
                     --elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
@@ -3753,7 +3753,7 @@ do
                         elseif NormalDialogChild.Info.TextLabel.Text:match('Sleighball is starting') then
                             task.wait(1)	
                             Utils.FindButton('No')
-                        elseif NormalDialogChild.Info.TextLabel.Text:match('Sleep or Treat is starting') then
+                        elseif NormalDialogChild.Info.TextLabel.Text:match('Starry Bounce is starting') then
                             task.wait(1)	
                             Utils.FindButton('No')					
                         -- elseif NormalDialogChild.Info.TextLabel.Text:match('invitation') then
