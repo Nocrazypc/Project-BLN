@@ -458,6 +458,13 @@ do
 
             print(string.format('[Debug] %s', tostring(...)))
         end
+        function Utils.IsDayAndHour(day, utcHour)
+            local now = DateTime.now()
+            local weekday = now:FormatUniversalTime('dddd', 'en-us')
+            local hour = tonumber(now:FormatUniversalTime('H', 'en-us'))
+
+            return weekday == day and hour == utcHour
+        end
         function Utils.CenterText(text, width)
             local textLength = #text
 
