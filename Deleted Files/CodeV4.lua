@@ -10936,7 +10936,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     }
 
                     RouterClient.get('MinigameAPI/MessageServer'):FireServer(unpack(args))
-                    task.wait(0.1)
+                    task.wait(0.5)
                 end
 
                 task.wait()
