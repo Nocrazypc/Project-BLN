@@ -10920,9 +10920,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             local minigameId = StarCatchMinigameClient.instanced_minigame.minigame_id
 
             while StarCatchMinigameClient.instanced_minigame do
-
-                Teleport.DeleteWater()
-
                 if StarCatchMinigameClient.instanced_minigame.ingame_app_controller.right_value >= 40 then
                     break
                 end
