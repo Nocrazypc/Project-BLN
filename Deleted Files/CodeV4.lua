@@ -11182,10 +11182,6 @@ for index, _table in ipairs(files)do
     end
 end
 
-task.delay(60, function()
-    localPlayer:SetAttribute('hasStartedFarming', true)
-end)
-
 -------------- Autostart some toggled options for Feli---------------------
 task.wait(30)
 -------- Low Render- Hide parts ------------
