@@ -483,10 +483,11 @@ do
             local stuckTimer = 0
 
             repeat
-                task.wait(1)
 
                 hasPetChar = ClientData.get('pet_char_wrappers') and ClientData.get('pet_char_wrappers')[1] and ClientData.get('pet_char_wrappers')[1].pet_unique and true or false
                 stuckTimer = stuckTimer + 1
+
+				task.wait(1)
             until hasPetChar or stuckTimer > 20
 
             if stuckTimer > 20 then
