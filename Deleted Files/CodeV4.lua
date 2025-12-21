@@ -10421,6 +10421,26 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     task.wait(1)
                     DailiesNetService.try_to_claim_tab_reward('2d_tuesdays')
                 end
+                if Utils.IsDayAndHour('Tuesday', 21) then
+                    print('SWITCHED TO 2d_kitty BECAUSE ITS EVENT TIME')
+                    FarmingPet.SetFarmingTable({
+                        '2d_kitty',
+                    })
+
+                    return
+                end
+
+                local potionFarmPets = {
+                    '2d_kitty',
+                    'dog',
+                    'cat',
+                    'starter_egg',
+                    'cracked_egg',
+                    'basic_egg_2022_ant',
+                    'basic_egg_2022_mouse',
+                }
+
+                FarmingPet.SetFarmingTable(potionFarmPets)
             end)
         end
         function self.Start()
