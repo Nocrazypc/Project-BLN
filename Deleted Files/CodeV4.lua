@@ -10358,11 +10358,11 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                         repeat
                             Utils.PrintDebug('Stopping because its buying or aging or in minigame')
 
-                            count = count + 20
+                            count = count + 30
 
-                            task.wait(20)
+                            task.wait(30)
 			---------------------------
-			            if not SleighballClient.instanced_minigame then
+			            if not (SleighballClient.instanced_minigame or StarCatchMinigameClient.instanced_minigame) then
                         localPlayer:SetAttribute('StopFarmingTemp', false)
                         --print('no active minigames so setting StopFarmingTemp to false')
                         task.wait(10)
