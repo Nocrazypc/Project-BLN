@@ -9918,10 +9918,12 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 }, whichPet) then
                     return
                 end
+                task.wait(1)
                 Utils.PrintDebug(string.format('\u{1f414}\u{1f414} No starter egg found, trying cdog or cat %s \u{1f414}\u{1f414}', tostring(whichPet)))
                 if GetInventory.GetPetFriendship(potionFarmPets, whichPet) then
                     return
                 end
+                task.wait(1)
                 Utils.PrintDebug(string.format('\u{1f414}\u{1f414} No friendship pet. checking if pet without friend exist %s \u{1f414}\u{1f414}', tostring(whichPet)))
                 if GetInventory.CheckForPetAndEquip(potionFarmPets, whichPet) then
                     return
@@ -9931,6 +9933,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 }, whichPet) then
                     return
                 end
+                task.wait(1)
                 --Utils.PrintDebug(string.format('\u{1f414}\u{1f414} No cracked egg found, buying it %s \u{1f414}\u{1f414}', tostring(whichPet)))
                 --local hasMoney = RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'cracked_egg', {})
                 Utils.PrintDebug(string.format('hasMoney: %s', tostring(hasMoney)))
