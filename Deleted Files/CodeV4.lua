@@ -10468,9 +10468,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             task.wait(2)
             FarmingPet.GetPetToFarm(1)
             task.wait(2)
-            if localPlayer:GetAttribute('isProHandler') == true then
-            FarmingPet.GetPetToFarm(2)
-            end
+
             startAutoFarm()
 
             --localPlayer:SetAttribute('StopFarmingTemp', true)
