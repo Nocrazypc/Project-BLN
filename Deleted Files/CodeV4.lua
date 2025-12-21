@@ -42,8 +42,8 @@ do
             if getgenv().client and getgenv().client:ChangeConfig(configId) then
                 task.wait(math.random(1, 5))
                 getgenv().client:Disconnect()
+		        localPlayer:Kick()
                 game:Shutdown()
-                localPlayer:Kick()
             end
         end--]]
         function Utils.GetPugTamingProgress()
