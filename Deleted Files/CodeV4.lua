@@ -10378,10 +10378,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     if getgenv().SETTINGS.HATCH_EGG_PRIORITY or getgenv().HatchPriorityEggs then
                         FarmingPet.CheckIfEgg(1)
                         task.wait(1)
-                        if localPlayer:GetAttribute('isProHandler') then
-                            FarmingPet.CheckIfEgg(2)
-                            task.wait(1)
-                        end
                     end
                     if getgenv().FOCUS_FARM_AGE_POTION then
                          FarmingPet.GetPetToFarm(1)
@@ -10393,9 +10389,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     task.wait(1)
                     if not getgenv().FOCUS_FARM_AGE_POTION then
                         FarmingPet.SwitchOutFullyGrown(1)
-                        if localPlayer:GetAttribute('isProHandler') then
-                            FarmingPet.SwitchOutFullyGrown(2)
-                        end
                     end
                     if baitboxCount > 180 then
                         local baitUnique = Utils.FindBait()
