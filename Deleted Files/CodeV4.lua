@@ -9813,16 +9813,25 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             end
         end
         local isfocusFarmPets = function()
-            local equippedPet = ClientData.get('pet_char_wrappers') and ClientData.get('pet_char_wrappers')[1]
+            --local equippedPet = ClientData.get('pet_char_wrappers') and ClientData.get('pet_char_wrappers')[1]
+	        local pets = ClientData.get('pet_char_wrappers')
+            local equippedPet = pets and pets[1]
+	
             if not equippedPet then
-                return false
+                if not Utils.Equip(getgenv().petCurrentlyFarming1, false) then
+                    return false
+                end
+                if not Utils.WaitForPetToEquip() then
+                    return false
+                end
             end
-            local petId = equippedPet.pet_id
-            if not petId then
-                return false
-            end
-            local result = table.find(potionFarmPets, petId) and true or false
-            return result
+	
+            pets = ClientData.get('pet_char_wrappers')
+            equippedPet = pets and pets[1]
+	
+            local petId = equippedPet and equippedPet.pet_id
+	
+            return petId ~= nil and table.find(potionFarmPets, petId) ~= nil
         end
         local isProHandler = function()
             local subscription = ClientData.get_data()[localPlayer.Name].subscription_equip_2x_pets
