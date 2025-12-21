@@ -10913,6 +10913,34 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             RouterClient.get('WinterEventAPI/ProgressTaming'):InvokeServer(true)
         end
 
+        local startStarCatch = function()
+            local minigameId = StarCatchMinigameClient.instanced_minigame.minigame_id
+
+            while StarCatchMinigameClient.instanced_minigame do
+                if StarCatchMinigameClient.instanced_minigame.ingame_app_controller.right_value >= 40 then
+                    break
+                end
+
+                for _, v in StarCatchMinigameClient.instanced_minigame.stars do
+                    if not v.boppable then
+                        continue
+                    end
+
+                    local args = {
+                        minigameId,
+                        'bop_star',
+                        v.id,
+                        workspace:GetServerTimeNow(),
+                    }
+
+                    RouterClient.get('MinigameAPI/MessageServer'):FireServer(unpack(args))
+                    task.wait(0.1)
+                end
+
+                task.wait()
+            end
+        end
+
         function Christmas2025Handler.Init()
             print('Initializing Christmas2025Handler')
             MinigameInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function(
