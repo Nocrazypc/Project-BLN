@@ -11182,6 +11182,10 @@ for index, _table in ipairs(files)do
     end
 end
 
+task.delay(60, function()
+    localPlayer:SetAttribute('hasStartedFarming', true)
+end)
+
 -------------- Autostart some toggled options for Feli---------------------
 task.wait(30)
 -------- Low Render- Hide parts ------------
@@ -11208,3 +11212,19 @@ pcall(function()
     end
 end)
 ----------------------------------------
+task.wait(240)
+-------- Low Render- Hide parts 2------------
+pcall(function()
+        
+for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
+    if v:IsA("BasePart") then
+        v.Transparency = 1 
+    end 
+end 
+
+game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
+    if v:IsA('BasePart') then
+        v.Transparency = 1 
+    end 
+end)
+end)
