@@ -10806,6 +10806,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         local isRewardClaimed = function(dayNumber)
         local adventManager = ClientData.get_data()[localPlayer.Name].winter_2025_advent_manager
         local RunService = game:GetService("RunService")
+        local Teleport = __DARKLUA_BUNDLE_MODULES.load('f')
 
             if not adventManager then
                 return nil
