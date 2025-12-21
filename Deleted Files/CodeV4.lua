@@ -10937,8 +10937,43 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     }
 
                     RouterClient.get('MinigameAPI/MessageServer'):FireServer(unpack(args))
-                    task.wait(0.01)
+                    task.wait(0.1)
                 end
+
+
+                for _, v in StarCatchMinigameClient.instanced_minigame.stars do
+                    if not v.boppable then
+                        continue
+                    end
+
+                    local args = {
+                        minigameId,
+                        'bop_star',
+                        v.id,
+                        workspace:GetServerTimeNow(),
+                    }
+
+                    RouterClient.get('MinigameAPI/MessageServer'):FireServer(unpack(args))
+                    task.wait(0.1)
+                end
+
+
+                for _, v in StarCatchMinigameClient.instanced_minigame.stars do
+                    if not v.boppable then
+                        continue
+                    end
+
+                    local args = {
+                        minigameId,
+                        'bop_star',
+                        v.id,
+                        workspace:GetServerTimeNow(),
+                    }
+
+                    RouterClient.get('MinigameAPI/MessageServer'):FireServer(unpack(args))
+                    task.wait(0.1)
+                end
+
 
                 task.wait()
             end
