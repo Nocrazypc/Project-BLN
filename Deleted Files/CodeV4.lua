@@ -10917,23 +10917,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         end
 
         local startStarCatch = function()
-------------------------------------------------------------
-pcall(function()
-        
-for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
-    if v:IsA("BasePart") then
-        v.Transparency = 0 
-    end 
-end 
-
-game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
-    if v:IsA('BasePart') then
-        v.Transparency = 0 
-    end 
-end)
-end)
--------------------------------------------------------------
-
             local minigameId = StarCatchMinigameClient.instanced_minigame.minigame_id
 
             while StarCatchMinigameClient.instanced_minigame do
@@ -10958,22 +10941,6 @@ end)
                 end
 
                 task.wait()
-------------------------------
-pcall(function()
-        
-for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
-    if v:IsA("BasePart") then
-        v.Transparency = 1 
-    end 
-end 
-
-game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
-    if v:IsA('BasePart') then
-        v.Transparency = 1 
-    end 
-end)
-end)
---------------------------------------
             end
         end
 
