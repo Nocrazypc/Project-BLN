@@ -10929,8 +10929,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
 
                 for _, v in StarCatchMinigameClient.instanced_minigame.stars do
                     if not v.boppable then
-                        --continue
-		                return
+                        continue
                     end
 
                     local args = {
@@ -10941,7 +10940,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     }
 
                     RouterClient.get('MinigameAPI/MessageServer'):FireServer(unpack(args))
-                    task.wait(0.1)
+                    task.wait(0.05)
                 end
 
                 task.wait()
