@@ -8475,6 +8475,8 @@ end
 game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
     if v:IsA('BasePart') and Value then
         v.Transparency = 1 
+    elseif v:IsA('BasePart') and not Value then
+        v.Transparency = 1 	--- is zero for switch 	
     end 
 end)
 --
