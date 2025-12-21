@@ -9857,6 +9857,17 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             end
             return false
         end
+
+        function FarmingPet.SetFarmingTable(pets)
+            if typeof(pets) ~= 'table' then
+                print('the pets is not a table')
+
+                return
+            end
+
+            potionFarmPets = pets
+        end
+
         function FarmingPet.SwitchOutFullyGrown(whichPet)
             if localPlayer:GetAttribute('StopFarmingTemp') == true then
                 return
