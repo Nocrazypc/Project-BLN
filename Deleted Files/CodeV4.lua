@@ -10963,7 +10963,12 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                             localPlayer:SetAttribute('StopFarmingTemp', true)
                             task.wait(10)
                             startSleighball()
-                            localPlayer:SetAttribute('StopFarmingTemp', false)
+                        end
+                    elseif MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('STARRY BOUNCE') then
+                        if localPlayer:GetAttribute('hasStartedFarming') == true then
+                            localPlayer:SetAttribute('StopFarmingTemp', true)
+                            task.wait(10)
+                            startStarCatch()
                         end
                     end
                 end
