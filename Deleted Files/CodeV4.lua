@@ -3824,7 +3824,8 @@ do
                         task.wait(4)
                         removeGameOverButton('MinigameRewardsApp')
                         RouterClient.get('TeamAPI/Spawn'):InvokeServer()
-                        task.wait(2)
+                        Utils.GetCharacter()
+                        task.wait(6)
                         Teleport.FarmingHome()
                         Utils.GetHumanoidRootPart().Anchored = false
 	                    localPlayer:SetAttribute('StopFarmingTemp', false)
