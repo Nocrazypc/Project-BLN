@@ -2139,6 +2139,8 @@ do
 
                 getgenv().petCurrentlyFarming1 = petUnique
 
+				Utils.WaitForPetToEquip()
+
                 return true
             elseif whichPet == 2 then
                 RouterClient.get('ToolAPI/Equip'):InvokeServer(petUnique, {
@@ -2147,6 +2149,8 @@ do
 
                 getgenv().petCurrentlyFarming2 = petUnique
 
+				Utils.WaitForPetToEquip()
+				
                 return true
             end
 
