@@ -9900,20 +9900,18 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 if whichPet == 2 and localPlayer:GetAttribute('isProHandler') == true and getgenv().petCurrentlyFarming2 then
                     return
                 end
-                for _ = 1, 3 do
-                    print('trying to see if 2d kitty')
 
-                    if GetInventory.CheckForPetAndEquip({
-                        '2d_kitty',
-                    }, whichPet) then
-                        print('FOUND 2d kitty', whichPet)
+                print('trying to see if 2d kitty')
 
-                        return
-                    end
+                if GetInventory.CheckForPetAndEquip({
+                    '2d_kitty',
+                }, whichPet) then
+                    print('FOUND 2d kitty', whichPet)
 
-                    task.wait(1)
+                    return
                 end
 
+                task.wait(1)
                 Utils.PrintDebug(string.format('\u{1f414}\u{1f414} Getting pet to Farm age up potion, %s \u{1f414}\u{1f414}', tostring(whichPet)))
                 if GetInventory.CheckForPetAndEquip({
                     'starter_egg',
