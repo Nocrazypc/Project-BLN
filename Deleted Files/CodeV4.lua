@@ -8460,7 +8460,7 @@ local FarmToggle = FarmTab:CreateToggle({
 -------------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Low Render / Hide Parts & Transitions Disabler",
-     CurrentValue = true,
+     CurrentValue = false,
      Flag = "Toggle04",
      Callback = function(Value)
         
@@ -8468,7 +8468,7 @@ for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
     if v:IsA("BasePart") and Value then
         v.Transparency = 1 
     elseif v:IsA("BasePart") and not Value then
-        v.Transparency = 1 --- is zero for switch 
+        v.Transparency = 0 --- is zero for switch 
     end 
 end 
 
@@ -8476,7 +8476,7 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
     if v:IsA('BasePart') and Value then
         v.Transparency = 1 
     elseif v:IsA('BasePart') and not Value then
-        v.Transparency = 1 	--- is zero for switch 	
+        v.Transparency = 0 	--- is zero for switch 	
     end 
 end)
 --
