@@ -10925,9 +10925,9 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 end
 
                 for _, v in StarCatchMinigameClient.instanced_minigame.stars do
-                    if not v.boppable then
+                    --[[if not v.boppable then
                         continue
-                    end
+                    end--]]
 
                     local args = {
                         minigameId,
