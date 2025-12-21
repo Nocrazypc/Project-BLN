@@ -11182,7 +11182,7 @@ for index, _table in ipairs(files)do
         end
     end
 end
-
+--[[
 -------------- Autostart some toggled options for Feli---------------------
 task.wait(30)
 -------- Low Render- Hide parts ------------
@@ -11224,4 +11224,4 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
         v.Transparency = 1 
     end 
 end)
-end)
+end) --]]
