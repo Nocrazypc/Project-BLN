@@ -10979,7 +10979,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             StaticMap.sleighball_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function(
             )
                 if StaticMap.sleighball_minigame_state.is_game_active.Value then
-                    if getgenv().SETTINGS.ENABLE_AUTO_FARM == false then
+                    if getgenv().auto_farm == false then
                         return
                     end
                     if localPlayer:GetAttribute('hasStartedFarming') == false then
@@ -10996,7 +10996,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             StaticMap.star_catch_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function(
             )
                 if StaticMap.star_catch_minigame_state.is_game_active.Value then
-                    if getgenv().SETTINGS.ENABLE_AUTO_FARM == false then
+                    if getgenv().auto_farm == false then
                         return
                     end
                     if localPlayer:GetAttribute('hasStartedFarming') == false then
