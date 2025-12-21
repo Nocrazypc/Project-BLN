@@ -10990,6 +10990,23 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     Bypass('RouterClient').get('MinigameAPI/AttemptJoin'):FireServer('sleighball', true)
                 end
             end)
+            StaticMap.star_catch_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function(
+            )
+                if StaticMap.star_catch_minigame_state.is_game_active.Value then
+                    if getgenv().SETTINGS.ENABLE_AUTO_FARM == false then
+                        return
+                    end
+                    if localPlayer:GetAttribute('hasStartedFarming') == false then
+                        return
+                    end
+                    if localPlayer:GetAttribute('StopFarmingTemp') == true then
+                        return
+                    end
+
+                    localPlayer:SetAttribute('StopFarmingTemp', true)
+                    Bypass('RouterClient').get('MinigameAPI/AttemptJoin'):FireServer('star_catch', true)
+                end
+            end)
         end
         function Christmas2025Handler.Start()
             tryCollectGingerbread()
