@@ -11006,6 +11006,9 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     if getgenv().auto_farm == false then
                         return
                     end
+                    if localPlayer:GetAttribute('IsTuesdayEvent') == true then
+                        return
+                    end
                     if localPlayer:GetAttribute('hasStartedFarming') == false then
                         return
                     end
