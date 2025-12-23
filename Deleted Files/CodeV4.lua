@@ -10982,8 +10982,11 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             end)
             StaticMap.sleighball_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function(
             )
-                if StaticMap.sleighball_minigame_state.is_game_active.Value then
+                 if localPlayer:GetAttribute('IsTuesdayEvent') == true then
                     if getgenv().auto_farm == false then
+                        return
+                    end
+                    if localPlayer:GetAttribute('IsTuesdayEvent') == true then
                         return
                     end
                     if localPlayer:GetAttribute('hasStartedFarming') == false then
