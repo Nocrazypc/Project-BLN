@@ -10922,7 +10922,9 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             local minigameId = StarCatchMinigameClient.instanced_minigame.minigame_id
 
             while StarCatchMinigameClient.instanced_minigame do
-                if StarCatchMinigameClient.instanced_minigame.ingame_app_controller.right_value >= 40 then
+                local ingameAppController = StarCatchMinigameClient.instanced_minigame.ingame_app_controller
+
+                if ingameAppController and ingameAppController.right_value >= 40 then
                     break
                 end
 
