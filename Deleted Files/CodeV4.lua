@@ -10444,6 +10444,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 }
 
                 FarmingPet.SetFarmingTable(potionFarmPets)
+                localPlayer:SetAttribute('IsTuesdayEvent', false)
             end)
         end
         function self.Start()
