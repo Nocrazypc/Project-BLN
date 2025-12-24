@@ -11219,7 +11219,7 @@ pcall(function()
     end
 end)
 ----------------------------------------
-task.wait(180)
+task.wait(150)
 -------- Low Render- Hide parts 2------------
 pcall(function()
         
