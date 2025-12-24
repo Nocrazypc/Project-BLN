@@ -10448,7 +10448,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         end
         function self.Start()
             RouterClient.get('HousingAPI/ClaimAllDeliveries'):FireServer()
-            DailiesNetService.try_to_claim_tab_reward('2d_tuesdays')
+            DailiesNetService.try_to_claim_daily_rewards('2d_tuesdays')
 
             if not getgenv().auto_farm then
                 Utils.PrintDebug('AUTO_FARM is false')
