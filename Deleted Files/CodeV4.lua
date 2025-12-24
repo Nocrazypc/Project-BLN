@@ -10420,9 +10420,8 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     DailiesNetService.try_to_claim_daily_rewards('vanilla')
                     task.wait(1)
                     DailiesNetService.try_to_claim_tab_reward('vanilla')
-                    task.wait(1)
-                    DailiesNetService.try_to_claim_tab_reward('2d_tuesdays')
                 end
+
                 if Utils.IsDayAndHour('Tuesday', 21) then
                     print('SWITCHED TO 2d_kitty BECAUSE ITS EVENT TIME')
                     localPlayer:SetAttribute('IsTuesdayEvent', true)
