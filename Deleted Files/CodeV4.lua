@@ -10425,6 +10425,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 if Utils.IsDayAndHour('Tuesday', 21) then
                     print('SWITCHED TO 2d_kitty BECAUSE ITS EVENT TIME')
                     localPlayer:SetAttribute('IsTuesdayEvent', true)
+                    DailiesNetService.try_to_claim_daily_rewards('2d_tuesdays')
                     FarmingPet.SetFarmingTable({
                         '2d_kitty',
                     })
