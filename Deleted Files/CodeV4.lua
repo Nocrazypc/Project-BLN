@@ -1414,7 +1414,7 @@ do
             local TextLabel = Instance.new('TextLabel')
 
             --part.Position = campsite.Position + Vector3.new(0, 80, 0)
-			part.Position = Neighborhood.Position + Vector3.new(0,-12, 0)
+			part.Position = Neighborhood.Position + Vector3.new(0,-15, 0)
             part.Size = Vector3.new(200, 2, 200)
             part.Anchored = true
             part.Transparency = 0
