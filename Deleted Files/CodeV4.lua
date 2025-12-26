@@ -3826,7 +3826,8 @@ do
                         RouterClient.get('TeamAPI/Spawn'):InvokeServer()
                         Utils.GetCharacter()
                         task.wait(6)
-                        Teleport.FarmingHome()
+                        --Teleport.FarmingHome()
+				       Teleport.Neighborhood()
                         Utils.GetHumanoidRootPart().Anchored = false
 	                    localPlayer:SetAttribute('StopFarmingTemp', false)
 				        --RunService:Set3dRenderingEnabled(true) -- 3D On
