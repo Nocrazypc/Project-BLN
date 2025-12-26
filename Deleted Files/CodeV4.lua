@@ -1412,8 +1412,7 @@ do
             local SurfaceGui = Instance.new('SurfaceGui')
             local TextLabel = Instance.new('TextLabel')
 
-            --part.Position = campsite.Position + Vector3.new(0, 80, 0)
-			part.Position = Vector3.new(10000, 500, 10000)
+            part.Position = campsite.Position + Vector3.new(0, 80, 0)
             part.Size = Vector3.new(200, 2, 200)
             part.Anchored = true
             part.Transparency = 0
