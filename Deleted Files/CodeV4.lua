@@ -1813,21 +1813,6 @@ do
 			
             Teleport.DeleteWater()
         end
-
-        local Player = game:GetService("Players").LocalPlayer
-		local ReplicatedStorage = game:GetService("ReplicatedStorage")
-		
-        function Teleport.GoToHome()
-             game.ReplicatedStorage.API["HousingAPI/SubscribeToHouse"]:FireServer(game:GetService("Players").LocalPlayer)
-             spawn(function()
-                 pcall(function()
-                     SetLocation("housing", "MainDoor", {["house_owner"] = Player})
-                 end)
-             end)       
-             task.wait(1)
-             --localPlayer.Character.HumanoidRootPart.CFrame = Workspace.HouseInteriors.blueprint:FindFirstChildWhichIsA('Model'):GetModelCFrame():ToWorldSpace(CFrame.new(0, 0, -8))
-             return false
-        end
 		
         return Teleport
     end
