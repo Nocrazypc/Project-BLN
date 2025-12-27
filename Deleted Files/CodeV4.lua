@@ -1815,14 +1815,14 @@ do
         end
 
         function Teleport.GoToHome()
-             game.ReplicatedStorage.API["HousingAPI/SubscribeToHouse"]:FireServer(game:GetService("Players").LocalPlayer)
+             game.ReplicatedStorage.API["HousingAPI/SubscribeToHouse"]:FireServer(game:GetService("Players").localPlayer)
              spawn(function()
                  pcall(function()
-                     SetLocation("housing", "MainDoor", {["house_owner"] = Player})
+                     SetLocation("housing", "MainDoor", {["house_owner"] = localPlayer})
                  end)
              end)       
              task.wait(1)
-             --Player.Character.HumanoidRootPart.CFrame = Workspace.HouseInteriors.blueprint:FindFirstChildWhichIsA('Model'):GetModelCFrame():ToWorldSpace(CFrame.new(0, 0, -8))
+             --localPlayer.Character.HumanoidRootPart.CFrame = Workspace.HouseInteriors.blueprint:FindFirstChildWhichIsA('Model'):GetModelCFrame():ToWorldSpace(CFrame.new(0, 0, -8))
              return false
         end
 		
