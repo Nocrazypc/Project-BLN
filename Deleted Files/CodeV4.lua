@@ -10486,11 +10486,10 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                    pcall(function()
                         startAutoFarm()
 
-                        if ClientData.get_data()[localPlayer.Name].winter_2025_train_gingerbread then
+                        --[[if ClientData.get_data()[localPlayer.Name].winter_2025_train_gingerbread then
                             Ailment.SoloRideTheTrain()
-                            --Teleport.FarmingHome()
-							Teleport.Neighborhood()
-                        end
+                            Teleport.FarmingHome()
+                        end --]]
                         --UpdateTextEvent:Fire()
                     end)
 
