@@ -1810,6 +1810,9 @@ do
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
 
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+
+	        Utils.PlaceFLoorUnderPlayer() --
+			
             Teleport.DeleteWater()
         end
 
