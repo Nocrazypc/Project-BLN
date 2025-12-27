@@ -10475,27 +10475,27 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             FarmingPet.GetPetToFarm(1)
             task.wait(2)
 
-            --startAutoFarm()
+            startAutoFarm()
 
-            task.defer(function()
+            --[[task.defer(function()
                 --local UpdateTextEvent = (ReplicatedStorage:WaitForChild('UpdateTextEvent'))
 
                 while getgenv().auto_farm do
                     getgenv().lastTimeFarming = DateTime.now().UnixTimestamp
 
-                   pcall(function()
-                        startAutoFarm()
+                  pcall(function()
+                        --startAutoFarm()
 
-                        --[[if ClientData.get_data()[localPlayer.Name].winter_2025_train_gingerbread then
+                        if ClientData.get_data()[localPlayer.Name].winter_2025_train_gingerbread then
                             Ailment.SoloRideTheTrain()
                             Teleport.FarmingHome()
-                        end --]]
+                        end 
                         --UpdateTextEvent:Fire()
-                    end)
+                 end) 
 
                     task.wait(1)
                 end
-            end)
+            end) --]]
         end
 
         return self
