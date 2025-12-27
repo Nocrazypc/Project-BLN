@@ -1407,14 +1407,12 @@ do
                 return
             end
 			
-            --local campsite = Workspace.StaticMap.Campsite.CampsiteOrigin
-			local Neighborhood = game.Workspace.Interiors['Neighborhood!Fall']:WaitForChild('InteriorOrigin')
+            local campsite = Workspace.StaticMap.Campsite.CampsiteOrigin
             local part = Instance.new('Part')
             local SurfaceGui = Instance.new('SurfaceGui')
             local TextLabel = Instance.new('TextLabel')
 
-            --part.Position = campsite.Position + Vector3.new(0, 80, 0)
-			part.Position = Neighborhood.InteriorOrigin.CFrame + Vector3.new(0, -20, 0)
+            part.Position = campsite.Position + Vector3.new(0, 80, 0)
             part.Size = Vector3.new(200, 2, 200)
             part.Anchored = true
             part.Transparency = 0
