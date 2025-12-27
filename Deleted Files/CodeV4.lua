@@ -11197,8 +11197,9 @@ for index, _table in ipairs(files)do
     end
 end
 
-task.delay(60, function() --1
-    localPlayer:SetAttribute('hasStartedFarming', true) --1
+task.delay(60, function()
+    localPlayer:SetAttribute('hasStartedFarming', true)
+end)
 
 -------------- Autostart some toggled options for Feli---------------------
 task.wait(2)
@@ -11225,8 +11226,6 @@ pcall(function()
         Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
     end
 end)
-
-end) --1
 ----------------------------------------
 task.wait(180)
 -------- Low Render- Hide parts 2------------
