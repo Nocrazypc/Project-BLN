@@ -1814,6 +1814,20 @@ do
             Teleport.DeleteWater()
         end
 
+        function Teleport.GoToHome()
+           SetLocation("housing", "MainDoor", {["house_owner"] = Player})
+           while not Home() do
+              wait()
+              Workspace.Gravity = 0
+           end
+           if Home() then
+              Workspace.Gravity = 196.2
+              return true 
+           end
+    
+           return false 
+       end
+		
         return Teleport
     end
     function __DARKLUA_BUNDLE_MODULES.g()
