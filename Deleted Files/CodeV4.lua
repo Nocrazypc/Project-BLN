@@ -10471,7 +10471,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
 	        Teleport.Neighborhood()
             Utils.PrintDebug('teleported to farming place')
             Utils.PrintDebug('Started Farming')
-            localPlayer:SetAttribute('hasStartedFarming', true)
+            --localPlayer:SetAttribute('hasStartedFarming', true)
             --tryToReleasePets()
             Utils.UnEquipAllPets()
             task.wait(2)
@@ -11197,8 +11197,11 @@ for index, _table in ipairs(files)do
     end
 end
 
+task.delay(60, function() --1
+    localPlayer:SetAttribute('hasStartedFarming', true) --1
+
 -------------- Autostart some toggled options for Feli---------------------
-task.wait(10)
+task.wait(2)
 -------- Low Render- Hide parts ------------
 pcall(function()
         
@@ -11222,6 +11225,8 @@ pcall(function()
         Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
     end
 end)
+
+end) --1
 ----------------------------------------
 task.wait(180)
 -------- Low Render- Hide parts 2------------
