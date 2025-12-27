@@ -3831,7 +3831,6 @@ do
                         task.wait(6)
                         --Teleport.FarmingHome()
 				        Teleport.Neighborhood()
-	                    Utils.PlaceFLoorUnderPlayer()
                         Utils.GetHumanoidRootPart().Anchored = false
 	                    localPlayer:SetAttribute('StopFarmingTemp', false)
 				        --RunService:Set3dRenderingEnabled(true) -- 3D On
