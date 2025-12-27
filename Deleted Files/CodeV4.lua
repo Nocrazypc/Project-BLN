@@ -10466,7 +10466,8 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             setupFloor()
             CollisionsClient.set_collidable(false)
             task.wait(2)
-            --Teleport.FarmingHome()
+            Teleport.FarmingHome()
+            task.wait(5)
 	        Teleport.Neighborhood()
             Utils.PrintDebug('teleported to farming place')
             Utils.PrintDebug('Started Farming')
@@ -10477,24 +10478,22 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             FarmingPet.GetPetToFarm(1)
             task.wait(2)
 
-            startAutoFarm()
+            --startAutoFarm()
 
-            --localPlayer:SetAttribute('StopFarmingTemp', true)
             task.defer(function()
                 --local UpdateTextEvent = (ReplicatedStorage:WaitForChild('UpdateTextEvent'))
 
                 while getgenv().auto_farm do
-                    --getgenv().lastTimeFarming = DateTime.now().UnixTimestamp
+                    getgenv().lastTimeFarming = DateTime.now().UnixTimestamp
 
                    pcall(function()
-                        --startAutoFarm()
+                        startAutoFarm()
 
                         if ClientData.get_data()[localPlayer.Name].winter_2025_train_gingerbread then
                             Ailment.SoloRideTheTrain()
                             --Teleport.FarmingHome()
-							        Teleport.Neighborhood()
+							Teleport.Neighborhood()
                         end
-
                         --UpdateTextEvent:Fire()
                     end)
 
