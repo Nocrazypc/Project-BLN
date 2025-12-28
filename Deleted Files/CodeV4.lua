@@ -11061,7 +11061,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
 end
 
 setfpscap(2)
-task.wait(5)
+task.wait(1)
 
 if not game:IsLoaded() then
     game.Loaded:Wait()
@@ -11211,7 +11211,7 @@ for index, _table in ipairs(files)do
 end
 
 -------------- Autostart some toggled options for Feli---------------------
-task.wait(10)
+task.wait()
 -------- Low Render- Hide parts ------------
 pcall(function()
         
