@@ -1599,7 +1599,7 @@ do
             localPlayer.Character:MoveTo(teleportPostion)
 			
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
-            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+            Utils.GetHumanoid():ChangeState(Enum.HumanoidStateType.Landed)
             task.wait(2)
         end
 		
@@ -1609,7 +1609,7 @@ do
 
             localPlayer.Character.PrimaryPart.CFrame = Workspace.CampingLocation.CFrame + Vector3.new(rng:NextInteger(1, 30), 5, rng:NextInteger(1, 30))
 
-            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+            Utils.GetHumanoid():ChangeState(Enum.HumanoidStateType.Landed)
             Teleport.DeleteWater()
         end
         function Teleport.BeachParty()
