@@ -1749,7 +1749,7 @@ do
 
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
 
-            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+            Utils.GetHumanoid():ChangeState(Enum.HumanoidStateType.Landed)
             Teleport.DeleteWater()
 
             return true
@@ -1763,7 +1763,7 @@ do
 
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
 
-            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+            Utils.GetHumanoid():ChangeState(Enum.HumanoidStateType.Landed)
         end
         function Teleport.SkyCastle()
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
