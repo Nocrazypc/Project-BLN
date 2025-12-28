@@ -10480,7 +10480,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 --local UpdateTextEvent = (ReplicatedStorage:WaitForChild('UpdateTextEvent'))
 
                 while getgenv().auto_farm do
-                    --getgenv().lastTimeFarming = DateTime.now().UnixTimestamp
+                    getgenv().lastTimeFarming = DateTime.now().UnixTimestamp
 
                    --[[pcall(function()
                         --startAutoFarm()
