@@ -9796,6 +9796,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         local localPlayer = Players.LocalPlayer
         local petToBuy = 'aztec_egg_2025_aztec_egg'
         local potionFarmPets = {
+            'winter_2025_mrs_whiskerpips',
             '2d_kitty',
             'dog',
             'cat',
