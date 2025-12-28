@@ -1618,7 +1618,7 @@ do
 
             localPlayer.Character.PrimaryPart.CFrame = Workspace.BeachPartyLocation.CFrame + Vector3.new(math.random(1, 30), 5, math.random(1, 30))
 
-            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+            Utils.GetHumanoid():ChangeState(Enum.HumanoidStateType.Landed)
             Teleport.DeleteWater()
         end
 		    function Teleport.GingerbreadCollectionCircle()
