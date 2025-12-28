@@ -10395,6 +10395,9 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     if getgenv().FOCUS_FARM_AGE_POTION then
                          FarmingPet.GetPetToFarm(1)
                     end
+				
+                    Utils.GetHumanoidRootPart().Anchored = false
+				
                     if not completePetAilments(1) then
                         task.wait()
                         completeBabyAilments()
