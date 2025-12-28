@@ -10266,18 +10266,21 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
                 if key == 'salon' then
                     Ailment.SalonAilment(key, petUnique)
-                    Teleport.FarmingHome()
+                    --Teleport.FarmingHome()
+					Teleport.Nursery()
                     return true
                 elseif key == 'moon' then
                     Ailment.MoonAilment(key, petUnique)
                     return true
                 elseif key == 'pizza_party' then
                     Ailment.PizzaPartyAilment(key, petUnique)
-                    Teleport.FarmingHome()
+                    --Teleport.FarmingHome()
+					Teleport.Nursery()
                     return true
                 elseif key == 'school' then
                     Ailment.SchoolAilment(key, petUnique)
-                    Teleport.FarmingHome()
+                    --Teleport.FarmingHome()
+					Teleport.Nursery()
                     return true
                 elseif key == 'bored' then
                     if furniture.piano == 'nil' then
@@ -10322,23 +10325,27 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     Teleport.PlaceFloorAtBeachParty()
                     Ailment.BeachPartyAilment(petUnique)
                     task.wait(2)
-                    Teleport.FarmingHome()
+                    --Teleport.FarmingHome()
+					Teleport.Nursery()
                     return true
                 elseif key == 'camping' then
                     Teleport.PlaceFloorAtCampSite()
                     Ailment.CampingAilment(petUnique)
                     task.wait(130) -- test to keep tasks pending before sick task appears
-                    Teleport.FarmingHome()
+                    --Teleport.FarmingHome()
+					Teleport.Nursery()
                     return true
                 --[[elseif key == 'ice_skating' then
                     Ailment.IceSkating(petUnique)
                     task.wait(2)
-                    Teleport.FarmingHome()
+                    --Teleport.FarmingHome()
+					Teleport.Nursery()
                     return true
                 elseif key == 'ride_the_train' then
                     Ailment.RideTheTrain(petUnique)
                     task.wait(2)
-                    Teleport.FarmingHome()
+                    --Teleport.FarmingHome()
+					Teleport.Nursery()
                     return true--]]
                 end
             end
