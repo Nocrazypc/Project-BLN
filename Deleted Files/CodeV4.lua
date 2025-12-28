@@ -1565,7 +1565,7 @@ do
             localPlayer.Character.PrimaryPart.CFrame = Workspace:WaitForChild('StaticMap'):WaitForChild('Campsite'):WaitForChild('CampsiteOrigin').CFrame + Vector3.new(math.random(1, 5), 10, math.random(1, 5))
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
 
-            Utils.GetHumanoid():ChangeState(Enum.HumanoidStateType.Landed)
+            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
             Teleport.DeleteWater()
             task.wait(2)
         end
@@ -1577,10 +1577,10 @@ do
             Workspace.Interiors:WaitForChild(tostring(Workspace.Interiors:FindFirstChildWhichIsA('Model')))
 
             localPlayer.Character.PrimaryPart.CFrame = Workspace.Interiors.Nursery:WaitForChild('GumballMachine'):WaitForChild('Root').CFrame + Vector3.new(
--12, 10, 0) --
+-8, 10, 0)
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
 
-            Utils.GetHumanoid():ChangeState(Enum.HumanoidStateType.Landed)
+            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
             task.wait(2)
         end
 
@@ -1599,7 +1599,7 @@ do
             localPlayer.Character:MoveTo(teleportPostion)
 			
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
-            Utils.GetHumanoid():ChangeState(Enum.HumanoidStateType.Landed)
+            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
             task.wait(2)
         end
 		
@@ -1609,7 +1609,7 @@ do
 
             localPlayer.Character.PrimaryPart.CFrame = Workspace.CampingLocation.CFrame + Vector3.new(rng:NextInteger(1, 30), 5, rng:NextInteger(1, 30))
 
-            Utils.GetHumanoid():ChangeState(Enum.HumanoidStateType.Landed)
+            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
             Teleport.DeleteWater()
         end
         function Teleport.BeachParty()
@@ -1618,7 +1618,7 @@ do
 
             localPlayer.Character.PrimaryPart.CFrame = Workspace.BeachPartyLocation.CFrame + Vector3.new(math.random(1, 30), 5, math.random(1, 30))
 
-            Utils.GetHumanoid():ChangeState(Enum.HumanoidStateType.Landed)
+            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
             Teleport.DeleteWater()
         end
 		    function Teleport.GingerbreadCollectionCircle()
@@ -1651,8 +1651,7 @@ do
             end
 
             localPlayer.Character:MoveTo(navPart.Position)
-			Utils.GetHumanoidRootPart().Anchored = false
-            Utils.GetHumanoid():ChangeState(Enum.HumanoidStateType.Landed)
+            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
             Teleport.DeleteWater()
         end
         function Teleport.Bonfire()
@@ -1668,7 +1667,7 @@ do
             local location = npc.PrimaryPart.Position + Vector3.new(math.random(1, 15), 5, math.random(1, 15))
 
             localPlayer.Character:MoveTo(location)
-            Utils.GetHumanoid():ChangeState(Enum.HumanoidStateType.Landed)
+            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
             Teleport.DeleteWater()
         end
         function Teleport.PipeOrgan()
@@ -1709,7 +1708,7 @@ do
 
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
 
-            Utils.GetHumanoid():ChangeState(Enum.HumanoidStateType.Landed)
+            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
             Teleport.DeleteWater()
             task.wait(2)
 
@@ -1725,7 +1724,7 @@ do
             localPlayer.Character.PrimaryPart.CFrame = Workspace:WaitForChild('StaticMap'):WaitForChild('Park'):WaitForChild('Roundabout').PrimaryPart.CFrame + vec
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
 
-            Utils.GetHumanoid():ChangeState(Enum.HumanoidStateType.Landed)
+            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
             Teleport.DeleteWater()
         end
         function Teleport.DownloadMainMap()
@@ -1749,7 +1748,7 @@ do
 
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
 
-            Utils.GetHumanoid():ChangeState(Enum.HumanoidStateType.Landed)
+            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
             Teleport.DeleteWater()
 
             return true
@@ -1763,7 +1762,7 @@ do
 
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
 
-            Utils.GetHumanoid():ChangeState(Enum.HumanoidStateType.Landed)
+            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
         end
         function Teleport.SkyCastle()
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
@@ -1791,7 +1790,7 @@ do
 -5, -1))
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
 
-            Utils.GetHumanoid():ChangeState(Enum.HumanoidStateType.Landed)
+            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
         end
         function Teleport.Neighborhood()
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
@@ -1806,15 +1805,14 @@ do
 
             Workspace.Interiors['Neighborhood!Fall']:WaitForChild('InteriorOrigin')
 
-			localPlayer.Character.PrimaryPart.CFrame = Workspace.Interiors['Neighborhood!Fall'].InteriorOrigin.CFrame + Vector3.new(0, -10, 0) --
-
+            localPlayer.Character.PrimaryPart.CFrame = Workspace.Interiors['Neighborhood!Fall'].InteriorOrigin.CFrame + Vector3.new(0, 
+-10, 0)
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
 
-            Utils.GetHumanoid():ChangeState(Enum.HumanoidStateType.Landed)
-			
+            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
             Teleport.DeleteWater()
         end
-		
+
         return Teleport
     end
     function __DARKLUA_BUNDLE_MODULES.g()
@@ -3827,9 +3825,8 @@ do
                         removeGameOverButton('MinigameRewardsApp')
                         RouterClient.get('TeamAPI/Spawn'):InvokeServer()
                         Utils.GetCharacter()
-                        task.wait(2)
-                        --Teleport.FarmingHome()
-				        Teleport.Nursery()
+                        task.wait(6)
+                        Teleport.FarmingHome()
                         Utils.GetHumanoidRootPart().Anchored = false
 	                    localPlayer:SetAttribute('StopFarmingTemp', false)
 				        --RunService:Set3dRenderingEnabled(true) -- 3D On
@@ -3914,17 +3911,17 @@ do
             end
 
             lowSpecTerrain()
-            -- lowSpecLighting() --
-            -- Lighting:ClearAllChildren() --
+            --lowSpecLighting() --
+            --Lighting:ClearAllChildren() --
             Terrain:Clear()
 
-           -- for _, v in pairs(Workspace:GetDescendants())do --
-               --  lowSpecTextures(v) --
-           -- end --
+            --[[for _, v in pairs(Workspace:GetDescendants())do --
+                 lowSpecTextures(v) --
+            end --
 
-           -- Workspace.DescendantAdded:Connect(function(v) --
-           -- lowSpecTextures(v) --
-           -- end) -- 
+            Workspace.DescendantAdded:Connect(function(v) --
+                lowSpecTextures(v) --
+             end) -- --]]
         end
 
         return self
@@ -8420,8 +8417,7 @@ local FarmToggle = FarmTab:CreateToggle({
      Callback = function(Value)
 	
 		  task.wait(3)
-          --Teleport.FarmingHome()
-	      Teleport.Nursery()
+          Teleport.FarmingHome()
 		  --getgenv().auto_farm = Value
           localPlayer:SetAttribute('StopFarmingTemp', false)
      end,
@@ -9668,7 +9664,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         function Ailment.SoloRideTheTrain()
             Utils.PrintDebug('\u{1f682} Riding the Train \u{1f682}')
             Teleport.GingerbreadCollectionCircle()
-            setfpscap(1)
 
             task.wait(2)
 
@@ -9695,7 +9690,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             until not ClientData.get_data()[localPlayer.Name].winter_2025_train_gingerbread or count > 120
 
             getUpFromSitting()
-            setfpscap(2)
         end
         function Ailment.BuccaneerBandAilment(petUnique)
             ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
@@ -9820,7 +9814,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 return false
             end
         end
-        --[[local isfocusFarmPets = function()
+        local isfocusFarmPets = function()
             --local equippedPet = ClientData.get('pet_char_wrappers') and ClientData.get('pet_char_wrappers')[1]
 	        local pets = ClientData.get('pet_char_wrappers')
             local equippedPet = pets and pets[1]
@@ -9840,21 +9834,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             local petId = equippedPet and equippedPet.pet_id
 	
             return petId ~= nil and table.find(potionFarmPets, petId) ~= nil
-        end--]]
-
-        local isfocusFarmPets = function()
-            local equippedPet = ClientData.get('pet_char_wrappers') and ClientData.get('pet_char_wrappers')[1]
-            if not equippedPet then
-                return false
-            end
-            local petId = equippedPet.pet_id
-            if not petId then
-                return false
-            end
-            local result = table.find(potionFarmPets, petId) and true or false
-            return result
         end
-
         local isProHandler = function()
             local subscription = ClientData.get_data()[localPlayer.Name].subscription_equip_2x_pets
             if not subscription then
@@ -9880,7 +9860,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             return false
         end
 
-        --[[function FarmingPet.SetFarmingTable(pets)
+        function FarmingPet.SetFarmingTable(pets)
             if typeof(pets) ~= 'table' then
                 print('the pets is not a table')
 
@@ -9888,7 +9868,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             end
 
             potionFarmPets = pets
-        end--]]
+        end
 
         function FarmingPet.SwitchOutFullyGrown(whichPet)
             if localPlayer:GetAttribute('StopFarmingTemp') == true then
@@ -9916,17 +9896,14 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             if getgenv().FOCUS_FARM_AGE_POTION then
                 if whichPet == 1 and isfocusFarmPets() then
                     Utils.PrintDebug(string.format('Has focusFarmpets equipped, %s', tostring(whichPet)))
-
                     return
                 end
-
                 isProHandler()
-
                 if whichPet == 2 and localPlayer:GetAttribute('isProHandler') == true and getgenv().petCurrentlyFarming2 then
                     return
                 end
 
-                --[[print('trying to see if 2d kitty')
+                print('trying to see if 2d kitty')
 
                 if GetInventory.CheckForPetAndEquip({
                     '2d_kitty',
@@ -9936,7 +9913,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     return
                 end
 
-                task.wait(1)--]]
+                task.wait(1)
                 Utils.PrintDebug(string.format('\u{1f414}\u{1f414} Getting pet to Farm age up potion, %s \u{1f414}\u{1f414}', tostring(whichPet)))
                 if GetInventory.CheckForPetAndEquip({
                     'starter_egg',
@@ -10278,21 +10255,18 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique]do
                 if key == 'salon' then
                     Ailment.SalonAilment(key, petUnique)
-                    --Teleport.FarmingHome()
-					Teleport.Nursery()
+                    Teleport.FarmingHome()
                     return true
                 elseif key == 'moon' then
                     Ailment.MoonAilment(key, petUnique)
                     return true
                 elseif key == 'pizza_party' then
                     Ailment.PizzaPartyAilment(key, petUnique)
-                    --Teleport.FarmingHome()
-					Teleport.Nursery()
+                    Teleport.FarmingHome()
                     return true
                 elseif key == 'school' then
                     Ailment.SchoolAilment(key, petUnique)
-                    --Teleport.FarmingHome()
-					Teleport.Nursery()
+                    Teleport.FarmingHome()
                     return true
                 elseif key == 'bored' then
                     if furniture.piano == 'nil' then
@@ -10337,27 +10311,23 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     Teleport.PlaceFloorAtBeachParty()
                     Ailment.BeachPartyAilment(petUnique)
                     task.wait(2)
-                    --Teleport.FarmingHome()
-					Teleport.Nursery()
+                    Teleport.FarmingHome()
                     return true
                 elseif key == 'camping' then
                     Teleport.PlaceFloorAtCampSite()
                     Ailment.CampingAilment(petUnique)
                     task.wait(130) -- test to keep tasks pending before sick task appears
-                    --Teleport.FarmingHome()
-					Teleport.Nursery()
+                    Teleport.FarmingHome()
                     return true
                 --[[elseif key == 'ice_skating' then
                     Ailment.IceSkating(petUnique)
                     task.wait(2)
-                    --Teleport.FarmingHome()
-					Teleport.Nursery()
+                    Teleport.FarmingHome()
                     return true
                 elseif key == 'ride_the_train' then
                     Ailment.RideTheTrain(petUnique)
                     task.wait(2)
-                    --Teleport.FarmingHome()
-					Teleport.Nursery()
+                    Teleport.FarmingHome()
                     return true--]]
                 end
             end
@@ -10414,7 +10384,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     if getgenv().FOCUS_FARM_AGE_POTION then
                          FarmingPet.GetPetToFarm(1)
                     end
-				    if not completePetAilments(1) then
+                    if not completePetAilments(1) then
                         task.wait()
                         completeBabyAilments()
                     end
@@ -10441,7 +10411,9 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         end
         function self.Init()
             RouterClient.get('PayAPI/DisablePopups'):FireServer()
-            RouterClient.get('WeatherAPI/WeatherUpdated').OnClientEvent:Connect(function(dayOrNight)
+            RouterClient.get('WeatherAPI/WeatherUpdated').OnClientEvent:Connect(function(
+                dayOrNight
+            )
                 task.wait(2)
 
                 if dayOrNight == 'NIGHT' then
@@ -10450,7 +10422,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     DailiesNetService.try_to_claim_tab_reward('vanilla')
                 end
 
-                --[[if Utils.IsDayAndHour('Tuesday', 21) then
+                if Utils.IsDayAndHour('Tuesday', 21) then
                     print('SWITCHED TO 2d_kitty BECAUSE ITS EVENT TIME')
                     localPlayer:SetAttribute('IsTuesdayEvent', true)
                     DailiesNetService.try_to_claim_daily_rewards('2d_tuesdays')
@@ -10459,10 +10431,10 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     })
 
                     return
-                end--]]
+                end
 
                 local potionFarmPets = {
-                    --'2d_kitty',
+                    '2d_kitty',
                     'dog',
                     'cat',
                     'starter_egg',
@@ -10471,8 +10443,8 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     'basic_egg_2022_mouse',
                 }
 
-                --FarmingPet.SetFarmingTable(potionFarmPets)
-                --localPlayer:SetAttribute('IsTuesdayEvent', false)
+                FarmingPet.SetFarmingTable(potionFarmPets)
+                localPlayer:SetAttribute('IsTuesdayEvent', false)
             end)
         end
         function self.Start()
@@ -10491,38 +10463,39 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             setupFloor()
             CollisionsClient.set_collidable(false)
             task.wait(2)
-            --Teleport.FarmingHome()
-            Teleport.Nursery()
+            Teleport.FarmingHome()
             Utils.PrintDebug('teleported to farming place')
             Utils.PrintDebug('Started Farming')
-            --localPlayer:SetAttribute('hasStartedFarming', true)
+            localPlayer:SetAttribute('hasStartedFarming', true)
             --tryToReleasePets()
             Utils.UnEquipAllPets()
             task.wait(2)
             FarmingPet.GetPetToFarm(1)
             task.wait(2)
 
-            --startAutoFarm()
+            startAutoFarm()
 
-            task.delay(30, function()
+            --localPlayer:SetAttribute('StopFarmingTemp', true)
+            task.defer(function()
                 --local UpdateTextEvent = (ReplicatedStorage:WaitForChild('UpdateTextEvent'))
 
                 while getgenv().auto_farm do
-                    getgenv().lastTimeFarming = DateTime.now().UnixTimestamp
+                    --getgenv().lastTimeFarming = DateTime.now().UnixTimestamp
 
-                  pcall(function()
-                        startAutoFarm()
+                   pcall(function()
+                        --startAutoFarm()
 
-                        --[[if ClientData.get_data()[localPlayer.Name].winter_2025_train_gingerbread then
+                        if ClientData.get_data()[localPlayer.Name].winter_2025_train_gingerbread then
                             Ailment.SoloRideTheTrain()
-                            Teleport.Nursery()
-                        end --]]
+                            Teleport.FarmingHome()
+                        end
+
                         --UpdateTextEvent:Fire()
-                 end) 
+                    end)
 
                     task.wait(1)
                 end
-            end) 
+            end)
         end
 
         return self
@@ -10832,10 +10805,37 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         local StaticMap = (workspace:WaitForChild('StaticMap'))
         local MinigameInGameApp = (PlayerGui:WaitForChild('MinigameInGameApp'))
         local Christmas2025Handler = {}
+        local isRewardClaimed = function(dayNumber)
         local adventManager = ClientData.get_data()[localPlayer.Name].winter_2025_advent_manager
         local RunService = game:GetService("RunService")
         local Teleport = __DARKLUA_BUNDLE_MODULES.load('f')
 
+            if not adventManager then
+                return nil
+            end
+            if not adventManager.rewards_claimed then
+                return nil
+            end
+
+            for _, dayClaimed in adventManager.rewards_claimed do
+                if dayClaimed == dayNumber then
+                    print('Reward ' .. dayNumber .. ' already claimed')
+
+                    return true
+                end
+            end
+
+            print('Reward ' .. dayNumber .. ' not claimed yet')
+
+            return false
+        end
+        local tryRedeemAdventCalendar = function()
+            local dt = (DateTime.now():ToLocalTime())
+
+            if isRewardClaimed(dt.Day) == false then
+                RouterClient.get('WinterEventAPI/AdventCalendarTryTakeReward'):InvokeServer(dt.Day)
+            end
+        end
         local tryCollectGingerbread = function()
             for _, v in ipairs(ginerbreadIds)do
                 IceSkatingNet.PickUpGingerbread:fire_server({
@@ -11032,6 +11032,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 if dayOrNight == 'DAY' then
                     tryCollectGingerbread()
                     tryExchangeGingerbread()
+                    tryRedeemAdventCalendar()
                     tryTamePug()
                 end
             end)
@@ -11168,8 +11169,6 @@ local files = {
     },
 }
 
-localPlayer:SetAttribute('hasStartedFarming', false)
-
 Utils.PrintDebug('----- INITIALIZING MODULES -----')
 
 for index, _table in ipairs(files)do
@@ -11194,10 +11193,8 @@ for index, _table in ipairs(files)do
     end
 end
 
-localPlayer:SetAttribute('hasStartedFarming', true)
-
 -------------- Autostart some toggled options for Feli---------------------
-task.wait(2)
+task.wait(10)
 -------- Low Render- Hide parts ------------
 pcall(function()
         
