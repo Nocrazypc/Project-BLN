@@ -9926,7 +9926,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     return
                 end
 
-                print('trying to see if 2d kitty')
+                --[[print('trying to see if 2d kitty')
 
                 if GetInventory.CheckForPetAndEquip({
                     '2d_kitty',
@@ -9936,7 +9936,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     return
                 end
 
-                task.wait(1)
+                task.wait(1)--]]
                 Utils.PrintDebug(string.format('\u{1f414}\u{1f414} Getting pet to Farm age up potion, %s \u{1f414}\u{1f414}', tostring(whichPet)))
                 if GetInventory.CheckForPetAndEquip({
                     'starter_egg',
