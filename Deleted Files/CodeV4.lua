@@ -10807,37 +10807,10 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         local StaticMap = (workspace:WaitForChild('StaticMap'))
         local MinigameInGameApp = (PlayerGui:WaitForChild('MinigameInGameApp'))
         local Christmas2025Handler = {}
-        local isRewardClaimed = function(dayNumber)
         local adventManager = ClientData.get_data()[localPlayer.Name].winter_2025_advent_manager
         local RunService = game:GetService("RunService")
         local Teleport = __DARKLUA_BUNDLE_MODULES.load('f')
 
-            if not adventManager then
-                return nil
-            end
-            if not adventManager.rewards_claimed then
-                return nil
-            end
-
-            for _, dayClaimed in adventManager.rewards_claimed do
-                if dayClaimed == dayNumber then
-                    print('Reward ' .. dayNumber .. ' already claimed')
-
-                    return true
-                end
-            end
-
-            print('Reward ' .. dayNumber .. ' not claimed yet')
-
-            return false
-        end
-        local tryRedeemAdventCalendar = function()
-            local dt = (DateTime.now():ToLocalTime())
-
-            if isRewardClaimed(dt.Day) == false then
-                RouterClient.get('WinterEventAPI/AdventCalendarTryTakeReward'):InvokeServer(dt.Day)
-            end
-        end
         local tryCollectGingerbread = function()
             for _, v in ipairs(ginerbreadIds)do
                 IceSkatingNet.PickUpGingerbread:fire_server({
