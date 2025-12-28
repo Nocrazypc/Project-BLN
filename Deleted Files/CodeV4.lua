@@ -11149,6 +11149,8 @@ local files = {
     },
 }
 
+localPlayer:SetAttribute('hasStartedFarming', false)
+
 Utils.PrintDebug('----- INITIALIZING MODULES -----')
 
 for index, _table in ipairs(files)do
