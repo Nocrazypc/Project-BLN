@@ -11049,7 +11049,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 if dayOrNight == 'DAY' then
                     tryCollectGingerbread()
                     tryExchangeGingerbread()
-                    tryRedeemAdventCalendar()
+                    --tryRedeemAdventCalendar()
                     tryTamePug()
                 end
             end)
