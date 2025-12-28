@@ -9673,6 +9673,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         function Ailment.SoloRideTheTrain()
             Utils.PrintDebug('\u{1f682} Riding the Train \u{1f682}')
             Teleport.GingerbreadCollectionCircle()
+            setfpscap(1)
 
             task.wait(2)
 
@@ -9699,6 +9700,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             until not ClientData.get_data()[localPlayer.Name].winter_2025_train_gingerbread or count > 120
 
             getUpFromSitting()
+            setfpscap(2)
         end
         function Ailment.BuccaneerBandAilment(petUnique)
             ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
