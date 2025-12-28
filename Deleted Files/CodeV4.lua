@@ -1569,7 +1569,8 @@ do
             Teleport.DeleteWater()
             task.wait(2)
         end
-        function Teleport.Nursery()
+        --function Teleport.Nursery()
+		function Teleport.FarmingHome()
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
 
             SetLocationFunc('Nursery', 'MainDoor', {})
