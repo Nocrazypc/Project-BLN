@@ -1791,7 +1791,7 @@ do
 -5, -1))
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
 
-            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+            Utils.GetHumanoid():ChangeState(Enum.HumanoidStateType.Landed)
         end
         function Teleport.Neighborhood()
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
