@@ -3888,6 +3888,9 @@ do
                 v.Transparency = 1
             elseif v:IsA('Decal') or v:IsA('Texture') then
                 v.Transparency = 1
+            elseif v:IsA('ParticleEmitter') or v:IsA('Trail') then
+                v.Lifetime = NumberRange.new(1, 1.1)
+                v.Enabled = false
             elseif v:IsA('Explosion') then
                 v.BlastPressure = 1
                 v.BlastRadius = 1
@@ -3904,6 +3907,8 @@ do
                 v.TextureId = 0
             elseif v:IsA('ShirtGraphic') then
                 v.Graphic = 1
+            elseif v:IsA('Animator') then
+                v:Destroy()
             end
         end
 
