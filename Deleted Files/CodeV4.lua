@@ -9917,7 +9917,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 if whichPet == 2 and localPlayer:GetAttribute('isProHandler') == true and getgenv().petCurrentlyFarming2 then
                     return
                 end
-                if GetInventory.CheckForPetAndEquip({
+                --[[if GetInventory.CheckForPetAndEquip({
                     'winter_2025_mrs_whiskerpips',
                 }, whichPet) then
                     print('FOUND winter_2025_mrs_whiskerpips', whichPet)
@@ -9935,7 +9935,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     return
                 end
 
-                task.wait(1)
+                task.wait(1)--]] --activate for 2D kitty
                 Utils.PrintDebug(string.format('\u{1f414}\u{1f414} Getting pet to Farm age up potion, %s \u{1f414}\u{1f414}', tostring(whichPet)))
                 if GetInventory.CheckForPetAndEquip({
                     'starter_egg',
