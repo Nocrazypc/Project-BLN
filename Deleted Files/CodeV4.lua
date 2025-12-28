@@ -10465,6 +10465,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 end
 
                 local potionFarmPets = {
+                    'winter_2025_mrs_whiskerpips',
                     '2d_kitty',
                     'dog',
                     'cat',
