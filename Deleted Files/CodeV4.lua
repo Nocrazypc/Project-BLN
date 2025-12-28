@@ -9916,13 +9916,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 if whichPet == 2 and localPlayer:GetAttribute('isProHandler') == true and getgenv().petCurrentlyFarming2 then
                     return
                 end
-                if GetInventory.CheckForPetAndEquip({
-                    'winter_2025_mrs_whiskerpips',
-                }, whichPet) then
-                    print('FOUND winter_2025_mrs_whiskerpips', whichPet)
-
-                    return
-                end
 
                 print('trying to see if 2d kitty')
 
