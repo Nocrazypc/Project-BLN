@@ -1548,6 +1548,22 @@ do
             Utils.GetCharacter().Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
             Teleport.DeleteWater()
         end--]]
+
+		function Teleport.FarmingHome() --new for nursey
+            localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
+
+            SetLocationFunc('Nursery', 'MainDoor', {})
+            task.wait(1)
+            Workspace.Interiors:WaitForChild(tostring(Workspace.Interiors:FindFirstChildWhichIsA('Model')))
+
+            localPlayer.Character.PrimaryPart.CFrame = Workspace.Interiors.Nursery:WaitForChild('GumballMachine'):WaitForChild('Root').CFrame + Vector3.new(
+-155, 10, 0)
+            localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
+
+            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+            task.wait(2)
+        end
+		
         function Teleport.MainMap()
             local isAlreadyOnMainMap = Workspace:FindFirstChild('Interiors'):FindFirstChild('center_map_plot', true)
 
@@ -1569,8 +1585,8 @@ do
             Teleport.DeleteWater()
             task.wait(2)
         end
-        --function Teleport.Nursery()
-		function Teleport.FarmingHome()
+		
+        function Teleport.Nursery()
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
 
             SetLocationFunc('Nursery', 'MainDoor', {})
@@ -1578,7 +1594,7 @@ do
             Workspace.Interiors:WaitForChild(tostring(Workspace.Interiors:FindFirstChildWhichIsA('Model')))
 
             localPlayer.Character.PrimaryPart.CFrame = Workspace.Interiors.Nursery:WaitForChild('GumballMachine'):WaitForChild('Root').CFrame + Vector3.new(
--155, 10, 0)
+-10, 10, 0)
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
 
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
