@@ -10454,7 +10454,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     DailiesNetService.try_to_claim_tab_reward('vanilla')
                 end
 
-                if Utils.IsDayAndHour('Tuesday', 21) then
+                --[[if Utils.IsDayAndHour('Tuesday', 21) then
                     print('SWITCHED TO 2d_kitty BECAUSE ITS EVENT TIME')
                     localPlayer:SetAttribute('IsTuesdayEvent', true)
                     DailiesNetService.try_to_claim_daily_rewards('2d_tuesdays')
@@ -10463,7 +10463,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     })
 
                     return
-                end
+                end--]]
 
                 local potionFarmPets = {
                     'winter_2025_mrs_whiskerpips',
