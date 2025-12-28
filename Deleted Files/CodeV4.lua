@@ -1725,7 +1725,7 @@ do
             localPlayer.Character.PrimaryPart.CFrame = Workspace:WaitForChild('StaticMap'):WaitForChild('Park'):WaitForChild('Roundabout').PrimaryPart.CFrame + vec
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
 
-            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+            Utils.GetHumanoid():ChangeState(Enum.HumanoidStateType.Landed)
             Teleport.DeleteWater()
         end
         function Teleport.DownloadMainMap()
