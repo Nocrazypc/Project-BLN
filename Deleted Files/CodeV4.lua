@@ -9907,10 +9907,20 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             if getgenv().FOCUS_FARM_AGE_POTION then
                 if whichPet == 1 and isfocusFarmPets() then
                     Utils.PrintDebug(string.format('Has focusFarmpets equipped, %s', tostring(whichPet)))
+
                     return
                 end
+
                 isProHandler()
+
                 if whichPet == 2 and localPlayer:GetAttribute('isProHandler') == true and getgenv().petCurrentlyFarming2 then
+                    return
+                end
+                if GetInventory.CheckForPetAndEquip({
+                    'winter_2025_mrs_whiskerpips',
+                }, whichPet) then
+                    print('FOUND winter_2025_mrs_whiskerpips', whichPet)
+
                     return
                 end
 
