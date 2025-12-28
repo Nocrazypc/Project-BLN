@@ -1651,7 +1651,8 @@ do
             end
 
             localPlayer.Character:MoveTo(navPart.Position)
-            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+			Utils.GetHumanoidRootPart().Anchored = false
+            Utils.GetHumanoid():ChangeState(Enum.HumanoidStateType.Landed)
             Teleport.DeleteWater()
         end
         function Teleport.Bonfire()
