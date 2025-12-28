@@ -3508,6 +3508,7 @@ do
             ['The Homepass has been restarted'] = 'Okay',
             ['Costume Party starts'] = 'Okay',
             ['Step away from'] = 'Okay',
+            ['Welcome to Adopt Me!'] = 'Next',	
         }
         local getNormalDialogTextLabel = function()
             local Dialog = (DialogApp and {
