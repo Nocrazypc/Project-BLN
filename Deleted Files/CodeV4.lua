@@ -10502,16 +10502,20 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 while getgenv().auto_farm do
                     getgenv().lastTimeFarming = DateTime.now().UnixTimestamp
 
-                   --[[pcall(function()
+                   pcall(function() -- test start
                         --startAutoFarm()
-
+                        local RunService = game:GetService("RunService")
                         if ClientData.get_data()[localPlayer.Name].winter_2025_train_gingerbread then
+			                RunService:Set3dRenderingEnabled(false)
+			                task.wait(1)
                             Ailment.SoloRideTheTrain()
                             Teleport.FarmingHome()
+			                task.wait(3)
+			                RunService:Set3dRenderingEnabled(true)
                         end
 
                         --UpdateTextEvent:Fire()
-                    end)--]]
+                    end) -- test end
 
                     task.wait(1)
                 end
