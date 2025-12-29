@@ -3844,7 +3844,8 @@ do
                         RouterClient.get('TeamAPI/Spawn'):InvokeServer()
                         Utils.GetCharacter()
                         task.wait(6)
-                        Teleport.FarmingHome()
+                        --Teleport.FarmingHome() -- test 3
+				        Teleport.GingerbreadCollectionCircle()
                         Utils.GetHumanoidRootPart().Anchored = false
 	                    localPlayer:SetAttribute('StopFarmingTemp', false)
 				        --RunService:Set3dRenderingEnabled(true) -- 3D On
