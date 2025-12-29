@@ -3843,9 +3843,8 @@ do
                         removeGameOverButton('MinigameRewardsApp')
                         RouterClient.get('TeamAPI/Spawn'):InvokeServer()
                         Utils.GetCharacter()
-                        task.wait(6)
-                        --Teleport.FarmingHome() -- test 3
-				        Teleport.GingerbreadCollectionCircle()
+                        task.wait(10)
+                        Teleport.FarmingHome() 
                         Utils.GetHumanoidRootPart().Anchored = false
 	                    localPlayer:SetAttribute('StopFarmingTemp', false)
 				        --RunService:Set3dRenderingEnabled(true) -- 3D On
