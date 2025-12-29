@@ -10502,7 +10502,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 while getgenv().auto_farm do
                     getgenv().lastTimeFarming = DateTime.now().UnixTimestamp
 
-                   pcall(function() -- test start
+                   --[[pcall(function()
                         --startAutoFarm()
                         local RunService = game:GetService("RunService")
                         if ClientData.get_data()[localPlayer.Name].winter_2025_train_gingerbread then
@@ -10515,7 +10515,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                         end
 
                         --UpdateTextEvent:Fire()
-                    end) -- test end
+                    end) --]] 
 
                     task.wait(1)
                 end
