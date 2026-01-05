@@ -10234,13 +10234,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                             count = count + 30
 
                             task.wait(30)
-			---------------------------
-			            if not (SleighballClient.instanced_minigame or StarCatchMinigameClient.instanced_minigame) then
-                        localPlayer:SetAttribute('StopFarmingTemp', false)
-                        --print('no active minigames so setting StopFarmingTemp to false')
-                        task.wait(10)
-                        end
-			---------------------------
+
                         until not localPlayer:GetAttribute('StopFarmingTemp') or count > 600
 
                         localPlayer:SetAttribute('StopFarmingTemp', false)
