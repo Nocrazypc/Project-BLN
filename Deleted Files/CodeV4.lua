@@ -8321,7 +8321,7 @@ Check the Developer Console for more information.]],
                 DisableRayfieldPrompts = true,
                 DisableBuildWarnings = true,
                 LoadingTitle = "Loading BLN V4 Script ",
-                LoadingSubtitle = "by BlackLastNight 2025",
+                LoadingSubtitle = "by BlackLastNight 2026",
 	        ConfigurationSaving = {
 		Enabled = false,
 		FolderName = nil, -- Create a custom folder for your hub/game
