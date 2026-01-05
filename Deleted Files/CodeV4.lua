@@ -9573,67 +9573,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             Utils.ReEquipPet(Ailment.whichPet)
             waitForTaskToFinish('summerfest_bonfire', petUnique)
         end
-        function Ailment.IceSkating(petUnique)
-            Utils.PrintDebug(string.format('\u{26f8} Doing ice_skating on %s \u{26f8}', tostring(Ailment.whichPet)))
-            Teleport.GingerbreadCollectionCircle()
-            task.wait(2)
-            Utils.ReEquipPet(Ailment.whichPet)
-            waitForTaskToFinish('ice_skating', petUnique)
-        end
-        function Ailment.RideTheTrain(petUnique)
-            Utils.PrintDebug(string.format('\u{1f682} Doing ride_the_train on %s \u{1f682}', tostring(Ailment.whichPet)))
-            Teleport.GingerbreadCollectionCircle()
-            task.wait(2)
-            Utils.ReEquipPet(Ailment.whichPet)
-
-            local trainSeats = workspace:WaitForChild('WinterTrainSeats', 10)
-
-            if not trainSeats then
-                return
-            end
-
-            local seat = trainSeats:WaitForChild('Seat', 10)
-
-            if not seat then
-                return
-            end
-
-            WinterTrainNet.EnterCarriageSeat:fire_server({carriage = seat})
-            waitForTaskToFinish('ride_the_train', petUnique)
-            getUpFromSitting()
-        end
-        function Ailment.SoloRideTheTrain()
-            Utils.PrintDebug('\u{1f682} Riding the Train \u{1f682}')
-            Teleport.GingerbreadCollectionCircle()
-            --setfpscap(1)
-
-            task.wait(2)
-
-            local trainSeats = workspace:WaitForChild('WinterTrainSeats', 10)
-
-            if not trainSeats then
-                return
-            end
-
-            local seat = trainSeats:WaitForChild('Seat', 10)
-
-            if not seat then
-                return
-            end
-
-            WinterTrainNet.EnterCarriageSeat:fire_server({carriage = seat})
-
-            local count = 0
-
-            repeat
-                task.wait(10)
-
-                count = count + 10
-            until not ClientData.get_data()[localPlayer.Name].winter_2025_train_gingerbread or count > 120
-
-            getUpFromSitting()
-            --setfpscap(2)
-        end
         function Ailment.BuccaneerBandAilment(petUnique)
             ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
             task.wait(2)
