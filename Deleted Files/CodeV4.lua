@@ -46,9 +46,7 @@ do
                 game:Shutdown()
             end
         end--]]
-        function Utils.GetPugTamingProgress()
-            return ClientData.get_data()[localPlayer.Name].snowball_pug_manager.snowballpug_taming_progress or 0
-        end
+
         function Utils.MoveToWithTimeout(humanoid, target, timeout)
             local reached = false
             local connection
