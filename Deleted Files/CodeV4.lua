@@ -1638,39 +1638,6 @@ do
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
             Teleport.DeleteWater()
         end
-		    function Teleport.GingerbreadCollectionCircle()
-            SetLocationFunc('MainMap', 'Neighborhood/MainDoor', {})
-            task.wait(1)
-            Workspace.Interiors:WaitForChild(tostring(Workspace.Interiors:FindFirstChildWhichIsA('Model')))
-
-            local christmasMap = Workspace.Interiors:WaitForChild('MainMap!Christmas', 10)
-
-            if not christmasMap then
-                return
-            end
-
-            local eventFolder = christmasMap:WaitForChild('Event', 10)
-
-            if not eventFolder then
-                return
-            end
-
-            local iceSkatingFolder = eventFolder:WaitForChild('IceSkating', 10)
-
-            if not iceSkatingFolder then
-                return
-            end
-
-            local navPart = iceSkatingFolder:WaitForChild('GingerbreadCollectionNavPart', 10)
-
-            if not navPart then
-                return
-            end
-
-            localPlayer.Character:MoveTo(navPart.Position)
-            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
-            Teleport.DeleteWater()
-        end
         function Teleport.Bonfire()
             ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
             task.wait(1)
@@ -1686,50 +1653,6 @@ do
             localPlayer.Character:MoveTo(location)
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
             Teleport.DeleteWater()
-        end
-        function Teleport.PipeOrgan()
-            CollisionsClient.set_collidable(false)
-
-            localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
-
-            SetLocationFunc('MainMap', 'Neighborhood/MainDoor', {})
-
-            local mainmapfall = Workspace.Interiors:WaitForChild('MainMap!Fall', 30)
-
-            if not mainmapfall then
-                return false
-            end
-
-            local eventFolder = mainmapfall:WaitForChild('Event', 10)
-
-            if not eventFolder then
-                return false
-            end
-
-            local pipeOrgan = eventFolder:WaitForChild('PipeOrgan', 10)
-
-            if not pipeOrgan then
-                return false
-            end
-
-            local pianoStaircase = pipeOrgan:WaitForChild('PianoStaircase', 10)
-
-            if not pianoStaircase then
-                return false
-            end
-
-            local keyPart = pianoStaircase:WaitForChild('Keys'):WaitForChild('1')
-            local newPosition = keyPart.PrimaryPart.Position + Vector3.new(5, 0, 0)
-
-            localPlayer.Character:MoveTo(newPosition)
-
-            localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
-
-            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
-            Teleport.DeleteWater()
-            task.wait(2)
-
-            return true
         end
         function Teleport.PlayGround(vec)
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
