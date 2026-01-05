@@ -1517,22 +1517,7 @@ do
             TextLabel.TextWrapped = true
 			
         end
-        function Teleport.placeFloorOnJoinZone()
-            for _, v in Workspace:GetChildren()do
-                if v.Name == 'FloorPart2' then
-                    return
-                end
-            end
 
-            local part = Instance.new('Part')
-
-            part.Position = game.Workspace.Interiors:WaitForChild('Halloween2024Shop'):WaitForChild('TileSkip'):WaitForChild('JoinZone'):WaitForChild('EmitterPart').Position + Vector3.new(0, 
--2, 0)
-            part.Size = Vector3.new(100, 2, 100)
-            part.Anchored = true
-            part.Name = 'FloorPart2'
-            part.Parent = Workspace
-        end
         function Teleport.DeleteWater()
             Workspace.Terrain:Clear()
         end
