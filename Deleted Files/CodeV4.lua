@@ -3775,10 +3775,20 @@ do
         return self
     end
     function __DARKLUA_BUNDLE_MODULES.n()
-        local Workspace = (cloneref(game:GetService('Workspace')))
+        local ReplicatedStorage = game:GetService('ReplicatedStorage')
+        local Players = game:GetService('Players')
+        local Workspace = game:GetService('Workspace')
+        local Lighting = game:GetService('Lighting')
         local Terrain = (Workspace:WaitForChild('Terrain'))
-        local Lighting = (cloneref(game:GetService('Lighting')))
+        local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
+        local ClientData = Bypass('ClientData')
         local self = {}
+        local localPlayer = Players.LocalPlayer
+        local liveOpsMapType = ClientData.get_data()[localPlayer.Name].LiveOpsMapType
+        local namesToRemove = {
+            string.format('MainMap!%s', tostring(liveOpsMapType)),
+            string.format('Neighborhood!%s', tostring(liveOpsMapType)),
+        }
         local TURN_ON = getgenv().POTATO_MODE or false
 
         local lowSpecTerrain = function()
