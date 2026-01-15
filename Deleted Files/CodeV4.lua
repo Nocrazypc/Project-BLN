@@ -3775,6 +3775,7 @@ do
         return self
     end
     function __DARKLUA_BUNDLE_MODULES.n()
+
         local ReplicatedStorage = game:GetService('ReplicatedStorage')
         local Players = game:GetService('Players')
         local Workspace = game:GetService('Workspace')
@@ -3789,8 +3790,7 @@ do
             string.format('MainMap!%s', tostring(liveOpsMapType)),
             string.format('Neighborhood!%s', tostring(liveOpsMapType)),
         }
-        local TURN_ON = getgenv().POTATO_MODE or false
-
+        local TURN_ON = true
         local lowSpecTerrain = function()
             Terrain.WaterReflectance = 0
             Terrain.WaterTransparency = 1
@@ -3816,6 +3816,9 @@ do
                 v.Transparency = 1
             elseif v:IsA('Decal') or v:IsA('Texture') then
                 v.Transparency = 1
+            elseif v:IsA('ParticleEmitter') or v:IsA('Trail') then
+                v.Lifetime = NumberRange.new(1, 1.1)
+                v.Enabled = false
             elseif v:IsA('Explosion') then
                 v.BlastPressure = 1
                 v.BlastRadius = 1
@@ -3842,17 +3845,27 @@ do
             end
 
             lowSpecTerrain()
-            --lowSpecLighting() --
-            --Lighting:ClearAllChildren() --
+            --lowSpecLighting()
+            --Lighting:ClearAllChildren()
             Terrain:Clear()
 
-            --[[for _, v in pairs(Workspace:GetDescendants())do --
-                 lowSpecTextures(v) --
-            end --
+            for _, v in Workspace:WaitForChild('Interiors'):GetChildren()do
+                if v:IsA('Model') then
+                    v:Destroy()
+                end
+            end
+            --[[for _, v in pairs(Workspace:GetDescendants())do
+                lowSpecTextures(v)
+            end --]]
 
-            Workspace.DescendantAdded:Connect(function(v) --
-                lowSpecTextures(v) --
-             end) -- --]]
+            Workspace:WaitForChild('Interiors').ChildAdded:Connect(function(v)
+                if v:IsA('Model') and table.find(namesToRemove, v.Name) then
+                    v:Destroy()
+                end
+            end)
+            --[[Workspace.DescendantAdded:Connect(function(v)
+                lowSpecTextures(v)
+            end)--]]
         end
 
         return self
