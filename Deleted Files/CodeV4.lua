@@ -3789,7 +3789,7 @@ do
             string.format('MainMap!%s', tostring(liveOpsMapType)),
             string.format('Neighborhood!%s', tostring(liveOpsMapType)),
         }
-        local TURN_ON = true
+        local TURN_ON = getgenv().POTATO_MODE or false
         local lowSpecTerrain = function()
             Terrain.WaterReflectance = 0
             Terrain.WaterTransparency = 1
