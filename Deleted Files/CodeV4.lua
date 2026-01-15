@@ -10628,7 +10628,7 @@ pcall(function()
     end
 end)
 ----------------------------------------
-task.wait(180)
+--[[task.wait(180)
 -------- Low Render- Hide parts 2------------
 pcall(function()
         
@@ -10643,4 +10643,4 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
         v.Transparency = 1 
     end 
 end)
-end)
+end) --]]
