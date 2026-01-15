@@ -3105,10 +3105,7 @@ do
             local queueOnTeleport = (syn and syn.queue_on_teleport) or queue_on_teleport
 
             if queueOnTeleport then
-                queueOnTeleport(
-[[            localPlayer:Kick("IS IN PUBLIC SERVER")
-            game:Shutdown()
-        ]])
+                queueOnTeleport('            game:Shutdown()\n        ')
             end
         end
         function self.Start()
