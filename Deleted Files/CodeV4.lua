@@ -3672,7 +3672,10 @@ do
                         Utils.FindButton('Okay')
                     elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('CODE RED!') then
 					    task.wait(1)
-                        Utils.FindButton('Okay')					
+                        Utils.FindButton('Okay')
+                    elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Would you like to teleport') then
+                        task.wait(1)	
+                        Utils.FindButton('No')
                     end
                 end)
             end)
