@@ -3670,6 +3670,9 @@ do
                     --    game:Shutdown()
                     elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('You found a') then
                         Utils.FindButton('Okay')
+                    elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('CODE RED!') then
+					    task.wait(1)
+                        Utils.FindButton('Okay')					
                     end
                 end)
             end)
@@ -3704,6 +3707,9 @@ do
                            -- game:Shutdown()
                         elseif NormalDialogChild.Info.TextLabel.Text:match('You found a') then
                             Utils.FindButton('Okay')
+                        elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('CODE RED!') then
+					        task.wait(1)
+                            Utils.FindButton('Okay')							
                         end
                     end)
                 end)
