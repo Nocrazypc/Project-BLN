@@ -456,12 +456,13 @@ do
 
             print(string.format('[Debug] %s', tostring(...)))
         end
-        function Utils.IsDayAndHour(day, utcHour)
+        function Utils.IsDayAndHour(day, utcHour, amPm)
             local now = DateTime.now()
             local weekday = now:FormatUniversalTime('dddd', 'en-us')
-            local hour = tonumber(now:FormatUniversalTime('H', 'en-us'))
+            local hour = tonumber(now:FormatUniversalTime('h', 'en-us'))
+            local amPmNow = now:FormatUniversalTime('a', 'en-us')
 
-            return weekday == day and hour == utcHour
+            return weekday == day and hour == utcHour and amPmNow == amPm
         end
         function Utils.CenterText(text, width)
             local textLength = #text
