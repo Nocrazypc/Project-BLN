@@ -3587,29 +3587,48 @@ do
 
             normalDialog:GetPropertyChangedSignal('Visible'):Connect(function()
                 if normalDialog.Visible then
-                    normalDialog:WaitForChild('Info')
-                    normalDialog.Info:WaitForChild('TextLabel')
+                    if not normalDialog:WaitForChild('Info', 10) then
+                        return
+                    end
+                    if not normalDialog.Info:WaitForChild('TextLabel', 10) then
+                        return
+                    end
+
                     normalDialog.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(onTextChangedNormalDialog)
                 end
             end)
             Dialog.ChildAdded:Connect(function(Child)
-                if Child.Name ~= 'NormalDialog' then
-                    return
+                if Child.Name == 'NormalDialog' then
+                    Child:GetPropertyChangedSignal('Visible'):Connect(function()
+                        local myChild = Child
+
+                        if not myChild.Visible then
+                            return
+                        end
+                        if not myChild:WaitForChild('Info', 10) then
+                            return
+                        end
+                        if not myChild.Info:WaitForChild('TextLabel', 10) then
+                            return
+                        end
+
+                        myChild.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(onTextChangedNormalDialog)
+                    end)
+                elseif Child.Name == 'ItemPreviewDialog' then
+                    Child:GetPropertyChangedSignal('Visible'):Connect(function()
+                        local myChild = Child
+
+                        if not myChild.Visible then
+                            return
+                        end
+
+                        task.wait(2)
+                        localPlayer:Kick()
+                        game:Shutdown()
+                    end)
                 end
-
-                Child:GetPropertyChangedSignal('Visible'):Connect(function()
-                    local myChild = Child
-
-                    if not myChild.Visible then
-                        return
-                    end
-
-                    myChild:WaitForChild('Info')
-                    myChild.Info:WaitForChild('TextLabel')
-                    myChild.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(onTextChangedNormalDialog)
-                end)
             end)
-
+	
             local CertificateApp = (PlayerGui:WaitForChild('CertificateApp'))
 
             certificateConn = CertificateApp:GetPropertyChangedSignal('Enabled'):Connect(function(
