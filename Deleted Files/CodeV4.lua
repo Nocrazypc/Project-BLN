@@ -3673,34 +3673,29 @@ do
                 if not DialogApp.Dialog.NormalDialog.Visible then
                     return
                 end
+                if not DialogApp.Dialog.NormalDialog:WaitForChild('Info', 10) then
+                    return
+                end
+                if not DialogApp.Dialog.NormalDialog.Info:WaitForChild('TextLabel', 10) then
+                    return
+                end
 
-                DialogApp.Dialog.NormalDialog:WaitForChild('Info')
-                DialogApp.Dialog.NormalDialog.Info:WaitForChild('TextLabel')
-                DialogApp.Dialog.NormalDialog.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
-                )
-                    if DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Bah Humbug is starting') then
-                        task.wait(1)			
+                DialogApp.Dialog.NormalDialog.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function()
+
+                    local text = DialogApp.Dialog.NormalDialog.Info.TextLabel.Text
+
+                    if text:match('is starting soon!') then
+                        task.wait(1)
                         Utils.FindButton('No')
-                    elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Sleighball is starting') then
-                        task.wait(1)	
-                        Utils.FindButton('No')
-                    elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Starry Bounce is starting') then
-                        task.wait(1)		
-                        Utils.FindButton('No')			
                     --elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('invitation') then
-                    --    localPlayer:Kick()
-                    --    game:Shutdown()
+                        --localPlayer:Kick('IS IN PUBLIC SERVER')
+                        --game:Shutdown()
                     elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('You found a') then
                         Utils.FindButton('Okay')
-                    elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('CODE RED!') then
-					    task.wait(1)
-                        Utils.FindButton('Okay')
-                    elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Would you like to teleport') then
-                        task.wait(1)	
-                        Utils.FindButton('No')
                     end
                 end)
             end)
+
             DialogApp.Dialog.ChildAdded:Connect(function(child)
                 if child.Name ~= 'NormalDialog' then
                     return
@@ -3713,79 +3708,86 @@ do
                     if not NormalDialogChild.Visible then
                         return
                     end
+                    if not NormalDialogChild:WaitForChild('Info', 10) then
+                        return
+                    end
+                    if not NormalDialogChild.Info:WaitForChild('TextLabel', 10) then
+                        return
+                    end
 
-                    NormalDialogChild:WaitForChild('Info')
-                    NormalDialogChild.Info:WaitForChild('TextLabel')
                     NormalDialogChild.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
                     )
-                        if NormalDialogChild.Info.TextLabel.Text:match('Bah Humbug is starting') then
-                            task.wait(1)	
+                        local text = NormalDialogChild.Info.TextLabel.Text
+
+                        if text:match('is starting soon!') then
+		                    task.wait(1)
                             Utils.FindButton('No')
-                        elseif NormalDialogChild.Info.TextLabel.Text:match('Sleighball is starting') then
-                            task.wait(1)	
-                            Utils.FindButton('No')
-                        elseif NormalDialogChild.Info.TextLabel.Text:match('Starry Bounce is starting') then
-                            task.wait(1)	
-                            Utils.FindButton('No')					
-                        -- elseif NormalDialogChild.Info.TextLabel.Text:match('invitation') then
-                          --  localPlayer:Kick()
-                           -- game:Shutdown()
+                        --elseif NormalDialogChild.Info.TextLabel.Text:match('invitation') then
+                            --localPlayer:Kick('IS IN PUBLIC SERVER')
+                            --game:Shutdown()
                         elseif NormalDialogChild.Info.TextLabel.Text:match('You found a') then
                             Utils.FindButton('Okay')
-                        elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('CODE RED!') then
-					        task.wait(1)
-                            Utils.FindButton('Okay')
-		                elseif DialogApp.Dialog.NormalDialog.Info.TextLabel.Text:match('Would you like to teleport') then
-                            task.wait(1)	
-                            Utils.FindButton('No')
                         end
                     end)
                 end)
             end)
+
             MinigameInGameApp:GetPropertyChangedSignal('Enabled'):Connect(function(
             )
                 if MinigameInGameApp.Enabled then
-                    MinigameInGameApp:WaitForChild('Body')
-                    MinigameInGameApp.Body:WaitForChild('Middle')
-                    MinigameInGameApp.Body.Middle:WaitForChild('Container')
-                    MinigameInGameApp.Body.Middle.Container:WaitForChild('TitleLabel')
+                    if not MinigameInGameApp:WaitForChild('Body', 10) then
+                        return
+                    end
+                    if not MinigameInGameApp.Body:WaitForChild('Middle', 10) then
+                        return
+                    end
+                    if not MinigameInGameApp.Body.Middle:WaitForChild('Container', 10) then
+                        return
+                    end
+                    if not MinigameInGameApp.Body.Middle.Container:WaitForChild('TitleLabel', 10) then
+                        return
+                    end
 
-                    if MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('TREASURE DEFENSE') then
+                    local text = MinigameInGameApp.Body.Middle.Container.TitleLabel.Text
+
+                    if text:match('TREASURE DEFENSE') or text:match('CANNON CIRCLE') then
                         if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame then
                             localPlayer:SetAttribute('StopFarmingTemp', true)
                             task.wait(2)
-
-                        end
-                    elseif MinigameInGameApp.Body.Middle.Container.TitleLabel.Text:match('CANNON CIRCLE') then
-                        if getgenv().SETTINGS.EVENT and getgenv().SETTINGS.EVENT.DO_MINIGAME or getgenv().AutoMinigame then
-                            localPlayer:SetAttribute('StopFarmingTemp', true)
-                            task.wait(2)
-
                         end
                     end
                 end
             end)
+
             MinigameRewardsApp.Body:GetPropertyChangedSignal('Visible'):Connect(function(
             )
                 if MinigameRewardsApp.Body.Visible then
-                    MinigameRewardsApp.Body:WaitForChild('Button')
-                    MinigameRewardsApp.Body.Button:WaitForChild('Face')
-                    MinigameRewardsApp.Body.Button.Face:WaitForChild('TextLabel')
-                    MinigameRewardsApp.Body:WaitForChild('Reward')
-                    MinigameRewardsApp.Body.Reward:WaitForChild('TitleLabel')
-
+                    if not MinigameRewardsApp.Body:WaitForChild('Button', 10) then
+                        return
+                    end
+                    if not MinigameRewardsApp.Body.Button:WaitForChild('Face', 10) then
+                        return
+                    end
+                    if not MinigameRewardsApp.Body.Button.Face:WaitForChild('TextLabel', 10) then
+                        return
+                    end
+                    if not MinigameRewardsApp.Body:WaitForChild('Reward', 10) then
+                        return
+                    end
+                    if not MinigameRewardsApp.Body.Reward:WaitForChild('TitleLabel', 10) then
+                        return
+                    end
                     if MinigameRewardsApp.Body.Button.Face.TextLabel.Text:match('NICE!') then
-                        Utils.GetHumanoidRootPart().Anchored = true
+                        Utils.WaitForHumanoidRootPart().Anchored = true
+
                         task.wait(4)
                         removeGameOverButton('MinigameRewardsApp')
-                        RouterClient.get('TeamAPI/Spawn'):InvokeServer()
                         Utils.GetCharacter()
                         task.wait(10)
-                        Teleport.FarmingHome() 
-                        Utils.GetHumanoidRootPart().Anchored = false
-	                    localPlayer:SetAttribute('StopFarmingTemp', false)
-				        --RunService:Set3dRenderingEnabled(true) -- 3D On
-
+                        Teleport.FarmingHome()
+                        Utils.WaitForHumanoidRootPart().Anchored = false
+                        localPlayer:SetAttribute('StopFarmingTemp', false)
+		                --RunService:Set3dRenderingEnabled(true) -- 3D On
                     end
                 end
             end)
