@@ -3527,17 +3527,23 @@ do
         end
 
         local tryClickPlaytimePayout = function()
-
             if not PlaytimePayoutsApp.Enabled then
                 return
             end
+            if not PlaytimePayoutsApp:WaitForChild('Frame', 10) then
+                return
+            end
+            if not PlaytimePayoutsApp.Frame:WaitForChild('Container', 10) then
+                return
+            end
+            if not PlaytimePayoutsApp.Frame.Container:WaitForChild('CashOutContainer', 10) then
+                return
+            end
+            if not PlaytimePayoutsApp.Frame.Container.CashOutContainer:WaitForChild('CashOutButton', 10) then
+                return
+            end
 
-            PlaytimePayoutsApp:WaitForChild('Frame')
-            PlaytimePayoutsApp.Frame:WaitForChild('Container')
-            PlaytimePayoutsApp.Frame.Container:WaitForChild('CashOutContainer')
-            PlaytimePayoutsApp.Frame.Container.CashOutContainer:WaitForChild('CashOutButton')
-
-            local button = (PlaytimePayoutsApp.Frame.Container.CashOutContainer.CashOutButton:WaitForChild('DepthButton'))
+            local button = (PlaytimePayoutsApp.Frame.Container.CashOutContainer.CashOutButton:WaitForChild('DepthButton', 10))
 
             Utils.FireButton(button)
             task.wait(1)
