@@ -3629,8 +3629,8 @@ do
                         end
 
                         task.wait(2)
-                        localPlayer:Kick()
-                        game:Shutdown()
+                        --localPlayer:Kick()
+                        --game:Shutdown()
                     end)
                 end
             end)
