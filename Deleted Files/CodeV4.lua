@@ -3138,7 +3138,6 @@ do
             end
 
             RouterClient.get('HousingAPI/SetDoorLocked'):InvokeServer(true)
-            Utils.PlaceFLoorUnderPlayer()
 
             RouterClient.get('TeamAPI/ChooseTeam'):InvokeServer('Babies', {
                 ['dont_send_back_home'] = true,
