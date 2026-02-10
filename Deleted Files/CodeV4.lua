@@ -8419,6 +8419,17 @@ FarmTab:CreateButton({
         setfpscap(2)
 	end,
 })
+-------------------------------------------
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Focus Farm Age Potions",
+     CurrentValue = true,
+     Flag = "Toggle033",
+     Callback = function(Value)
+
+         getgenv().FOCUS_FARM_AGE_POTION = Value
+
+     end,
+ })
 -----------------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Pet Auto Fusion",
@@ -8434,18 +8445,7 @@ local FarmToggle = FarmTab:CreateToggle({
 	end
      end,
  })
--------------------------------------------
-local FarmToggle = FarmTab:CreateToggle({
-     Name = "Focus Farm Age Potions",
-     CurrentValue = true,
-     Flag = "Toggle033",
-     Callback = function(Value)
-
-         getgenv().FOCUS_FARM_AGE_POTION = Value
-
-     end,
- })
--------------------------------------------
+-----------------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Low Render / Hide Parts & Transitions Disabler",
      CurrentValue = true,
@@ -8477,6 +8477,13 @@ pcall(function()
 end)
      end,
  })
+-----------------------------------------------
+FarmTab:CreateButton({
+	Name = "3D Render OFF",
+	Callback = function()
+           RunService:Set3dRenderingEnabled(false)
+	end,
+})
 
 FarmTab:CreateButton({
 	Name = "3D Render ON",
