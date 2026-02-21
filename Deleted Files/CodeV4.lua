@@ -3824,8 +3824,8 @@ do
         function self.Start()
             tryClickPlaytimePayout()
 
-            for _, name in appList do
-                Bypass('UIManager').set_app_visibility(name, false)
+            if Bypass('UIManager').apps.MerchPopUpApp.visible then
+                Utils.FireButton(Bypass('UIManager').apps.MerchPopUpApp.instance.Background.KeyImage.ExitButton)
             end
 
             task.delay(10, onTextChangedNormalDialog)
