@@ -3820,12 +3820,20 @@ do
                 Trade.AutoAcceptTrade()
             end)
         end
+
         function self.Start()
             tryClickPlaytimePayout()
+
+            for _, name in appList do
+                Bypass('UIManager').set_app_visibility(name, false)
+            end
+
+            task.delay(10, onTextChangedNormalDialog)
         end
 
         return self
     end
+
     function __DARKLUA_BUNDLE_MODULES.n()
         local ReplicatedStorage = game:GetService('ReplicatedStorage')
         local Players = game:GetService('Players')
