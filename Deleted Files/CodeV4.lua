@@ -3383,6 +3383,16 @@ do
         local certificateConn
         local starterPackAppConn
         local RunService = game:GetService("RunService")
+
+        local appList = {
+            'MerchPopUpApp',
+            'ExtraButtonsApp',
+            'HouseEditorWrapperApp',
+            'GuideArrowApp',
+            'NavigatorApp',
+            'QuestIconApp',
+        }
+
         local patterns = {
             ['UH OH!'] = 'Okay',
             ['Would you like to teleport'] = 'No',
