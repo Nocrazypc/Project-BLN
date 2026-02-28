@@ -9736,7 +9736,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         local Teleport = __DARKLUA_BUNDLE_MODULES.load('f')
         local FarmingPet = {}
         local localPlayer = Players.LocalPlayer
-        local petToBuy = 'aztec_egg_2025_aztec_egg'
+        local petToBuy = 'endangered_2026_endangered_egg'
         local potionFarmPets = {
             '2d_kitty',
             'dog',
