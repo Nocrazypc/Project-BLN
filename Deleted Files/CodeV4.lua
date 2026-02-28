@@ -9983,7 +9983,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                     if Utils.BucksAmount() >= 10000 then
                         Utils.PrintDebug('Buying gumball egg')
                         Teleport.Nursery()
-                        RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'aztec_egg_2025_aztec_egg', {})
+                        RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'endangered_2026_endangered_egg', {})
                     end
                 end
             end
