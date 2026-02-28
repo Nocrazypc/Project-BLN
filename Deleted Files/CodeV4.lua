@@ -9756,11 +9756,11 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 return true
             end
             if GetInventory.CheckForPetAndEquip({
-                'aztec_egg_2025_aztec_egg',
+                'endangered_2026_endangered_egg',
             }, 1) then
                 return true
             else
-                local hasMoney = RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'aztec_egg_2025_aztec_egg', {})
+                local hasMoney = RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'endangered_2026_endangered_egg', {})
                 if hasMoney then
                     return true
                 end
