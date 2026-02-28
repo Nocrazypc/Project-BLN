@@ -8515,7 +8515,7 @@ FarmTab:CreateDivider()
 FarmTab:CreateSection("Eggs Only")
 --------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
-     Name = "Buy & Hatch Current Eggs: Aztec Egg",
+     Name = "Buy & Hatch Current Eggs: Endangered Egg",
      CurrentValue = false,
      Flag = "Toggle201",
      Callback = function(Value)
