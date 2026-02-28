@@ -8440,7 +8440,7 @@ FarmTab:CreateButton({
 -------------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Focus Farm Age Potions",
-     CurrentValue = true,
+     CurrentValue = false,
      Flag = "Toggle033",
      Callback = function(Value)
 
