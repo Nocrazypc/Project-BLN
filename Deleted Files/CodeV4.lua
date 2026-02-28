@@ -8496,7 +8496,7 @@ end)
      end,
  })
 -----------------------------------------------
-FarmTab:CreateButton({
+--[[FarmTab:CreateButton({
 	Name = "3D Render OFF",
 	Callback = function()
            RunService:Set3dRenderingEnabled(false)
@@ -8508,7 +8508,7 @@ FarmTab:CreateButton({
 	Callback = function()
            RunService:Set3dRenderingEnabled(true)
 	end,
-})
+}) --]]
 
 FarmTab:CreateDivider()
 --------- Hatch Eggs Only ------------
