@@ -8440,7 +8440,7 @@ FarmTab:CreateButton({
 -------------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Focus Farm Age Potions",
-     CurrentValue = false,
+     CurrentValue = true,
      Flag = "Toggle033",
      Callback = function(Value)
 
@@ -8516,7 +8516,7 @@ FarmTab:CreateSection("Eggs Only")
 --------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Buy & Hatch Current Eggs: Endangered Egg",
-     CurrentValue = true,
+     CurrentValue = false,
      Flag = "Toggle201",
      Callback = function(Value)
 	
