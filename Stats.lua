@@ -257,11 +257,12 @@ local function bucksAmount()
     return ClientData.get_data()[localPlayer.Name].money or 0
 end
 
------ gingerbread------
+----- gingerbread candy or eggs------
 
---[[local function gingerbreadAmount()
-    return ClientData.get_data()[localPlayer.Name].gingerbread_2024 or 0
-end--]]
+local function gingerbreadAmount()
+    --[[return ClientData.get_data()[localPlayer.Name].gingerbread_2024 or 0--]]
+      return ClientData.get_data()[localPlayer.Name].eggs_2026 or 0
+end
 
 -----------------------
 
