@@ -10905,6 +10905,9 @@ local files = {
     {
        PetOfflineHandler = __DARKLUA_BUNDLE_MODULES.load('B'),
     },
+    {
+       SugarFestival2026 = __DARKLUA_BUNDLE_MODULES.load('C'),
+    },
 }
 
 Utils.PrintDebug('----- INITIALIZING MODULES -----')
