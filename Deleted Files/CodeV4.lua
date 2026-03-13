@@ -10841,7 +10841,7 @@ StatsGuis:UpdateText("NameFrame")
 			StatsGuis:UpdateText("BucksAndPotionFrame")
             StatsGuis:UpdateText("TotalFrame")
             StatsGuis:UpdateText("TotalFrame1")
-           -- StatsGuis:UpdateText("TotalFrame2") -GingerBread--
+            StatsGuis:UpdateText("TotalFrame2") --GingerBread Frame
             task.wait(5) 
             end
         end)
