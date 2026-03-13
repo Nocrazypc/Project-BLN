@@ -27,15 +27,15 @@ local TotalFrame1 = Instance.new("Frame")
 local TextLabel_5 = Instance.new("TextLabel")
 local UICorner_5 = Instance.new("UICorner")
 -----Gingerbread slot-----
---local TotalFrame2 = Instance.new("Frame")
---local TextLabel_6 = Instance.new("TextLabel")
---local UICorner_6 = Instance.new("UICorner")
+local TotalFrame2 = Instance.new("Frame")
+local TextLabel_6 = Instance.new("TextLabel")
+local UICorner_6 = Instance.new("UICorner")
 -------------------------
 
 
 local startCount = 0
 local startBucksAmount = 0
---local startgingerbreadAmount = 0
+local startgingerbreadAmount = 0
 local startTime = nil
 
 
@@ -204,7 +204,7 @@ UICorner_5.Parent = TextLabel_5
 
 ------ Gingerbread ---------
 
---[[TotalFrame2.Name = "TotalFrame2"
+TotalFrame2.Name = "TotalFrame2"
 TotalFrame2.Parent = MainFrame
 TotalFrame2.AnchorPoint = Vector2.new(0.5, 0.5)
 TotalFrame2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -230,7 +230,7 @@ TextLabel_6.TextSize = 14.000
 TextLabel_6.TextWrapped = true
 
 UICorner_6.CornerRadius = UDim.new(0, 12)
-UICorner_6.Parent = TextLabel_6--]]
+UICorner_6.Parent = TextLabel_6
 
 ----------------------------
 
@@ -279,7 +279,7 @@ end
 
 startCount = agePotionCount()
 startBucksAmount = bucksAmount()
---startgingerbreadAmount = gingerbreadAmount()
+startgingerbreadAmount = gingerbreadAmount()
 startTime = DateTime.now().UnixTimestamp
 
 function StatsGuis:UpdateText(nameOfFrame: string)
@@ -292,10 +292,10 @@ function StatsGuis:UpdateText(nameOfFrame: string)
     elseif nameOfFrame == "BucksAndPotionFrame" then
         local potionCount = agePotionCount() - startCount
         local bucks = bucksAmount() - startBucksAmount
-        --local gingerbread = gingerbreadAmount() - startgingerbreadAmount
+        local gingerbread = gingerbreadAmount() - startgingerbreadAmount
         if potionCount <= 0 then potionCount = 0 end
         if bucks <= 0 then bucks = 0 end
-        --if gingerbread <= 0 then gingerbread = 0 end
+        if gingerbread <= 0 then gingerbread = 0 end
         MainFrame.BucksAndPotionFrame.TextLabel.Text = `🧪 {formatNumber(potionCount)} 💰 {formatNumber(bucks)}`
     elseif nameOfFrame == "TotalFrame" then
         local potionCount = agePotionCount()
@@ -304,9 +304,10 @@ function StatsGuis:UpdateText(nameOfFrame: string)
         local bucks = bucksAmount()
         MainFrame.TotalFrame1.TextLabel.Text = `Total 💰 {formatNumber(bucks)}`
 --- Gingerbread-----
-    --elseif nameOfFrame == "TotalFrame2" then
-        --local gingerbread = gingerbreadAmount()
+    elseif nameOfFrame == "TotalFrame2" then
+        local gingerbread = gingerbreadAmount()
         --MainFrame.TotalFrame2.TextLabel.Text = `Total 🍪 {formatNumber(gingerbread)}`
+		MainFrame.TotalFrame2.TextLabel.Text = `Total 🥚 {formatNumber(gingerbread)}`
 --------------------
     elseif nameOfFrame == "NameFrame" then
         MainFrame.NameFrame.TextLabel.Text = `😎 {localPlayer.Name}`
