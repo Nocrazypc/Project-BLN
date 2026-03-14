@@ -10554,8 +10554,10 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
 
     function __DARKLUA_BUNDLE_MODULES.C()
         local ReplicatedStorage = game:GetService('ReplicatedStorage')
+        local Players = game:GetService('Players')
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
         local RouterClient = Bypass('RouterClient')
+        local ClientData = Bypass('ClientData')
         local NetRemote = (game:GetService('ReplicatedStorage'):WaitForChild('adoptme_new_net'))
         local GetInventory = __DARKLUA_BUNDLE_MODULES.load('i')
         local eggIds = {
@@ -10728,6 +10730,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             '{2bf4ce11-5905-4c97-ab4f-298025e5b4e0}',
         }
         local self = {}
+        local localPlayer = Players.LocalPlayer
         local getFreeDice = function()
             NetRemote:WaitForChild(
 [[adoptme_legacy_shared.ContentPacks.Sugarfest2026.Game.BoardGame.BoardGameNetService:23]]):FireServer()
