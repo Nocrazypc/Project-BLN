@@ -307,7 +307,7 @@ function StatsGuis:UpdateText(nameOfFrame: string)
     elseif nameOfFrame == "TotalFrame2" then
         local gingerbread = gingerbreadAmount()
         --MainFrame.TotalFrame2.TextLabel.Text = `Total 🍪 {formatNumber(gingerbread)}`
-		MainFrame.TotalFrame2.TextLabel.Text = `Tot 🍬🥚 {formatNumber(gingerbread)}`
+		MainFrame.TotalFrame2.TextLabel.Text = `🍬🥚 {formatNumber(gingerbread)}`
 --------------------
     elseif nameOfFrame == "NameFrame" then
         MainFrame.NameFrame.TextLabel.Text = `😎 {localPlayer.Name}`
