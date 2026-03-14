@@ -10735,15 +10735,26 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             NetRemote:WaitForChild(
 [[adoptme_legacy_shared.ContentPacks.Sugarfest2026.Game.BoardGame.BoardGameNetService:23]]):FireServer()
         end
-        local tryRollDice = function()
-            local args = {
-                {
-                    dice_item_unique = GetInventory.GetUniqueId('gifts', 'sugarfest_2026_dice'),
-                },
+        local tryRollDices = function()
+            local dices = {
+                'sugarfest_2026_dice',
+                'sugarfest_2026_custom_dice',
             }
 
-            NetRemote:WaitForChild(
+            for _, value in dices do
+                local uniqueId = GetInventory.GetUniqueId('gifts', value)
+
+                if not uniqueId then
+                    continue
+                end
+
+                local args = {
+                    {dice_item_unique = uniqueId},
+                }
+
+                NetRemote:WaitForChild(
 [[adoptme_legacy_shared.ContentPacks.Sugarfest2026.Game.BoardGame.BoardGameNetService:10]]):FireServer(unpack(args))
+            end
         end
         local tryGetEggs = function()
             for _, v in eggIds do
@@ -10758,10 +10769,37 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
 [[adoptme_legacy_shared.ContentPacks.Sugarfest2026.ChocolateRiver.ChocolateRiverNet:6]]):FireServer(unpack(args))
                 task.wait(0.2)
             end
-
             task.wait(1)
             NetRemote:WaitForChild(
 [[adoptme_legacy_shared.ContentPacks.Sugarfest2026.ChocolateRiver.ChocolateRiverNet:14]]):FireServer()
+        end
+
+        local tryBuyCandyChisel = function()
+            return RouterClient.get('ShopAPI/BuyItem'):InvokeServer('gifts', 'sugarfest_2026_candy_chisel', {buy_count = 1})
+        end
+        local tryConsumeCandyChisel = function()
+            return NetRemote:WaitForChild('CandyCliffConsumeChisel'):InvokeServer()
+        end
+        local fireCandyCliffCarve = function(numCarve)
+            local test = NetRemote:WaitForChild('CandyCliffCarve'):InvokeServer({carve_amount = numCarve})
+
+            print(test, numCarve)
+        end
+        local processCandyCliffCarve = function()
+            tryBuyCandyChisel()
+            task.wait(1)
+            tryConsumeCandyChisel()
+
+            if ClientData.get_data()[localPlayer.Name].sugarfest_2026_candy_cliff_manager.carve_index == 0 then
+                print('open new cliff cave')
+                fireCandyCliffCarve(0)
+                task.wait(1)
+            end
+
+            for i = 1, ClientData.get_data()[localPlayer.Name].sugarfest_2026_candy_cliff_manager.remaining_carves do
+                fireCandyCliffCarve(i)
+                task.wait(0.1)
+            end
         end
 
         function self.Init()
@@ -10771,6 +10809,8 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
                 if dayOrNight == 'DAY' then
                     task.wait(5)
                     tryGetEggs()
+                    processCandyCliffCarve()
+                    tryRollDices()			
                 end
             end)
             RouterClient.get('SugarfestAPI/SetFlag'):FireServer('sugarfest_2026_intro_video', true)
@@ -10778,8 +10818,9 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         function self.Start()
             getFreeDice()
             task.wait(1)
-            tryRollDice()
+            tryRollDices()
             tryGetEggs()
+            processCandyCliffCarve()
         end
 
         return self
