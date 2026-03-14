@@ -3392,7 +3392,6 @@ do
             'HouseEditorWrapperApp',
             'GuideArrowApp',
             'NavigatorApp',
-            'QuestIconApp',
         }
 
         local patterns = {
