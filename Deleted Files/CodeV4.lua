@@ -10352,11 +10352,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
             )
                 task.wait(2)
 
-                if dayOrNight == 'NIGHT' then
-                    DailiesNetService.try_to_claim_daily_rewards('vanilla')
-                    task.wait(1)
-                    DailiesNetService.try_to_claim_tab_reward('vanilla')
-                end
 
                 if ClientData.get_data()[localPlayer.Name].synced_value_2d_kitty_tuesdays then
                     local isTuesdayEvent = Utils.IsDayAndHour('Tuesday', 8, 'am') or Utils.IsDayAndHour('Tuesday', 4, 'pm') or Utils.IsDayAndHour('Wednesday', 12, 'am')
