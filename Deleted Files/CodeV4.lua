@@ -10560,6 +10560,7 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         local ClientData = Bypass('ClientData')
         local NetRemote = (game:GetService('ReplicatedStorage'):WaitForChild('adoptme_new_net'))
         local GetInventory = __DARKLUA_BUNDLE_MODULES.load('i')
+        local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
         local eggIds = {
             '{46dca2e4-1ac9-4859-942b-f1c80b6d070b}',
             '{008581c8-0479-4fbe-9034-c2a42c7e5d25}',
@@ -10775,6 +10776,11 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
         end
 
         local tryBuyCandyChisel = function()
+            if Utils.EventCurrencyAmount() < 250000 then
+                --print('less than 250k, skipping candy chisel buy')
+                return
+            end
+
             return RouterClient.get('ShopAPI/BuyItem'):InvokeServer('gifts', 'sugarfest_2026_candy_chisel', {buy_count = 1})
         end
         local tryConsumeCandyChisel = function()
