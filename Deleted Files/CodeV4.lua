@@ -4124,7 +4124,50 @@ do
         return Clipboard
     end
 
-    function __DARKLUA_BUNDLE_MODULES.q()  ----------- Claim taskboard   
+    function __DARKLUA_BUNDLE_MODULES.q()  ----------- TaskBoard Manager
+        local ReplicatedStorage = game:GetService('ReplicatedStorage')
+        local Players = game:GetService('Players')
+        local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
+        local RouterClient = Bypass('RouterClient')
+        local modules = ReplicatedStorage:WaitForChild('new'):WaitForChild('modules')
+        local DailiesNetService = (require(modules:WaitForChild('Dailies'):WaitForChild('DailiesNetService')))
+        local DailyTaskboardHandler = {}
+        local localPlayer = Players.LocalPlayer
+
+        function DailyTaskboardHandler.Init()
+            --print('Initializing DailyTaskboardHandler...')
+            RouterClient.get('DataAPI/DataChanged').OnClientEvent:Connect(function(
+                playerName,
+                dataType,
+                data
+            )
+                if playerName ~= localPlayer.Name then
+                    return
+                end
+                if dataType ~= 'dailies_manager' then
+                    return
+                end
+                if not data then
+                    return
+                end
+                if not data.serialized_tabs then
+                    return
+                end
+
+                for name, _ in data.serialized_tabs do
+                    print(string.format('Daily Taskboard Tab: %s', tostring(name)))
+                    DailiesNetService.try_to_claim_daily_rewards(name)
+                    task.wait(1)
+                    DailiesNetService.try_to_claim_tab_reward(name)
+                    task.wait()
+                end
+            end)
+        end
+        function DailyTaskboardHandler.Start()
+            print('Starting DailyTaskboardHandler...')
+        end
+
+        return DailyTaskboardHandler
     end 
 
     function __DARKLUA_BUNDLE_MODULES.r()
