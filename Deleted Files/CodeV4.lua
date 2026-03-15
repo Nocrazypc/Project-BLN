@@ -10977,6 +10977,8 @@ getgenv().POTATO_MODE = false
 getgenv().AutoMinigame = true
 getgenv().AutoMinigame2 = false
 
+getgenv().Buy_Chisels = false
+
 local files = {
     {
         PrepareAccountHandler = __DARKLUA_BUNDLE_MODULES.load('k'),
