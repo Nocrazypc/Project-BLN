@@ -8573,8 +8573,20 @@ local FarmToggle = FarmTab:CreateToggle({
 
 FarmTab:CreateDivider()
 ----------- Minigames -------------
-FarmTab:CreateSection("Events & Minigames: Nothing")
+FarmTab:CreateSection("Events & Minigames: SugarFest")
 --------------------------------------
+
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Buy Candy Chisels",
+     CurrentValue = false,
+     Flag = "Toggle11",
+     Callback = function(Value)
+
+     getgenv().Buy_Chisels = Value
+
+     end,
+ }) 
+
 --[[local FarmToggle = FarmTab:CreateToggle({
      Name = " Get daily Skulls from Temple Trek Minigame",
      CurrentValue = false,
@@ -8593,18 +8605,6 @@ FarmTab:CreateSection("Events & Minigames: Nothing")
 
      end,
  })--]]
-
---[[local FarmToggle = FarmTab:CreateToggle({
-     Name = "Tear Up Toykyo Minigame",
-     CurrentValue = false,
-     Flag = "Toggle11",
-     Callback = function(Value)
-
-     getgenv().AutoMinigame2 = Value
-
-     end,
- }) --]]
-
 
 --------- Second Tab -----------
             local MiscTab = Window:CreateTab('Others', 4483362458)
