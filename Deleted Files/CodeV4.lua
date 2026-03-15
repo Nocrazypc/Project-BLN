@@ -8555,6 +8555,22 @@ FarmTab:CreateButton({
 }) --]]
 
 FarmTab:CreateDivider()
+----------- Minigames -------------
+FarmTab:CreateSection("Events & Minigames: SugarFest")
+--------------------------------------
+
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Buy Candy Chisels",
+     CurrentValue = false,
+     Flag = "Toggle11",
+     Callback = function(Value)
+
+     getgenv().Buy_Chisels = Value
+
+     end,
+ }) 
+
+FarmTab:CreateDivider()
 --------- Hatch Eggs Only ------------
 FarmTab:CreateSection("Eggs Only")
 --------------------------------------
