@@ -10820,8 +10820,8 @@ local FarmToggle = FarmTab:CreateToggle({
 [[adoptme_legacy_shared.ContentPacks.Sugarfest2026.ChocolateRiver.ChocolateRiverNet:14]]):FireServer()
         end
         local tryBuyCandyChisel = function()
-            if Utils.EventCurrencyAmount() < 250000 then
-                print('less than 250k, skipping candy chisel buy')
+            if Utils.EventCurrencyAmount() < 250000 or not getgenv().Buy_Chisels then
+                --print('less than 250k, skipping candy chisel buy')
 
                 return
             end
