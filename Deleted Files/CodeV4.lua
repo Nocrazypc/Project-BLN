@@ -10882,6 +10882,64 @@ local FarmToggle = FarmTab:CreateToggle({
                     processCandyCliffCarve()
                     tryRollDice('sugarfest_2026_dice')
                     tryRollDice('sugarfest_2026_custom_dice')
+
+                elseif dayOrNight == 'NIGHT' then
+                    local mochiStumpHp = ClientData.get_data()[localPlayer.Name].mochi_stump_hp
+
+                    for i = 1, MOCHI_STUMP_MAX_AMOUNT do
+                        print('checking mochi stump with id ' .. i .. ' for mochi cat interaction, hp: ' .. tostring(mochiStumpHp[tostring(i)]))
+
+                        if mochiStumpHp[tostring(i)] and mochiStumpHp[tostring(i)] == 0 then
+                            print('mochi stump with id ' .. i .. ' has no hp, skipping mochi cat interaction')
+
+                            continue
+                        end
+
+                        local uniqueId = GetInventory.GetUniqueId('gifts', 'sugarfest_2026_mochi_mallet')
+
+                        if not uniqueId then
+                            print(
+[[no mochi mallet gift found in inventory, skipping mochi cat interaction]])
+
+                            return
+                        end
+
+                        RouterClient.get('LocationAPI/SetLocation'):FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
+                        Utils.Equip(uniqueId, false)
+                        task.wait(1)
+
+                        for _ = 1, 3 do
+                            local args = {
+                                {
+                                    stump_id = tostring(i),
+                                    item_unique_id = uniqueId,
+                                },
+                            }
+
+                            NetRemote:WaitForChild(
+[[adoptme_legacy_shared.ContentPacks.Sugarfest2026.Game.MochiCat.MochiCatNet:11]]):InvokeServer(unpack(args))
+                            task.wait(1)
+                        end
+                    end
+                end
+            end)
+            StaticMap.waffle_wreck_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function(
+            )
+                if StaticMap.waffle_wreck_minigame_state.is_game_active.Value then
+                    if getgenv().SETTINGS.ENABLE_AUTO_FARM == false then
+                        return
+                    end
+                    if localPlayer:GetAttribute('hasStartedFarming') == false then
+                        return
+                    end
+                    if localPlayer:GetAttribute('StopFarmingTemp') == true then
+                        return
+                    end
+
+                    localPlayer:SetAttribute('StopFarmingTemp', true)
+                    Bypass('RouterClient').get('MinigameAPI/AttemptJoin'):FireServer('waffle_wreck', true)
+
+		
                 end
             end)
             RouterClient.get('SugarfestAPI/SetFlag'):FireServer('sugarfest_2026_intro_video', true)
