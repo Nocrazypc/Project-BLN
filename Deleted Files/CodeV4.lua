@@ -8561,6 +8561,19 @@ FarmTab:CreateSection("Events & Minigames: SugarFest")
 --------------------------------------
 
 local FarmToggle = FarmTab:CreateToggle({
+     Name = "Buy Mochi Mallets",
+     CurrentValue = false,
+     Flag = "Toggle245",
+     Callback = function(Value)
+
+     getgenv().Buy_mochi_mallets = Value
+
+     end,
+ }) 
+
+
+
+local FarmToggle = FarmTab:CreateToggle({
      Name = "Buy Candy Chisels",
      CurrentValue = false,
      Flag = "Toggle11",
