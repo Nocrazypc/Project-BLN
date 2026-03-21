@@ -10886,10 +10886,10 @@ local FarmToggle = FarmTab:CreateToggle({
                     local mochiStumpHp = ClientData.get_data()[localPlayer.Name].mochi_stump_hp
 
                     for i = 1, MOCHI_STUMP_MAX_AMOUNT do
-                        print('checking mochi stump with id ' .. i .. ' for mochi cat interaction, hp: ' .. tostring(mochiStumpHp[tostring(i)]))
+                        --print('checking mochi stump with id ' .. i .. ' for mochi cat interaction, hp: ' .. tostring(mochiStumpHp[tostring(i)]))
 
                         if mochiStumpHp[tostring(i)] and mochiStumpHp[tostring(i)] == 0 then
-                            print('mochi stump with id ' .. i .. ' has no hp, skipping mochi cat interaction')
+                            --print('mochi stump with id ' .. i .. ' has no hp, skipping mochi cat interaction')
 
                             continue
                         end
@@ -10897,8 +10897,7 @@ local FarmToggle = FarmTab:CreateToggle({
                         local uniqueId = GetInventory.GetUniqueId('gifts', 'sugarfest_2026_mochi_mallet')
 
                         if not uniqueId then
-                            print(
-[[no mochi mallet gift found in inventory, skipping mochi cat interaction]])
+                            --print([[no mochi mallet gift found in inventory, skipping mochi cat interaction]])
 
                             return
                         end
