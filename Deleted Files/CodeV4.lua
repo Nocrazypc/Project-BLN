@@ -10876,8 +10876,8 @@ local FarmToggle = FarmTab:CreateToggle({
             RouterClient.get('WeatherAPI/WeatherUpdated').OnClientEvent:Connect(function(
                 dayOrNight
             )
+                task.wait(5)
                 if dayOrNight == 'DAY' then
-                    task.wait(5)
                     tryGetEggs()
                     processCandyCliffCarve()
                     tryRollDice('sugarfest_2026_dice')
