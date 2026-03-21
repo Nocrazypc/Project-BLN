@@ -3686,27 +3686,6 @@ do
                 end
             end)
 
-            DialogApp.Dialog.CheckboxDialog:GetPropertyChangedSignal('Visible'):Connect(function(
-            )
-                if not DialogApp.Dialog.CheckboxDialog.Visible then
-                    return
-                end
-                if not DialogApp.Dialog.CheckboxDialog:WaitForChild('Info', 10) then
-                    return
-                end
-                if not DialogApp.Dialog.CheckboxDialog.Info:WaitForChild('TextLabel', 10) then
-                    return
-                end
-
-                DialogApp.Dialog.CheckboxDialog.Info.TextLabel:GetPropertyChangedSignal('Text'):Connect(function(
-                )
-                    local text = DialogApp.Dialog.CheckboxDialog.Info.TextLabel.Text
-
-                    if text:match('is starting soon!') or text:match('Would you like to teleport') then
-                        Utils.FindButton('No')
-                    end
-                end)
-            end)
             DialogApp.Dialog.NormalDialog:GetPropertyChangedSignal('Visible'):Connect(function(
             )
                 if not DialogApp.Dialog.NormalDialog.Visible then
