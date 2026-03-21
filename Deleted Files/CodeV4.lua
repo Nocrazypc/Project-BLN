@@ -10859,6 +10859,17 @@ local FarmToggle = FarmTab:CreateToggle({
 
             return RouterClient.get('ShopAPI/BuyItem'):InvokeServer('gifts', 'sugarfest_2026_candy_chisel', {buy_count = 1})
         end
+
+        local tryBuyMochiMallets = function()
+            if Utils.EventCurrencyAmount() < 250000 or not getgenv().Buy_mochi_mallets then
+                --print('less than 250k, skipping Mochi Mallet buy')
+
+                return
+            end
+
+            return RouterClient.get('ShopAPI/BuyItem'):InvokeServer('gifts', 'sugarfest_2026_mochi_mallet', {buy_count = 5})
+        end
+
         local tryConsumeCandyChisel = function()
             return NetRemote:WaitForChild('CandyCliffConsumeChisel'):InvokeServer()
         end
