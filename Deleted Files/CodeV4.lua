@@ -10830,13 +10830,13 @@ local FarmToggle = FarmTab:CreateToggle({
                 }
 
                 NetRemote:WaitForChild(
-[[adoptme_legacy_shared.ContentPacks.Sugarfest2026.ChocolateRiver.ChocolateRiverNet:6]]):FireServer(unpack(args))
+[[adoptme_legacy_shared.ContentPacks.Sugarfest2026.Game.CocoadileRiver.ChocolateRiverNet:6]]):FireServer(unpack(args))
                 task.wait(0.2)
             end
 
             task.wait(1)
             NetRemote:WaitForChild(
-[[adoptme_legacy_shared.ContentPacks.Sugarfest2026.ChocolateRiver.ChocolateRiverNet:14]]):FireServer()
+[[adoptme_legacy_shared.ContentPacks.Sugarfest2026.Game.CocoadileRiver.ChocolateRiverNet:14]]):FireServer()
         end
         local tryBuyCandyChisel = function()
             if Utils.EventCurrencyAmount() < 250000 or not getgenv().Buy_Chisels then
