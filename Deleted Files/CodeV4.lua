@@ -3686,7 +3686,6 @@ do
                 end
             end)
 
-
             DialogApp.Dialog.CheckboxDialog:GetPropertyChangedSignal('Visible'):Connect(function(
             )
                 if not DialogApp.Dialog.CheckboxDialog.Visible then
