@@ -10922,25 +10922,6 @@ local FarmToggle = FarmTab:CreateToggle({
                     end
                 end
             end)
-            StaticMap.waffle_wreck_minigame_state.is_game_active:GetPropertyChangedSignal('Value'):Connect(function(
-            )
-                if StaticMap.waffle_wreck_minigame_state.is_game_active.Value then
-                    if getgenv().SETTINGS.ENABLE_AUTO_FARM == false then
-                        return
-                    end
-                    if localPlayer:GetAttribute('hasStartedFarming') == false then
-                        return
-                    end
-                    if localPlayer:GetAttribute('StopFarmingTemp') == true then
-                        return
-                    end
-
-                    localPlayer:SetAttribute('StopFarmingTemp', true)
-                    Bypass('RouterClient').get('MinigameAPI/AttemptJoin'):FireServer('waffle_wreck', true)
-
-		
-                end
-            end)
             RouterClient.get('SugarfestAPI/SetFlag'):FireServer('sugarfest_2026_intro_video', true)
         end
         function self.Start()
