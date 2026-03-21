@@ -10907,6 +10907,8 @@ local FarmToggle = FarmTab:CreateToggle({
                     tryRollDice('sugarfest_2026_custom_dice')
 
                 elseif dayOrNight == 'NIGHT' then
+			        tryBuyMochiMallets()
+                    task.wait(3)
                     local mochiStumpHp = ClientData.get_data()[localPlayer.Name].mochi_stump_hp
 
                     for i = 1, MOCHI_STUMP_MAX_AMOUNT do
