@@ -10616,7 +10616,6 @@ local FarmToggle = FarmTab:CreateToggle({
         local GetInventory = __DARKLUA_BUNDLE_MODULES.load('i')
         local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
         local MOCHI_STUMP_MAX_AMOUNT = 5
-        local StaticMap = (workspace:WaitForChild('StaticMap'))
         local eggIds = {
             '{46dca2e4-1ac9-4859-942b-f1c80b6d070b}',
             '{008581c8-0479-4fbe-9034-c2a42c7e5d25}',
