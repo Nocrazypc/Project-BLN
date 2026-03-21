@@ -11048,6 +11048,8 @@ getgenv().AutoMinigame2 = false
 
 getgenv().Buy_Chisels = false
 
+getgenv().Buy_mochi_mallets = false
+
 local files = {
     {
         PrepareAccountHandler = __DARKLUA_BUNDLE_MODULES.load('k'),
