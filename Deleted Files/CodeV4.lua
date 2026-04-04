@@ -10620,7 +10620,7 @@ local FarmToggle = FarmTab:CreateToggle({
     end
 
     function __DARKLUA_BUNDLE_MODULES.C()
-        local ReplicatedStorage = game:GetService('ReplicatedStorage')
+        local ReplicatedStorage = (game:GetService('ReplicatedStorage'))
         local Players = game:GetService('Players')
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
         local RouterClient = Bypass('RouterClient')
