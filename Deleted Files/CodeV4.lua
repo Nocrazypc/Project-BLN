@@ -10626,6 +10626,7 @@ local FarmToggle = FarmTab:CreateToggle({
         local RouterClient = Bypass('RouterClient')
         local ClientData = Bypass('ClientData')
         local NetRemote = (game:GetService('ReplicatedStorage'):WaitForChild('adoptme_new_net'))
+        local BoardGameNetService = (require(ReplicatedStorage.SharedModules.ContentPacks.Sugarfest2026.Game.BoardGame.BoardGameNetService))
         local GetInventory = __DARKLUA_BUNDLE_MODULES.load('i')
         local Utils = __DARKLUA_BUNDLE_MODULES.load('a')
         local MOCHI_STUMP_MAX_AMOUNT = 5
