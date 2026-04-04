@@ -10900,6 +10900,13 @@ local FarmToggle = FarmTab:CreateToggle({
                 dayOrNight
             )
                 task.wait(5)
+	            local playerData = ClientData.get_data()[localPlayer.Name]
+                local bunnyManager = playerData and (playerData.sugarfest_2026_easter_bunny_manager)
+
+                if bunnyManager and bunnyManager.bunnies_claimable >= 1 then
+                    NetRemote:WaitForChild('TryClaimBunny'):InvokeServer()
+                    print('Claimed bunny from auto farm')
+                end
                 if dayOrNight == 'DAY' then
                     tryGetEggs()
                     processCandyCliffCarve()
