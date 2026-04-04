@@ -10140,7 +10140,7 @@ local FarmToggle = FarmTab:CreateToggle({
 
 
     function __DARKLUA_BUNDLE_MODULES.z()
-        local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
+        local ReplicatedStorage = (cloneref(game:GetService('ReplicatedStorage')))
         local Players = cloneref(game:GetService('Players'))
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
         local ClientData = Bypass('ClientData')
