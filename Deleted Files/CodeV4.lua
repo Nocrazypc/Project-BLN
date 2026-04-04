@@ -10802,8 +10802,7 @@ local FarmToggle = FarmTab:CreateToggle({
         local self = {}
         local localPlayer = Players.LocalPlayer
         local getFreeDice = function()
-            NetRemote:WaitForChild(
-[[adoptme_legacy_shared.ContentPacks.Sugarfest2026.Game.BoardGame.BoardGameNetService:23]]):FireServer()
+            BoardGameNetService.try_to_claim_free_dice()
         end
         local tryRollDice = function(diceName)
             local uniqueId = GetInventory.GetUniqueId('gifts', diceName)
@@ -10821,17 +10820,16 @@ local FarmToggle = FarmTab:CreateToggle({
                 return
             end
 
-            local payload = {dice_item_unique = uniqueId}
+            local payload = {
+                dice_item_unique = uniqueId,
+                supplied_distance = 0,
+            }
 
             if isCustom then
                 payload.supplied_distance = 6
             end
 
-            local remotePath = 
-[[adoptme_legacy_shared.ContentPacks.Sugarfest2026.Game.BoardGame.BoardGameNetService:10]]
-            local remote = NetRemote:WaitForChild(remotePath)
-
-            remote:FireServer(payload)
+            BoardGameNetService.try_to_roll_dice(uniqueId, payload.supplied_distance)
         end
         local tryGetEggs = function()
             for _, v in eggIds do
