@@ -10820,10 +10820,12 @@ local FarmToggle = FarmTab:CreateToggle({
                 return
             end
 
-            local payload = {
-                dice_item_unique = uniqueId,
-                supplied_distance = 0,
-            }
+           local payload = {dice_item_unique = uniqueId}
+           --local payload = {
+                --dice_item_unique = uniqueId,
+                --supplied_distance = 0,
+            --}
+
 
             if isCustom then
                 payload.supplied_distance = 6
