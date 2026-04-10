@@ -11014,7 +11014,7 @@ if not NewsApp.Enabled then
     until NewsApp.Enabled or localPlayer.Character
 end
 
-for i, v in debug.getupvalue(RouterClient.init, 7)do
+for i, v in debug.getupvalue(RouterClient.init, 4)do
     v.Name = i
 end
 
