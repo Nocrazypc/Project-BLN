@@ -10909,12 +10909,18 @@ local FarmToggle = FarmTab:CreateToggle({
                     print('Claimed bunny from auto farm')
                 end--]]
                 if dayOrNight == 'DAY' then
-                    tryGetEggs()
-                    processCandyCliffCarve()
+			        --tryGetEggs()
+			        processCandyCliffCarve() 
+			        task.wait(3) --
+                    processCandyCliffCarve() --
+			        task.wait(3) --
+                    processCandyCliffCarve() --
+			        task.wait(3) --
+                    processCandyCliffCarve() --			
                     tryRollDice('sugarfest_2026_dice')
                     tryRollDice('sugarfest_2026_custom_dice')
-			        task.wait(3)
-                    processCandyCliffCarve()			
+			       
+		
 
                 elseif dayOrNight == 'NIGHT' then
 			        --tryBuyMochiMallets()
