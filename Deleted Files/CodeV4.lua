@@ -10748,9 +10748,6 @@ local files = {
     {
        DailyTaskboardHandler = __DARKLUA_BUNDLE_MODULES.load('q'),
     },	
-    {
-       SugarFestival2026 = __DARKLUA_BUNDLE_MODULES.load('C'),
-    },
 }
 
 Utils.PrintDebug('----- INITIALIZING MODULES -----')
