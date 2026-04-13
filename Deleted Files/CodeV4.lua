@@ -8595,7 +8595,7 @@ FarmTab:CreateSection("Events & Minigames: None")
 
      end,
  })--]]
-
+FarmTab:CreateDivider()
 --------- Second Tab -----------
             local MiscTab = Window:CreateTab('Others', 4483362458)
 
