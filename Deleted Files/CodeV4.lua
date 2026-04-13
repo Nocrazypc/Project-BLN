@@ -10916,7 +10916,13 @@ local FarmToggle = FarmTab:CreateToggle({
 			        task.wait(3) --
                     processCandyCliffCarve() --
 			        task.wait(3) --
-                    processCandyCliffCarve() --			
+                    processCandyCliffCarve() --	
+			        task.wait(3) --
+                    processCandyCliffCarve() --		
+			        task.wait(3) --
+                    processCandyCliffCarve() --		
+			        task.wait(3) --
+                    processCandyCliffCarve() --						
                     tryRollDice('sugarfest_2026_dice')
                     tryRollDice('sugarfest_2026_custom_dice')
 			       
