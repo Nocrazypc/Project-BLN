@@ -10880,7 +10880,7 @@ local FarmToggle = FarmTab:CreateToggle({
             print(test, numCarve)
         end
         local processCandyCliffCarve = function()
-            tryBuyCandyChisel()
+            --tryBuyCandyChisel()
             task.wait(1)
             tryConsumeCandyChisel()
 
