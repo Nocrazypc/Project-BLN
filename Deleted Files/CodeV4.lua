@@ -8425,7 +8425,7 @@ Check the Developer Console for more information.]],
 ------------- Rayfield Config ------------- 
         local setupRayfield = function()
         local Window = Rayfield:CreateWindow({
-	        Name = "BLN Adopt Me! Autofarm V4.4  😎   SugarFest Event 🍬🥚  ",
+	        Name = "BLN Adopt Me! Autofarm V4.4  😎",
                 Theme = 'Default',
                 DisableRayfieldPrompts = true,
                 DisableBuildWarnings = true,
