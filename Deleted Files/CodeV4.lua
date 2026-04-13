@@ -10904,15 +10904,17 @@ local FarmToggle = FarmTab:CreateToggle({
 	            local playerData = ClientData.get_data()[localPlayer.Name]
                 local bunnyManager = playerData and (playerData.sugarfest_2026_easter_bunny_manager)
 
-                if bunnyManager and bunnyManager.bunnies_claimable >= 1 then
+                --[[if bunnyManager and bunnyManager.bunnies_claimable >= 1 then
                     NetRemote:WaitForChild('TryClaimBunny'):InvokeServer()
                     print('Claimed bunny from auto farm')
-                end
+                end--]]
                 if dayOrNight == 'DAY' then
                     tryGetEggs()
                     processCandyCliffCarve()
                     tryRollDice('sugarfest_2026_dice')
                     tryRollDice('sugarfest_2026_custom_dice')
+			        task.wait(3)
+                    processCandyCliffCarve()			
 
                 elseif dayOrNight == 'NIGHT' then
 			        --tryBuyMochiMallets()
