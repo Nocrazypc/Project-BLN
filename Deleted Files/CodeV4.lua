@@ -10676,9 +10676,6 @@ getgenv().POTATO_MODE = false
 getgenv().AutoMinigame = true
 getgenv().AutoMinigame2 = false
 
-getgenv().Buy_Chisels = false
-
-getgenv().Buy_mochi_mallets = false
 
 local files = {
     {
