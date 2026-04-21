@@ -1,5 +1,5 @@
 
-if game.PlaceId ~= 920587237999 then
+if game.PlaceId ~= 920587237 then
     return
 end
 
