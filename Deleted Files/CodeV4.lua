@@ -3427,7 +3427,7 @@ do
             ['Costume Party starts'] = 'Okay',
             ['Step away from'] = 'Okay',
             ['Welcome to Adopt Me!'] = 'Next',
-            ['Sean's UFO'] = 'Okay',
+            ['UFO'] = 'Okay',
         }
         local getNormalDialogTextLabel = function()
             local Dialog = (DialogApp and {
