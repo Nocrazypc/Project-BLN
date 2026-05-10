@@ -4127,7 +4127,7 @@ do
     end
 
     function __DARKLUA_BUNDLE_MODULES.q()  ----------- TaskBoard Manager
-        local ReplicatedStorage = game:GetService('ReplicatedStorage')
+       --[[ local ReplicatedStorage = game:GetService('ReplicatedStorage')
         local Players = game:GetService('Players')
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
         local RouterClient = Bypass('RouterClient')
@@ -4169,7 +4169,7 @@ do
             print('Starting DailyTaskboardHandler...')
         end
 
-        return DailyTaskboardHandler
+        return DailyTaskboardHandler --]]
     end 
 
     function __DARKLUA_BUNDLE_MODULES.r()
