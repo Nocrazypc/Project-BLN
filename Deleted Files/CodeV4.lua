@@ -10679,6 +10679,8 @@ getgenv().POTATO_MODE = false
 getgenv().AutoMinigame = false
 getgenv().AutoMinigame2 = false
 
+getgenv().SETTINGS.DEBUG_MODE = true
+
 
 local files = {
     {
