@@ -3388,10 +3388,12 @@ do
 
         local appList = {
             'MerchPopUpApp',
+            'SubscriptionsPopUpApp',
             'ExtraButtonsApp',
             'HouseEditorWrapperApp',
             'GuideArrowApp',
             'NavigatorApp',
+            'QuestIconApp',
         }
 
         local patterns = {
