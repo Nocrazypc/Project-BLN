@@ -3112,7 +3112,7 @@ do
             end
         end
         function self.Start()
-            setfpscap(2)
+            setfpscap(3)
             StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Captures, false)
 
             if DialogApp.Dialog.ThemeColorDialog.Visible then
