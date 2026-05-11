@@ -8471,7 +8471,7 @@ local FarmToggle = FarmTab:CreateToggle({
           Teleport.FarmingHome()
 		  --getgenv().auto_farm = Value
           localPlayer:SetAttribute('StopFarmingTemp', false)
-          setfpscap(2)
+          setfpscap(3)
      end,
  })
 
@@ -8482,7 +8482,7 @@ FarmTab:CreateButton({
         setfpscap(20)
         task.wait(300)
         localPlayer:SetAttribute('StopFarmingTemp', false)
-        setfpscap(2)
+        setfpscap(3)
 	end,
 })
 -------------------------------------------
