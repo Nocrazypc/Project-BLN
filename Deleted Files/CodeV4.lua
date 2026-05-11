@@ -237,7 +237,7 @@ do
         function Utils.EventCurrencyAmount()
             --[[return ClientData.get_data()[localPlayer.Name].candy_2025 or 0 --]]
 			--[[return ClientData.get_data()[localPlayer.Name].gingerbread_2025 or 0--]]
-			return ClientData.get_data()[localPlayer.Name].eggs_2026 or 0
+			--[[return ClientData.get_data()[localPlayer.Name].eggs_2026 or 0 --]]
         end
         function Utils.FoodItemCount(nameId)
             local count = 0
