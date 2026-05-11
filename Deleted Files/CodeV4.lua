@@ -3840,7 +3840,7 @@ do
     end
 
     function __DARKLUA_BUNDLE_MODULES.n()
-        local ReplicatedStorage = game:GetService('ReplicatedStorage')
+        --[[ local ReplicatedStorage = game:GetService('ReplicatedStorage')
         local Players = game:GetService('Players')
         local Workspace = game:GetService('Workspace')
         local Lighting = game:GetService('Lighting')
@@ -3918,21 +3918,21 @@ do
                     v:Destroy()
                 end
             end
-            --[[for _, v in pairs(Workspace:GetDescendants())do
+            for _, v in pairs(Workspace:GetDescendants())do
                 lowSpecTextures(v)
-            end --]]
+            end
 
             Workspace:WaitForChild('Interiors').ChildAdded:Connect(function(v)
                 if v:IsA('Model') and table.find(namesToRemove, v.Name) then
                     v:Destroy()
                 end
             end)
-            --[[Workspace.DescendantAdded:Connect(function(v)
+            Workspace.DescendantAdded:Connect(function(v)
                 lowSpecTextures(v)
-            end)--]]
+            end)
         end
 
-        return self
+        return self --]]
     end
 
     function __DARKLUA_BUNDLE_MODULES.o()
