@@ -10583,7 +10583,7 @@ FarmTab:CreateDivider()
     end
 end
 
-setfpscap(2)
+setfpscap(3)
 task.wait(1)
 
 if not game:IsLoaded() then
@@ -10598,7 +10598,7 @@ getgenv().loaded = true
 if game.PlaceId ~= 920587237 then
     return
 end
-setfpscap(2)
+--setfpscap(3)
 
 local ReplicatedStorage = game:GetService('ReplicatedStorage')
 --local GuiService = game:GetService('GuiService')
