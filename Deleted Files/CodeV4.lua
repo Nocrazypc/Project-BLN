@@ -10304,7 +10304,7 @@ FarmTab:CreateDivider()
                 elseif key == 'camping' then
                     Teleport.PlaceFloorAtCampSite()
                     Ailment.CampingAilment(petUnique)
-                    task.wait(2) -- 90 to 160 test to keep tasks pending before sick task appears
+                    task.wait(30) -- 90 to 160 test to keep tasks pending before sick task appears
                     Teleport.FarmingHome()
                     return true
                 end
