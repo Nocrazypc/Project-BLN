@@ -10158,9 +10158,9 @@ FarmTab:CreateDivider()
             end
             for key, _ in ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments do
                 if key == 'hungry' then
-                    Ailment.BabyHungryAilment()
-                    return
-                elseif key == 'thirsty' then
+                    --Ailment.BabyHungryAilment()
+                    --return
+               --[[ elseif --]] if key == 'thirsty' then
                     Ailment.BabyThirstyAilment()
                     return
                 elseif key == 'bored' then
