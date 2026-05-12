@@ -10704,9 +10704,9 @@ local files = {
     {
        AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('z'),
     },
-   --[[ {
+    {
        PetOfflineHandler = __DARKLUA_BUNDLE_MODULES.load('B'),
-    }, --]]
+    },
     {
        DailyTaskboardHandler = __DARKLUA_BUNDLE_MODULES.load('q'),
     },	
