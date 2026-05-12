@@ -29,7 +29,7 @@ do
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
         local ClientData = Bypass('ClientData')
         local RouterClient = Bypass('RouterClient')
-        local debugMode = true
+        local debugMode = false
         local localPlayer = Players.LocalPlayer
 
         --[[function Utils.SetConfigFarming(configId)
