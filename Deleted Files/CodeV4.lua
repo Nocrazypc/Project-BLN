@@ -9458,7 +9458,7 @@ FarmTab:CreateDivider()
         function Ailment.HungryAilment()
             Utils.PrintDebug(string.format('\u{1f356} Doing hungry task on %s \u{1f356}', tostring(Ailment.whichPet)))
             Utils.ReEquipPet(Ailment.whichPet)
-            FoodAilments('icecream')
+            FoodAilments('pizza')
             Utils.PrintDebug(string.format('\u{1f356} Finished hungry task on %s \u{1f356}', tostring(Ailment.whichPet)))
         end
         function Ailment.ThirstyAilment()
