@@ -4168,6 +4168,7 @@ do
                     DailiesNetService.try_to_claim_tab_reward(name)
                     task.wait()
                 end
+			    debouce = false
             end)
         end
         function DailyTaskboardHandler.Start()
