@@ -9496,7 +9496,7 @@ FarmTab:CreateDivider()
                     [3] = 'Yes',
                     [4] = game:GetService('Players').LocalPlayer.Character,
                 }
-                RouterClient.get('AdoptAPI/FocusPet'):FireServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet].char)
+                ReplicatedStorage.API:FindFirstChild('HousingAPI/ActivateInteriorFurniture'):InvokeServer(unpack(args))
                 Utils.PrintDebug(string.format('\u{1fa79} SICK task Finished on %s \u{1fa79}', tostring(Ailment.whichPet)))
             else
                 getDoctorId()
