@@ -9267,7 +9267,7 @@ FarmTab:CreateDivider()
                         Utils.PrintDebug('\u{26a0}\u{fe0f} Trying to feed pet but no pet equipped \u{26a0}\u{fe0f}')
                         return
                     end
-                    ReplicatedStorage.API['PetObjectAPI/CreatePetObject']:InvokeServer('__Enum_PetObjectCreatorType_2', {
+                    RouterClient.get('PetObjectAPI/CreatePetObject'):InvokeServer('__Enum_PetObjectCreatorType_2', {
                         ['pet_unique'] = ClientData.get('pet_char_wrappers')[Ailment.whichPet].pet_unique,
                         ['unique_id'] = v.unique,
                     })
@@ -9276,7 +9276,7 @@ FarmTab:CreateDivider()
                 end
             end
             if not hasFood then
-                ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', FoodPassOn, {})
+                RouterClient.get('ShopAPI/BuyItem'):InvokeServer('food', FoodPassOn, {})
                 task.wait(2)
                 FoodAilments(FoodPassOn)
             end
