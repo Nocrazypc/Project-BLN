@@ -9280,17 +9280,12 @@ FarmTab:CreateDivider()
                 task.wait(2)
                 FoodAilments(FoodPassOn)
             end
+
+            return
         end
-        local getKeyFrom = function(itemId)
-            for key, value in ClientData.get_data()[localPlayer.Name].house_interior.furniture do
-                if value.id == itemId then
-                    return key
-                end
-            end
-            return nil
-        end
+
         local useToolOnBaby = function(uniqueId)
-            ReplicatedStorage.API['ToolAPI/ServerUseTool']:FireServer(uniqueId, 'END')
+            RouterClient.get('ToolAPI/ServerUseTool'):InvokeServer(uniqueId, 'END')
         end
         local PianoAilment = function(pianoId, petCharOrPlayerChar)
             local args = {
@@ -9303,12 +9298,12 @@ FarmTab:CreateDivider()
                 petCharOrPlayerChar,
             }
             task.spawn(function()
-                ReplicatedStorage.API:FindFirstChild('HousingAPI/ActivateFurniture'):InvokeServer(unpack(args))
+                RouterClient.get('HousingAPI/ActivateFurniture'):InvokeServer(unpack(args))
             end)
         end
         local furnitureAilments = function(nameId, petCharOrPlayerChar)
             task.spawn(function()
-                ReplicatedStorage.API['HousingAPI/ActivateFurniture']:InvokeServer(localPlayer, nameId, 'UseBlock', {
+                RouterClient.get('HousingAPI/ActivateFurniture'):InvokeServer(localPlayer, nameId, 'UseBlock', {
                     ['cframe'] = localPlayer.Character.HumanoidRootPart.CFrame,
                 }, petCharOrPlayerChar)
             end)
@@ -9339,7 +9334,7 @@ FarmTab:CreateDivider()
             Utils.PrintDebug('\u{1fa79} Getting Doctor ID \u{1fa79}')
             local stuckCount = 0
             local isStuck = false
-            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('Hospital')
+            RouterClient.get('LocationAPI/SetLocation'):FireServer('Hospital')
             task.wait(5)
             local doctor = Workspace.HouseInteriors.furniture:FindFirstChild('Doctor', true)
             if not doctor then
@@ -9371,7 +9366,7 @@ FarmTab:CreateDivider()
                 ClientData.get('pet_char_wrappers')[Ailment.whichPet].char,
                 localPlayer.Character.StrollerTool.ModelHandle.TouchToSits.TouchToSit,
             }
-            ReplicatedStorage.API:FindFirstChild('AdoptAPI/UseStroller'):InvokeServer(unpack(args))
+            RouterClient.get('AdoptAPI/UseStroller'):InvokeServer(unpack(args))
             return true
         end
         local babyJump = function()
@@ -9381,9 +9376,9 @@ FarmTab:CreateDivider()
             localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
         end
         local getUpFromSitting = function()
-            ReplicatedStorage.API['AdoptAPI/ExitSeatStates']:FireServer()
+            RouterClient.get('AdoptAPI/ExitSeatStates'):FireServer()
             task.wait()
-            ReplicatedStorage.API['AdoptAPI/ExitSeatStates']:FireServer()
+            RouterClient.get('AdoptAPI/ExitSeatStates'):FireServer()
             task.wait(1)
             Utils.PrintDebug('Exited from seat')
         end
@@ -9392,14 +9387,14 @@ FarmTab:CreateDivider()
             for _, v in ClientData.get_data()[localPlayer.Name].inventory.food do
                 if v.id == FoodPassOn then
                     hasFood = true
-                    ReplicatedStorage.API['ToolAPI/Equip']:InvokeServer(v.unique, {})
+                    RouterClient.get('ToolAPI/Equip'):InvokeServer(v.unique, {})
                     task.wait(1)
                     useToolOnBaby(v.unique)
                     return
                 end
             end
             if not hasFood then
-                ReplicatedStorage.API['ShopAPI/BuyItem']:InvokeServer('food', FoodPassOn, {})
+                RouterClient.get('ShopAPI/BuyItem'):InvokeServer('food', FoodPassOn, {})
                 task.wait(1)
                 babyGetFoodAndEat(FoodPassOn)
             end
@@ -9418,7 +9413,7 @@ FarmTab:CreateDivider()
             for i = 1, 3 do
                 for _, ailment in ailmentsList do
                     Utils.PrintDebug(string.format('card: %s, ailment: %s', tostring(i), tostring(ailment)))
-                    ReplicatedStorage.API['AilmentsAPI/ChooseMysteryAilment']:FireServer(petUnique, 'mystery', i, ailment)
+                    RouterClient.get('AilmentsAPI/ChooseMysteryAilment'):FireServer(petUnique, 'mystery', i, ailment)
                     task.wait(3)
                     if not (ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique] and ClientData.get_data()[localPlayer.Name].ailments_manager.ailments[petUnique][mysteryId]) then
                         Utils.PrintDebug(string.format('\u{1f449} Picked %s ailment from mystery card \u{1f448}', tostring(ailment)))
@@ -9490,7 +9485,7 @@ FarmTab:CreateDivider()
             Utils.ReEquipPet(Ailment.whichPet)
             if doctorId then
                 Utils.PrintDebug(string.format('\u{1fa79} Doing sick task on %s \u{1fa79}', tostring(Ailment.whichPet)))
-                ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('Hospital')
+                RouterClient.get('LocationAPI/SetLocation'):FireServer('Hospital')
                 if not isDoctorLoaded() then
                     Utils.PrintDebug(string.format('\u{1fa79}\u{26a0}\u{fe0f} Doctor didnt load on %s \u{1fa79}\u{26a0}\u{fe0f}', tostring(Ailment.whichPet)))
                     return
@@ -9501,7 +9496,7 @@ FarmTab:CreateDivider()
                     [3] = 'Yes',
                     [4] = game:GetService('Players').LocalPlayer.Character,
                 }
-                ReplicatedStorage.API:FindFirstChild('HousingAPI/ActivateInteriorFurniture'):InvokeServer(unpack(args))
+                RouterClient.get('AdoptAPI/FocusPet'):FireServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet].char)
                 Utils.PrintDebug(string.format('\u{1fa79} SICK task Finished on %s \u{1fa79}', tostring(Ailment.whichPet)))
             else
                 getDoctorId()
@@ -9513,12 +9508,12 @@ FarmTab:CreateDivider()
             if not Utils.IsPetEquipped(Ailment.whichPet) then
                 return
             end
-            ReplicatedStorage.API['AdoptAPI/FocusPet']:FireServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet].char)
+            RouterClient.get('AdoptAPI/FocusPet'):FireServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet].char)
             task.wait(1)
             if not Utils.IsPetEquipped(Ailment.whichPet) then
                 return
             end
-            ReplicatedStorage.API['PetAPI/ReplicateActivePerformances']:FireServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet].char, {
+            RouterClient.get('PetAPI/ReplicateActivePerformances'):FireServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet].char, {
                 ['FocusPet'] = true,
                 ['Petting'] = true,
             })
@@ -9526,37 +9521,30 @@ FarmTab:CreateDivider()
             if not Utils.IsPetEquipped(Ailment.whichPet) then
                 return
             end
-            Bypass('RouterClient').get('AilmentsAPI/ProgressPetMeAilment'):FireServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet].pet_unique)
+            RouterClient.get('AilmentsAPI/ProgressPetMeAilment'):FireServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet].pet_unique)
             Utils.PrintDebug('\u{1f431} RAN PETME AILMENT \u{1f431}')
         end
         function Ailment.SalonAilment(ailment, petUnique)
             Utils.ReEquipPet(Ailment.whichPet)
             Utils.PrintDebug(string.format('\u{1f457} Doing salon task on %s \u{1f457}', tostring(Ailment.whichPet)))
-            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('Salon')
+            RouterClient.get('LocationAPI/SetLocation'):FireServer('Salon')
             waitForTaskToFinish(ailment, petUnique)
             Utils.PrintDebug(string.format('\u{1f457} Finished salon task on %s \u{1f457}', tostring(Ailment.whichPet)))
-        end
-        function Ailment.MoonAilment(ailment, petUnique)
-            Utils.ReEquipPet(Ailment.whichPet)
-            Utils.PrintDebug(string.format('\u{1f31a} Doing moon task on %s \u{1f31a}', tostring(Ailment.whichPet)))
-            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MoonInterior')
-            waitForTaskToFinish(ailment, petUnique)
-            Utils.PrintDebug(string.format('\u{1f31a} Doing moon task on %s \u{1f31a}', tostring(Ailment.whichPet)))
         end
         function Ailment.PizzaPartyAilment(ailment, petUnique)
             Utils.ReEquipPet(Ailment.whichPet)
             Utils.PrintDebug(string.format('\u{1f355} Doing pizza party task on %s \u{1f355}', tostring(Ailment.whichPet)))
-            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('PizzaShop')
+            RouterClient.get('LocationAPI/SetLocation'):FireServer('PizzaShop')
             waitForTaskToFinish(ailment, petUnique)
             Utils.PrintDebug(string.format('\u{1f355} Finished pizza party task on %s \u{1f355}', tostring(Ailment.whichPet)))
         end
         function Ailment.SchoolAilment(ailment, petUnique)
             Utils.ReEquipPet(Ailment.whichPet)
             Utils.PrintDebug(string.format('\u{1f3eb} Doing school task on %s \u{1f3eb}', tostring(Ailment.whichPet)))
-            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('School')
             waitForTaskToFinish(ailment, petUnique)
             Utils.PrintDebug(string.format('\u{1f3eb} Finished school task on %s \u{1f3eb}', tostring(Ailment.whichPet)))
         end
+            RouterClient.get('LocationAPI/SetLocation'):FireServer('School')
         function Ailment.BoredAilment(pianoId, petUnique)
             Utils.ReEquipPet(Ailment.whichPet)
             Utils.PrintDebug(string.format('\u{1f971} Doing bored task on %s \u{1f971}', tostring(Ailment.whichPet)))
@@ -9634,7 +9622,7 @@ FarmTab:CreateDivider()
             if not Utils.IsPetEquipped(Ailment.whichPet) then
                 return
             end
-            ReplicatedStorage.API['AdoptAPI/HoldBaby']:FireServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet]['char'])
+            RouterClient.get('AdoptAPI/HoldBaby'):FireServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet]['char'])
             waitForJumpingToFinish('walk', petUnique)
             if not Utils.IsPetEquipped(Ailment.whichPet) then
                 return
