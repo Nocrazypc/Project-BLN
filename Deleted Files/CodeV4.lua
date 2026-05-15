@@ -10252,9 +10252,6 @@ FarmTab:CreateDivider()
                     Ailment.SalonAilment(key, petUnique)
                     Teleport.FarmingHome()
                     return true
-                elseif key == 'moon' then
-                    Ailment.MoonAilment(key, petUnique)
-                    return true
                 elseif key == 'pizza_party' then
                     Ailment.PizzaPartyAilment(key, petUnique)
                     Teleport.FarmingHome()
