@@ -4137,6 +4137,7 @@ do
         local DailiesNetService = (require(modules:WaitForChild('Dailies'):WaitForChild('DailiesNetService')))
         local DailyTaskboardHandler = {}
         local localPlayer = Players.LocalPlayer
+        local debouce = false
 
         function DailyTaskboardHandler.Init()
             --print('Initializing DailyTaskboardHandler...')
@@ -4151,13 +4152,15 @@ do
                 if dataType ~= 'dailies_manager' then
                     return
                 end
-                if not data then
+                if not (data and data.serialized_tabs) then
                     return
                 end
-                if not data.serialized_tabs then
+                if debouce then
                     return
                 end
 
+                debouce = true
+		
                 for name, _ in data.serialized_tabs do
                     print(string.format('Daily Taskboard Tab: %s', tostring(name)))
                     DailiesNetService.try_to_claim_daily_rewards(name)
