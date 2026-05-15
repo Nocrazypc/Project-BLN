@@ -9231,17 +9231,33 @@ FarmTab:CreateDivider()
 
         Ailment.whichPet = 1
 
+        local retryCount = 0
+        local MAX_RETRIES = 3
         local consumeFood = function()
-            local foodItem = Workspace.PetObjects:WaitForChild(tostring(Workspace.PetObjects:FindFirstChildWhichIsA('Model')), 10)
-            if not foodItem then
-                Utils.PrintDebug('NO food item in workspace')
-                return
+            local foodItem = Workspace.PetObjects:FindFirstChildWhichIsA('Model')
+
+            while not foodItem and retryCount < MAX_RETRIES do
+                retryCount = retryCount + 1
+
+                task.wait(1)
+
+                foodItem = Workspace.PetObjects:FindFirstChildWhichIsA('Model')
             end
+
+            retryCount = 0
+
             if not Utils.IsPetEquipped(Ailment.whichPet) then
                 return
             end
-            ReplicatedStorage.API['PetAPI/ConsumeFoodObject']:FireServer(foodItem, ClientData.get('pet_char_wrappers')[Ailment.whichPet].pet_unique)
+            if not foodItem then
+                Utils.PrintDebug("\u{26a0}\u{fe0f} Couldn't find food item to consume, skipping task \u{26a0}\u{fe0f}")
+
+                return
+            end
+
+            RouterClient.get('PetAPI/ConsumeFoodObject'):FireServer(foodItem, ClientData.get('pet_char_wrappers')[Ailment.whichPet].pet_unique)
         end
+
         local function FoodAilments(FoodPassOn)
             local hasFood = false
             for _, v in ClientData.get_data()[localPlayer.Name].inventory.food do
