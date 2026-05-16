@@ -9285,7 +9285,9 @@ FarmTab:CreateDivider()
         end
 
         local useToolOnBaby = function(uniqueId)
-            RouterClient.get('ToolAPI/ServerUseTool'):InvokeServer(uniqueId, 'END')
+            pcall(function()
+                RouterClient.get('ToolAPI/ServerUseTool'):InvokeServer(uniqueId, 'END')
+            end)
         end
         local PianoAilment = function(pianoId, petCharOrPlayerChar)
             local args = {
