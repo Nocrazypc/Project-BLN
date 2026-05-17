@@ -9725,7 +9725,7 @@ FarmTab:CreateDivider()
             Utils.PrintDebug('\u{1f476}\u{1f95b} Doing baby water task \u{1f476}\u{1f95b}')
             local stuckCount = 0
             repeat
-                babyGetFoodAndEat('lemonade')
+                babyGetFoodAndEat('water')
                 stuckCount = stuckCount + 1
                 task.wait(2)
             until not ClientData.get_data()[localPlayer.Name].ailments_manager.baby_ailments['thirsty'] or stuckCount >= 30
