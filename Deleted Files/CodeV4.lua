@@ -3396,7 +3396,7 @@ do
         }
 
         local patterns = {
-            ['UH OH!'] = 'Okay',
+            ['Thunder has'] = 'Okay',
             ['Waffle Scuffle is starting soon!'] = 'No',
             ['Would you like to teleport'] = 'No',
             ["You haven't collected the Gingerbread"] = 'No',
