@@ -10764,10 +10764,13 @@ local files = {
         PotatoModeHandler = __DARKLUA_BUNDLE_MODULES.load('n'),
     },
     {
-        TradeLicenseHandler = __DARKLUA_BUNDLE_MODULES.load('r'),
+       DailyTaskboardHandler = __DARKLUA_BUNDLE_MODULES.load('q'),
     },
     {
-        SummerCamp2026 = __DARKLUA_BUNDLE_MODULES.load('s'),
+       TradeLicenseHandler = __DARKLUA_BUNDLE_MODULES.load('r'),
+    },
+    {
+       SummerCamp2026 = __DARKLUA_BUNDLE_MODULES.load('s'),
     },
     {
        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('v'),
@@ -10778,9 +10781,6 @@ local files = {
     {
        PetOfflineHandler = __DARKLUA_BUNDLE_MODULES.load('B'),
     },
-    {
-       DailyTaskboardHandler = __DARKLUA_BUNDLE_MODULES.load('q'),
-    },	
 }
 
 Utils.PrintDebug('----- INITIALIZING MODULES -----')
