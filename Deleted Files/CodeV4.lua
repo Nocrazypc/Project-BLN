@@ -4263,6 +4263,11 @@ do
 
                 print('Data Changed Event Fired for journey_repair!')
                 tryClaimRepair()
+
+                if getgenv().BUY_BEFORE_FARMING then
+                    BuyItem.StartBuyItems(getgenv().BUY_BEFORE_FARMING)
+                    print('Attempted to buy items for Summer Camp 2026!')
+                end		
             end)
         end
         function SummerCamp2026.Start()
