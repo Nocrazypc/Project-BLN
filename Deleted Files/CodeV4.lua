@@ -4211,7 +4211,69 @@ do
 
         return self
     end
-    function __DARKLUA_BUNDLE_MODULES.s()
+    function __DARKLUA_BUNDLE_MODULES.s() -- Summer Camp 2026
+        local ReplicatedStorage = game:GetService('ReplicatedStorage')
+        local Players = game:GetService('Players')
+        local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
+        local RouterClient = Bypass('RouterClient')
+        local ClientData = Bypass('ClientData')
+        local BuyItem = __DARKLUA_BUNDLE_MODULES.load('g')
+        local contentPacks = (ReplicatedStorage:WaitForChild('SharedModules'):WaitForChild('ContentPacks'))
+        local JourneyRepairNet = (require(contentPacks:WaitForChild('JourneyPass2026'):WaitForChild('Game'):WaitForChild('JourneyRepairNet')))
+        local localPlayer = Players.LocalPlayer
+        local SummerCamp2026 = {}
+        local tryClaimRepair = function()
+            local journeyRepair = ClientData.get_data()[localPlayer.Name].journey_repair
+
+            if journeyRepair.repair_complete then
+                return
+            end
+
+            for _, v in {
+                'repair_1',
+                'repair_2',
+                'repair_3',
+            }do
+                local args = {
+                    {
+                        week_index = journeyRepair.week_index,
+                        cycle_index = journeyRepair.cycle_index,
+                        marker_id = v,
+                    },
+                }
+
+                JourneyRepairNet.ClaimPart:fire_server(unpack(args))
+                task.wait(1)
+            end
+        end
+
+        function SummerCamp2026.Init()
+            RouterClient.get('DataAPI/DataChanged').OnClientEvent:Connect(function(
+                playerName,
+                dataKey,
+                dataValue
+            )
+                if playerName ~= localPlayer.Name then
+                    return
+                end
+                if dataKey ~= 'journey_repair' then
+                    return
+                end
+
+                print('Data Changed Event Fired for journey_repair!')
+                tryClaimRepair()
+
+                if getgenv().BUY_BEFORE_FARMING then
+                    BuyItem.StartBuyItems(getgenv().BUY_BEFORE_FARMING)
+                    print('Attempted to buy items for Summer Camp 2026!')
+                end
+            end)
+        end
+        function SummerCamp2026.Start()
+            tryClaimRepair()
+        end
+
+        return SummerCamp2026
     end
 
     function __DARKLUA_BUNDLE_MODULES.t()
@@ -10703,6 +10765,9 @@ local files = {
     },
     {
         TradeLicenseHandler = __DARKLUA_BUNDLE_MODULES.load('r'),
+    },
+    {
+        SummerCamp2026 = __DARKLUA_BUNDLE_MODULES.load('s'),
     },
     {
        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('v'),
