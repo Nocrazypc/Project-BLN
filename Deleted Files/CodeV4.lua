@@ -3398,7 +3398,7 @@ do
 
         local patterns = {
             ['Thunder has'] = 'Okay',
-            ['The Journey Pass truck'] = 'Okay',
+            ['Boat tour'] = 'Okay',
             ['Would you like to teleport'] = 'No',
             ["You haven't collected the Gingerbread"] = 'No',
             ['Be careful when trading'] = 'Okay',
