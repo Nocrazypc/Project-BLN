@@ -3400,7 +3400,7 @@ do
             ['Thunder has'] = 'Okay',
             ['Boat tour'] = 'Okay',
             --['Would you like to teleport'] = 'No',
-            ['Would you like to teleport to the boat'] = 'Yes',
+            ['Would you like to teleport'] = 'Yes',
             ["You haven't collected the Gingerbread"] = 'No',
             ['Be careful when trading'] = 'Okay',
             ['This trade seems unbalanced'] = 'Next',
