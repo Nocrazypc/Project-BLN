@@ -4213,7 +4213,7 @@ do
         return self
     end
     function __DARKLUA_BUNDLE_MODULES.s() -- Summer Camp 2026
-        local ReplicatedStorage = game:GetService('ReplicatedStorage')
+        --[[local ReplicatedStorage = game:GetService('ReplicatedStorage')
         local Players = game:GetService('Players')
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
         local RouterClient = Bypass('RouterClient')
@@ -4274,7 +4274,7 @@ do
             tryClaimRepair()
         end
 
-        return SummerCamp2026
+        return SummerCamp2026 --]]
     end
 
     function __DARKLUA_BUNDLE_MODULES.t()
@@ -10770,9 +10770,9 @@ local files = {
     {
        TradeLicenseHandler = __DARKLUA_BUNDLE_MODULES.load('r'),
     },
-    {
-       SummerCamp2026 = __DARKLUA_BUNDLE_MODULES.load('s'),
-    },
+    --{
+      -- SummerCamp2026 = __DARKLUA_BUNDLE_MODULES.load('s'),
+    --},
     {
        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('v'),
     },	
