@@ -10458,12 +10458,6 @@ FarmTab:CreateDivider()
             )
                 task.wait(2)
 
-                if Utils.IsDayAndHour('Saturday', 4, 'am') then
-                    BuyItem.StartBuyItems(getgenv().BUY_ITEMS)
-                    print('Attempted to buy items for Summer Camp 2026!')
-                end
-
-
                 if ClientData.get_data()[localPlayer.Name].synced_value_2d_kitty_tuesdays then
                     local isTuesdayEvent = Utils.IsDayAndHour('Tuesday', 8, 'am') or Utils.IsDayAndHour('Tuesday', 4, 'pm') or Utils.IsDayAndHour('Wednesday', 12, 'am')
 
