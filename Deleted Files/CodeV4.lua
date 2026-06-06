@@ -10459,7 +10459,7 @@ FarmTab:CreateDivider()
                 task.wait(2)
 
                 if Utils.IsDayAndHour('Saturday', 4, 'am') then
-                    BuyItem.StartBuyItems(getgenv().BUY_BEFORE_FARMING)
+                    BuyItem.StartBuyItems(getgenv().BUY_ITEMS)
                     print('Attempted to buy items for Summer Camp 2026!')
                 end
 
@@ -10749,7 +10749,7 @@ getgenv().HatchPriorityEggs = false
 getgenv().ENABLE_RELEASE_PETS = false
 getgenv().PETS_TO_AGE_IN_PEN = {}
 
-getgenv().BUY_BEFORE_FARMING = {
+getgenv().BUY_ITEMS = {
 {NameId = "journey_pass_2026_gecko_duck, MaxAmount = 40"}
 }
 
