@@ -1,7 +1,6 @@
-
-if game.PlaceId ~= 920587237 then
-    return
-end
+--if game.PlaceId ~= 920587237 then
+    --return
+--end
 
 local __DARKLUA_BUNDLE_MODULES
 
