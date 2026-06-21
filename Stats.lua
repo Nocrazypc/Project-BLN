@@ -261,7 +261,7 @@ end
 
 local function gingerbreadAmount()
     --[[return ClientData.get_data()[localPlayer.Name].gingerbread_2024 or 0--]]
-      return ClientData.get_data()[localPlayer.Name].compass_coins_2026 or 0
+      return ClientData.get_data()[localPlayer.Name].acorns_2026 or 0
 end
 
 -----------------------
@@ -307,7 +307,7 @@ function StatsGuis:UpdateText(nameOfFrame: string)
     elseif nameOfFrame == "TotalFrame2" then
         local gingerbread = gingerbreadAmount()
         --MainFrame.TotalFrame2.TextLabel.Text = `Total 🍪 {formatNumber(gingerbread)}`
-		MainFrame.TotalFrame2.TextLabel.Text = `🧭 {formatNumber(gingerbread)}`
+		MainFrame.TotalFrame2.TextLabel.Text = `🌰 {formatNumber(gingerbread)}`
 --------------------
     elseif nameOfFrame == "NameFrame" then
         MainFrame.NameFrame.TextLabel.Text = `😎 {localPlayer.Name}`
