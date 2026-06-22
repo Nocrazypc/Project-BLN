@@ -2507,7 +2507,18 @@ do
 
             return nil
         end
-        function GetInventory.IsPetInInventory(tabId, uniqueId)
+        function GetInventory.GetAmountOfItems(tabId, nameId)
+            local count = 0
+
+            for _, v in ClientData.get_data()[localPlayer.Name].inventory[tabId]do
+                if v.id == nameId then
+                    count = count + 1
+                end
+            end
+
+            return count
+        end
+		function GetInventory.IsPetInInventory(tabId, uniqueId)
             for _, v in ClientData.get_data()[localPlayer.Name].inventory[tabId]do
                 if v.unique == uniqueId then
                     return true
