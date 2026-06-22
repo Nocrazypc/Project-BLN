@@ -281,71 +281,77 @@ do
 			
             return string.format('%02d:%02d:%02d', hours, minutes, seconds)
         end
-        function Utils.ClickGuiButton(button, xOffset, yOffset)
-            if not button then
-                return
-            end
+            function Utils.ClickGuiButton(button, xOffset, yOffset)
+                if not button then
+                    return
+                end
 
-            pcall(function()
-                local xOffset1 = xOffset or 60
-                local yOffset1 = yOffset or 60
-
-                task.wait()
-                VirtualInputManager:SendMouseButtonEvent(button.AbsolutePosition.X + xOffset1, button.AbsolutePosition.Y + yOffset1, 0, true, game, 1)
-                task.wait()
-                VirtualInputManager:SendMouseButtonEvent(button.AbsolutePosition.X + xOffset1, button.AbsolutePosition.Y + yOffset1, 0, false, game, 1)
-            end)
-
-            return
-        end
-        function Utils.FireButton(button)
-            if not button then
-                return
-            end
-            if firesignal then
                 pcall(function()
-                    local mouseButton1Down = button.MouseButton1Down
-                    local mouseButton1Click = button.MouseButton1Click
-                    local mouseButton1Up = button.MouseButton1Up						
+                    local xOffset1 = xOffset or 60
+                    local yOffset1 = yOffset or 60
 
-                    firesignal(mouseButton1Down)
-                    task.wait(1)
-                    firesignal(mouseButton1Click)						
-                    task.wait(1)
-                    firesignal(mouseButton1Up)
+                    task.wait()
+                    VirtualInputManager:SendMouseButtonEvent(button.AbsolutePosition.X + xOffset1, button.AbsolutePosition.Y + yOffset1, 0, true, game, 1)
+                    task.wait()
+                    VirtualInputManager:SendMouseButtonEvent(button.AbsolutePosition.X + xOffset1, button.AbsolutePosition.Y + yOffset1, 0, false, game, 1)
                 end)
-            else
-                Utils.ClickGuiButton(button)
-            end
-        end
-        function Utils.FindButton(text, dialogFramePassOn)
-            task.wait(0.1)
-
-            dialogFramePassOn = dialogFramePassOn or 'NormalDialog'
-
-            local dialog = localPlayer:WaitForChild('PlayerGui'):WaitForChild('DialogApp'):WaitForChild('Dialog')
-            local buttons = dialog:WaitForChild(dialogFramePassOn):WaitForChild('Buttons', 10)
-
-            if not buttons then
-                Utils.PrintDebug('NO BUTTONS')
 
                 return
             end
+            function Utils.FireButton(button)
+                if not button then
+                    return
+                end
+                if firesignal then
+                    local retries = 0
 
-            for _, v in buttons:GetDescendants()do
-                if v:IsA('TextLabel') and v.Text == text then
-                    local button = v:FindFirstAncestorWhichIsA('ImageButton') or v:FindFirstAncestorWhichIsA('TextButton')
+                    repeat
+                        pcall(function()
+                            local mouseButton1Down = button.MouseButton1Down
+                            local mouseButton1Click = button.MouseButton1Click
+                            local mouseButton1Up = button.MouseButton1Up
 
-                    if not button then
-                        return
-                    end
+                            firesignal(mouseButton1Down)
+                            task.wait(0.1)
+                            firesignal(mouseButton1Click)
+                            task.wait(0.1)
+                            firesignal(mouseButton1Up)
 
-                    Utils.FireButton(button)
+                            retries = retries + 1
+                        end)
+                    until not button or button.Visible == false or retries > 3
+                else
+                    Utils.ClickGuiButton(button)
+                end
+            end
+            function Utils.FindButton(text, dialogFramePassOn)
+                task.wait(0.1)
+
+                dialogFramePassOn = dialogFramePassOn or 'NormalDialog'
+
+                local dialog = localPlayer:WaitForChild('PlayerGui'):WaitForChild('DialogApp'):WaitForChild('Dialog')
+                local buttons = dialog:WaitForChild(dialogFramePassOn):WaitForChild('Buttons', 10)
+
+                if not buttons then
+                    Utils.PrintDebug('NO BUTTONS')
 
                     return
                 end
+
+                for _, v in buttons:GetDescendants()do
+                    if v:IsA('TextLabel') and v.Text == text then
+                        local button = v:FindFirstAncestorWhichIsA('ImageButton') or v:FindFirstAncestorWhichIsA('TextButton')
+
+                        if not button then
+                            return
+                        end
+
+                        Utils.FireButton(button)
+
+                        return
+                    end
+                end
             end
-        end
         function Utils.IsPetEquipped(whichPet)
             local petIndex = ClientData.get('pet_char_wrappers')[whichPet]
 
