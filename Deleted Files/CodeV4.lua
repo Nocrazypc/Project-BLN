@@ -2071,7 +2071,7 @@ do
 
                 getgenv().petCurrentlyFarming1 = petUnique
 
-				Utils.WaitForPetToEquip()
+				Utils.WaitForPetToEquip(whichPet)
 
                 return true
             elseif whichPet == 2 then
@@ -2081,7 +2081,7 @@ do
 
                 getgenv().petCurrentlyFarming2 = petUnique
 
-				Utils.WaitForPetToEquip()
+				Utils.WaitForPetToEquip(whichPet)
 				
                 return true
             end
