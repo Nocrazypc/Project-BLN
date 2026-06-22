@@ -4232,6 +4232,7 @@ do
     function __DARKLUA_BUNDLE_MODULES.s() -- Summer 2026
             local ReplicatedStorage = game:GetService('ReplicatedStorage')
             local Players = game:GetService('Players')
+		    local Workspace = (game:GetService('Workspace'))
             local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
             local ClientData = Bypass('ClientData')
             local RouterClient = Bypass('RouterClient')
@@ -4240,11 +4241,57 @@ do
             local Utils = __DARKLUA_BUNDLE_MODULES.a()
             local contentPacks = (ReplicatedStorage:WaitForChild('SharedModules'):WaitForChild('ContentPacks'))
             local FishingNetService = (require(contentPacks:WaitForChild('Summer2026'):WaitForChild('Fishing'):WaitForChild('FishingNetService')))
+		    local BalloonFightNetService = (require(contentPacks:WaitForChild('Summer2026'):WaitForChild('BalloonFight'):WaitForChild('BalloonFightNetService')))
             local localPlayer = Players.LocalPlayer
+		    local fishes = {
+                {
+                    id = 'summer_2026_gold_fish',
+                    max = 15,
+                },
+                {
+                    id = 'summer_2026_silver_fish',
+                    max = 35,
+                },
+                {
+                    id = 'summer_2026_bronze_fish',
+                    max = 75,
+                },
+            }
             local HAS_FISHS_FOR_MONSTER_BAIT = false
             local Summer2026 = {}
+		    local checkFishesInventory = function()
+                for i = #fishes, 1, -1 do
+                    local fish = fishes[i]
+
+                    if fish.max ~= math.huge and GetInventory.GetAmountOfItems('gifts', fish.id) >= fish.max then
+                        table.remove(fishes, i)
+                    end
+                end
+            end
             local tryBuyBait = function()
-                BuyItem.BuyItemWithCurrencyLimit('summer_2026_fishing_bait', 76000)
+                if HAS_FISHS_FOR_MONSTER_BAIT then
+                    return
+                end
+
+                BuyItem.StartBuyItems({
+                    {
+                        NameId = 'summer_2026_fishing_bait',
+                        MaxAmount = 10,
+                    },
+                })
+            end
+            local getFishId = function(name, caughtFish)
+                local hotspots = ClientData.get_data()[localPlayer.Name].fishing_manager.hotspots
+
+                for lake, fishs in hotspots do
+                    for unique, fishName in fishs do
+                        if fishName == name and not table.find(caughtFish, unique) then
+                            return lake, unique
+                        end
+                    end
+                end
+
+                return nil, nil
             end
             local tryCatchRainbowFish = function()
                 for lake, fishs in ClientData.get_data()[localPlayer.Name].fishing_manager.hotspots do
@@ -4265,6 +4312,7 @@ do
             end
             local tryBuyRainbowTrout = function()
                 if HAS_FISHS_FOR_MONSTER_BAIT then
+			        print([[Not buying rainbow trout because it has items to buy monster bait, just waiting on acorns (75k+)]])
                     return
                 end
                 if Utils.EventCurrencyAmount() < 70000 then
@@ -4299,6 +4347,21 @@ do
 
                 HAS_FISHS_FOR_MONSTER_BAIT = false
 
+			                fishes = {
+                    {
+                        id = 'summer_2026_gold_fish',
+                        max = 15,
+                    },
+                    {
+                        id = 'summer_2026_silver_fish',
+                        max = 35,
+                    },
+                    {
+                        id = 'summer_2026_bronze_fish',
+                        max = 75,
+                    },
+                }
+
                 task.wait()
 
                 return GetInventory.GetUniqueId('gifts', 'summer_2026_monster_fishing_bait') ~= nil
@@ -4326,11 +4389,25 @@ do
                     return
                 end
 
-                for lake, fishs in ClientData.get_data()[localPlayer.Name].fishing_manager.hotspots do
-                    for unique, fishName in fishs do
-                        FishingNetService.catch_fish(lake, unique)
-                        task.wait(1)
+                checkFishesInventory()
+
+                local baitCount = GetInventory.GetAmountOfItems('gifts', 'summer_2026_fishing_bait') or 1
+                local caughtFish = {}
+
+                for _ = 1, baitCount do
+                    for _, fishData in ipairs(fishes)do
+                        local lake, uniqueId = getFishId(fishData.id, caughtFish)
+
+                        if lake and uniqueId then
+                            table.insert(caughtFish, uniqueId)
+                            FishingNetService.catch_fish(lake, uniqueId)
+                            print('Caught:', uniqueId, lake)
+
+                            break
+                        end
                     end
+
+                    task.wait(1)
                 end
             end
             local tryBuyFishingRod = function()
@@ -4349,16 +4426,38 @@ do
 
                 FishingNetService.upgrade_fishing_rod()
             end
+            local tryBalloonFight = function()
+                for _ = 1, 55 do
+                    BalloonFightNetService.register_hit(8002733564, Utils.GetCharacter():GetPivot().Position)
+                    task.wait(1)
 
+                    for i, v in Workspace.Acorns:GetChildren()do
+                        if v:IsA('Model') then
+                            local primaryPart = v.PrimaryPart
+
+                            if not primaryPart then
+                                continue
+                            end
+
+                            primaryPart.CFrame = Utils.WaitForHumanoidRootPart().CFrame
+                        end
+                    end
+                end
+            end
+		
             function Summer2026.Init()
                 RouterClient.get('WeatherAPI/WeatherUpdated').OnClientEvent:Connect(function(
                     dayOrNight
                 )
                     task.wait(3)
-                    tryUpgradeFishingRod()
-                    tryBuyBait()
-                    tryCatchFish()
-                    tryBuyRainbowTrout()
+
+                    if dayOrNight == 'DAY' then
+                        tryUpgradeFishingRod()
+                        tryBuyBait()
+                        tryCatchFish()
+                        tryBuyRainbowTrout()
+                        tryBalloonFight()
+                    end
                 end)
             end
             function Summer2026.Start()
@@ -4367,6 +4466,7 @@ do
                 tryBuyBait()
                 tryCatchFish()
                 tryBuyRainbowTrout()
+                tryBalloonFight()
             end
 
             return Summer2026
