@@ -4212,69 +4212,147 @@ do
 
         return self
     end
-    function __DARKLUA_BUNDLE_MODULES.s() -- Summer Camp 2026
-        --[[local ReplicatedStorage = game:GetService('ReplicatedStorage')
-        local Players = game:GetService('Players')
-        local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
-        local RouterClient = Bypass('RouterClient')
-        local ClientData = Bypass('ClientData')
-        local BuyItem = __DARKLUA_BUNDLE_MODULES.load('g')
-        local contentPacks = (ReplicatedStorage:WaitForChild('SharedModules'):WaitForChild('ContentPacks'))
-        local JourneyRepairNet = (require(contentPacks:WaitForChild('JourneyPass2026'):WaitForChild('Game'):WaitForChild('JourneyRepairNet')))
-        local localPlayer = Players.LocalPlayer
-        local SummerCamp2026 = {}
-        local tryClaimRepair = function()
-            local journeyRepair = ClientData.get_data()[localPlayer.Name].journey_repair
-
-            if journeyRepair.repair_complete then
-                return
+    function __DARKLUA_BUNDLE_MODULES.s() -- Summer 2026
+            local ReplicatedStorage = game:GetService('ReplicatedStorage')
+            local Players = game:GetService('Players')
+            local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
+            local ClientData = Bypass('ClientData')
+            local RouterClient = Bypass('RouterClient')
+            local BuyItem = __DARKLUA_BUNDLE_MODULES.g()
+            local GetInventory = __DARKLUA_BUNDLE_MODULES.j()
+            local Utils = __DARKLUA_BUNDLE_MODULES.b()
+            local contentPacks = (ReplicatedStorage:WaitForChild('SharedModules'):WaitForChild('ContentPacks'))
+            local FishingNetService = (require(contentPacks:WaitForChild('Summer2026'):WaitForChild('Fishing'):WaitForChild('FishingNetService')))
+            local localPlayer = Players.LocalPlayer
+            local HAS_FISHS_FOR_MONSTER_BAIT = false
+            local Summer2026 = {}
+            local tryBuyBait = function()
+                BuyItem.BuyItemWithCurrencyLimit('summer_2026_fishing_bait', 76000)
             end
-
-            for _, v in {
-                'repair_1',
-                'repair_2',
-                'repair_3',
-            }do
-                local args = {
-                    {
-                        week_index = journeyRepair.week_index,
-                        cycle_index = journeyRepair.cycle_index,
-                        marker_id = v,
-                    },
-                }
-
-                JourneyRepairNet.ClaimPart:fire_server(unpack(args))
-                task.wait(1)
+            local tryCatchRainbowFish = function()
+                for lake, fishs in ClientData.get_data()[localPlayer.Name].fishing_manager.hotspots do
+                    for unique, fishName in fishs do
+                        if fishName == 'summer_2026_rainbow_fish' then
+                            print('\u{1f308} RAINBOW FISH DETECTED \u{1f308}')
+                            BuyItem.StartBuyItems({
+                                {
+                                    NameId = 'summer_2026_fishing_bait',
+                                    MaxAmount = 1,
+                                },
+                            })
+                            task.wait(1)
+                            FishingNetService.catch_fish(lake, unique)
+                        end
+                    end
+                end
             end
-        end
-
-        function SummerCamp2026.Init()
-            RouterClient.get('DataAPI/DataChanged').OnClientEvent:Connect(function(
-                playerName,
-                dataKey,
-                dataValue
-            )
-                if playerName ~= localPlayer.Name then
+            local tryBuyRainbowTrout = function()
+                if HAS_FISHS_FOR_MONSTER_BAIT then
                     return
                 end
-                if dataKey ~= 'journey_repair' then
+                if Utils.EventCurrencyAmount() < 70000 then
+                    return
+                end
+                if not GetInventory.GetUniqueId('gifts', 'summer_2026_rainbow_fish') then
                     return
                 end
 
-                print('Data Changed Event Fired for journey_repair!')
-                tryClaimRepair()
+                FishingNetService.purchase_item('summer_2026_rainbow_trout', 1)
+            end
+            local tryBuyTealwoodMonsterBait = function()
+                if GetInventory.GetUniqueId('gifts', 'summer_2026_monster_fishing_bait') then
+                    return true
+                end
+                if GetInventory.GetAmountOfItems('gifts', 'summer_2026_bronze_fish') < 75 then
+                    return false
+                end
+                if GetInventory.GetAmountOfItems('gifts', 'summer_2026_silver_fish') < 35 then
+                    return false
+                end
+                if GetInventory.GetAmountOfItems('gifts', 'summer_2026_gold_fish') < 15 then
+                    return false
+                end
+                if Utils.EventCurrencyAmount() < 75000 then
+                    HAS_FISHS_FOR_MONSTER_BAIT = true
 
-                if getgenv().BUY_BEFORE_FARMING then
-                    BuyItem.StartBuyItems(getgenv().BUY_BEFORE_FARMING)
-                    print('Attempted to buy items for Summer Camp 2026!')
-                end		
-            end)
-        end
-        function SummerCamp2026.Start()
-            tryClaimRepair()
-        end
+                    return false
+                end
 
-        return SummerCamp2026 --]]
+                FishingNetService.purchase_item('summer_2026_monster_fishing_bait', 1)
+
+                HAS_FISHS_FOR_MONSTER_BAIT = false
+
+                task.wait()
+
+                return GetInventory.GetUniqueId('gifts', 'summer_2026_monster_fishing_bait') ~= nil
+            end
+            local tryCatchTealwoodMonster = function()
+                if not tryBuyTealwoodMonsterBait() then
+                    return
+                end
+
+                for lake, fishs in ClientData.get_data()[localPlayer.Name].fishing_manager.hotspots do
+                    for unique, fishName in fishs do
+                        if fishName == 'summer_2026_lake_monster' then
+                            FishingNetService.catch_fish(lake, unique)
+                        end
+                    end
+                end
+            end
+            local tryCatchFish = function()
+                tryCatchTealwoodMonster()
+                tryCatchRainbowFish()
+
+                if not GetInventory.GetUniqueId('gifts', 'summer_2026_fishing_bait') then
+                    warn('No fishing bait')
+
+                    return
+                end
+
+                for lake, fishs in ClientData.get_data()[localPlayer.Name].fishing_manager.hotspots do
+                    for unique, fishName in fishs do
+                        FishingNetService.catch_fish(lake, unique)
+                        task.wait(1)
+                    end
+                end
+            end
+            local tryBuyFishingRod = function()
+                for _, v in ClientData.get_data()[localPlayer.Name].fishing_manager.bought_unique_items do
+                    if v == true then
+                        return
+                    end
+                end
+
+                FishingNetService.purchase_item('summer_2026_bronze_fishing_rod', 1)
+            end
+            local tryUpgradeFishingRod = function()
+                if ClientData.get_data()[localPlayer.Name].fishing_manager.bought_unique_items['summer_2026_gold_fishing_rod'] then
+                    return
+                end
+
+                FishingNetService.upgrade_fishing_rod()
+            end
+
+            function Summer2026.Init()
+                RouterClient.get('WeatherAPI/WeatherUpdated').OnClientEvent:Connect(function(
+                    dayOrNight
+                )
+                    task.wait(3)
+                    tryUpgradeFishingRod()
+                    tryBuyBait()
+                    tryCatchFish()
+                    tryBuyRainbowTrout()
+                end)
+            end
+            function Summer2026.Start()
+                tryBuyFishingRod()
+                tryUpgradeFishingRod()
+                tryBuyBait()
+                tryCatchFish()
+                tryBuyRainbowTrout()
+            end
+
+            return Summer2026
     end
 
     function __DARKLUA_BUNDLE_MODULES.t()
