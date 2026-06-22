@@ -10774,9 +10774,9 @@ local files = {
     {
        TradeLicenseHandler = __DARKLUA_BUNDLE_MODULES.load('r'),
     },
-    --{
-      -- SummerCamp2026 = __DARKLUA_BUNDLE_MODULES.load('s'),
-    --},
+    {
+       SummerCamp2026 = __DARKLUA_BUNDLE_MODULES.load('s'),
+    },
     {
        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('v'),
     },	
