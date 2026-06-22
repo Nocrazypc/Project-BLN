@@ -485,13 +485,13 @@ do
 
             return string.format('%s %s %s', tostring(string.rep(' ', left)), tostring(text), tostring(string.rep(' ', right)))
         end
-        function Utils.WaitForPetToEquip()
+        function Utils.WaitForPetToEquip(whichPet)
             local hasPetChar = nil
             local stuckTimer = 0
 
             repeat
 
-                hasPetChar = ClientData.get('pet_char_wrappers') and ClientData.get('pet_char_wrappers')[1] and ClientData.get('pet_char_wrappers')[1].pet_unique and true or false
+                hasPetChar = ClientData.get('pet_char_wrappers') and ClientData.get('pet_char_wrappers')[whichPet] and ClientData.get('pet_char_wrappers')[whichPet].pet_unique and true or false
                 stuckTimer = stuckTimer + 1
 
 				task.wait(1)
