@@ -4486,7 +4486,7 @@ do
 
                 FishingNetService.upgrade_fishing_rod()
             end
-            local tryBalloonFight = function()
+            --[[local tryBalloonFight = function()
                 for _ = 1, 55 do
                     BalloonFightNetService.register_hit(8002733564, Utils.GetCharacter():GetPivot().Position)
                     task.wait(1)
@@ -4503,7 +4503,7 @@ do
                         end
                     end
                 end
-            end
+            end--]]
 		
             function Summer2026.Init()
                 RouterClient.get('WeatherAPI/WeatherUpdated').OnClientEvent:Connect(function(
