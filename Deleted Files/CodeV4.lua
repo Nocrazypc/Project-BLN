@@ -1933,29 +1933,29 @@ do
 
             RouterClient.get('SocialStonesAPI/AttemptExchange'):FireServer('pets', 'moon_2025_glormy_dolphin', 1)
         end
-        function self.BuyItemWithCurrencyLimit(itemNameId, currencyLimit)
-            while Bypass('ClientData').get_data()[localPlayer.Name].money >= currencyLimit do
+            function self.BuyItemWithCurrencyLimit(itemNameId, currencyLimit)
                 local itemValues = getItemInfoFromDatabase(itemNameId)
 
                 if not itemValues then
-                    break
+                    return
                 end
 
-                local amountPurchase = getAmountToPurchase(itemValues, currencyLimit)
+                while Bypass('ClientData').get_data()[localPlayer.Name][itemValues.currency_id] >= currencyLimit do
+                    local amountPurchase = getAmountToPurchase(itemValues, currencyLimit)
 
-                if amountPurchase <= 0 then
-                    break
-                end
-                if not buyItem(itemValues, amountPurchase) then
-                    break
-                end
+                    if amountPurchase <= 0 then
+                        break
+                    end
+                    if not buyItem(itemValues, amountPurchase) then
+                        break
+                    end
 
-                task.wait(1)
+                    task.wait(1)
+                end
             end
-        end
 
-        return self
-    end
+            return self
+        end
     function __DARKLUA_BUNDLE_MODULES.h()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
