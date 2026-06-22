@@ -503,25 +503,85 @@ do
 
             return true
         end
-        function Utils.GetCharacter()
-            return localPlayer.Character or localPlayer.CharacterAdded:Wait()
-        end
+            function Utils.GetCharacter()
+                return localPlayer.Character or localPlayer.CharacterAdded:Wait()
+            end
+            function Utils.GetHumanoid()
+                local humanoid = Utils.GetCharacter():FindFirstChild('Humanoid')
 
-		
-        function Utils.GetHumanoid()
-            return (Utils.GetCharacter():WaitForChild('Humanoid'))
-        end
+                return humanoid
+            end
+            function Utils.GetHumanoidRootPart()
+                local humanoidRootPart = Utils.GetCharacter():FindFirstChild('HumanoidRootPart')
 
-        function Utils.GetHumanoidRootPart()
-            return (Utils.GetCharacter():WaitForChild('HumanoidRootPart'))
-        end
+                return humanoidRootPart
+            end
+            function Utils.WaitForHumanoid()
+                local humanoid = Utils.GetHumanoid()
 
-        function Utils.FireRedeemCode(code)
-            RouterClient.get('CodeRedemptionAPI/AttemptRedeemCode'):InvokeServer(code)
-        end
+                while not humanoid do
+                    task.wait(1)
 
-        return Utils
-    end
+                    humanoid = Utils.GetHumanoid()
+                end
+
+                return humanoid
+            end
+            function Utils.WaitForHumanoidRootPart()
+                local humanoidRootPart = Utils.GetHumanoidRootPart()
+
+                while not humanoidRootPart do
+                    task.wait(1)
+
+                    humanoidRootPart = Utils.GetHumanoidRootPart()
+                end
+
+                return humanoidRootPart
+            end
+            function Utils.FireRedeemCode(code)
+                RouterClient.get('CodeRedemptionAPI/AttemptRedeemCode'):InvokeServer(code)
+            end
+            function Utils.InvokeServerWithTimeout(
+                timeout,
+                remoteFunction,
+                ...
+            )
+                local result = nil
+                local hasResponded = false
+                local currentThread = coroutine.running()
+
+                task.spawn(function(...)
+                    local success, response = pcall(remoteFunction.InvokeServer, remoteFunction, 
+...)
+
+                    if not hasResponded then
+                        hasResponded = true
+                        result = {
+                            success = success,
+                            response = response,
+                        }
+
+                        task.spawn(currentThread)
+                    end
+                end, ...)
+                task.delay(timeout, function()
+                    if not hasResponded then
+                        hasResponded = true
+
+                        task.spawn(currentThread)
+                    end
+                end)
+                coroutine.yield()
+
+                if result then
+                    return result.success, result.response
+                else
+                    return false, 'Timed out waiting for server response'
+                end
+            end
+
+            return Utils
+        end
     function __DARKLUA_BUNDLE_MODULES.b()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
