@@ -8732,7 +8732,7 @@ local FarmToggle = FarmTab:CreateToggle({
 
 FarmTab:CreateDivider()
 ----------- Minigames -------------
-FarmTab:CreateSection("Events & Minigames: None")
+FarmTab:CreateSection("Events & Minigames: Summer Camp 2026")
 --------------------------------------
 
 --[[local FarmToggle = FarmTab:CreateToggle({
