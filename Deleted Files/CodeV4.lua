@@ -4516,7 +4516,7 @@ do
                         tryBuyBait()
                         tryCatchFish()
                         tryBuyRainbowTrout()
-                        tryBalloonFight()
+                        --tryBalloonFight()
                     end
                 end)
             end
@@ -4526,7 +4526,7 @@ do
                 tryBuyBait()
                 tryCatchFish()
                 tryBuyRainbowTrout()
-                tryBalloonFight()
+                --tryBalloonFight()
             end
 
             return Summer2026
