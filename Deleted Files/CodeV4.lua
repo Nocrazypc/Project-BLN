@@ -4219,8 +4219,8 @@ do
             local ClientData = Bypass('ClientData')
             local RouterClient = Bypass('RouterClient')
             local BuyItem = __DARKLUA_BUNDLE_MODULES.g()
-            local GetInventory = __DARKLUA_BUNDLE_MODULES.j()
-            local Utils = __DARKLUA_BUNDLE_MODULES.b()
+            local GetInventory = __DARKLUA_BUNDLE_MODULES.i()
+            local Utils = __DARKLUA_BUNDLE_MODULES.a()
             local contentPacks = (ReplicatedStorage:WaitForChild('SharedModules'):WaitForChild('ContentPacks'))
             local FishingNetService = (require(contentPacks:WaitForChild('Summer2026'):WaitForChild('Fishing'):WaitForChild('FishingNetService')))
             local localPlayer = Players.LocalPlayer
