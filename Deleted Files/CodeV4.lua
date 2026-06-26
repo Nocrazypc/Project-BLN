@@ -8921,7 +8921,7 @@ local FarmToggle = FarmTab:CreateToggle({
  })
 
 local FarmToggle = FarmTab:CreateToggle({
-     Name = "Buy Rainbow Trouts",
+     Name = "Get Rainbow Fish & Buy Rainbow Trouts",
      CurrentValue = false,
      Flag = "Toggle11",
      Callback = function(Value)
