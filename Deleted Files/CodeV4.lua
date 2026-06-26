@@ -10139,27 +10139,33 @@ FarmTab:CreateDivider()
                 return false
             end
         end
-        local isfocusFarmPets = function()
-            --local equippedPet = ClientData.get('pet_char_wrappers') and ClientData.get('pet_char_wrappers')[1]
-	        local pets = ClientData.get('pet_char_wrappers')
-            local equippedPet = pets and pets[1]
-	
-            if not equippedPet then
-                if not Utils.Equip(getgenv().petCurrentlyFarming1, false) then
-                    return false
+            local isfocusFarmPets = function(petsToFarmList, whichPet)
+                local pets = ClientData.get('pet_char_wrappers')
+                local equippedPet = pets and pets[whichPet]
+
+                if not equippedPet then
+                    local petFarming
+
+                    if whichPet == 1 then
+                        petFarming = getgenv().petCurrentlyFarming1
+                    elseif whichPet == 2 then
+                        petFarming = getgenv().petCurrentlyFarming2
+                    end
+                    if not Utils.Equip(petFarming, false) then
+                        return false
+                    end
+                    if not Utils.WaitForPetToEquip(whichPet) then
+                        return false
+                    end
                 end
-                if not Utils.WaitForPetToEquip() then
-                    return false
-                end
+
+                pets = ClientData.get('pet_char_wrappers')
+                equippedPet = pets and pets[whichPet]
+
+                local petId = equippedPet and equippedPet.pet_id
+
+                return petId ~= nil and table.find(petsToFarmList, petId) ~= nil
             end
-	
-            pets = ClientData.get('pet_char_wrappers')
-            equippedPet = pets and pets[1]
-	
-            local petId = equippedPet and equippedPet.pet_id
-	
-            return petId ~= nil and table.find(potionFarmPets, petId) ~= nil
-        end
         local isProHandler = function()
             local subscription = ClientData.get_data()[localPlayer.Name].subscription_equip_2x_pets
             if not subscription then
