@@ -2027,6 +2027,7 @@ do
         local Players = cloneref(game:GetService('Players'))
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
         local ClientData = (Bypass('ClientData'))
+        local RouterClient = (Bypass('RouterClient'))
         local self = {}
         local localPlayer = Players.LocalPlayer
         local getFullgrownPets = function(mega)
@@ -2100,7 +2101,7 @@ do
                 end
 
                 if #fusionReady >= 4 then
-                    ReplicatedStorage.API:FindFirstChild('PetAPI/DoNeonFusion'):InvokeServer({
+                    RouterClient.get('PetAPI/DoNeonFusion'):InvokeServer({
                         unpack(fusionReady),
                     })
                     task.wait()
