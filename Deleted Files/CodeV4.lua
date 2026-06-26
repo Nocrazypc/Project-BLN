@@ -4034,7 +4034,7 @@ do
             for _, v in ClientData.get_data()[localPlayer.Name].inventory.pets do
                 for _, v2 in InventoryDB.pets do
                     if v.id == v2.id and v.properties.mega_neon then
-                        megaPets[title .. v2.name] = (megaPets[title .. v2.name] or 0) + 1
+                        megaPets[title .. v2.name] = ((megaPets[title .. v2.name] or 0)) + 1
                     end
                 end
             end
@@ -4051,7 +4051,7 @@ do
             for _, v in ClientData.get_data()[localPlayer.Name].inventory.pets do
                 for _, v2 in InventoryDB.pets do
                     if v.id == v2.id and v.properties.neon then
-                        neonPets[title .. v2.name] = (neonPets[title .. v2.name] or 0) + 1
+                        neonPets[title .. v2.name] = ((neonPets[title .. v2.name] or 0)) + 1
                     end
                 end
             end
@@ -4068,7 +4068,7 @@ do
             for _, v in pairs(ClientData.get_data()[localPlayer.Name].inventory.pets)do
                 for _, v2 in InventoryDB.pets do
                     if v.id == v2.id and not v.properties.neon and not v.properties.mega_neon then
-                        normalPets[title .. v2.name] = (normalPets[title .. v2.name] or 0) + 1
+                        normalPets[title .. v2.name] = ((normalPets[title .. v2.name] or 0)) + 1
                     end
                 end
             end
@@ -4084,7 +4084,7 @@ do
                     continue
                 end
 
-                tablePassOn[v.id] = (tablePassOn[v.id] or 0) + 1
+                tablePassOn[v.id] = ((tablePassOn[v.id] or 0)) + 1
             end
         end
         local getTable = function(nameId, tablePassOn)
