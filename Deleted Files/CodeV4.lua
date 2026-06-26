@@ -4512,21 +4512,21 @@ do
                     task.wait(3)
 
                     if dayOrNight == 'DAY' then
-                        tryUpgradeFishingRod()
-                        tryBuyBait()
-                        tryCatchFish()
-                        tryBuyRainbowTrout()
+                        --tryUpgradeFishingRod()
+                        --tryBuyBait()
+                        --tryCatchFish()
+                        --tryBuyRainbowTrout()
                         tryBalloonFight()
                     end
                 end)
             end
             function Summer2026.Start()
-                tryBuyFishingRod()
-                tryUpgradeFishingRod()
-                tryBuyBait()
-                tryCatchFish()
-                tryBuyRainbowTrout()
-                tryBalloonFight()
+                --tryBuyFishingRod()
+                --tryUpgradeFishingRod()
+                --tryBuyBait()
+                --tryCatchFish()
+                --tryBuyRainbowTrout()
+                --tryBalloonFight()
             end
 
             return Summer2026
