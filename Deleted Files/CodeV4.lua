@@ -10225,24 +10225,23 @@ FarmTab:CreateDivider()
         end
         function FarmingPet.GetPetToFarm(whichPet)
             if getgenv().FOCUS_FARM_AGE_POTION then
-                if whichPet == 1 and isfocusFarmPets() then
-                    Utils.PrintDebug(string.format('Has focusFarmpets equipped, %s', tostring(whichPet)))
-                    return
-                end
-                isProHandler()
-                if whichPet == 2 and localPlayer:GetAttribute('isProHandler') == true and getgenv().petCurrentlyFarming2 then
-                    return
-                end
+                    if ClientData.get_data()[localPlayer.Name].synced_value_2d_kitty_tuesdays then
+                        if isfocusFarmPets({
+                            '2d_kitty',
+                        }, whichPet) then
+                            return
+                        end
+                        if GetInventory.CheckForPetAndEquip({
+                            '2d_kitty',
+                        }, whichPet) then
+                            print('FOUND 2d kitty', whichPet)
 
-                print('trying to see if 2d kitty')
-
-                if GetInventory.CheckForPetAndEquip({
-                    '2d_kitty',
-                }, whichPet) then
-                    print('FOUND 2d kitty', whichPet)
-
-                    return
-                end
+                            return
+                        end
+                    end
+                    if isfocusFarmPets(potionFarmPets, whichPet) then
+                        return
+                    end
 
                 task.wait(1)
                 Utils.PrintDebug(string.format('\u{1f414}\u{1f414} Getting pet to Farm age up potion, %s \u{1f414}\u{1f414}', tostring(whichPet)))
