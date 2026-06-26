@@ -4317,7 +4317,7 @@ do
                     max = 75,
                 },
             }
-            local HAS_FISHS_FOR_MONSTER_BAIT = false
+
             local Summer2026 = {}
 		    local checkFishesInventory = function()
                 for i = #fishes, 1, -1 do
@@ -4329,10 +4329,6 @@ do
                 end
             end
             local tryBuyBait = function()
-                if HAS_FISHS_FOR_MONSTER_BAIT then
-                    return
-                end
-
                 BuyItem.StartBuyItems({
                     {
                         NameId = 'summer_2026_fishing_bait',
@@ -4371,10 +4367,6 @@ do
                 end
             end
             local tryBuyRainbowTrout = function()
-                if HAS_FISHS_FOR_MONSTER_BAIT then
-			        print([[Not buying rainbow trout because it has items to buy monster bait, just waiting on acorns (75k+)]])
-                    return
-                end
                 if Utils.EventCurrencyAmount() < 70000 then
                     return
                 end
@@ -4398,16 +4390,13 @@ do
                     return false
                 end
                 if Utils.EventCurrencyAmount() < 75000 then
-                    HAS_FISHS_FOR_MONSTER_BAIT = true
 
                     return false
                 end
 
                 FishingNetService.purchase_item('summer_2026_monster_fishing_bait', 1)
 
-                HAS_FISHS_FOR_MONSTER_BAIT = false
-
-			                fishes = {
+			    fishes = {
                     {
                         id = 'summer_2026_gold_fish',
                         max = 15,
@@ -4440,9 +4429,6 @@ do
                 end
             end
             local tryCatchFish = function()
-                tryCatchTealwoodMonster()
-                tryCatchRainbowFish()
-
                 if not GetInventory.GetUniqueId('gifts', 'summer_2026_fishing_bait') then
                     warn('No fishing bait')
 
