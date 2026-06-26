@@ -8909,24 +8909,28 @@ FarmTab:CreateDivider()
 FarmTab:CreateSection("Events & Minigames: Summer Camp 2026")
 --------------------------------------
 
---[[local FarmToggle = FarmTab:CreateToggle({
-     Name = " Get daily Skulls from Temple Trek Minigame",
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Get Fish & buy Tealwood Monster",
      CurrentValue = false,
      Flag = "Toggle10",
      Callback = function(Value)
 
-     local AztecEvent = __DARKLUA_BUNDLE_MODULES.load('w')
-	 getgenv().AutoMinigame = Value
-
-	 while task.wait(3) do
-         AztecEvent.StartEvent()
-         task.wait(20)
-         AztecEvent.BuyRoyalEgg()
-         task.wait(3600)
-         end
+	 getgenv().BUY_TEALWOOD_MONSTER = Value
 
      end,
- })--]]
+ })
+
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Buy Rainbow Trouts",
+     CurrentValue = false,
+     Flag = "Toggle11",
+     Callback = function(Value)
+
+	 getgenv().BUY_RAINBOW_TROUT = Value
+
+     end,
+ })
+
 FarmTab:CreateDivider()
 --------- Second Tab -----------
             local MiscTab = Window:CreateTab('Others', 4483362458)
