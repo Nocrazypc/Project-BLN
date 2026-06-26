@@ -4534,7 +4534,7 @@ do
                     tryBuyRainbowTrout()
                 end
 
-                tryBalloonFight()
+                --tryBalloonFight()
             end
 
             return Summer2026
