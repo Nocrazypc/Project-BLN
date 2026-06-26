@@ -4306,6 +4306,7 @@ do
             local contentPacks = (ReplicatedStorage:WaitForChild('SharedModules'):WaitForChild('ContentPacks'))
             local FishingNetService = (require(contentPacks:WaitForChild('Summer2026'):WaitForChild('Fishing'):WaitForChild('FishingNetService')))
 		    local BalloonFightNetService = (require(contentPacks:WaitForChild('Summer2026'):WaitForChild('BalloonFight'):WaitForChild('BalloonFightNetService')))
+            local BuriedTreasureNet = (require(contentPacks.Summer2026:WaitForChild('Game'):WaitForChild('BuriedTreasure'):WaitForChild('BuriedTreasureNet')))
             local localPlayer = Players.LocalPlayer
 		    local fishes = {
                 {
@@ -4494,7 +4495,23 @@ do
                     end
                 end
             end
-		
+
+            local tryCollectBottle = function()
+                if ClientData.get_data()[localPlayer.Name].buried_treasure_manager.beach_bone_count >= 1 then
+                    BuriedTreasureNet.CollectBottle:invoke_server_async()
+                end
+            end
+            local tryHandInBone = function()
+                if GetInventory.GetAmountOfItems('gifts', 'summer_2026_bone_in_a_bottle') >= 1 then
+                    BuriedTreasureNet.HandInBone:invoke_server_async()
+                end
+            end
+            local tryHandInPages = function()
+                if GetInventory.GetAmountOfItems('gifts', 'summer_2026_campfire_page') >= 1 then
+                    BuriedTreasureNet.HandInPages:invoke_server_async()
+                end
+            end
+
             function Summer2026.Init()
                 RouterClient.get('WeatherAPI/WeatherUpdated').OnClientEvent:Connect(function(
                     dayOrNight
@@ -4517,6 +4534,9 @@ do
                         end
 
                         tryBalloonFight()
+                        tryCollectBottle()
+                        tryHandInBone()
+                        tryHandInPages()
                     end
                 end)
             end
@@ -4535,6 +4555,9 @@ do
                 end
 
                 --tryBalloonFight()
+                tryCollectBottle()
+                tryHandInBone()
+                tryHandInPages()
             end
 
             return Summer2026
