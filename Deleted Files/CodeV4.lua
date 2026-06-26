@@ -4512,21 +4512,39 @@ do
                     task.wait(3)
 
                     if dayOrNight == 'DAY' then
-                        --tryUpgradeFishingRod()
-                        --tryBuyBait()
-                        --tryCatchFish()
-                        --tryBuyRainbowTrout()
+			            tryUpgradeFishingRod()
+			
+                        if getgenv().BUY_TEALWOOD_MONSTER then
+                            print('Trying to catch tealwood or get fish requirements')
+                            tryBuyBait()
+                            tryCatchTealwoodMonster()
+                            tryCatchFish()
+                        end
+                        if getgenv().BUY_RAINBOW_TROUT then
+                            print('trying to catch rainbow fish or buy rainbow trout')
+                            tryCatchRainbowFish()
+                            tryBuyRainbowTrout()
+                        end
+
                         tryBalloonFight()
                     end
                 end)
             end
             function Summer2026.Start()
-                --tryBuyFishingRod()
-                --tryUpgradeFishingRod()
-                --tryBuyBait()
-                --tryCatchFish()
-                --tryBuyRainbowTrout()
-                --tryBalloonFight()
+                tryBuyFishingRod()
+                tryUpgradeFishingRod()
+
+                if getgenv().BUY_TEALWOOD_MONSTER then
+                    tryBuyBait()
+                    tryCatchTealwoodMonster()
+                    tryCatchFish()
+                end
+                if getgenv().BUY_RAINBOW_TROUT then
+                    tryCatchRainbowFish()
+                    tryBuyRainbowTrout()
+                end
+
+                tryBalloonFight()
             end
 
             return Summer2026
@@ -11007,7 +11025,8 @@ getgenv().POTATO_MODE = false
 getgenv().AutoMinigame = false
 getgenv().AutoMinigame2 = false
 
-
+getgenv().BUY_TEALWOOD_MONSTER = false
+getgenv().BUY_RAINBOW_TROUT = false
 
 
 local files = {
