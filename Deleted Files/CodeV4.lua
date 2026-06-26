@@ -10726,33 +10726,6 @@ FarmTab:CreateDivider()
             )
                 task.wait(2)
 
-                if ClientData.get_data()[localPlayer.Name].synced_value_2d_kitty_tuesdays then
-                    local isTuesdayEvent = Utils.IsDayAndHour('Tuesday', 8, 'am') or Utils.IsDayAndHour('Tuesday', 4, 'pm') or Utils.IsDayAndHour('Wednesday', 12, 'am')
-
-                    if isTuesdayEvent then
-                        print('SWITCHED TO 2d_kitty BECAUSE ITS EVENT TIME')
-                        localPlayer:SetAttribute('IsTuesdayEvent', true)
-                        DailiesNetService.try_to_claim_daily_rewards('2d_tuesdays')
-                        FarmingPet.SetFarmingTable({
-                            '2d_kitty',
-                        })
-
-                        return
-                    end
-                end
-
-                local potionFarmPets = {
-                    '2d_kitty',
-                    'dog',
-                    'cat',
-                    'starter_egg',
-                    'cracked_egg',
-                    'basic_egg_2022_ant',
-                    'basic_egg_2022_mouse',
-                }
-
-                FarmingPet.SetFarmingTable(potionFarmPets)
-                localPlayer:SetAttribute('IsTuesdayEvent', false)
             end)
         end
         function self.Start()
