@@ -4305,6 +4305,7 @@ do
             local Utils = __DARKLUA_BUNDLE_MODULES.a()
             local contentPacks = (ReplicatedStorage:WaitForChild('SharedModules'):WaitForChild('ContentPacks'))
             local FishingNetService = (require(contentPacks:WaitForChild('Summer2026'):WaitForChild('Fishing'):WaitForChild('FishingNetService')))
+            local SkydivingNetService = (require(contentPacks.Summer2026.Game.Skydiving.SkydivingNetService))
 		    local BalloonFightNetService = (require(contentPacks:WaitForChild('Summer2026'):WaitForChild('BalloonFight'):WaitForChild('BalloonFightNetService')))
             local BuriedTreasureNet = (require(contentPacks.Summer2026:WaitForChild('Game'):WaitForChild('BuriedTreasure'):WaitForChild('BuriedTreasureNet')))
             local localPlayer = Players.LocalPlayer
@@ -4511,6 +4512,39 @@ do
                     BuriedTreasureNet.HandInPages:invoke_server_async()
                 end
             end
+
+            local tryBuyStormCondor = function()
+                if not getgenv().BUY_STORM_CONDOR then
+                    return
+                end
+
+                SkydivingNetService.ToggleStormChallenge:fire_server({enabled = true})
+                task.wait(1)
+                SkydivingNetService.StartDive:fire_server({})
+                task.wait(1)
+
+                for key, value in ClientData.get_data()[localPlayer.Name].skydiving_manager.storm_rings do
+                    SkydivingNetService.ClaimRings:fire_server({
+                        ring_ids = {key},
+                    })
+                    task.wait(1)
+                end
+
+                SkydivingNetService.EndDive:fire_server({
+                    landed_on_target = false,
+                    storm_completed = true,
+                    landing_position = Vector3.new(-378.46279907227, 44.068000793457, 
+-1602.7985839844),
+                    unreachable_ring_ids = {},
+                })
+                BuyItem.StartBuyItems({
+                    {
+                        NameId = 'summer_2026_storm_condor',
+                        MaxAmount = 1,
+                    },
+                })
+            end
+
 
             function Summer2026.Init()
                 RouterClient.get('WeatherAPI/WeatherUpdated').OnClientEvent:Connect(function(
@@ -11022,6 +11056,7 @@ getgenv().AutoMinigame2 = false
 
 getgenv().BUY_TEALWOOD_MONSTER = false
 getgenv().BUY_RAINBOW_TROUT = false
+getgenv().BUY_STORM_CONDOR = false
 
 
 local files = {
