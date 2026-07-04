@@ -8990,7 +8990,7 @@ local FarmToggle = FarmTab:CreateToggle({
  })
 
 local FarmToggle = FarmTab:CreateToggle({
-     Name = "Skydiving Airship & buy Storm Condor ",
+     Name = "Unlock & Buy 10 Storm Condor -650k Acorns-  ",
      CurrentValue = false,
      Flag = "Toggle12",
      Callback = function(Value)
