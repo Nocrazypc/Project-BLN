@@ -8989,6 +8989,17 @@ local FarmToggle = FarmTab:CreateToggle({
      end,
  })
 
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Skydiving Airship & buy Storm Condor ",
+     CurrentValue = false,
+     Flag = "Toggle12",
+     Callback = function(Value)
+
+	 getgenv().BUY_STORM_CONDOR = Value
+
+     end,
+ })
+
 FarmTab:CreateDivider()
 --------- Second Tab -----------
             local MiscTab = Window:CreateTab('Others', 4483362458)
