@@ -4545,7 +4545,6 @@ do
                 })
             end
 
-
             function Summer2026.Init()
                 RouterClient.get('WeatherAPI/WeatherUpdated').OnClientEvent:Connect(function(
                     dayOrNight
@@ -4571,6 +4570,7 @@ do
                         tryCollectBottle()
                         tryHandInBone()
                         tryHandInPages()
+		                tryBuyStormCondor()
                     end
                 end)
             end
@@ -4588,10 +4588,11 @@ do
                     tryBuyRainbowTrout()
                 end
 
-                --tryBalloonFight()
+                --task.spawn(tryBalloonFight)
                 tryCollectBottle()
                 tryHandInBone()
                 tryHandInPages()
+               --tryBuyStormCondor()
             end
 
             return Summer2026
