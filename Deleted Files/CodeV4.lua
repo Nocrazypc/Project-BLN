@@ -4532,7 +4532,7 @@ do
 
                 SkydivingNetService.EndDive:fire_server({
                     landed_on_target = false,
-                    --storm_completed = true,
+                    storm_completed = true,
                     landing_position = Vector3.new(-378.46279907227, 44.068000793457, 
 -1602.7985839844),
                     unreachable_ring_ids = {},
@@ -4540,7 +4540,7 @@ do
                 BuyItem.StartBuyItems({
                     {
                         NameId = 'summer_2026_storm_condor',
-                        MaxAmount = 1,
+                        MaxAmount = 10,
                     },
                 })
             end
