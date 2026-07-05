@@ -4540,7 +4540,7 @@ do
                 BuyItem.StartBuyItems({
                     {
                         NameId = 'summer_2026_storm_condor',
-                        MaxAmount = 16,
+                        MaxAmount = 20,
                     },
                 })
             end
