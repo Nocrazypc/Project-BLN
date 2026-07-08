@@ -4311,21 +4311,6 @@ do
 		    local BalloonFightNetService = (require(contentPacks:WaitForChild('Summer2026'):WaitForChild('BalloonFight'):WaitForChild('BalloonFightNetService')))
             local BuriedTreasureNet = (require(contentPacks.Summer2026:WaitForChild('Game'):WaitForChild('BuriedTreasure'):WaitForChild('BuriedTreasureNet')))
             local localPlayer = Players.LocalPlayer
-		    local fishes = {
-                {
-                    id = 'summer_2026_gold_fish',
-                    max = 15,
-                },
-                {
-                    id = 'summer_2026_silver_fish',
-                    max = 35,
-                },
-                {
-                    id = 'summer_2026_bronze_fish',
-                    max = 75,
-                },
-            }
-
             local Summer2026 = {}
 		    local checkFishesInventory = function()
                 for i = #fishes, 1, -1 do
