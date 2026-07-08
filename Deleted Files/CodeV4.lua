@@ -3475,8 +3475,10 @@ do
         }
 
         local patterns = {
+			['Karp Bait is no longer needed'] = 'Next',
             ['caught enough Karp'] = 'Next',
             ['Your certificate'] = 'Okay',
+			["You've been refunded"] = 'Okay',
             ['Wind has picked'] = 'Okay',
             ['new Fishing Rod'] = 'Okay',
 			['Would you like to head to the flight'] = 'No',
