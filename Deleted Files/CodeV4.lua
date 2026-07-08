@@ -4541,7 +4541,7 @@ do
                     tryBuyRainbowTrout()
                 end
 
-                trySellFishes()
+                --trySellFishes()
                 --task.spawn(tryBalloonFight)
                 tryCollectBottle()
                 tryHandInBone()
