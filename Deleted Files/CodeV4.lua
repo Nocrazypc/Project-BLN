@@ -4402,7 +4402,8 @@ do
                     })
                 elseif getgenv().SETTINGS.BUY_RAINBOW_TROUT then
                     sellExtraFishes({summer_2026_rainbow_fish = 99999})
-                else
+
+                elseif getgenv().SELL_FISHES then
                     sellExtraFishes({})
                 end
             end
@@ -11023,7 +11024,7 @@ getgenv().AutoMinigame2 = false
 getgenv().BUY_TEALWOOD_MONSTER = false
 getgenv().BUY_RAINBOW_TROUT = false
 getgenv().BUY_STORM_CONDOR = false
-
+getgenv().SELL_FISHES = false
 
 local files = {
     {
