@@ -4531,17 +4531,17 @@ do
             function Summer2026.Start()
                 tryBuyFishingRod()
                 tryUpgradeFishingRod()
+                tryCatchFish()
 
                 if getgenv().BUY_TEALWOOD_MONSTER then
-                    tryBuyBait()
                     tryCatchTealwoodMonster()
-                    tryCatchFish()
+
                 end
                 if getgenv().BUY_RAINBOW_TROUT then
-                    tryCatchRainbowFish()
                     tryBuyRainbowTrout()
                 end
 
+                trySellFishes()
                 --task.spawn(tryBalloonFight)
                 tryCollectBottle()
                 tryHandInBone()
