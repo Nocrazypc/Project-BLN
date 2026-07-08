@@ -4394,16 +4394,16 @@ do
                 end
             end
             local trySellFishes = function()
-                if getgenv().BUY_TEALWOOD_MONSTER then
+                --[[if getgenv().BUY_TEALWOOD_MONSTER then
                     sellExtraFishes({
                         summer_2026_bronze_fish = 75,
                         summer_2026_silver_fish = 35,
                         summer_2026_gold_fish = 15,
                     })
                 elseif getgenv().BUY_RAINBOW_TROUT then
-                    sellExtraFishes({summer_2026_rainbow_fish = 99999})
+                    sellExtraFishes({summer_2026_rainbow_fish = 99999})--]]
 
-                elseif getgenv().SELL_FISHES then
+                if getgenv().SELL_FISHES then
                     sellExtraFishes({})
                 end
             end
