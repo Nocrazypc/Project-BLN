@@ -4508,19 +4508,18 @@ do
 
                     if dayOrNight == 'DAY' then
 			            tryUpgradeFishingRod()
+	                    tryCatchFish()
 			
                         if getgenv().BUY_TEALWOOD_MONSTER then
                             print('Trying to catch tealwood or get fish requirements')
-                            tryBuyBait()
                             tryCatchTealwoodMonster()
-                            tryCatchFish()
                         end
                         if getgenv().BUY_RAINBOW_TROUT then
                             print('trying to catch rainbow fish or buy rainbow trout')
-                            tryCatchRainbowFish()
                             tryBuyRainbowTrout()
                         end
 
+	                    trySellFishes()
                         tryBalloonFight()
                         tryCollectBottle()
                         tryHandInBone()
