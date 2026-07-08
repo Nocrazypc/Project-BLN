@@ -8923,7 +8923,7 @@ FarmTab:CreateSection("Events & Minigames: Summer Camp 2026")
 --------------------------------------
 
 local FarmToggle = FarmTab:CreateToggle({
-     Name = "Get Fish & buy Tealwood Monster",
+     Name = "Buy Tealwood Monster -75k Acorns-",
      CurrentValue = false,
      Flag = "Toggle10",
      Callback = function(Value)
@@ -8934,7 +8934,7 @@ local FarmToggle = FarmTab:CreateToggle({
  })
 
 local FarmToggle = FarmTab:CreateToggle({
-     Name = "Get Rainbow Fish & Buy Rainbow Trouts",
+     Name = "Buy Rainbow Trout -70k Acorns-",
      CurrentValue = false,
      Flag = "Toggle11",
      Callback = function(Value)
