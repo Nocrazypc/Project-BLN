@@ -8945,6 +8945,17 @@ local FarmToggle = FarmTab:CreateToggle({
  })
 
 local FarmToggle = FarmTab:CreateToggle({
+     Name = "Sell Fish",
+     CurrentValue = false,
+     Flag = "Toggle1112",
+     Callback = function(Value)
+
+	 getgenv().SELL_FISHES = Value
+
+     end,
+ })
+
+local FarmToggle = FarmTab:CreateToggle({
      Name = "Unlock & Buy 10 Storm Condor -650k Acorns-  ",
      CurrentValue = false,
      Flag = "Toggle12",
