@@ -8923,7 +8923,7 @@ FarmTab:CreateSection("Events & Minigames: Summer Camp 2026")
 --------------------------------------
 
 local FarmToggle = FarmTab:CreateToggle({
-     Name = "Buy Tealwood Monster -75k Acorns-",
+     Name = "Buy & use Tealwood Monster Bait -75k Acorns-",
      CurrentValue = false,
      Flag = "Toggle10",
      Callback = function(Value)
