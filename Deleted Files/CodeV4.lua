@@ -11032,10 +11032,6 @@ getgenv().POTATO_MODE = false
 getgenv().AutoMinigame = false
 getgenv().AutoMinigame2 = false
 
-getgenv().BUY_TEALWOOD_MONSTER = false
-getgenv().BUY_RAINBOW_TROUT = false
-getgenv().BUY_STORM_CONDOR = false
-getgenv().SELL_FISHES = false
 
 local files = {
     {
@@ -11055,9 +11051,6 @@ local files = {
     },
     {
        TradeLicenseHandler = __DARKLUA_BUNDLE_MODULES.load('r'),
-    },
-    {
-       Summer2026 = __DARKLUA_BUNDLE_MODULES.load('s'),
     },
     {
        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('v'),
