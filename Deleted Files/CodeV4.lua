@@ -8664,20 +8664,9 @@ local FarmToggle = FarmTab:CreateToggle({
 
 FarmTab:CreateDivider()
 ----------- Minigames -------------
-FarmTab:CreateSection("Events & Minigames: Summer Camp 2026")
+FarmTab:CreateSection("Events & Minigames: None")
 --------------------------------------
-
-local FarmToggle = FarmTab:CreateToggle({
-     Name = "Buy & use Tealwood Monster Bait -75k Acorns-",
-     CurrentValue = false,
-     Flag = "Toggle10",
-     Callback = function(Value)
-
-	 getgenv().BUY_TEALWOOD_MONSTER = Value
-
-     end,
- })
-
+--[[
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Buy Rainbow Trout -70k Acorns-",
      CurrentValue = false,
@@ -8688,28 +8677,7 @@ local FarmToggle = FarmTab:CreateToggle({
 
      end,
  })
-
-local FarmToggle = FarmTab:CreateToggle({
-     Name = "Sell Fish",
-     CurrentValue = false,
-     Flag = "Toggle1112",
-     Callback = function(Value)
-
-	 getgenv().SELL_FISHES = Value
-
-     end,
- })
-
-local FarmToggle = FarmTab:CreateToggle({
-     Name = "Unlock & Buy 10 Storm Condor -650k Acorns-  ",
-     CurrentValue = false,
-     Flag = "Toggle12",
-     Callback = function(Value)
-
-	 getgenv().BUY_STORM_CONDOR = Value
-
-     end,
- })
+--]]
 
 FarmTab:CreateDivider()
 --------- Second Tab -----------
