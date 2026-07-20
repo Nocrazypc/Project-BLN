@@ -9761,30 +9761,6 @@ FarmTab:CreateDivider()
             Utils.PrintDebug('\u{2753} Picking mystery task \u{2753}')
             pickMysteryTask(mysteryId, petUnique)
         end
-        function Ailment.BonfireAilment(petUnique)
-            Utils.PrintDebug(string.format('\u{1f3d6}\u{fe0f} Doing bonfire on %s \u{1f3d6}\u{fe0f}', tostring(Ailment.whichPet)))
-            Teleport.Bonfire()
-            task.wait(2)
-            Utils.ReEquipPet(Ailment.whichPet)
-            waitForTaskToFinish('summerfest_bonfire', petUnique)
-        end
-        function Ailment.BuccaneerBandAilment(petUnique)
-            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
-            task.wait(2)
-            local key = getKeyFrom('summerfest_2025_buccaneer_band')
-            if not key then
-                Utils.PrintDebug('didnt find key for band')
-                return
-            end
-            Utils.PrintDebug('Doing Band task')
-            task.spawn(function()
-                ReplicatedStorage.API:FindFirstChild('HousingAPI/ActivateInteriorFurniture'):InvokeServer(key, 'Guitar', {
-                    ['cframe'] = CFrame.new(-607, 35, -1641, -0, -0, -1, 0, 1, -0, 1, -0, -0),
-                }, localPlayer.Character)
-            end)
-            waitForTaskToFinish('buccaneer_band', petUnique)
-            getUpFromSitting()
-        end
         function Ailment.BabyHungryAilment()
             Utils.PrintDebug('\u{1f476}\u{1f374} Doing baby hungry task \u{1f476}\u{1f374}')
             local stuckCount = 0
