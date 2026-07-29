@@ -8828,20 +8828,18 @@ local FarmToggle = FarmTab:CreateToggle({
 
 FarmTab:CreateDivider()
 ----------- Minigames -------------
-FarmTab:CreateSection("Events & Minigames: None")
+FarmTab:CreateSection("Events & Minigames: Bee Pass 2026")
 --------------------------------------
---[[
 local FarmToggle = FarmTab:CreateToggle({
-     Name = "Buy Rainbow Trout -70k Acorns-",
+     Name = "Autofarm Bee Pass",
      CurrentValue = false,
      Flag = "Toggle11",
      Callback = function(Value)
 
-	 getgenv().BUY_RAINBOW_TROUT = Value
+	 getgenv().BeePass2026 = Value
 
      end,
  })
---]]
 
 FarmTab:CreateDivider()
 --------- Second Tab -----------
