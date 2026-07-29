@@ -3493,6 +3493,7 @@ do
 
         local patterns = {
             ["You've completed the entire Bee Pass!"] = 'Okay',
+			['The Bee Pass has been restarted'] = 'Okay',
             ['Your certificate'] = 'Okay',
 			["You've been refunded"] = 'Okay',
             ['Wind has picked'] = 'Okay',
@@ -3524,7 +3525,6 @@ do
             ['mailbox'] = 'Okay',
             ['Pay 1500 Bucks'] = 'Yes',
             ['Pet Pen!'] = 'Go to Pet Pen',
-            ['The Bee Pass has been restarted'] = 'Okay',
             ['Costume Party starts'] = 'Okay',
             ['Step away from'] = 'Okay',
             ['Welcome to Adopt Me!'] = 'Next',
