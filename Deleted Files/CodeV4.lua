@@ -4470,9 +4470,7 @@ do
             function BeePass2026.Init() end
             function BeePass2026.Start()
 
-              -- if getgenv().BeePass2026 then
                task.spawn(infLoop)
-              -- end
 
             end
 
