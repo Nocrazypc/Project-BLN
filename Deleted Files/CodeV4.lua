@@ -579,7 +579,24 @@ do
                     return false, 'Timed out waiting for server response'
                 end
             end
+            function Utils.SafeRequire(root, timeout, ...)
+                local current = root
 
+                for _, name in {...}do
+                    current = current:WaitForChild(name, timeout)
+
+                    if not current then
+                        return nil
+                    end
+                end
+
+                if current:IsA('ModuleScript') then
+                    return (require(current))
+                end
+
+                return nil
+            end
+		
             return Utils
         end
     function __DARKLUA_BUNDLE_MODULES.b()
