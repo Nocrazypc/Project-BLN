@@ -8849,7 +8849,7 @@ FarmTab:CreateSection("Events & Minigames: Bee Pass 2026")
 --------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Autofarm Bee Pass",
-     CurrentValue = false,
+     CurrentValue = true,
      Flag = "Toggle11",
      Callback = function(Value)
 
