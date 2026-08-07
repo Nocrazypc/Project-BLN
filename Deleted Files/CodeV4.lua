@@ -8682,9 +8682,9 @@ local FarmToggle = FarmTab:CreateToggle({
 
 FarmTab:CreateDivider()
 ----------- Minigames -------------
-FarmTab:CreateSection("Events & Minigames: Bee Pass 2026")
+FarmTab:CreateSection("Events & Minigames: None")
 --------------------------------------
-local FarmToggle = FarmTab:CreateToggle({
+--[[ local FarmToggle = FarmTab:CreateToggle({
      Name = "Autofarm Bee Pass",
      CurrentValue = true,
      Flag = "Toggle11",
@@ -8693,7 +8693,7 @@ local FarmToggle = FarmTab:CreateToggle({
 	 getgenv().BeePass2026 = Value
 
      end,
- })
+ }) --]]
 
 FarmTab:CreateDivider()
 --------- Second Tab -----------
