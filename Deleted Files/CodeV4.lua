@@ -3492,7 +3492,7 @@ do
         }
 
         local patterns = {
-            ["You've completed the entire Bee Pass!"] = 'Okay',
+            ['There's birthday cake to grab!'] = 'No',
 			['The Bee Pass has been restarted'] = 'Okay',
             ['Your certificate'] = 'Okay',
 			["You've been refunded"] = 'Okay',
