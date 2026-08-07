@@ -4311,169 +4311,9 @@ do
 
         return self
     end
-    function __DARKLUA_BUNDLE_MODULES.s() -- Bee Pass 2026
-            local ReplicatedStorage = (game:GetService('ReplicatedStorage'))
-            local Players = game:GetService('Players')
-            local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
-            local ClientData = Bypass('ClientData')
-            local RouterClient = Bypass('RouterClient')
-            local BuyItem = __DARKLUA_BUNDLE_MODULES.g()
-            local GetInventory = __DARKLUA_BUNDLE_MODULES.i()
-            local Utils = __DARKLUA_BUNDLE_MODULES.a()
-            local contentPacks = (ReplicatedStorage:WaitForChild('SharedModules'):WaitForChild('ContentPacks'))
-            local BeesWagonFlowerHelper = (Utils.SafeRequire(contentPacks, 5, 'BeesWagon2026', 'Game', 'BeesWagonFlowerHelper'))
-            local BeesWagonWagonNet = (Utils.SafeRequire(contentPacks, 5, 'BeesWagon2026', 'Game', 'BeesWagonWagonNet'))
-            local LiveOpsTime = Utils.SafeRequire(ReplicatedStorage.SharedModules, 5, 'Game', 'LiveOpsTime')
-            local localPlayer = Players.LocalPlayer
-            local MAX_REWARD_CLAIMS = 13
-            local BeePass2026 = {}
-            local pickupFlowers = function()
-                for spot = 1, BeesWagonFlowerHelper.PLANTING_SPOT_COUNT do
-                    local spotString = tostring(spot)
-                    local flower = ClientData.get_data()[localPlayer.Name].bees_wagon_2026_manager.planted_seeds[spotString]
 
-                    if not flower then
-                        continue
-                    end
-                    if BeesWagonFlowerHelper.is_flower_ready(flower, LiveOpsTime.now()) then
-                        print('Picked up the flower from:', spotString)
-                        BeesWagonWagonNet.RequestPickFlower:fire_server(spotString)
-                        task.wait(1)
-                    end
-                end
-            end
-            local placeFlowersInVase = function()
-                for i = 1, BeesWagonFlowerHelper.BOUQUET_COUNT do
-                    BeesWagonWagonNet.RequestAddBouquetFlower:fire_server(tostring(i))
-                    task.wait()
-                end
-            end
-            local countPlantedByKind = function()
-                local counts = {}
-                local plantedSeeds = ClientData.get_data()[localPlayer.Name].bees_wagon_2026_manager.planted_seeds
+    function __DARKLUA_BUNDLE_MODULES.s() -- Summer 2026
 
-                for _, seed in plantedSeeds do
-                    counts[seed.flower_kind] = (counts[seed.flower_kind] or 0) + 1
-                end
-
-                return counts
-            end
-            local countHeldFlowers = function()
-                return BeesWagonFlowerHelper.count_owned_flowers(ClientData.get_data()[localPlayer.Name].inventory.toys)
-            end
-            local claimFromPool = function(pool, key, need)
-                local taken = math.min(need, pool[key] or 0)
-
-                if taken > 0 then
-                    pool[key] = pool[key] - taken
-                end
-
-                return taken
-            end
-            local startBeeEvent = function()
-                pickupFlowers()
-                placeFlowersInVase()
-
-                local unclaimedPlanted = countPlantedByKind()
-                local unclaimedFlowers = countHeldFlowers()
-
-                for i = 1, BeesWagonFlowerHelper.BOUQUET_COUNT do
-                    local flowersReq = BeesWagonFlowerHelper.get_bouquet_requirements(tostring(i), localPlayer.UserId)
-                    local placedInBouquet = ClientData.get_data()[localPlayer.Name].bees_wagon_2026_manager.placed_flowers[tostring(i)] or {}
-                    local flowerNeeded = BeesWagonFlowerHelper.compute_remaining_requirements(flowersReq, placedInBouquet)
-
-                    for name, value in flowerNeeded do
-                        local seedKind = BeesWagonFlowerHelper.get_seed_item_kind(name)
-
-                        value = value - claimFromPool(unclaimedFlowers, name, value)
-                        value = value - claimFromPool(unclaimedPlanted, name, value)
-
-                        if value <= 0 then
-                            continue
-                        end
-
-                        local playerSeedAmount = GetInventory.GetAmountOfItems('toys', seedKind)
-                        local buySeedAmount = value - playerSeedAmount
-
-                        if buySeedAmount >= 1 then
-                            local hasMoney = RouterClient.get('ShopAPI/BuyItem'):InvokeServer('toys', seedKind, {buy_count = buySeedAmount})
-
-                            if hasMoney == 'too little money' then
-                                return
-                            end
-                        end
-
-                        local planted = 0
-
-                        for spot = 1, BeesWagonFlowerHelper.PLANTING_SPOT_COUNT do
-                            if planted >= value then
-                                break
-                            end
-
-                            local isAlreadySeeded = ClientData.get_data()[localPlayer.Name].bees_wagon_2026_manager.planted_seeds[tostring(spot)]
-
-                            if isAlreadySeeded then
-                                continue
-                            end
-
-                            local seedUnique = GetInventory.GetUniqueId('toys', seedKind)
-
-                            if not seedUnique then
-                                print('no seedUnique')
-
-                                break
-                            end
-
-                            BeesWagonWagonNet.RequestPlantSeed:fire_server({
-                                spot_index = tostring(spot),
-                                seed_item_unique = seedUnique,
-                            })
-
-                            planted = planted + 1
-
-                            task.wait(1)
-                        end
-                    end
-                end
-            end
-            local claimBattlePassRewards = function()
-                local battlePass = ClientData.get_data()[localPlayer.Name].battle_pass_manager
-                local passData = battlePass and battlePass.bees_2026_pass
-
-                if not passData then
-                    return
-                end
-
-                local nextReward = passData.rewards_claimed
-
-                for _ = 1, MAX_REWARD_CLAIMS do
-                    nextReward = nextReward + 1
-
-                    local claimed = RouterClient.get('BattlePassAPI/ClaimReward'):InvokeServer('bees_2026_pass', nextReward)
-
-                    if not claimed then
-                        return
-                    end
-
-                    task.wait()
-                end
-            end
-            local infLoop = function()
-                while true do
-                    startBeeEvent()
-                    claimBattlePassRewards()
-                    task.wait(60)
-                end
-            end
-
-            function BeePass2026.Init() end
-            function BeePass2026.Start()
-
-               task.spawn(infLoop)
-
-            end
-
-            return BeePass2026		
     end
 
     function __DARKLUA_BUNDLE_MODULES.t()
@@ -10896,7 +10736,6 @@ getgenv().POTATO_MODE = false
 
 getgenv().AutoMinigame = false
 getgenv().AutoMinigame2 = false
-getgenv().BeePass2026 = false
 
 local files = {
     {
@@ -10917,9 +10756,9 @@ local files = {
     {
        TradeLicenseHandler = __DARKLUA_BUNDLE_MODULES.load('r'),
     },
-    {
+   --[[ {
        BeePass2026 = __DARKLUA_BUNDLE_MODULES.load('s'),
-    },
+    },--]]
     {
        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('v'),
     },	
