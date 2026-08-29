@@ -10722,8 +10722,8 @@ Utils = __DARKLUA_BUNDLE_MODULES.load('a')
 
 getgenv().auto_farm = true
 getgenv().AutoFusion = false
-getgenv().FOCUS_FARM_AGE_POTION = true
-getgenv().HatchPriorityEggs = false
+getgenv().FOCUS_FARM_AGE_POTION = false
+getgenv().HatchPriorityEggs = true
 
 getgenv().ENABLE_RELEASE_PETS = false
 getgenv().PETS_TO_AGE_IN_PEN = {}
