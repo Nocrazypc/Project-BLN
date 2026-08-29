@@ -9852,7 +9852,7 @@ FarmTab:CreateDivider()
         local Teleport = __DARKLUA_BUNDLE_MODULES.load('f')
         local FarmingPet = {}
         local localPlayer = Players.LocalPlayer
-        local petToBuy = 'endangered_2026_endangered_egg'
+        local petToBuy = 'fairytale_egg_2026_fairytale_egg'
         local potionFarmPets = {
             '2d_kitty',
             'dog',
