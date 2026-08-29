@@ -3499,7 +3499,7 @@ do
             ['Wind has picked'] = 'Okay',
             ['new Fishing Rod'] = 'Okay',
 			['Would you like to head to the flight'] = 'No',
-            ['Would you like to teleport'] = 'No',
+            --['Would you like to teleport'] = 'No',
             ["You haven't collected the Gingerbread"] = 'No',
             ['Be careful when trading'] = 'Okay',
             ['This trade seems unbalanced'] = 'Next',
