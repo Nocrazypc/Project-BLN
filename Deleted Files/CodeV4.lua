@@ -10104,7 +10104,7 @@ FarmTab:CreateDivider()
                     if Utils.BucksAmount() >= 10000 then
                         Utils.PrintDebug('Buying gumball egg')
                         Teleport.Nursery()
-                        RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'endangered_2026_endangered_egg', {})
+                        RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'fairytale_egg_2026_fairytale_egg', {})
                     end
                 end
             end
