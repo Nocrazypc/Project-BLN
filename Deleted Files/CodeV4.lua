@@ -9872,11 +9872,11 @@ FarmTab:CreateDivider()
                 return true
             end
             if GetInventory.CheckForPetAndEquip({
-                'endangered_2026_endangered_egg',
+                'fairytale_egg_2026_fairytale_egg',
             }, 1) then
                 return true
             else
-                local hasMoney = RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'endangered_2026_endangered_egg', {})
+                local hasMoney = RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'fairytale_egg_2026_fairytale_egg', {})
                 if hasMoney then
                     return true
                 end
