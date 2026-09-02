@@ -3207,7 +3207,7 @@ do
             end
         end
         function self.Start()
-            setfpscap(3)
+            setfpscap(4)
             StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Captures, false)
 
             if DialogApp.Dialog.ThemeColorDialog.Visible then
@@ -8576,7 +8576,7 @@ local FarmToggle = FarmTab:CreateToggle({
           Teleport.FarmingHome()
 		  --getgenv().auto_farm = Value
           localPlayer:SetAttribute('StopFarmingTemp', false)
-          setfpscap(3)
+          setfpscap(4)
      end,
  })
 
@@ -8587,7 +8587,7 @@ FarmTab:CreateButton({
         setfpscap(20)
         task.wait(300)
         localPlayer:SetAttribute('StopFarmingTemp', false)
-        setfpscap(3)
+        setfpscap(4)
 	end,
 })
 -------------------------------------------
@@ -10637,7 +10637,7 @@ FarmTab:CreateDivider()
     end
 end
 
-setfpscap(3)
+setfpscap(4)
 task.wait(1)
 
 if not game:IsLoaded() then
