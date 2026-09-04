@@ -8581,11 +8581,11 @@ local FarmToggle = FarmTab:CreateToggle({
  })
 
 FarmTab:CreateButton({
-	Name = "Stop AutoFarm Temporarily (5 minutes)",
+	Name = "Stop AutoFarm Temporarily (10 minutes)",
 	Callback = function()
 	    localPlayer:SetAttribute('StopFarmingTemp', true)
         setfpscap(20)
-        task.wait(300)
+        task.wait(600)
         localPlayer:SetAttribute('StopFarmingTemp', false)
         setfpscap(4)
 	end,
