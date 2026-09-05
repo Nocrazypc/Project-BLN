@@ -3207,7 +3207,7 @@ do
             end
         end
         function self.Start()
-            setfpscap(4)
+            --setfpscap(4)
             StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Captures, false)
 
             if DialogApp.Dialog.ThemeColorDialog.Visible then
@@ -10637,7 +10637,7 @@ FarmTab:CreateDivider()
     end
 end
 
-setfpscap(4)
+--setfpscap(4)
 task.wait(1)
 
 if not game:IsLoaded() then
@@ -10811,6 +10811,8 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
     end 
 end)
 end)
+
+setfpscap(4)
 --------Transitions Remover -------------
 --[[ pcall(function() 
     require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
