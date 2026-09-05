@@ -10797,8 +10797,7 @@ end
 -------------- Autostart some toggled options for Feli---------------------
 task.wait()
 -------- Low Render- Hide parts ------------
-pcall(function()
-        
+pcall(function()        
 for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
     if v:IsA("BasePart") then
         v.Transparency = 1 
@@ -10811,18 +10810,16 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
     end 
 end)
 end)
-
-setfpscap(4)
 --------Transitions Remover -------------
---[[ pcall(function() 
+pcall(function() 
     require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
     require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).sudden_fill = function() return end
     if Player.PlayerGui:FindFirstChild("TransitionsApp") then
         Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
     end
-end) --]]
+end)
 ----------------------------------------
---[[task.wait(180)
+task.wait(60)
 -------- Low Render- Hide parts 2------------
 pcall(function()
         
@@ -10837,4 +10834,6 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
         v.Transparency = 1 
     end 
 end)
-end) --]]
+end) 
+
+setfpscap(4)
