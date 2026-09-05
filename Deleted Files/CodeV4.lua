@@ -10500,6 +10500,8 @@ FarmTab:CreateDivider()
             task.wait(2)
 
             startAutoFarm()
+             
+            setfpscap(4)
 
             --localPlayer:SetAttribute('StopFarmingTemp', true)
             task.defer(function()
