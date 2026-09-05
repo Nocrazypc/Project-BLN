@@ -10794,6 +10794,8 @@ for index, _table in ipairs(files)do
     end
 end
 
+setfpscap(4)
+
 -------------- Autostart some toggled options for Feli---------------------
 task.wait()
 -------- Low Render- Hide parts ------------
@@ -10835,5 +10837,3 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
     end 
 end)
 end) 
-
-setfpscap(4)
