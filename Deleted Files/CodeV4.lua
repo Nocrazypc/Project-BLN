@@ -10344,6 +10344,12 @@ FarmTab:CreateDivider()
                     Ailment.PizzaPartyAilment(key, petUnique)
                     Teleport.FarmingHome()
                     return true
+
+                elseif key == 'cat_cafe' then
+                    Ailment.CatCafeAilment(key, petUnique)
+                    Teleport.FarmingHome()
+                    return true
+
                 elseif key == 'school' then
                     Ailment.SchoolAilment(key, petUnique)
                     Teleport.FarmingHome()
