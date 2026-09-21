@@ -9635,6 +9635,15 @@ FarmTab:CreateDivider()
             waitForTaskToFinish(ailment, petUnique)
             Utils.PrintDebug(string.format('\u{1f355} Finished pizza party task on %s \u{1f355}', tostring(Ailment.whichPet)))
         end
+
+        function Ailment.CatCafeAilment(ailment, petUnique)
+            Utils.ReEquipPet(Ailment.whichPet)
+            Utils.PrintDebug(string.format('\u{1f355} Doing cat cafe task on %s \u{1f355}', tostring(Ailment.whichPet)))
+            RouterClient.get('LocationAPI/SetLocation'):FireServer('CatCafe')
+            waitForTaskToFinish(ailment, petUnique)
+            Utils.PrintDebug(string.format('\u{1f355} Finished cat cafe task on %s \u{1f355}', tostring(Ailment.whichPet)))
+        end
+
         function Ailment.SchoolAilment(ailment, petUnique)
             Utils.ReEquipPet(Ailment.whichPet)
             Utils.PrintDebug(string.format('\u{1f3eb} Doing school task on %s \u{1f3eb}', tostring(Ailment.whichPet)))
