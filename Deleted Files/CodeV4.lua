@@ -9729,7 +9729,6 @@ FarmTab:CreateDivider()
                 return
             end
             RouterClient.get('AdoptAPI/HoldBaby'):InvokeServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet]['char'])
-            --ReplicatedStorage.API:FindFirstChild('AdoptAPI/HoldBaby'):FireServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet]['char'])
             waitForJumpingToFinish('walk', petUnique)
             if not Utils.IsPetEquipped(Ailment.whichPet) then
                 return
