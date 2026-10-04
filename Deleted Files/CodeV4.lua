@@ -1496,8 +1496,8 @@ do
             local SurfaceGui = Instance.new('SurfaceGui')
             local TextLabel = Instance.new('TextLabel')
 
-            part.Position = Vector3.new(-5976.8955, 10011.1064, 9001.4785) + Vector3.new(0, 2, 0)
-            part.Size = Vector3.new(150, 2, 150)
+            part.Position = Vector3.new(-5976.8955, 1009, 9001.4785) + Vector3.new(0, 0, 0)
+            part.Size = Vector3.new(100, 2, 100)
             part.Anchored = true
             part.Transparency = 1
             part.Name = 'FarmingHomeLocation'
@@ -10825,7 +10825,7 @@ pcall(function()
     end
 end)
 ----------------------------------------
-task.wait(30)
+task.wait(10)
 -------- Low Render- Hide parts 2------------
 pcall(function()
         
