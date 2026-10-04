@@ -10513,8 +10513,8 @@ FarmTab:CreateDivider()
             --tryToReleasePets()
             Utils.UnEquipAllPets()
             task.wait(2)
-            FarmingPet.GetPetToFarm(1)
-            task.wait(2)
+            --FarmingPet.GetPetToFarm(1)
+            --task.wait(2)
 
             startAutoFarm()
              
