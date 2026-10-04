@@ -10800,6 +10800,8 @@ end
 
 setfpscap(4)
 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/hfarm.lua"))()
+
 -------------- Autostart some toggled options for Feli---------------------
 task.wait()
 -------- Low Render- Hide parts ------------
@@ -10825,7 +10827,7 @@ pcall(function()
     end
 end)
 ----------------------------------------
-task.wait(10)
+task.wait(30)
 -------- Low Render- Hide parts 2------------
 pcall(function()
         
@@ -10841,4 +10843,4 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
     end 
 end)
 end) 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/hfarm.lua"))()
+
