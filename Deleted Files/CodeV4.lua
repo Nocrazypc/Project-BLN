@@ -8570,13 +8570,13 @@ local FarmTab = Window:CreateTab("Farm", 4483362458)
 ------------------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Start AutoFarm",
-     CurrentValue = true,
+     CurrentValue = false,
      Flag = "Toggle01",
      Callback = function(Value)
 	
 		  task.wait(3)
           Teleport.FarmingHome()
-		  --getgenv().auto_farm = Value
+		  getgenv().auto_farm = Value
           localPlayer:SetAttribute('StopFarmingTemp', false)
           setfpscap(4)
      end,
@@ -10740,7 +10740,7 @@ getgenv().petCurrentlyFarming1 = nil
 getgenv().petCurrentlyFarming2 = nil
 Utils = __DARKLUA_BUNDLE_MODULES.load('a')
 
-getgenv().auto_farm = true
+getgenv().auto_farm = false
 getgenv().AutoFusion = false
 getgenv().FOCUS_FARM_AGE_POTION = true
 getgenv().HatchPriorityEggs = false
