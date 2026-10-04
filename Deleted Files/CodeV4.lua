@@ -10516,7 +10516,7 @@ FarmTab:CreateDivider()
             --FarmingPet.GetPetToFarm(1)
             --task.wait(2)
 
-            startAutoFarm()
+            --startAutoFarm()
              
             setfpscap(4)
 
