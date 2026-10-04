@@ -10494,10 +10494,10 @@ FarmTab:CreateDivider()
             RouterClient.get('HousingAPI/ClaimAllDeliveries'):FireServer()
             DailiesNetService.try_to_claim_daily_rewards('2d_tuesdays')
 
-            if not getgenv().auto_farm then
+            --[[if not getgenv().auto_farm then
                 Utils.PrintDebug('AUTO_FARM is false')
                 return
-            end
+            end--]]
             if getgenv().SETTINGS.PET_AUTO_FUSION or getgenv().AutoFusion then
                 Fusion.MakeMega(false)
                 Fusion.MakeMega(true)
