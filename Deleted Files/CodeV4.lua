@@ -3236,7 +3236,7 @@ do
 
             RouterClient.get('HousingAPI/SetDoorLocked'):InvokeServer(true)
 
-            RouterClient.get('TeamAPI/ChooseTeam'):InvokeServer('Parents', {
+            RouterClient.get('TeamAPI/ChooseTeam'):InvokeServer('Babies', {
                 ['dont_send_back_home'] = true,
             })
             Utils.PrintDebug('turned to baby')
@@ -8570,13 +8570,13 @@ local FarmTab = Window:CreateTab("Farm", 4483362458)
 ------------------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
      Name = "Start AutoFarm",
-     CurrentValue = false,
+     CurrentValue = true,
      Flag = "Toggle01",
      Callback = function(Value)
 	
 		  task.wait(3)
           Teleport.FarmingHome()
-		  getgenv().auto_farm = Value
+		  --getgenv().auto_farm = Value
           localPlayer:SetAttribute('StopFarmingTemp', false)
           setfpscap(4)
      end,
@@ -10494,10 +10494,10 @@ FarmTab:CreateDivider()
             RouterClient.get('HousingAPI/ClaimAllDeliveries'):FireServer()
             DailiesNetService.try_to_claim_daily_rewards('2d_tuesdays')
 
-            --[[if not getgenv().auto_farm then
+            if not getgenv().auto_farm then
                 Utils.PrintDebug('AUTO_FARM is false')
                 return
-            end--]]
+            end
             if getgenv().SETTINGS.PET_AUTO_FUSION or getgenv().AutoFusion then
                 Fusion.MakeMega(false)
                 Fusion.MakeMega(true)
@@ -10513,10 +10513,10 @@ FarmTab:CreateDivider()
             --tryToReleasePets()
             Utils.UnEquipAllPets()
             task.wait(2)
-            --FarmingPet.GetPetToFarm(1)
-            --task.wait(2)
+            FarmingPet.GetPetToFarm(1)
+            task.wait(2)
 
-            --startAutoFarm()
+            startAutoFarm()
              
             setfpscap(4)
 
@@ -10644,9 +10644,9 @@ FarmTab:CreateDivider()
             end)
         end
         function PetOfflineHandler.Start()
-            --[[if getgenv().auto_farm == false then
+            if getgenv().auto_farm == false then
                 return
-            end--]]
+            end
             PetOffline.ClaimAllXP()
             task.wait(2)
             removeAllMaxedPets()
@@ -10740,7 +10740,7 @@ getgenv().petCurrentlyFarming1 = nil
 getgenv().petCurrentlyFarming2 = nil
 Utils = __DARKLUA_BUNDLE_MODULES.load('a')
 
-getgenv().auto_farm = false
+getgenv().auto_farm = true
 getgenv().AutoFusion = false
 getgenv().FOCUS_FARM_AGE_POTION = true
 getgenv().HatchPriorityEggs = false
