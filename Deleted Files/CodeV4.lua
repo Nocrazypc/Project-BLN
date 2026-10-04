@@ -3493,6 +3493,8 @@ do
 
         local patterns = {
             --['Teleport to'] = 'No',
+			['Teleport there now?'] = 'No',
+			['Ghost Gallery is'] = 'No',
 			['The Bee Pass has been restarted'] = 'Okay',
             ['Your certificate'] = 'Okay',
 			["You've been refunded"] = 'Okay',
@@ -10712,7 +10714,7 @@ StatsGuis:UpdateText("NameFrame")
 			StatsGuis:UpdateText("BucksAndPotionFrame")
             StatsGuis:UpdateText("TotalFrame")
             StatsGuis:UpdateText("TotalFrame1")
-           --StatsGuis:UpdateText("TotalFrame2") --GingerBread/eggs/Compass coins Frame
+            StatsGuis:UpdateText("TotalFrame2") --GingerBread/eggs/Compass coins Frame
             task.wait(5) 
             end
         end)
