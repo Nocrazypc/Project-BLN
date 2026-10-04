@@ -10644,9 +10644,9 @@ FarmTab:CreateDivider()
             end)
         end
         function PetOfflineHandler.Start()
-            if getgenv().auto_farm == false then
+            --[[if getgenv().auto_farm == false then
                 return
-            end
+            end--]]
             PetOffline.ClaimAllXP()
             task.wait(2)
             removeAllMaxedPets()
