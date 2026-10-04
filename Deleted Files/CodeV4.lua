@@ -10438,9 +10438,9 @@ FarmTab:CreateDivider()
                         repeat
                             Utils.PrintDebug('Stopping because its buying or aging or in minigame')
 
-                            count = count + 30
+                            count = count + 60
 
-                            task.wait(30)
+                            task.wait(60)
 
                         until not localPlayer:GetAttribute('StopFarmingTemp') or count > 600
 
