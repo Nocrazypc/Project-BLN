@@ -3493,6 +3493,7 @@ do
 
         local patterns = {
             --['Teleport to'] = 'No',
+		    ['The Crypt has been reset!'] = 'Okay',
 			['The Bee Pass has been restarted'] = 'Okay',
             ['Your certificate'] = 'Okay',
 			["You've been refunded"] = 'Okay',
