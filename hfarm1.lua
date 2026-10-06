@@ -6632,7 +6632,7 @@ __moduleSources["Game/TaskManager"] = function(...)
     local TEAM_KEY = "team"
     -- Halloween / Pet Pen jobs (Game/EventTasks): seconds until the same job is looked at again (success or not).
     local EVENT_RECHECK_SECONDS = { ghost_gallery = 120, stray_cat = 1800, crypt = 60, pigeon_nest = 60, quests = 300, pen_stock = 20, age_potion = 5, open_gift = 3, house_visits = 300 }
-    local GHOST_GALLERY_LEAD_SECONDS = 10--(75) start the trip to the Manor this long before the round
+    local GHOST_GALLERY_LEAD_SECONDS = 20--(75) start the trip to the Manor this long before the round
 
     function TaskManager.new(deps)
         local self = setmetatable({}, TaskManager)
