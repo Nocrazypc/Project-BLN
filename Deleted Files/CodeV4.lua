@@ -8692,7 +8692,6 @@ local FarmToggle = FarmTab:CreateToggle({
      Flag = "Toggle11",
      Callback = function(Value)
 
-	 loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/hfarm1.lua"))()
 
      end,
  })
@@ -10815,6 +10814,7 @@ end
 
 setfpscap(4)
 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/hfarm1.lua"))()
 
 -------------- Autostart some toggled options for Feli---------------------
 task.wait()
