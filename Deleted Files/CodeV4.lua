@@ -1607,7 +1607,27 @@ do
         function Teleport.DeleteWater()
             Workspace.Terrain:Clear()
         end
-        function Teleport.FarmingHome()
+
+-----------------------------------
+
+	        function Teleport.FarmingHome()	 --Halloween
+			
+		    localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
+
+            SetLocationFunc('HauntedManor', 'MainDoor', {})
+            task.wait(1)
+            Workspace.Interiors:WaitForChild(tostring(Workspace.Interiors:FindFirstChildWhichIsA('Model')))
+
+            localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = false
+
+            localPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+            task.wait(2)
+        end
+
+-----------------------------
+
+		
+        --[[function Teleport.FarmingHome()
             Utils.GetCharacter():WaitForChild('HumanoidRootPart').Anchored = true
 			
             Utils.GetCharacter():MoveTo(Workspace.FarmingHomeLocation.Position + Vector3.new(0, 10, 0))
@@ -1616,9 +1636,9 @@ do
 
             Utils.GetCharacter().Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
             Teleport.DeleteWater()
-        end
+        end--]]
 
-		--[[function Teleport.FarmingHome() --for nursey
+		--[[function Teleport.FarmingHome() --for nursery
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
 
             SetLocationFunc('Nursery', 'MainDoor', {})
