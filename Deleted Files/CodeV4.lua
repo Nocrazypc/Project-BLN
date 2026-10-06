@@ -8684,18 +8684,18 @@ local FarmToggle = FarmTab:CreateToggle({
 
 FarmTab:CreateDivider()
 ----------- Minigames -------------
-FarmTab:CreateSection("Events & Minigames: None")
+FarmTab:CreateSection("Events & Minigames: Halloween 2026")
 --------------------------------------
---[[ local FarmToggle = FarmTab:CreateToggle({
-     Name = "Autofarm Bee Pass",
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Ghost Gallery + Crypt",
      CurrentValue = true,
      Flag = "Toggle11",
      Callback = function(Value)
 
-	 getgenv().BeePass2026 = Value
+	 loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/hfarm1.lua"))()
 
      end,
- }) --]]
+ })
 
 FarmTab:CreateDivider()
 --------- Second Tab -----------
@@ -10815,7 +10815,6 @@ end
 
 setfpscap(4)
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/hfarm1.lua"))()
 
 -------------- Autostart some toggled options for Feli---------------------
 task.wait()
