@@ -502,8 +502,8 @@ __moduleSources["Core/Config"] = function(...)
             EggToBuy = "cracked_egg", -- cracked_egg (350 Bucks) | pet_egg (600 Bucks) | fairytale_egg_2026_fairytale_egg (event); royal_egg (Robux) is never bought
             MaxEggBuysPerSession = 0, -- 0 = no limit (user default) -- never farm a full grown pet (age 6): equip one that still grows (any)
             AntiAfk = true, -- virtual click when Roblox reports idle (prevents the 20-minute kick)
-            BuyWater = true,
-            BuyFood = true, -- hungry with no food: buy 1 sandwich (hotdog if that fails)
+            BuyWater = false,
+            BuyFood = false, -- hungry with no food: buy 1 sandwich (hotdog if that fails)
             MaxBuysPerSession = 0, -- 0 = no limit (one item is bought only when a need has nothing to use) -- thirsty with no drink in the backpack: buy 1 water (1 Buck, watch4)
             -- Age potions (pet_age_potion, tiny_pet_age_potion) on the equipped pet that still grows; verified by its age
             AutoPotions = {
