@@ -10800,7 +10800,7 @@ end
 
 setfpscap(4)
 
----loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/hfarm.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/hfarm.lua"))()
 
 -------------- Autostart some toggled options for Feli---------------------
 task.wait()
