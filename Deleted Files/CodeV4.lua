@@ -10814,7 +10814,6 @@ end
 
 setfpscap(4)
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/hfarm1.lua"))()
 
 -------------- Autostart some toggled options for Feli---------------------
 task.wait()
@@ -10841,7 +10840,12 @@ pcall(function()
     end
 end)
 ----------------------------------------
-task.wait(60)
+task.wait(10)
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/hfarm1.lua"))()
+
+---------------------------------------
+task.wait(30)
 -------- Low Render- Hide parts 2------------
 pcall(function()
         
