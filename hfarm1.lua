@@ -25,7 +25,7 @@ local UserConfig = {
             walk = false,    
             ride = false,      
         },
-        BuyWater = false,     
+        BuyWater = true,     
         BuyFood = false,      
         MaxBuysPerSession = 0, 
         AutoAcceptMenu = false, 
