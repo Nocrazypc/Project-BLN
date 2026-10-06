@@ -1496,13 +1496,29 @@ do
             local SurfaceGui = Instance.new('SurfaceGui')
             local TextLabel = Instance.new('TextLabel')
 
-            part.Position = Vector3.new(-5976.8955, 9995, 9001.4785) + Vector3.new(0, 0, 0)
-            part.Size = Vector3.new(100, 2, 100)
+            part.Position = campsite.Position + Vector3.new(0, 80, 0)
+            part.Size = Vector3.new(200, 2, 200)
             part.Anchored = true
-            part.Transparency = 1
+            part.Transparency = 0
             part.Name = 'FarmingHomeLocation'
             part.Parent = Workspace
-
+            SurfaceGui.Parent = part
+            SurfaceGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+            SurfaceGui.AlwaysOnTop = false
+            SurfaceGui.CanvasSize = Vector2.new(600, 600)
+            SurfaceGui.Face = Enum.NormalId.Top
+            TextLabel.Parent = SurfaceGui
+	        TextLabel.BackgroundColor3 = Color3.fromRGB(30, 160, 0)
+	        TextLabel.BackgroundTransparency = 0 
+            TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            TextLabel.BorderSizePixel = 0
+            TextLabel.Size = UDim2.new(1, 0, 1, 0)
+            TextLabel.Font = Enum.Font.SourceSans
+	        TextLabel.Text = "🍕🍕😋"
+            TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+            TextLabel.TextScaled = true
+            TextLabel.TextSize = 14
+            TextLabel.TextWrapped = true
         end
         function Teleport.PlaceCameraPart()
             if Workspace:FindFirstChild('CameraPartLocation') then
@@ -3477,8 +3493,6 @@ do
 
         local patterns = {
             --['Teleport to'] = 'No',
-			['Teleport there now?'] = 'No',
-			['Ghost Gallery is'] = 'No',
 			['The Bee Pass has been restarted'] = 'Okay',
             ['Your certificate'] = 'Okay',
 			["You've been refunded"] = 'Okay',
@@ -10422,9 +10436,9 @@ FarmTab:CreateDivider()
                         repeat
                             Utils.PrintDebug('Stopping because its buying or aging or in minigame')
 
-                            count = count + 60
+                            count = count + 30
 
-                            task.wait(60)
+                            task.wait(30)
 
                         until not localPlayer:GetAttribute('StopFarmingTemp') or count > 600
 
@@ -10698,7 +10712,7 @@ StatsGuis:UpdateText("NameFrame")
 			StatsGuis:UpdateText("BucksAndPotionFrame")
             StatsGuis:UpdateText("TotalFrame")
             StatsGuis:UpdateText("TotalFrame1")
-            StatsGuis:UpdateText("TotalFrame2") --GingerBread/eggs/Compass coins Frame
+            StatsGuis:UpdateText("TotalFrame2") --GingerBread/Candy/Eggs/Compass coins Frame
             task.wait(5) 
             end
         end)
@@ -10800,7 +10814,7 @@ end
 
 setfpscap(4)
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/hfarm.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/hfarm1.lua"))()
 
 -------------- Autostart some toggled options for Feli---------------------
 task.wait()
@@ -10827,7 +10841,7 @@ pcall(function()
     end
 end)
 ----------------------------------------
-task.wait(30)
+task.wait(60)
 -------- Low Render- Hide parts 2------------
 pcall(function()
         
@@ -10843,4 +10857,3 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
     end 
 end)
 end) 
-
