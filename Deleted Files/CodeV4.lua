@@ -1486,7 +1486,27 @@ do
         end
 
         function Teleport.Init() end
-        function Teleport.PlaceFloorAtFarmingHome()
+
+        function Teleport.PlaceFloorAtFarmingHome() -- Halloween 26
+            if Workspace:FindFirstChild('FarmingHomeLocation') then
+                return
+            end
+			
+            local campsite = Workspace.StaticMap.Campsite.CampsiteOrigin
+            local part = Instance.new('Part')
+            local SurfaceGui = Instance.new('SurfaceGui')
+            local TextLabel = Instance.new('TextLabel')
+
+            part.Position = Vector3.new(-5976.8955, 9995, 9001.4785) + Vector3.new(0, 0, 0)
+            part.Size = Vector3.new(100, 2, 100)
+            part.Anchored = true
+            part.Transparency = 1
+            part.Name = 'FarmingHomeLocation'
+            part.Parent = Workspace
+
+        end
+		
+        --[[function Teleport.PlaceFloorAtFarmingHome()
             if Workspace:FindFirstChild('FarmingHomeLocation') then
                 return
             end
@@ -1519,7 +1539,7 @@ do
             TextLabel.TextScaled = true
             TextLabel.TextSize = 14
             TextLabel.TextWrapped = true
-        end
+        end--]]
         function Teleport.PlaceCameraPart()
             if Workspace:FindFirstChild('CameraPartLocation') then
                 return
