@@ -6209,10 +6209,10 @@ __moduleSources["Game/EventTasks"] = function(...)
                 ctx.waitUntil(function()
                     return not inRound()
                 end, 15)
-               -- local home, homeWhy = ctx.travel:goTo(GameConstants.HouseInteriorName)
-                --if not home then
-                   -- ctx.logger:info("Event", "Ghost Gallery: going home after the round did not work (" .. tostring(homeWhy) .. ")")
-                --end
+               local home, homeWhy = ctx.travel:goTo(GameConstants.HouseInteriorName)
+                if not home then
+                 ctx.logger:info("Event", "Ghost Gallery: going home after the round did not work (" .. tostring(homeWhy) .. ")")
+                end
                 return ok, reason
             end
             -- 3) the loaned vacuum
