@@ -13,7 +13,7 @@ local UserConfig = {
         },
         KeepPetEquipped = true,
         PreferNeon = false,
-        PetOrder = "youngest",
+        PetOrder = "oldest",
         FarmPetKinds = {},
         BuyEgg = false,
         EggToBuy = "cracked_egg",
