@@ -62,7 +62,7 @@ local UserConfig = {
             },
             Quests = true,
             HouseVisits = false,
-            PetPen = true,
+            PetPen = false,
             PetPenMinutes = 15,
             PetPenSlots = 4,
             PetPenStock = false,
