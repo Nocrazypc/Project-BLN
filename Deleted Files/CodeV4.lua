@@ -6,12 +6,12 @@ end
 local UserConfig = {
     Farm = {
         Enabled = true,
-        BabyMode = false,
+        BabyMode = true,
         AutoNeeds = {
-            Enabled = false,
+            Enabled = true,
             Skip = {},
         },
-        KeepPetEquipped = false,
+        KeepPetEquipped = true,
         PreferNeon = false,
         PetOrder = "youngest",
         FarmPetKinds = {},
@@ -26,7 +26,7 @@ local UserConfig = {
             Enabled = false,
             Mega = false,
         },
-        CollectCashback = false,
+        CollectCashback = true,
         AutoOpen = {
             Enabled = false,
         },
