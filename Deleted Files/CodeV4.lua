@@ -26,7 +26,7 @@ local UserConfig = {
             Enabled = false,
             Mega = false,
         },
-        CollectCashback = true,
+        CollectCashback = false,
         AutoOpen = {
             Enabled = false,
         },
