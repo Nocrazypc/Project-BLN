@@ -59,12 +59,14 @@ local UserConfig = {
             PigeonNest = false,
             AutoSkelicorn = true, -- Crypt -> Lightning Lever -> the machine by the Manor -> buy 1 Skelicorn (120k candy)
             CandyPets = {
-                Enabled = false,
+                Enabled = true,
                 Pick = {},
+				MaxBuy = false, -- true: as many as the candy pays for, in ONE purchase
 				KeepCandy = 3000000,
                     Buy = {
-                        { id = "halloween_2026_jump_scare", price = 40000, max = 1 },
-                        { id = "halloween_2026_jacobean_pigeon", price = 4000, max = 4 },
+                        --{ id = "halloween_2026_jump_scare", price = 40000, max = 1 },
+                        --{ id = "halloween_2026_jacobean_pigeon", price = 4000, max = 4 },
+					    { id = "halloween_2026_skelicorn", price = 120000, max = 4, machine = true },
                     },
             },
             Quests = true,
