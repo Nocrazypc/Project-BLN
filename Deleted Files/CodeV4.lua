@@ -37,7 +37,7 @@ local UserConfig = {
         AutoRejoin = false,
         SpotTravel = "teleport",
         GameTravel = true,
-        HomeByRespawn = false,
+        HomeByRespawn = true,
         FoodBowlTrip = false,
         StuckRecovery = {
             Enabled = true,
@@ -45,7 +45,7 @@ local UserConfig = {
         },
         DisableMinutes = 15,
         Event = {
-            GhostGallery = true,
+            GhostGallery = false,
             Hauntlet = true,
             HauntletMove = "tween", -- how the bot reaches a door's circle: "tween" (smooth) | "walk" | "tp"
             HauntletMoveSeconds = 0.5, -- tween: seconds to reach the circle (0.1 - 5)
