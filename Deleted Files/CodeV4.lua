@@ -24,7 +24,7 @@ local UserConfig = {
             Skip = {},
         },
         AutoNeon = {
-            Enabled = false,
+            Enabled = true,
             Mega = false,
         },
         CollectCashback = false,
