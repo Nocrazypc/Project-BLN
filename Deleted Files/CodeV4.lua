@@ -2,22 +2,23 @@ if game.PlaceId ~= 920587237 then
     return
 end
 
+ local SKELICORN = "halloween_2026_skelicorn"
 
 local UserConfig = {
     Farm = {
         Enabled = true,
         BabyMode = false,
         AutoNeeds = {
-            Enabled = false,
+            Enabled = true,
             Skip = {},
         },
         KeepPetEquipped = false,
         PreferNeon = false,
         PetOrder = "youngest",
-        FarmPetKinds = {},
+        FarmPetKinds = { SKELICORN },
         BuyEgg = false,
         EggToBuy = "cracked_egg",
-        Focus = "", -- "Mega a pet": an egg (buy + hatch on repeat) or a pet kind (grow, neon, mega it; Pet Pen copies)
+        Focus = "SKELICORN", -- "Mega a pet": an egg (buy + hatch on repeat) or a pet kind (grow, neon, mega it; Pet Pen copies)
         AutoPotions = {
             Enabled = false,
             Skip = {},
@@ -44,16 +45,17 @@ local UserConfig = {
         },
         DisableMinutes = 15,
         Event = {
-            GhostGallery = false,
+            GhostGallery = true,
             Hauntlet = true,
             HauntletMove = "tween", -- how the bot reaches a door's circle: "tween" (smooth) | "walk" | "tp"
             HauntletMoveSeconds = 0.5, -- tween: seconds to reach the circle (0.1 - 5)
             HauntletFirst = true, -- a Hauntlet run before a Ghost Gallery round when both are near
             HauntletSquad = false, -- your accounts in one run play as a team (phone / keys / wand by turns)
             HauntletSquadKey = "", -- private: only accounts with the relay's SQUAD_KEY ask it who is in the run (never shared)
-            StrayCat = false,
+            StrayCat = true,
             Crypt = true,
-            CryptOpen = { "ladder" },
+            CryptOpen = { "lever", "candy_corn_pile_ginormous", "candy_corn_pile_big",
+            "candy_corn_pile_small", "ladder" },
             PigeonNest = false,
             AutoSkelicorn = true, -- Crypt -> Lightning Lever -> the machine by the Manor -> buy 1 Skelicorn (120k candy)
             CandyPets = {
@@ -62,10 +64,10 @@ local UserConfig = {
             },
             Quests = true,
             HouseVisits = false,
-            PetPen = false,
+            PetPen = true,
             PetPenMinutes = 15,
             PetPenSlots = 4,
-            PetPenStock = false,
+            PetPenStock = true,
         },
     },
     Interface = { Enabled = false, Keybind = "RightShift", Toasts = true, RememberSettings = true, Theme = "Halloween",
