@@ -46,7 +46,7 @@ local UserConfig = {
         DisableMinutes = 15,
         Event = {
             GhostGallery = true,
-            Hauntlet = false,
+            Hauntlet = true,
             HauntletMove = "tween", -- how the bot reaches a door's circle: "tween" (smooth) | "walk" | "tp"
             HauntletMoveSeconds = 0.5, -- tween: seconds to reach the circle (0.1 - 5)
             HauntletFirst = true, -- a Hauntlet run before a Ghost Gallery round when both are near
@@ -13825,3 +13825,52 @@ end)
 if not startOk then
     warn("[AdoptMe Farm] Failed to start: " .. tostring(startError))
 end
+
+
+
+
+-------------- Stats GUIs ---------------
+local StatsGuis = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Stats.lua"))()
+StatsGuis:UpdateText("NameFrame")
+---- Updater ---
+        task.spawn(function()
+            while task.wait() do
+			StatsGuis:UpdateText("TimeFrame")
+			StatsGuis:UpdateText("BucksAndPotionFrame")
+            StatsGuis:UpdateText("TotalFrame")
+            StatsGuis:UpdateText("TotalFrame1")
+            StatsGuis:UpdateText("TotalFrame2") --GingerBread/Candy/Eggs/Compass coins Frame
+            task.wait(5) 
+            end
+        end)
+
+-------- Low Render- Hide parts------------
+
+task.wait(60)
+
+pcall(function()
+        
+for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
+    if v:IsA("BasePart") then
+        v.Transparency = 1 
+    end 
+end 
+
+game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
+    if v:IsA('BasePart') then
+        v.Transparency = 1 
+    end 
+end)
+end)
+
+--------Transitions Remover -------------
+pcall(function() 
+    require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
+    require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).sudden_fill = function() return end
+    if Player.PlayerGui:FindFirstChild("TransitionsApp") then
+        Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
+    end
+end)
+
+
+setfpscap(4)
