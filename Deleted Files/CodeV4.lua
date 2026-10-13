@@ -52,7 +52,7 @@ local UserConfig = {
             HauntletFirst = true, -- a Hauntlet run before a Ghost Gallery round when both are near
             HauntletSquad = false, -- your accounts in one run play as a team (phone / keys / wand by turns)
             HauntletSquadKey = "", -- private: only accounts with the relay's SQUAD_KEY ask it who is in the run (never shared)
-            StrayCat = true,
+            StrayCat = false,
             Crypt = true,
             CryptOpen = { "lever", "candy_corn_pile_ginormous", "candy_corn_pile_big",
             "candy_corn_pile_small", "ladder" },
