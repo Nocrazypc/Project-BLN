@@ -9,10 +9,10 @@ local UserConfig = {
         Enabled = true,
         BabyMode = false,
         AutoNeeds = {
-            Enabled = false,
+            Enabled = true,
             Skip = {},
         },
-        KeepPetEquipped = false,
+        KeepPetEquipped = true,
         PreferNeon = false,
         PetOrder = "oldest",
         FarmPetKinds = { "halloween_2026_skelicorn" },
@@ -27,7 +27,7 @@ local UserConfig = {
             Enabled = false,
             Mega = false,
         },
-        CollectCashback = false,
+        CollectCashback = true,
         AutoOpen = {
             Enabled = false,
         },
@@ -45,8 +45,8 @@ local UserConfig = {
         },
         DisableMinutes = 15,
         Event = {
-            GhostGallery = false,
-            Hauntlet = true,
+            GhostGallery = true,
+            Hauntlet = false,
             HauntletMove = "tween", -- how the bot reaches a door's circle: "tween" (smooth) | "walk" | "tp"
             HauntletMoveSeconds = 0.5, -- tween: seconds to reach the circle (0.1 - 5)
             HauntletFirst = true, -- a Hauntlet run before a Ghost Gallery round when both are near
