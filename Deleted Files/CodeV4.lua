@@ -18,7 +18,7 @@ local UserConfig = {
         FarmPetKinds = { SKELICORN },
         BuyEgg = false,
         EggToBuy = "cracked_egg",
-        Focus = "", -- "Mega a pet": an egg (buy + hatch on repeat) or a pet kind (grow, neon, mega it; Pet Pen copies)
+        Focus = "Skelicorn", -- "Mega a pet": an egg (buy + hatch on repeat) or a pet kind (grow, neon, mega it; Pet Pen copies)
         AutoPotions = {
             Enabled = false,
             Skip = {},
@@ -68,7 +68,7 @@ local UserConfig = {
                     Buy = {
                         --{ id = "halloween_2026_jump_scare", price = 40000, max = 1 },
                         --{ id = "halloween_2026_jacobean_pigeon", price = 4000, max = 4 },
-					    { id = "halloween_2026_skelicorn", price = 120000, max = 4, machine = true },
+					    { id = "halloween_2026_skelicorn", price = 120000, max = 2, machine = true },
                     },
             },
             Quests = true,
