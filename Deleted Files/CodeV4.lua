@@ -69,6 +69,8 @@ local UserConfig = {
                     },
             },
             Quests = true,
+			PigeonNest = false,
+            AutoNest = false,
             HouseVisits = false,
             PetPen = true,
             PetPenMinutes = 15,
