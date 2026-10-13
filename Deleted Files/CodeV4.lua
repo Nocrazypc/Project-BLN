@@ -61,6 +61,11 @@ local UserConfig = {
             CandyPets = {
                 Enabled = false,
                 Pick = {},
+				KeepCandy = 3000000,
+                    Buy = {
+                        { id = "halloween_2026_jump_scare", price = 40000, max = 1 },
+                        { id = "halloween_2026_jacobean_pigeon", price = 4000, max = 4 },
+                    },
             },
             Quests = true,
             HouseVisits = false,
