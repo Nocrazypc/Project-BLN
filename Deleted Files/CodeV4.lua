@@ -2,7 +2,7 @@ if game.PlaceId ~= 920587237 then
     return
 end
 
-local skelicorn = "halloween_2026_skelicorn"
+local SKELICORN = "halloween_2026_skelicorn"
 
 local UserConfig = {
     Farm = {
@@ -18,7 +18,7 @@ local UserConfig = {
         FarmPetKinds = { SKELICORN },
         BuyEgg = false,
         EggToBuy = "cracked_egg",
-        Focus = "skelicorn", -- "Mega a pet": an egg (buy + hatch on repeat) or a pet kind (grow, neon, mega it; Pet Pen copies)
+        Focus = "", -- "Mega a pet": an egg (buy + hatch on repeat) or a pet kind (grow, neon, mega it; Pet Pen copies)
         AutoPotions = {
             Enabled = false,
             Skip = {},
