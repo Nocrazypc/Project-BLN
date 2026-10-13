@@ -16522,7 +16522,7 @@ StatsGuis:UpdateText("NameFrame")
 
 task.wait(60)
 
---[[pcall(function()
+pcall(function()
         
 for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
     if v:IsA("BasePart") then
@@ -16535,6 +16535,16 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
         v.Transparency = 1 
     end 
 end)
-end)--]]
+end)
+
+--------Transitions Remover -------------
+pcall(function() 
+    require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
+    require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).sudden_fill = function() return end
+    if Player.PlayerGui:FindFirstChild("TransitionsApp") then
+        Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
+    end
+end)
+
 
 setfpscap(4)
