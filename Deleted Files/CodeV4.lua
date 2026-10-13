@@ -55,7 +55,8 @@ local UserConfig = {
             StrayCat = false,
             Crypt = true,
             CryptOpen = { "lever", "candy_corn_pile_ginormous", "candy_corn_pile_big", "candy_corn_pile_small", "ladder" },
-            PigeonNest = false,
+			PigeonNest = false,
+            AutoNest = false,
             AutoSkelicorn = true, -- Crypt -> Lightning Lever -> the machine by the Manor -> buy 1 Skelicorn (120k candy)
             CandyPets = {
                 Enabled = true,
@@ -69,8 +70,6 @@ local UserConfig = {
                     },
             },
             Quests = true,
-			PigeonNest = false,
-            AutoNest = false,
             HouseVisits = false,
             PetPen = true,
             PetPenMinutes = 15,
