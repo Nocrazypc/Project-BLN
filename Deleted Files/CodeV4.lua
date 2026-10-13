@@ -14,7 +14,7 @@ local UserConfig = {
         },
         KeepPetEquipped = false,
         PreferNeon = false,
-        PetOrder = "youngest",
+        PetOrder = "oldest",
         FarmPetKinds = { SKELICORN },
         BuyEgg = false,
         EggToBuy = "cracked_egg",
