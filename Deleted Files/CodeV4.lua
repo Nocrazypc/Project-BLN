@@ -531,8 +531,8 @@ __moduleSources["Core/Config"] = function(...)
         },
         Telemetry = {
             Enabled = false,
-            Url = "https://adoptmelogs.04demirali123.workers.dev/log",
-            Owner = "victimoffate_",
+            Url = "",
+            Owner = "",
             SummaryMinutes = 30,
             IncludeInventory = true,
         },
