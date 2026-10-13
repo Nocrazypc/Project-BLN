@@ -89,12 +89,12 @@ local UserConfig = {
         IncludeInventory = true,
     },
     Notifications = {
-        Enabled = true,
+        Enabled = false,
         Webhooks = {
             Summary = "",
             Alerts = "",
         },
-        SummaryIntervalMinutes = 30,
+        SummaryIntervalMinutes = 300000,
         SendOnTaskComplete = false,
         SendOnError = true,
         SendOnKick = true,
