@@ -16522,7 +16522,7 @@ StatsGuis:UpdateText("NameFrame")
 
 task.wait(60)
 
-pcall(function()
+--[[pcall(function()
         
 for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
     if v:IsA("BasePart") then
@@ -16535,6 +16535,6 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
         v.Transparency = 1 
     end 
 end)
-end)
+end)--]]
 
 setfpscap(4)
