@@ -6,14 +6,14 @@ end
 local UserConfig = {
     Farm = {
         Enabled = true,
-        BabyMode = true,
+        BabyMode = false,
         AutoNeeds = {
-            Enabled = true,
+            Enabled = false,
             Skip = {},
         },
-        KeepPetEquipped = true,
+        KeepPetEquipped = false,
         PreferNeon = false,
-        PetOrder = "oldest",
+        PetOrder = "youngest",
         FarmPetKinds = {},
         BuyEgg = false,
         EggToBuy = "cracked_egg",
@@ -26,7 +26,7 @@ local UserConfig = {
             Enabled = false,
             Mega = false,
         },
-        CollectCashback = true,
+        CollectCashback = false,
         AutoOpen = {
             Enabled = false,
         },
@@ -44,7 +44,7 @@ local UserConfig = {
         },
         DisableMinutes = 15,
         Event = {
-            GhostGallery = true,
+            GhostGallery = false,
             Hauntlet = true,
             HauntletMove = "tween", -- how the bot reaches a door's circle: "tween" (smooth) | "walk" | "tp"
             HauntletMoveSeconds = 0.5, -- tween: seconds to reach the circle (0.1 - 5)
@@ -62,7 +62,7 @@ local UserConfig = {
             },
             Quests = true,
             HouseVisits = false,
-            PetPen = true,
+            PetPen = false,
             PetPenMinutes = 15,
             PetPenSlots = 4,
             PetPenStock = false,
