@@ -55,6 +55,7 @@ local UserConfig = {
 			GhostJoinByZone = true, -- joins Ghost Gallery by standing in the Manor circle
             StrayCat = false,
             Crypt = true,
+			MummySpider = false, -- bottom of the Crypt: takes the Mummy Spider
             CryptOpen = { "lever", "candy_corn_pile_ginormous", "candy_corn_pile_big", "candy_corn_pile_small", "ladder" },
 			PigeonNest = false,
             AutoNest = false,
