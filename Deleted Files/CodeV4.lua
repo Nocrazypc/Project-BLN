@@ -54,8 +54,7 @@ local UserConfig = {
             HauntletSquadKey = "", -- private: only accounts with the relay's SQUAD_KEY ask it who is in the run (never shared)
             StrayCat = false,
             Crypt = true,
-            CryptOpen = { "lever", "candy_corn_pile_ginormous", "candy_corn_pile_big",
-            "candy_corn_pile_small", "ladder" },
+            CryptOpen = { "lever", "candy_corn_pile_ginormous", "candy_corn_pile_big", "candy_corn_pile_small", "ladder" },
             PigeonNest = false,
             AutoSkelicorn = true, -- Crypt -> Lightning Lever -> the machine by the Manor -> buy 1 Skelicorn (120k candy)
             CandyPets = {
