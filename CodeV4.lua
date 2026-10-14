@@ -1,4 +1,3 @@
-
 if game.PlaceId ~= 920587237 then
     return
 end
@@ -237,7 +236,8 @@ do
             --[[return ClientData.get_data()[localPlayer.Name].candy_2025 or 0 --]]
 			--[[return ClientData.get_data()[localPlayer.Name].gingerbread_2025 or 0--]]
 			--[[return ClientData.get_data()[localPlayer.Name].eggs_2026 or 0 --]]
-			return ClientData.get_data()[localPlayer.Name].compass_coins_2026 or 0
+			--[[return ClientData.get_data()[localPlayer.Name].compass_coins_2026 or 0--]]
+			return ClientData.get_data()[localPlayer.Name].acorns_2026 or 0
         end
         function Utils.FoodItemCount(nameId)
             local count = 0
@@ -281,71 +281,77 @@ do
 			
             return string.format('%02d:%02d:%02d', hours, minutes, seconds)
         end
-        function Utils.ClickGuiButton(button, xOffset, yOffset)
-            if not button then
-                return
-            end
+            function Utils.ClickGuiButton(button, xOffset, yOffset)
+                if not button then
+                    return
+                end
 
-            pcall(function()
-                local xOffset1 = xOffset or 60
-                local yOffset1 = yOffset or 60
-
-                task.wait()
-                VirtualInputManager:SendMouseButtonEvent(button.AbsolutePosition.X + xOffset1, button.AbsolutePosition.Y + yOffset1, 0, true, game, 1)
-                task.wait()
-                VirtualInputManager:SendMouseButtonEvent(button.AbsolutePosition.X + xOffset1, button.AbsolutePosition.Y + yOffset1, 0, false, game, 1)
-            end)
-
-            return
-        end
-        function Utils.FireButton(button)
-            if not button then
-                return
-            end
-            if firesignal then
                 pcall(function()
-                    local mouseButton1Down = button.MouseButton1Down
-                    local mouseButton1Click = button.MouseButton1Click
-                    local mouseButton1Up = button.MouseButton1Up						
+                    local xOffset1 = xOffset or 60
+                    local yOffset1 = yOffset or 60
 
-                    firesignal(mouseButton1Down)
-                    task.wait(1)
-                    firesignal(mouseButton1Click)						
-                    task.wait(1)
-                    firesignal(mouseButton1Up)
+                    task.wait()
+                    VirtualInputManager:SendMouseButtonEvent(button.AbsolutePosition.X + xOffset1, button.AbsolutePosition.Y + yOffset1, 0, true, game, 1)
+                    task.wait()
+                    VirtualInputManager:SendMouseButtonEvent(button.AbsolutePosition.X + xOffset1, button.AbsolutePosition.Y + yOffset1, 0, false, game, 1)
                 end)
-            else
-                Utils.ClickGuiButton(button)
-            end
-        end
-        function Utils.FindButton(text, dialogFramePassOn)
-            task.wait(0.1)
-
-            dialogFramePassOn = dialogFramePassOn or 'NormalDialog'
-
-            local dialog = localPlayer:WaitForChild('PlayerGui'):WaitForChild('DialogApp'):WaitForChild('Dialog')
-            local buttons = dialog:WaitForChild(dialogFramePassOn):WaitForChild('Buttons', 10)
-
-            if not buttons then
-                Utils.PrintDebug('NO BUTTONS')
 
                 return
             end
+            function Utils.FireButton(button)
+                if not button then
+                    return
+                end
+                if firesignal then
+                    local retries = 0
 
-            for _, v in buttons:GetDescendants()do
-                if v:IsA('TextLabel') and v.Text == text then
-                    local button = v:FindFirstAncestorWhichIsA('ImageButton') or v:FindFirstAncestorWhichIsA('TextButton')
+                    repeat
+                        pcall(function()
+                            local mouseButton1Down = button.MouseButton1Down
+                            local mouseButton1Click = button.MouseButton1Click
+                            local mouseButton1Up = button.MouseButton1Up
 
-                    if not button then
-                        return
-                    end
+                            firesignal(mouseButton1Down)
+                            task.wait(0.1)
+                            firesignal(mouseButton1Click)
+                            task.wait(0.1)
+                            firesignal(mouseButton1Up)
 
-                    Utils.FireButton(button)
+                            retries = retries + 1
+                        end)
+                    until not button or button.Visible == false or retries > 3
+                else
+                    Utils.ClickGuiButton(button)
+                end
+            end
+            function Utils.FindButton(text, dialogFramePassOn)
+                task.wait(0.1)
+
+                dialogFramePassOn = dialogFramePassOn or 'NormalDialog'
+
+                local dialog = localPlayer:WaitForChild('PlayerGui'):WaitForChild('DialogApp'):WaitForChild('Dialog')
+                local buttons = dialog:WaitForChild(dialogFramePassOn):WaitForChild('Buttons', 10)
+
+                if not buttons then
+                    Utils.PrintDebug('NO BUTTONS')
 
                     return
                 end
+
+                for _, v in buttons:GetDescendants()do
+                    if v:IsA('TextLabel') and v.Text == text then
+                        local button = v:FindFirstAncestorWhichIsA('ImageButton') or v:FindFirstAncestorWhichIsA('TextButton')
+
+                        if not button then
+                            return
+                        end
+
+                        Utils.FireButton(button)
+
+                        return
+                    end
+                end
             end
-        end
         function Utils.IsPetEquipped(whichPet)
             local petIndex = ClientData.get('pet_char_wrappers')[whichPet]
 
@@ -479,13 +485,13 @@ do
 
             return string.format('%s %s %s', tostring(string.rep(' ', left)), tostring(text), tostring(string.rep(' ', right)))
         end
-        function Utils.WaitForPetToEquip()
+        function Utils.WaitForPetToEquip(whichPet)
             local hasPetChar = nil
             local stuckTimer = 0
 
             repeat
 
-                hasPetChar = ClientData.get('pet_char_wrappers') and ClientData.get('pet_char_wrappers')[1] and ClientData.get('pet_char_wrappers')[1].pet_unique and true or false
+                hasPetChar = ClientData.get('pet_char_wrappers') and ClientData.get('pet_char_wrappers')[whichPet] and ClientData.get('pet_char_wrappers')[whichPet].pet_unique and true or false
                 stuckTimer = stuckTimer + 1
 
 				task.wait(1)
@@ -497,25 +503,102 @@ do
 
             return true
         end
-        function Utils.GetCharacter()
-            return localPlayer.Character or localPlayer.CharacterAdded:Wait()
-        end
+            function Utils.GetCharacter()
+                return localPlayer.Character or localPlayer.CharacterAdded:Wait()
+            end
+            function Utils.GetHumanoid()
+                local humanoid = Utils.GetCharacter():FindFirstChild('Humanoid')
 
+                return humanoid
+            end
+            function Utils.GetHumanoidRootPart()
+                local humanoidRootPart = Utils.GetCharacter():FindFirstChild('HumanoidRootPart')
+
+                return humanoidRootPart
+            end
+            function Utils.WaitForHumanoid()
+                local humanoid = Utils.GetHumanoid()
+
+                while not humanoid do
+                    task.wait(1)
+
+                    humanoid = Utils.GetHumanoid()
+                end
+
+                return humanoid
+            end
+            function Utils.WaitForHumanoidRootPart()
+                local humanoidRootPart = Utils.GetHumanoidRootPart()
+
+                while not humanoidRootPart do
+                    task.wait(1)
+
+                    humanoidRootPart = Utils.GetHumanoidRootPart()
+                end
+
+                return humanoidRootPart
+            end
+            function Utils.FireRedeemCode(code)
+                RouterClient.get('CodeRedemptionAPI/AttemptRedeemCode'):InvokeServer(code)
+            end
+            function Utils.InvokeServerWithTimeout(
+                timeout,
+                remoteFunction,
+                ...
+            )
+                local result = nil
+                local hasResponded = false
+                local currentThread = coroutine.running()
+
+                task.spawn(function(...)
+                    local success, response = pcall(remoteFunction.InvokeServer, remoteFunction, 
+...)
+
+                    if not hasResponded then
+                        hasResponded = true
+                        result = {
+                            success = success,
+                            response = response,
+                        }
+
+                        task.spawn(currentThread)
+                    end
+                end, ...)
+                task.delay(timeout, function()
+                    if not hasResponded then
+                        hasResponded = true
+
+                        task.spawn(currentThread)
+                    end
+                end)
+                coroutine.yield()
+
+                if result then
+                    return result.success, result.response
+                else
+                    return false, 'Timed out waiting for server response'
+                end
+            end
+            function Utils.SafeRequire(root, timeout, ...)
+                local current = root
+
+                for _, name in {...}do
+                    current = current:WaitForChild(name, timeout)
+
+                    if not current then
+                        return nil
+                    end
+                end
+
+                if current:IsA('ModuleScript') then
+                    return (require(current))
+                end
+
+                return nil
+            end
 		
-        function Utils.GetHumanoid()
-            return (Utils.GetCharacter():WaitForChild('Humanoid'))
+            return Utils
         end
-
-        function Utils.GetHumanoidRootPart()
-            return (Utils.GetCharacter():WaitForChild('HumanoidRootPart'))
-        end
-
-        function Utils.FireRedeemCode(code)
-            RouterClient.get('CodeRedemptionAPI/AttemptRedeemCode'):InvokeServer(code)
-        end
-
-        return Utils
-    end
     function __DARKLUA_BUNDLE_MODULES.b()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
@@ -1403,7 +1486,27 @@ do
         end
 
         function Teleport.Init() end
-        function Teleport.PlaceFloorAtFarmingHome()
+
+        function Teleport.PlaceFloorAtFarmingHome() -- Halloween 26
+            if Workspace:FindFirstChild('FarmingHomeLocation') then
+                return
+            end
+			
+            local campsite = Workspace.StaticMap.Campsite.CampsiteOrigin
+            local part = Instance.new('Part')
+            local SurfaceGui = Instance.new('SurfaceGui')
+            local TextLabel = Instance.new('TextLabel')
+
+            part.Position = Vector3.new(-5976.8955, 9995, 9001.4785) + Vector3.new(0, 0, 0)
+            part.Size = Vector3.new(100, 2, 100)
+            part.Anchored = true
+            part.Transparency = 1
+            part.Name = 'FarmingHomeLocation'
+            part.Parent = Workspace
+
+        end
+		
+        --[[function Teleport.PlaceFloorAtFarmingHome()
             if Workspace:FindFirstChild('FarmingHomeLocation') then
                 return
             end
@@ -1436,7 +1539,7 @@ do
             TextLabel.TextScaled = true
             TextLabel.TextSize = 14
             TextLabel.TextWrapped = true
-        end
+        end--]]
         function Teleport.PlaceCameraPart()
             if Workspace:FindFirstChild('CameraPartLocation') then
                 return
@@ -1524,6 +1627,7 @@ do
         function Teleport.DeleteWater()
             Workspace.Terrain:Clear()
         end
+		
         function Teleport.FarmingHome()
             Utils.GetCharacter():WaitForChild('HumanoidRootPart').Anchored = true
 			
@@ -1535,7 +1639,7 @@ do
             Teleport.DeleteWater()
         end
 
-		--[[function Teleport.FarmingHome() --for nursey
+		--[[function Teleport.FarmingHome() --for nursery
             localPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
 
             SetLocationFunc('Nursery', 'MainDoor', {})
@@ -1933,34 +2037,35 @@ do
 
             RouterClient.get('SocialStonesAPI/AttemptExchange'):FireServer('pets', 'moon_2025_glormy_dolphin', 1)
         end
-        function self.BuyItemWithCurrencyLimit(itemNameId, currencyLimit)
-            while Bypass('ClientData').get_data()[localPlayer.Name].money >= currencyLimit do
+            function self.BuyItemWithCurrencyLimit(itemNameId, currencyLimit)
                 local itemValues = getItemInfoFromDatabase(itemNameId)
 
                 if not itemValues then
-                    break
+                    return
                 end
 
-                local amountPurchase = getAmountToPurchase(itemValues, currencyLimit)
+                while Bypass('ClientData').get_data()[localPlayer.Name][itemValues.currency_id] >= currencyLimit do
+                    local amountPurchase = getAmountToPurchase(itemValues, currencyLimit)
 
-                if amountPurchase <= 0 then
-                    break
-                end
-                if not buyItem(itemValues, amountPurchase) then
-                    break
-                end
+                    if amountPurchase <= 0 then
+                        break
+                    end
+                    if not buyItem(itemValues, amountPurchase) then
+                        break
+                    end
 
-                task.wait(1)
+                    task.wait(1)
+                end
             end
-        end
 
-        return self
-    end
+            return self
+        end
     function __DARKLUA_BUNDLE_MODULES.h()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
         local ClientData = (Bypass('ClientData'))
+        local RouterClient = (Bypass('RouterClient'))
         local self = {}
         local localPlayer = Players.LocalPlayer
         local getFullgrownPets = function(mega)
@@ -2034,7 +2139,7 @@ do
                 end
 
                 if #fusionReady >= 4 then
-                    ReplicatedStorage.API:FindFirstChild('PetAPI/DoNeonFusion'):InvokeServer({
+                    RouterClient.get('PetAPI/DoNeonFusion'):InvokeServer({
                         unpack(fusionReady),
                     })
                     task.wait()
@@ -2065,7 +2170,7 @@ do
 
                 getgenv().petCurrentlyFarming1 = petUnique
 
-				Utils.WaitForPetToEquip()
+				Utils.WaitForPetToEquip(whichPet)
 
                 return true
             elseif whichPet == 2 then
@@ -2075,7 +2180,7 @@ do
 
                 getgenv().petCurrentlyFarming2 = petUnique
 
-				Utils.WaitForPetToEquip()
+				Utils.WaitForPetToEquip(whichPet)
 				
                 return true
             end
@@ -2507,7 +2612,18 @@ do
 
             return nil
         end
-        function GetInventory.IsPetInInventory(tabId, uniqueId)
+        function GetInventory.GetAmountOfItems(tabId, nameId)
+            local count = 0
+
+            for _, v in ClientData.get_data()[localPlayer.Name].inventory[tabId]do
+                if v.id == nameId then
+                    count = count + 1
+                end
+            end
+
+            return count
+        end
+		function GetInventory.IsPetInInventory(tabId, uniqueId)
             for _, v in ClientData.get_data()[localPlayer.Name].inventory[tabId]do
                 if v.unique == uniqueId then
                     return true
@@ -3112,7 +3228,7 @@ do
             end
         end
         function self.Start()
-            setfpscap(3)
+            --setfpscap(4)
             StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Captures, false)
 
             if DialogApp.Dialog.ThemeColorDialog.Visible then
@@ -3243,7 +3359,7 @@ do
         return self
     end
     function __DARKLUA_BUNDLE_MODULES.l()
-        local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
+        --[[local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
         local Players = cloneref(game:GetService('Players'))
         local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
         local ClientData = Bypass('ClientData')
@@ -3364,7 +3480,7 @@ do
             dailyLoginAppClick()
         end
 
-        return self
+        return self--]]
     end
         function __DARKLUA_BUNDLE_MODULES.m()
         local ReplicatedStorage = cloneref(game:GetService('ReplicatedStorage'))
@@ -3397,8 +3513,14 @@ do
         }
 
         local patterns = {
-            ['Thunder has'] = 'Okay',
-            ['Boat tour'] = 'Okay',
+            --['Teleport to'] = 'No',
+		    ['The Crypt has been reset!'] = 'Okay',
+			['The Bee Pass has been restarted'] = 'Okay',
+            ['Your certificate'] = 'Okay',
+			["You've been refunded"] = 'Okay',
+            ['Wind has picked'] = 'Okay',
+            ['new Fishing Rod'] = 'Okay',
+			['Would you like to head to the flight'] = 'No',
             ['Would you like to teleport'] = 'No',
             ["You haven't collected the Gingerbread"] = 'No',
             ['Be careful when trading'] = 'Okay',
@@ -3425,7 +3547,6 @@ do
             ['mailbox'] = 'Okay',
             ['Pay 1500 Bucks'] = 'Yes',
             ['Pet Pen!'] = 'Go to Pet Pen',
-            ['The Homepass has been restarted'] = 'Okay',
             ['Costume Party starts'] = 'Okay',
             ['Step away from'] = 'Okay',
             ['Welcome to Adopt Me!'] = 'Next',
@@ -3953,7 +4074,7 @@ do
             for _, v in ClientData.get_data()[localPlayer.Name].inventory.pets do
                 for _, v2 in InventoryDB.pets do
                     if v.id == v2.id and v.properties.mega_neon then
-                        megaPets[title .. v2.name] = (megaPets[title .. v2.name] or 0) + 1
+                        megaPets[title .. v2.name] = ((megaPets[title .. v2.name] or 0)) + 1
                     end
                 end
             end
@@ -3970,7 +4091,7 @@ do
             for _, v in ClientData.get_data()[localPlayer.Name].inventory.pets do
                 for _, v2 in InventoryDB.pets do
                     if v.id == v2.id and v.properties.neon then
-                        neonPets[title .. v2.name] = (neonPets[title .. v2.name] or 0) + 1
+                        neonPets[title .. v2.name] = ((neonPets[title .. v2.name] or 0)) + 1
                     end
                 end
             end
@@ -3987,7 +4108,7 @@ do
             for _, v in pairs(ClientData.get_data()[localPlayer.Name].inventory.pets)do
                 for _, v2 in InventoryDB.pets do
                     if v.id == v2.id and not v.properties.neon and not v.properties.mega_neon then
-                        normalPets[title .. v2.name] = (normalPets[title .. v2.name] or 0) + 1
+                        normalPets[title .. v2.name] = ((normalPets[title .. v2.name] or 0)) + 1
                     end
                 end
             end
@@ -4003,7 +4124,7 @@ do
                     continue
                 end
 
-                tablePassOn[v.id] = (tablePassOn[v.id] or 0) + 1
+                tablePassOn[v.id] = ((tablePassOn[v.id] or 0)) + 1
             end
         end
         local getTable = function(nameId, tablePassOn)
@@ -4212,69 +4333,9 @@ do
 
         return self
     end
-    function __DARKLUA_BUNDLE_MODULES.s() -- Summer Camp 2026
-        --[[local ReplicatedStorage = game:GetService('ReplicatedStorage')
-        local Players = game:GetService('Players')
-        local Bypass = (require(ReplicatedStorage:WaitForChild('Fsys')).load)
-        local RouterClient = Bypass('RouterClient')
-        local ClientData = Bypass('ClientData')
-        local BuyItem = __DARKLUA_BUNDLE_MODULES.load('g')
-        local contentPacks = (ReplicatedStorage:WaitForChild('SharedModules'):WaitForChild('ContentPacks'))
-        local JourneyRepairNet = (require(contentPacks:WaitForChild('JourneyPass2026'):WaitForChild('Game'):WaitForChild('JourneyRepairNet')))
-        local localPlayer = Players.LocalPlayer
-        local SummerCamp2026 = {}
-        local tryClaimRepair = function()
-            local journeyRepair = ClientData.get_data()[localPlayer.Name].journey_repair
 
-            if journeyRepair.repair_complete then
-                return
-            end
+    function __DARKLUA_BUNDLE_MODULES.s() -- Summer 2026
 
-            for _, v in {
-                'repair_1',
-                'repair_2',
-                'repair_3',
-            }do
-                local args = {
-                    {
-                        week_index = journeyRepair.week_index,
-                        cycle_index = journeyRepair.cycle_index,
-                        marker_id = v,
-                    },
-                }
-
-                JourneyRepairNet.ClaimPart:fire_server(unpack(args))
-                task.wait(1)
-            end
-        end
-
-        function SummerCamp2026.Init()
-            RouterClient.get('DataAPI/DataChanged').OnClientEvent:Connect(function(
-                playerName,
-                dataKey,
-                dataValue
-            )
-                if playerName ~= localPlayer.Name then
-                    return
-                end
-                if dataKey ~= 'journey_repair' then
-                    return
-                end
-
-                print('Data Changed Event Fired for journey_repair!')
-                tryClaimRepair()
-
-                if getgenv().BUY_BEFORE_FARMING then
-                    BuyItem.StartBuyItems(getgenv().BUY_BEFORE_FARMING)
-                    print('Attempted to buy items for Summer Camp 2026!')
-                end		
-            end)
-        end
-        function SummerCamp2026.Start()
-            tryClaimRepair()
-        end
-
-        return SummerCamp2026 --]]
     end
 
     function __DARKLUA_BUNDLE_MODULES.t()
@@ -8537,18 +8598,18 @@ local FarmToggle = FarmTab:CreateToggle({
           Teleport.FarmingHome()
 		  --getgenv().auto_farm = Value
           localPlayer:SetAttribute('StopFarmingTemp', false)
-          setfpscap(3)
+          setfpscap(4)
      end,
  })
 
 FarmTab:CreateButton({
-	Name = "Stop AutoFarm Temporarily (5 minutes)",
+	Name = "Stop AutoFarm Temporarily (10 minutes)",
 	Callback = function()
 	    localPlayer:SetAttribute('StopFarmingTemp', true)
         setfpscap(20)
-        task.wait(300)
+        task.wait(600)
         localPlayer:SetAttribute('StopFarmingTemp', false)
-        setfpscap(3)
+        setfpscap(4)
 	end,
 })
 -------------------------------------------
@@ -8600,13 +8661,14 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
     end 
 end)
 --
---[[pcall(function() 
+pcall(function() 
     require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
     require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).sudden_fill = function() return end
     if Player.PlayerGui:FindFirstChild("TransitionsApp") then
         Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
     end
-end) --]]
+end)
+--
      end,
  })
 -----------------------------------------------
@@ -8629,12 +8691,12 @@ FarmTab:CreateDivider()
 FarmTab:CreateSection("Eggs Only")
 --------------------------------------
 local FarmToggle = FarmTab:CreateToggle({
-     Name = "Buy & Hatch Current Eggs: Endangered Egg",
+     Name = "Buy & Hatch Current Eggs: Fairytale Egg",
      CurrentValue = false,
      Flag = "Toggle201",
      Callback = function(Value)
 	
-        task.wait(3)
+        task.wait(1)
         getgenv().HatchPriorityEggs = Value
         localPlayer:SetAttribute('StopFarmingTemp', false)
 
@@ -8643,27 +8705,18 @@ local FarmToggle = FarmTab:CreateToggle({
 
 FarmTab:CreateDivider()
 ----------- Minigames -------------
-FarmTab:CreateSection("Events & Minigames: None")
+FarmTab:CreateSection("Events & Minigames: Halloween 2026")
 --------------------------------------
-
---[[local FarmToggle = FarmTab:CreateToggle({
-     Name = " Get daily Skulls from Temple Trek Minigame",
-     CurrentValue = false,
-     Flag = "Toggle10",
+local FarmToggle = FarmTab:CreateToggle({
+     Name = "Ghost Gallery + Crypt",
+     CurrentValue = true,
+     Flag = "Toggle11",
      Callback = function(Value)
 
-     local AztecEvent = __DARKLUA_BUNDLE_MODULES.load('w')
-	 getgenv().AutoMinigame = Value
-
-	 while task.wait(3) do
-         AztecEvent.StartEvent()
-         task.wait(20)
-         AztecEvent.BuyRoyalEgg()
-         task.wait(3600)
-         end
 
      end,
- })--]]
+ })
+
 FarmTab:CreateDivider()
 --------- Second Tab -----------
             local MiscTab = Window:CreateTab('Others', 4483362458)
@@ -9603,6 +9656,15 @@ FarmTab:CreateDivider()
             waitForTaskToFinish(ailment, petUnique)
             Utils.PrintDebug(string.format('\u{1f355} Finished pizza party task on %s \u{1f355}', tostring(Ailment.whichPet)))
         end
+
+        function Ailment.CatCafeAilment(ailment, petUnique)
+            Utils.ReEquipPet(Ailment.whichPet)
+            Utils.PrintDebug(string.format('\u{1f355} Doing cat cafe task on %s \u{1f355}', tostring(Ailment.whichPet)))
+            RouterClient.get('LocationAPI/SetLocation'):FireServer('CatCafe')
+            waitForTaskToFinish(ailment, petUnique)
+            Utils.PrintDebug(string.format('\u{1f355} Finished cat cafe task on %s \u{1f355}', tostring(Ailment.whichPet)))
+        end
+
         function Ailment.SchoolAilment(ailment, petUnique)
             Utils.ReEquipPet(Ailment.whichPet)
             Utils.PrintDebug(string.format('\u{1f3eb} Doing school task on %s \u{1f3eb}', tostring(Ailment.whichPet)))
@@ -9687,7 +9749,7 @@ FarmTab:CreateDivider()
             if not Utils.IsPetEquipped(Ailment.whichPet) then
                 return
             end
-            RouterClient.get('AdoptAPI/HoldBaby'):FireServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet]['char'])
+            RouterClient.get('AdoptAPI/HoldBaby'):InvokeServer(ClientData.get('pet_char_wrappers')[Ailment.whichPet]['char'])
             waitForJumpingToFinish('walk', petUnique)
             if not Utils.IsPetEquipped(Ailment.whichPet) then
                 return
@@ -9745,30 +9807,6 @@ FarmTab:CreateDivider()
         function Ailment.MysteryAilment(mysteryId, petUnique)
             Utils.PrintDebug('\u{2753} Picking mystery task \u{2753}')
             pickMysteryTask(mysteryId, petUnique)
-        end
-        function Ailment.BonfireAilment(petUnique)
-            Utils.PrintDebug(string.format('\u{1f3d6}\u{fe0f} Doing bonfire on %s \u{1f3d6}\u{fe0f}', tostring(Ailment.whichPet)))
-            Teleport.Bonfire()
-            task.wait(2)
-            Utils.ReEquipPet(Ailment.whichPet)
-            waitForTaskToFinish('summerfest_bonfire', petUnique)
-        end
-        function Ailment.BuccaneerBandAilment(petUnique)
-            ReplicatedStorage.API['LocationAPI/SetLocation']:FireServer('MainMap', localPlayer, ClientData.get_data()[localPlayer.Name].LiveOpsMapType)
-            task.wait(2)
-            local key = getKeyFrom('summerfest_2025_buccaneer_band')
-            if not key then
-                Utils.PrintDebug('didnt find key for band')
-                return
-            end
-            Utils.PrintDebug('Doing Band task')
-            task.spawn(function()
-                ReplicatedStorage.API:FindFirstChild('HousingAPI/ActivateInteriorFurniture'):InvokeServer(key, 'Guitar', {
-                    ['cframe'] = CFrame.new(-607, 35, -1641, -0, -0, -1, 0, 1, -0, 1, -0, -0),
-                }, localPlayer.Character)
-            end)
-            waitForTaskToFinish('buccaneer_band', petUnique)
-            getUpFromSitting()
         end
         function Ailment.BabyHungryAilment()
             Utils.PrintDebug('\u{1f476}\u{1f374} Doing baby hungry task \u{1f476}\u{1f374}')
@@ -9845,7 +9883,7 @@ FarmTab:CreateDivider()
         local Teleport = __DARKLUA_BUNDLE_MODULES.load('f')
         local FarmingPet = {}
         local localPlayer = Players.LocalPlayer
-        local petToBuy = 'endangered_2026_endangered_egg'
+        local petToBuy = 'fairytale_egg_2026_fairytale_egg'
         local potionFarmPets = {
             '2d_kitty',
             'dog',
@@ -9865,38 +9903,44 @@ FarmTab:CreateDivider()
                 return true
             end
             if GetInventory.CheckForPetAndEquip({
-                'endangered_2026_endangered_egg',
+                'fairytale_egg_2026_fairytale_egg',
             }, 1) then
                 return true
             else
-                local hasMoney = RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'endangered_2026_endangered_egg', {})
+                local hasMoney = RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'fairytale_egg_2026_fairytale_egg', {})
                 if hasMoney then
                     return true
                 end
                 return false
             end
         end
-        local isfocusFarmPets = function()
-            --local equippedPet = ClientData.get('pet_char_wrappers') and ClientData.get('pet_char_wrappers')[1]
-	        local pets = ClientData.get('pet_char_wrappers')
-            local equippedPet = pets and pets[1]
-	
-            if not equippedPet then
-                if not Utils.Equip(getgenv().petCurrentlyFarming1, false) then
-                    return false
+            local isfocusFarmPets = function(petsToFarmList, whichPet)
+                local pets = ClientData.get('pet_char_wrappers')
+                local equippedPet = pets and pets[whichPet]
+
+                if not equippedPet then
+                    local petFarming
+
+                    if whichPet == 1 then
+                        petFarming = getgenv().petCurrentlyFarming1
+                    elseif whichPet == 2 then
+                        petFarming = getgenv().petCurrentlyFarming2
+                    end
+                    if not Utils.Equip(petFarming, false) then
+                        return false
+                    end
+                    if not Utils.WaitForPetToEquip(whichPet) then
+                        return false
+                    end
                 end
-                if not Utils.WaitForPetToEquip() then
-                    return false
-                end
+
+                pets = ClientData.get('pet_char_wrappers')
+                equippedPet = pets and pets[whichPet]
+
+                local petId = equippedPet and equippedPet.pet_id
+
+                return petId ~= nil and table.find(petsToFarmList, petId) ~= nil
             end
-	
-            pets = ClientData.get('pet_char_wrappers')
-            equippedPet = pets and pets[1]
-	
-            local petId = equippedPet and equippedPet.pet_id
-	
-            return petId ~= nil and table.find(potionFarmPets, petId) ~= nil
-        end
         local isProHandler = function()
             local subscription = ClientData.get_data()[localPlayer.Name].subscription_equip_2x_pets
             if not subscription then
@@ -9956,24 +10000,23 @@ FarmTab:CreateDivider()
         end
         function FarmingPet.GetPetToFarm(whichPet)
             if getgenv().FOCUS_FARM_AGE_POTION then
-                if whichPet == 1 and isfocusFarmPets() then
-                    Utils.PrintDebug(string.format('Has focusFarmpets equipped, %s', tostring(whichPet)))
-                    return
-                end
-                isProHandler()
-                if whichPet == 2 and localPlayer:GetAttribute('isProHandler') == true and getgenv().petCurrentlyFarming2 then
-                    return
-                end
+                    if ClientData.get_data()[localPlayer.Name].synced_value_2d_kitty_tuesdays then
+                        if isfocusFarmPets({
+                            '2d_kitty',
+                        }, whichPet) then
+                            return
+                        end
+                        if GetInventory.CheckForPetAndEquip({
+                            '2d_kitty',
+                        }, whichPet) then
+                            print('FOUND 2d kitty', whichPet)
 
-                print('trying to see if 2d kitty')
-
-                if GetInventory.CheckForPetAndEquip({
-                    '2d_kitty',
-                }, whichPet) then
-                    print('FOUND 2d kitty', whichPet)
-
-                    return
-                end
+                            return
+                        end
+                    end
+                    if isfocusFarmPets(potionFarmPets, whichPet) then
+                        return
+                    end
 
                 task.wait(1)
                 Utils.PrintDebug(string.format('\u{1f414}\u{1f414} Getting pet to Farm age up potion, %s \u{1f414}\u{1f414}', tostring(whichPet)))
@@ -10092,7 +10135,7 @@ FarmTab:CreateDivider()
                     if Utils.BucksAmount() >= 10000 then
                         Utils.PrintDebug('Buying gumball egg')
                         Teleport.Nursery()
-                        RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'endangered_2026_endangered_egg', {})
+                        RouterClient.get('ShopAPI/BuyItem'):InvokeServer('pets', 'fairytale_egg_2026_fairytale_egg', {})
                     end
                 end
             end
@@ -10322,6 +10365,12 @@ FarmTab:CreateDivider()
                     Ailment.PizzaPartyAilment(key, petUnique)
                     Teleport.FarmingHome()
                     return true
+
+                elseif key == 'cat_cafe' then
+                    Ailment.CatCafeAilment(key, petUnique)
+                    Teleport.FarmingHome()
+                    return true
+
                 elseif key == 'school' then
                     Ailment.SchoolAilment(key, petUnique)
                     Teleport.FarmingHome()
@@ -10458,33 +10507,6 @@ FarmTab:CreateDivider()
             )
                 task.wait(2)
 
-                if ClientData.get_data()[localPlayer.Name].synced_value_2d_kitty_tuesdays then
-                    local isTuesdayEvent = Utils.IsDayAndHour('Tuesday', 8, 'am') or Utils.IsDayAndHour('Tuesday', 4, 'pm') or Utils.IsDayAndHour('Wednesday', 12, 'am')
-
-                    if isTuesdayEvent then
-                        print('SWITCHED TO 2d_kitty BECAUSE ITS EVENT TIME')
-                        localPlayer:SetAttribute('IsTuesdayEvent', true)
-                        DailiesNetService.try_to_claim_daily_rewards('2d_tuesdays')
-                        FarmingPet.SetFarmingTable({
-                            '2d_kitty',
-                        })
-
-                        return
-                    end
-                end
-
-                local potionFarmPets = {
-                    '2d_kitty',
-                    'dog',
-                    'cat',
-                    'starter_egg',
-                    'cracked_egg',
-                    'basic_egg_2022_ant',
-                    'basic_egg_2022_mouse',
-                }
-
-                FarmingPet.SetFarmingTable(potionFarmPets)
-                localPlayer:SetAttribute('IsTuesdayEvent', false)
             end)
         end
         function self.Start()
@@ -10502,10 +10524,10 @@ FarmTab:CreateDivider()
             end
             setupFloor()
             CollisionsClient.set_collidable(false)
-            task.wait(2)
+            task.wait(1)
             Teleport.FarmingHome()
-            Utils.PrintDebug('teleported to farming place')
-            Utils.PrintDebug('Started Farming')
+            --Utils.PrintDebug('teleported to farming place')
+            --Utils.PrintDebug('Started Farming')
             localPlayer:SetAttribute('hasStartedFarming', true)
             --tryToReleasePets()
             Utils.UnEquipAllPets()
@@ -10514,6 +10536,8 @@ FarmTab:CreateDivider()
             task.wait(2)
 
             startAutoFarm()
+             
+            setfpscap(4)
 
             --localPlayer:SetAttribute('StopFarmingTemp', true)
             task.defer(function()
@@ -10652,7 +10676,7 @@ FarmTab:CreateDivider()
     end
 end
 
-setfpscap(3)
+--setfpscap(4)
 task.wait(1)
 
 if not game:IsLoaded() then
@@ -10709,7 +10733,7 @@ StatsGuis:UpdateText("NameFrame")
 			StatsGuis:UpdateText("BucksAndPotionFrame")
             StatsGuis:UpdateText("TotalFrame")
             StatsGuis:UpdateText("TotalFrame1")
-            StatsGuis:UpdateText("TotalFrame2") --GingerBread/eggs/Compass coins Frame
+            StatsGuis:UpdateText("TotalFrame2") --GingerBread/Candy/Eggs/Compass coins Frame
             task.wait(5) 
             end
         end)
@@ -10743,17 +10767,14 @@ getgenv().HatchPriorityEggs = false
 getgenv().ENABLE_RELEASE_PETS = false
 getgenv().PETS_TO_AGE_IN_PEN = {}
 
-getgenv().BUY_ITEMS = {
+--[[getgenv().BUY_ITEMS = {
 {NameId = "journey_pass_2026_gecko_duck, MaxAmount = 50"}
-}
+}--]]
 
 getgenv().POTATO_MODE = false
 
 getgenv().AutoMinigame = false
 getgenv().AutoMinigame2 = false
-
-
-
 
 local files = {
     {
@@ -10774,9 +10795,9 @@ local files = {
     {
        TradeLicenseHandler = __DARKLUA_BUNDLE_MODULES.load('r'),
     },
-    --{
-      -- SummerCamp2026 = __DARKLUA_BUNDLE_MODULES.load('s'),
-    --},
+   --[[ {
+       BeePass2026 = __DARKLUA_BUNDLE_MODULES.load('s'),
+    },--]]
     {
        RayfieldHandler = __DARKLUA_BUNDLE_MODULES.load('v'),
     },	
@@ -10812,11 +10833,13 @@ for index, _table in ipairs(files)do
     end
 end
 
+setfpscap(4)
+
+
 -------------- Autostart some toggled options for Feli---------------------
 task.wait()
 -------- Low Render- Hide parts ------------
-pcall(function()
-        
+pcall(function()        
 for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
     if v:IsA("BasePart") then
         v.Transparency = 1 
@@ -10830,15 +10853,20 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
 end)
 end)
 --------Transitions Remover -------------
---[[ pcall(function() 
+pcall(function() 
     require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).transition = function() return end 
     require(game.ReplicatedStorage.ClientModules.Core.UIManager.Apps.TransitionsApp).sudden_fill = function() return end
     if Player.PlayerGui:FindFirstChild("TransitionsApp") then
         Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
     end
-end) --]]
+end)
 ----------------------------------------
---[[task.wait(180)
+task.wait(10)
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/hfarm1.lua"))()
+
+---------------------------------------
+task.wait(30)
 -------- Low Render- Hide parts 2------------
 pcall(function()
         
@@ -10853,4 +10881,4 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
         v.Transparency = 1 
     end 
 end)
-end) --]]
+end) 
