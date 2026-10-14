@@ -3,7 +3,7 @@
 local UserConfig = {
     Farm = {
         Enabled = true,       
-        BabyMode = true,      
+        BabyMode = false,      
         FastTravel = true,    
         Tasks = {             
             pet_me = false,
@@ -53,11 +53,11 @@ local UserConfig = {
         Event = {             -- Halloween 2026 + Pet Pen (true = on)
             Enabled = true,
             GhostGallery = true, 
-            Crypt = true,        
-            MummySpider = true,  
+            Crypt = false,        
+            MummySpider = false,  
             Quests = true,       
             HouseVisits = false, 
-            PigeonNest = true,   
+            PigeonNest = false,   
             StrayCat = false,     
             PetPen = false,       
             PetPenMinutes = 15,
