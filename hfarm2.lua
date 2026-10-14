@@ -1,5 +1,3 @@
-
-
 local UserConfig = {
     Farm = {
         Enabled = true,
@@ -11,7 +9,7 @@ local UserConfig = {
         KeepPetEquipped = false,
         PreferNeon = false,
         PetOrder = "oldest",
-        FarmPetKinds = { SKELICORN },
+        FarmPetKinds = {},
         BuyEgg = false,
         EggToBuy = "cracked_egg",
         Focus = "Skelicorn", -- "Mega a pet": an egg (buy + hatch on repeat) or a pet kind (grow, neon, mega it; Pet Pen copies)
