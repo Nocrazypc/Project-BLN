@@ -11382,7 +11382,7 @@ __moduleSources["Game/EventTasks"] = function(...)
                 -- local home, homeWhy = ctx.travel:goTo(GameConstants.HouseInteriorName)
                 -- if not home then
                     -- ctx.logger:info("Event", "Hauntlet: going home after the run did not work (" .. tostring(homeWhy) .. ")")
-                end
+                -- end
             else
                 ctx.logger:info("Event", "Hauntlet: the run is still going: no travel out of a run")
             end
