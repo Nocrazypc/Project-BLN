@@ -1,5 +1,4 @@
 
-local SKELICORN = "halloween_2026_skelicorn"
 
 local UserConfig = {
     Farm = {
