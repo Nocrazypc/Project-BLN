@@ -10663,7 +10663,7 @@ FarmTab:CreateDivider()
             end)
         end
         function PetOfflineHandler.Start()
-            if getgenv().auto_farm == false then
+            if getgenv().farm_in_pen == false then
                 return
             end
             PetOffline.ClaimAllXP()
@@ -10763,6 +10763,7 @@ getgenv().auto_farm = true
 getgenv().AutoFusion = false
 getgenv().FOCUS_FARM_AGE_POTION = true
 getgenv().HatchPriorityEggs = false
+getgenv().farm_in_pen = false
 
 getgenv().ENABLE_RELEASE_PETS = false
 getgenv().PETS_TO_AGE_IN_PEN = {}
@@ -10804,9 +10805,9 @@ local files = {
     {
        AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('z'),
     },
-   --[[ {
+   {
        PetOfflineHandler = __DARKLUA_BUNDLE_MODULES.load('B'),
-    }, --]]
+    },
 }
 
 Utils.PrintDebug('----- INITIALIZING MODULES -----')
