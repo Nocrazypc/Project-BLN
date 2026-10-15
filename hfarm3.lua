@@ -521,14 +521,14 @@ __moduleSources["Core/Config"] = function(...)
             Language = "Auto",
         },
         Logging = {
-            ConsoleLevel = "INFO",
-            FileLevel = "DEBUG",
-            FileEnabled = true,
-            SessionFile = true,
+            ConsoleLevel = "OFF",
+            FileLevel = "OFF",
+            FileEnabled = false,
+            SessionFile = false,
             Folder = "AdoptMeFarm/logs",
             FlushSeconds = 5,
             DuplicateWindowSeconds = 10,
-            MaxLinesPerSession = 20000,
+            MaxLinesPerSession = 10,
         },
         Telemetry = {
             Enabled = false, -- hardcoded off: no data is ever sent to the script owner's server
