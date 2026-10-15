@@ -3257,7 +3257,7 @@ do
 
             RouterClient.get('HousingAPI/SetDoorLocked'):InvokeServer(true)
 
-            RouterClient.get('TeamAPI/ChooseTeam'):InvokeServer('Babies', {
+            RouterClient.get('TeamAPI/ChooseTeam'):InvokeServer('Parents', {
                 ['dont_send_back_home'] = true,
             })
             Utils.PrintDebug('turned to baby')
