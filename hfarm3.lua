@@ -40,7 +40,7 @@ local UserConfig = {
         },
         DisableMinutes = 15,
         Event = {
-            GhostGallery = false,
+            GhostGallery = true,
             Hauntlet = true,
             HauntletMove = "tp", -- how the bot reaches a door's circle: "tween" (smooth) | "walk" | "tp"
             HauntletMoveSeconds = 0.5, -- tween: seconds to reach the circle (0.1 - 5)
