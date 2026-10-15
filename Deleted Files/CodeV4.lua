@@ -10786,9 +10786,9 @@ local files = {
     {
         GameGuiHandler = __DARKLUA_BUNDLE_MODULES.load('m'),
     },
-    {
+    --[[ {
         PotatoModeHandler = __DARKLUA_BUNDLE_MODULES.load('n'),
-    },
+    }, --]]
     {
        DailyTaskboardHandler = __DARKLUA_BUNDLE_MODULES.load('q'),
     },
@@ -10804,9 +10804,9 @@ local files = {
     {
        AutoFarmHandler = __DARKLUA_BUNDLE_MODULES.load('z'),
     },
-    {
+   --[[ {
        PetOfflineHandler = __DARKLUA_BUNDLE_MODULES.load('B'),
-    },
+    }, --]]
 }
 
 Utils.PrintDebug('----- INITIALIZING MODULES -----')
