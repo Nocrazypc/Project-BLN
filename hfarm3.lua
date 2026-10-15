@@ -10,7 +10,7 @@ local UserConfig = {
         KeepPetEquipped = false,
         PreferNeon = false,
         PetOrder = "youngest",
-        FarmPetKinds = {},
+        FarmPetKinds = { SKELICORN },
         BuyEgg = false,
         EggToBuy = "cracked_egg",
         Focus = "", -- "Mega a pet": an egg (buy + hatch on repeat) or a pet kind (grow, neon, mega it; Pet Pen copies)
@@ -45,6 +45,8 @@ local UserConfig = {
             HauntletMove = "tween", -- how the bot reaches a door's circle: "tween" (smooth) | "walk" | "tp"
             HauntletMoveSeconds = 0.5, -- tween: seconds to reach the circle (0.1 - 5)
             HauntletFirst = true, -- a Hauntlet run before a Ghost Gallery round when both are near
+            HauntletSquad = false, -- your accounts in one run play as a team (phone / keys / wand by turns)
+            HauntletSquadKey = "", -- private: only accounts with the relay's SQUAD_KEY ask it who is in the run (never shared)
             UsePrompt = true, -- home before a minigame, then Yes on the game's own Teleport prompt (fewer white screens)
             GhostJoinByZone = true, -- joins Ghost Gallery by standing in the Manor circle
             StrayCat = false,
@@ -58,13 +60,13 @@ local UserConfig = {
                 Enabled = false,
                 Pick = {}, -- what to buy (Skelicorn too): one every 0.5 s until the candy runs out
                 MaxBuy = false, -- true: as many as the candy pays for, in ONE purchase
-                KeepCandy = 0,
+                KeepCandy = 3000000,
                 KeepBucks = 0,
                 Buy = {
-                    { id = "halloween_2026_jump_scare",      price = 40000,  max = 1 },
+                    { id = "halloween_2026_jump_scare",      price = 40000,  max = 4 },
                     { id = "halloween_2026_jacobean_pigeon", price = 4000,   max = 4 },
                     -- sold by the machine by the Manor (Lightning Lever): bought by the Skelicorn task, not here
-                    { id = "halloween_2026_skelicorn",       price = 120000, max = 0, machine = true },
+                    { id = "halloween_2026_skelicorn",       price = 120000, max = 2, machine = true },
                 },
             },
             Quests = false,
