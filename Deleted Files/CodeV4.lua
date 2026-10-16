@@ -1487,7 +1487,7 @@ do
 
         function Teleport.Init() end
 
-        function Teleport.PlaceFloorAtFarmingHome() -- Halloween 26
+        --[[function Teleport.PlaceFloorAtFarmingHome() -- Halloween 26
             if Workspace:FindFirstChild('FarmingHomeLocation') then
                 return
             end
@@ -1504,9 +1504,9 @@ do
             part.Name = 'FarmingHomeLocation'
             part.Parent = Workspace
 
-        end
+        end--]]
 		
-        --[[function Teleport.PlaceFloorAtFarmingHome()
+        function Teleport.PlaceFloorAtFarmingHome()
             if Workspace:FindFirstChild('FarmingHomeLocation') then
                 return
             end
@@ -1539,7 +1539,7 @@ do
             TextLabel.TextScaled = true
             TextLabel.TextSize = 14
             TextLabel.TextWrapped = true
-        end--]]
+        end
         function Teleport.PlaceCameraPart()
             if Workspace:FindFirstChild('CameraPartLocation') then
                 return
@@ -10883,4 +10883,4 @@ end)
 ----------------------------------------
 task.wait(10)
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/hfarm3.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/hfarm1.lua"))()
