@@ -10861,13 +10861,9 @@ pcall(function()
         Player.PlayerGui.TransitionsApp:FindFirstChild("Whiteout").Visible = false
     end
 end)
-----------------------------------------
-task.wait(10)
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/hfarm1.lua"))()
 
 ---------------------------------------
-task.wait(30)
+task.wait(20)
 -------- Low Render- Hide parts 2------------
 pcall(function()
         
@@ -10883,3 +10879,8 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
     end 
 end)
 end) 
+
+----------------------------------------
+task.wait(10)
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/hfarm3.lua"))()
