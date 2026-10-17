@@ -6,11 +6,10 @@ end
 getgenv().SCRIPT_KEY = "bf3878b9-dabd-42f2-a469-138d058b9ef6"
 loadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/27704cc5af934d43acfc7b3d5adea87d4e97dcf80d4cba271852c74a24818ffc/download"))()
 
----------------------------------------
 
 
 task.wait(30)
--------- Low Render- Hide parts 2------------
+
 pcall(function()
         
 for i,v in pairs(game:GetService("Workspace").Interiors:GetDescendants()) do
