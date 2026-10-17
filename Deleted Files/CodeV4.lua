@@ -5,8 +5,8 @@ end
 
 --getgenv().SCRIPT_KEY = "bf3878b9-dabd-42f2-a469-138d058b9ef6"
 --loadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/27704cc5af934d43acfc7b3d5adea87d4e97dcf80d4cba271852c74a24818ffc/download"))()
-getgenv().SCRIPT_KEY = "1d6d534e-c6e2-4b99-8aa7-68fb44a64e3f"
-loadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/8d8e0d8d12262988520ac7f2f9a69b2f031127d8969113fff62fc6340faf105c/download"))()
+getgenv().SCRIPT_KEY = "23a4edd5-635d-4abf-b109-ab7d1400852b"
+loadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/27704cc5af934d43acfc7b3d5adea87d4e97dcf80d4cba271852c74a24818ffc/download"))()
 
 -------------- Stats GUIs ---------------
 local StatsGuis = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Stats.lua"))()
