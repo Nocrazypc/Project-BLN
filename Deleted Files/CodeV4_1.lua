@@ -3,7 +3,7 @@ if game.PlaceId ~= 920587237 then
 end
 
 
-getgenv().SCRIPT_KEY = "6bd241f0-96d1-4adb-a70f-a4eed353c19c"
+getgenv().SCRIPT_KEY = "33b4eb03-5545-44d3-9b29-834135067141"
 loadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/27704cc5af934d43acfc7b3d5adea87d4e97dcf80d4cba271852c74a24818ffc/download"))()
 
 -------------- Stats GUIs ---------------
