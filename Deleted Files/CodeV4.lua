@@ -2,10 +2,6 @@ if game.PlaceId ~= 920587237 then
     return
 end
 
-
-getgenv().SCRIPT_KEY = "b9c31392-9576-45b3-b4b8-d94fb42a5ec1"
-loadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/27704cc5af934d43acfc7b3d5adea87d4e97dcf80d4cba271852c74a24818ffc/download"))()
-
 -------------- Stats GUIs ---------------
 local StatsGuis = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nocrazypc/Project-BLN/refs/heads/main/Stats.lua"))()
 StatsGuis:UpdateText("NameFrame")
@@ -22,7 +18,7 @@ StatsGuis:UpdateText("NameFrame")
         end)
 
 
-task.wait(30)
+task.wait(20)
 
 pcall(function()
         
@@ -38,3 +34,8 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
     end 
 end)
 end) 
+
+task.wait(20)
+
+loadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/27704cc5af934d43acfc7b3d5adea87d4e97dcf80d4cba271852c74a24818ffc/download"))()
+
