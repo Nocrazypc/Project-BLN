@@ -12,7 +12,7 @@ StatsGuis:UpdateText("NameFrame")
 			StatsGuis:UpdateText("BucksAndPotionFrame")
             StatsGuis:UpdateText("TotalFrame")
             StatsGuis:UpdateText("TotalFrame1")
-            StatsGuis:UpdateText("TotalFrame2") --GingerBread/Candy/Eggs/Compass coins Frame
+            --StatsGuis:UpdateText("TotalFrame2") --GingerBread/Candy/Eggs/Compass coins Frame
             task.wait(5) 
             end
         end)
@@ -37,5 +37,6 @@ end)
 
 task.wait(20)
 
+SCRIPT_KEY="790bc885-3588-4f60-a303-2ed4aeebb3de" 
 loadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/27704cc5af934d43acfc7b3d5adea87d4e97dcf80d4cba271852c74a24818ffc/download"))()
 
