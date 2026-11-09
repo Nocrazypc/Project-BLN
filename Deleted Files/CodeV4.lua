@@ -38,7 +38,7 @@ end)
 task.wait(20)
 
 BoltOn = true   --- catch lightning
-BoltBait = "Cake" -----"Cookie" — or "Cake" / "Keep them"
+BoltBait = "Cake" -----"Cookie" or "Cake" / "Keep them"
 BoltLure = true --- auto lure with Lightning baits
 SCRIPT_KEY="790bc885-3588-4f60-a303-2ed4aeebb3de" 
 loadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/27704cc5af934d43acfc7b3d5adea87d4e97dcf80d4cba271852c74a24818ffc/download"))()
