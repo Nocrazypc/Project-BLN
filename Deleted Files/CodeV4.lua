@@ -35,7 +35,7 @@ game:GetService("Workspace").Interiors.DescendantAdded:Connect(function(v)
 end)
 end) 
 
-task.wait(10)
+task.wait(3)
 
 
 SCRIPT_KEY="790bc885-3588-4f60-a303-2ed4aeebb3de" 
